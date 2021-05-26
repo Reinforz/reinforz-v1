@@ -1,0 +1,76 @@
+{
+  "name": "reinforz",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": "http://devorein.github.io/reinforz",
+  "dependencies": {
+    "@material-ui/core": "^4.11.4",
+    "@material-ui/icons": "^4.11.2",
+    "@material-ui/lab": "^4.0.0-alpha.58",
+    "@material-ui/styles": "^4.11.4",
+    "dompurify": "^2.2.8",
+    "js-yaml": "^3.14.1",
+    "marked": "^2.0.3",
+    "notistack": "^1.0.8",
+    "prism-react-renderer": "^1.2.0",
+    "prismjs": "^1.23.0",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
+    "react-dropzone": "^11.3.2",
+    "react-icons": "^3.11.0",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "^4.0.3",
+    "shortid": "^2.2.16"
+  },
+  "devDependencies": {
+    "@storybook/addon-essentials": "^6.1.21",
+    "@storybook/addon-links": "^6.2.9",
+    "@storybook/preset-create-react-app": "^1.2.0",
+    "@storybook/react": "^6.1.21",
+    "@testing-library/dom": "^7.31.0",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.5.0",
+    "@testing-library/user-event": "^7.2.1",
+    "@types/dompurify": "^2.2.2",
+    "@types/jest": "^24.9.1",
+    "@types/js-yaml": "^3.12.6",
+    "@types/marked": "^1.2.2",
+    "@types/prismjs": "^1.16.5",
+    "@types/react": "^16.14.6",
+    "@types/react-dom": "^16.9.13",
+    "@types/react-icons": "^3.0.0",
+    "@types/react-router-dom": "^5.1.7",
+    "@types/shortid": "^0.0.29",
+    "@typescript-eslint/eslint-plugin": "^4.0.1",
+    "@typescript-eslint/parser": "^4.0.1",
+    "gh-pages": "^3.1.0",
+    "jest": "^26.6.0",
+    "sass": "^1.32.13",
+    "ts-jest": "^26.5.6",
+    "typescript": "^4.2.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test:react": "react-scripts test",
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "test": "npx jest --runInBand --config ./jest.config.js"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

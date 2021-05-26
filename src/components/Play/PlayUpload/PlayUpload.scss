@@ -1,0 +1,19 @@
+.PlayUpload {
+  grid-area: 1/1/2/2;
+  font-weight: bold;
+  user-select: none;
+  cursor: pointer;
+  outline: none;
+  transition: border 0.24s ease-in-out;
+  height: 100%;
+  font-size: 1.25em;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  p {
+    margin: 5px 10px;
+    text-align: center;
+    width: 100%;
+  }
+}
+

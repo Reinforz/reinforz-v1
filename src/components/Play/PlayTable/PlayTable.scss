@@ -1,0 +1,35 @@
+.PlayTable {
+  height: 100%;
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+  grid-gap: 10px;
+  grid-area: 1/2/4/3;
+  
+  .MuiTableContainer-root {
+    height: 250px;
+  }
+  .Table {
+    width: 100%;
+    position: relative;
+    height: 100%;
+    tr {
+      width: 100%;
+      display: inline-table;
+      table-layout: fixed;
+    }
+
+    tbody {
+      overflow-y: scroll;
+      height: 150px;
+      width: 100%;
+      position: absolute;
+    }
+
+    tfoot {
+      position: absolute;
+      top: 100%;
+      transform: translateY(-100%);
+      width: 100%;
+    }
+  }
+}

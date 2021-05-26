@@ -1,0 +1,11 @@
+.QuestionInputs{
+  grid-area: 2/1/4/2;
+  height: calc(100% - 40px);
+  padding: 10px;
+  .MuiInputBase-input.MuiInput-input{
+    padding: 10px
+  }
+  &-item{
+    margin: 10px 0px;
+  }
+}

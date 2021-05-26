@@ -1,0 +1,25 @@
+.Menu{
+  position: absolute;
+  top: 0px;
+  width: 300px;
+  height: calc(100vh - 10px);
+  transition: left 250ms ease-in-out;
+  z-index: 50;
+  
+  &-icons{
+    position: absolute;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    top: 50%;
+    transition: transform 200ms ease-in-out, left 250ms ease-in-out;
+    padding: 5px;
+    border-radius: 5px;
+    z-index: 50;
+    &-icon{
+      width: 25px;
+      height: 25px;
+      margin: 5px 0px;
+    }
+  }
+}

@@ -1,0 +1,9 @@
+.Quiz {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+
+  &-button.MuiButton-containedPrimary{
+    margin: 0px 5px 5px 0px;
+  }
+}

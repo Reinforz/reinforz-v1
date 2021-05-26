@@ -1,0 +1,47 @@
+.PlaySettings {
+  padding: 5px;
+  grid-template-rows: 1fr 1fr 30px 50px;
+  display: grid;
+  height: calc(100% - 20px);
+  grid-area: 1/3/4/4;
+
+  &-total {
+    text-align: center;
+    font-weight: bolder;
+    font-size: 1rem;
+    margin-top: 10px;
+  }
+  &-group {
+    &--options {
+      grid-area: 1/1/2/2;
+    }
+    &--filters {
+      grid-area: 2/1/3/2;
+    }
+    overflow: auto;
+    &-header {
+      font-weight: bold;
+      font-size: 1.25em;
+      padding: 5px;
+      border-radius: 2px;
+    }
+    &-content {
+      display: flex;
+      flex-direction: column;
+      margin: 5px 0px;
+      .MuiInputLabel-root {
+        margin: 10px 0px 0px 0px;
+        font-size: 1.15em;
+        font-weight: 500;
+      }
+    }
+    &-button {
+      width: 100%;
+    }
+  }
+
+  &-button.MuiButton-containedPrimary {
+    margin-top: 10px;
+    width: 100%;
+  }
+}

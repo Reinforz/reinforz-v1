@@ -1,0 +1,50 @@
+.Settings {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  border-radius: 5px;
+  &-header{
+    font-size: 1.5em;
+    font-weight: bolder;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    padding: 5px
+  }
+  &-icon {
+    font-size: 1.5em;
+    padding: 2;
+    cursor: pointer;
+  }
+  
+  &-content{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    &-group{
+      width: 100%;
+      padding: 5px;
+      margin: 5px;
+      border-radius: 5px;
+      .MuiInputLabel-root{
+        margin-right: 20px;
+        width: 100px;
+        font-weight: bolder;
+        font-size: 1.25em;
+      }
+      .MuiRadio-root{
+        margin-left: 12px;
+      }
+    }
+  
+    &-Button,.MuiButton-contained{
+      margin-top: 20px;
+    }
+  }
+}

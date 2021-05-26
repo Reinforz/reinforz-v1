@@ -1,0 +1,19 @@
+.QuestionHints {
+  display: flex;
+  flex-direction: column;
+  grid-area: 2/2/3/3;
+  max-height: 350px;
+
+  &-list {
+    border-radius: 5px;
+    overflow: auto;
+    &-item {
+      margin: 5px;
+      border-radius: 5px;
+      padding: 5px 10px;
+    }
+  }
+  &-button.MuiButton-containedPrimary{
+    margin: 10px 0px 5px 5px;
+  }
+}
