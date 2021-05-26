@@ -23,7 +23,7 @@ const result: TQuestionResult = {
   time_allocated: 30,
   user_answers: [],
   weight: 1,
-  options: undefined
+  options: null
 };
 
 it(`Should filter out if question type is within excluded_types`, () => {

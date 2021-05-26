@@ -13,7 +13,7 @@ const createQuiz = () => {
         question: ['Question 1'],
         time_allocated: 30,
         weight: 1,
-        options: undefined,
+        options: null,
         type: 'FIB',
         difficulty: 'Advanced',
         quiz: {
