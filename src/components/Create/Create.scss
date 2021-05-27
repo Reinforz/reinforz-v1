@@ -1,0 +1,8 @@
+.Create{
+  display: grid;
+  grid-template-columns: 500px 1fr;
+}
+
+.Create .List{
+  grid-area: 1/1/2/2;
+}
