@@ -183,7 +183,9 @@ describe('Snippet type questions', () => {
       answers: [
         [
           {
-            text: '1'
+            text: '1',
+            regex: null,
+            modifiers: []
           }
         ]
       ],
@@ -218,7 +220,9 @@ describe('FIB type questions', () => {
       answers: [
         [
           {
-            text: '1'
+            text: '1',
+            regex: null,
+            modifiers: []
           }
         ]
       ],
