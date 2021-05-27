@@ -3,6 +3,7 @@ import { SnackbarProvider } from "notistack";
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Create } from './components/Create/Create';
 import Play from "./components/Play/Play";
 import Settings from './components/Settings/Settings';
 import SettingsContext from "./context/SettingsContext";
@@ -21,6 +22,7 @@ const App = () => {
           <Switch>
             <Route exact path="/" render={() => <Play />} />
             <Route exact path="/settings" render={() => <Settings settings={settings} setSettings={setSettings} />} />
+            <Route exact path="/create" render={() => <Create />} />
           </Switch>
         </div>
       </SettingsContext.Provider>

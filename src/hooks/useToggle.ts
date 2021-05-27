@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import useThemeSettings from './useThemeSettings';
 
 export default function useToggle<T>(
   initial: T | (() => T),
@@ -14,10 +13,6 @@ export default function useToggle<T>(
     }
     return value as T;
   });
-  const {
-    settings,
-    sounds: { switch_off, switch_on }
-  } = useThemeSettings();
   return {
     current_toggle: toggle,
     setToggle,
