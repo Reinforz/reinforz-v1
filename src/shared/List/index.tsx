@@ -33,11 +33,12 @@ export default function List<T extends { _id: string }>(props: Props<T>) {
       {selectedItems.length}/{items.length}
       <div className="List-header-title">{header}</div>
       <div className="List-header-icons">
-        <Icon popoverText={`Remove ${selectedItems.length} selected items`} key={"deleteicon"} >
+        <Icon popoverText={`Remove ${selectedItems.length} selected items`} key={"delete icon"} >
           <CancelIcon className={"List-header-icons--cancel"} onClick={() => {
             const remainingItems = items.filter(item => !selectedItems.includes(item._id))
             setItems(remainingItems)
             props.onDelete && props.onDelete(remainingItems)
+            setSelectedItems([])
           }} />
         </Icon>
       </div>
@@ -60,6 +61,7 @@ export default function List<T extends { _id: string }>(props: Props<T>) {
                 <CancelIcon className="List-content-item-icons--cancel" onClick={() => {
                   props.onDelete && props.onDelete([item])
                   setItems(items.filter(_item => _item._id !== _id))
+                  setSelectedItems(selectedItems.filter(selectedItem => selectedItem !== _id))
                 }} style={{ fill: theme.palette.error.dark }} />
               </Icon>
             </div>
