@@ -8,4 +8,4 @@ chmod +x $codecov_file
 cd "${GITHUB_WORKSPACE}/packages";
 
 file="${GITHUB_WORKSPACE}/coverage/lcov.info"
-$codecov_file -f $file -v
+$codecov_file -t $CODECOV_TOKEN -f $file -v
