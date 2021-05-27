@@ -70,11 +70,12 @@ export function checkInputAnswers(
   userAnswers: string[],
   answers: IQuestionAnswerFull[][]
 ) {
-  let isCorrect = false, totalCorrectAnswers = 0;
+  let isCorrect = false,
+    totalCorrectAnswers = 0;
   for (let index = 0; index < userAnswers.length; index++) {
     isCorrect = checkInputAnswer(userAnswers[index], answers[index]);
     if (!isCorrect) break;
-    else totalCorrectAnswers++
+    else totalCorrectAnswers++;
   }
   return [isCorrect, totalCorrectAnswers] as const;
 }

@@ -120,17 +120,21 @@ export function generateCompleteQuestion(question: TQuestionPartial) {
         break;
       case 'Snippet':
         completeQuestion.answers.forEach((answers) => {
-          answers.forEach(answer=> {
-            answer.text = answer.text.toString()
-          })
+          answers.forEach((answer) => {
+            answer.text = answer.text.toString();
+            answer.modifiers = answer.modifiers ?? [];
+            answer.regex = answer.regex ?? null;
+          });
         });
         time_allocated = 45;
         break;
       case 'FIB':
         completeQuestion.answers.forEach((answers) => {
-          answers.forEach(answer=> {
-            answer.text = answer.text.toString()
-          })
+          answers.forEach((answer) => {
+            answer.text = answer.text.toString();
+            answer.modifiers = answer.modifiers ?? [];
+            answer.regex = answer.regex ?? null;
+          });
         });
         if (
           completeQuestion.answers.length + 1 !==
