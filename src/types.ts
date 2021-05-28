@@ -268,3 +268,5 @@ export interface MenuRProps {
     content_elem_style: any;
   };
 }
+
+export type TQuizSortBy = 'Difficulty' | 'Time Allocated' | 'Question Types';

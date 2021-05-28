@@ -1,3 +1,9 @@
 .PlayQuizzes{
   grid-area: 1/2/4/3;
+  &-Selects{
+    display: flex;
+    .MuiFormGroup-root{
+      flex: 1
+    }
+  }
 }

@@ -36,7 +36,7 @@ export function generateTheme(theme: 'dark' | 'light') {
         MuiInputLabel: {
           root: {
             fontWeight: 'bolder',
-            fontSize: '1.25em',
+            fontSize: '0.85em',
             backgroundColor: grey[900],
             padding: 5
           }
