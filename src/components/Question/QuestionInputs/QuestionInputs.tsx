@@ -18,7 +18,9 @@ export default function QuestionInputs(props: Props) {
     <div className={`QuestionInputs QuestionInputs--${type}`} style={{ backgroundColor: theme.color.dark }}>
       {props.question.answers.map((_, i) =>
         <div key={`${_id}.${i}`} className={`QuestionInputs-item`} style={{ backgroundColor: theme.color.base, color: theme.palette.text.primary }}>
-          <TextField fullWidth value={userAnswers[i] ?? ''} onChange={e => {
+          <TextField fullWidth inputProps={{
+            placeHolder: `Answer ${i + 1}`
+          }} value={userAnswers[i] ?? ''} onChange={e => {
             userAnswers[i] = e.target.value;
             setUserAnswers([...userAnswers])
           }} /></div>
