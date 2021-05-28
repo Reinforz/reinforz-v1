@@ -68,11 +68,19 @@
   .Question-question p code {
     background: rgb(19, 19, 19);
   }
+
+  .Question-question p {
+    color: rgb(224, 224, 224);
+  }
 }
 
 .light {
   .Question-question p code {
     background: rgb(224, 224, 224);
+  }
+
+  .Question-question p {
+    color: rgb(19, 19, 19);
   }
 }
 
