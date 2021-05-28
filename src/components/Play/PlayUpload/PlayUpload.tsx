@@ -18,7 +18,7 @@ const centerBottomErrorNotistack = {
 } as OptionsObject;
 
 export default function PlayUpload() {
-  const { uploadedQuizzes, errorLogs, setUploadedQuizzes, setErrorLogs } = useContext(PlayContext);
+  const { uploadedQuizzes, setSelectedQuizzes, errorLogs, setUploadedQuizzes, setErrorLogs } = useContext(PlayContext);
   const { enqueueSnackbar } = useSnackbar();
   const { theme } = useThemeSettings();
 
@@ -53,8 +53,10 @@ export default function PlayUpload() {
 
     Promise.all(filePromises).then(quizzes => {
       const [logMessages, filteredUploadedQuizzes] = filterUploadedQuizzes(quizzes)
+      const mergedUploadedQuizzes = [...uploadedQuizzes, ...filteredUploadedQuizzes];
       setErrorLogs([...errorLogs, ...logMessages]);
-      setUploadedQuizzes([...uploadedQuizzes, ...filteredUploadedQuizzes]);
+      setUploadedQuizzes(mergedUploadedQuizzes);
+      setSelectedQuizzes(mergedUploadedQuizzes.map(mergedUploadedQuiz => mergedUploadedQuiz._id))
     });
   };
 
