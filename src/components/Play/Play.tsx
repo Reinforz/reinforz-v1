@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { QUIZ_1, QUIZ_2 } from "../../data/quizzes";
 import { List } from "../../shared";
 import {
   IErrorLog, IPlaySettings, IQuizFull, TQuestionFull
@@ -39,8 +40,8 @@ function Play() {
   });
 
   const [playing, setPlaying] = useState(false);
-  const [uploadedQuizzes, setUploadedQuizzes] = useState<IQuizFull[]>([]);
-  const [selectedQuizzes, setSelectedQuizzes] = useState<string[]>([]);
+  const [uploadedQuizzes, setUploadedQuizzes] = useState<IQuizFull[]>([QUIZ_1, QUIZ_2]);
+  const [selectedQuizzes, setSelectedQuizzes] = useState<string[]>([QUIZ_1._id, QUIZ_2._id]);
   const [errorLogs, setErrorLogs] = useState<IErrorLog[]>([]);
 
   let filteredQuizzes = JSON.parse(JSON.stringify(uploadedQuizzes.filter(quiz => selectedQuizzes.includes(quiz._id)))) as IQuizFull[];
