@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { PlayContext } from "../../context/PlayContext";
-import { List } from "../../shared";
+import { List, Menu } from "../../shared";
 import {
   IErrorLog, IPlaySettings, IQuizFull
 } from "../../types";
@@ -21,7 +21,7 @@ function Play() {
     filters: PLAY_SETTINGS ? PLAY_SETTINGS.play_filters : createDefaultPlaySettingsFiltersState()
   });
 
-  const [playing, setPlaying] = useState(true);
+  const [playing, setPlaying] = useState(false);
   const [uploadedQuizzes, setUploadedQuizzes] = useState<IQuizFull[]>([]);
   const [selectedQuizzes, setSelectedQuizzes] = useState<string[]>([]);
   const [errorLogs, setErrorLogs] = useState<IErrorLog[]>([]);
@@ -34,13 +34,13 @@ function Play() {
   const [allQuestions, allQuestionsMap] = generateQuestionsMap(filteredQuizzes, playSettings.filters)
 
   return <PlayContext.Provider value={{ allQuestionsMap, allQuestions, filteredQuizzes, setPlaySettings, playSettings, errorLogs, setErrorLogs, setPlaying, playing, uploadedQuizzes, selectedQuizzes, setUploadedQuizzes, setSelectedQuizzes }}>
-    {!playing ? <div className="Play">
+    {!playing ? <Menu contents={[<PlaySettings />, <div className="Play">
       <PlayUpload />
       <PlayErrorlogs />
       <List selectedItems={selectedQuizzes} setSelectedItems={setSelectedQuizzes} header="Uploaded Quizzes" items={uploadedQuizzes} setItems={setUploadedQuizzes} fields={["subject", "topic", (item: any) => item.questions.length + " Qs"]} />
       <PlayListTable />
-      <PlaySettings />
-    </div> : <Quiz />}
+
+    </div>]} /> : <Quiz />}
   </PlayContext.Provider>
 }
 

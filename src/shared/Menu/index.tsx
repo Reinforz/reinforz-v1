@@ -7,105 +7,95 @@ import Icon from "../Icon";
 import "./style.scss";
 
 export interface MenuProps {
-  initial_position?: 'left' | 'right';
-  initial_open?: boolean;
-  children: any;
+  initialPosition?: 'left' | 'right';
+  initialOpen?: boolean;
   width?: number;
-  lskey: string;
-  content: JSX.Element;
-}
-
-export interface MenuRProps {
-  MenuComponent: JSX.Element;
-  MenuExtra: {
-    content_elem_style: any;
-  };
+  lsKey?: string;
+  contents: [JSX.Element, JSX.Element];
 }
 
 export default function Menu(props: MenuProps) {
-  const { width = 300, initial_position, lskey, initial_open, content, children } = props;
-  let menu_ls_state = {
-    position: initial_position || "left",
-    is_open: initial_open || false
+  const { width = 300, initialPosition, lsKey, initialOpen, contents } = props;
+  let menuLsState = {
+    position: initialPosition || "right",
+    isOpen: initialOpen || true
   };
 
-  if (lskey) {
-    const ls_value = localStorage.getItem(lskey);
-    if (ls_value)
-      menu_ls_state = JSON.parse(ls_value)
+  if (lsKey) {
+    const lsValue = localStorage.getItem(lsKey);
+    if (lsValue)
+      menuLsState = JSON.parse(lsValue)
   }
-  const [is_open, setIsOpen] = useState(menu_ls_state.is_open);
-  const [position, setPosition] = useState(menu_ls_state.position);
+  const [isOpen, setIsOpen] = useState<boolean>(menuLsState.isOpen);
+  const [position, setPosition] = useState(menuLsState.position);
   const theme = useTheme() as ExtendedTheme;
 
-  const content_elem_style: any = {};
-  content_elem_style.position = `absolute`;
-  content_elem_style.transition = `width 250ms ease-in-out, left 250ms ease-in-out`;
+  const contentStyle: any = {};
+  contentStyle.position = `absolute`;
+  contentStyle.transition = `width 250ms ease-in-out, left 250ms ease-in-out`;
 
-  let left = null, icons_style = {
+  let left = null, iconsStyle: React.CSSProperties = {
     backgroundColor: theme.color.dark
-  } as any, icon_style = {} as any;
+  }, iconStyle: React.CSSProperties = {};
 
   if (position === "right") {
-    if (is_open) {
-      left = `calc(100% - ${width}px)`;
-      icon_style.transform = "rotate(0deg)";
-      icons_style.left = "-40px"
-      content_elem_style.width = `calc(100% - ${width}px)`;
-      content_elem_style.left = `0px`;
+    if (isOpen) {
+      left = `100%`;
+      iconStyle.transform = "rotate(0deg)";
+      iconsStyle.left = "-40px"
+      contentStyle.width = `calc(100% - ${width}px)`;
+      contentStyle.left = `0px`;
     }
     else {
       left = "100%"
-      icon_style.transform = "rotate(-180deg)";
-      icons_style.left = "-40px"
-      content_elem_style.width = `100%`;
-      content_elem_style.left = `0px`;
+      iconStyle.transform = "rotate(-180deg)";
+      iconsStyle.left = "-40px"
+      contentStyle.width = `100%`;
+      contentStyle.left = `0px`;
     }
   } else {
-    if (is_open) {
-      left = "0px"
-      icon_style.transform = "rotate(-180deg)";;
-      icons_style.left = "100%"
-      content_elem_style.width = `calc(100% - ${width}px)`;
-      content_elem_style.left = `${width}px`;
+    if (isOpen) {
+      left = `-${width}px`
+      iconStyle.transform = "rotate(-180deg)";;
+      iconsStyle.left = "100%"
+      contentStyle.width = `calc(100% - ${width}px)`;
+      contentStyle.left = `${width}px`;
     }
     else {
       left = `-${width}px`
-      icon_style.transform = "rotate(0deg)"
-      icons_style.left = "100%"
-      content_elem_style.width = `100%`;
-      content_elem_style.left = `0px`;
+      iconStyle.transform = "rotate(0deg)"
+      iconsStyle.left = "100%"
+      contentStyle.width = `100%`;
+      contentStyle.left = `0px`;
     }
   }
 
-  return children({
-    MenuComponent: <div className="Menu" style={{ left }}>
-      <div className="Menu-icons" style={icons_style}>
-        <Icon popoverText={`${is_open ? "Close" : "Open"} Menu`}>
+  return <div style={contentStyle}>
+    {contents[1]}
+    <div className="Menu" style={{ left }}>
+      <div className="Menu-icons" style={iconsStyle}>
+        <Icon popoverText={`${isOpen ? "Close" : "Open"} Menu`}>
           <FaArrowAltCircleRight className="Menu-icons-icon Menu-icons-icon--toggle" onClick={() => {
-            const new_value = !is_open
-            setIsOpen(new_value)
-            lskey && localStorage.setItem(lskey, JSON.stringify({
-              is_open: new_value,
+            const newValue = !isOpen
+            setIsOpen(newValue)
+            lsKey && localStorage.setItem(lsKey, JSON.stringify({
+              isOpen: newValue,
               position
             }))
-          }} style={{ fill: theme.color.opposite_dark, ...icon_style }} />
+          }} style={{ fill: theme.color.opposite_dark, ...iconStyle }} />
         </Icon>
         <Icon popoverText={`Switch to ${position === "left" ? "right" : "left"}`} >
           <RiArrowLeftRightLine className="Menu-icons-icon Menu-icons-icon--position" onClick={() => {
-            const new_value = position === "left" ? "right" : "left"
-            setPosition(new_value)
-            lskey && localStorage.setItem(lskey, JSON.stringify({
-              is_open,
-              position: new_value
+            const newValue = position === "left" ? "right" : "left"
+            setPosition(newValue)
+            lsKey && localStorage.setItem(lsKey, JSON.stringify({
+              isOpen,
+              position: newValue
             }))
           }} style={{ fill: theme.color.opposite_dark }} />
         </Icon>
       </div>
-      {content}
-    </div>,
-    MenuExtra: {
-      content_elem_style
-    }
-  })
+      {contents[0]}
+    </div>
+  </div>
 }
