@@ -1,11 +1,11 @@
 import { Button, Checkbox, FormControlLabel } from "@material-ui/core";
 import { OptionsObject, useSnackbar } from "notistack";
 import React, { useContext } from "react";
+import { PlayContext } from "../../../context/PlayContext";
 import { useThemeSettings } from "../../../hooks";
 import { CheckboxGroup, InputRange } from '../../../shared';
 import { IPlaySettingsOptionsState } from "../../../types";
 import { createDefaultPlaySettingsFiltersState, createDefaultPlaySettingsOptionsState } from "../../../utils";
-import { PlayContext } from "../Play";
 import "./PlaySettings.scss";
 
 const enqueueSnackbarOptionsObject: OptionsObject = {

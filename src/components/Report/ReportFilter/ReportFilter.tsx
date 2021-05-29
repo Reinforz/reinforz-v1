@@ -1,9 +1,9 @@
 import { Button } from '@material-ui/core';
 import React, { Dispatch, SetStateAction, useContext } from "react";
+import { PlayContext } from '../../../context/PlayContext';
 import { CheckboxGroup, InputRange, RadioGroup, Select } from '../../../shared';
 import { IReportFilterState } from "../../../types";
 import { createDefaultReportFilterState } from '../../../utils';
-import { PlayContext } from '../../Play/Play';
 import "./ReportFilter.scss";
 
 const transformLabel = (stat: string) => {

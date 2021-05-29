@@ -1,6 +1,6 @@
 import { useContext } from "react";
+import { PlayContext } from "../../../context/PlayContext";
 import { ListTable } from "../../../shared";
-import { PlayContext } from "../Play";
 import "./PlayListTable.scss";
 
 export function PlayListTable() {

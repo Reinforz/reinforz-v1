@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import { PlayContext } from "../../context/PlayContext";
 import { List } from "../../shared";
 import {
-  IErrorLog, IPlaySettings, IQuizFull, TQuestionFull
+  IErrorLog, IPlaySettings, IQuizFull
 } from "../../types";
 import { arrayShuffler, createDefaultPlaySettingsFiltersState, createDefaultPlaySettingsOptionsState, generateQuestionsMap } from "../../utils";
 import Quiz from "../Quiz/Quiz";
@@ -10,24 +11,6 @@ import PlayErrorlogs from "./PlayErrorlogs/PlayErrorlogs";
 import { PlayListTable } from "./PlayListTable/PlayListTable";
 import PlaySettings from "./PlaySettings/PlaySettings";
 import PlayUpload from "./PlayUpload/PlayUpload";
-
-interface IPlayContext {
-  playing: boolean
-  setPlaying: React.Dispatch<React.SetStateAction<boolean>>
-  uploadedQuizzes: IQuizFull[],
-  setUploadedQuizzes: React.Dispatch<React.SetStateAction<IQuizFull[]>>
-  selectedQuizzes: string[],
-  setSelectedQuizzes: React.Dispatch<React.SetStateAction<string[]>>
-  filteredQuizzes: IQuizFull[],
-  errorLogs: IErrorLog[],
-  setErrorLogs: React.Dispatch<React.SetStateAction<IErrorLog[]>>
-  playSettings: IPlaySettings
-  setPlaySettings: React.Dispatch<React.SetStateAction<IPlaySettings>>
-  allQuestions: TQuestionFull[]
-  allQuestionsMap: Map<string, TQuestionFull>
-}
-
-export const PlayContext = React.createContext({} as IPlayContext)
 
 function Play() {
   let PLAY_SETTINGS: any = localStorage.getItem('PLAY_SETTINGS');

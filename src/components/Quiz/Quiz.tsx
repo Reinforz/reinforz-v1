@@ -1,10 +1,10 @@
 import React, { Fragment, useContext, useState } from "react";
+import { PlayContext } from "../../context/PlayContext";
 import { RESULT_1 } from "../../data/results";
 import { useCycle, useThemeSettings } from "../../hooks";
 import { Stats } from "../../shared";
 import { TQuestionFull, TQuestionResult } from "../../types";
 import { arrayShuffler, getAnswerResult } from "../../utils";
-import { PlayContext } from "../Play/Play";
 import Question from "../Question/Question";
 import Report from "../Report/Report";
 import "./Quiz.scss";

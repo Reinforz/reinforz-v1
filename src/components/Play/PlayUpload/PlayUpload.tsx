@@ -2,10 +2,10 @@ import yaml from 'js-yaml';
 import { OptionsObject, useSnackbar } from "notistack";
 import React, { useContext } from 'react';
 import { useDropzone } from 'react-dropzone';
+import { PlayContext } from '../../../context/PlayContext';
 import { useThemeSettings } from '../../../hooks';
 import { IQuizPartial } from '../../../types';
 import { filterUploadedQuizzes } from "../../../utils";
-import { PlayContext } from '../Play';
 import "./PlayUpload.scss";
 
 const trimLower = (data: string) => data.replace(/\s/g, '').toLowerCase();

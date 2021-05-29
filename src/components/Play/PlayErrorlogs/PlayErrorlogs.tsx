@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
+import { PlayContext } from '../../../context/PlayContext';
 import { useThemeSettings } from '../../../hooks';
-import { PlayContext } from '../Play';
 import "./PlayErrorlogs.scss";
 
 export default function PlayErrorlogs() {

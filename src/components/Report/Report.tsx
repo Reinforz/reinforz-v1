@@ -1,9 +1,9 @@
 import { Button } from '@material-ui/core';
 import React, { useContext, useState } from 'react';
+import { PlayContext } from '../../context/PlayContext';
 import { Table } from '../../shared';
 import { TQuestionResult } from "../../types";
 import { applyResultFilters, createDefaultReportFilterState, generateQuizzesFromResults } from '../../utils';
-import { PlayContext } from '../Play/Play';
 import "./Report.scss";
 import ReportExport from './ReportExport/ReportExport';
 import ReportFilter from './ReportFilter/ReportFilter';
