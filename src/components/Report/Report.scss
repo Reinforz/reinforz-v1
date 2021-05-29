@@ -1,18 +1,7 @@
 .Report {
   height: 100vh;
   user-select: none;
-  display: grid;
-  grid-template-columns: 300px 1fr 1fr;
-  grid-template-rows: 50px 1fr;
 
-  &Filter {
-    padding: 10px;
-    overflow: auto;
-    height: calc(100vh - 30px);
-    margin-right: 10px;
-    grid-area: 1/1/3/2;
-  }
-  
   &Export {
     grid-area: 1/2/2/3;
     padding: 5px;

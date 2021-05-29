@@ -1,7 +1,7 @@
 import { Button } from '@material-ui/core';
 import React, { useContext, useState } from 'react';
 import { PlayContext } from '../../context/PlayContext';
-import { Table } from '../../shared';
+import { Menu, Table } from '../../shared';
 import { TQuestionResult } from "../../types";
 import { applyResultFilters, createDefaultReportFilterState, generateQuizzesFromResults } from '../../utils';
 import "./Report.scss";
@@ -55,8 +55,7 @@ export default function Report(props: Props) {
   }
 
   return (
-    <div className="Report">
-      <ReportFilter reportFilter={reportFilter} setReportFilter={setReportFilter} />
+    <Menu contents={[<ReportFilter reportFilter={reportFilter} setReportFilter={setReportFilter} />, <div className="Report">
       <ReportExport filteredResults={filteredResults} filteredQuizzes={Object.values(filteredQuizzes)} />
       <Table className="ReportTable" accumulator={accumulator} transformValue={transformValue} contents={filteredResults} collapseContents={["explanation"]} headers={["subject", "type", "difficulty", "verdict", "score", "time_allocated", "time_taken", "weight", "user_answers", "hints_used"].filter(report_stat => !reportFilter.excluded_columns.includes(report_stat))} onHeaderClick={(header, order) => {
         if (header.match(/(score|time|hints)/))
@@ -72,5 +71,6 @@ export default function Report(props: Props) {
           setSelectedQuizzes(Object.values(filteredQuizzes).map(quiz => quiz._id))
         }}>Back to Home</Button>
       </div>
-    </div>)
+    </div>]} />
+  )
 }

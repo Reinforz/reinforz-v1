@@ -21,7 +21,7 @@ function Play() {
     filters: PLAY_SETTINGS ? PLAY_SETTINGS.play_filters : createDefaultPlaySettingsFiltersState()
   });
 
-  const [playing, setPlaying] = useState(false);
+  const [playing, setPlaying] = useState(true);
   const [uploadedQuizzes, setUploadedQuizzes] = useState<IQuizFull[]>([]);
   const [selectedQuizzes, setSelectedQuizzes] = useState<string[]>([]);
   const [errorLogs, setErrorLogs] = useState<IErrorLog[]>([]);
@@ -39,7 +39,6 @@ function Play() {
       <PlayErrorlogs />
       <List selectedItems={selectedQuizzes} setSelectedItems={setSelectedQuizzes} header="Uploaded Quizzes" items={uploadedQuizzes} setItems={setUploadedQuizzes} fields={["subject", "topic", (item: any) => item.questions.length + " Qs"]} />
       <PlayListTable />
-
     </div>]} /> : <Quiz />}
   </PlayContext.Provider>
 }
