@@ -2,9 +2,25 @@ import { useTheme } from "@material-ui/styles";
 import React, { useState } from "react";
 import { FaArrowAltCircleRight } from "react-icons/fa";
 import { RiArrowLeftRightLine } from "react-icons/ri";
-import { ExtendedTheme, MenuProps } from "../../types";
+import { ExtendedTheme } from "../../types";
 import Icon from "../Icon";
 import "./style.scss";
+
+export interface MenuProps {
+  initial_position?: 'left' | 'right';
+  initial_open?: boolean;
+  children: any;
+  width?: number;
+  lskey: string;
+  content: JSX.Element;
+}
+
+export interface MenuRProps {
+  MenuComponent: JSX.Element;
+  MenuExtra: {
+    content_elem_style: any;
+  };
+}
 
 export default function Menu(props: MenuProps) {
   const { width = 300, initial_position, lskey, initial_open, content, children } = props;

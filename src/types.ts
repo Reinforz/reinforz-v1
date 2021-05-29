@@ -227,19 +227,3 @@ export interface SettingsProps {
   settings: ISettings;
   setSettings: (settings: ISettings) => any;
 }
-
-export interface MenuProps {
-  initial_position?: 'left' | 'right';
-  initial_open?: boolean;
-  children: any;
-  width?: number;
-  lskey: string;
-  content: JSX.Element;
-}
-
-export interface MenuRProps {
-  MenuComponent: JSX.Element;
-  MenuExtra: {
-    content_elem_style: any;
-  };
-}
