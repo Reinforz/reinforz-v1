@@ -30,7 +30,9 @@ export default function Menu(props: MenuProps) {
   const [position, setPosition] = useState(menuLsState.position);
   const theme = useTheme() as ExtendedTheme;
 
-  const contentStyle: any = {};
+  const contentStyle: React.CSSProperties = {
+    height: '100% '
+  };
   contentStyle.position = `absolute`;
   contentStyle.transition = `width 250ms ease-in-out, left 250ms ease-in-out`;
 
