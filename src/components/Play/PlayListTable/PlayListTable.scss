@@ -1,5 +1,14 @@
-.ListTable{
+.PlayListTable{
   grid-area: 1/2/4/3;
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+}
+
+.ListTable{
+  margin: 5px;
+  border-radius: 5px;
+  display: grid;
+  grid-template-rows: 50px 150px 50px;
   &-headers-row, &-body-row{
     display: grid;
     grid-template-columns: 25px 200px;
@@ -11,6 +20,10 @@
     padding: 10px;
     margin: 5px;
     user-select: none;
+  }
+
+  &-body{
+    overflow: auto;
   }
 
   &-body-row-item--title{
