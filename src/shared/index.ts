@@ -4,6 +4,7 @@ import Highlighter from './Highlighter';
 import Icon from './Icon';
 import InputRange from './InputRange';
 import List from './List';
+import ListTable from './ListTable';
 import Menu from './Menu';
 import RadioGroup from './RadioGroup';
 import Select from './Select';
@@ -14,6 +15,7 @@ import Toggles from './Toggles';
 import View from './View';
 
 export {
+  ListTable,
   InputRange,
   Select,
   RadioGroup,
@@ -29,3 +31,4 @@ export {
   Table,
   Stats
 };
+

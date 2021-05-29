@@ -56,7 +56,7 @@ function Play() {
       <PlayUpload />
       <PlayErrorlogs />
       <List selectedItems={selectedQuizzes} setSelectedItems={setSelectedQuizzes} header="Uploaded Quizzes" items={uploadedQuizzes} setItems={setUploadedQuizzes} fields={["subject", "title", (item: any) => item.questions.length + " Qs"]} />
-      <PlayListTable headers={["Beginner", "Intermediate", "Advanced"]} itemKey={"difficulty"} />
+      <PlayListTable />
       <PlaySettings />
     </div> : <Quiz />}
   </PlayContext.Provider>
