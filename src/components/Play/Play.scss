@@ -2,11 +2,10 @@
   height: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 100px 325px 325px;
-  grid-gap: 5px;
+  grid-template-rows: 100px 327.5px 327.5px;
   
   .List{
     grid-area: 3/1/4/2;
-    height: calc(100% - 15px);
+    margin: 2.5px;
   }
 }
