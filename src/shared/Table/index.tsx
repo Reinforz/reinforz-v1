@@ -15,9 +15,34 @@ import marked from "marked";
 import React, { Fragment, useState } from 'react';
 import { MdPlayArrow } from "react-icons/md";
 import { useThemeSettings } from '../../hooks';
-import { ExtendedTheme, TableHeaderProps, TableProps, TableRowsProps } from "../../types";
+import { ExtendedTheme } from "../../types";
 import Icon from "../Icon";
 import "./style.scss";
+
+interface Table_RowsCommonProps {
+  collapseContents?: string[];
+  transformValue?: (header: string, content: any) => string;
+  headers: string[];
+  title?: string;
+}
+
+export interface TableProps<Values> extends Table_RowsCommonProps {
+  contents: Values[];
+  accumulator: (header: string, contents: Array<any>) => string | null | number;
+  className?: string;
+  onHeaderClick: (header: string, order: 'ASC' | 'DESC') => any;
+}
+
+export interface TableRowsProps extends Table_RowsCommonProps {
+  content: any;
+  index: number;
+}
+
+export interface TableHeaderProps {
+  headers: string[];
+  collapseContents?: string[];
+  onHeaderClick: (header: string, order: 'ASC' | 'DESC') => any;
+}
 
 const DOMPurify = createDOMPurify(window);
 

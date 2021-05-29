@@ -3,31 +3,6 @@ import { Language } from 'prism-react-renderer';
 
 // Basic Components
 
-interface Table_RowsCommonProps {
-  collapseContents?: string[];
-  transformValue?: (header: string, content: any) => string;
-  headers: string[];
-  title?: string;
-}
-
-export interface TableProps<Values> extends Table_RowsCommonProps {
-  contents: Values[];
-  accumulator: (header: string, contents: Array<any>) => string | null | number;
-  className?: string;
-  onHeaderClick: (header: string, order: 'ASC' | 'DESC') => any;
-}
-
-export interface TableRowsProps extends Table_RowsCommonProps {
-  content: any;
-  index: number;
-}
-
-export interface TableHeaderProps {
-  headers: string[];
-  collapseContents?: string[];
-  onHeaderClick: (header: string, order: 'ASC' | 'DESC') => any;
-}
-
 export interface IErrorLog {
   quiz: string;
   target: string;
@@ -268,5 +243,3 @@ export interface MenuRProps {
     content_elem_style: any;
   };
 }
-
-export type TQuizSortBy = 'Difficulty' | 'Time Allocated' | 'Question Types';

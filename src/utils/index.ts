@@ -9,7 +9,7 @@ export * from './filterUploadedQuizzes';
 export * from './generateCompleteQuestion';
 export * from './generateQuestionsMap';
 export * from './generateQuizzesFromResults';
-export * from './generateSortHavingItems';
 export * from './generateTheme';
 export * from './getAnswerResult';
 export * from './getSettings';
+
