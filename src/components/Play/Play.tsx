@@ -8,7 +8,7 @@ import { arrayShuffler, createDefaultPlaySettingsFiltersState, createDefaultPlay
 import Quiz from "../Quiz/Quiz";
 import "./Play.scss";
 import PlayErrorlogs from "./PlayErrorlogs/PlayErrorlogs";
-import PlayQuizzes from "./PlayQuizzes/PlayQuizzes";
+import { PlayListTable } from "./PlayListTable/PlayListTable";
 import PlaySettings from "./PlaySettings/PlaySettings";
 import PlayUpload from "./PlayUpload/PlayUpload";
 
@@ -56,8 +56,8 @@ function Play() {
       <PlayUpload />
       <PlayErrorlogs />
       <List selectedItems={selectedQuizzes} setSelectedItems={setSelectedQuizzes} header="Uploaded Quizzes" items={uploadedQuizzes} setItems={setUploadedQuizzes} fields={["subject", "title", (item: any) => item.questions.length + " Qs"]} />
+      <PlayListTable headers={["Beginner", "Intermediate", "Advanced"]} itemKey={"difficulty"} />
       <PlaySettings />
-      <PlayQuizzes />
     </div> : <Quiz />}
   </PlayContext.Provider>
 }

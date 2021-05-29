@@ -1,0 +1,15 @@
+.PlayListTable{
+  grid-area: 1/2/4/3;
+  &-headers-row, &-body-row{
+    display: grid;
+    grid-template-columns: 25px 50px;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    text-align: center;
+    font-weight: bolder;
+    font-size: 18px;
+    padding: 10px;
+    margin: 5px;
+    user-select: none;
+  }
+}

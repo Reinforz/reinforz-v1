@@ -26,9 +26,10 @@ export default function PlayQuizzes() {
       <Select items={generateSortHavingItems(playQuizzesState.sort_by)} label={"Sort Having"} menuItemLabel={(item) => item} setState={setPlayQuizzesState} state={playQuizzesState} stateKey={"sort_having"} />
     </div>
     <div className="PlayQuizzes-Items">
-      {uploadedQuizzes.map(uploadedQuiz => <div>
+      {uploadedQuizzes.map(uploadedQuiz => <div key={uploadedQuiz._id}>
         {uploadedQuiz.title}
         {uploadedQuiz.subject}
+        {uploadedQuiz.questions.length + " questions"}
       </div>)}
     </div>
   </div>
