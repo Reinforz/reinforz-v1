@@ -6,7 +6,7 @@ export const QUIZ_1: IQuizFull = {
   questions: [
     {
       question: 'Quiz 1 Question 1',
-      answers: ['0'],
+      answers: ['0', '1'],
       hints: ['Hint 1', 'Hint 2', 'Hint 3'],
       options: [
         {
@@ -35,7 +35,7 @@ export const QUIZ_1: IQuizFull = {
         'https://i1.wp.com/blog.enriqueoriol.com/wp-content/uploads/2018/08/reduxLogo.png?fit=1024%2C684',
       weight: 1,
       difficulty: 'Beginner',
-      type: 'MCQ',
+      type: 'MS',
       time_allocated: 120,
       _id: 'quiz1.question1',
       quiz: {

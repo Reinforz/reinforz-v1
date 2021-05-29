@@ -13,7 +13,7 @@ interface Props<T> {
 export default function ListTable<T extends Record<string, any>>(props: Props<T>) {
   const { theme } = useThemeSettings();
   const [itemsMap, setItemsMap] = useState<Record<string, any>[]>([]);
-  const [sorts, setSorts] = useState<(boolean[])>([true, true, ...(new Array(props.headers.length)).fill(true)]);
+  const [sort, setSort] = useState<[string, boolean]>(['title', true]);
   useEffect(() => {
     setItemsMap(props.items.map((item, index) => {
       const itemMap: Record<string, any> = {
@@ -47,23 +47,25 @@ export default function ListTable<T extends Record<string, any>>(props: Props<T>
       aggregateItemsMap[key] += value;
     })
   });
+  const headers = ["Sl", "title", ...props.headers];
+  const sortedItems: Record<string, any>[] = sort ? itemsMap.sort((sortedItemA, sortedItemB) => sortedItemA[sort[0]] > sortedItemB[sort[0]] ? sort[1] ? 1 : -1 : sort[1] ? -1 : 1) : itemsMap;
 
   return <div className={`ListTable${props.className ? ' ' + props.className : ''}`} style={{ backgroundColor: theme.color.base, color: theme.palette.text.secondary }}>
     <div className="ListTable-headers">
       <div className="ListTable-headers-row" style={{ backgroundColor: theme.color.dark }}>
-        {["Sl", "title", ...props.headers].map((header, headerIndex) => <span className={`ListTable-headers-row-item ListTable-headers-row-item--${header}`} key={header} onClick={() => {
-          sorts[headerIndex] = !sorts[headerIndex]
-          setSorts([...sorts])
+        {headers.map((header) => <span className={`ListTable-headers-row-item ListTable-headers-row-item--${header}`} key={header} onClick={() => {
+          if (sort[0] === header) setSort([header, !sort[1]])
+          else setSort([header, false])
         }}>
-          <span className={`ListTable-headers-row-item-icon`} style={{ transform: sorts[headerIndex] ? `rotate(-90deg)` : 'rotate(90deg)' }}>
+          {<span className={`ListTable-headers-row-item-icon`} style={{ transform: sort[1] ? `rotate(-90deg)` : 'rotate(90deg)', visibility: sort[0] === header ? 'initial' : 'hidden' }}>
             ▶
-          </span>
+          </span>}
           <span className={`ListTable-headers-row-item-text`}>{header}</span>
         </span>)}
       </div>
     </div>
     <div className="ListTable-body">
-      {itemsMap.map((itemMap) => <div key={itemMap._id} className="ListTable-body-row" style={{ backgroundColor: theme.color.light }}>
+      {sortedItems.map((itemMap) => <div key={itemMap._id} className="ListTable-body-row" style={{ backgroundColor: theme.color.light }}>
         {["index", "title", ...props.headers].map(header => <span className={`ListTable-body-row-item ListTable-body-row-item--${header}`} key={header}>{itemMap[header]}</span>)}
       </div>)}
     </div>
