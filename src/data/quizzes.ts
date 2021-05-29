@@ -1,7 +1,7 @@
 import { IQuizFull } from '../types';
 
 export const QUIZ_1: IQuizFull = {
-  title: 'Title 1',
+  topic: 'Topic 1',
   subject: 'Subject 1',
   questions: [
     {
@@ -39,7 +39,7 @@ export const QUIZ_1: IQuizFull = {
       time_allocated: 120,
       _id: 'quiz1.question1',
       quiz: {
-        title: 'Title 1',
+        topic: 'Topic 1',
         subject: 'Subject 1',
         _id: 'quiz1'
       }
@@ -73,7 +73,7 @@ export const QUIZ_1: IQuizFull = {
       time_allocated: 120,
       _id: 'quiz1.question2',
       quiz: {
-        title: 'Title 1',
+        topic: 'Topic 1',
         subject: 'Subject 1',
         _id: 'quiz1'
       }
@@ -83,7 +83,7 @@ export const QUIZ_1: IQuizFull = {
 };
 
 export const QUIZ_2: IQuizFull = {
-  title: 'Title 2',
+  topic: 'Topic 2',
   subject: 'Subject 2',
   questions: [
     {
@@ -121,7 +121,7 @@ export const QUIZ_2: IQuizFull = {
       time_allocated: 120,
       _id: 'quiz2.question1',
       quiz: {
-        title: 'Title 2',
+        topic: 'Topic 2',
         subject: 'Subject 2',
         _id: 'quiz2'
       }
@@ -155,7 +155,7 @@ export const QUIZ_2: IQuizFull = {
       time_allocated: 120,
       _id: 'quiz2.question2',
       quiz: {
-        title: 'Title 2',
+        topic: 'Topic 2',
         subject: 'Subject 2',
         _id: 'quiz2'
       }

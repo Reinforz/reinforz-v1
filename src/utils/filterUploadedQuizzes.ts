@@ -6,7 +6,7 @@ export function filterUploadedQuizzes(quizzes: IQuizPartial[]) {
   const logMessages: IErrorLog[] = [];
   const filteredUploadedQuizzes: IQuizFull[] = [];
   quizzes.forEach((quiz, quizIndex) => {
-    if (quiz.title && quiz.subject && quiz.questions.length > 0) {
+    if (quiz.topic && quiz.subject && quiz.questions.length > 0) {
       const quizId = shortid();
       quiz._id = quizId;
       const filteredQuestions: TQuestionFull[] = [];
@@ -15,7 +15,7 @@ export function filterUploadedQuizzes(quizzes: IQuizPartial[]) {
         if (logs.errors.length === 0) {
           generatedQuestion.quiz = {
             subject: quiz.subject,
-            title: quiz.title,
+            topic: quiz.topic,
             _id: quizId
           };
         }
@@ -23,7 +23,7 @@ export function filterUploadedQuizzes(quizzes: IQuizPartial[]) {
           logMessages.push({
             _id: shortid(),
             level: 'WARN',
-            quiz: `${quiz.subject} - ${quiz.title}`,
+            quiz: `${quiz.subject} - ${quiz.topic}`,
             target: `Question ${questionIndex + 1}`,
             message: warn
           });
@@ -32,7 +32,7 @@ export function filterUploadedQuizzes(quizzes: IQuizPartial[]) {
           logMessages.push({
             _id: shortid(),
             level: 'ERROR',
-            quiz: `${quiz.subject} - ${quiz.title}`,
+            quiz: `${quiz.subject} - ${quiz.topic}`,
             target: `Question ${questionIndex + 1}`,
             message: error
           });
@@ -43,19 +43,19 @@ export function filterUploadedQuizzes(quizzes: IQuizPartial[]) {
       filteredUploadedQuizzes.push(quiz as any);
     }
 
-    if (!quiz.title)
+    if (!quiz.topic)
       logMessages.push({
         _id: shortid(),
         level: 'ERROR',
-        quiz: `${quiz.subject} - ${quiz.title}`,
+        quiz: `${quiz.subject} - ${quiz.topic}`,
         target: `Quiz ${quizIndex + 1}`,
-        message: 'Quiz title absent'
+        message: 'Quiz topic absent'
       });
     if (!quiz.subject)
       logMessages.push({
         _id: shortid(),
         level: 'ERROR',
-        quiz: `${quiz.subject} - ${quiz.title}`,
+        quiz: `${quiz.subject} - ${quiz.topic}`,
         target: `Quiz ${quizIndex + 1}`,
         message: 'Quiz subject absent'
       });
@@ -63,7 +63,7 @@ export function filterUploadedQuizzes(quizzes: IQuizPartial[]) {
       logMessages.push({
         _id: shortid(),
         level: 'ERROR',
-        quiz: `${quiz.subject} - ${quiz.title}`,
+        quiz: `${quiz.subject} - ${quiz.topic}`,
         target: `Quiz ${quizIndex + 1}`,
         message: 'Quiz must have at least 1 question'
       });

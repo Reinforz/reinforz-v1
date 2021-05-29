@@ -27,14 +27,14 @@ export interface IPlaySettingsFiltersState {
 }
 
 export interface IQuizPartial {
-  title: string;
+  topic: string;
   subject: string;
   questions: TQuestionPartial[];
   _id?: string;
 }
 
 export interface IQuizFull {
-  title: string;
+  topic: string;
   subject: string;
   questions: TQuestionFull[];
   _id: string;
@@ -166,7 +166,7 @@ export interface QuestionHighlighterProps extends HighlighterProps {
 }
 
 export interface QuizIdentifiers {
-  title: string;
+  topic: string;
   _id: string;
   subject: string;
 }

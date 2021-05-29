@@ -54,7 +54,7 @@ function Play() {
     {!playing ? <div className="Play">
       <PlayUpload />
       <PlayErrorlogs />
-      <List selectedItems={selectedQuizzes} setSelectedItems={setSelectedQuizzes} header="Uploaded Quizzes" items={uploadedQuizzes} setItems={setUploadedQuizzes} fields={["subject", "title", (item: any) => item.questions.length + " Qs"]} />
+      <List selectedItems={selectedQuizzes} setSelectedItems={setSelectedQuizzes} header="Uploaded Quizzes" items={uploadedQuizzes} setItems={setUploadedQuizzes} fields={["subject", "topic", (item: any) => item.questions.length + " Qs"]} />
       <PlayListTable />
       <PlaySettings />
     </div> : <Quiz />}

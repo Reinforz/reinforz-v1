@@ -37,9 +37,9 @@ export default function PlayUpload() {
           if (result) {
             try {
               const quizData = ext.match(/(yaml|yml)/) ? yaml.safeLoad(result as string) as any : JSON.parse(result.toString());
-              const matchedQuiz = uploadedQuizzes.find((currentQuiz) => trimLower(currentQuiz.title) === trimLower(quizData.title) && trimLower(currentQuiz.subject) === trimLower(quizData.subject));
+              const matchedQuiz = uploadedQuizzes.find((currentQuiz) => trimLower(currentQuiz.topic) === trimLower(quizData.topic) && trimLower(currentQuiz.subject) === trimLower(quizData.subject));
               if (matchedQuiz)
-                enqueueSnackbar(`${matchedQuiz.subject} - ${matchedQuiz.title} has already been added`, centerBottomErrorNotistack);
+                enqueueSnackbar(`${matchedQuiz.subject} - ${matchedQuiz.topic} has already been added`, centerBottomErrorNotistack);
               else
                 resolve(quizData);
             } catch (err) {

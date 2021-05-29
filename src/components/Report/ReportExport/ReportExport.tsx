@@ -38,7 +38,7 @@ export default function ReportExport(props: Props) {
         delete cloned_question.quiz;
         return cloned_question;
       })
-      type === "yaml" ? download(`${quiz.subject} - ${quiz.title}.yaml`, safeDump(quiz)) : download(`${quiz.subject} - ${quiz.title}.json`, JSON.stringify(quiz, undefined, 2))
+      type === "yaml" ? download(`${quiz.subject} - ${quiz.topic}.yaml`, safeDump(quiz)) : download(`${quiz.subject} - ${quiz.topic}.json`, JSON.stringify(quiz, undefined, 2))
     })
   }, [filteredQuizzes])
 

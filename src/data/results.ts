@@ -34,7 +34,7 @@ export const RESULT_1: TQuestionResult = {
   _id: 'ln5zMGBRPU',
   quiz: {
     subject: 'Dart',
-    title: 'Dart Basic Types',
+    topic: 'Dart Basic Types',
     _id: '-QIv_LbJl'
   },
   user_answers: [],
