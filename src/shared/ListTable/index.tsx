@@ -8,6 +8,7 @@ interface Props<T> {
   itemKey: keyof T
   generateTitle: (item: T) => string
   className?: string
+  itemMapKey?: (item: any) => string | undefined
 }
 
 export default function ListTable<T extends Record<string, any>>(props: Props<T>) {
@@ -19,7 +20,6 @@ export default function ListTable<T extends Record<string, any>>(props: Props<T>
       const itemMap: Record<string, any> = {
         _id: item._id,
         title: props.generateTitle(item),
-        index: index + 1
       };
 
       props.headers.forEach(header => {
@@ -27,7 +27,7 @@ export default function ListTable<T extends Record<string, any>>(props: Props<T>
       })
 
       props.items[index][props.itemKey].forEach((item: any) => {
-        itemMap[item[props.itemKeyKey]]++;
+        itemMap[props.itemMapKey ? props.itemMapKey(item) : item[props.itemKeyKey]]++;
       })
       return itemMap;
     }))
@@ -57,16 +57,17 @@ export default function ListTable<T extends Record<string, any>>(props: Props<T>
           if (sort[0] === header) setSort([header, !sort[1]])
           else setSort([header, false])
         }}>
-          {<span className={`ListTable-headers-row-item-icon`} style={{ transform: sort[1] ? `rotate(-90deg)` : 'rotate(90deg)', visibility: sort[0] === header ? 'initial' : 'hidden' }}>
+          {header !== "Sl" ? <span className={`ListTable-headers-row-item-icon`} style={{ transform: sort[1] ? `rotate(-90deg)` : 'rotate(90deg)', visibility: sort[0] === header ? 'initial' : 'hidden' }}>
             ▶
-          </span>}
+          </span> : null}
           <span className={`ListTable-headers-row-item-text`}>{header}</span>
         </span>)}
       </div>
     </div>
     <div className="ListTable-body">
-      {sortedItems.map((itemMap) => <div key={itemMap._id} className="ListTable-body-row" style={{ backgroundColor: theme.color.light }}>
-        {["index", "title", ...props.headers].map(header => <span className={`ListTable-body-row-item ListTable-body-row-item--${header}`} key={header}>{itemMap[header]}</span>)}
+      {sortedItems.map((itemMap, index) => <div key={itemMap._id} className="ListTable-body-row" style={{ backgroundColor: theme.color.light }}>
+        <span className={`ListTable-body-row-item ListTable-body-row-item--index`}>{index + 1}</span>
+        {["title", ...props.headers].map(header => <span className={`ListTable-body-row-item ListTable-body-row-item--${header}`} key={header}>{itemMap[header]}</span>)}
       </div>)}
     </div>
     <div className="ListTable-footer">
