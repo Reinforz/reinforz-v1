@@ -12,7 +12,7 @@ export default function PlayErrorlogs() {
     <div className="PlayErrorLogs-content" style={{ backgroundColor: theme.color.dark }}>
       {errorLogs.length > 0 ?
         errorLogs.map((errorLog) => (
-          <div style={{ backgroundColor: errorLog.level === "ERROR" ? theme.palette.error.main : theme.palette.warning.main, color: theme.palette.text.primary }} className="PlayErrorLogs-content-item">{errorLog.quiz}: {errorLog.target}, {errorLog.message}</div>
+          <div key={errorLog._id} style={{ backgroundColor: errorLog.level === "ERROR" ? theme.palette.error.main : theme.palette.warning.main, color: theme.palette.text.primary }} className="PlayErrorLogs-content-item">{errorLog.quiz}: {errorLog.target}, {errorLog.message}</div>
         )) : <div style={{ fontSize: "1.25em", fontWeight: "bold", position: "absolute", transform: "translate(-50%,-50%)", top: "50%", left: "50%", textAlign: 'center' }}>No Errors or Warnings!</div>}
     </div>
   </div>

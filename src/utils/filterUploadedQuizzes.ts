@@ -6,9 +6,9 @@ export function filterUploadedQuizzes(quizzes: IQuizPartial[]) {
   const logMessages: IErrorLog[] = [];
   const filteredUploadedQuizzes: IQuizFull[] = [];
   quizzes.forEach((quiz, quizIndex) => {
+    const quizId = shortid();
+    quiz._id = quizId;
     if (quiz.topic && quiz.subject && quiz.questions.length > 0) {
-      const quizId = shortid();
-      quiz._id = quizId;
       const filteredQuestions: TQuestionFull[] = [];
       quiz.questions.forEach((question, questionIndex) => {
         const [generatedQuestion, logs] = generateCompleteQuestion(question);
@@ -25,7 +25,8 @@ export function filterUploadedQuizzes(quizzes: IQuizPartial[]) {
             level: 'WARN',
             quiz: `${quiz.subject} - ${quiz.topic}`,
             target: `Question ${questionIndex + 1}`,
-            message: warn
+            message: warn,
+            quiz_id: quiz._id as string
           });
         });
         logs.errors.forEach((error) => {
@@ -34,7 +35,8 @@ export function filterUploadedQuizzes(quizzes: IQuizPartial[]) {
             level: 'ERROR',
             quiz: `${quiz.subject} - ${quiz.topic}`,
             target: `Question ${questionIndex + 1}`,
-            message: error
+            message: error,
+            quiz_id: quiz._id as string
           });
         });
         if (logs.errors.length === 0) filteredQuestions.push(generatedQuestion);
@@ -49,7 +51,8 @@ export function filterUploadedQuizzes(quizzes: IQuizPartial[]) {
         level: 'ERROR',
         quiz: `${quiz.subject} - ${quiz.topic}`,
         target: `Quiz ${quizIndex + 1}`,
-        message: 'Quiz topic absent'
+        message: 'Quiz topic absent',
+        quiz_id: quiz._id
       });
     if (!quiz.subject)
       logMessages.push({
@@ -57,7 +60,8 @@ export function filterUploadedQuizzes(quizzes: IQuizPartial[]) {
         level: 'ERROR',
         quiz: `${quiz.subject} - ${quiz.topic}`,
         target: `Quiz ${quizIndex + 1}`,
-        message: 'Quiz subject absent'
+        message: 'Quiz subject absent',
+        quiz_id: quiz._id
       });
     if (!quiz.questions || quiz.questions.length <= 0)
       logMessages.push({
@@ -65,7 +69,8 @@ export function filterUploadedQuizzes(quizzes: IQuizPartial[]) {
         level: 'ERROR',
         quiz: `${quiz.subject} - ${quiz.topic}`,
         target: `Quiz ${quizIndex + 1}`,
-        message: 'Quiz must have at least 1 question'
+        message: 'Quiz must have at least 1 question',
+        quiz_id: quiz._id
       });
   });
 

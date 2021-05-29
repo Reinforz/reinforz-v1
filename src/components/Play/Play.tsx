@@ -37,7 +37,9 @@ function Play() {
     {!playing ? <Menu contents={[<PlaySettings />, <div className="Play">
       <PlayUpload />
       <PlayErrorlogs />
-      <List selectedItems={selectedQuizzes} setSelectedItems={setSelectedQuizzes} header="Uploaded Quizzes" items={uploadedQuizzes} setItems={setUploadedQuizzes} fields={["subject", "topic", (item: any) => item.questions.length + " Qs"]} />
+      <List onDelete={(remainingItems) => {
+        setErrorLogs(errorLogs.filter(errorLog => !remainingItems.map(remainingItem => remainingItem._id).includes(errorLog.quiz_id)))
+      }} selectedItems={selectedQuizzes} setSelectedItems={setSelectedQuizzes} header="Uploaded Quizzes" items={uploadedQuizzes} setItems={setUploadedQuizzes} fields={[(item) => `${item.subject} - ${item.topic}`, (item) => item.questions.length + " Qs"]} />
       <PlayListTable />
     </div>]} /> : <Quiz />}
   </PlayContext.Provider>

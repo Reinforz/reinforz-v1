@@ -9,6 +9,7 @@ export interface IErrorLog {
   message: string;
   level: 'ERROR' | 'WARN';
   _id: string;
+  quiz_id: string;
 }
 
 export interface IPlaySettingsOptionsState {
