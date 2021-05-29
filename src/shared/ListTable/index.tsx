@@ -57,14 +57,14 @@ export default function ListTable<T extends Record<string, any>>(props: Props<T>
           if (sort[0] === header) setSort([header, !sort[1]])
           else setSort([header, false])
         }}>
-          {header !== "Sl" ? <span className={`ListTable-headers-row-item-icon`} style={{ transform: sort[1] ? `rotate(-90deg)` : 'rotate(90deg)', visibility: sort[0] === header ? 'initial' : 'hidden' }}>
+          {header === sort[0] ? <span className={`ListTable-headers-row-item-icon`} style={{ transform: sort[1] ? `rotate(-90deg)` : 'rotate(90deg)' }}>
             ▶
           </span> : null}
           <span className={`ListTable-headers-row-item-text`}>{header}</span>
         </span>)}
       </div>
     </div>
-    <div className="ListTable-body">
+    <div className="ListTable-body" style={{ backgroundColor: theme.color.dark }}>
       {sortedItems.map((itemMap, index) => <div key={itemMap._id} className="ListTable-body-row" style={{ backgroundColor: theme.color.light }}>
         <span className={`ListTable-body-row-item ListTable-body-row-item--index`}>{index + 1}</span>
         {["title", ...props.headers].map(header => <span className={`ListTable-body-row-item ListTable-body-row-item--${header}`} key={header}>{itemMap[header]}</span>)}
