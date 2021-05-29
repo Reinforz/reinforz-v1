@@ -1,4 +1,5 @@
 import React, { Fragment, useContext, useState } from "react";
+import { RESULT_1 } from "../../data/results";
 import { useCycle, useThemeSettings } from "../../hooks";
 import { Stats } from "../../shared";
 import { TQuestionFull, TQuestionResult } from "../../types";
@@ -10,7 +11,7 @@ import "./Quiz.scss";
 
 export default function Quiz() {
   const { playSettings, allQuestions } = useContext(PlayContext);
-  const [results, setResults] = useState([] as TQuestionResult[]);
+  const [results, setResults] = useState([RESULT_1] as TQuestionResult[]);
   const { theme } = useThemeSettings();
   const { isLastItem, currentItem, getNextIndex, hasEnded, currentIndex } = useCycle(allQuestions);
 
