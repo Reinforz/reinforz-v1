@@ -31,16 +31,17 @@ export default function PlayUpload() {
         reader.onabort = () => reject('file reading was aborted');
         reader.onerror = () => reject('file reading has failed');
         reader.onload = () => {
-          const ext = file.name.split(".")[1];
+          const dotSplitChunks = file.name.split(".");
+          const ext = dotSplitChunks[dotSplitChunks.length - 1]
           const { result } = reader;
           if (result) {
             try {
-              const QuizData = ext.match(/(yaml|yml)/) ? yaml.safeLoad(result as string) as any : JSON.parse(result.toString());
-              const matchedQuiz = uploadedQuizzes.find((currentQuiz) => trimLower(currentQuiz.title) === trimLower(QuizData.title) && trimLower(currentQuiz.subject) === trimLower(QuizData.subject));
+              const quizData = ext.match(/(yaml|yml)/) ? yaml.safeLoad(result as string) as any : JSON.parse(result.toString());
+              const matchedQuiz = uploadedQuizzes.find((currentQuiz) => trimLower(currentQuiz.title) === trimLower(quizData.title) && trimLower(currentQuiz.subject) === trimLower(quizData.subject));
               if (matchedQuiz)
                 enqueueSnackbar(`${matchedQuiz.subject} - ${matchedQuiz.title} has already been added`, centerBottomErrorNotistack);
               else
-                resolve(QuizData);
+                resolve(quizData);
             } catch (err) {
               enqueueSnackbar(`${file.name} Error: ${err.message}`, centerBottomErrorNotistack)
             }

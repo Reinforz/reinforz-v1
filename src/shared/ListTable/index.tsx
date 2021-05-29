@@ -13,7 +13,7 @@ interface Props<T> {
 export default function ListTable<T extends Record<string, any>>(props: Props<T>) {
   const { theme } = useThemeSettings();
   const [itemsMap, setItemsMap] = useState<Record<string, any>[]>([]);
-
+  const [sorts, setSorts] = useState<(boolean[])>([true, true, ...(new Array(props.headers.length)).fill(true)]);
   useEffect(() => {
     setItemsMap(props.items.map((item, index) => {
       const itemMap: Record<string, any> = {
@@ -51,7 +51,15 @@ export default function ListTable<T extends Record<string, any>>(props: Props<T>
   return <div className={`ListTable${props.className ? ' ' + props.className : ''}`} style={{ backgroundColor: theme.color.base, color: theme.palette.text.secondary }}>
     <div className="ListTable-headers">
       <div className="ListTable-headers-row" style={{ backgroundColor: theme.color.dark }}>
-        {["Sl", "Quiz", ...props.headers].map(header => <span className={`ListTable-headers-row-item ListTable-headers-row-item--${header}`} key={header}>{header}</span>)}
+        {["Sl", "title", ...props.headers].map((header, headerIndex) => <span className={`ListTable-headers-row-item ListTable-headers-row-item--${header}`} key={header} onClick={() => {
+          sorts[headerIndex] = !sorts[headerIndex]
+          setSorts([...sorts])
+        }}>
+          <span className={`ListTable-headers-row-item-icon`} style={{ transform: sorts[headerIndex] ? `rotate(-90deg)` : 'rotate(90deg)' }}>
+            ▶
+          </span>
+          <span className={`ListTable-headers-row-item-text`}>{header}</span>
+        </span>)}
       </div>
     </div>
     <div className="ListTable-body">

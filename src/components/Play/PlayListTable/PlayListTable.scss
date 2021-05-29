@@ -5,10 +5,10 @@
 }
 
 .ListTable{
-  margin: 5px;
+  margin: 2.5px;
   border-radius: 5px;
   display: grid;
-  grid-template-rows: 50px 150px 50px;
+  grid-template-rows: 50px 145px 50px;
   &-headers-row, &-body-row{
     display: grid;
     grid-template-columns: 25px 200px;
@@ -28,5 +28,17 @@
 
   &-body-row-item--title{
     overflow: auto;
+  }
+
+  &-headers-row-item{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    text-transform: capitalize;
+    &-icon{
+      font-size: 12px;
+      margin-right: 3px;
+    }
   }
 }
