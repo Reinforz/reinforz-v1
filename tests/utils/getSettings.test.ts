@@ -20,13 +20,14 @@ it(`Should generate default settings if data is not stored in local storage`, ()
 it(`Should generate overridden settings if data is stored in local storage`, () => {
   getItemMock.mockReturnValueOnce(
     JSON.stringify({
-      animation: 'false'
+      animation: 'true',
+      hovertips: 'false'
     })
   );
   const settings = getSettings();
   expect(settings).toStrictEqual({
-    animation: false,
-    hovertips: true,
+    animation: true,
+    hovertips: false,
     theme: 'dark'
   });
 });
