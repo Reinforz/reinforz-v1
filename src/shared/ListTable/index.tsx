@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useThemeSettings } from "../../hooks";
-import { createItemMap } from "../../utils";
+import { createAggregateItemsMap, createItemMap } from "../../utils";
 
 interface Props<T> {
   itemKeyKey: string
@@ -21,19 +21,7 @@ export default function ListTable<T extends Record<string, any>>(props: Props<T>
     // eslint-disable-next-line
   }, [props.items])
 
-  const aggregateItemsMap: Record<string, number> = {
-    total: itemsMap.length
-  };
-
-  props.headers.forEach(header => {
-    aggregateItemsMap[header] = 0
-  })
-
-  itemsMap.forEach(itemMap => {
-    Object.entries(itemMap).forEach(([key, value]) => {
-      aggregateItemsMap[key] += value;
-    })
-  });
+  const aggregateItemsMap = createAggregateItemsMap(itemsMap, props.headers)
 
   const headers = ["Sl", "title", ...props.headers];
   const sortedItems: Record<string, any>[] = sort ? itemsMap.sort((sortedItemA, sortedItemB) => sortedItemA[sort[0]] > sortedItemB[sort[0]] ? sort[1] ? 1 : -1 : sort[1] ? -1 : 1) : itemsMap;
