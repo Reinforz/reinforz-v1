@@ -4,6 +4,14 @@
   grid-template-rows: 1fr 1fr 1fr;
 }
 
+.ListTable:nth-child(1){
+  margin-top: 5px;
+}
+
+.ListTable:last-child{
+  margin-bottom: 5px;
+}
+
 .ListTable{
   margin: 2.5px;
   border-radius: 5px;

@@ -47,6 +47,7 @@ export default function ListTable<T extends Record<string, any>>(props: Props<T>
       aggregateItemsMap[key] += value;
     })
   });
+
   const headers = ["Sl", "title", ...props.headers];
   const sortedItems: Record<string, any>[] = sort ? itemsMap.sort((sortedItemA, sortedItemB) => sortedItemA[sort[0]] > sortedItemB[sort[0]] ? sort[1] ? 1 : -1 : sort[1] ? -1 : 1) : itemsMap;
 
