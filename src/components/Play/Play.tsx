@@ -1,7 +1,12 @@
+import { makeStyles } from '@material-ui/core';
+import SettingsIcon from '@material-ui/icons/Settings';
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { PlayContext } from "../../context/PlayContext";
+import { useThemeSettings } from '../../hooks';
 import { List, Menu } from "../../shared";
 import {
+  ExtendedTheme,
   IErrorLog, IPlaySettings, IQuizFull
 } from "../../types";
 import { arrayShuffler, createDefaultPlaySettingsFiltersState, createDefaultPlaySettingsOptionsState, generateQuestionsMap } from "../../utils";
@@ -12,7 +17,16 @@ import { PlayListTable } from "./PlayListTable/PlayListTable";
 import PlaySettings from "./PlaySettings/PlaySettings";
 import PlayUpload from "./PlayUpload/PlayUpload";
 
+const useStyles = makeStyles((theme: ExtendedTheme) => ({
+  root: {
+    fill: theme.color.opposite_light
+  }
+}))
+
 function Play() {
+  const history = useHistory();
+  const classes = useStyles();
+  const { theme } = useThemeSettings();
   let PLAY_SETTINGS: any = localStorage.getItem('PLAY_SETTINGS');
   PLAY_SETTINGS = PLAY_SETTINGS ? JSON.parse(PLAY_SETTINGS) : undefined;
 
@@ -35,6 +49,7 @@ function Play() {
 
   return <PlayContext.Provider value={{ allQuestionsMap, allQuestions, filteredQuizzes, setPlaySettings, playSettings, errorLogs, setErrorLogs, setPlaying, playing, uploadedQuizzes, selectedQuizzes, setUploadedQuizzes, setSelectedQuizzes }}>
     {!playing ? <Menu contents={[<PlaySettings />, <div className="Play">
+      <SettingsIcon fill={theme.color.opposite_light} className={`${classes.root} Play-settings-icon`} onClick={() => history.push("/settings")} />
       <PlayUpload />
       <PlayErrorlogs />
       <List onDelete={(remainingItems) => {
