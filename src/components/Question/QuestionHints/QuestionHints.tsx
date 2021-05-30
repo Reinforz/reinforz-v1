@@ -1,11 +1,7 @@
 import { Button } from '@material-ui/core';
-import createDOMPurify from 'dompurify';
-import marked from 'marked';
-import React from 'react';
 import { useDisabled, useThemeSettings } from '../../../hooks';
+import { sanitizeMarkdown } from "../../../utils";
 import "./QuestionHints.scss";
-
-const DOMPurify = createDOMPurify(window);
 
 interface Props {
   hints: string[]
@@ -33,7 +29,7 @@ export default function QuestionHints(props: Props) {
     }}>{hints.length > 0 ? `Show ${"hints"} ${totalUsedHints}/${hints.length}` : `No hints available`}</Button>
     <div className="QuestionHints-list" >
       {usedHints.map((hint, i) =>
-        <div key={`hint${i}`} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(marked(`${i + 1}: ${hint}`.toString())) }} style={{ backgroundColor: theme.color.dark }} className="QuestionHints-list-item" />)}
+        <div key={`hint${i}`} dangerouslySetInnerHTML={{ __html: sanitizeMarkdown(`${i + 1}: ${hint}`.toString()) }} style={{ backgroundColor: theme.color.dark }} className="QuestionHints-list-item" />)}
     </div>
   </div>
 }

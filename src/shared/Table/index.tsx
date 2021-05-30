@@ -10,12 +10,11 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
-import createDOMPurify from 'dompurify';
-import marked from "marked";
 import React, { Fragment, useState } from 'react';
 import { MdPlayArrow } from "react-icons/md";
 import { useThemeSettings } from '../../hooks';
 import { ExtendedTheme } from "../../types";
+import { sanitizeMarkdown } from "../../utils";
 import Icon from "../Icon";
 import "./style.scss";
 
@@ -43,8 +42,6 @@ export interface TableHeaderProps {
   collapseContents?: string[];
   onHeaderClick: (header: string, order: 'ASC' | 'DESC') => any;
 }
-
-const DOMPurify = createDOMPurify(window);
 
 const useStyles = makeStyles((theme: ExtendedTheme) => ({
   th: {
@@ -94,7 +91,7 @@ function TableRows(props: TableRowsProps) {
             <div className="Table-row-collapseheader">
               {collapseContent}
             </div>
-            <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(marked(content[collapseContent].toString())) }} className="Table-row-collapsecontent" />
+            <div dangerouslySetInnerHTML={{ __html: sanitizeMarkdown(content[collapseContent].toString()) }} className="Table-row-collapsecontent" />
           </div>)}
         </Collapse>
       </TableCell>
