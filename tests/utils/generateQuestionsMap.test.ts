@@ -18,14 +18,14 @@ const createQuiz = () => {
         difficulty: 'Advanced',
         quiz: {
           subject: 'Subject 1',
-          title: 'Title 1',
+          topic: 'Title 1',
           _id: '1'
         }
       }
     ],
     _id: '1',
     subject: 'Subject 1',
-    title: 'Title 1'
+    topic: 'Title 1'
   } as IQuizFull;
 };
 

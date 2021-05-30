@@ -9,7 +9,7 @@ const result: TQuestionResult = {
   time_taken: 20,
   quiz: {
     subject: 'Subject 1',
-    title: 'Title 1',
+    topic: 'Title 1',
     _id: '1'
   },
   question_id: '1',

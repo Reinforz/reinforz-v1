@@ -6,7 +6,7 @@ const question_1: TQuestionFull = {
     difficulty: 'Advanced',
     quiz: {
       subject: 'Subject 1',
-      title: 'Title 1',
+      topic: 'Topic 1',
       _id: '1'
     },
     _id: '1',
@@ -55,7 +55,7 @@ it(`Should work`, () => {
   expect(filteredQuizzes).toStrictEqual({
     '1': {
       subject: 'Subject 1',
-      title: 'Title 1',
+      topic: 'Topic 1',
       _id: '1',
       questions: [question_1, question_2]
     }

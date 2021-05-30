@@ -4,7 +4,7 @@ it(`Should filter out uploaded quizzes`, () => {
   const [logMessages, filteredUploadedQuizzes] = filterUploadedQuizzes([
     {
       subject: 'Subject',
-      title: 'Title',
+      topic: 'Title',
       questions: [
         {
           answers: ['1'],
@@ -27,6 +27,7 @@ it(`Should filter out uploaded quizzes`, () => {
   expect(logMessages).toStrictEqual([
     {
       _id: expect.any(String),
+      quiz_id: expect.any(String),
       level: 'WARN',
       quiz: 'Subject - Title',
       target: 'Question 2',
@@ -35,6 +36,7 @@ it(`Should filter out uploaded quizzes`, () => {
     },
     {
       _id: expect.any(String),
+      quiz_id: expect.any(String),
       level: 'ERROR',
       quiz: 'Subject - Title',
       target: 'Question 2',
@@ -43,13 +45,15 @@ it(`Should filter out uploaded quizzes`, () => {
     },
     {
       _id: expect.any(String),
+      quiz_id: expect.any(String),
       level: 'ERROR',
       quiz: `undefined - undefined`,
       target: `Quiz 2`,
-      message: 'Quiz title absent'
+      message: 'Quiz topic absent'
     },
     {
       _id: expect.any(String),
+      quiz_id: expect.any(String),
       level: 'ERROR',
       quiz: `undefined - undefined`,
       target: `Quiz 2`,
@@ -57,6 +61,7 @@ it(`Should filter out uploaded quizzes`, () => {
     },
     {
       _id: expect.any(String),
+      quiz_id: expect.any(String),
       level: 'ERROR',
       quiz: `undefined - undefined`,
       target: `Quiz 2`,
@@ -67,7 +72,7 @@ it(`Should filter out uploaded quizzes`, () => {
   expect(filteredUploadedQuizzes).toStrictEqual([
     {
       subject: 'Subject',
-      title: 'Title',
+      topic: 'Title',
       _id: expect.any(String),
       questions: [
         {
@@ -89,7 +94,7 @@ it(`Should filter out uploaded quizzes`, () => {
           _id: expect.any(String),
           quiz: {
             subject: 'Subject',
-            title: 'Title',
+            topic: 'Title',
             _id: expect.any(String)
           }
         }
