@@ -3,6 +3,13 @@ import { createMuiTheme, darken, lighten } from '@material-ui/core/styles';
 import { ExtendedThemeOptions } from '../types';
 
 export function generateTheme(theme: 'dark' | 'light') {
+  const light = theme === 'dark' ? grey[800] : lighten(grey[200], 0.5);
+  const dark = theme === 'dark' ? grey[900] : grey[300];
+  const base = theme === 'dark' ? darken(grey[800], 0.25) : grey[200];
+  const opposite_dark = theme === 'dark' ? grey[300] : grey[900];
+  const opposite_base = theme === 'dark' ? grey[200] : darken(grey[800], 0.25);
+  const opposite_light = theme === 'dark' ? lighten(grey[200], 0.5) : grey[800];
+
   if (theme === 'dark')
     return createMuiTheme({
       palette: {
@@ -12,7 +19,7 @@ export function generateTheme(theme: 'dark' | 'light') {
           secondary: grey[200]
         },
         background: {
-          default: darken(grey[800], 0.25)
+          default: base
         }
       },
       typography: {
@@ -20,14 +27,25 @@ export function generateTheme(theme: 'dark' | 'light') {
         fontSize: 14
       },
       color: {
-        light: grey[800],
-        dark: grey[900],
-        base: darken(grey[800], 0.25),
-        opposite_dark: grey[300],
-        opposite_base: grey[200],
-        opposite_light: lighten(grey[200], 0.5)
+        light,
+        dark,
+        base,
+        opposite_dark,
+        opposite_base,
+        opposite_light
       },
       overrides: {
+        MuiIconButton: {
+          root: {
+            width: '18px',
+            height: '18px'
+          }
+        },
+        MuiFormControlLabel: {
+          root: {
+            marginLeft: 0
+          }
+        },
         MuiTypography: {
           root: {
             color: grey[100]
@@ -37,13 +55,13 @@ export function generateTheme(theme: 'dark' | 'light') {
           root: {
             fontWeight: 'bolder',
             fontSize: '0.85em',
-            backgroundColor: grey[900],
+            backgroundColor: dark,
             padding: 5
           }
         },
         MuiFormGroup: {
           root: {
-            backgroundColor: grey[800],
+            backgroundColor: light,
             margin: 5,
             padding: '0px 0px 0px 5px'
           }
@@ -59,39 +77,56 @@ export function generateTheme(theme: 'dark' | 'light') {
           secondary: grey[800]
         },
         background: {
-          paper: lighten(grey[200], 0.5),
-          default: grey[200]
+          paper: light,
+          default: base
         }
       },
       color: {
-        light: lighten(grey[200], 0.5),
-        dark: grey[300],
-        base: grey[200],
-        opposite_dark: grey[900],
-        opposite_base: darken(grey[800], 0.25),
-        opposite_light: grey[800]
+        light,
+        dark,
+        base,
+        opposite_dark,
+        opposite_base,
+        opposite_light
       },
       typography: {
         fontFamily: `"Fira Sans"`,
         fontSize: 14
       },
       overrides: {
+        MuiIconButton: {
+          root: {
+            width: '18px',
+            height: '18px'
+          }
+        },
+        MuiButtonBase: {
+          root: {
+            padding: 0
+          }
+        },
+        MuiFormControlLabel: {
+          root: {
+            marginLeft: 0,
+            backgroundColor: light
+          }
+        },
         MuiTypography: {
           root: {
-            color: grey[900]
+            color: opposite_dark
           }
         },
         MuiInputLabel: {
           root: {
             fontWeight: 'bolder',
-            fontSize: '1.25em',
-            backgroundColor: grey[300],
+            fontSize: '0.85em',
+            backgroundColor: dark,
             padding: 5
           }
         },
         MuiFormGroup: {
           root: {
-            backgroundColor: lighten(grey[200], 0.5),
+            backgroundColor: light,
             margin: 5,
             padding: '0px 0px 0px 5px'
           }

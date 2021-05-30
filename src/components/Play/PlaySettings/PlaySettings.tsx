@@ -25,8 +25,8 @@ export default function PlaySettings() {
 
   return <div className="PlaySettings" style={{ backgroundColor: theme.color.base, color: theme.palette.text.primary }}>
     <div className="PlaySettings-group PlaySettings-group--options">
-      <div className="PlaySettings-group-header PlaySettings-group-header--options" style={{ backgroundColor: theme.color.dark, color: theme.palette.text.primary }}>Options</div>
-      <div className="PlaySettings-group-content PlaySettings-group-content--options">
+      <div className="PlaySettings-group-header PlaySettings-group-header--options" style={{ backgroundColor: theme.color.dark }}>Options</div>
+      <div className="PlaySettings-group-content PlaySettings-group-content--options" style={{ backgroundColor: theme.color.dark }}>
         {Object.keys(playSettings.options).map((key, index) => {
           let isDisabled = false;
           if (Boolean(key.match(/(shuffle_questions|shuffle_quizzes)/) && playSettings.options.flatten_mix)) isDisabled = true;

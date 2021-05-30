@@ -1,5 +1,4 @@
 .PlaySettings {
-  padding: 5px;
   grid-template-rows: 350px 1fr 30px 50px;
   display: grid;
   height: calc(100% - 12.5px);
@@ -12,6 +11,7 @@
     font-size: 1rem;
     margin-top: 10px;
   }
+
   &-group {
     &--options {
       grid-area: 1/1/2/2;
@@ -24,16 +24,23 @@
       font-weight: bold;
       font-size: 1.25em;
       padding: 5px;
+      margin: 5px;
       border-radius: 2px;
     }
     &-content {
       display: flex;
       flex-direction: column;
-      margin: 5px 0px;
+      margin: 5px;
+      padding: 2.5px;
       .MuiInputLabel-root {
-        margin: 10px 0px 0px 0px;
         font-size: 1.15em;
         font-weight: 500;
+      }
+      .MuiFormControlLabel-root{
+        margin: 2.5px;
+        .MuiCheckbox-root{
+          margin-right: 5px;
+        }
       }
     }
     &-button {
