@@ -13,3 +13,7 @@ import { divideTimeAllocated } from '../../src/utils';
     );
   });
 });
+
+it(`Should throw error if time_allocated > 120`, () => {
+  expect(() => divideTimeAllocated(130)).toThrow();
+});
