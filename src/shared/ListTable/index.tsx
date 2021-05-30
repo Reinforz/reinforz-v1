@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useThemeSettings } from "../../hooks";
+import { createItemMap } from "../../utils";
 
 interface Props<T> {
   itemKeyKey: string
@@ -16,21 +17,7 @@ export default function ListTable<T extends Record<string, any>>(props: Props<T>
   const [itemsMap, setItemsMap] = useState<Record<string, any>[]>([]);
   const [sort, setSort] = useState<[string, boolean]>(['title', true]);
   useEffect(() => {
-    setItemsMap(props.items.map((item, index) => {
-      const itemMap: Record<string, any> = {
-        _id: item._id,
-        title: props.generateTitle(item),
-      };
-
-      props.headers.forEach(header => {
-        itemMap[header] = 0
-      })
-
-      props.items[index][props.itemKey].forEach((item: any) => {
-        itemMap[props.itemMapKey ? props.itemMapKey(item) : item[props.itemKeyKey]]++;
-      })
-      return itemMap;
-    }))
+    setItemsMap(createItemMap<T>(props))
     // eslint-disable-next-line
   }, [props.items])
 

@@ -3,6 +3,7 @@ export * from './arrayShuffler';
 export * from './calculateScore';
 export * from './checkInputAnswers';
 export * from './createDefaultState';
+export * from './createItemMap';
 export * from './displayTime';
 export * from './divideTimeAllocated';
 export * from './download';
