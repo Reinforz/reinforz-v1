@@ -14,3 +14,4 @@ export * from './generateQuizzesFromResults';
 export * from './generateTheme';
 export * from './getAnswerResult';
 export * from './getSettings';
+export * from './sanitizeMarkdown';
