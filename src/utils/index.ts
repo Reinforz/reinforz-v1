@@ -4,6 +4,7 @@ export * from './calculateScore';
 export * from './checkInputAnswers';
 export * from './createDefaultState';
 export * from './displayTime';
+export * from './divideTimeAllocated';
 export * from './download';
 export * from './filterUploadedQuizzes';
 export * from './generateCompleteQuestion';
@@ -12,4 +13,3 @@ export * from './generateQuizzesFromResults';
 export * from './generateTheme';
 export * from './getAnswerResult';
 export * from './getSettings';
-
