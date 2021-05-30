@@ -17,6 +17,12 @@
   border-radius: 5px;
   display: grid;
   grid-template-rows: 50px 145px 50px;
+  &-body-row-item{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
   &-headers-row, &-body-row{
     display: grid;
     grid-template-columns: 25px 200px;
