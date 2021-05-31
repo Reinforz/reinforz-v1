@@ -1,9 +1,13 @@
 .ListTable{
   margin: 2.5px;
-  border-radius: 5px;
   display: flex;
   flex-direction: column;
   padding: 2.5px;
+
+  &-headers, &-body{
+    padding: 2.5px;
+    margin: 2.5px;
+  }
 
   &-body-row-item{
     display: flex;
@@ -27,7 +31,7 @@
   &-body{
     overflow: auto;
     margin: 2.5px;
-    height: 150px;
+    height: calc(100% - 50px);
   }
 
   &-body-row-item--title{
