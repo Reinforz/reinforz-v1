@@ -1,6 +1,6 @@
 import shortid from 'shortid';
 import { TQuestionFull, TQuestionPartial } from '../types';
-import { generateInputQuestionAnswers } from './generateInputQuestionAnswers';
+import { generateInputQuestionAnswers } from './';
 
 function setObjectValues(parent: any, arr: [string, any][]) {
   arr.forEach((entry) => {
