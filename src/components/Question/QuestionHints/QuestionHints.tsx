@@ -23,13 +23,13 @@ export default function QuestionHints(props: Props) {
     }
   }
 
-  return <div className="QuestionHints">
+  return <div className="QuestionHints" style={{ backgroundColor: theme.color.base, color: theme.palette.text.primary }}>
     <Button disabled={is_disabled || hintsExhausted} color="primary" variant="contained" className="QuestionHints-button" onClick={() => {
       onButtonClick()
     }}>{hints.length > 0 ? `Show ${"hints"} ${totalUsedHints}/${hints.length}` : `No hints available`}</Button>
-    <div className="QuestionHints-list" >
+    <div className="QuestionHints-list" style={{ backgroundColor: theme.color.dark }}>
       {usedHints.map((hint, i) =>
-        <div key={`hint${i}`} dangerouslySetInnerHTML={{ __html: sanitizeMarkdown(`${i + 1}: ${hint}`.toString()) }} style={{ backgroundColor: theme.color.dark }} className="QuestionHints-list-item" />)}
+        <div key={`hint${i}`} dangerouslySetInnerHTML={{ __html: sanitizeMarkdown(`${i + 1}: ${hint}`.toString()) }} style={{ backgroundColor: theme.color.light }} className="QuestionHints-list-item" />)}
     </div>
   </div>
 }

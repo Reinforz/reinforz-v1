@@ -12,7 +12,7 @@ export function createDefaultPlaySettingsOptionsState() {
     instant_feedback: true,
     flatten_mix: false,
     partial_score: true,
-    disable_timer: false
+    disable_timer: true
   } as IPlaySettingsOptions;
 }
 

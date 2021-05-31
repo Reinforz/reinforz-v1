@@ -2,18 +2,25 @@
   display: flex;
   flex-direction: column;
   grid-area: 2/2/3/3;
-  max-height: 350px;
+  padding: 2.5px;
+  margin: 2.5px;
 
   &-list {
     border-radius: 5px;
     overflow: auto;
+    height: 290px;
+    padding: 2.5px;
+    margin: 2.5px;
+
     &-item {
-      margin: 5px;
-      border-radius: 5px;
-      padding: 5px 10px;
+      margin: 2.5px;
+      padding: 10px 5px;
+      display: inline-block;
+      width: calc(100% - 15px);
+
+      p{
+        margin: 0px;
+      }
     }
-  }
-  &-button.MuiButton-containedPrimary{
-    margin: 10px 0px 5px 5px;
   }
 }

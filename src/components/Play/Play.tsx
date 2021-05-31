@@ -36,7 +36,7 @@ function Play() {
     options: PLAY_SETTINGS && PLAY_SETTINGS.play_options ? PLAY_SETTINGS.play_options : createDefaultPlaySettingsOptionsState(),
     filters: PLAY_SETTINGS && PLAY_SETTINGS.play_filters ? PLAY_SETTINGS.play_filters : createDefaultPlaySettingsFiltersState()
   });
-  const [playing, setPlaying] = useState(false);
+  const [playing, setPlaying] = useState(true);
   const [uploadedQuizzes, setUploadedQuizzes] = useState<IQuizFull[]>([QUIZ_1]);
   const [selectedQuizIds, setSelectedQuizIds] = useState<string[]>([QUIZ_1._id]);
   const [errorLogs, setErrorLogs] = useState<IErrorLog[]>([]);
