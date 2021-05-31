@@ -1,10 +1,10 @@
 .Menu{
   position: absolute;
   top: 0px;
-  width: 300px;
   height: calc(100vh - 10px);
   transition: left 250ms ease-in-out;
   z-index: 50;
+  padding: 2.5px;
   
   &-icons{
     position: absolute;

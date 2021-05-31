@@ -42,7 +42,7 @@ export default function Menu(props: MenuProps) {
 
   if (position === "right") {
     if (isOpen) {
-      left = `100%`;
+      left = `calc(100% - 5px)`;
       iconStyle.transform = "rotate(0deg)";
       iconsStyle.left = "-40px"
       contentStyle.width = `calc(100% - ${width}px)`;
@@ -74,7 +74,7 @@ export default function Menu(props: MenuProps) {
 
   return <div style={contentStyle}>
     {contents[1]}
-    <div className="Menu" style={{ left }}>
+    <div className="Menu" style={{ left, width }}>
       <div className="Menu-icons" style={iconsStyle}>
         <Icon popoverText={`${isOpen ? "Close" : "Open"} Menu`}>
           <FaArrowAltCircleRight className="Menu-icons-icon Menu-icons-icon--toggle" onClick={() => {

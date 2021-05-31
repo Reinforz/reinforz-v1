@@ -48,7 +48,7 @@ function Play() {
   const [allQuestions, allQuestionsMap] = generateQuestionsMap(filteredQuizzes, playSettings.filters)
 
   return <PlayContext.Provider value={{ allQuestionsMap, allQuestions, filteredQuizzes, setPlaySettings, playSettings, errorLogs, setErrorLogs, setPlaying, playing, uploadedQuizzes, selectedQuizzes, setUploadedQuizzes, setSelectedQuizzes }}>
-    {!playing ? <Menu contents={[<PlaySettings />, <div className="Play">
+    {!playing ? <Menu width={290} contents={[<PlaySettings />, <div className="Play">
       <SettingsIcon fill={theme.color.opposite_light} className={`${classes.root} Play-settings-icon`} onClick={() => history.push("/settings")} />
       <PlayUpload />
       <PlayErrorlogs />
