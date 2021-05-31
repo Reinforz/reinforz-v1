@@ -4,10 +4,16 @@ import { BsMoon, BsSun } from 'react-icons/bs';
 import { useHistory } from 'react-router-dom';
 import { useThemeSettings } from '../../hooks';
 import { Toggles } from '../../shared';
-import { SettingsProps } from '../../types';
+import { ISettings } from '../../types';
 import "./Settings.scss";
 
-function Settings(props: SettingsProps) {
+interface Props {
+  settings: ISettings;
+  setSettings: (settings: ISettings) => void;
+}
+
+
+function Settings(props: Props) {
   const { settings, setSettings } = props;
   const { theme, animation, hovertips } = settings;
   const history = useHistory();

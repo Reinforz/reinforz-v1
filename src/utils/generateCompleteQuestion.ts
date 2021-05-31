@@ -1,5 +1,6 @@
 import shortid from 'shortid';
 import { TQuestionFull, TQuestionPartial } from '../types';
+import { generateInputQuestionAnswers } from './generateInputQuestionAnswers';
 
 function setObjectValues(parent: any, arr: [string, any][]) {
   arr.forEach((entry) => {
@@ -119,23 +120,15 @@ export function generateCompleteQuestion(question: TQuestionPartial) {
 
         break;
       case 'Snippet':
-        completeQuestion.answers.forEach((answers) => {
-          answers.forEach((answer) => {
-            answer.text = answer.text.toString();
-            answer.modifiers = answer.modifiers ?? [];
-            answer.regex = answer.regex ?? null;
-          });
-        });
+        completeQuestion.answers = generateInputQuestionAnswers(
+          question.answers
+        );
         time_allocated = 45;
         break;
       case 'FIB':
-        completeQuestion.answers.forEach((answers) => {
-          answers.forEach((answer) => {
-            answer.text = answer.text.toString();
-            answer.modifiers = answer.modifiers ?? [];
-            answer.regex = answer.regex ?? null;
-          });
-        });
+        completeQuestion.answers = generateInputQuestionAnswers(
+          question.answers
+        );
         if (
           completeQuestion.answers.length + 1 !==
           completeQuestion.question.length

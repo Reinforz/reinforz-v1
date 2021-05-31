@@ -83,13 +83,13 @@ export interface IMsQuestionPartial extends IQuestionPartial {
 export interface ISnippetQuestionPartial extends IQuestionPartial {
   question: string;
   type?: 'Snippet';
-  answers: IQuestionAnswerPartial[][];
+  answers: (IQuestionAnswerPartial[] | IQuestionAnswerPartial | string)[];
 }
 
 export interface IFibQuestionPartial extends IQuestionPartial {
   question: string[];
   type?: 'FIB';
-  answers: IQuestionAnswerPartial[][];
+  answers: (IQuestionAnswerPartial[] | IQuestionAnswerPartial | string)[];
 }
 
 export type TQuestionAnswerModifiers = 'IC' | 'IS';
@@ -143,18 +143,22 @@ export interface IFibQuestionFull extends Required<IQuestionPartial> {
   quiz: QuizIdentifiers;
 }
 
-export type TQuestionPartial =
-  | IFibQuestionPartial
+export type TInputQuestionPartial =
   | ISnippetQuestionPartial
-  | IMsQuestionPartial
-  | IMcqQuestionPartial;
-export type TQuestionFull =
-  | IFibQuestionFull
-  | ISnippetQuestionFull
-  | IMsQuestionFull
-  | IMcqQuestionFull;
+  | IFibQuestionPartial;
+export type TSelectionQuestionPartial =
+  | IMcqQuestionPartial
+  | IMsQuestionPartial;
+
+export type TQuestionPartial =
+  | TInputQuestionPartial
+  | TSelectionQuestionPartial;
+
 export type TInputQuestionFull = ISnippetQuestionFull | IFibQuestionFull;
 export type TSelectionQuestionFull = IMcqQuestionFull | IMsQuestionFull;
+
+export type TQuestionFull = TInputQuestionFull | TSelectionQuestionFull;
+
 export interface HighlighterProps {
   code: string;
   language: Language;
@@ -224,8 +228,4 @@ export interface ISettings {
   theme: AllowedTheme;
   animation: boolean;
   hovertips: boolean;
-}
-export interface SettingsProps {
-  settings: ISettings;
-  setSettings: (settings: ISettings) => any;
 }
