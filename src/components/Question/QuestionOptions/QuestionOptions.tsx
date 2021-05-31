@@ -12,14 +12,14 @@ interface Props {
 
 export default function QuestionOptions(props: Props) {
   const { theme } = useThemeSettings();
-  const { setUserAnswers, userAnswers, question: { _id, type } } = props;
+  const { setUserAnswers, userAnswers, question: { _id } } = props;
 
   const generateOptions = () => {
     switch (props.question.type) {
       case "MCQ": {
-        return <RadioGroup className="QuestionOptions-container QuestionOptions-container--MCQ" style={{ backgroundColor: theme.color.dark, color: theme.palette.text.primary }} value={userAnswers.length === 0 ? [''] : userAnswers[0]} onChange={e => setUserAnswers([e.target.value])}>
+        return <RadioGroup className="QuestionOptions-container QuestionOptions-container--MCQ" style={{ backgroundColor: theme.color.base }} value={userAnswers.length === 0 ? [''] : userAnswers[0]} onChange={e => setUserAnswers([e.target.value])}>
           {props.question.options.map((option, i) => {
-            return <div key={`${_id}option${i}`} className="QuestionOptions-container-item" style={{ backgroundColor: theme.color.base }}>
+            return <div key={`${_id}option${i}`} className="QuestionOptions-container-item" style={{ backgroundColor: theme.color.light }}>
               <FormControlLabel
                 control={<Radio color="primary" />}
                 value={`${i}`}
@@ -31,14 +31,14 @@ export default function QuestionOptions(props: Props) {
         </RadioGroup>
       }
       case "MS": {
-        return <FormGroup className="QuestionOptions-container QuestionOptions-container--MS" style={{ backgroundColor: theme.color.dark, color: theme.palette.text.primary }} onChange={(e: any) => {
+        return <FormGroup className="QuestionOptions-container QuestionOptions-container--MS" style={{ backgroundColor: theme.color.base }} onChange={(e: any) => {
           if (e.target.checked)
             setUserAnswers(userAnswers.concat(e.target.value))
           else
             setUserAnswers(userAnswers.filter(user_answer => user_answer !== e.target.value));
         }}>
           {props.question.options.map((option, i) => {
-            return <div key={`${_id}option${i}`} className={`QuestionOptions-container-item`} style={{ backgroundColor: theme.color.base }}>
+            return <div key={`${_id}option${i}`} className={`QuestionOptions-container-item`} style={{ backgroundColor: theme.color.light }}>
               <FormControlLabel
                 control={<Checkbox checked={userAnswers.includes(`${i}`)} value={`${i}`} color="primary" />}
                 label={option.text}
@@ -46,13 +46,12 @@ export default function QuestionOptions(props: Props) {
           })}
         </FormGroup>
       }
+      default: {
+        return null
+      }
     }
   }
 
-  return (
-    <div className={`QuestionOptions QuestionOptions--${type}`}>
-      {generateOptions()}
-    </div>
-  );
+  return generateOptions()
 }
 
