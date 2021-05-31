@@ -2,11 +2,11 @@
   height: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 100px 330px 330px;
+  grid-template-rows: 100px 327.5px 327.5px;
+  padding: 2.5px;
   
   .List{
     grid-area: 3/1/4/2;
-    margin: 2.5px 2.5px 5px 5px;
   }
 
   &-settings-icon{

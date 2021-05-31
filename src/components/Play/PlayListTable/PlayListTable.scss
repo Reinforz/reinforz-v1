@@ -15,8 +15,10 @@
 .ListTable{
   margin: 2.5px;
   border-radius: 5px;
-  display: grid;
-  grid-template-rows: 50px 145px 50px;
+  display: flex;
+  flex-direction: column;
+  padding: 2.5px;
+
   &-body-row-item{
     display: flex;
     justify-content: center;
@@ -32,13 +34,14 @@
     font-weight: bolder;
     font-size: 16px;
     padding: 10px;
-    margin: 5px;
+    margin: 2.5px;
     user-select: none;
   }
 
   &-body{
     overflow: auto;
-    margin: 2.5px 5px;
+    margin: 2.5px;
+    height: 150px;
   }
 
   &-body-row-item--title{
