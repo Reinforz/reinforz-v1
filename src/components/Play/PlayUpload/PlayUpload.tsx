@@ -18,7 +18,7 @@ const centerBottomErrorNotistack = {
 } as OptionsObject;
 
 export default function PlayUpload() {
-  const { uploadedQuizzes, setSelectedQuizzes, errorLogs, setUploadedQuizzes, setErrorLogs } = useContext(PlayContext);
+  const { uploadedQuizzes, setSelectedQuizIds, errorLogs, setUploadedQuizzes, setErrorLogs } = useContext(PlayContext);
   const { enqueueSnackbar } = useSnackbar();
   const { theme } = useThemeSettings();
 
@@ -57,7 +57,7 @@ export default function PlayUpload() {
       const mergedUploadedQuizzes = [...uploadedQuizzes, ...filteredUploadedQuizzes];
       setErrorLogs([...errorLogs, ...logMessages]);
       setUploadedQuizzes(mergedUploadedQuizzes);
-      setSelectedQuizzes(mergedUploadedQuizzes.map(mergedUploadedQuiz => mergedUploadedQuiz._id))
+      setSelectedQuizIds(mergedUploadedQuizzes.map(mergedUploadedQuiz => mergedUploadedQuiz._id))
     });
   };
 

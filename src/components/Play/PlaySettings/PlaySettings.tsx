@@ -17,7 +17,7 @@ const enqueueSnackbarOptionsObject: OptionsObject = {
 }
 
 export default function PlaySettings() {
-  const { setPlaying, selectedQuizzes, playSettings, setPlaySettings, filteredQuizzes } = useContext(PlayContext);
+  const { setPlaying, selectedQuizIds, playSettings, setPlaySettings, filteredQuizzes } = useContext(PlayContext);
   const { theme } = useThemeSettings();
   const { enqueueSnackbar } = useSnackbar();
 
@@ -27,11 +27,10 @@ export default function PlaySettings() {
     <div className="PlaySettings-group PlaySettings-group--options">
       <div className="PlaySettings-group-header PlaySettings-group-header--options" style={{ backgroundColor: theme.color.dark }}>Options</div>
       <div className="PlaySettings-group-content PlaySettings-group-content--options" style={{ backgroundColor: theme.color.dark }}>
-        {/* // ? Utilize CheckboxGroup component */}
         {Object.keys(playSettings.options).map((key, index) => {
           let isDisabled = false;
           if (Boolean(key.match(/(shuffle_questions|shuffle_quizzes)/) && playSettings.options.flatten_mix)) isDisabled = true;
-          if (selectedQuizzes.length <= 1 && key === "shuffle_quizzes") isDisabled = true;
+          if (selectedQuizIds.length <= 1 && key === "shuffle_quizzes") isDisabled = true;
           return <FormControlLabel key={key + index}
             control={
               <Checkbox
@@ -76,14 +75,14 @@ export default function PlaySettings() {
 
     </div>
     <div className="PlaySettings-total" style={{ backgroundColor: theme.color.dark, color: filteredQuestions === 0 ? theme.palette.error.main : theme.palette.success.main }}>{filteredQuestions} Questions</div>
-    <Button disabled={(filteredQuestions === 0 && selectedQuizzes.length !== 0) || selectedQuizzes.length === 0} className="PlaySettings-button" color="primary" variant="contained" onClick={() => {
-      if (selectedQuizzes.length > 0 && filteredQuestions > 0) {
+    <Button disabled={(filteredQuestions === 0 && selectedQuizIds.length !== 0) || selectedQuizIds.length === 0} className="PlaySettings-button" color="primary" variant="contained" onClick={() => {
+      if (selectedQuizIds.length > 0 && filteredQuestions > 0) {
         setPlaying(true)
       }
-      else if (filteredQuestions === 0 && selectedQuizzes.length !== 0) {
+      else if (filteredQuestions === 0 && selectedQuizIds.length !== 0) {
         enqueueSnackbar('You must have at least one question to play', enqueueSnackbarOptionsObject)
       }
-      else if (selectedQuizzes.length === 0) {
+      else if (selectedQuizIds.length === 0) {
         enqueueSnackbar('You must have at least one quiz selected', enqueueSnackbarOptionsObject)
       }
     }}>Start</Button>

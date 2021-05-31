@@ -6,8 +6,8 @@ interface IPlayContext {
   setPlaying: React.Dispatch<React.SetStateAction<boolean>>
   uploadedQuizzes: IQuizFull[],
   setUploadedQuizzes: React.Dispatch<React.SetStateAction<IQuizFull[]>>
-  selectedQuizzes: string[],
-  setSelectedQuizzes: React.Dispatch<React.SetStateAction<string[]>>
+  selectedQuizIds: string[],
+  setSelectedQuizIds: React.Dispatch<React.SetStateAction<string[]>>
   filteredQuizzes: IQuizFull[],
   errorLogs: IErrorLog[],
   setErrorLogs: React.Dispatch<React.SetStateAction<IErrorLog[]>>
