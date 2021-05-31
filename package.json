@@ -19,10 +19,10 @@
     "react-dropzone": "^11.3.2",
     "react-icons": "^3.11.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "^4.0.3",
     "shortid": "^2.2.16"
   },
   "devDependencies": {
+    "react-scripts": "^4.0.3",
     "@storybook/addon-essentials": "^6.1.21",
     "@storybook/addon-links": "^6.2.9",
     "@storybook/preset-create-react-app": "^1.2.0",
@@ -56,7 +56,7 @@
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "test": "npx jest --runInBand --config ./jest.config.js"
+    "test:unit": "npx jest --runInBand --config ./jest.config.js"
   },
   "eslintConfig": {
     "extends": "react-app"
