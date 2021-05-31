@@ -2,7 +2,7 @@ import { Button } from '@material-ui/core';
 import React, { Dispatch, SetStateAction, useContext } from "react";
 import { PlayContext } from '../../../context/PlayContext';
 import { CheckboxGroup, InputRange, RadioGroup, Select } from '../../../shared';
-import { IReportFilterState } from "../../../types";
+import { IReportFilter } from "../../../types";
 import { createDefaultReportFilterState } from '../../../utils';
 import "./ReportFilter.scss";
 
@@ -12,8 +12,8 @@ const transformLabel = (stat: string) => {
 }
 
 interface Props {
-  reportFilter: IReportFilterState,
-  setReportFilter: Dispatch<SetStateAction<IReportFilterState>>
+  reportFilter: IReportFilter,
+  setReportFilter: Dispatch<SetStateAction<IReportFilter>>
 }
 
 export default function ReportFilter(props: Props) {

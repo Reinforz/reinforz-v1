@@ -12,7 +12,7 @@ export interface IErrorLog {
   quiz_id: string;
 }
 
-export interface IPlaySettingsOptionsState {
+export interface IPlaySettingsOptions {
   shuffle_options: boolean;
   shuffle_quizzes: boolean;
   shuffle_questions: boolean;
@@ -21,7 +21,7 @@ export interface IPlaySettingsOptionsState {
   partial_score: boolean;
 }
 
-export interface IPlaySettingsFiltersState {
+export interface IPlaySettingsFilters {
   time_allocated: [number, number];
   excluded_difficulty: TQuestionDifficulty[];
   excluded_types: TQuestionType[];
@@ -42,8 +42,8 @@ export interface IQuizFull {
 }
 
 export interface IPlaySettings {
-  options: IPlaySettingsOptionsState;
-  filters: IPlaySettingsFiltersState;
+  options: IPlaySettingsOptions;
+  filters: IPlaySettingsFilters;
 }
 
 export type TQuestionType = 'MCQ' | 'MS' | 'FIB' | 'Snippet';
@@ -191,7 +191,7 @@ export type TQuestionResult =
   | ISnippetQuestionResult
   | IFibQuestionResult;
 
-export interface IReportFilterState {
+export interface IReportFilter {
   time_taken: [number, number];
   verdict: boolean | 'mixed';
   hints_used: number | 'any';

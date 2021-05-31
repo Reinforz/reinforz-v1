@@ -1,9 +1,9 @@
-import { IPlaySettingsOptionsState, IQuizFull } from '../types';
+import { IPlaySettingsOptions, IQuizFull } from '../types';
 
 export function applyPlaySettingsOptions(
   uploadedQuizzes: IQuizFull[],
   selectedQuizIds: string[],
-  playSettingsOptions: IPlaySettingsOptionsState,
+  playSettingsOptions: IPlaySettingsOptions,
   shuffleFn: (items: any[]) => any[]
 ) {
   const selectedQuizzes = uploadedQuizzes.filter((uploadedQuiz) =>

@@ -4,7 +4,7 @@ import React, { useContext } from "react";
 import { PlayContext } from "../../../context/PlayContext";
 import { useThemeSettings } from "../../../hooks";
 import { CheckboxGroup, InputRange } from '../../../shared';
-import { IPlaySettingsOptionsState } from "../../../types";
+import { IPlaySettingsOptions } from "../../../types";
 import { createDefaultPlaySettingsFiltersState, createDefaultPlaySettingsOptionsState } from "../../../utils";
 import "./PlaySettings.scss";
 
@@ -35,7 +35,7 @@ export default function PlaySettings() {
             control={
               <Checkbox
                 disabled={isDisabled}
-                checked={playSettings.options[key as keyof IPlaySettingsOptionsState]}
+                checked={playSettings.options[key as keyof IPlaySettingsOptions]}
                 onChange={(event, checked) => {
                   if (key === "flatten_mix") setPlaySettings({ ...playSettings, options: { ...playSettings.options, [event.target.name]: checked, shuffle_questions: checked, shuffle_quizzes: checked } })
                   else setPlaySettings({ ...playSettings, options: { ...playSettings.options, [event.target.name]: checked } })
@@ -57,7 +57,7 @@ export default function PlaySettings() {
         Filters
       </div>
       <div className="PlaySettings-group-content PlaySettings-group-content--filters" style={{ backgroundColor: theme.color.dark }}>
-        <InputRange label={"Time Allocated range"} min={0} max={60} setState={(filters: any) => {
+        <InputRange label={"Time Allocated range"} min={0} max={120} setState={(filters: any) => {
           setPlaySettings({ ...playSettings, filters })
         }} state={playSettings.filters} stateKey={"time_allocated"} />
 
