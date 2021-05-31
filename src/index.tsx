@@ -30,6 +30,6 @@ const App = () => {
   </ThemeProvider>
 }
 
-ReactDOM.render(<Router basename={process.env.PUBLIC_URL}>
+ReactDOM.render(<Router>
   <App />
 </Router >, document.getElementById('root'));
