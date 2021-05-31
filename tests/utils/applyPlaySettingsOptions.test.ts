@@ -47,7 +47,8 @@ it(`Should work when all options are false`, () => {
       partial_score: false,
       shuffle_options: false,
       shuffle_questions: false,
-      shuffle_quizzes: false
+      shuffle_quizzes: false,
+      disable_timer: false
     },
     () => []
   );
@@ -68,7 +69,8 @@ it(`Should shuffle quizzes`, () => {
       partial_score: false,
       shuffle_options: false,
       shuffle_questions: false,
-      shuffle_quizzes: true
+      shuffle_quizzes: true,
+      disable_timer: false
     },
     shuffleFn
   );
@@ -88,7 +90,8 @@ it(`Should shuffle questions`, () => {
       partial_score: false,
       shuffle_options: false,
       shuffle_questions: true,
-      shuffle_quizzes: false
+      shuffle_quizzes: false,
+      disable_timer: false
     },
     shuffleFn
   );
@@ -108,7 +111,8 @@ it(`Should not shuffle quizzes when flatten_mix=true`, () => {
       partial_score: false,
       shuffle_options: false,
       shuffle_questions: false,
-      shuffle_quizzes: true
+      shuffle_quizzes: true,
+      disable_timer: false
     },
     shuffleFn
   );
@@ -128,7 +132,8 @@ it(`Should shuffle questions when flatten_mix=true`, () => {
       partial_score: false,
       shuffle_options: false,
       shuffle_questions: true,
-      shuffle_quizzes: false
+      shuffle_quizzes: false,
+      disable_timer: false
     },
     shuffleFn
   );
@@ -148,7 +153,8 @@ it(`Should shuffle options`, () => {
       partial_score: false,
       shuffle_options: true,
       shuffle_questions: false,
-      shuffle_quizzes: false
+      shuffle_quizzes: false,
+      disable_timer: false
     },
     shuffleFn
   );
