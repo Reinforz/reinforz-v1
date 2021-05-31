@@ -1,5 +1,6 @@
 import { Button, useTheme } from "@material-ui/core";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { PlayContext } from "../../context/PlayContext";
 import { ExtendedTheme, TQuestionFull } from "../../types";
 import { displayTime, sanitizeMarkdown } from "../../utils";
 import FibQuestionDisplay from "./FibQuestionDisplay";
@@ -15,6 +16,7 @@ interface Props {
 };
 
 export default function Question(props: Props) {
+  const { playSettings } = useContext(PlayContext);
   const { changeCounter, isLast, question: { image, hints, question, time_allocated } } = props;
   const [userAnswers, setUserAnswers] = useState<string[]>([]);
   const [usedHints, setUsedHints] = useState<string[]>([]);
@@ -22,13 +24,17 @@ export default function Question(props: Props) {
   const [timer, setTimer] = useState<null | NodeJS.Timeout>(null);
   const theme = useTheme() as ExtendedTheme;
 
+  const { disable_timer } = playSettings.options
+
   const onNextButtonPress = () => {
     setUserAnswers([])
     setUsedHints([])
-    setTimer(null)
-    setTimeout(null)
-    typeof timer === "number" && clearInterval(timer)
-    changeCounter(userAnswers, time_allocated - (timeout as number), usedHints.length)
+    if (!disable_timer) {
+      setTimer(null)
+      setTimeout(null)
+      typeof timer === "number" && clearInterval(timer)
+    }
+    changeCounter(userAnswers, !disable_timer ? time_allocated - (timeout as number) : 0, usedHints.length)
   }
 
   if (timeout === 0) {
@@ -36,14 +42,16 @@ export default function Question(props: Props) {
   }
 
   useEffect(() => {
-    setTimeout(props.question.time_allocated)
-    const timer = setInterval(() => {
-      setTimeout((seconds) => {
-        return typeof seconds === "number" ? seconds - 1 : 0
-      })
-    }, 1000);
-    setTimer(timer)
-  }, [props.question])
+    if (!disable_timer) {
+      setTimeout(props.question.time_allocated)
+      const timer = setInterval(() => {
+        setTimeout((seconds) => {
+          return typeof seconds === "number" ? seconds - 1 : 0
+        })
+      }, 1000);
+      setTimer(timer)
+    }
+  }, [props.question, disable_timer])
 
 
   return <div className="Question">
@@ -53,9 +61,9 @@ export default function Question(props: Props) {
       ? <QuestionOptions setUserAnswers={setUserAnswers} userAnswers={userAnswers} question={props.question} />
       : <QuestionInputs setUserAnswers={setUserAnswers} userAnswers={userAnswers} question={props.question} />}
     <QuestionHints usedHints={usedHints} setUsedHints={setUsedHints} hints={hints} />
-    {timeout && <div style={{ display: 'flex', gridArea: `3/2/4/3`, alignItems: `center`, height: '65px' }}>
+    {<div style={{ display: 'flex', gridArea: `3/2/4/3`, alignItems: `center`, height: '65px' }}>
       <Button className="QuestionButton" variant="contained" color="primary" onClick={onNextButtonPress}>{!isLast ? "Next" : "Report"}</Button>
-      <div style={{ backgroundColor: theme.color.dark, color: theme.palette.text.primary }} className="QuestionTimer">{displayTime(timeout)}</div>
+      {timeout && !playSettings.options.disable_timer && <div style={{ backgroundColor: theme.color.dark, color: theme.palette.text.primary }} className="QuestionTimer">{displayTime(timeout)}</div>}
     </div>}
   </div>
 }
