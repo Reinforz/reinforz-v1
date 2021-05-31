@@ -1,3 +1,4 @@
+export * from './applyPlaySettingsOptions';
 export * from './applyResultFilters';
 export * from './arrayShuffler';
 export * from './calculateScore';

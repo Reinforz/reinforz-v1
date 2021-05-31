@@ -10,7 +10,7 @@ import {
   ExtendedTheme,
   IErrorLog, IPlaySettings, IQuizFull
 } from "../../types";
-import { arrayShuffler, createDefaultPlaySettingsFiltersState, createDefaultPlaySettingsOptionsState, generateQuestionsMap } from "../../utils";
+import { applyPlaySettingsOptions, createDefaultPlaySettingsFiltersState, createDefaultPlaySettingsOptionsState, generateQuestionsMap } from "../../utils";
 import Quiz from "../Quiz/Quiz";
 import "./Play.scss";
 import PlayErrorlogs from "./PlayErrorlogs/PlayErrorlogs";
@@ -33,19 +33,15 @@ function Play() {
   PLAY_SETTINGS = PLAY_SETTINGS ? JSON.parse(PLAY_SETTINGS) : undefined;
 
   const [playSettings, setPlaySettings] = useState<IPlaySettings>({
-    options: PLAY_SETTINGS ? PLAY_SETTINGS.play_options : createDefaultPlaySettingsOptionsState(),
-    filters: PLAY_SETTINGS ? PLAY_SETTINGS.play_filters : createDefaultPlaySettingsFiltersState()
+    options: PLAY_SETTINGS && PLAY_SETTINGS.play_options ? PLAY_SETTINGS.play_options : createDefaultPlaySettingsOptionsState(),
+    filters: PLAY_SETTINGS && PLAY_SETTINGS.play_filters ? PLAY_SETTINGS.play_filters : createDefaultPlaySettingsFiltersState()
   });
-
   const [playing, setPlaying] = useState(false);
   const [uploadedQuizzes, setUploadedQuizzes] = useState<IQuizFull[]>([QUIZ_1]);
   const [selectedQuizIds, setSelectedQuizIds] = useState<string[]>([QUIZ_1._id]);
   const [errorLogs, setErrorLogs] = useState<IErrorLog[]>([]);
 
-  const selectedQuizzes = uploadedQuizzes.filter(uploadedQuiz => selectedQuizIds.includes(uploadedQuiz._id));
-  let filteredQuizzes = JSON.parse(JSON.stringify(uploadedQuizzes.filter(quiz => selectedQuizIds.includes(quiz._id)))) as IQuizFull[];
-  if (playSettings.options.shuffle_quizzes && !playSettings.options.flatten_mix) filteredQuizzes = arrayShuffler(filteredQuizzes);
-  if (playSettings.options.shuffle_questions && !playSettings.options.flatten_mix) filteredQuizzes.forEach(quiz => quiz.questions = arrayShuffler(quiz.questions));
+  const [selectedQuizzes, filteredQuizzes] = applyPlaySettingsOptions(uploadedQuizzes, selectedQuizIds, playSettings.options);
 
   const [allQuestions, allQuestionsMap] = generateQuestionsMap(filteredQuizzes, playSettings.filters)
 
