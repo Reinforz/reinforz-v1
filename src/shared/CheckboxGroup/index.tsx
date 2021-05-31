@@ -1,5 +1,6 @@
 import { Checkbox, FormControlLabel, FormGroup, InputLabel } from "@material-ui/core";
-import React, { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction } from "react";
+import { useThemeSettings } from "../../hooks";
 
 interface Props<I extends Record<string, any>> {
   label: string
@@ -11,16 +12,19 @@ interface Props<I extends Record<string, any>> {
 
 export default function CheckboxGroup<I extends Record<string, any>>(props: Props<I>) {
   const items: string[] = props.state[props.stateKey];
+  const { theme } = useThemeSettings();
   return <FormGroup>
     <InputLabel>{props.label}</InputLabel>
-    {props.items.map((item, index) => <FormControlLabel key={item + index} label={item} control={<Checkbox checked={items.includes(item)} name={item} onChange={(e) => {
-      if ((e.target as any).checked) {
-        props.setState({ ...props.state, [props.stateKey]: items.concat(item) });
-      }
-      else {
-        props.setState({ ...props.state, [props.stateKey]: items.filter(_item => _item !== item) })
-      }
-    }}
-      color="primary" />} />)}
+    <div style={{ background: theme.color.dark, display: 'flex', flexDirection: 'column' }} className="CheckboxGroup-content">
+      {props.items.map((item, index) => <FormControlLabel key={item + index} label={item} control={<Checkbox checked={items.includes(item)} name={item} onChange={(e) => {
+        if ((e.target as any).checked) {
+          props.setState({ ...props.state, [props.stateKey]: items.concat(item) });
+        }
+        else {
+          props.setState({ ...props.state, [props.stateKey]: items.filter(_item => _item !== item) })
+        }
+      }}
+        color="primary" />} />)}
+    </div>
   </FormGroup>
 }

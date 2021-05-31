@@ -27,6 +27,7 @@ export default function PlaySettings() {
     <div className="PlaySettings-group PlaySettings-group--options">
       <div className="PlaySettings-group-header PlaySettings-group-header--options" style={{ backgroundColor: theme.color.dark }}>Options</div>
       <div className="PlaySettings-group-content PlaySettings-group-content--options" style={{ backgroundColor: theme.color.dark }}>
+        {/* // ? Utilize CheckboxGroup component */}
         {Object.keys(playSettings.options).map((key, index) => {
           let isDisabled = false;
           if (Boolean(key.match(/(shuffle_questions|shuffle_quizzes)/) && playSettings.options.flatten_mix)) isDisabled = true;
@@ -53,10 +54,10 @@ export default function PlaySettings() {
       }}>Reset</Button>
     </div>
     <div className="PlaySettings-group PlaySettings-group--filters">
-      <div className="PlaySettings-group-header PlaySettings-group-header--filters" style={{ backgroundColor: theme.color.dark, color: theme.palette.text.primary }}>
+      <div className="PlaySettings-group-header PlaySettings-group-header--filters" style={{ backgroundColor: theme.color.dark }}>
         Filters
       </div>
-      <div className="PlaySettings-group-content PlaySettings-group-content--filters">
+      <div className="PlaySettings-group-content PlaySettings-group-content--filters" style={{ backgroundColor: theme.color.dark }}>
         <InputRange label={"Time Allocated range"} min={0} max={60} setState={(filters: any) => {
           setPlaySettings({ ...playSettings, filters })
         }} state={playSettings.filters} stateKey={"time_allocated"} />

@@ -35,15 +35,53 @@ export function generateTheme(theme: 'dark' | 'light') {
         opposite_light
       },
       overrides: {
+        MuiButton: {
+          contained: {
+            margin: 2.5
+          }
+        },
+        MuiInput: {
+          root: {
+            padding: 2.5
+          }
+        },
+        MuiCheckbox: {
+          root: {
+            padding: 0,
+            marginRight: 5
+          }
+        },
         MuiIconButton: {
           root: {
             width: '18px',
             height: '18px'
           }
         },
+        MuiButtonBase: {
+          root: {
+            padding: 0
+          }
+        },
         MuiFormControlLabel: {
           root: {
-            marginLeft: 0
+            marginLeft: 2.5,
+            marginRight: 2.5,
+            margin: 2.5,
+            padding: 5,
+            backgroundColor: light
+          }
+        },
+        MuiFormLabel: {
+          root: {
+            margin: 2.5,
+            padding: 5
+          }
+        },
+        MuiFormControl: {
+          root: {
+            backgroundColor: light,
+            margin: 2.5,
+            padding: 2.5
           }
         },
         MuiTypography: {
@@ -54,16 +92,17 @@ export function generateTheme(theme: 'dark' | 'light') {
         MuiInputLabel: {
           root: {
             fontWeight: 'bolder',
-            fontSize: '0.85em',
+            fontSize: '1em',
             backgroundColor: dark,
-            padding: 5
+            padding: 5,
+            margin: 2.5
           }
         },
         MuiFormGroup: {
           root: {
-            backgroundColor: light,
-            margin: 5,
-            padding: '0px 0px 0px 5px'
+            backgroundColor: base,
+            margin: 2.5,
+            padding: 2.5
           }
         }
       }
@@ -94,6 +133,18 @@ export function generateTheme(theme: 'dark' | 'light') {
         fontSize: 14
       },
       overrides: {
+        MuiButton: {
+          contained: {
+            width: `calc(100% - 10px)`,
+            margin: 5
+          }
+        },
+        MuiCheckbox: {
+          root: {
+            padding: 0,
+            marginRight: 5
+          }
+        },
         MuiIconButton: {
           root: {
             width: '18px',
@@ -107,7 +158,11 @@ export function generateTheme(theme: 'dark' | 'light') {
         },
         MuiFormControlLabel: {
           root: {
-            marginLeft: 0,
+            height: 18,
+            marginLeft: 2.5,
+            marginRight: 2.5,
+            margin: 2.5,
+            padding: 5,
             backgroundColor: light
           }
         },
