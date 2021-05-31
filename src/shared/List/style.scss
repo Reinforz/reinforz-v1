@@ -37,6 +37,10 @@
         @extend %CancelIcon;
       }
     }
+
+    .MuiCheckbox-root{
+      padding-left: 5px;
+    }
   }
   
   &-content {

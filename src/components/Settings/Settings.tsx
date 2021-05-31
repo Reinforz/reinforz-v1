@@ -14,14 +14,14 @@ function Settings(props: SettingsProps) {
   const { theme: THEME } = useThemeSettings();
 
   return (
-    <div className="Settings" style={{ backgroundColor: THEME.color.light }}>
-      <div className="Settings-header" style={{ backgroundColor: THEME.color.dark, color: THEME.palette.text.secondary }}>Settings</div>
-      <div className="Settings-content">
-        <RadioGroup name="theme" value={theme} row className="Settings-content-group" style={{ backgroundColor: THEME.color.base }}>
+    <div className="Settings" style={{ backgroundColor: THEME.color.base, color: THEME.palette.text.secondary }}>
+      <div className="Settings-header" style={{ backgroundColor: THEME.color.dark }}>Settings</div>
+      <div className="Settings-content" style={{ backgroundColor: THEME.color.dark }}>
+        <RadioGroup name="theme" value={theme} row className="Settings-content-group">
           <InputLabel className="Settings-content-group-label">Theme</InputLabel>
           {["dark", "light"].map((_theme, index) => <FormControlLabel onClick={(e: any) => {
             setSettings({ ...settings, theme: theme === "dark" ? "light" : "dark" })
-          }} key={_theme.toString() + index} value={_theme} control={<Radio color="primary" />} label={_theme === "dark" ? <BsMoon className="Settings-icon Settings-icon--theme" style={{ fill: THEME.color.opposite_dark }} /> : <BsSun className="Settings-icon Settings-icon--theme" style={{ fill: THEME.color.opposite_dark }} />} />)}
+          }} key={_theme.toString() + index} value={_theme} control={<Radio color="primary" />} label={_theme === "dark" ? <BsMoon size={20} className="Settings-icon Settings-icon--theme" /> : <BsSun size={20} className="Settings-icon Settings-icon--theme" />} />)}
         </RadioGroup>
         <Toggles classNames={{
           FormGroup: 'Settings-content-group',

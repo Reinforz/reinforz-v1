@@ -50,7 +50,7 @@ function Play() {
 
   return <PlayContext.Provider value={{ allQuestionsMap, allQuestions, filteredQuizzes, setPlaySettings, playSettings, errorLogs, setErrorLogs, setPlaying, playing, uploadedQuizzes, selectedQuizzes, setUploadedQuizzes, setSelectedQuizzes }}>
     {!playing ? <Menu width={290} contents={[<PlaySettings />, <div className="Play">
-      <IoMdSettings fill={theme.color.opposite_light} className={`${classes.root} Play-settings-icon`} onClick={() => history.push("/settings")} />
+      <IoMdSettings size={25} fill={theme.color.opposite_light} className={`${classes.root} Play-settings-icon`} onClick={() => history.push("/settings")} />
       <PlayUpload />
       <PlayErrorlogs />
       <List onDelete={(remainingItems) => {
