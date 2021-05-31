@@ -42,14 +42,14 @@ function Play() {
   const [selectedQuizIds, setSelectedQuizIds] = useState<string[]>([QUIZ_1._id]);
   const [errorLogs, setErrorLogs] = useState<IErrorLog[]>([]);
 
+  const selectedQuizzes = uploadedQuizzes.filter(uploadedQuiz => selectedQuizIds.includes(uploadedQuiz._id));
   let filteredQuizzes = JSON.parse(JSON.stringify(uploadedQuizzes.filter(quiz => selectedQuizIds.includes(quiz._id)))) as IQuizFull[];
-
   if (playSettings.options.shuffle_quizzes && !playSettings.options.flatten_mix) filteredQuizzes = arrayShuffler(filteredQuizzes);
   if (playSettings.options.shuffle_questions && !playSettings.options.flatten_mix) filteredQuizzes.forEach(quiz => quiz.questions = arrayShuffler(quiz.questions));
 
   const [allQuestions, allQuestionsMap] = generateQuestionsMap(filteredQuizzes, playSettings.filters)
 
-  return <PlayContext.Provider value={{ allQuestionsMap, allQuestions, filteredQuizzes, setPlaySettings, playSettings, errorLogs, setErrorLogs, setPlaying, playing, uploadedQuizzes, selectedQuizIds, setUploadedQuizzes, setSelectedQuizIds }}>
+  return <PlayContext.Provider value={{ selectedQuizzes, allQuestionsMap, allQuestions, filteredQuizzes, setPlaySettings, playSettings, errorLogs, setErrorLogs, setPlaying, playing, uploadedQuizzes, selectedQuizIds, setUploadedQuizzes, setSelectedQuizIds }}>
     {!playing ? <Menu width={290} contents={[<PlaySettings />, <div className="Play">
       <IoMdSettings size={25} fill={theme.color.opposite_light} className={`${classes.root} Play-settings-icon`} onClick={() => history.push("/settings")} />
       <PlayUpload />
