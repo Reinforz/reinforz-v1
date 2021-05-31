@@ -19,6 +19,7 @@ export interface IPlaySettingsOptions {
   instant_feedback: boolean;
   flatten_mix: boolean;
   partial_score: boolean;
+  disable_timer: boolean;
 }
 
 export interface IPlaySettingsFilters {

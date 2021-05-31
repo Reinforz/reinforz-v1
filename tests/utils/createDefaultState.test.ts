@@ -13,7 +13,8 @@ describe('createDefaultPlaySettingsOptionsState', () => {
       shuffle_questions: true,
       instant_feedback: true,
       flatten_mix: false,
-      partial_score: true
+      partial_score: true,
+      disable_timer: false
     });
   });
 });
