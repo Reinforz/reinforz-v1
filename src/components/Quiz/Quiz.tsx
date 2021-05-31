@@ -3,7 +3,7 @@ import { PlayContext } from "../../context/PlayContext";
 import { useCycle, useThemeSettings } from "../../hooks";
 import { Stats } from "../../shared";
 import { TQuestionFull, TQuestionResult } from "../../types";
-import { arrayShuffler, getAnswerResult } from "../../utils";
+import { getAnswerResult } from "../../utils";
 import Question from "../Question/Question";
 import Report from "../Report/Report";
 import "./Quiz.scss";
@@ -20,9 +20,6 @@ export default function Quiz() {
   const generateContent = () => {
     if (!hasEnded) {
       const currentQuestion = JSON.parse(JSON.stringify(currentItem)) as TQuestionFull;
-      if (currentQuestion.options) {
-        currentQuestion.options = playSettings.options.shuffle_options ? arrayShuffler(currentQuestion.options) : currentQuestion.options;
-      }
       return <Fragment>
         <Stats items={[["Title", `${currentQuestion.quiz.subject} - ${currentQuestion.quiz.topic}`], ['Total Correct', totalCorrectAnswers], ["Current", currentIndex + 1], ["Total", totalQuestions], ["Type", currentQuestion.type], ["Weight", currentQuestion.weight], ["Time Allocated", currentQuestion.time_allocated], ["Difficulty", currentQuestion.difficulty]]} />
         <Question isLast={isLastItem} question={currentQuestion} changeCounter={(user_answers, time_taken, hints_used) => {

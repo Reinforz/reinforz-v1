@@ -20,5 +20,13 @@ export function applyPlaySettingsOptions(
     filteredQuizzes.forEach(
       (quiz) => (quiz.questions = arrayShuffler(quiz.questions))
     );
+  if (playSettingsOptions.shuffle_options) {
+    filteredQuizzes.forEach((quiz) =>
+      quiz.questions.forEach((question) => {
+        if (question.options)
+          question.options = arrayShuffler(question.options);
+      })
+    );
+  }
   return [selectedQuizzes, filteredQuizzes] as const;
 }
