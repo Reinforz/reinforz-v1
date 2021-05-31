@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useThemeSettings } from "../../hooks";
 import { createAggregateItemsMap, createItemMap } from "../../utils";
+import "./style.scss";
 
 interface Props<T> {
   itemKeyKey: string
