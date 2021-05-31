@@ -1,7 +1,7 @@
 # Reinforz
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/devorein/reinforz/master/public/192.png">
+<img src="https://github.com/Devorein/reinforz/blob/master/public/192.png?raw=true">
 <p>
 <p align="center">
   Force yourself to master a topic through continuous feedback

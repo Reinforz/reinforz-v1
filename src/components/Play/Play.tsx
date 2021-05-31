@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core';
-import SettingsIcon from '@material-ui/icons/Settings';
 import React, { useState } from "react";
+import { IoMdSettings } from 'react-icons/io';
 import { useHistory } from "react-router-dom";
 import { PlayContext } from "../../context/PlayContext";
 import { useThemeSettings } from '../../hooks';
@@ -16,6 +16,7 @@ import PlayErrorlogs from "./PlayErrorlogs/PlayErrorlogs";
 import { PlayListTable } from "./PlayListTable/PlayListTable";
 import PlaySettings from "./PlaySettings/PlaySettings";
 import PlayUpload from "./PlayUpload/PlayUpload";
+
 
 const useStyles = makeStyles((theme: ExtendedTheme) => ({
   root: {
@@ -49,7 +50,7 @@ function Play() {
 
   return <PlayContext.Provider value={{ allQuestionsMap, allQuestions, filteredQuizzes, setPlaySettings, playSettings, errorLogs, setErrorLogs, setPlaying, playing, uploadedQuizzes, selectedQuizzes, setUploadedQuizzes, setSelectedQuizzes }}>
     {!playing ? <Menu width={290} contents={[<PlaySettings />, <div className="Play">
-      <SettingsIcon fill={theme.color.opposite_light} className={`${classes.root} Play-settings-icon`} onClick={() => history.push("/settings")} />
+      <IoMdSettings fill={theme.color.opposite_light} className={`${classes.root} Play-settings-icon`} onClick={() => history.push("/settings")} />
       <PlayUpload />
       <PlayErrorlogs />
       <List onDelete={(remainingItems) => {

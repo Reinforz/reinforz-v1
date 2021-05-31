@@ -8,9 +8,8 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import React, { Fragment, useState } from 'react';
+import { AiFillDownCircle, AiFillUpCircle } from 'react-icons/ai';
 import { MdPlayArrow } from "react-icons/md";
 import { useThemeSettings } from '../../hooks';
 import { ExtendedTheme } from "../../types";
@@ -75,10 +74,10 @@ function TableRows(props: TableRowsProps) {
     <TableRow className={classes.tr} >
       {collapseContents && <TableCell className={classes.td}>
         <Icon popoverText="Click to show explanation" >
-          <KeyboardArrowUpIcon onClick={() => setOpen(!open)} style={{ display: !open ? "initial" : "none", color: theme.color.opposite_dark }} />
+          <AiFillUpCircle onClick={() => setOpen(!open)} style={{ display: !open ? "initial" : "none", color: theme.color.opposite_dark }} />
         </Icon>
         <Icon popoverText="Click to hide explanation" >
-          <KeyboardArrowDownIcon onClick={() => setOpen(!open)} style={{ display: open ? "initial" : "none", color: theme.color.opposite_dark }} />
+          <AiFillDownCircle onClick={() => setOpen(!open)} style={{ display: open ? "initial" : "none", color: theme.color.opposite_dark }} />
         </Icon>
       </TableCell>}
       <TableCell className={classes.td}>{index + 1}</TableCell>

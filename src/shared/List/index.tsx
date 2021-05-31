@@ -1,6 +1,6 @@
 import { Checkbox } from "@material-ui/core";
-import CancelIcon from '@material-ui/icons/Cancel';
 import React from "react";
+import { MdDelete } from 'react-icons/md';
 import { useThemeSettings } from "../../hooks";
 import Icon from "../Icon";
 import "./style.scss";
@@ -34,7 +34,7 @@ export default function List<T extends { _id: string }>(props: Props<T>) {
       <div className="List-header-title">{header}</div>
       <div className="List-header-icons">
         <Icon popoverText={`Remove ${selectedItems.length} selected items`} key={"delete icon"} >
-          <CancelIcon className={"List-header-icons--cancel"} onClick={() => {
+          <MdDelete className={"List-header-icons--cancel"} onClick={() => {
             const remainingItems = items.filter(item => !selectedItems.includes(item._id))
             setItems(remainingItems)
             props.onDelete && props.onDelete(remainingItems)
@@ -58,7 +58,7 @@ export default function List<T extends { _id: string }>(props: Props<T>) {
                 }
               }} checked={selectedItems.includes(_id)} value={_id} />
               <Icon key={_id + "icon" + index} popoverText="Delete this item">
-                <CancelIcon className="List-content-item-icons--cancel" onClick={() => {
+                <MdDelete className="List-content-item-icons--cancel" onClick={() => {
                   props.onDelete && props.onDelete([item])
                   setItems(items.filter(_item => _item._id !== _id))
                   setSelectedItems(selectedItems.filter(selectedItem => selectedItem !== _id))

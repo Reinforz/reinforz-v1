@@ -1,12 +1,11 @@
-import GetAppIcon from '@material-ui/icons/GetApp';
 import { safeDump } from 'js-yaml';
 import React, { useCallback, useState } from 'react';
+import { FaDownload } from "react-icons/fa";
 import { useThemeSettings } from '../../../hooks';
 import { Icon, Select } from '../../../shared';
 import { IQuizFull, TQuestionResult } from "../../../types";
 import { download } from "../../../utils";
 import "./ReportExport.scss";
-
 interface Props {
   filteredResults: TQuestionResult[],
   filteredQuizzes: IQuizFull[]
@@ -59,7 +58,7 @@ export default function ReportExport(props: Props) {
       <Select items={['Original', 'Report']} label={"Export Type"} menuItemLabel={(item) => item} setState={setExportState} state={exportState} stateKey={"export_type"} />
       <Select items={['YAML', 'JSON']} label={"Export As"} menuItemLabel={(item) => item} setState={setExportState} state={exportState} stateKey={"export_as"} />
       <Icon popoverText={`Export ${export_type} as ${export_as}`} >
-        <GetAppIcon style={{ fill: theme.color.opposite_dark }} onClick={() => {
+        <FaDownload style={{ fill: theme.color.opposite_dark }} onClick={() => {
           downloadFiles()
         }} />
       </Icon>
