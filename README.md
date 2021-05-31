@@ -1,8 +1,9 @@
-# Reinforz
-
 <p align="center">
 <img src="https://github.com/Devorein/reinforz/blob/master/public/192.png?raw=true">
 <p>
+<h1 align="center">
+  Reinforz
+</h1>
 <p align="center">
   Force yourself to master a topic through continuous feedback
 </p>
