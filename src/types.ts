@@ -183,18 +183,11 @@ export interface IResult {
   score: number;
   time_taken: number;
   hints_used: number;
-  question_id: string;
+  question: TQuestionFull
 }
 
-export interface IMsQuestionResult extends IMsQuestionFull, IResult {}
-export interface IMcqQuestionResult extends IMcqQuestionFull, IResult {}
-export interface ISnippetQuestionResult extends ISnippetQuestionFull, IResult {}
-export interface IFibQuestionResult extends IFibQuestionFull, IResult {}
 export type TQuestionResult =
-  | IMsQuestionResult
-  | IMcqQuestionResult
-  | ISnippetQuestionResult
-  | IFibQuestionResult;
+  | IResult
 
 export interface IReportFilter {
   time_taken: [number, number];
