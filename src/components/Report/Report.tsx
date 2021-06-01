@@ -57,15 +57,17 @@ export default function Report(props: Props) {
 
   return (
     <Menu contents={[<ReportFilter reportFilter={reportFilter} setReportFilter={setReportFilter} />, <div className="Report">
-      <ReportExport filteredResults={filteredResults} filteredQuizzes={Object.values(filteredQuizzes)} />
       <ReportTable filteredResults={filteredResults} />
-      <div className="ReportBackButton">
-        <Button variant="contained" color="primary" onClick={() => {
-          localStorage.setItem("REPORT_FILTERS", JSON.stringify(reportFilter))
-          setPlaying(false);
-          setUploadedQuizzes(Object.values(filteredQuizzes))
-          setSelectedQuizIds(Object.values(filteredQuizzes).map(quiz => quiz._id))
-        }}>Back to Home</Button>
+      <div style={{ gridArea: '1/2/3/3', display: 'flex', flexDirection: 'column' }}>
+        <ReportExport filteredResults={filteredResults} filteredQuizzes={Object.values(filteredQuizzes)} />
+        <div className="Report-BackButton">
+          <Button variant="contained" color="primary" onClick={() => {
+            localStorage.setItem("REPORT_FILTERS", JSON.stringify(reportFilter))
+            setPlaying(false);
+            setUploadedQuizzes(Object.values(filteredQuizzes))
+            setSelectedQuizIds(Object.values(filteredQuizzes).map(quiz => quiz._id))
+          }}>Back to Home</Button>
+        </div>
       </div>
     </div>]} />
   )

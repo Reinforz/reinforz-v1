@@ -1,57 +1,20 @@
 .Report {
   height: 100vh;
   user-select: none;
+  display: grid;
+  grid-template-columns: 1fr 250px;
 
-  &Export {
-    grid-area: 1/2/2/3;
-    padding: 5px;
-    display: flex;
-    align-items: center;
-    .MuiFormControl-root {
-      margin-right: 10px;
-    }
+  &-Table{
+    grid-area: 1/1/3/2;
   }
 
-  &BackButton{
-    grid-area: 1/3/2/4;
+  &-Aggregator{
+
+  }
+
+  &-BackButton{
     display: flex;
     justify-content: flex-end;
     padding: 5px 5px;
-  }
-
-  .Table {
-    grid-area: 2/2/3/4;
-    position: relative;
-    height: 100%;
-    tr {
-      width: 100%;
-      display: inline-table;
-      table-layout: fixed;
-    }
-
-    tbody {
-      overflow: scroll;
-      height: calc(100vh - 200px);
-      width: 100%;
-      position: absolute;
-    }
-
-    tfoot {
-      position: absolute;
-      top: 100%;
-      transform: translateY(-50px);
-      width: 100%;
-    }
-  }
-
-  &-buttons {
-    display: flex;
-    padding: 5px;
-    align-items: center;
-    justify-content: center;
-    grid-area: 3/1/4/2;
-    &-item.MuiButton-containedPrimary {
-      margin: 0px 5px;
-    }
   }
 }

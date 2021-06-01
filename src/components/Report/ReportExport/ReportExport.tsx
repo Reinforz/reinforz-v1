@@ -1,6 +1,6 @@
+import { Button } from '@material-ui/core';
 import { safeDump } from 'js-yaml';
 import React, { useCallback, useState } from 'react';
-import { FaDownload } from "react-icons/fa";
 import { useThemeSettings } from '../../../hooks';
 import { Icon, Select } from '../../../shared';
 import { IQuizFull, TQuestionResult } from "../../../types";
@@ -54,13 +54,13 @@ export default function ReportExport(props: Props) {
   }
 
   return (
-    <div className="ReportExport">
+    <div className="Report-Export">
       <Select items={['Original', 'Report']} label={"Export Type"} menuItemLabel={(item) => item} setState={setExportState} state={exportState} stateKey={"export_type"} />
       <Select items={['YAML', 'JSON']} label={"Export As"} menuItemLabel={(item) => item} setState={setExportState} state={exportState} stateKey={"export_as"} />
       <Icon popoverText={`Export ${export_type} as ${export_as}`} >
-        <FaDownload style={{ fill: theme.color.opposite_dark }} onClick={() => {
+        <Button variant="contained" color="primary" onClick={() => {
           downloadFiles()
-        }} />
+        }}>Download</Button>
       </Icon>
     </div>
   );

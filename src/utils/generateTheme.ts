@@ -36,6 +36,13 @@ export function generateTheme(theme: 'dark' | 'light') {
       opposite_light
     },
     overrides: {
+      MuiListItem: {
+        button: {
+          '&:hover': {
+            backgroundColor: dark
+          }
+        }
+      },
       MuiButton: {
         contained: {
           margin: 2.5
