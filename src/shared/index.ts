@@ -13,8 +13,10 @@ import Table from './Table';
 import Timer from './Timer';
 import Toggles from './Toggles';
 import View from './View';
+import StackList from './StackList';
 
 export {
+  StackList,
   ListTable,
   InputRange,
   Select,

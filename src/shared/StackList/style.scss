@@ -1,0 +1,31 @@
+.StackList{
+  padding: 2.5px;
+  margin: 2.5px;
+  display: flex;
+  flex-direction: column;
+
+  &-header, &-content{
+    padding: 2.5px;
+    margin: 2.5px;
+  }
+
+  &-header{
+    text-align: center;
+    font-weight: bold;
+    padding: 5px;
+  }
+
+  &-content{
+    display: flex;
+    flex-direction: column;
+    &-item{
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;
+      margin: 2.5px;
+      &-value{
+        font-weight: bold;
+      }
+    }
+  }
+}
