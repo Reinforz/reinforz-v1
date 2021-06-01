@@ -16,7 +16,7 @@ export default function InputRange<T extends Record<string, any>>(props: Props<T
   const range: [number, number] = state[stateKey]
   return <FormGroup>
     <InputLabel>{label}</InputLabel>
-    <div style={{ background: theme.color.dark, display: 'flex', flexDirection: 'column' }} className="InputRange-content">
+    <div style={{ background: theme.color.dark, display: 'flex', flexDirection: 'column', padding: 2.5, margin: 2.5 }} className="InputRange-content">
       <TextField type="number" inputProps={{ step: 5, min, max: range[1] }} value={range[0]} onChange={(e) => {
         setState({ ...state, [stateKey]: [e.target.value, range[1]] })
       }} />

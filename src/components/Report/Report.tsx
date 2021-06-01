@@ -1,12 +1,13 @@
 import { Button } from '@material-ui/core';
 import React, { useContext, useState } from 'react';
 import { PlayContext } from '../../context/PlayContext';
-import { Menu, Table } from '../../shared';
+import { Menu } from '../../shared';
 import { TQuestionResult } from "../../types";
 import { applyResultFilters, createDefaultReportFilterState, generateQuizzesFromResults } from '../../utils';
 import "./Report.scss";
 import ReportExport from './ReportExport/ReportExport';
 import ReportFilter from './ReportFilter/ReportFilter';
+import { ReportTable } from './ReportTable/ReportTable';
 
 export interface Props {
   results: TQuestionResult[],
@@ -57,12 +58,7 @@ export default function Report(props: Props) {
   return (
     <Menu contents={[<ReportFilter reportFilter={reportFilter} setReportFilter={setReportFilter} />, <div className="Report">
       <ReportExport filteredResults={filteredResults} filteredQuizzes={Object.values(filteredQuizzes)} />
-      <Table className="ReportTable" accumulator={accumulator} transformValue={transformValue} contents={filteredResults.map(filteredResults => ({ ...filteredResults, ...filteredResults.question }))} collapseContents={["explanation"]} headers={["subject", "type", "difficulty", "verdict", "score", "time_allocated", "time_taken", "weight", "user_answers", "hints_used"].filter(report_stat => !reportFilter.excluded_columns.includes(report_stat))} onHeaderClick={(header, order) => {
-        if (header.match(/(score|time|hints)/))
-          props.setResults(filteredResults.sort((a: any, b: any) => order === "DESC" ? a[header] - b[header] : b[header] - a[header]))
-        else if (header === "verdict") props.setResults(filteredResults.sort((a: any, b: any) => order === "DESC" ? a[header] === false ? -1 : 1 : a[header] === true ? -1 : 1))
-        else props.setResults(filteredResults.sort((a: any, b: any) => order === "DESC" ? a[header] > b[header] ? -1 : 1 : a[header] < b[header] ? -1 : 1))
-      }} />
+      <ReportTable filteredResults={filteredResults} />
       <div className="ReportBackButton">
         <Button variant="contained" color="primary" onClick={() => {
           localStorage.setItem("REPORT_FILTERS", JSON.stringify(reportFilter))

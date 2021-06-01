@@ -1,6 +1,7 @@
 import { Button } from '@material-ui/core';
 import React, { Dispatch, SetStateAction, useContext } from "react";
 import { PlayContext } from '../../../context/PlayContext';
+import { useThemeSettings } from '../../../hooks';
 import { CheckboxGroup, InputRange, RadioGroup, Select } from '../../../shared';
 import { IReportFilter } from "../../../types";
 import { createDefaultReportFilterState } from '../../../utils';
@@ -18,11 +19,11 @@ interface Props {
 
 export default function ReportFilter(props: Props) {
   const { setReportFilter, reportFilter } = props;
-
+  const { theme } = useThemeSettings();
   const { selectedQuizIds } = useContext(PlayContext);
 
-  return <div className="ReportFilter">
-    <InputRange label={"Time taken range"} min={0} max={60} setState={setReportFilter} state={reportFilter} stateKey={"time_taken"} />
+  return <div className="ReportFilter" style={{ backgroundColor: theme.color.dark }}>
+    <InputRange label={"Time taken range"} min={0} max={120} setState={setReportFilter} state={reportFilter} stateKey={"time_taken"} />
     <RadioGroup items={["true", "false", "mixed"]} label={"Verdict"} setState={setReportFilter} state={reportFilter} stateKey={"verdict"} />
     <RadioGroup items={["0", "1", "2", "any"]} label={"Hints Used"} setState={setReportFilter} state={reportFilter} stateKey={"hints_used"} />
     <CheckboxGroup label={'Excluded Difficulty'} items={['Beginner', 'Intermediate', 'Advanced']} setState={setReportFilter} stateKey={'excluded_difficulty'} state={reportFilter} />
@@ -38,6 +39,6 @@ export default function ReportFilter(props: Props) {
     />
     <Button variant="contained" color="primary" onClick={() => {
       setReportFilter(createDefaultReportFilterState())
-    }} style={{ width: "100%" }}>Reset</Button>
+    }} style={{ width: "calc(100% - 5px)" }}>Reset</Button>
   </div>
 }

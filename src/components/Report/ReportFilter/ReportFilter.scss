@@ -1,7 +1,6 @@
 .ReportFilter {
-  .MuiFormGroup-root {
-    padding: 5px;
-    .MuiInputLabel-root {
-    }
-  }
+  height: 100%;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
 }

@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { IoMdSettings } from 'react-icons/io';
 import { useHistory } from "react-router-dom";
 import { PlayContext } from "../../context/PlayContext";
+import { QUIZ_1, QUIZ_2 } from '../../data/quizzes';
 import { useThemeSettings } from '../../hooks';
 import { List, Menu } from "../../shared";
 import {
@@ -16,7 +17,6 @@ import PlayErrorlogs from "./PlayErrorlogs/PlayErrorlogs";
 import { PlayListTable } from "./PlayListTable/PlayListTable";
 import PlaySettings from "./PlaySettings/PlaySettings";
 import PlayUpload from "./PlayUpload/PlayUpload";
-
 
 const useStyles = makeStyles((theme: ExtendedTheme) => ({
   root: {
@@ -35,9 +35,9 @@ function Play() {
     options: PLAY_SETTINGS && PLAY_SETTINGS.play_options ? PLAY_SETTINGS.play_options : createDefaultPlaySettingsOptionsState(),
     filters: PLAY_SETTINGS && PLAY_SETTINGS.play_filters ? PLAY_SETTINGS.play_filters : createDefaultPlaySettingsFiltersState()
   });
-  const [playing, setPlaying] = useState(false);
-  const [uploadedQuizzes, setUploadedQuizzes] = useState<IQuizFull[]>([]);
-  const [selectedQuizIds, setSelectedQuizIds] = useState<string[]>([]);
+  const [playing, setPlaying] = useState(true);
+  const [uploadedQuizzes, setUploadedQuizzes] = useState<IQuizFull[]>([QUIZ_1, QUIZ_2]);
+  const [selectedQuizIds, setSelectedQuizIds] = useState<string[]>([QUIZ_1._id, QUIZ_2._id]);
   const [errorLogs, setErrorLogs] = useState<IErrorLog[]>([]);
 
   const [selectedQuizzes, filteredQuizzes] = applyPlaySettingsOptions(uploadedQuizzes, selectedQuizIds, playSettings.options, arrayShuffler);

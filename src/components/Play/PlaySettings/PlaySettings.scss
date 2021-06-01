@@ -25,13 +25,6 @@
     }
     &--filters {
       grid-area: 2/1/3/2;
-      .MuiFormGroup-root{
-        padding: 2.5px;
-      }
-      .CheckboxGroup-content, .InputRange-content{
-        margin: 2.5px;
-        padding: 2.5px;
-      }
     }
     overflow: auto;
     &-header {

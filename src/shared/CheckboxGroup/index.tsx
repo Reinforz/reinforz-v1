@@ -15,7 +15,7 @@ export default function CheckboxGroup<I extends Record<string, any>>(props: Prop
   const { theme } = useThemeSettings();
   return <FormGroup>
     <InputLabel>{props.label}</InputLabel>
-    <div style={{ background: theme.color.dark, display: 'flex', flexDirection: 'column' }} className="CheckboxGroup-content">
+    <div style={{ background: theme.color.dark, display: 'flex', flexDirection: 'column', padding: 2.5, margin: 2.5 }} className="CheckboxGroup-content">
       {props.items.map((item, index) => <FormControlLabel key={item + index} label={item} control={<Checkbox checked={items.includes(item)} name={item} onChange={(e) => {
         if ((e.target as any).checked) {
           props.setState({ ...props.state, [props.stateKey]: items.concat(item) });
