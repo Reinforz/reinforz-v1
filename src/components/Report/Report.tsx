@@ -57,7 +57,7 @@ export default function Report(props: Props) {
   return (
     <Menu contents={[<ReportFilter reportFilter={reportFilter} setReportFilter={setReportFilter} />, <div className="Report">
       <ReportExport filteredResults={filteredResults} filteredQuizzes={Object.values(filteredQuizzes)} />
-      <Table className="ReportTable" accumulator={accumulator} transformValue={transformValue} contents={filteredResults} collapseContents={["explanation"]} headers={["subject", "type", "difficulty", "verdict", "score", "time_allocated", "time_taken", "weight", "user_answers", "hints_used"].filter(report_stat => !reportFilter.excluded_columns.includes(report_stat))} onHeaderClick={(header, order) => {
+      <Table className="ReportTable" accumulator={accumulator} transformValue={transformValue} contents={filteredResults.map(filteredResults => ({ ...filteredResults, ...filteredResults.question }))} collapseContents={["explanation"]} headers={["subject", "type", "difficulty", "verdict", "score", "time_allocated", "time_taken", "weight", "user_answers", "hints_used"].filter(report_stat => !reportFilter.excluded_columns.includes(report_stat))} onHeaderClick={(header, order) => {
         if (header.match(/(score|time|hints)/))
           props.setResults(filteredResults.sort((a: any, b: any) => order === "DESC" ? a[header] - b[header] : b[header] - a[header]))
         else if (header === "verdict") props.setResults(filteredResults.sort((a: any, b: any) => order === "DESC" ? a[header] === false ? -1 : 1 : a[header] === true ? -1 : 1))
