@@ -7,7 +7,6 @@ import { applyResultFilters, createDefaultReportFilterState, generateQuizzesFrom
 import "./Report.scss";
 import ReportExport from './ReportExport/ReportExport';
 import ReportFilter from './ReportFilter/ReportFilter';
-import { ReportTable } from './ReportTable/ReportTable';
 
 export interface Props {
   results: TQuestionResult[],
@@ -57,7 +56,6 @@ export default function Report(props: Props) {
 
   return (
     <Menu contents={[<ReportFilter reportFilter={reportFilter} setReportFilter={setReportFilter} />, <div className="Report">
-      <ReportTable filteredResults={filteredResults} />
       <div style={{ gridArea: '1/2/3/3', display: 'flex', flexDirection: 'column' }}>
         <ReportExport filteredResults={filteredResults} filteredQuizzes={Object.values(filteredQuizzes)} />
         <div className="Report-BackButton">

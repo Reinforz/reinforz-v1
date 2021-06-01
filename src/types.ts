@@ -56,7 +56,6 @@ export interface IQuestionPartial {
   weight?: number;
   time_allocated?: number;
   difficulty?: TQuestionDifficulty;
-  explanation?: string | null;
   hints?: string[];
   _id?: string;
 }
@@ -70,26 +69,34 @@ export interface IMcqQuestionPartial extends IQuestionPartial {
   question: string;
   options: string[];
   type?: 'MCQ';
-  answers: string[];
+  answers: (string | IInputQuestionAnswerPartial)[];
 }
 
 export interface IMsQuestionPartial extends IQuestionPartial {
   question: string;
   options: string[];
   type?: 'MS';
-  answers: string[];
+  answers: (string | IInputQuestionAnswerPartial)[];
 }
 
 export interface ISnippetQuestionPartial extends IQuestionPartial {
   question: string;
   type?: 'Snippet';
-  answers: (IQuestionAnswerPartial[] | IQuestionAnswerPartial | string)[];
+  answers: (
+    | IInputQuestionAnswerPartial[]
+    | IInputQuestionAnswerPartial
+    | string
+  )[];
 }
 
 export interface IFibQuestionPartial extends IQuestionPartial {
   question: string[];
   type?: 'FIB';
-  answers: (IQuestionAnswerPartial[] | IQuestionAnswerPartial | string)[];
+  answers: (
+    | IInputQuestionAnswerPartial[]
+    | IInputQuestionAnswerPartial
+    | string
+  )[];
 }
 
 export type TQuestionAnswerModifiers = 'IC' | 'IS';
@@ -99,17 +106,23 @@ interface IRegex {
   flags: string;
 }
 
-export interface IQuestionAnswerPartial {
+export interface IInputQuestionAnswerPartial {
   text: string;
   modifiers?: TQuestionAnswerModifiers[];
   regex?: IRegex;
+  explanation?: string | null;
+}
+
+export interface ISelectionQuestionAnswerPartial {
+  text: string;
+  explanation?: string | null;
 }
 
 export interface IMcqQuestionFull extends Required<IQuestionPartial> {
   question: string;
   options: SelectionQuestionOptions[];
   type: 'MCQ';
-  answers: string[];
+  answers: ISelectionQuestionAnswerPartial[];
   quiz: QuizIdentifiers;
 }
 
@@ -117,7 +130,7 @@ export interface IMsQuestionFull extends Required<IQuestionPartial> {
   question: string;
   options: SelectionQuestionOptions[];
   type: 'MS';
-  answers: string[];
+  answers: ISelectionQuestionAnswerPartial[];
   quiz: QuizIdentifiers;
 }
 
@@ -125,6 +138,7 @@ export interface IQuestionAnswerFull {
   text: string;
   modifiers: TQuestionAnswerModifiers[];
   regex: IRegex | null;
+  explanation: string | null;
 }
 
 export interface ISnippetQuestionFull extends Required<IQuestionPartial> {
@@ -183,11 +197,10 @@ export interface IResult {
   score: number;
   time_taken: number;
   hints_used: number;
-  question: TQuestionFull
+  question: TQuestionFull;
 }
 
-export type TQuestionResult =
-  | IResult
+export type TQuestionResult = IResult;
 
 export interface IReportFilter {
   time_taken: [number, number];
