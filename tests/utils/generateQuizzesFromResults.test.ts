@@ -26,20 +26,18 @@ const question_1: TQuestionFull = {
   };
 
 const result_1: TQuestionResult = {
-    ...question_1,
+    question: question_1,
     verdict: true,
     hints_used: 0,
     time_taken: 20,
-    question_id: '1',
     score: 1,
     user_answers: []
   },
   result_2: TQuestionResult = {
-    ...question_2,
+    question: question_2,
     verdict: true,
     hints_used: 0,
     time_taken: 20,
-    question_id: '2',
     score: 1,
     user_answers: []
   };

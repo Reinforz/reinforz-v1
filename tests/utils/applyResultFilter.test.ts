@@ -2,28 +2,29 @@ import { TQuestionResult } from '../../src/types';
 import { applyResultFilters } from '../../src/utils';
 
 const result: TQuestionResult = {
-  type: 'FIB',
-  difficulty: 'Advanced',
   verdict: true,
   hints_used: 0,
   time_taken: 20,
-  quiz: {
-    subject: 'Subject 1',
-    topic: 'Title 1',
-    _id: '1'
-  },
-  question_id: '1',
-  _id: '1',
-  answers: [],
-  explanation: null,
-  hints: [],
-  image: null,
-  question: ['Question 1'],
   score: 1,
-  time_allocated: 30,
   user_answers: [],
-  weight: 1,
-  options: null
+  question: {
+    type: 'FIB',
+    difficulty: 'Advanced',
+    quiz: {
+      subject: 'Subject 1',
+      topic: 'Title 1',
+      _id: '1'
+    },
+    _id: '1',
+    answers: [],
+    explanation: null,
+    hints: [],
+    image: null,
+    question: ['Question 1'],
+    time_allocated: 30,
+    weight: 1,
+    options: null
+  }
 };
 
 it(`Should filter out if question type is within excluded_types`, () => {
