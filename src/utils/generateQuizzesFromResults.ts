@@ -6,7 +6,7 @@ export function generateQuizzesFromResults(
 ) {
   const filteredQuizzes: Record<string, IQuizFull> = {};
   filteredResults.forEach((filteredResult) => {
-    const targetQuestion = allQuestionsMap.get(filteredResult.question_id)!;
+    const targetQuestion = allQuestionsMap.get(filteredResult.question._id)!;
     const clonedTargetQuestion = JSON.parse(
       JSON.stringify(targetQuestion)
     ) as TQuestionFull;

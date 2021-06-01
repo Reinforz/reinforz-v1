@@ -37,7 +37,7 @@ export default function Report(props: Props) {
 
   const filteredResults = applyResultFilters(props.results, reportFilter,);
   const filteredQuizzes = generateQuizzesFromResults(filteredResults, allQuestionsMap);
-  const total_weights = props.results.reduce((acc, cur) => acc + cur.weight, 0);
+  const total_weights = props.results.reduce((acc, cur) => acc + cur.question.weight, 0);
 
   const accumulator = (header: string, contents: Array<any>) => {
     switch (header) {
