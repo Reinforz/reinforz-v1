@@ -6,7 +6,16 @@ export const QUIZ_1: IQuizFull = {
   questions: [
     {
       question: 'Quiz 1 Question 1',
-      answers: ['0', '1'],
+      answers: [
+        {
+          text: '0',
+          explanation: null
+        },
+        {
+          text: '1',
+          explanation: null
+        }
+      ],
       hints: ['Hint 1', 'Hint 2', 'Hint 3'],
       options: [
         {
@@ -30,7 +39,6 @@ export const QUIZ_1: IQuizFull = {
           index: '4'
         }
       ],
-      explanation: '* List item 1\n* List item 2\n',
       image:
         'https://i1.wp.com/blog.enriqueoriol.com/wp-content/uploads/2018/08/reduxLogo.png?fit=1024%2C684',
       weight: 1,
@@ -51,20 +59,21 @@ export const QUIZ_1: IQuizFull = {
           {
             text: 'answer 1',
             modifiers: [],
-            regex: null
+            regex: null,
+            explanation: null
           }
         ],
         [
           {
             text: 'answer 2',
             modifiers: [],
-            regex: null
+            regex: null,
+            explanation: null
           }
         ]
       ],
       hints: ['Hint 1', 'Hint 2', 'Hint 3'],
       options: null,
-      explanation: '* List item 1\n* List item 2\n',
       image:
         'https://www.freecodecamp.org/news/content/images/2020/02/Ekran-Resmi-2019-11-18-18.08.13.png',
       weight: 1,
@@ -88,7 +97,12 @@ export const QUIZ_2: IQuizFull = {
   questions: [
     {
       question: 'Quiz 2 Question 1',
-      answers: ['0'],
+      answers: [
+        {
+          text: '0',
+          explanation: null
+        }
+      ],
       hints: ['Hint 1', 'Hint 2', 'Hint 3'],
       options: [
         {
@@ -112,7 +126,6 @@ export const QUIZ_2: IQuizFull = {
           index: '4'
         }
       ],
-      explanation: '* List item 1\n* List item 2\n',
       image:
         'https://i1.wp.com/blog.enriqueoriol.com/wp-content/uploads/2018/08/reduxLogo.png?fit=1024%2C684',
       weight: 1,
@@ -133,20 +146,21 @@ export const QUIZ_2: IQuizFull = {
           {
             text: 'answer 1',
             modifiers: [],
-            regex: null
+            regex: null,
+            explanation: null
           }
         ],
         [
           {
             text: 'answer 2',
             modifiers: [],
-            regex: null
+            regex: null,
+            explanation: null
           }
         ]
       ],
       hints: ['Hint 1', 'Hint 2', 'Hint 3'],
       options: null,
-      explanation: '* List item 1\n* List item 2\n',
       image:
         'https://www.freecodecamp.org/news/content/images/2020/02/Ekran-Resmi-2019-11-18-18.08.13.png',
       weight: 1,

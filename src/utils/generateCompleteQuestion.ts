@@ -1,5 +1,9 @@
 import shortid from 'shortid';
-import { TQuestionFull, TQuestionPartial } from '../types';
+import {
+  TQuestionFull,
+  TQuestionPartial,
+  TSelectionQuestionPartial
+} from '../types';
 import { generateInputQuestionAnswers } from './';
 
 function setObjectValues(parent: any, arr: [string, any][]) {
@@ -50,8 +54,20 @@ export function generateCompleteQuestion(question: TQuestionPartial) {
     switch (completeQuestion.type) {
       case 'MCQ':
         // Convert all the answers to string
-        completeQuestion.answers = completeQuestion.answers.map((answer) =>
-          answer.toString()
+        completeQuestion.answers = (question as TSelectionQuestionPartial).answers.map(
+          (answer) => {
+            if (typeof answer === 'string') {
+              return {
+                text: answer.toString(),
+                explanation: null
+              };
+            } else {
+              return {
+                text: answer.toString(),
+                explanation: answer.explanation ?? null
+              };
+            }
+          }
         );
         time_allocated = 15;
         // If there are no options for MCQ question, add an error
@@ -82,8 +98,20 @@ export function generateCompleteQuestion(question: TQuestionPartial) {
         }
         break;
       case 'MS':
-        completeQuestion.answers = completeQuestion.answers.map((answer) =>
-          answer.toString()
+        completeQuestion.answers = (question as TSelectionQuestionPartial).answers.map(
+          (answer) => {
+            if (typeof answer === 'string') {
+              return {
+                text: answer.toString(),
+                explanation: null
+              };
+            } else {
+              return {
+                text: answer.toString(),
+                explanation: answer.explanation ?? null
+              };
+            }
+          }
         );
         if (!dummyQuestion.options)
           logs.errors.push(
@@ -106,8 +134,8 @@ export function generateCompleteQuestion(question: TQuestionPartial) {
           }
           completeQuestion.answers.forEach((answer) => {
             if (
-              parseInt(answer) < 0 ||
-              parseInt(answer) > dummyQuestion.options.length - 1
+              parseInt(answer.text) < 0 ||
+              parseInt(answer.text) > dummyQuestion.options.length - 1
             )
               logs.errors.push(
                 `MS Answer must be within 0-${

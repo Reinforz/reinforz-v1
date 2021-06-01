@@ -69,14 +69,14 @@ export interface IMcqQuestionPartial extends IQuestionPartial {
   question: string;
   options: string[];
   type?: 'MCQ';
-  answers: (string | IInputQuestionAnswerPartial)[];
+  answers: (string | ISelectionQuestionAnswerPartial)[];
 }
 
 export interface IMsQuestionPartial extends IQuestionPartial {
   question: string;
   options: string[];
   type?: 'MS';
-  answers: (string | IInputQuestionAnswerPartial)[];
+  answers: (string | ISelectionQuestionAnswerPartial)[];
 }
 
 export interface ISnippetQuestionPartial extends IQuestionPartial {
@@ -122,7 +122,7 @@ export interface IMcqQuestionFull extends Required<IQuestionPartial> {
   question: string;
   options: SelectionQuestionOptions[];
   type: 'MCQ';
-  answers: ISelectionQuestionAnswerPartial[];
+  answers: ISelectionQuestionAnswerFull[];
   quiz: QuizIdentifiers;
 }
 
@@ -130,7 +130,7 @@ export interface IMsQuestionFull extends Required<IQuestionPartial> {
   question: string;
   options: SelectionQuestionOptions[];
   type: 'MS';
-  answers: ISelectionQuestionAnswerPartial[];
+  answers: ISelectionQuestionAnswerFull[];
   quiz: QuizIdentifiers;
 }
 
@@ -138,6 +138,11 @@ export interface IQuestionAnswerFull {
   text: string;
   modifiers: TQuestionAnswerModifiers[];
   regex: IRegex | null;
+  explanation: string | null;
+}
+
+export interface ISelectionQuestionAnswerFull {
+  text: string;
   explanation: string | null;
 }
 

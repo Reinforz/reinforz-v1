@@ -9,7 +9,8 @@ export function generateInputQuestionAnswers(
         {
           text: answer.toString(),
           modifiers: [],
-          regex: null
+          regex: null,
+          explanation: null
         }
       ] as TInputQuestionFull['answers'][0];
     else if (Array.isArray(answer)) {
@@ -17,7 +18,8 @@ export function generateInputQuestionAnswers(
         return {
           text: answer.text.toString(),
           modifiers: answer.modifiers ?? [],
-          regex: answer.regex ?? null
+          regex: answer.regex ?? null,
+          explanation: answer.explanation ?? null
         } as TInputQuestionFull['answers'][0][0];
       });
     } else {
@@ -25,7 +27,8 @@ export function generateInputQuestionAnswers(
         {
           text: answer.text.toString(),
           modifiers: answer.modifiers ?? [],
-          regex: answer.regex ?? null
+          regex: answer.regex ?? null,
+          explanation: answer.explanation ?? null
         }
       ] as TInputQuestionFull['answers'][0];
     }
