@@ -1,5 +1,9 @@
 import shortid from 'shortid';
-import { TQuestionFull, TSelectionQuestionFull } from '../types';
+import {
+  TQuestionFull,
+  TResultQuestion,
+  TSelectionQuestionFull
+} from '../types';
 import { calculateScore } from './calculateScore';
 import { checkInputAnswers } from './checkInputAnswers';
 import { transformReportSelectionQuestion } from './transformReportQuestion';
@@ -15,7 +19,8 @@ export function getAnswerResult(
   const { hints, weight, time_allocated } = currentQuestion;
   userAnswers = userAnswers.filter((user_answer) => user_answer !== '');
   let verdict = false;
-  const transformedQuestion = JSON.parse(
+  let transformedQuestion: TResultQuestion = null as any;
+  const copiedCurrentQuestion = JSON.parse(
     JSON.stringify(currentQuestion)
   ) as TQuestionFull;
 
@@ -26,8 +31,8 @@ export function getAnswerResult(
         currentQuestion.answers[0].text.toString() ===
           currentQuestion.options![parseInt(userAnswers[0])].index;
       totalCorrectAnswers = verdict ? 1 : 0;
-      transformReportSelectionQuestion(
-        transformedQuestion as TSelectionQuestionFull,
+      transformedQuestion = transformReportSelectionQuestion(
+        copiedCurrentQuestion as TSelectionQuestionFull,
         userAnswers
       );
       break;
@@ -41,8 +46,8 @@ export function getAnswerResult(
           if (isCorrect) totalCorrectAnswers++;
           return isCorrect;
         });
-      transformReportSelectionQuestion(
-        transformedQuestion as TSelectionQuestionFull,
+      transformedQuestion = transformReportSelectionQuestion(
+        copiedCurrentQuestion as TSelectionQuestionFull,
         userAnswers
       );
       break;
@@ -54,19 +59,22 @@ export function getAnswerResult(
       break;
   }
 
-  return {
-    verdict,
-    score: calculateScore({
-      weight,
-      time_allocated,
-      time_taken,
-      hints_used,
-      partial_score,
+  return [
+    transformedQuestion,
+    {
       verdict,
-      totalAnswers: currentQuestion.answers.length,
-      totalCorrectAnswers,
-      totalHints: hints.length
-    }),
-    _id: shortid()
-  };
+      score: calculateScore({
+        weight,
+        time_allocated,
+        time_taken,
+        hints_used,
+        partial_score,
+        verdict,
+        totalAnswers: currentQuestion.answers.length,
+        totalCorrectAnswers,
+        totalHints: hints.length
+      }),
+      _id: shortid()
+    }
+  ] as const;
 }

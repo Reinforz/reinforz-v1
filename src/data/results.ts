@@ -23,7 +23,8 @@ export const RESULT_1: IResult = {
   hints_used: 1,
   score: 1,
   time_taken: 20,
-  verdict: true
+  verdict: true,
+  _id: 'result_1'
 };
 
 export const RESULT_2: IResult = {
@@ -45,5 +46,6 @@ export const RESULT_2: IResult = {
   hints_used: 2,
   score: 0.65,
   time_taken: 50,
-  verdict: false
+  verdict: false,
+  _id: 'result_2'
 };

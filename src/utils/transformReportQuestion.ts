@@ -13,4 +13,6 @@ export function transformReportSelectionQuestion(
     sortedOption.isCorrect = correctAnswers.includes(index.toString());
     sortedOption.userSelected = userAnswers.includes(index.toString());
   });
+
+  return question as IResultSelectionQuestion;
 }
