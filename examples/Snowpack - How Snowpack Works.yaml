@@ -1,4 +1,4 @@
-title: How Snowpack Works
+topic: How Snowpack Works
 subject: Snowpack
 questions:
   - question: What sort of tool is snowpack ?
@@ -17,9 +17,9 @@ questions:
       - 0
   - question: In which stage does snowpack serve unbundled application code ?
     answers:
-      - - text: development
-          modifiers:
-            - IC
+      - text: development
+        modifiers:
+          - IC
   - question: Does snowpack rebuilds entire application code for a single file change ?
     options:
       - False
@@ -28,7 +28,7 @@ questions:
       - 0
   - question: What does HMR stand for ?
     answers:
-      - - text: Hot Module Replacement
-          modifiers:
-            - IS
-            - IC
+      - text: Hot Module Replacement
+        modifiers:
+          - IS
+          - IC

@@ -40,6 +40,7 @@ export default function Menu(props: MenuProps) {
     backgroundColor: theme.color.base
   }, iconStyle: React.CSSProperties = {};
 
+  // ?: Convert to util module
   if (position === "right") {
     if (isOpen) {
       left = `calc(100% - 5px)`;
