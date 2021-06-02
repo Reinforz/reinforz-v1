@@ -1,7 +1,8 @@
 import shortid from 'shortid';
-import { TQuestionFull } from '../types';
+import { TQuestionFull, TSelectionQuestionFull } from '../types';
 import { calculateScore } from './calculateScore';
 import { checkInputAnswers } from './checkInputAnswers';
+import { transformReportSelectionQuestion } from './transformReportQuestion';
 
 export function getAnswerResult(
   currentQuestion: TQuestionFull,
@@ -14,6 +15,9 @@ export function getAnswerResult(
   const { hints, weight, time_allocated } = currentQuestion;
   userAnswers = userAnswers.filter((user_answer) => user_answer !== '');
   let verdict = false;
+  const transformedQuestion = JSON.parse(
+    JSON.stringify(currentQuestion)
+  ) as TQuestionFull;
 
   switch (currentQuestion.type) {
     case 'MCQ':
@@ -22,6 +26,10 @@ export function getAnswerResult(
         currentQuestion.answers[0].text.toString() ===
           currentQuestion.options![parseInt(userAnswers[0])].index;
       totalCorrectAnswers = verdict ? 1 : 0;
+      transformReportSelectionQuestion(
+        transformedQuestion as TSelectionQuestionFull,
+        userAnswers
+      );
       break;
     case 'MS':
       verdict =
@@ -33,6 +41,10 @@ export function getAnswerResult(
           if (isCorrect) totalCorrectAnswers++;
           return isCorrect;
         });
+      transformReportSelectionQuestion(
+        transformedQuestion as TSelectionQuestionFull,
+        userAnswers
+      );
       break;
     case 'Snippet':
     case 'FIB':

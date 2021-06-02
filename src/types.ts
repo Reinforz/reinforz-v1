@@ -188,11 +188,10 @@ export type IResultSelectionQuestion = Omit<
   TSelectionQuestionFull,
   'options'
 > & {
-  options: TSelectionQuestionFull['options'] &
-    {
-      isCorrect: boolean;
-      userSelected: boolean;
-    }[];
+  options: (SelectionQuestionOptions & {
+    isCorrect: boolean;
+    userSelected: boolean;
+  })[];
 };
 
 export type IResultInputQuestion = Omit<TInputQuestionFull, 'answers'> & {
@@ -210,6 +209,7 @@ export interface IResult {
   time_taken: number;
   hints_used: number;
   question: TResultQuestion;
+  _id: string;
 }
 
 export interface IReportFilter {

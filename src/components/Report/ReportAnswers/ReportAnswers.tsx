@@ -2,12 +2,12 @@ import { AiFillCheckSquare } from "react-icons/ai";
 import { FaUser, FaUserSlash } from "react-icons/fa";
 import { MdCancel } from "react-icons/md";
 import { useThemeSettings } from "../../../hooks";
-import { TQuestionFull } from "../../../types";
+import { TResultQuestion } from "../../../types";
 import { sanitizeMarkdown } from "../../../utils";
 import "./ReportAnswers.scss";
 
 interface Props {
-  question: TQuestionFull
+  question: TResultQuestion
   userAnswers: string[]
 }
 

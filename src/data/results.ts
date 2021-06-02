@@ -7,13 +7,13 @@ import {
 } from '../types';
 import { QUIZ_1 } from './quizzes';
 
-const quiz1 = QUIZ_1.questions[0] as IMsQuestionFull,
-  quiz2 = QUIZ_1.questions[1] as IFibQuestionFull;
+const question1 = QUIZ_1.questions[0] as IMsQuestionFull,
+  question2 = QUIZ_1.questions[1] as IFibQuestionFull;
 
 export const RESULT_1: IResult = {
   question: {
-    ...quiz1,
-    options: quiz1.options.map((option, index) => ({
+    ...question1,
+    options: question1.options.map((option, index) => ({
       ...option,
       isCorrect: [0, 1].includes(index),
       userSelected: [0, 1].includes(index)
@@ -28,8 +28,8 @@ export const RESULT_1: IResult = {
 
 export const RESULT_2: IResult = {
   question: {
-    ...quiz2,
-    answers: quiz2.answers.map((answers, index) =>
+    ...question2,
+    answers: question2.answers.map((answers, index) =>
       answers.map((answer, _index) => ({
         ...answer,
         userInput:
