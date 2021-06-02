@@ -9,10 +9,9 @@ interface Props {
 
 export function ReportTable(props: Props) {
   const { theme } = useThemeSettings();
-
   return <div className="Report-Table" style={{ backgroundColor: theme.color.base, color: theme.palette.text.primary }}>
-    {props.filteredResults.map(filteredResult => {
-      return <div key={filteredResult.question._id} className="Report-Table-item" style={{ backgroundColor: theme.color.dark }}>
+    {props.filteredResults.map(filteredResult =>
+      <div key={filteredResult.question._id} className="Report-Table-item" style={{ backgroundColor: theme.color.dark }}>
         <div className="Report-Table-item-question" style={{ backgroundColor: theme.color.light }}>
           {filteredResult.question.question}
         </div>
@@ -22,8 +21,17 @@ export function ReportTable(props: Props) {
             fontWeight: 'bold', color: filteredResult.verdict === false ? "#ff3223" : "#36e336"
           }}>{filteredResult.verdict === false ? "Incorrect" : "Correct"}</div>]]} />
         </div>
-        <ReportAnswers question={filteredResult.question} userAnswers={filteredResult.user_answers} />
-      </div>
-    })}
+        <div style={{ display: 'flex' }}>
+          <ReportAnswers question={filteredResult.question} userAnswers={filteredResult.user_answers} />
+          <div style={{ width: '25%' }}>
+            <StackList header="Quiz Stats" items={[['Topic', filteredResult.question.quiz.topic], ['Subject', filteredResult.question.quiz.subject]]} />
+            <div className="Report-Table-item-hints" style={{ backgroundColor: theme.color.base }}>
+              {filteredResult.question.hints.map(hint => <div className="Report-Table-item-hints-item" style={{ backgroundColor: theme.color.light }}>
+                {hint}
+              </div>)}
+            </div>
+          </div>
+        </div>
+      </div>)}
   </div>
 }

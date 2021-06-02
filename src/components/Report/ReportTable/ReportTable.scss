@@ -1,26 +1,33 @@
 .Report-Table{
-  height: 100%;
+  height: calc(100% - 10px);
   padding: 2.5px;
   margin: 2.5px;
-
-  .StackList{
-    flex: 1;
-  }
+  overflow: auto;
 
   &-item{
     padding: 2.5px;
     margin: 2.5px;
 
-    &-question{
-      padding: 7.5px;
+    &-hints{
       margin: 2.5px;
-      font-size: 2em;
-      font-weight: bold;
-      text-align: center;
+      padding: 5px 0px;
+
+      &-item{
+        padding: 10px;
+        margin: 5px;
+      }
+    }
+
+    &-question{
+      padding: 10px;
+      margin: 2.5px;
     }
 
     &-stats{
       display: flex;
+      .StackList{
+        flex: 1;
+      }
     }
   }
 }
