@@ -22,7 +22,10 @@ export function computeNumberDataAggregation(
       return max;
     }
     case 'AVG': {
-      return data.reduce((acc, cur) => acc + cur, 0) / data.length;
+      return (
+        data.reduce((acc, cur) => acc + cur, 0) /
+        (data.length === 0 ? 1 : data.length)
+      );
     }
   }
 }

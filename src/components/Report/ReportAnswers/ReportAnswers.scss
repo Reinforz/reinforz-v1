@@ -1,0 +1,24 @@
+.Report-Answers{
+  padding: 2.5px;
+  margin: 2.5px;
+  padding-bottom: 1.5px;
+  height: 450px;
+  overflow: auto;
+
+  &-container{
+    padding: 2.5px;
+    margin: 2.5px;
+    margin-bottom: 5px;
+    padding-bottom: 1.5px;
+
+    &-item{
+      padding: 5px;
+      margin: 2.5px;
+      margin-bottom: 5px;
+
+      p{
+        margin: 0px;
+      }
+    }
+  }
+}

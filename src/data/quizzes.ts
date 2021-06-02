@@ -9,17 +9,18 @@ export const QUIZ_1: IQuizFull = {
       answers: [
         {
           text: '0',
-          explanation: null
+          explanation: 'Since 0 is an even number'
         },
         {
-          text: '1',
+          text: '2',
           explanation: null
         }
       ],
       hints: ['Hint 1', 'Hint 2', 'Hint 3'],
       options: [
         {
-          text: 'Option 1',
+          text:
+            'Option 1 can also be really really big if the user wants it to',
           index: '0'
         },
         {

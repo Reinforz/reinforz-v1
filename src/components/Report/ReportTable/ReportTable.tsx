@@ -1,6 +1,7 @@
 import { useThemeSettings } from "../../../hooks";
 import { StackList } from "../../../shared";
 import { TQuestionResult } from "../../../types";
+import { ReportAnswers } from "../ReportAnswers/ReportAnswers";
 import "./ReportTable.scss";
 interface Props {
   filteredResults: TQuestionResult[]
@@ -21,6 +22,7 @@ export function ReportTable(props: Props) {
             fontWeight: 'bold', color: filteredResult.verdict === false ? "#ff3223" : "#36e336"
           }}>{filteredResult.verdict === false ? "Incorrect" : "Correct"}</div>]]} />
         </div>
+        <ReportAnswers question={filteredResult.question} userAnswers={filteredResult.user_answers} />
       </div>
     })}
   </div>

@@ -3,7 +3,7 @@ import { QUIZ_1 } from './quizzes';
 
 export const RESULT_1: TQuestionResult = {
   question: QUIZ_1.questions[0],
-  user_answers: [],
+  user_answers: ['0', '1'],
   hints_used: 1,
   score: 1,
   time_taken: 20,
