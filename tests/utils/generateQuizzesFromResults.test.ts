@@ -14,7 +14,6 @@ it(`Should work`, () => {
     ])
   );
 
-  console.log(JSON.stringify(filteredQuizzes, null, 2));
   expect(filteredQuizzes).toStrictEqual({
     quiz1: {
       subject: 'Subject 1',

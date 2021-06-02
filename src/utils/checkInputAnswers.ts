@@ -20,10 +20,11 @@ export function checkInputAnswer(
       userAnswer,
       answers[index]
     );
+
+    transformedAnswers[index].isCorrect = false;
     if (modifiedUserAnswer === modifiedAnswerText) {
       isCorrect = true;
       transformedAnswers[index].isCorrect = true;
-      transformedAnswers[index].userInput = userAnswer;
       break;
     } else {
       const regex = answers[index].regex;
@@ -31,7 +32,6 @@ export function checkInputAnswer(
         const generatedRegex = new RegExp(regex.regex, regex.flags);
         isCorrect = Boolean(userAnswer.match(generatedRegex));
         transformedAnswers[index].isCorrect = isCorrect;
-        transformedAnswers[index].userInput = userAnswer;
         if (isCorrect) break;
       }
     }
@@ -78,7 +78,7 @@ export function checkInputAnswers(
   answers: IInputQuestionAnswerFull[][]
 ) {
   const transformedUserAnswers: IResultInputQuestion['answers'] = JSON.parse(
-    JSON.stringify(userAnswers)
+    JSON.stringify(answers)
   );
   let isCorrect = false,
     totalCorrectAnswers = 0;

@@ -22,7 +22,7 @@ describe('modifyAnswers', () => {
 describe('checkInputAnswer', () => {
   describe('Answer text', () => {
     it(`Should match regular answer text`, () => {
-      const isCorrect = checkInputAnswer('Hello World', [
+      const [isCorrect] = checkInputAnswer('Hello World', [
         {
           modifiers: [],
           regex: null,
@@ -40,7 +40,7 @@ describe('checkInputAnswer', () => {
     });
 
     it(`Should not match regular answer text`, () => {
-      const isCorrect = checkInputAnswer('Hello World', [
+      const [isCorrect] = checkInputAnswer('Hello World', [
         {
           modifiers: [],
           regex: null,
@@ -60,7 +60,7 @@ describe('checkInputAnswer', () => {
 
   describe('Answer regex', () => {
     it(`Should match regular answer regex`, () => {
-      const isCorrect = checkInputAnswer('Hello World', [
+      const [isCorrect] = checkInputAnswer('Hello World', [
         {
           modifiers: [],
           regex: {
@@ -75,7 +75,7 @@ describe('checkInputAnswer', () => {
     });
 
     it(`Should not match regular answer regex`, () => {
-      const isCorrect = checkInputAnswer('Hello World', [
+      const [isCorrect] = checkInputAnswer('Hello World', [
         {
           modifiers: [],
           regex: {
@@ -93,7 +93,11 @@ describe('checkInputAnswer', () => {
 
 describe('checkInputAnswers', () => {
   it(`Should work when answers matches`, () => {
-    const [isCorrect, totalCorrectAnswers] = checkInputAnswers(
+    const [
+      isCorrect,
+      totalCorrectAnswers,
+      transformedAnswers
+    ] = checkInputAnswers(
       ['Hello World', 'helloworld'],
       [
         [
@@ -116,10 +120,34 @@ describe('checkInputAnswers', () => {
     );
     expect(isCorrect).toStrictEqual(true);
     expect(totalCorrectAnswers).toStrictEqual(2);
+    expect(transformedAnswers).toStrictEqual([
+      [
+        {
+          modifiers: [],
+          regex: null,
+          text: 'Hello World',
+          explanation: null,
+          isCorrect: true
+        }
+      ],
+      [
+        {
+          modifiers: ['IC', 'IS'],
+          regex: null,
+          text: 'Hello World',
+          explanation: null,
+          isCorrect: true
+        }
+      ]
+    ]);
   });
 
   it(`Should work when answer doesn't match`, () => {
-    const [isCorrect, totalCorrectAnswers] = checkInputAnswers(
+    const [
+      isCorrect,
+      totalCorrectAnswers,
+      transformedAnswers
+    ] = checkInputAnswers(
       ['Hello World', 'helloworld'],
       [
         [
@@ -134,5 +162,16 @@ describe('checkInputAnswers', () => {
     );
     expect(isCorrect).toStrictEqual(false);
     expect(totalCorrectAnswers).toStrictEqual(0);
+    expect(transformedAnswers).toStrictEqual([
+      [
+        {
+          modifiers: [],
+          regex: null,
+          text: 'helloworld',
+          explanation: null,
+          isCorrect: false
+        }
+      ]
+    ]);
   });
 });
