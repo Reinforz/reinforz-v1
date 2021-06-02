@@ -78,14 +78,14 @@ export function generateCompleteQuestion(question: TQuestionPartial) {
         else {
           // If the answer index is greater than total options, or negative add an error
           if (
-            parseInt(dummyQuestion.answers[0]) < 0 ||
-            parseInt(dummyQuestion.answers[0]) >
+            parseInt(dummyQuestion.answers[0].text) < 0 ||
+            parseInt(dummyQuestion.answers[0].text) >
               dummyQuestion.options.length - 1
           )
             logs.errors.push(
               `MCQ Answer must be within 0-${
                 dummyQuestion.options.length - 1
-              }, provided ${dummyQuestion.answers[0]}`
+              }, provided ${dummyQuestion.answers[0].text}`
             );
 
           if (
@@ -140,7 +140,7 @@ export function generateCompleteQuestion(question: TQuestionPartial) {
               logs.errors.push(
                 `MS Answer must be within 0-${
                   dummyQuestion.options.length - 1
-                }, provided ${answer}`
+                }, provided ${answer.text}`
               );
           });
         }

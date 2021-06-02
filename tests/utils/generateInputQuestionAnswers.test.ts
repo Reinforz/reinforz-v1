@@ -6,7 +6,8 @@ it(`Should work for string`, () => {
       {
         text: 'answer 1',
         modifiers: [],
-        regex: null
+        regex: null,
+        explanation: null
       }
     ]
   ]);
@@ -21,7 +22,8 @@ it(`Should work for object with all options given`, () => {
         regex: {
           flags: 'g',
           regex: '123'
-        }
+        },
+        explanation: null
       }
     ])
   ).toStrictEqual([
@@ -32,7 +34,8 @@ it(`Should work for object with all options given`, () => {
         regex: {
           flags: 'g',
           regex: '123'
-        }
+        },
+        explanation: null
       }
     ]
   ]);
@@ -50,7 +53,8 @@ it(`Should work for object with no options given`, () => {
       {
         text: '123',
         modifiers: [],
-        regex: null
+        regex: null,
+        explanation: null
       }
     ]
   ]);
@@ -66,7 +70,8 @@ it(`Should work for array with all options given`, () => {
           regex: {
             flags: 'g',
             regex: '123'
-          }
+          },
+          explanation: null
         }
       ]
     ])
@@ -78,7 +83,8 @@ it(`Should work for array with all options given`, () => {
         regex: {
           flags: 'g',
           regex: '123'
-        }
+        },
+        explanation: null
       }
     ]
   ]);
@@ -98,7 +104,8 @@ it(`Should work for array with no options given`, () => {
       {
         text: '123',
         modifiers: [],
-        regex: null
+        regex: null,
+        explanation: null
       }
     ]
   ]);

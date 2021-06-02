@@ -5,7 +5,12 @@ describe('MCQ Questions', () => {
     const info = getAnswerResult(
       {
         type: 'MCQ',
-        answers: ['0'],
+        answers: [
+          {
+            text: '0',
+            explanation: null
+          }
+        ],
         options: [
           {
             text: 'Option 2',
@@ -40,7 +45,12 @@ describe('MCQ Questions', () => {
     const info = getAnswerResult(
       {
         type: 'MCQ',
-        answers: ['0'],
+        answers: [
+          {
+            text: '0',
+            explanation: null
+          }
+        ],
         options: [
           {
             text: 'Option 3',
@@ -77,7 +87,16 @@ describe('MS Questions', () => {
     const info = getAnswerResult(
       {
         type: 'MS',
-        answers: ['0', '1'],
+        answers: [
+          {
+            text: '0',
+            explanation: null
+          },
+          {
+            text: '1',
+            explanation: null
+          }
+        ],
         options: [
           {
             text: 'Option 3',
@@ -108,11 +127,20 @@ describe('MS Questions', () => {
     });
   });
 
-  it(`Should work for correct answers`, () => {
+  it(`Should work for wrong answers`, () => {
     const info = getAnswerResult(
       {
         type: 'MS',
-        answers: ['0', '1'],
+        answers: [
+          {
+            text: '0',
+            explanation: null
+          },
+          {
+            Text: '1',
+            explanation: null
+          }
+        ],
         options: [
           {
             text: 'Option 3',

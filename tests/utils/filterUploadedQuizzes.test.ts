@@ -76,7 +76,12 @@ it(`Should filter out uploaded quizzes`, () => {
       _id: expect.any(String),
       questions: [
         {
-          answers: ['1'],
+          answers: [
+            {
+              text: '1',
+              explanation: null
+            }
+          ],
           type: 'MCQ',
           options: [
             { text: 'Option 1', index: '0' },

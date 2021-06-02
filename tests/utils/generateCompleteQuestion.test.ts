@@ -9,7 +9,12 @@ describe('MCQ type questions', () => {
       question: 'Question'
     });
     expect(completeQuestion).toStrictEqual({
-      answers: ['1'],
+      answers: [
+        {
+          text: '1',
+          explanation: null
+        }
+      ],
       type: 'MCQ',
       options: [
         { text: 'Option 1', index: '0' },
@@ -94,7 +99,16 @@ describe('MS type questions', () => {
       question: 'Question'
     });
     expect(completeQuestion).toStrictEqual({
-      answers: ['1', '2'],
+      answers: [
+        {
+          text: '1',
+          explanation: null
+        },
+        {
+          text: '2',
+          explanation: null
+        }
+      ],
       type: 'MS',
       options: [
         { text: 'Option 1', index: '0' },
@@ -185,7 +199,8 @@ describe('Snippet type questions', () => {
           {
             text: '1',
             regex: null,
-            modifiers: []
+            modifiers: [],
+            explanation: null
           }
         ]
       ],
@@ -222,7 +237,8 @@ describe('FIB type questions', () => {
           {
             text: '1',
             regex: null,
-            modifiers: []
+            modifiers: [],
+            explanation: null
           }
         ]
       ],
@@ -285,7 +301,12 @@ it(`Should populate warns if wrong difficulty, weight and time_allocated are giv
   });
 
   expect(completeQuestion).toStrictEqual({
-    answers: ['1'],
+    answers: [
+      {
+        text: '1',
+        explanation: null
+      }
+    ],
     type: 'MCQ',
     options: [
       { text: 'Option 1', index: '0' },
