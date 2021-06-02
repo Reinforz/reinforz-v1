@@ -14,6 +14,7 @@ export * from './generateCompleteQuestion';
 export * from './generateInputQuestionAnswers';
 export * from './generateQuestionsMap';
 export * from './generateQuizzesFromResults';
+export * from './generateSelectionQuestionAnswers';
 export * from './generateTheme';
 export * from './getAnswerResult';
 export * from './getSettings';
