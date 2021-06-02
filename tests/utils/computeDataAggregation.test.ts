@@ -1,4 +1,7 @@
-import { computeNumberDataAggregation } from '../../src/utils';
+import {
+  computeBooleanDataAggregation,
+  computeNumberDataAggregation
+} from '../../src/utils';
 
 describe('computeNumberDataAggregation', () => {
   it(`Should work for MAX aggregation`, () => {
@@ -17,5 +20,19 @@ describe('computeNumberDataAggregation', () => {
     expect(computeNumberDataAggregation([1, 2, 3, 4, 5], 'AVG')).toStrictEqual(
       3
     );
+  });
+});
+
+describe('computeBooleanDataAggregation', () => {
+  it(`Should work for TRUE aggregation`, () => {
+    expect(
+      computeBooleanDataAggregation([true, false, true, true, false], 'TRUE')
+    ).toStrictEqual(3);
+  });
+
+  it(`Should work for FALSE aggregation`, () => {
+    expect(
+      computeBooleanDataAggregation([true, false, true, true, false], 'FALSE')
+    ).toStrictEqual(2);
   });
 });
