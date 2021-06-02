@@ -249,4 +249,5 @@ export interface IReportAggregator {
   weight: TNumberAggregation;
   score: TNumberAggregation;
   verdict: TBooleanAggregation;
+  hints_used: TNumberAggregation;
 }
