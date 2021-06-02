@@ -1,4 +1,5 @@
 import { Theme, ThemeOptions } from '@material-ui/core/styles';
+import { Language } from 'prism-react-renderer';
 
 // Basic Components
 
@@ -133,7 +134,7 @@ export interface IMsQuestionFull extends Required<IQuestionPartial> {
   quiz: QuizIdentifiers;
 }
 
-export interface IQuestionAnswerFull {
+export interface IInputQuestionAnswerFull {
   text: string;
   modifiers: TQuestionAnswerModifiers[];
   regex: IRegex | null;
@@ -149,7 +150,7 @@ export interface ISnippetQuestionFull extends Required<IQuestionPartial> {
   question: string;
   options: null;
   type: 'Snippet';
-  answers: IQuestionAnswerFull[][];
+  answers: IInputQuestionAnswerFull[][];
   quiz: QuizIdentifiers;
 }
 
@@ -157,7 +158,7 @@ export interface IFibQuestionFull extends Required<IQuestionPartial> {
   question: string[];
   options: null;
   type: 'FIB';
-  answers: IQuestionAnswerFull[][];
+  answers: IInputQuestionAnswerFull[][];
   quiz: QuizIdentifiers;
 }
 
@@ -235,4 +236,9 @@ export interface IReportAggregator {
   score: TNumberAggregation;
   verdict: TBooleanAggregation;
   hints_used: TNumberAggregation;
+}
+
+export interface HighlighterProps {
+  code: string;
+  language: Language;
 }

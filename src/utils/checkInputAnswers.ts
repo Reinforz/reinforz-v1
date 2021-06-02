@@ -1,4 +1,4 @@
-import { IQuestionAnswerFull } from '../types';
+import { IInputQuestionAnswerFull } from '../types';
 
 /**
  * Checks user's answer against an answer object and returns whether or not it matches the given answers including its alternates
@@ -8,7 +8,7 @@ import { IQuestionAnswerFull } from '../types';
  */
 export function checkInputAnswer(
   userAnswer: string,
-  answers: IQuestionAnswerFull[]
+  answers: IInputQuestionAnswerFull[]
 ) {
   let isCorrect = false;
 
@@ -40,7 +40,7 @@ export function checkInputAnswer(
  */
 export function modifyAnswers(
   userAnswer: string,
-  answer: Omit<IQuestionAnswerFull, 'regex'>
+  answer: Omit<IInputQuestionAnswerFull, 'regex'>
 ) {
   let answerText = answer.text;
   answer.modifiers.forEach((modifier) => {
@@ -68,7 +68,7 @@ export function modifyAnswers(
  */
 export function checkInputAnswers(
   userAnswers: string[],
-  answers: IQuestionAnswerFull[][]
+  answers: IInputQuestionAnswerFull[][]
 ) {
   let isCorrect = false,
     totalCorrectAnswers = 0;

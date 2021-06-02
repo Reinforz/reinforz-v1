@@ -7,13 +7,8 @@ import "prismjs/components/prism-dart";
 import "prismjs/components/prism-git";
 import "prismjs/components/prism-java";
 import { useThemeSettings } from "../../../hooks";
-import { TQuestionType } from "../../../types";
+import { HighlighterProps, TQuestionType } from "../../../types";
 import "./QuestionHighlighter.scss";
-
-export interface HighlighterProps {
-  code: string;
-  language: Language;
-}
 
 export interface QuestionHighlighterProps extends HighlighterProps {
   type: TQuestionType;
