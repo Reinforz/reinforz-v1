@@ -22,7 +22,7 @@ export function ReportAnswers(props: Props) {
         const answerIndex = answers.findIndex(answer => answer === index.toString());
         const isCorrectAnswer = answerIndex !== -1;
         const isUserCorrect = userAnswers.includes(index.toString());
-        return <div className="Report-Answers-container" style={{ backgroundColor: theme.color.dark }}>
+        return <div className="Report-Answers-container" style={{ backgroundColor: theme.color.dark }} key={option.text}>
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             <div style={{ backgroundColor: theme.color.light, padding: 10 }} className="Report-Answers-container-item Report-Answers-container-item--text" dangerouslySetInnerHTML={{ __html: sanitizeMarkdown(option.text ?? '') }}></div>
             <div style={{ backgroundColor: theme.color.light, width: 50, display: 'flex', alignItems: 'center' }} className="Report-Answers-container-item">

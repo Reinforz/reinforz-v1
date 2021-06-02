@@ -44,14 +44,14 @@ export default function Menu(props: MenuProps) {
     if (isOpen) {
       left = `calc(100% - 5px)`;
       iconStyle.transform = "rotate(0deg)";
-      iconsStyle.left = "-40px"
+      iconsStyle.left = "-35px"
       contentStyle.width = `calc(100% - ${width}px)`;
       contentStyle.left = `0px`;
     }
     else {
       left = "100%"
       iconStyle.transform = "rotate(-180deg)";
-      iconsStyle.left = "-40px"
+      iconsStyle.left = "-35px"
       contentStyle.width = `100%`;
       contentStyle.left = `0px`;
     }
