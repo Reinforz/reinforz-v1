@@ -1,7 +1,8 @@
 import { useThemeSettings } from "../../../hooks";
 import { StackList } from "../../../shared";
-import { IResult } from "../../../types";
+import { IResult, IResultInputQuestion } from "../../../types";
 import { sanitizeMarkdown } from "../../../utils";
+import { ReportAnswers } from "../ReportAnswers/ReportAnswers";
 import { ReportOptions } from "../ReportOptions/ReportOptions";
 import "./ReportTable.scss";
 interface Props {
@@ -24,7 +25,7 @@ export function ReportTable(props: Props) {
           }}>{filteredResult.verdict === false ? "Incorrect" : "Correct"}</div>]]} />
         </div>
         <div style={{ display: 'flex' }}>
-          {filteredResult.question.type === "MCQ" || filteredResult.question.type === "MS" ? <ReportOptions question={filteredResult.question} userAnswers={filteredResult.user_answers} /> : null}
+          {(filteredResult.question.type === "MCQ" || filteredResult.question.type === "MS") ? <ReportOptions question={filteredResult.question} userAnswers={filteredResult.user_answers} /> : <ReportAnswers question={filteredResult.question as IResultInputQuestion} userAnswers={filteredResult.user_answers} />}
           <div style={{ width: '25%' }}>
             <StackList header="Quiz Stats" items={[['Topic', filteredResult.question.quiz.topic], ['Subject', filteredResult.question.quiz.subject]]} />
             <div className="Report-Table-item-hints" style={{ backgroundColor: theme.color.base }}>
