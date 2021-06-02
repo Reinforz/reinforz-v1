@@ -7,7 +7,7 @@ export function generateMenuStyles(
     iconsContainerStyle: React.CSSProperties = {},
     iconStyle: React.CSSProperties = {},
     contentStyle: React.CSSProperties = {
-      height: '100% '
+      height: '100%'
     };
   contentStyle.position = `absolute`;
   contentStyle.transition = `width 250ms ease-in-out, left 250ms ease-in-out`;
