@@ -13,6 +13,7 @@ export * from './download';
 export * from './filterUploadedQuizzes';
 export * from './generateCompleteQuestion';
 export * from './generateInputQuestionAnswers';
+export * from './generateMenuStyles';
 export * from './generateQuestionsMap';
 export * from './generateQuizzesFromResults';
 export * from './generateSelectionQuestionAnswers';

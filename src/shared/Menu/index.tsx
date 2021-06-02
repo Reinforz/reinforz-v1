@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { FaArrowAltCircleRight } from "react-icons/fa";
 import { RiArrowLeftRightLine } from "react-icons/ri";
 import { ExtendedTheme } from "../../types";
+import { generateMenuStyles } from "../../utils";
 import Icon from "../Icon";
 import "./style.scss";
 
@@ -30,53 +31,12 @@ export default function Menu(props: MenuProps) {
   const [position, setPosition] = useState(menuLsState.position);
   const theme = useTheme() as ExtendedTheme;
 
-  const contentStyle: React.CSSProperties = {
-    height: '100% '
-  };
-  contentStyle.position = `absolute`;
-  contentStyle.transition = `width 250ms ease-in-out, left 250ms ease-in-out`;
-
-  let left = null, iconsStyle: React.CSSProperties = {
-    backgroundColor: theme.color.base
-  }, iconStyle: React.CSSProperties = {};
-
-  // ?: Convert to util module
-  if (position === "right") {
-    if (isOpen) {
-      left = `calc(100% - 5px)`;
-      iconStyle.transform = "rotate(0deg)";
-      iconsStyle.left = "-35px"
-      contentStyle.width = `calc(100% - ${width}px)`;
-      contentStyle.left = `0px`;
-    }
-    else {
-      left = "100%"
-      iconStyle.transform = "rotate(-180deg)";
-      iconsStyle.left = "-35px"
-      contentStyle.width = `100%`;
-      contentStyle.left = `0px`;
-    }
-  } else {
-    if (isOpen) {
-      left = `-${width}px`
-      iconStyle.transform = "rotate(-180deg)";;
-      iconsStyle.left = "100%"
-      contentStyle.width = `calc(100% - ${width}px)`;
-      contentStyle.left = `${width}px`;
-    }
-    else {
-      left = `-${width}px`
-      iconStyle.transform = "rotate(0deg)"
-      iconsStyle.left = "100%"
-      contentStyle.width = `100%`;
-      contentStyle.left = `0px`;
-    }
-  }
+  const { left, iconsContainerStyle, iconStyle, contentStyle } = generateMenuStyles(position, isOpen, width);
 
   return <div style={contentStyle}>
     {contents[1]}
     <div className="Menu" style={{ left, width }}>
-      <div className="Menu-icons" style={iconsStyle}>
+      <div className="Menu-icons" style={{ ...iconsContainerStyle, backgroundColor: theme.color.base }}>
         <Icon popoverText={`${isOpen ? "Close" : "Open"} Menu`}>
           <FaArrowAltCircleRight className="Menu-icons-icon Menu-icons-icon--toggle" onClick={() => {
             const newValue = !isOpen
