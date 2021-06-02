@@ -20,6 +20,18 @@ describe('modifyAnswers', () => {
 });
 
 describe('checkInputAnswer', () => {
+  it(`Should work if userAnswer is undefined`, () => {
+    const [isCorrect] = checkInputAnswer(undefined, [
+      {
+        modifiers: [],
+        regex: null,
+        explanation: null,
+        text: 'helloworld'
+      }
+    ]);
+    expect(isCorrect).toStrictEqual(false);
+  });
+
   describe('Answer text', () => {
     it(`Should match regular answer text`, () => {
       const [isCorrect] = checkInputAnswer('Hello World', [

@@ -7,7 +7,7 @@ import { IInputQuestionAnswerFull, IResultInputQuestion } from '../types';
  * @returns whether user's answer matches any of the answers
  */
 export function checkInputAnswer(
-  userAnswer: string,
+  userAnswer: string | undefined,
   answers: IInputQuestionAnswerFull[]
 ) {
   let isCorrect = false;
@@ -15,24 +15,26 @@ export function checkInputAnswer(
     JSON.stringify(answers)
   );
 
-  for (let index = 0; index < answers.length; index++) {
-    const [modifiedUserAnswer, modifiedAnswerText] = modifyAnswers(
-      userAnswer,
-      answers[index]
-    );
+  if (userAnswer !== undefined) {
+    for (let index = 0; index < answers.length; index++) {
+      const [modifiedUserAnswer, modifiedAnswerText] = modifyAnswers(
+        userAnswer,
+        answers[index]
+      );
 
-    transformedAnswers[index].isCorrect = false;
-    if (modifiedUserAnswer === modifiedAnswerText) {
-      isCorrect = true;
-      transformedAnswers[index].isCorrect = true;
-      break;
-    } else {
-      const regex = answers[index].regex;
-      if (regex) {
-        const generatedRegex = new RegExp(regex.regex, regex.flags);
-        isCorrect = Boolean(userAnswer.match(generatedRegex));
-        transformedAnswers[index].isCorrect = isCorrect;
-        if (isCorrect) break;
+      transformedAnswers[index].isCorrect = false;
+      if (modifiedUserAnswer === modifiedAnswerText) {
+        isCorrect = true;
+        transformedAnswers[index].isCorrect = true;
+        break;
+      } else {
+        const regex = answers[index].regex;
+        if (regex) {
+          const generatedRegex = new RegExp(regex.regex, regex.flags);
+          isCorrect = Boolean(userAnswer.match(generatedRegex));
+          transformedAnswers[index].isCorrect = isCorrect;
+          if (isCorrect) break;
+        }
       }
     }
   }
@@ -82,7 +84,7 @@ export function checkInputAnswers(
   );
   let isCorrect = false,
     totalCorrectAnswers = 0;
-  for (let index = 0; index < userAnswers.length; index++) {
+  for (let index = 0; index < answers.length; index++) {
     const result = checkInputAnswer(userAnswers[index], answers[index]);
     transformedUserAnswers[index] = result[1];
     isCorrect = result[0];
