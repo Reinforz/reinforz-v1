@@ -6,10 +6,21 @@ import "prismjs/components/prism-csharp";
 import "prismjs/components/prism-dart";
 import "prismjs/components/prism-git";
 import "prismjs/components/prism-java";
-import React from "react";
 import { useThemeSettings } from "../../../hooks";
-import { QuestionHighlighterProps } from "../../../types";
+import { TQuestionType } from "../../../types";
 import "./QuestionHighlighter.scss";
+
+export interface HighlighterProps {
+  code: string;
+  language: Language;
+}
+
+export interface QuestionHighlighterProps extends HighlighterProps {
+  type: TQuestionType;
+  fibRefs: React.MutableRefObject<React.RefObject<HTMLInputElement>[]>;
+  answers: string[];
+  image?: string;
+}
 
 export default function QuestionHighlighter(props: QuestionHighlighterProps) {
   const { code, language, type, fibRefs, answers, image } = props;

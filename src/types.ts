@@ -1,5 +1,4 @@
 import { Theme, ThemeOptions } from '@material-ui/core/styles';
-import { Language } from 'prism-react-renderer';
 
 // Basic Components
 
@@ -177,18 +176,6 @@ export type TInputQuestionFull = ISnippetQuestionFull | IFibQuestionFull;
 export type TSelectionQuestionFull = IMcqQuestionFull | IMsQuestionFull;
 
 export type TQuestionFull = TInputQuestionFull | TSelectionQuestionFull;
-
-export interface HighlighterProps {
-  code: string;
-  language: Language;
-}
-
-export interface QuestionHighlighterProps extends HighlighterProps {
-  type: TQuestionType;
-  fibRefs: React.MutableRefObject<React.RefObject<HTMLInputElement>[]>;
-  answers: string[];
-  image?: string;
-}
 
 export interface QuizIdentifiers {
   topic: string;
