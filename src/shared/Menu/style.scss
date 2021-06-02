@@ -7,6 +7,7 @@
   padding: 2.5px;
   
   &-icons{
+    opacity: 0;
     position: absolute;
     cursor: pointer;
     display: flex;
@@ -16,6 +17,11 @@
     padding: 5px;
     border-radius: 5px;
     z-index: 50;
+    transition: opacity 200ms ease-in-out;
+    &:hover{
+      opacity: 1;
+      transition: opacity 200ms ease-in-out;
+    }
     &-icon{
       width: 25px;
       height: 25px;
