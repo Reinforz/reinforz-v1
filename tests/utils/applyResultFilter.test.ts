@@ -7,6 +7,7 @@ const result: IResult = {
   time_taken: 20,
   score: 1,
   user_answers: [],
+  _id: 'result_1',
   question: {
     type: 'FIB',
     difficulty: 'Advanced',

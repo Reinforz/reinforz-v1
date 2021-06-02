@@ -2,7 +2,7 @@ import { getAnswerResult } from '../../src/utils';
 
 describe('MCQ Questions', () => {
   it(`Should work for correct answers`, () => {
-    const info = getAnswerResult(
+    const [, info] = getAnswerResult(
       {
         type: 'MCQ',
         answers: [
@@ -42,7 +42,7 @@ describe('MCQ Questions', () => {
   });
 
   it(`Should work for wrong answers`, () => {
-    const info = getAnswerResult(
+    const [, info] = getAnswerResult(
       {
         type: 'MCQ',
         answers: [
@@ -84,7 +84,7 @@ describe('MCQ Questions', () => {
 
 describe('MS Questions', () => {
   it(`Should work for correct answers`, () => {
-    const info = getAnswerResult(
+    const [, info] = getAnswerResult(
       {
         type: 'MS',
         answers: [
@@ -128,7 +128,7 @@ describe('MS Questions', () => {
   });
 
   it(`Should work for wrong answers`, () => {
-    const info = getAnswerResult(
+    const [, info] = getAnswerResult(
       {
         type: 'MS',
         answers: [
@@ -174,7 +174,7 @@ describe('MS Questions', () => {
 
 describe('FIB Questions', () => {
   it(`Should work for correct answers`, () => {
-    const info = getAnswerResult(
+    const [, info] = getAnswerResult(
       {
         type: 'FIB',
         answers: [
@@ -208,7 +208,7 @@ describe('FIB Questions', () => {
   });
 
   it(`Should work for wrong answers`, () => {
-    const info = getAnswerResult(
+    const [, info] = getAnswerResult(
       {
         type: 'Snippet',
         answers: [

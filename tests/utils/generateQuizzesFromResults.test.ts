@@ -1,52 +1,16 @@
-import { IResult, TQuestionFull } from '../../src/types';
+import { QUIZ_1 } from '../../src/data/quizzes';
+import { RESULT_1, RESULT_2 } from '../../src/data/results';
 import { generateQuizzesFromResults } from '../../src/utils';
 
-const question_1: TQuestionFull = {
-    type: 'FIB',
-    difficulty: 'Advanced',
-    quiz: {
-      subject: 'Subject 1',
-      topic: 'Topic 1',
-      _id: '1'
-    },
-    _id: '1',
-    answers: [],
-    hints: [],
-    image: null,
-    question: ['Question 1'],
-    time_allocated: 30,
-    weight: 1,
-    options: null
-  },
-  question_2: TQuestionFull = {
-    ...question_1,
-    _id: '2',
-    question: ['Question 2']
-  };
-
-const result_1: IResult = {
-    question: question_1,
-    verdict: true,
-    hints_used: 0,
-    time_taken: 20,
-    score: 1,
-    user_answers: []
-  },
-  result_2: IResult = {
-    question: question_2,
-    verdict: true,
-    hints_used: 0,
-    time_taken: 20,
-    score: 1,
-    user_answers: []
-  };
+const question1 = QUIZ_1.questions[0],
+  question2 = QUIZ_1.questions[1];
 
 it(`Should work`, () => {
   const filteredQuizzes = generateQuizzesFromResults(
-    [result_1, result_2],
+    [RESULT_1, RESULT_2],
     new Map([
-      ['1', question_1],
-      ['2', question_2]
+      ['1', question1],
+      ['2', question2]
     ])
   );
   expect(filteredQuizzes).toStrictEqual({
@@ -54,7 +18,7 @@ it(`Should work`, () => {
       subject: 'Subject 1',
       topic: 'Topic 1',
       _id: '1',
-      questions: [question_1, question_2]
+      questions: [question1, question2]
     }
   });
 });
