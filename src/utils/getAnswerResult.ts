@@ -58,11 +58,10 @@ export function getAnswerResult(
       totalCorrectAnswers = result[1];
       transformedQuestion = {
         ...copiedCurrentQuestion,
-        options: result[2]
+        answers: result[2]
       } as any;
       break;
   }
-
   return [
     transformedQuestion,
     {

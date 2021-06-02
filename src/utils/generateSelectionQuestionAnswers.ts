@@ -4,7 +4,7 @@ export function generateSelectionQuestionAnswers(
   answers: TSelectionQuestionPartial['answers']
 ): TSelectionQuestionFull['answers'] {
   return answers.map((answer) => {
-    if (typeof answer === 'string') {
+    if (typeof answer !== 'object') {
       return {
         text: answer.toString(),
         explanation: null

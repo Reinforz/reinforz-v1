@@ -28,11 +28,11 @@ export function ReportTable(props: Props) {
           {(filteredResult.question.type === "MCQ" || filteredResult.question.type === "MS") ? <ReportOptions question={filteredResult.question} userAnswers={filteredResult.user_answers} /> : <ReportAnswers question={filteredResult.question as IResultInputQuestion} userAnswers={filteredResult.user_answers} />}
           <div style={{ width: '25%' }}>
             <StackList header="Quiz Stats" items={[['Topic', filteredResult.question.quiz.topic], ['Subject', filteredResult.question.quiz.subject]]} />
-            <div className="Report-Table-item-hints" style={{ backgroundColor: theme.color.base }}>
+            {filteredResult.question.hints.length !== 0 ? <div className="Report-Table-item-hints" style={{ backgroundColor: theme.color.base }}>
               {filteredResult.question.hints.map(hint => <div className="Report-Table-item-hints-item" key={hint} style={{ backgroundColor: theme.color.light }}>
                 {hint}
               </div>)}
-            </div>
+            </div> : null}
           </div>
         </div>
       </div>)}
