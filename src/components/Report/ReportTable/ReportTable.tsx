@@ -13,7 +13,9 @@ export function ReportTable(props: Props) {
   return <div className="Report-Table" style={{ backgroundColor: theme.color.base, color: theme.palette.text.primary }}>
     {props.filteredResults.map(filteredResult =>
       <div key={filteredResult.question._id} className="Report-Table-item" style={{ backgroundColor: theme.color.dark }}>
-        <div className="Report-Table-item-question" style={{ backgroundColor: theme.color.light }} dangerouslySetInnerHTML={{ __html: sanitizeMarkdown(filteredResult.question.question as string) }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 350px' }}>
+          {<div className="Report-Table-item-question" style={{ gridArea: filteredResult.question.image ? `1/1/2/2` : `1/1/2/3`, backgroundColor: theme.color.light }} dangerouslySetInnerHTML={{ __html: sanitizeMarkdown(filteredResult.question.question as string) }}></div>}
+          {filteredResult.question.image && <div className="Report-Table-item-image" style={{ gridArea: `1/2/2/3`, backgroundColor: theme.color.light }}><img src={filteredResult.question.image} alt="Question" /></div>}
         </div>
         <div className="Report-Table-item-stats">
           <StackList header="Question Stats" items={[['Type', filteredResult.question.type], ['Difficulty', filteredResult.question.difficulty], ['Time Allocated', filteredResult.question.time_allocated], ['Weight', filteredResult.question.weight]]} />

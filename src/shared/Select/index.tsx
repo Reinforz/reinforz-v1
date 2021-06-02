@@ -17,7 +17,7 @@ export default function Select<T extends Record<string, any>>(props: Props<T>) {
   const { items, multiple, renderValue, menuItemLabel, state, stateKey, setState } = props;
   return <FormGroup>
     <InputLabel>{props.label}</InputLabel>
-    <div style={{ background: theme.color.dark, display: 'flex', flexDirection: 'column', padding: 2.5, margin: 2.5 }} className="Select-content">
+    <div style={{ background: theme.color.light, display: 'flex', flexDirection: 'column', padding: 2.5, margin: 2.5 }} className="Select-content">
       <MuiSelect value={state[stateKey] as string[]}
         multiple={multiple}
         renderValue={renderValue}
