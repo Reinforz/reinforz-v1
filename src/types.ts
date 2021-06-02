@@ -240,3 +240,13 @@ export interface ISettings {
   animation: boolean;
   hovertips: boolean;
 }
+
+export type TNumberAggregation = 'MIN' | 'MAX' | 'AVG';
+export type TBooleanAggregation = 'TRUE' | 'FALSE';
+export interface IReportAggregator {
+  time_allocated: TNumberAggregation;
+  time_taken: TNumberAggregation;
+  weight: TNumberAggregation;
+  score: TNumberAggregation;
+  verdict: TBooleanAggregation;
+}

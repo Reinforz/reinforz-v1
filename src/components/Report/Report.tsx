@@ -5,6 +5,7 @@ import { Menu } from '../../shared';
 import { TQuestionResult } from "../../types";
 import { applyResultFilters, createDefaultReportFilterState, generateQuizzesFromResults } from '../../utils';
 import "./Report.scss";
+import { ReportAggregator } from './ReportAggregator/ReportAggregator';
 import ReportExport from './ReportExport/ReportExport';
 import ReportFilter from './ReportFilter/ReportFilter';
 import { ReportTable } from './ReportTable/ReportTable';
@@ -18,48 +19,15 @@ export default function Report(props: Props) {
   const { setPlaying, setUploadedQuizzes, setSelectedQuizIds, allQuestionsMap } = useContext(PlayContext);
 
   const [reportFilter, setReportFilter] = useState(createDefaultReportFilterState());
-
-  const transformValue = (header: string, content: any) => {
-    const value = content[header];
-    switch (header) {
-      case "verdict":
-        return <div style={{
-          fontWeight: 'bolder', color: value === false ? "#ff3223" : "#36e336"
-        }}>{value === false ? "Incorrect" : "Correct"}</div>
-      case "answers":
-      case "user_answers":
-        if (content.type.match(/(MS|FIB)/))
-          return value.map((value: any, index: number) => <div key={value + index}>{value}</div>);
-        else return value
-      default:
-        return value?.toString() ?? "N/A";
-    }
-  }
-
-  const filteredResults = applyResultFilters(props.results, reportFilter,);
+  const filteredResults = applyResultFilters(props.results, reportFilter);
   const filteredQuizzes = generateQuizzesFromResults(filteredResults, allQuestionsMap);
-  const total_weights = props.results.reduce((acc, cur) => acc + cur.question.weight, 0);
-
-  const accumulator = (header: string, contents: Array<any>) => {
-    switch (header) {
-      case "time_allocated":
-      case "time_taken":
-      case "weight":
-        return Number((contents.reduce((acc, cur) => acc + parseInt(cur), 0) / contents.length).toFixed(2));
-      case "score":
-        return total_weights !== 0 ? Number((contents.reduce((acc, cur) => acc + parseFloat(cur), 0) / total_weights).toFixed(2)) : 0;
-      case "verdict":
-        return contents.filter(content => content).length;
-      default:
-        return null;
-    }
-  }
 
   return (
     <Menu contents={[<ReportFilter reportFilter={reportFilter} setReportFilter={setReportFilter} />, <div className="Report">
       <ReportTable filteredResults={filteredResults} />
       <div style={{ gridArea: '1/2/3/3', display: 'flex', flexDirection: 'column' }}>
         <ReportExport filteredResults={filteredResults} filteredQuizzes={Object.values(filteredQuizzes)} />
+        <ReportAggregator filteredResults={filteredResults} />
         <div className="Report-BackButton">
           <Button variant="contained" color="primary" onClick={() => {
             localStorage.setItem("REPORT_FILTERS", JSON.stringify(reportFilter))

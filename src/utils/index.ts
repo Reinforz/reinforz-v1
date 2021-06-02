@@ -3,6 +3,7 @@ export * from './applyResultFilters';
 export * from './arrayShuffler';
 export * from './calculateScore';
 export * from './checkInputAnswers';
+export * from './computeDataAggregation';
 export * from './createAggregateItemsMap';
 export * from './createDefaultState';
 export * from './createItemMap';
