@@ -5,6 +5,7 @@ import {
   TSelectionQuestionPartial
 } from '../types';
 import { generateInputQuestionAnswers } from './';
+import { generateSelectionQuestionAnswers } from './generateSelectionQuestionAnswers';
 
 function setObjectValues(parent: any, arr: [string, any][]) {
   arr.forEach((entry) => {
@@ -54,20 +55,8 @@ export function generateCompleteQuestion(question: TQuestionPartial) {
     switch (completeQuestion.type) {
       case 'MCQ':
         // Convert all the answers to string
-        completeQuestion.answers = (question as TSelectionQuestionPartial).answers.map(
-          (answer) => {
-            if (typeof answer === 'string') {
-              return {
-                text: answer.toString(),
-                explanation: null
-              };
-            } else {
-              return {
-                text: answer.toString(),
-                explanation: answer.explanation ?? null
-              };
-            }
-          }
+        completeQuestion.answers = generateSelectionQuestionAnswers(
+          (question as TSelectionQuestionPartial).answers
         );
         time_allocated = 15;
         // If there are no options for MCQ question, add an error
@@ -98,20 +87,8 @@ export function generateCompleteQuestion(question: TQuestionPartial) {
         }
         break;
       case 'MS':
-        completeQuestion.answers = (question as TSelectionQuestionPartial).answers.map(
-          (answer) => {
-            if (typeof answer === 'string') {
-              return {
-                text: answer.toString(),
-                explanation: null
-              };
-            } else {
-              return {
-                text: answer.toString(),
-                explanation: answer.explanation ?? null
-              };
-            }
-          }
+        completeQuestion.answers = generateSelectionQuestionAnswers(
+          (question as TSelectionQuestionPartial).answers
         );
         if (!dummyQuestion.options)
           logs.errors.push(
