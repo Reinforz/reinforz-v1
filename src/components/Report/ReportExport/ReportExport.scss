@@ -1,9 +1,9 @@
-.ReportExport {
-  padding: 5px;
-  display: flex;
-  align-items: center;
-
-  .MuiButton-containedPrimary{
-    width: 100%;
+.Report-Export {
+  &-button{
+    display: flex;
+    justify-content: center;
+    .MuiButton-containedPrimary{
+      width: 50%;
+    }
   }
 }

@@ -55,7 +55,7 @@ export default function ReportExport(props: Props) {
     <div className="Report-Export">
       <Select items={['Original', 'Report']} label={"Export Type"} menuItemLabel={(item) => item} setState={setExportState} state={exportState} stateKey={"export_type"} />
       <Select items={['YAML', 'JSON']} label={"Export As"} menuItemLabel={(item) => item} setState={setExportState} state={exportState} stateKey={"export_as"} />
-      <Icon popoverText={`Export ${export_type} as ${export_as}`} >
+      <Icon popoverText={`Export ${export_type} as ${export_as}`} className="Report-Export-button">
         <Button variant="contained" color="primary" onClick={() => {
           downloadFiles()
         }}>Download</Button>

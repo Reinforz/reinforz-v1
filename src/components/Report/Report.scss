@@ -8,13 +8,8 @@
     grid-area: 1/1/3/2;
   }
 
-  &-Aggregator{
-
-  }
-
   &-BackButton{
     display: flex;
-    justify-content: flex-end;
-    padding: 5px 5px;
+    justify-content: center;
   }
 }
