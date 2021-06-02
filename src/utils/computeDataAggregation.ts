@@ -1,4 +1,4 @@
-import { TNumberAggregation } from '../types';
+import { TBooleanAggregation, TNumberAggregation } from '../types';
 
 export function computeNumberDataAggregation(
   data: number[],
@@ -23,6 +23,20 @@ export function computeNumberDataAggregation(
     }
     case 'AVG': {
       return data.reduce((acc, cur) => acc + cur, 0) / data.length;
+    }
+  }
+}
+
+export function computeBooleanDataAggregation(
+  data: boolean[],
+  aggregation: TBooleanAggregation
+) {
+  switch (aggregation) {
+    case 'TRUE': {
+      return data.filter((data) => data).length;
+    }
+    case 'FALSE': {
+      return data.filter((data) => !data).length;
     }
   }
 }
