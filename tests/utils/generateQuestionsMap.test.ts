@@ -7,7 +7,6 @@ const createQuiz = () => {
       {
         _id: '1',
         answers: [],
-        explanation: null,
         hints: [],
         image: null,
         question: ['Question 1'],

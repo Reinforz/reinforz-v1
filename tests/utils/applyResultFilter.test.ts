@@ -17,7 +17,6 @@ const result: TQuestionResult = {
     },
     _id: '1',
     answers: [],
-    explanation: null,
     hints: [],
     image: null,
     question: ['Question 1'],

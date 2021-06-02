@@ -11,7 +11,6 @@ const question_1: TQuestionFull = {
     },
     _id: '1',
     answers: [],
-    explanation: null,
     hints: [],
     image: null,
     question: ['Question 1'],
