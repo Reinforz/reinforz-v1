@@ -11,7 +11,7 @@ export function generateSelectionQuestionAnswers(
       };
     } else {
       return {
-        text: answer.toString(),
+        text: answer.text.toString(),
         explanation: answer.explanation ?? null
       };
     }
