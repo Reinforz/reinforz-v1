@@ -79,7 +79,7 @@ export const QUIZ_1: IQuizFull = {
       weight: 1,
       difficulty: 'Beginner',
       type: 'FIB',
-      time_allocated: 120,
+      time_allocated: 60,
       _id: 'quiz1.question2',
       quiz: {
         topic: 'Topic 1',

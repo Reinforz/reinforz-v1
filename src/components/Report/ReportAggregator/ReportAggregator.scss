@@ -1,0 +1,19 @@
+.Report-Aggregator {
+  &-item {
+    display: flex;
+    justify-content: space-between;
+    .MuiFormGroup-root{
+      min-width: 225px;
+    }
+    &-value {
+      font-weight: bold;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+      margin: 2.5px;
+      border-radius: 2.5px;
+    }
+  }
+}

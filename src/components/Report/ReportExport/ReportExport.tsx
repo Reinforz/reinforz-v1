@@ -1,7 +1,6 @@
 import { Button } from '@material-ui/core';
 import { safeDump } from 'js-yaml';
 import React, { useCallback, useState } from 'react';
-import { useThemeSettings } from '../../../hooks';
 import { Icon, Select } from '../../../shared';
 import { IQuizFull, TQuestionResult } from "../../../types";
 import { download } from "../../../utils";
@@ -20,7 +19,6 @@ export default function ReportExport(props: Props) {
   const { filteredResults, filteredQuizzes } = props;
   let REPORT_EXPORT: any = localStorage.getItem('REPORT_EXPORT');
   REPORT_EXPORT = REPORT_EXPORT ? JSON.parse(REPORT_EXPORT) : undefined;
-  const { theme } = useThemeSettings();
 
   const [exportState, setExportState] = useState<IReportExportState>({
     export_type: REPORT_EXPORT ? REPORT_EXPORT.export_type : 'Original',

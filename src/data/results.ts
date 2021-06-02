@@ -16,5 +16,5 @@ export const RESULT_2: TQuestionResult = {
   hints_used: 1,
   score: 1,
   time_taken: 20,
-  verdict: true
+  verdict: false
 };
