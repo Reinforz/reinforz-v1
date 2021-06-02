@@ -4,8 +4,10 @@ import {
   TQuestionPartial,
   TSelectionQuestionPartial
 } from '../types';
-import { generateInputQuestionAnswers } from './';
-import { generateSelectionQuestionAnswers } from './generateSelectionQuestionAnswers';
+import {
+  generateInputQuestionAnswers,
+  generateSelectionQuestionAnswers
+} from './';
 
 function setObjectValues(parent: any, arr: [string, any][]) {
   arr.forEach((entry) => {

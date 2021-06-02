@@ -10,7 +10,8 @@ describe('modifyAnswers', () => {
       'Hello world',
       {
         modifiers: ['IC', 'IS'],
-        text: 'Hello WORLD'
+        text: 'Hello WORLD',
+        explanation: null
       }
     );
     expect(modifiedUserAnswer).toStrictEqual('helloworld');
@@ -25,12 +26,14 @@ describe('checkInputAnswer', () => {
         {
           modifiers: [],
           regex: null,
+          explanation: null,
           text: 'helloworld'
         },
         {
           modifiers: ['IC', 'IS'],
           regex: null,
-          text: 'Hello World'
+          text: 'Hello World',
+          explanation: null
         }
       ]);
       expect(isCorrect).toStrictEqual(true);
@@ -41,12 +44,14 @@ describe('checkInputAnswer', () => {
         {
           modifiers: [],
           regex: null,
-          text: 'helloworld'
+          text: 'helloworld',
+          explanation: null
         },
         {
           modifiers: [],
           regex: null,
-          text: 'hello world'
+          text: 'hello world',
+          explanation: null
         }
       ]);
       expect(isCorrect).toStrictEqual(false);
@@ -62,7 +67,8 @@ describe('checkInputAnswer', () => {
             regex: 'Hello World',
             flags: ''
           },
-          text: 'helloworld'
+          text: 'helloworld',
+          explanation: null
         }
       ]);
       expect(isCorrect).toStrictEqual(true);
@@ -76,7 +82,8 @@ describe('checkInputAnswer', () => {
             regex: 'HelloWorld',
             flags: ''
           },
-          text: 'helloworld'
+          text: 'helloworld',
+          explanation: null
         }
       ]);
       expect(isCorrect).toStrictEqual(false);
@@ -93,14 +100,16 @@ describe('checkInputAnswers', () => {
           {
             modifiers: [],
             regex: null,
-            text: 'Hello World'
+            text: 'Hello World',
+            explanation: null
           }
         ],
         [
           {
             modifiers: ['IC', 'IS'],
             regex: null,
-            text: 'Hello World'
+            text: 'Hello World',
+            explanation: null
           }
         ]
       ]
@@ -117,7 +126,8 @@ describe('checkInputAnswers', () => {
           {
             modifiers: [],
             regex: null,
-            text: 'helloworld'
+            text: 'helloworld',
+            explanation: null
           }
         ]
       ]
