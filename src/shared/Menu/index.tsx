@@ -37,7 +37,7 @@ export default function Menu(props: MenuProps) {
   contentStyle.transition = `width 250ms ease-in-out, left 250ms ease-in-out`;
 
   let left = null, iconsStyle: React.CSSProperties = {
-    backgroundColor: theme.color.dark
+    backgroundColor: theme.color.base
   }, iconStyle: React.CSSProperties = {};
 
   if (position === "right") {

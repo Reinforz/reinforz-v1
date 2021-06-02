@@ -33,12 +33,7 @@ export const RESULT_2: IResult = {
     answers: question2.answers.map((answers, index) =>
       answers.map((answer, _index) => ({
         ...answer,
-        userInput:
-          index === 0 && _index === 0
-            ? 'answer 1'
-            : index === 1 && _index === 0
-            ? 'answer 2'
-            : null
+        isCorrect: _index === 0
       }))
     ) as IResultInputQuestion['answers']
   },

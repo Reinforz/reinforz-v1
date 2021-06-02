@@ -10,17 +10,30 @@
     margin-bottom: 5px;
     padding-bottom: 1.5px;
 
+    &-userAnswer{
+      padding: 10px;
+      margin: 2.5px;
+      text-align: center;
+      font-size: 18px;
+      margin-bottom: 5px;
+    }
+
     &-item{
-      padding: 5px;
       margin: 2.5px;
       margin-bottom: 5px;
-      width: 50;
       display: flex;
-      align-items: center;
-      justify-content: center;
-
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 5px;
       p{
         margin: 0px;
+      }
+
+      &-isCorrect{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: 5px;
       }
     }
   }

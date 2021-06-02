@@ -59,15 +59,18 @@ export const QUIZ_1: IQuizFull = {
         [
           {
             text: 'answer 1',
-            modifiers: [],
+            modifiers: ['IC', 'IS'],
             regex: null,
-            explanation: null
+            explanation: 'Explanation 1 for answer 1'
           },
           {
             text: 'answer 1 version 2',
             modifiers: [],
-            regex: null,
-            explanation: null
+            regex: {
+              flags: 'gi',
+              regex: 'answer1'
+            },
+            explanation: 'Explanation 1 for answer 2'
           }
         ],
         [
