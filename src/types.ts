@@ -184,13 +184,33 @@ export interface QuizIdentifiers {
   subject: string;
 }
 
+export type IResultSelectionQuestion = Omit<
+  TSelectionQuestionFull,
+  'answers'
+> & {
+  answers: ISelectionQuestionAnswerFull & {
+    isCorrect: boolean;
+    userSelected: boolean;
+  };
+};
+
+export type IResultInputQuestion = Omit<TInputQuestionFull, 'answers'> & {
+  answers: IInputQuestionAnswerFull & {
+    userSelected: string;
+  };
+};
+
+export type TResultQuestion =
+  | IResultSelectionQuestion
+  | IInputQuestionAnswerFull;
+
 export interface IResult {
   user_answers: string[];
   verdict: boolean;
   score: number;
   time_taken: number;
   hints_used: number;
-  question: TQuestionFull;
+  question: TResultQuestion;
 }
 
 export interface IReportFilter {
