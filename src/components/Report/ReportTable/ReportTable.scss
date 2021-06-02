@@ -3,6 +3,10 @@
   padding: 2.5px;
   margin: 2.5px;
 
+  .StackList{
+    flex: 1;
+  }
+
   &-item{
     padding: 2.5px;
     margin: 2.5px;
@@ -10,9 +14,13 @@
     &-question{
       padding: 7.5px;
       margin: 2.5px;
-      font-size: 1.5em;
+      font-size: 2em;
       font-weight: bold;
       text-align: center;
+    }
+
+    &-stats{
+      display: flex;
     }
   }
 }
