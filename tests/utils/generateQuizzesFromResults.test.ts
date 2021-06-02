@@ -9,15 +9,17 @@ it(`Should work`, () => {
   const filteredQuizzes = generateQuizzesFromResults(
     [RESULT_1, RESULT_2],
     new Map([
-      ['1', question1],
-      ['2', question2]
+      ['quiz1.question1', question1],
+      ['quiz1.question2', question2]
     ])
   );
+
+  console.log(JSON.stringify(filteredQuizzes, null, 2));
   expect(filteredQuizzes).toStrictEqual({
-    '1': {
+    quiz1: {
       subject: 'Subject 1',
       topic: 'Topic 1',
-      _id: '1',
+      _id: 'quiz1',
       questions: [question1, question2]
     }
   });

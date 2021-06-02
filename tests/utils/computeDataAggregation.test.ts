@@ -21,6 +21,10 @@ describe('computeNumberDataAggregation', () => {
       3
     );
   });
+
+  it(`Should work for AVG aggregation with zero items`, () => {
+    expect(computeNumberDataAggregation([], 'AVG')).toStrictEqual(0);
+  });
 });
 
 describe('computeBooleanDataAggregation', () => {
