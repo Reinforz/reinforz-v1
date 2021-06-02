@@ -11,21 +11,21 @@ questions:
         modifiers:
           - IC
           - IS
-  # - question: For many applications, using React will lead to a fast user interface without doing much work to specifically optimize for performance
-  #   options:
-  #     - True
-  #     - False
-  #   answers:
-  #     - 0
-  # - question: Which react build is more performant ?
-  #   answers:
-  #     - production
-  # - question: Which criterias are important for a performant build ?
-  #   options:
-  #     - minified
-  #     - production
-  #     - development
-  #     - unminified
-  #   answers:
-  #     - 0
-  #     - 1
+  - question: For many applications, using React will lead to a fast user interface without doing much work to specifically optimize for performance
+    options:
+      - True
+      - False
+    answers:
+      - 0
+  - question: Which react build is more performant ?
+    answers:
+      - production
+  - question: Which criterias are important for a performant build ?
+    options:
+      - minified
+      - production
+      - development
+      - unminified
+    answers:
+      - 0
+      - 1
