@@ -1,7 +1,7 @@
-import { TQuestionResult } from '../../src/types';
+import { IResult } from '../../src/types';
 import { applyResultFilters } from '../../src/utils';
 
-const result: TQuestionResult = {
+const result: IResult = {
   verdict: true,
   hints_used: 0,
   time_taken: 20,

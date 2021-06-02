@@ -1,9 +1,9 @@
 import React, { useContext, useState } from "react";
 import { PlayContext } from "../../context/PlayContext";
-import { RESULT_1 } from "../../data/results";
+import { RESULT_2 } from "../../data/results";
 import { useCycle, useThemeSettings } from "../../hooks";
 import { Stats } from "../../shared";
-import { TQuestionFull, TQuestionResult } from "../../types";
+import { IResult, TQuestionFull } from "../../types";
 import { getAnswerResult } from "../../utils";
 import Question from "../Question/Question";
 import Report from "../Report/Report";
@@ -11,7 +11,7 @@ import "./Quiz.scss";
 
 export default function Quiz() {
   const { playSettings, allQuestions } = useContext(PlayContext);
-  const [results, setResults] = useState([RESULT_1] as TQuestionResult[]);
+  const [results, setResults] = useState([RESULT_2] as IResult[]);
   const { theme } = useThemeSettings();
   const { isLastItem, currentItem, getNextIndex, hasEnded, currentIndex } = useCycle(allQuestions);
 

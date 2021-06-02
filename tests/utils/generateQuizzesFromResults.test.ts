@@ -1,4 +1,4 @@
-import { TQuestionFull, TQuestionResult } from '../../src/types';
+import { IResult, TQuestionFull } from '../../src/types';
 import { generateQuizzesFromResults } from '../../src/utils';
 
 const question_1: TQuestionFull = {
@@ -24,7 +24,7 @@ const question_1: TQuestionFull = {
     question: ['Question 2']
   };
 
-const result_1: TQuestionResult = {
+const result_1: IResult = {
     question: question_1,
     verdict: true,
     hints_used: 0,
@@ -32,7 +32,7 @@ const result_1: TQuestionResult = {
     score: 1,
     user_answers: []
   },
-  result_2: TQuestionResult = {
+  result_2: IResult = {
     question: question_2,
     verdict: true,
     hints_used: 0,

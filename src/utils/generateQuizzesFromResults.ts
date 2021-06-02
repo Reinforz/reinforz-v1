@@ -1,7 +1,7 @@
-import { IQuizFull, TQuestionFull, TQuestionResult } from '../types';
+import { IQuizFull, IResult, TQuestionFull } from '../types';
 
 export function generateQuizzesFromResults(
-  filteredResults: TQuestionResult[],
+  filteredResults: IResult[],
   allQuestionsMap: Map<string, TQuestionFull>
 ) {
   const filteredQuizzes: Record<string, IQuizFull> = {};

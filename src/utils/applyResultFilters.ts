@@ -1,7 +1,7 @@
-import { IReportFilter, TQuestionResult } from '../types';
+import { IReportFilter, IResult } from '../types';
 
 export function applyResultFilters(
-  results: TQuestionResult[],
+  results: IResult[],
   reportFilter: Omit<IReportFilter, 'excluded_columns'>
 ) {
   const {

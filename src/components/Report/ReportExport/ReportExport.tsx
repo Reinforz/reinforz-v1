@@ -2,11 +2,11 @@ import { Button } from '@material-ui/core';
 import { safeDump } from 'js-yaml';
 import React, { useCallback, useState } from 'react';
 import { Icon, Select } from '../../../shared';
-import { IQuizFull, TQuestionResult } from "../../../types";
+import { IQuizFull, IResult } from "../../../types";
 import { download } from "../../../utils";
 import "./ReportExport.scss";
 interface Props {
-  filteredResults: TQuestionResult[],
+  filteredResults: IResult[],
   filteredQuizzes: IQuizFull[]
 }
 

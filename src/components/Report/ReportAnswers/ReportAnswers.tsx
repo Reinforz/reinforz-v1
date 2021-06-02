@@ -34,6 +34,9 @@ export function ReportAnswers(props: Props) {
         </div>
       })
     }
+    else {
+      return null;
+    }
   }
   return <div className="Report-Answers" style={{ backgroundColor: theme.color.base }}>
     {

@@ -1,7 +1,7 @@
-import { TQuestionResult } from '../types';
+import { IResult } from '../types';
 import { QUIZ_1 } from './quizzes';
 
-export const RESULT_1: TQuestionResult = {
+export const RESULT_1: IResult = {
   question: QUIZ_1.questions[0],
   user_answers: ['0', '1'],
   hints_used: 1,
@@ -10,7 +10,7 @@ export const RESULT_1: TQuestionResult = {
   verdict: true
 };
 
-export const RESULT_2: TQuestionResult = {
+export const RESULT_2: IResult = {
   question: QUIZ_1.questions[1],
   user_answers: [],
   hints_used: 2,

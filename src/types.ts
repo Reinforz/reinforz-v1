@@ -205,8 +205,6 @@ export interface IResult {
   question: TQuestionFull;
 }
 
-export type TQuestionResult = IResult;
-
 export interface IReportFilter {
   time_taken: [number, number];
   verdict: boolean | 'mixed';
