@@ -197,6 +197,7 @@ export type IResultSelectionQuestion = Omit<
 export type IResultInputQuestion = Omit<TInputQuestionFull, 'answers'> & {
   answers: (IInputQuestionAnswerFull & {
     userInput: string | null;
+    isCorrect: boolean;
   })[][];
 };
 

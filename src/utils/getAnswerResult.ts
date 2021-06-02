@@ -56,6 +56,10 @@ export function getAnswerResult(
       const result = checkInputAnswers(userAnswers, currentQuestion.answers);
       verdict = result[0];
       totalCorrectAnswers = result[1];
+      transformedQuestion = {
+        ...copiedCurrentQuestion,
+        options: result[2]
+      } as any;
       break;
   }
 

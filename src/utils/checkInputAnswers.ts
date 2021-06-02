@@ -1,4 +1,4 @@
-import { IInputQuestionAnswerFull } from '../types';
+import { IInputQuestionAnswerFull, IResultInputQuestion } from '../types';
 
 /**
  * Checks user's answer against an answer object and returns whether or not it matches the given answers including its alternates
@@ -11,6 +11,9 @@ export function checkInputAnswer(
   answers: IInputQuestionAnswerFull[]
 ) {
   let isCorrect = false;
+  const transformedAnswers: IResultInputQuestion['answers'][0] = JSON.parse(
+    JSON.stringify(answers)
+  );
 
   for (let index = 0; index < answers.length; index++) {
     const [modifiedUserAnswer, modifiedAnswerText] = modifyAnswers(
@@ -19,18 +22,22 @@ export function checkInputAnswer(
     );
     if (modifiedUserAnswer === modifiedAnswerText) {
       isCorrect = true;
+      transformedAnswers[index].isCorrect = true;
+      transformedAnswers[index].userInput = userAnswer;
       break;
     } else {
       const regex = answers[index].regex;
       if (regex) {
         const generatedRegex = new RegExp(regex.regex, regex.flags);
         isCorrect = Boolean(userAnswer.match(generatedRegex));
+        transformedAnswers[index].isCorrect = isCorrect;
+        transformedAnswers[index].userInput = userAnswer;
         if (isCorrect) break;
       }
     }
   }
 
-  return isCorrect;
+  return [isCorrect, transformedAnswers] as const;
 }
 
 /**
@@ -70,12 +77,17 @@ export function checkInputAnswers(
   userAnswers: string[],
   answers: IInputQuestionAnswerFull[][]
 ) {
+  const transformedUserAnswers: IResultInputQuestion['answers'] = JSON.parse(
+    JSON.stringify(userAnswers)
+  );
   let isCorrect = false,
     totalCorrectAnswers = 0;
   for (let index = 0; index < userAnswers.length; index++) {
-    isCorrect = checkInputAnswer(userAnswers[index], answers[index]);
+    const result = checkInputAnswer(userAnswers[index], answers[index]);
+    transformedUserAnswers[index] = result[1];
+    isCorrect = result[0];
     if (!isCorrect) break;
     else totalCorrectAnswers++;
   }
-  return [isCorrect, totalCorrectAnswers] as const;
+  return [isCorrect, totalCorrectAnswers, transformedUserAnswers] as const;
 }
