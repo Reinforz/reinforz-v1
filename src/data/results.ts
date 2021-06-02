@@ -16,10 +16,10 @@ export const RESULT_1: IResult = {
     options: question1.options.map((option, index) => ({
       ...option,
       isCorrect: [0, 1].includes(index),
-      userSelected: [0, 1].includes(index)
+      userSelected: [0, 2].includes(index)
     })) as IResultSelectionQuestion['options']
   },
-  user_answers: ['0', '1'],
+  user_answers: ['0', '2'],
   hints_used: 1,
   score: 1,
   time_taken: 20,
