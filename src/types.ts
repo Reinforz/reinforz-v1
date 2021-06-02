@@ -186,23 +186,22 @@ export interface QuizIdentifiers {
 
 export type IResultSelectionQuestion = Omit<
   TSelectionQuestionFull,
-  'answers'
+  'options'
 > & {
-  answers: ISelectionQuestionAnswerFull & {
-    isCorrect: boolean;
-    userSelected: boolean;
-  };
+  options: TSelectionQuestionFull['options'] &
+    {
+      isCorrect: boolean;
+      userSelected: boolean;
+    }[];
 };
 
 export type IResultInputQuestion = Omit<TInputQuestionFull, 'answers'> & {
-  answers: IInputQuestionAnswerFull & {
-    userSelected: string;
-  };
+  answers: (IInputQuestionAnswerFull & {
+    userInput: string | null;
+  })[][];
 };
 
-export type TResultQuestion =
-  | IResultSelectionQuestion
-  | IInputQuestionAnswerFull;
+export type TResultQuestion = IResultSelectionQuestion | IResultInputQuestion;
 
 export interface IResult {
   user_answers: string[];
