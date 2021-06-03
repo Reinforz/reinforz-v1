@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { PlayContext } from "../../context/PlayContext";
+import { RESULT_1, RESULT_2 } from "../../data/results";
 import { useCycle, useThemeSettings } from "../../hooks";
 import { Stats } from "../../shared";
 import { IResult, TQuestionFull } from "../../types";
@@ -10,7 +11,7 @@ import "./Quiz.scss";
 
 export default function Quiz() {
   const { playSettings, allQuestions } = useContext(PlayContext);
-  const [results, setResults] = useState([] as IResult[]);
+  const [results, setResults] = useState([RESULT_1, RESULT_2] as IResult[]);
   const { theme } = useThemeSettings();
   const { isLastItem, currentItem, getNextIndex, hasEnded, currentIndex } = useCycle(allQuestions);
 
@@ -18,7 +19,7 @@ export default function Quiz() {
     totalCorrectAnswers = results.filter(result => result.verdict).length;
 
   const generateContent = () => {
-    if (!hasEnded) {
+    if (hasEnded) {
       const currentQuestion = JSON.parse(JSON.stringify(currentItem)) as TQuestionFull;
       return <div className="Quiz" style={{ backgroundColor: theme.color.base }}>
         <Stats items={[["Title", `${currentQuestion.quiz.subject} - ${currentQuestion.quiz.topic}`], playSettings.options.instant_feedback ? ['Total Correct', totalCorrectAnswers] : null, ["Current", currentIndex + 1], ["Total", totalQuestions], ["Type", currentQuestion.type], ["Weight", currentQuestion.weight], !playSettings.options.disable_timer ? ["Time Allocated", currentQuestion.time_allocated] : null, ["Difficulty", currentQuestion.difficulty]]} />

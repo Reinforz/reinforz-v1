@@ -18,7 +18,7 @@ export function ReportAnswers(props: Props) {
     {
       question.answers.map((answers, index) => {
         return <div className="Report-Answers-container" key={index} style={{ backgroundColor: theme.color.dark }}>
-          <div className="Report-Answers-container-userAnswer" style={{ backgroundColor: theme.color.light }}>{userAnswers[index]}</div>
+          <div className="Report-Answers-container-userAnswer" style={{ backgroundColor: theme.color.light }}>{userAnswers[index] ?? 'N/A'}</div>
           {answers.map((answer, _index) => <div className="Report-Answers-container-item" key={_index} style={{ backgroundColor: theme.color.base }}>
             <div style={{ display: 'flex', marginBottom: 5, justifyContent: 'space-between' }}>
               <div style={{ backgroundColor: theme.color.light, padding: 10 }} className="Report-Answers-container-item-text" dangerouslySetInnerHTML={{ __html: sanitizeMarkdown(answer.text ?? '') }}></div>

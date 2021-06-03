@@ -1,6 +1,7 @@
 import { Button } from '@material-ui/core';
 import { safeDump } from 'js-yaml';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useContext, useState } from 'react';
+import { PlayContext } from '../../../context/PlayContext';
 import { Icon, Select } from '../../../shared';
 import { IQuizFull, IResult } from "../../../types";
 import { download } from "../../../utils";
@@ -16,6 +17,7 @@ interface IReportExportState {
 }
 
 export default function ReportExport(props: Props) {
+  const { playSettings } = useContext(PlayContext);
   const { filteredResults, filteredQuizzes } = props;
   let REPORT_EXPORT: any = localStorage.getItem('REPORT_EXPORT');
   REPORT_EXPORT = REPORT_EXPORT ? JSON.parse(REPORT_EXPORT) : undefined;
@@ -34,18 +36,24 @@ export default function ReportExport(props: Props) {
         const cloned_question = JSON.parse(JSON.stringify(question));
         delete cloned_question.quiz;
         return cloned_question;
-      })
+      });
       type === "yaml" ? download(`${quiz.subject} - ${quiz.topic}.yaml`, safeDump(quiz)) : download(`${quiz.subject} - ${quiz.topic}.json`, JSON.stringify(quiz, undefined, 2))
     })
   }, [filteredQuizzes])
 
   const downloadFiles = () => {
     if (export_as === "JSON") {
-      if (export_type === "Report") download(`Report${Date.now()}.json`, JSON.stringify(filteredResults, undefined, 2));
+      if (export_type === "Report") download(`Report${Date.now()}.json`, JSON.stringify({
+        settings: playSettings,
+        results: filteredResults
+      }, undefined, 2));
       else
         clonedDownload("json")
     } else {
-      if (export_type === "Report") download(`Report${Date.now()}.yaml`, safeDump(filteredResults));
+      if (export_type === "Report") download(`Report${Date.now()}.yaml`, safeDump({
+        settings: playSettings,
+        results: filteredResults
+      }));
       else
         clonedDownload("yaml")
     }
