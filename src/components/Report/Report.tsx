@@ -25,17 +25,17 @@ export default function Report() {
   });
 
   const history = useHistory();
+  const filteredResults = applyResultFilters(report.results, reportFilter);
+  const filteredQuizzes = generateQuizzesFromResults(filteredResults, allQuestionsMap);
 
   const render = () => {
     if (report.results.length !== 0) {
-      const filteredResults = applyResultFilters(report.results, reportFilter);
-      const filteredQuizzes = generateQuizzesFromResults(filteredResults, allQuestionsMap);
       return <Menu contents={[<ReportFilter reportFilter={reportFilter} setReportFilter={setReportFilter} />, <div className="Report">
-        <ReportTable filteredResults={filteredResults} />
+        <ReportTable />
         <div style={{ gridArea: '1/2/3/3', display: 'flex', flexDirection: 'column', overflow: 'auto' }}>
           <ReportSettings />
-          <ReportExport filteredResults={filteredResults} filteredQuizzes={Object.values(filteredQuizzes)} />
-          <ReportAggregator filteredResults={filteredResults} />
+          <ReportExport />
+          <ReportAggregator />
           <div className="Report-BackButton">
             <Button variant="contained" color="primary" onClick={() => {
               localStorage.setItem("REPORT_FILTERS", JSON.stringify(reportFilter))
@@ -51,7 +51,7 @@ export default function Report() {
     }
   }
 
-  return <ReportContext.Provider value={{ setReport, report }}>
+  return <ReportContext.Provider value={{ setReport, report, filteredResults, filteredQuizzes }}>
     {render()}
   </ReportContext.Provider>
 }

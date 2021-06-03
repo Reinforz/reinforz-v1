@@ -1,18 +1,19 @@
+import { useContext } from "react";
+import { ReportContext } from "../../../context/ReportContext";
 import { useThemeSettings } from "../../../hooks";
 import { StackList } from "../../../shared";
-import { IResult, IResultInputQuestion } from "../../../types";
+import { IResultInputQuestion } from "../../../types";
 import { ReportAnswers } from "../ReportAnswers/ReportAnswers";
 import { ReportOptions } from "../ReportOptions/ReportOptions";
 import { ReportQuestion } from "../ReportQuestion/ReportQuestion";
 import "./ReportTable.scss";
-interface Props {
-  filteredResults: IResult[]
-}
 
-export function ReportTable(props: Props) {
+export function ReportTable() {
+  const { filteredResults } = useContext(ReportContext);
+
   const { theme } = useThemeSettings();
   return <div className="Report-Table" style={{ backgroundColor: theme.color.base, color: theme.palette.text.primary }}>
-    {props.filteredResults.map(filteredResult =>
+    {filteredResults.map(filteredResult =>
       <div key={filteredResult.question._id} className="Report-Table-item" style={{ backgroundColor: theme.color.dark }}>
         <ReportQuestion question={filteredResult.question} />
         <div className="Report-Table-item-stats">
