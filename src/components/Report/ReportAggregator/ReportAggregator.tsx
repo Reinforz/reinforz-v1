@@ -34,7 +34,7 @@ export function ReportAggregator(props: Props) {
     </div>)}
     <div className="Report-Aggregator-item">
       <Select lsKey={"REPORT_AGGREGATOR"} menuItemLabel={(item) => item} label={'Score'} items={["MAX", "MIN", "AVG"]} setState={setReportAggregator} stateKey={"score"} state={reportAggregator} />
-      <div className="Report-Aggregator-item-value" style={{ backgroundColor: theme.color.light }}>{computeNumberDataAggregation(props.filteredResults.map(filteredResult => filteredResult.score.amount), { aggregation: reportAggregator.score, divider: totalWeight })}</div>
+      <div className="Report-Aggregator-item-value" style={{ backgroundColor: theme.color.light }}>{computeNumberDataAggregation(props.filteredResults.map(filteredResult => filteredResult.score.amount), { aggregation: reportAggregator.score, divider: totalWeight !== 0 ? totalWeight : 1 })}</div>
     </div>
     <div className="Report-Aggregator-item">
       <Select lsKey={"REPORT_AGGREGATOR"} menuItemLabel={(item) => item} label={"Verdict"} items={["TRUE", "FALSE"]} setState={setReportAggregator} stateKey={'verdict'} state={reportAggregator} />
