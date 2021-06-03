@@ -5,7 +5,8 @@ const options = {
   hints_used: 0,
   time_taken: 14,
   time_allocated: 60,
-  totalHints: 3
+  totalHints: 3,
+  timerDisabled: false
 } as const;
 
 describe('partial_score=true', () => {
@@ -80,6 +81,23 @@ describe('partial_score=true', () => {
         answers: 0.7,
         hints: 0.15,
         time: 0.037
+      });
+    });
+
+    it(`Should work when timerDisabled=true is used`, () => {
+      const score = calculateScore({
+        ...options2,
+        time_taken: 0,
+        totalAnswers: 1,
+        totalCorrectAnswers: 1,
+        timerDisabled: true
+      });
+
+      expect(score).toStrictEqual({
+        amount: 1,
+        answers: 0.85,
+        hints: 0.15,
+        time: 0
       });
     });
   });

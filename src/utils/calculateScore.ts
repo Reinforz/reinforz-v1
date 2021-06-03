@@ -10,6 +10,7 @@ interface Parameter {
   time_allocated: number;
   totalAnswers: number;
   totalCorrectAnswers: number;
+  timerDisabled: boolean;
 }
 
 export function calculateScore(parameter: Parameter): IResult['score'] {
@@ -22,20 +23,24 @@ export function calculateScore(parameter: Parameter): IResult['score'] {
     totalHints,
     time_allocated,
     totalAnswers,
-    totalCorrectAnswers
+    totalCorrectAnswers,
+    timerDisabled
   } = parameter;
-  const correctAnswersScore = 0.7 * (totalCorrectAnswers / totalAnswers);
+  const correctAnswersScore =
+    (timerDisabled ? 0.85 : 0.7) * (totalCorrectAnswers / totalAnswers);
   const hintsScore = Number(
     ((0.15 / (totalHints + 1)) * (totalHints + 1 - hints_used)).toFixed(3)
   );
   const totalTimeDivisions = Math.ceil(time_allocated / 15),
     timeDivisions = Math.floor(time_taken / 15);
-  const timeTakenScore = Number(
-    (
-      (0.15 / totalTimeDivisions) *
-      (totalTimeDivisions - timeDivisions)
-    ).toFixed(3)
-  );
+  const timeTakenScore = timerDisabled
+    ? 0
+    : Number(
+        (
+          (0.15 / totalTimeDivisions) *
+          (totalTimeDivisions - timeDivisions)
+        ).toFixed(3)
+      );
   const score =
     weight *
     (partial_score

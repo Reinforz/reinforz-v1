@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { IoMdSettings } from 'react-icons/io';
 import { useHistory } from "react-router-dom";
 import { PlayContext } from "../../context/PlayContext";
-import { QUIZ_1 } from '../../data/quizzes';
 import { useThemeSettings } from '../../hooks';
 import { List, Menu } from "../../shared";
 import {
@@ -34,8 +33,8 @@ function Play() {
     filters: createDefaultPlaySettingsFiltersState()
   })));
   const [playing, setPlaying] = useState(false);
-  const [uploadedQuizzes, setUploadedQuizzes] = useState<IQuizFull[]>([QUIZ_1]);
-  const [selectedQuizIds, setSelectedQuizIds] = useState<string[]>([QUIZ_1._id]);
+  const [uploadedQuizzes, setUploadedQuizzes] = useState<IQuizFull[]>([]);
+  const [selectedQuizIds, setSelectedQuizIds] = useState<string[]>([]);
   const [errorLogs, setErrorLogs] = useState<IErrorLog[]>([]);
 
   const [selectedQuizzes, filteredQuizzes] = applyPlaySettingsOptions(uploadedQuizzes, selectedQuizIds, playSettings.options, arrayShuffler);

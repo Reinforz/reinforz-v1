@@ -13,7 +13,8 @@ export function getAnswerResult(
   userAnswers: string[],
   time_taken: number,
   hints_used: number,
-  partial_score: boolean
+  partial_score: boolean,
+  timerDisabled: boolean
 ) {
   let totalCorrectAnswers = 0;
   const { hints, weight, time_allocated } = currentQuestion;
@@ -75,7 +76,8 @@ export function getAnswerResult(
         verdict,
         totalAnswers: currentQuestion.answers.length,
         totalCorrectAnswers,
-        totalHints: hints.length
+        totalHints: hints.length,
+        timerDisabled
       }),
       _id: shortid()
     }
