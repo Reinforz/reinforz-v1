@@ -1,6 +1,7 @@
 import { Button } from '@material-ui/core';
 import React, { useContext, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
+import { ReportContext } from '../../context/ReportContext';
 import { RootContext } from '../../context/RootContext';
 import { Menu } from '../../shared';
 import { IReport, IReportFilter, IResult } from "../../types";
@@ -15,13 +16,18 @@ import { ReportUpload } from './ReportUpload/ReportUpload';
 
 export default function Report() {
   const { state } = useLocation<{ results: IResult[] }>();
-  const { setUploadedQuizzes, setSelectedQuizIds, allQuestionsMap } = useContext(RootContext);
+  const { playSettings, setUploadedQuizzes, setSelectedQuizIds, allQuestionsMap } = useContext(RootContext);
   const [reportFilter, setReportFilter] = useState<IReportFilter>(JSON.parse(localStorage.getItem('REPORT_FILTERS') ?? JSON.stringify(createDefaultReportFilterState())));
-  const [report, setReport] = useState<IReport | null>(null);
+  const [report, setReport] = useState<IReport>({
+    results: state?.results ?? [],
+    createdAt: Date.now(),
+    settings: playSettings
+  });
+
   const history = useHistory();
 
   const render = () => {
-    if (report) {
+    if (report.results.length !== 0) {
       const filteredResults = applyResultFilters(report.results, reportFilter);
       const filteredQuizzes = generateQuizzesFromResults(filteredResults, allQuestionsMap);
       return <Menu contents={[<ReportFilter reportFilter={reportFilter} setReportFilter={setReportFilter} />, <div className="Report">
@@ -45,5 +51,7 @@ export default function Report() {
     }
   }
 
-  return render();
+  return <ReportContext.Provider value={{ setReport, report }}>
+    {render()}
+  </ReportContext.Provider>
 }
