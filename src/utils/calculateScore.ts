@@ -1,3 +1,5 @@
+import { IResult } from "../types";
+
 interface Parameter {
   weight: number;
   time_taken: number;
@@ -10,7 +12,7 @@ interface Parameter {
   totalCorrectAnswers: number;
 }
 
-export function calculateScore(parameter: Parameter) {
+export function calculateScore(parameter: Parameter): IResult["score"] {
   const {
     weight,
     time_taken,
@@ -22,21 +24,26 @@ export function calculateScore(parameter: Parameter) {
     totalAnswers,
     totalCorrectAnswers
   } = parameter;
-  const correct_answers_score = 0.7 * (totalCorrectAnswers / totalAnswers);
-  const hints_score = (0.15 / (totalHints + 1)) * (totalHints + 1 - hints_used);
+  const correctAnswersScore = 0.7 * (totalCorrectAnswers / totalAnswers);
+  const hintsScore = (0.15 / (totalHints + 1)) * (totalHints + 1 - hints_used);
   const totalTimeDivisions = Math.ceil(time_allocated / 15),
     timeDivisions = Math.floor(time_taken / 15);
-  const time_taken_score =
+  const timeTakenScore =
     (0.15 / totalTimeDivisions) * (totalTimeDivisions - timeDivisions);
   const score =
     weight *
     (partial_score
       ? Number(
-          (correct_answers_score + hints_score + time_taken_score).toFixed(2)
+          (correctAnswersScore + hintsScore + timeTakenScore).toFixed(2)
         )
       : verdict
       ? 1
       : 0);
 
-  return score;
+  return {
+    amount: score,
+    answers: correctAnswersScore,
+    hints: hintsScore,
+    time: timeTakenScore
+  };
 }

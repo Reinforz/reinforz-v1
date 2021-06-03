@@ -205,7 +205,12 @@ export type TResultQuestion = IResultSelectionQuestion | IResultInputQuestion;
 export interface IResult {
   user_answers: string[];
   verdict: boolean;
-  score: number;
+  score: {
+    amount: number,
+    time: number
+    hints: number
+    answers: number
+  };
   time_taken: number;
   hints_used: number;
   question: TResultQuestion;

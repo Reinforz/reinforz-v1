@@ -23,7 +23,12 @@ export const RESULT_1: IResult = {
   },
   user_answers: ['0', '2'],
   hints_used: 1,
-  score: 1,
+  score: {
+    amount: 1,
+    answers: 0.7,
+    hints: 0.15,
+    time: 0.15
+  },
   time_taken: 20,
   verdict: true,
   _id: 'result_1'
@@ -41,7 +46,12 @@ export const RESULT_2: IResult = {
   },
   user_answers: ['answer 1', 'answer 2'],
   hints_used: 2,
-  score: 0.65,
+  score: {
+    amount: 1,
+    answers: 0.45,
+    hints: 0.1,
+    time: 0.1
+  },
   time_taken: 50,
   verdict: false,
   _id: 'result_2'
