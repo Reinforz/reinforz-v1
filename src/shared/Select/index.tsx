@@ -12,6 +12,7 @@ interface Props<T extends Record<string, any>> {
   renderValue?: (selected: any) => JSX.Element[]
   multiple?: boolean
   onChange?: (e: ChangeEvent<{ name?: string | undefined; value: unknown }>) => void
+  lsKey?: string
 }
 
 export default function Select<T extends Record<string, any>>(props: Props<T>) {
@@ -26,6 +27,12 @@ export default function Select<T extends Record<string, any>>(props: Props<T>) {
         onChange={(e) => {
           setState({ ...state, [stateKey]: e.target.value as string[] })
           props.onChange && props.onChange(e)
+          if (props.lsKey) {
+            localStorage.setItem(props.lsKey, JSON.stringify({
+              ...props.state,
+              [stateKey]: e.target.value
+            }))
+          }
         }}>
         {items.map(item =>
           <MenuItem key={item} value={item}>{menuItemLabel(item)}</MenuItem>

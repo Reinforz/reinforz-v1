@@ -9,6 +9,7 @@ interface Props<I extends Record<string, any>> {
   items: string[]
   state: I
   onChange?: (items: string[]) => void
+  lsKey?: string
 }
 
 export default function CheckboxGroup<I extends Record<string, any>>(props: Props<I>) {
@@ -21,6 +22,12 @@ export default function CheckboxGroup<I extends Record<string, any>>(props: Prop
         const finalItems = (e.target as any).checked ? items.concat(item) : items.filter(_item => _item !== item);
         props.onChange && props.onChange(finalItems)
         props.setState({ ...props.state, [props.stateKey]: finalItems });
+        if (props.lsKey) {
+          localStorage.setItem(props.lsKey, JSON.stringify({
+            ...props.state,
+            [props.stateKey]: finalItems
+          }))
+        }
       }}
         color="primary" />} />)}
     </div>

@@ -9,6 +9,7 @@ interface Props<I> {
   items: string[]
   state: I
   onClick?: (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => any
+  lsKey?: string
 }
 
 export default function RadioGroup<I>(props: Props<I>) {
@@ -20,6 +21,12 @@ export default function RadioGroup<I>(props: Props<I>) {
       {props.items.map((item, index) => <FormControlLabel onClick={(e: any) => {
         props.setState({ ...props.state, [props.stateKey]: e.target.value })
         props.onClick && props.onClick(e);
+        if (props.lsKey) {
+          localStorage.setItem(props.lsKey, JSON.stringify({
+            ...props.state,
+            [props.stateKey]: e.target.value
+          }))
+        }
       }} key={item + index} value={item} control={<Radio color="primary" />} label={item} />)}
     </div>
   </MuiRadioGroup>
