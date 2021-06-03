@@ -4,8 +4,7 @@ import React, { useCallback, useContext, useState } from 'react';
 import { PlayContext } from '../../../context/PlayContext';
 import { Icon, Select } from '../../../shared';
 import { IQuizFull, IResult } from "../../../types";
-import { download } from "../../../utils";
-import { transformFullQuestions } from '../../../utils/transformFullQuestions';
+import { download, transformFullQuestions } from "../../../utils";
 import "./ReportExport.scss";
 interface Props {
   filteredResults: IResult[],

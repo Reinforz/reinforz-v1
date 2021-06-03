@@ -21,5 +21,6 @@ export * from './generateTheme';
 export * from './getAnswerResult';
 export * from './getSettings';
 export * from './sanitizeMarkdown';
+export * from './transformFullQuestions';
 export * from './transformReportQuestion';
 export * from './transformTextBySeparator';
