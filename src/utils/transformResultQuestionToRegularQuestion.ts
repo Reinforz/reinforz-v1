@@ -1,4 +1,8 @@
-import { TQuestionFull, TResultQuestion } from '../types';
+import {
+  IInputQuestionAnswerFull,
+  TQuestionFull,
+  TResultQuestion
+} from '../types';
 
 export function transformResultQuestionToRegularQuestion(
   question: TResultQuestion
@@ -8,8 +12,8 @@ export function transformResultQuestionToRegularQuestion(
       delete option.isCorrect;
       delete option.userSelected;
     });
-  } else if (question.type === 'Snippet' || question.type === 'FIB') {
-    question.answers.forEach((answers) => {
+  } else {
+    (question.answers as IInputQuestionAnswerFull[][]).forEach((answers) => {
       answers.forEach((answer: any) => {
         delete answer.isCorrect;
       });
