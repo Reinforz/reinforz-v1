@@ -5,25 +5,36 @@ import {
 
 describe('computeNumberDataAggregation', () => {
   it(`Should work for MAX aggregation`, () => {
-    expect(computeNumberDataAggregation([1, 3, 2, 5, 4], 'MAX')).toStrictEqual(
-      5
-    );
+    expect(
+      computeNumberDataAggregation([1, 3, 2, 5, 4], { aggregation: 'MAX' })
+    ).toStrictEqual(5);
   });
 
   it(`Should work for MIN aggregation`, () => {
-    expect(computeNumberDataAggregation([3, 2, 5, 4, 1], 'MIN')).toStrictEqual(
-      1
-    );
+    expect(
+      computeNumberDataAggregation([3, 2, 5, 4, 1], { aggregation: 'MIN' })
+    ).toStrictEqual(1);
   });
 
   it(`Should work for AVG aggregation`, () => {
-    expect(computeNumberDataAggregation([1, 2, 3, 4, 5], 'AVG')).toStrictEqual(
-      3
-    );
+    expect(
+      computeNumberDataAggregation([1, 2, 3, 4, 5], { aggregation: 'AVG' })
+    ).toStrictEqual(3);
+  });
+
+  it(`Should work for AVG aggregation custom divider`, () => {
+    expect(
+      computeNumberDataAggregation([1, 2, 3, 4, 5], {
+        aggregation: 'AVG',
+        divider: 15
+      })
+    ).toStrictEqual(1);
   });
 
   it(`Should work for AVG aggregation with zero items`, () => {
-    expect(computeNumberDataAggregation([], 'AVG')).toStrictEqual(0);
+    expect(
+      computeNumberDataAggregation([], { aggregation: 'AVG' })
+    ).toStrictEqual(0);
   });
 });
 
