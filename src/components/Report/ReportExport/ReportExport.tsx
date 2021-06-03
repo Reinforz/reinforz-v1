@@ -63,8 +63,18 @@ export default function ReportExport(props: Props) {
 
   return (
     <div className="Report-Export">
-      <Select items={['Original', 'Report']} label={"Export Type"} menuItemLabel={(item) => item} setState={setExportState} state={exportState} stateKey={"export_type"} />
-      <Select items={['YAML', 'JSON']} label={"Export As"} menuItemLabel={(item) => item} setState={setExportState} state={exportState} stateKey={"export_as"} />
+      <Select onChange={(e) => {
+        localStorage.setItem('REPORT_EXPORT', JSON.stringify({
+          ...exportState,
+          export_type: e.target.value
+        }))
+      }} items={['Original', 'Report']} label={"Export Type"} menuItemLabel={(item) => item} setState={setExportState} state={exportState} stateKey={"export_type"} />
+      <Select onChange={(e) => {
+        localStorage.setItem('REPORT_EXPORT', JSON.stringify({
+          ...exportState,
+          export_as: e.target.value
+        }))
+      }} items={['YAML', 'JSON']} label={"Export As"} menuItemLabel={(item) => item} setState={setExportState} state={exportState} stateKey={"export_as"} />
       <Icon popoverText={`Export ${export_type} as ${export_as}`} className="Report-Export-button">
         <Button variant="contained" color="primary" onClick={() => {
           downloadFiles()
