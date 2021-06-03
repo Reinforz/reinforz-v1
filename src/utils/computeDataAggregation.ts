@@ -2,9 +2,12 @@ import { TBooleanAggregation, TNumberAggregation } from '../types';
 
 export function computeNumberDataAggregation(
   data: number[],
-  aggregation: TNumberAggregation
+  options: {
+    aggregation: TNumberAggregation;
+    divider?: number;
+  }
 ) {
-  switch (aggregation) {
+  switch (options.aggregation) {
     case 'MIN': {
       let min = data[0];
       for (let index = 1; index < data.length; index++) {
@@ -22,9 +25,11 @@ export function computeNumberDataAggregation(
       return max;
     }
     case 'AVG': {
-      return (
-        data.reduce((acc, cur) => acc + cur, 0) /
-        (data.length === 0 ? 1 : data.length)
+      return Number(
+        (
+          data.reduce((acc, cur) => acc + cur, 0) /
+          (options.divider ?? (data.length === 0 ? 1 : data.length))
+        ).toFixed(2)
       );
     }
   }
