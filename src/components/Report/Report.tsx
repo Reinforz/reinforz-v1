@@ -2,7 +2,7 @@ import { Button } from '@material-ui/core';
 import React, { useContext, useState } from 'react';
 import { PlayContext } from '../../context/PlayContext';
 import { Menu } from '../../shared';
-import { IResult } from "../../types";
+import { IReportFilter, IResult } from "../../types";
 import { applyResultFilters, createDefaultReportFilterState, generateQuizzesFromResults } from '../../utils';
 import "./Report.scss";
 import { ReportAggregator } from './ReportAggregator/ReportAggregator';
@@ -18,7 +18,7 @@ export interface Props {
 export default function Report(props: Props) {
   const { setPlaying, setUploadedQuizzes, setSelectedQuizIds, allQuestionsMap } = useContext(PlayContext);
 
-  const [reportFilter, setReportFilter] = useState(createDefaultReportFilterState());
+  const [reportFilter, setReportFilter] = useState<IReportFilter>(JSON.parse(localStorage.getItem('REPORT_FILTERS') ?? JSON.stringify(createDefaultReportFilterState())));
   const filteredResults = applyResultFilters(props.results, reportFilter);
   const filteredQuizzes = generateQuizzesFromResults(filteredResults, allQuestionsMap);
 
