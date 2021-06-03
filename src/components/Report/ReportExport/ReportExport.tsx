@@ -5,6 +5,7 @@ import { PlayContext } from '../../../context/PlayContext';
 import { Icon, Select } from '../../../shared';
 import { IQuizFull, IResult } from "../../../types";
 import { download } from "../../../utils";
+import { transformFullQuestions } from '../../../utils/transformFullQuestions';
 import "./ReportExport.scss";
 interface Props {
   filteredResults: IResult[],
@@ -32,14 +33,7 @@ export default function ReportExport(props: Props) {
   // ? Convert to a util function
   const clonedDownload = useCallback((type) => {
     Object.values(filteredQuizzes).forEach(quiz => {
-      quiz.questions = quiz.questions.map(question => {
-        const clonedQuestion = JSON.parse(JSON.stringify(question));
-        delete clonedQuestion.quiz;
-        if (question.type === "MS" || question.type === "MCQ") {
-          clonedQuestion.options = question.options.sort((optionA, optionB) => parseInt(optionA.index) > parseInt(optionB.index) ? 1 : -1).map(option => option.text)
-        }
-        return clonedQuestion;
-      });
+      quiz.questions = transformFullQuestions(quiz.questions);
       type === "yaml" ? download(`${quiz.subject} - ${quiz.topic}.yaml`, safeDump(quiz)) : download(`${quiz.subject} - ${quiz.topic}.json`, JSON.stringify(quiz, undefined, 2))
     })
   }, [filteredQuizzes])
