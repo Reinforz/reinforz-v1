@@ -28,14 +28,12 @@ function Play() {
   const history = useHistory();
   const classes = useStyles();
   const { theme } = useThemeSettings();
-  let PLAY_SETTINGS: any = localStorage.getItem('PLAY_SETTINGS');
-  PLAY_SETTINGS = PLAY_SETTINGS ? JSON.parse(PLAY_SETTINGS) : undefined;
 
-  const [playSettings, setPlaySettings] = useState<IPlaySettings>({
-    options: PLAY_SETTINGS && PLAY_SETTINGS.play_options ? PLAY_SETTINGS.play_options : createDefaultPlaySettingsOptionsState(),
-    filters: PLAY_SETTINGS && PLAY_SETTINGS.play_filters ? PLAY_SETTINGS.play_filters : createDefaultPlaySettingsFiltersState()
-  });
-  const [playing, setPlaying] = useState(true);
+  const [playSettings, setPlaySettings] = useState<IPlaySettings>(JSON.parse(localStorage.getItem('PLAY_SETTINGS') ?? JSON.stringify({
+    options: createDefaultPlaySettingsOptionsState(),
+    filters: createDefaultPlaySettingsFiltersState()
+  })));
+  const [playing, setPlaying] = useState(false);
   const [uploadedQuizzes, setUploadedQuizzes] = useState<IQuizFull[]>([QUIZ_1]);
   const [selectedQuizIds, setSelectedQuizIds] = useState<string[]>([QUIZ_1._id]);
   const [errorLogs, setErrorLogs] = useState<IErrorLog[]>([]);
