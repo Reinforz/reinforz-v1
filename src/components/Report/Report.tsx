@@ -14,7 +14,7 @@ import { ReportTable } from './ReportTable/ReportTable';
 
 export default function Report() {
   const { state } = useLocation<{ results: IResult[] }>();
-  const { setPlaying, setUploadedQuizzes, setSelectedQuizIds, allQuestionsMap } = useContext(RootContext);
+  const { setUploadedQuizzes, setSelectedQuizIds, allQuestionsMap } = useContext(RootContext);
   const [reportFilter, setReportFilter] = useState<IReportFilter>(JSON.parse(localStorage.getItem('REPORT_FILTERS') ?? JSON.stringify(createDefaultReportFilterState())));
   const filteredResults = applyResultFilters(state?.results ?? [], reportFilter);
   const filteredQuizzes = generateQuizzesFromResults(filteredResults, allQuestionsMap);
@@ -29,7 +29,6 @@ export default function Report() {
         <div className="Report-BackButton">
           <Button variant="contained" color="primary" onClick={() => {
             localStorage.setItem("REPORT_FILTERS", JSON.stringify(reportFilter))
-            setPlaying(false);
             setUploadedQuizzes(Object.values(filteredQuizzes))
             setSelectedQuizIds(Object.values(filteredQuizzes).map(quiz => quiz._id))
           }}>Back to Home</Button>
