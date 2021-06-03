@@ -10,7 +10,7 @@ interface Props {
 
 export default function FibQuestionDisplay(props: Props) {
   const theme = useTheme() as ExtendedTheme;
-
+  // ?: Inject userAnswers with the markdown and remove styles
   const { image, question, userAnswers } = props;
   return <div className="Question-question Question-question--FIB" style={{ backgroundColor: theme.color.light, gridArea: image ? `1/1/2/2` : `1/1/2/3` }}>
     {question.map((questionChunk, i) => questionChunk !== "" ? <span className="Question-question-chunk" key={questionChunk + i}>

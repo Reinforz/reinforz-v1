@@ -9,7 +9,7 @@ export const QUIZ_1: IQuizFull = {
       answers: [
         {
           text: '0',
-          explanation: 'Since 0 is an even number'
+          explanation: `\`\`\`js\nconst explanation = "Hello World";\n\`\`\``
         },
         {
           text: '2',
@@ -60,7 +60,7 @@ export const QUIZ_1: IQuizFull = {
             text: 'answer 1',
             modifiers: ['IC', 'IS'],
             regex: null,
-            explanation: 'Explanation 1 for answer 1'
+            explanation: `\`\`\`js\nconst explanation = "Hello World";\n\`\`\``
           },
           {
             text: 'answer 1 version 2',

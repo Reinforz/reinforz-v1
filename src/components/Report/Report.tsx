@@ -3,7 +3,7 @@ import React, { useContext, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { ReportContext } from '../../context/ReportContext';
 import { RootContext } from '../../context/RootContext';
-import { RESULT_1 } from '../../data/results';
+import { RESULT_1, RESULT_2 } from '../../data/results';
 import { useThemeSettings } from '../../hooks';
 import { Menu } from '../../shared';
 import { IReport, IReportFilter, IResult } from "../../types";
@@ -23,7 +23,7 @@ export default function Report() {
   const { playSettings, setUploadedQuizzes, setSelectedQuizIds } = useContext(RootContext);
   const [reportFilter, setReportFilter] = useState<IReportFilter>(JSON.parse(localStorage.getItem('REPORT_FILTERS') ?? JSON.stringify(createDefaultReportFilterState())));
   const [report, setReport] = useState<IReport>({
-    results: state?.results ?? [RESULT_1],
+    results: state?.results ?? [RESULT_1, RESULT_2],
     createdAt: Date.now(),
     settings: playSettings
   });
