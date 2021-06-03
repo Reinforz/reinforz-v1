@@ -1,7 +1,7 @@
 import { Button } from '@material-ui/core';
 import { safeDump } from 'js-yaml';
 import React, { useCallback, useContext, useState } from 'react';
-import { PlayContext } from '../../../context/PlayContext';
+import { RootContext } from '../../../context/RootContext';
 import { Icon, Select } from '../../../shared';
 import { IQuizFull, IResult } from "../../../types";
 import { download, transformFullQuestions } from "../../../utils";
@@ -17,7 +17,7 @@ interface IReportExportState {
 }
 
 export default function ReportExport(props: Props) {
-  const { playSettings } = useContext(PlayContext);
+  const { playSettings } = useContext(RootContext);
   const { filteredResults, filteredQuizzes } = props;
   let REPORT_EXPORT: any = localStorage.getItem('REPORT_EXPORT');
   REPORT_EXPORT = REPORT_EXPORT ? JSON.parse(REPORT_EXPORT) : undefined;

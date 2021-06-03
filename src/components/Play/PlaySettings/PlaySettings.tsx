@@ -1,7 +1,8 @@
 import { Button, Checkbox, FormControlLabel } from "@material-ui/core";
 import { OptionsObject, useSnackbar } from "notistack";
 import React, { useContext } from "react";
-import { PlayContext } from "../../../context/PlayContext";
+import { useHistory } from "react-router-dom";
+import { RootContext } from "../../../context/RootContext";
 import { useThemeSettings } from "../../../hooks";
 import { CheckboxGroup, InputRange } from '../../../shared';
 import { IPlaySettingsOptions } from "../../../types";
@@ -17,8 +18,9 @@ const enqueueSnackbarOptionsObject: OptionsObject = {
 }
 
 export default function PlaySettings() {
-  const { setPlaying, selectedQuizIds, playSettings, setPlaySettings, filteredQuizzes } = useContext(PlayContext);
+  const { setPlaying, selectedQuizIds, playSettings, setPlaySettings, filteredQuizzes } = useContext(RootContext);
   const { theme } = useThemeSettings();
+  const history = useHistory();
   const { enqueueSnackbar } = useSnackbar();
 
   const filteredQuestions = filteredQuizzes.reduce((acc, filteredQuiz) => acc += filteredQuiz.questions.length, 0);
@@ -85,6 +87,7 @@ export default function PlaySettings() {
     <Button disabled={(filteredQuestions === 0 && selectedQuizIds.length !== 0) || selectedQuizIds.length === 0} className="PlaySettings-button" color="primary" variant="contained" onClick={() => {
       if (selectedQuizIds.length > 0 && filteredQuestions > 0) {
         setPlaying(true)
+        history.push("/play")
       }
       else if (filteredQuestions === 0 && selectedQuizIds.length !== 0) {
         enqueueSnackbar('You must have at least one question to play', enqueueSnackbarOptionsObject)

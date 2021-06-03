@@ -2,7 +2,7 @@ import yaml from 'js-yaml';
 import { OptionsObject, useSnackbar } from "notistack";
 import React, { useContext } from 'react';
 import { useDropzone } from 'react-dropzone';
-import { PlayContext } from '../../../context/PlayContext';
+import { RootContext } from '../../../context/RootContext';
 import { useThemeSettings } from '../../../hooks';
 import { IQuizPartial } from '../../../types';
 import { filterUploadedQuizzes } from "../../../utils";
@@ -18,7 +18,7 @@ const centerBottomErrorNotistack = {
 } as OptionsObject;
 
 export default function PlayUpload() {
-  const { uploadedQuizzes, setSelectedQuizIds, errorLogs, setUploadedQuizzes, setErrorLogs } = useContext(PlayContext);
+  const { uploadedQuizzes, setSelectedQuizIds, errorLogs, setUploadedQuizzes, setErrorLogs } = useContext(RootContext);
   const { enqueueSnackbar } = useSnackbar();
   const { theme } = useThemeSettings();
 

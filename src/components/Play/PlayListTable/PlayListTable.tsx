@@ -1,11 +1,11 @@
 import { useContext } from "react";
-import { PlayContext } from "../../../context/PlayContext";
+import { RootContext } from "../../../context/RootContext";
 import { ListTable } from "../../../shared";
 import { divideTimeAllocated } from "../../../utils";
 import "./PlayListTable.scss";
 
 export function PlayListTable() {
-  const { selectedQuizzes } = useContext(PlayContext);
+  const { selectedQuizzes } = useContext(RootContext);
   return <div className="PlayListTable">
     <ListTable generateTitle={(item) => `${item.subject} - ${item.topic}`} headers={["Beginner", "Intermediate", "Advanced"]} itemKey={"questions"} itemKeyKey={"difficulty"} items={selectedQuizzes} />
     <ListTable generateTitle={(item) => `${item.subject} - ${item.topic}`} headers={["MCQ", "MS", "FIB", "Snippet"]} itemKey={"questions"} itemKeyKey={"type"} items={selectedQuizzes} />

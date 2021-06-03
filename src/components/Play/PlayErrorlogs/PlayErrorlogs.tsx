@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
-import { PlayContext } from '../../../context/PlayContext';
+import { RootContext } from '../../../context/RootContext';
 import { useThemeSettings } from '../../../hooks';
 import "./PlayErrorlogs.scss";
 
 export default function PlayErrorlogs() {
   const { theme } = useThemeSettings();
-  const { errorLogs } = useContext(PlayContext)
+  const { errorLogs } = useContext(RootContext)
 
   return <div className="PlayErrorLogs" style={{ backgroundColor: theme.color.base, color: theme.palette.text.secondary }}>
     <div className="PlayErrorLogs-header" style={{ backgroundColor: theme.color.dark }}>Errors {"&"} Warnings</div>

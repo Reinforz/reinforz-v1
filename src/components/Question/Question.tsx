@@ -1,6 +1,6 @@
 import { Button, useTheme } from "@material-ui/core";
 import React, { useContext, useEffect, useState } from "react";
-import { PlayContext } from "../../context/PlayContext";
+import { RootContext } from "../../context/RootContext";
 import { ExtendedTheme, TQuestionFull } from "../../types";
 import { displayTime, sanitizeMarkdown } from "../../utils";
 import FibQuestionDisplay from "./FibQuestionDisplay";
@@ -16,7 +16,7 @@ interface Props {
 };
 
 export default function Question(props: Props) {
-  const { playSettings } = useContext(PlayContext);
+  const { playSettings } = useContext(RootContext);
   const { changeCounter, isLast, question: { image, hints, question, time_allocated } } = props;
   const [userAnswers, setUserAnswers] = useState<string[]>([]);
   const [usedHints, setUsedHints] = useState<string[]>([]);

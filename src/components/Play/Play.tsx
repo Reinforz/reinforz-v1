@@ -1,17 +1,13 @@
 import { makeStyles } from '@material-ui/core';
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import { IoMdSettings } from 'react-icons/io';
 import { useHistory } from "react-router-dom";
-import { PlayContext } from "../../context/PlayContext";
-import { QUIZ_1 } from '../../data/quizzes';
+import { RootContext } from "../../context/RootContext";
 import { useThemeSettings } from '../../hooks';
 import { List, Menu } from "../../shared";
 import {
-  ExtendedTheme,
-  IErrorLog, IPlaySettings, IQuizFull
+  ExtendedTheme
 } from "../../types";
-import { applyPlaySettingsOptions, arrayShuffler, createDefaultPlaySettingsFiltersState, createDefaultPlaySettingsOptionsState, generateQuestionsMap } from "../../utils";
-import Quiz from "../Quiz/Quiz";
 import "./Play.scss";
 import PlayErrorlogs from "./PlayErrorlogs/PlayErrorlogs";
 import { PlayListTable } from "./PlayListTable/PlayListTable";
@@ -28,31 +24,17 @@ function Play() {
   const history = useHistory();
   const classes = useStyles();
   const { theme } = useThemeSettings();
+  const { selectedQuizIds, setUploadedQuizzes, setSelectedQuizIds, uploadedQuizzes, errorLogs, setErrorLogs } = useContext(RootContext);
 
-  const [playSettings, setPlaySettings] = useState<IPlaySettings>(JSON.parse(localStorage.getItem('PLAY_SETTINGS') ?? JSON.stringify({
-    options: createDefaultPlaySettingsOptionsState(),
-    filters: createDefaultPlaySettingsFiltersState()
-  })));
-  const [playing, setPlaying] = useState(true);
-  const [uploadedQuizzes, setUploadedQuizzes] = useState<IQuizFull[]>([QUIZ_1]);
-  const [selectedQuizIds, setSelectedQuizIds] = useState<string[]>([QUIZ_1._id]);
-  const [errorLogs, setErrorLogs] = useState<IErrorLog[]>([]);
-
-  const [selectedQuizzes, filteredQuizzes] = applyPlaySettingsOptions(uploadedQuizzes, selectedQuizIds, playSettings.options, arrayShuffler);
-
-  const [allQuestions, allQuestionsMap] = generateQuestionsMap(filteredQuizzes, playSettings.filters);
-
-  return <PlayContext.Provider value={{ selectedQuizzes, allQuestionsMap, allQuestions, filteredQuizzes, setPlaySettings, playSettings, errorLogs, setErrorLogs, setPlaying, playing, uploadedQuizzes, selectedQuizIds, setUploadedQuizzes, setSelectedQuizIds }}>
-    {!playing ? <Menu width={290} contents={[<PlaySettings />, <div className="Play">
-      <IoMdSettings size={25} fill={theme.color.opposite_light} className={`${classes.root} Play-settings-icon`} onClick={() => history.push("/settings")} />
-      <PlayUpload />
-      <PlayErrorlogs />
-      <List onDelete={(remainingItems) => {
-        setErrorLogs(errorLogs.filter(errorLog => !remainingItems.map(remainingItem => remainingItem._id).includes(errorLog.quiz_id)))
-      }} selectedItems={selectedQuizIds} setSelectedItems={setSelectedQuizIds} header="Uploaded Quizzes" items={uploadedQuizzes} setItems={setUploadedQuizzes} fields={[(item) => `${item.subject} - ${item.topic}`, (item) => item.questions.length + " Qs"]} />
-      <PlayListTable />
-    </div>]} /> : <Quiz />}
-  </PlayContext.Provider>
+  return <Menu width={290} contents={[<PlaySettings />, <div className="Play">
+    <IoMdSettings size={25} fill={theme.color.opposite_light} className={`${classes.root} Play-settings-icon`} onClick={() => history.push("/settings")} />
+    <PlayUpload />
+    <PlayErrorlogs />
+    <List onDelete={(remainingItems) => {
+      setErrorLogs(errorLogs.filter(errorLog => !remainingItems.map(remainingItem => remainingItem._id).includes(errorLog.quiz_id)))
+    }} selectedItems={selectedQuizIds} setSelectedItems={setSelectedQuizIds} header="Uploaded Quizzes" items={uploadedQuizzes} setItems={setUploadedQuizzes} fields={[(item) => `${item.subject} - ${item.topic}`, (item) => item.questions.length + " Qs"]} />
+    <PlayListTable />
+  </div>]} />
 }
 
 export default Play;

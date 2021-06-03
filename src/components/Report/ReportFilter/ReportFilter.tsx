@@ -1,6 +1,6 @@
 import { Button } from '@material-ui/core';
 import React, { Dispatch, SetStateAction, useContext } from "react";
-import { PlayContext } from '../../../context/PlayContext';
+import { RootContext } from '../../../context/RootContext';
 import { useThemeSettings } from '../../../hooks';
 import { CheckboxGroup, InputRange, RadioGroup, Select } from '../../../shared';
 import { IReportFilter } from "../../../types";
@@ -20,7 +20,7 @@ interface Props {
 export default function ReportFilter(props: Props) {
   const { setReportFilter, reportFilter } = props;
   const { theme } = useThemeSettings();
-  const { selectedQuizIds, selectedQuizzes } = useContext(PlayContext);
+  const { selectedQuizIds, selectedQuizzes } = useContext(RootContext);
 
   return <div className="ReportFilter" style={{ backgroundColor: theme.color.dark }}>
     <InputRange label={"Time taken range"} min={0} max={120} setState={setReportFilter} state={reportFilter} stateKey={"time_taken"} />
