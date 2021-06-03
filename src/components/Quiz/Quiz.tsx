@@ -27,7 +27,7 @@ export default function Quiz() {
       const newResultState = [...results, { question: transformedQuestion, ...answerResult, time_taken, hints_used, user_answers }];
       if (allQuestions.length - 1 === currentIndex) {
         history.push("/report", {
-          results: newResultState
+          results: newResultState,
         })
       } else {
         setResults(newResultState)
