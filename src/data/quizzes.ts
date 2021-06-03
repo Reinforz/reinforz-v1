@@ -19,25 +19,24 @@ export const QUIZ_1: IQuizFull = {
       hints: ['Hint 1', 'Hint 2', 'Hint 3'],
       options: [
         {
-          text:
-            'Option 1 can also be really really big if the user wants it to',
-          index: '0'
+          text: 'Option 3',
+          index: '2'
         },
         {
           text: 'Option 2',
           index: '1'
         },
         {
-          text: 'Option 3',
-          index: '2'
+          text: 'Option 5',
+          index: '4'
         },
         {
           text: 'Option 4',
           index: '3'
         },
         {
-          text: 'Option 5',
-          index: '4'
+          text: 'Option 1',
+          index: '0'
         }
       ],
       image:

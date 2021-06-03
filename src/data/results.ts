@@ -15,7 +15,7 @@ export const RESULT_1: IResult = {
     ...question1,
     options: question1.options.map((option, index) => ({
       ...option,
-      isCorrect: [0, 1].includes(index),
+      isCorrect: [0, 2].includes(index),
       userSelected: [0, 2].includes(index)
     })) as IResultSelectionQuestion['options']
   },

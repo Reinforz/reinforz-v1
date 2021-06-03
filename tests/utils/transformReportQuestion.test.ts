@@ -2,6 +2,7 @@ import { transformReportSelectionQuestion } from '../../src/utils';
 
 describe('transformReportSelectionQuestion', () => {
   it(`Should work`, () => {
+    const userAnswers = ['0', '1', '2'];
     expect(
       transformReportSelectionQuestion(
         {
@@ -34,7 +35,7 @@ describe('transformReportSelectionQuestion', () => {
             }
           ]
         } as any,
-        ['0', '1', '2']
+        userAnswers
       )
     ).toStrictEqual({
       answers: [
@@ -52,7 +53,7 @@ describe('transformReportSelectionQuestion', () => {
           text: 'Option 1',
           index: '0',
           isCorrect: true,
-          userSelected: true
+          userSelected: false
         },
         {
           text: 'Option 2',
@@ -70,9 +71,10 @@ describe('transformReportSelectionQuestion', () => {
           text: 'Option 4',
           index: '3',
           isCorrect: false,
-          userSelected: false
+          userSelected: true
         }
       ]
     });
+    expect(userAnswers).toStrictEqual(['2', '1', '3']);
   });
 });

@@ -30,7 +30,7 @@ export function ReportAggregator(props: Props) {
       <div className="Report-Aggregator-item-value" style={{ backgroundColor: theme.color.light }}>{computeNumberDataAggregation(props.filteredResults.map(filteredResult => filteredResult[key[1]]), reportAggregator[key[1]])}</div>
     </div>)}
     <div className="Report-Aggregator-item">
-      <Select menuItemLabel={(item) => item} label={"Verdict"} items={["TRUE", "FALSE", "AVG"]} setState={setReportAggregator} stateKey={'verdict'} state={reportAggregator} />
+      <Select menuItemLabel={(item) => item} label={"Verdict"} items={["TRUE", "FALSE"]} setState={setReportAggregator} stateKey={'verdict'} state={reportAggregator} />
       <div className="Report-Aggregator-item-value" style={{ backgroundColor: theme.color.light }}>{computeBooleanDataAggregation(props.filteredResults.map(filteredResult => filteredResult.verdict), reportAggregator.verdict)}</div>
     </div>
   </div>

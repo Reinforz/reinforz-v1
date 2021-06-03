@@ -4,6 +4,9 @@ export function transformReportSelectionQuestion(
   question: TSelectionQuestionFull,
   userAnswers: string[]
 ) {
+  userAnswers.forEach((userAnswer, index) => {
+    userAnswers[index] = question.options[parseInt(userAnswer)].index;
+  });
   const sortedOptions: IResultSelectionQuestion['options'] = question.options.sort(
     (optionA, optionB) =>
       parseInt(optionA.index) > parseInt(optionB.index) ? 1 : -1
