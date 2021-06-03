@@ -45,14 +45,16 @@ export default function ReportExport(props: Props) {
     if (export_as === "JSON") {
       if (export_type === "Report") download(`Report${Date.now()}.json`, JSON.stringify({
         settings: playSettings,
-        results: filteredResults
+        results: filteredResults,
+        createdAt: Date.now()
       }, undefined, 2));
       else
         clonedDownload("json")
     } else {
       if (export_type === "Report") download(`Report${Date.now()}.yaml`, safeDump({
         settings: playSettings,
-        results: filteredResults
+        results: filteredResults,
+        createdAt: Date.now()
       }));
       else
         clonedDownload("yaml")

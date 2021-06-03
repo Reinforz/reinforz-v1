@@ -206,15 +206,21 @@ export interface IResult {
   user_answers: string[];
   verdict: boolean;
   score: {
-    amount: number,
-    time: number
-    hints: number
-    answers: number
+    amount: number;
+    time: number;
+    hints: number;
+    answers: number;
   };
   time_taken: number;
   hints_used: number;
   question: TResultQuestion;
   _id: string;
+}
+
+export interface IReport {
+  settings: IPlaySettings;
+  results: IResult[];
+  createdAt: number;
 }
 
 export interface IReportFilter {
