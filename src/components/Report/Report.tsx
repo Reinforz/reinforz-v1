@@ -35,7 +35,7 @@ export default function Report() {
 
   const render = () => {
     if (report.results.length !== 0) {
-      return <Menu contents={[<ReportFilter />, <div className="Report" style={{ color: theme.palette.text.primary }}>
+      return <Menu lsKey="REPORT_MENU" contents={[<ReportFilter />, <div className="Report" style={{ color: theme.palette.text.primary }}>
         <ReportTable />
         <div style={{ gridArea: '1/2/3/3', display: 'flex', flexDirection: 'column', overflow: 'auto' }}>
           <ReportStats />

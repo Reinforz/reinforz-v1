@@ -1,5 +1,20 @@
 import { ThemeProvider } from '@material-ui/styles';
 import { SnackbarProvider } from "notistack";
+import Prism from "prismjs";
+import "prismjs/components/prism-bash";
+import "prismjs/components/prism-c";
+import "prismjs/components/prism-clike";
+import "prismjs/components/prism-cpp";
+import "prismjs/components/prism-csharp";
+import "prismjs/components/prism-dart";
+import "prismjs/components/prism-docker";
+import "prismjs/components/prism-git";
+import "prismjs/components/prism-go";
+import "prismjs/components/prism-java";
+import "prismjs/components/prism-javascript";
+import "prismjs/components/prism-powershell";
+import "prismjs/components/prism-python";
+import "prismjs/components/prism-ruby";
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
@@ -12,8 +27,12 @@ import { RootContext } from './context/RootContext';
 import { SettingsContext } from "./context/SettingsContext";
 import { QUIZ_1 } from './data/quizzes';
 import './index.scss';
+import "./styles/vscode-dark.css";
 import { ExtendedTheme, IErrorLog, IPlaySettings, IQuizFull } from './types';
 import { applyPlaySettingsOptions, arrayShuffler, createDefaultPlaySettingsFiltersState, createDefaultPlaySettingsOptionsState, generateQuestionsMap, generateTheme, getSettings } from './utils';
+
+const a = Prism.highlight
+a.bind(this);
 
 const App = () => {
   const [settings, setSettings] = useState(getSettings());

@@ -5,7 +5,7 @@ export const QUIZ_1: IQuizFull = {
   subject: 'Subject 1',
   questions: [
     {
-      question: 'Quiz 1 Question 1',
+      question: `\`\`\`js\nconsole.log("Hello World");\n\`\`\``,
       answers: [
         {
           text: '0',
@@ -16,10 +16,10 @@ export const QUIZ_1: IQuizFull = {
           explanation: null
         }
       ],
-      hints: ['Hint 1', 'Hint 2', 'Hint 3'],
+      hints: [`\`\`\`js\nconsole.log("Hint 1");\n\`\`\``, 'Hint 2', 'Hint 3'],
       options: [
         {
-          text: 'Option 3',
+          text: `\`\`\`js\nconsole.log("Option 3");\n\`\`\``,
           index: '2'
         },
         {

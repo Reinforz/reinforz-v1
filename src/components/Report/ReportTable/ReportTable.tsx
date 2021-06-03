@@ -3,6 +3,7 @@ import { ReportContext } from "../../../context/ReportContext";
 import { useThemeSettings } from "../../../hooks";
 import { StackList } from "../../../shared";
 import { IResultInputQuestion } from "../../../types";
+import { sanitizeMarkdown } from "../../../utils";
 import { ReportAnswers } from "../ReportAnswers/ReportAnswers";
 import { ReportOptions } from "../ReportOptions/ReportOptions";
 import { ReportQuestion } from "../ReportQuestion/ReportQuestion";
@@ -28,8 +29,7 @@ export function ReportTable() {
           <div style={{ width: '25%' }}>
             {!reportFilter.excluded_columns.includes('quiz_stats') ? <StackList header="Quiz Stats" items={[['Topic', filteredResult.question.quiz.topic], ['Subject', filteredResult.question.quiz.subject]]} /> : null}
             {filteredResult.question.hints.length !== 0 && !reportFilter.excluded_columns.includes('hints') ? <div className="Report-Table-item-hints" style={{ backgroundColor: theme.color.base }}>
-              {filteredResult.question.hints.map(hint => <div className="Report-Table-item-hints-item" key={hint} style={{ backgroundColor: theme.color.light }}>
-                {hint}
+              {filteredResult.question.hints.map(hint => <div className="Report-Table-item-hints-item" key={hint} style={{ backgroundColor: theme.color.light }} dangerouslySetInnerHTML={{ __html: sanitizeMarkdown(hint) }}>
               </div>)}
             </div> : null}
           </div>

@@ -27,6 +27,11 @@ div#root {
 .App {
   height: 100%;
   &.dark {
+    pre{
+      background: #212121;
+      margin: 0px;
+      padding: 5px;
+    }
     ::-webkit-scrollbar {
       width: 10px;
     }
@@ -45,6 +50,13 @@ div#root {
   }
 
   &.light {
+
+    pre{
+      background: rgb(224, 224, 224);
+      margin: 0px;
+      padding: 5px;
+    }
+
     ::-webkit-scrollbar {
       width: 10px;
     }
