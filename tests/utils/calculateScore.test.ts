@@ -44,9 +44,9 @@ describe('partial_score=true', () => {
       });
 
       expect(score).toStrictEqual({
-        amount: 0.89,
+        amount: 0.887,
         answers: 0.7,
-        hints: 0.0375,
+        hints: 0.037,
         time: 0.15
       });
     });
@@ -60,9 +60,9 @@ describe('partial_score=true', () => {
       });
 
       expect(score).toStrictEqual({
-        amount: 0.96,
+        amount: 0.962,
         answers: 0.7,
-        hints: 0.11249999999999999,
+        hints: 0.112,
         time: 0.15
       });
     });
@@ -76,10 +76,10 @@ describe('partial_score=true', () => {
       });
 
       expect(score).toStrictEqual({
-        amount: 0.89,
+        amount: 0.887,
         answers: 0.7,
         hints: 0.15,
-        time: 0.0375
+        time: 0.037
       });
     });
   });
