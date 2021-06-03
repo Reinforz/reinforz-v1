@@ -22,3 +22,4 @@ export * from './getAnswerResult';
 export * from './getSettings';
 export * from './sanitizeMarkdown';
 export * from './transformReportQuestion';
+export * from './transformTextBySeparator';
