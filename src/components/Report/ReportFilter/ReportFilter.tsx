@@ -1,9 +1,9 @@
 import { Button } from '@material-ui/core';
-import React, { Dispatch, SetStateAction, useContext } from "react";
+import React, { useContext } from "react";
+import { ReportContext } from '../../../context/ReportContext';
 import { RootContext } from '../../../context/RootContext';
 import { useThemeSettings } from '../../../hooks';
 import { CheckboxGroup, InputRange, RadioGroup, Select } from '../../../shared';
-import { IReportFilter } from "../../../types";
 import { createDefaultReportFilterState } from '../../../utils';
 import "./ReportFilter.scss";
 
@@ -12,15 +12,10 @@ const transformLabel = (stat: string) => {
   return label.split(" ").map(c => c.charAt(0).toUpperCase() + c.substr(1)).join(" ");
 }
 
-interface Props {
-  reportFilter: IReportFilter,
-  setReportFilter: Dispatch<SetStateAction<IReportFilter>>
-}
-
-export default function ReportFilter(props: Props) {
-  const { setReportFilter, reportFilter } = props;
+export default function ReportFilter() {
   const { theme } = useThemeSettings();
   const { selectedQuizIds, selectedQuizzes } = useContext(RootContext);
+  const { setReportFilter, reportFilter } = useContext(ReportContext);
 
   return <div className="ReportFilter" style={{ backgroundColor: theme.color.dark }}>
     <InputRange label={"Time taken range"} min={0} max={120} setState={setReportFilter} state={reportFilter} stateKey={"time_taken"} />
@@ -34,7 +29,7 @@ export default function ReportFilter(props: Props) {
     }} setState={setReportFilter} state={reportFilter} stateKey={"excluded_quizzes"} />
     <Select lsKey={"REPORT_FILTERS"} multiple label={"Excluded Columns"}
       renderValue={(selected) => (selected as string[]).map((report_stat, index) => <div key={report_stat + "excluded_columns" + index}>{transformLabel(report_stat)}</div>)}
-      items={["quiz", "subject", "question", "type", "difficulty", "verdict", "score", "time_allocated", "time_taken", "answers", "weight", "user_answers", "hints_used"]}
+      items={["question", "image", "question_stats", "user_stats", "score_breakdown", "quiz_stats", "hints", "answers", "options"]}
       menuItemLabel={(item) => transformLabel(item)}
       setState={setReportFilter}
       state={reportFilter}

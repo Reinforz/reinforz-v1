@@ -33,7 +33,7 @@ export default function Report() {
 
   const render = () => {
     if (report.results.length !== 0) {
-      return <Menu contents={[<ReportFilter reportFilter={reportFilter} setReportFilter={setReportFilter} />, <div className="Report" style={{ color: theme.palette.text.primary }}>
+      return <Menu contents={[<ReportFilter />, <div className="Report" style={{ color: theme.palette.text.primary }}>
         <ReportTable />
         <div style={{ gridArea: '1/2/3/3', display: 'flex', flexDirection: 'column', overflow: 'auto' }}>
           <ReportStats />
@@ -55,7 +55,7 @@ export default function Report() {
     }
   }
 
-  return <ReportContext.Provider value={{ setReport, report, filteredResults, filteredQuizzes }}>
+  return <ReportContext.Provider value={{ setReport, report, filteredResults, filteredQuizzes, reportFilter, setReportFilter }}>
     {render()}
   </ReportContext.Provider>
 }
