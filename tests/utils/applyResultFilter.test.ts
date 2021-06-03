@@ -5,7 +5,12 @@ const result: IResult = {
   verdict: true,
   hints_used: 0,
   time_taken: 20,
-  score: 1,
+  score: {
+    amount: 1,
+    answers: 0.7,
+    hints: 0.15,
+    time: 0.15
+  },
   user_answers: [],
   _id: 'result_1',
   question: {

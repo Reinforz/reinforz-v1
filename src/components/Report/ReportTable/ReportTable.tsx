@@ -1,9 +1,9 @@
 import { useThemeSettings } from "../../../hooks";
 import { StackList } from "../../../shared";
 import { IResult, IResultInputQuestion } from "../../../types";
-import { sanitizeMarkdown } from "../../../utils";
 import { ReportAnswers } from "../ReportAnswers/ReportAnswers";
 import { ReportOptions } from "../ReportOptions/ReportOptions";
+import { ReportQuestion } from "../ReportQuestion/ReportQuestion";
 import "./ReportTable.scss";
 interface Props {
   filteredResults: IResult[]
@@ -14,10 +14,7 @@ export function ReportTable(props: Props) {
   return <div className="Report-Table" style={{ backgroundColor: theme.color.base, color: theme.palette.text.primary }}>
     {props.filteredResults.map(filteredResult =>
       <div key={filteredResult.question._id} className="Report-Table-item" style={{ backgroundColor: theme.color.dark }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 350px' }}>
-          {<div className="Report-Table-item-question" style={{ gridArea: filteredResult.question.image ? `1/1/2/2` : `1/1/2/3`, backgroundColor: theme.color.light }} dangerouslySetInnerHTML={{ __html: sanitizeMarkdown(Array.isArray(filteredResult.question.question) ? filteredResult.question.question.join(" | ") : filteredResult.question.question) }}></div>}
-          {filteredResult.question.image && <div className="Report-Table-item-image" style={{ gridArea: `1/2/2/3`, backgroundColor: theme.color.light }}><img src={filteredResult.question.image} alt="Question" /></div>}
-        </div>
+        <ReportQuestion question={filteredResult.question} />
         <div className="Report-Table-item-stats">
           <StackList header="Question Stats" items={[['Type', filteredResult.question.type], ['Difficulty', filteredResult.question.difficulty], ['Time Allocated', filteredResult.question.time_allocated], ['Weight', filteredResult.question.weight]]} />
           <StackList header="User Stats" items={[['Time Taken', filteredResult.time_taken], ['Hints Used', filteredResult.hints_used], ['Verdict', <div style={{
