@@ -20,9 +20,10 @@ export function ReportTable(props: Props) {
         </div>
         <div className="Report-Table-item-stats">
           <StackList header="Question Stats" items={[['Type', filteredResult.question.type], ['Difficulty', filteredResult.question.difficulty], ['Time Allocated', filteredResult.question.time_allocated], ['Weight', filteredResult.question.weight]]} />
-          <StackList header="User Stats" items={[['Time Taken', filteredResult.time_taken], ['Hints Used', filteredResult.hints_used], ['Score', filteredResult.score.amount], ['Verdict', <div style={{
+          <StackList header="User Stats" items={[['Time Taken', filteredResult.time_taken], ['Hints Used', filteredResult.hints_used], ['Verdict', <div style={{
             fontWeight: 'bold', color: filteredResult.verdict === false ? "#ff3223" : "#36e336"
           }}>{filteredResult.verdict === false ? "Incorrect" : "Correct"}</div>]]} />
+          <StackList header="Score Breakdown" items={[['Amount', filteredResult.score.amount], ['Answers', filteredResult.score.answers], ['Time', filteredResult.score.time], ['Hints', filteredResult.score.hints]]} />
         </div>
         <div style={{ display: 'flex' }}>
           {(filteredResult.question.type === "MCQ" || filteredResult.question.type === "MS") ? <ReportOptions question={filteredResult.question} userAnswers={filteredResult.user_answers} /> : <ReportAnswers question={filteredResult.question as IResultInputQuestion} userAnswers={filteredResult.user_answers} />}
