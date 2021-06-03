@@ -32,7 +32,8 @@ describe('MCQ Questions', () => {
       ['1'],
       14,
       0,
-      true
+      true,
+      false
     );
     expect(info).toStrictEqual({
       verdict: true,
@@ -77,6 +78,7 @@ describe('MCQ Questions', () => {
       ['2'],
       14,
       0,
+      false,
       false
     );
     expect(info).toStrictEqual({
@@ -128,7 +130,8 @@ describe('MS Questions', () => {
       ['1', '2'],
       14,
       0,
-      true
+      true,
+      false
     );
     expect(info).toStrictEqual({
       verdict: true,
@@ -177,6 +180,7 @@ describe('MS Questions', () => {
       ['0', '2'],
       14,
       0,
+      false,
       false
     );
     expect(info).toStrictEqual({
@@ -218,7 +222,8 @@ describe('FIB Questions', () => {
       ['chunk 1', 'chunk 2'],
       14,
       0,
-      true
+      true,
+      false
     );
     expect(info).toStrictEqual({
       verdict: true,
@@ -251,6 +256,7 @@ describe('FIB Questions', () => {
       ['chunk 2'],
       14,
       0,
+      false,
       false
     );
     expect(info).toStrictEqual({
