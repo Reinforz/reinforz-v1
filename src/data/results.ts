@@ -13,13 +13,15 @@ const question1 = QUIZ_1.questions[0] as IMsQuestionFull,
 export const RESULT_1: IResult = {
   question: {
     ...question1,
-    options: (question1.options.map((option, index) => ({
-      ...option,
-      isCorrect: [0, 2].includes(index),
-      userSelected: [0, 2].includes(index)
-    })) as IResultSelectionQuestion['options']).sort((optionA, optionB) =>
-      parseInt(optionA.index) > parseInt(optionB.index) ? 1 : -1
-    )
+    options: question1.options
+      .sort((optionA, optionB) =>
+        parseInt(optionA.index) > parseInt(optionB.index) ? 1 : -1
+      )
+      .map((option, index) => ({
+        ...option,
+        isCorrect: [0, 2].includes(index),
+        userSelected: [0, 2].includes(index)
+      })) as IResultSelectionQuestion['options']
   },
   user_answers: ['0', '2'],
   hints_used: 1,
