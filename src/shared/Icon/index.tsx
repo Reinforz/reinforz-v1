@@ -1,8 +1,7 @@
 import { Popover, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import React, { Fragment, useContext, useEffect } from 'react';
-import SettingsContext from '../../context/SettingsContext';
-import { ISettings } from '../../types';
+import { SettingsContext } from '../../context/SettingsContext';
 
 const useStyles = makeStyles((theme) => ({
   popover: {
@@ -22,7 +21,7 @@ interface Props {
 export default function Icon(props: Props) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const settings = useContext(SettingsContext) as ISettings;
+  const { settings } = useContext(SettingsContext);
 
   const open = Boolean(anchorEl);
 

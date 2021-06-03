@@ -1,4 +1,7 @@
 import React from "react";
 import { ISettings } from "../types";
 
-export default React.createContext({} as ISettings)
+export const SettingsContext = React.createContext({} as {
+  settings: ISettings;
+  setSettings: (settings: ISettings) => void;
+})

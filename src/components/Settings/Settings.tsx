@@ -1,20 +1,15 @@
 import { Button, FormControlLabel, InputLabel, Radio, RadioGroup } from '@material-ui/core';
-import React from 'react';
+import React, { useContext } from 'react';
 import { BsMoon, BsSun } from 'react-icons/bs';
 import { useHistory } from 'react-router-dom';
+import { SettingsContext } from '../../context/SettingsContext';
 import { useThemeSettings } from '../../hooks';
 import { Toggles } from '../../shared';
-import { ISettings } from '../../types';
 import "./Settings.scss";
 
-interface Props {
-  settings: ISettings;
-  setSettings: (settings: ISettings) => void;
-}
 
-
-function Settings(props: Props) {
-  const { settings, setSettings } = props;
+function Settings() {
+  const { settings, setSettings } = useContext(SettingsContext);
   const { theme, animation, hovertips } = settings;
   const history = useHistory();
   const { theme: THEME } = useThemeSettings();
