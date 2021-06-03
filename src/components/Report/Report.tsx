@@ -3,6 +3,7 @@ import React, { useContext, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { ReportContext } from '../../context/ReportContext';
 import { RootContext } from '../../context/RootContext';
+import { useThemeSettings } from '../../hooks';
 import { Menu } from '../../shared';
 import { IReport, IReportFilter, IResult } from "../../types";
 import { applyResultFilters, createDefaultReportFilterState, generateQuizzesFromResults } from '../../utils';
@@ -11,11 +12,13 @@ import { ReportAggregator } from './ReportAggregator/ReportAggregator';
 import ReportExport from './ReportExport/ReportExport';
 import ReportFilter from './ReportFilter/ReportFilter';
 import { ReportSettings } from './ReportSettings/ReportSettings';
+import { ReportStats } from './ReportStats/ReportStats';
 import { ReportTable } from './ReportTable/ReportTable';
 import { ReportUpload } from './ReportUpload/ReportUpload';
 
 export default function Report() {
   const { state } = useLocation<{ results: IResult[] }>();
+  const { theme } = useThemeSettings();
   const { playSettings, setUploadedQuizzes, setSelectedQuizIds, allQuestionsMap } = useContext(RootContext);
   const [reportFilter, setReportFilter] = useState<IReportFilter>(JSON.parse(localStorage.getItem('REPORT_FILTERS') ?? JSON.stringify(createDefaultReportFilterState())));
   const [report, setReport] = useState<IReport>({
@@ -30,9 +33,10 @@ export default function Report() {
 
   const render = () => {
     if (report.results.length !== 0) {
-      return <Menu contents={[<ReportFilter reportFilter={reportFilter} setReportFilter={setReportFilter} />, <div className="Report">
+      return <Menu contents={[<ReportFilter reportFilter={reportFilter} setReportFilter={setReportFilter} />, <div className="Report" style={{ color: theme.palette.text.primary }}>
         <ReportTable />
         <div style={{ gridArea: '1/2/3/3', display: 'flex', flexDirection: 'column', overflow: 'auto' }}>
+          <ReportStats />
           <ReportSettings />
           <ReportExport />
           <ReportAggregator />

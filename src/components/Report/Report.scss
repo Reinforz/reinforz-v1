@@ -4,12 +4,12 @@
   display: grid;
   grid-template-columns: 1fr 300px;
 
-  &-Table{
-    grid-area: 1/1/3/2;
-  }
-
   &-BackButton{
     display: flex;
     justify-content: center;
+  }
+
+  &-Table{
+    grid-area: 1/1/3/2;
   }
 }
