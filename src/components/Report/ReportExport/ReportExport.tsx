@@ -33,9 +33,12 @@ export default function ReportExport(props: Props) {
   const clonedDownload = useCallback((type) => {
     Object.values(filteredQuizzes).forEach(quiz => {
       quiz.questions = quiz.questions.map(question => {
-        const cloned_question = JSON.parse(JSON.stringify(question));
-        delete cloned_question.quiz;
-        return cloned_question;
+        const clonedQuestion = JSON.parse(JSON.stringify(question));
+        delete clonedQuestion.quiz;
+        if (question.type === "MS" || question.type === "MCQ") {
+          clonedQuestion.options = question.options.sort((optionA, optionB) => parseInt(optionA.index) > parseInt(optionB.index) ? 1 : -1).map(option => option.text)
+        }
+        return clonedQuestion;
       });
       type === "yaml" ? download(`${quiz.subject} - ${quiz.topic}.yaml`, safeDump(quiz)) : download(`${quiz.subject} - ${quiz.topic}.json`, JSON.stringify(quiz, undefined, 2))
     })

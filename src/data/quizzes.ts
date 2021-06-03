@@ -85,7 +85,7 @@ export const QUIZ_1: IQuizFull = {
       options: null,
       image:
         'https://www.freecodecamp.org/news/content/images/2020/02/Ekran-Resmi-2019-11-18-18.08.13.png',
-      weight: 2,
+      weight: 0.5,
       difficulty: 'Beginner',
       type: 'FIB',
       time_allocated: 60,

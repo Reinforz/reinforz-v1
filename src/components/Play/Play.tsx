@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { IoMdSettings } from 'react-icons/io';
 import { useHistory } from "react-router-dom";
 import { PlayContext } from "../../context/PlayContext";
+import { QUIZ_1 } from '../../data/quizzes';
 import { useThemeSettings } from '../../hooks';
 import { List, Menu } from "../../shared";
 import {
@@ -32,14 +33,14 @@ function Play() {
     options: createDefaultPlaySettingsOptionsState(),
     filters: createDefaultPlaySettingsFiltersState()
   })));
-  const [playing, setPlaying] = useState(false);
-  const [uploadedQuizzes, setUploadedQuizzes] = useState<IQuizFull[]>([]);
-  const [selectedQuizIds, setSelectedQuizIds] = useState<string[]>([]);
+  const [playing, setPlaying] = useState(true);
+  const [uploadedQuizzes, setUploadedQuizzes] = useState<IQuizFull[]>([QUIZ_1]);
+  const [selectedQuizIds, setSelectedQuizIds] = useState<string[]>([QUIZ_1._id]);
   const [errorLogs, setErrorLogs] = useState<IErrorLog[]>([]);
 
   const [selectedQuizzes, filteredQuizzes] = applyPlaySettingsOptions(uploadedQuizzes, selectedQuizIds, playSettings.options, arrayShuffler);
 
-  const [allQuestions, allQuestionsMap] = generateQuestionsMap(filteredQuizzes, playSettings.filters)
+  const [allQuestions, allQuestionsMap] = generateQuestionsMap(filteredQuizzes, playSettings.filters);
 
   return <PlayContext.Provider value={{ selectedQuizzes, allQuestionsMap, allQuestions, filteredQuizzes, setPlaySettings, playSettings, errorLogs, setErrorLogs, setPlaying, playing, uploadedQuizzes, selectedQuizIds, setUploadedQuizzes, setSelectedQuizIds }}>
     {!playing ? <Menu width={290} contents={[<PlaySettings />, <div className="Play">
