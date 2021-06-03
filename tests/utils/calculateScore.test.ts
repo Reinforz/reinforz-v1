@@ -27,7 +27,12 @@ describe('partial_score=true', () => {
         totalCorrectAnswers: 1
       });
 
-      expect(score).toStrictEqual(1);
+      expect(score).toStrictEqual({
+        amount: 1,
+        answers: 0.7,
+        hints: 0.15,
+        time: 0.15
+      });
     });
 
     it(`Should work when all hints are used`, () => {
@@ -38,7 +43,12 @@ describe('partial_score=true', () => {
         totalCorrectAnswers: 1
       });
 
-      expect(score).toStrictEqual(0.89);
+      expect(score).toStrictEqual({
+        amount: 0.89,
+        answers: 0.7,
+        hints: 0.0375,
+        time: 0.15
+      });
     });
 
     it(`Should work when some hints are used`, () => {
@@ -49,7 +59,12 @@ describe('partial_score=true', () => {
         totalCorrectAnswers: 1
       });
 
-      expect(score).toStrictEqual(0.96);
+      expect(score).toStrictEqual({
+        amount: 0.96,
+        answers: 0.7,
+        hints: 0.11249999999999999,
+        time: 0.15
+      });
     });
 
     it(`Should work when full time allocated is used`, () => {
@@ -60,7 +75,12 @@ describe('partial_score=true', () => {
         totalCorrectAnswers: 1
       });
 
-      expect(score).toStrictEqual(0.89);
+      expect(score).toStrictEqual({
+        amount: 0.89,
+        answers: 0.7,
+        hints: 0.15,
+        time: 0.0375
+      });
     });
   });
 
@@ -77,7 +97,12 @@ describe('partial_score=true', () => {
         totalCorrectAnswers: 1
       });
 
-      expect(score).toStrictEqual(0.65);
+      expect(score).toStrictEqual({
+        amount: 0.65,
+        answers: 0.35,
+        hints: 0.15,
+        time: 0.15
+      });
     });
   });
 });
@@ -101,7 +126,12 @@ describe('partial_score=false', () => {
         totalCorrectAnswers: 1
       });
 
-      expect(score).toStrictEqual(1);
+      expect(score).toStrictEqual({
+        amount: 1,
+        answers: 0.7,
+        hints: 0.15,
+        time: 0.15
+      });
     });
   });
 
@@ -118,7 +148,12 @@ describe('partial_score=false', () => {
         totalCorrectAnswers: 1
       });
 
-      expect(score).toStrictEqual(0);
+      expect(score).toStrictEqual({
+        amount: 0,
+        answers: 0.35,
+        hints: 0.15,
+        time: 0.15
+      });
     });
   });
 });

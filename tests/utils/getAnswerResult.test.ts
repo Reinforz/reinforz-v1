@@ -36,7 +36,12 @@ describe('MCQ Questions', () => {
     );
     expect(info).toStrictEqual({
       verdict: true,
-      score: 1,
+      score: {
+        amount: 1,
+        answers: 0.7,
+        hints: 0.15,
+        time: 0.15
+      },
       _id: expect.any(String)
     });
   });
@@ -76,7 +81,12 @@ describe('MCQ Questions', () => {
     );
     expect(info).toStrictEqual({
       verdict: false,
-      score: 0,
+      score: {
+        amount: 0,
+        answers: 0,
+        hints: 0.15,
+        time: 0.15
+      },
       _id: expect.any(String)
     });
   });
@@ -122,7 +132,12 @@ describe('MS Questions', () => {
     );
     expect(info).toStrictEqual({
       verdict: true,
-      score: 1,
+      score: {
+        amount: 1,
+        answers: 0.7,
+        hints: 0.15,
+        time: 0.15
+      },
       _id: expect.any(String)
     });
   });
@@ -166,7 +181,12 @@ describe('MS Questions', () => {
     );
     expect(info).toStrictEqual({
       verdict: false,
-      score: 0,
+      score: {
+        amount: 0,
+        answers: 0,
+        hints: 0.15,
+        time: 0.15
+      },
       _id: expect.any(String)
     });
   });
@@ -202,7 +222,12 @@ describe('FIB Questions', () => {
     );
     expect(info).toStrictEqual({
       verdict: true,
-      score: 1,
+      score: {
+        amount: 1,
+        answers: 0.7,
+        hints: 0.15,
+        time: 0.15
+      },
       _id: expect.any(String)
     });
   });
@@ -230,7 +255,12 @@ describe('FIB Questions', () => {
     );
     expect(info).toStrictEqual({
       verdict: false,
-      score: 0,
+      score: {
+        amount: 0,
+        answers: 0,
+        hints: 0.15,
+        time: 0.15
+      },
       _id: expect.any(String)
     });
   });
