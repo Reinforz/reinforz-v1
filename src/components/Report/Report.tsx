@@ -26,7 +26,7 @@ export default function Report(props: Props) {
   return (
     <Menu contents={[<ReportFilter reportFilter={reportFilter} setReportFilter={setReportFilter} />, <div className="Report">
       <ReportTable filteredResults={filteredResults} />
-      <div style={{ gridArea: '1/2/3/3', display: 'flex', flexDirection: 'column' }}>
+      <div style={{ gridArea: '1/2/3/3', display: 'flex', flexDirection: 'column', overflow: 'auto' }}>
         <ReportSettings />
         <ReportExport filteredResults={filteredResults} filteredQuizzes={Object.values(filteredQuizzes)} />
         <ReportAggregator filteredResults={filteredResults} />

@@ -8,5 +8,5 @@ export function transformTextBySeparator(
   return text
     .split(separator)
     .map((c) => c.charAt(0).toUpperCase() + c.substr(1))
-    .join(' ');
+    .join(join);
 }
