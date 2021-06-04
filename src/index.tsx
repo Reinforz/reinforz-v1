@@ -10,7 +10,6 @@ import Report from './components/Report/Report';
 import Settings from './components/Settings/Settings';
 import { RootContext } from './context/RootContext';
 import { SettingsContext } from "./context/SettingsContext";
-import { QUIZ_1 } from './data/quizzes';
 import './index.scss';
 import "./styles/vs-light.scss";
 import "./styles/vscode-dark.scss";
@@ -20,8 +19,8 @@ import { applyPlaySettingsOptions, arrayShuffler, generateQuestionsMap, generate
 const App = () => {
   const [settings, setSettings] = useState(getSettings());
   const [playSettings, setPlaySettings] = useState(getPlaySettings());
-  const [uploadedQuizzes, setUploadedQuizzes] = useState<IQuizFull[]>([QUIZ_1]);
-  const [selectedQuizIds, setSelectedQuizIds] = useState<string[]>([QUIZ_1._id]);
+  const [uploadedQuizzes, setUploadedQuizzes] = useState<IQuizFull[]>([]);
+  const [selectedQuizIds, setSelectedQuizIds] = useState<string[]>([]);
   const [errorLogs, setErrorLogs] = useState<IErrorLog[]>([]);
 
   const generatedTheme = generateTheme(settings.theme) as ExtendedTheme;
