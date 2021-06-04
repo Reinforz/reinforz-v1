@@ -20,6 +20,7 @@ export * from './generateQuizzesFromResults';
 export * from './generateSelectionQuestionAnswers';
 export * from './generateTheme';
 export * from './getAnswerResult';
+export * from "./getPlaySettings";
 export * from './getSettings';
 export * from './sanitizeMarkdown';
 export * from './transformFullQuestions';

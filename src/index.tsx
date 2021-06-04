@@ -13,23 +13,18 @@ import { SettingsContext } from "./context/SettingsContext";
 import { QUIZ_1 } from './data/quizzes';
 import './index.scss';
 import "./styles/vscode-dark.css";
-import { ExtendedTheme, IErrorLog, IPlaySettings, IQuizFull } from './types';
-import { applyPlaySettingsOptions, arrayShuffler, createDefaultPlaySettingsFiltersState, createDefaultPlaySettingsOptionsState, generateQuestionsMap, generateTheme, getSettings } from './utils';
+import { ExtendedTheme, IErrorLog, IQuizFull } from './types';
+import { applyPlaySettingsOptions, arrayShuffler, generateQuestionsMap, generateTheme, getPlaySettings, getSettings } from './utils';
 
 const App = () => {
   const [settings, setSettings] = useState(getSettings());
-  const generatedTheme = generateTheme(settings.theme) as ExtendedTheme;
-
-  const [playSettings, setPlaySettings] = useState<IPlaySettings>(JSON.parse(localStorage.getItem('PLAY_SETTINGS') ?? JSON.stringify({
-    options: createDefaultPlaySettingsOptionsState(),
-    filters: createDefaultPlaySettingsFiltersState()
-  })));
+  const [playSettings, setPlaySettings] = useState(getPlaySettings());
   const [uploadedQuizzes, setUploadedQuizzes] = useState<IQuizFull[]>([QUIZ_1]);
   const [selectedQuizIds, setSelectedQuizIds] = useState<string[]>([QUIZ_1._id]);
   const [errorLogs, setErrorLogs] = useState<IErrorLog[]>([]);
 
+  const generatedTheme = generateTheme(settings.theme) as ExtendedTheme;
   const [selectedQuizzes, filteredQuizzes] = applyPlaySettingsOptions(uploadedQuizzes, selectedQuizIds, playSettings.options, arrayShuffler);
-
   const [allQuestions, allQuestionsMap] = generateQuestionsMap(filteredQuizzes, playSettings.filters);
 
   return <ThemeProvider theme={generatedTheme}>
