@@ -53,7 +53,7 @@ export const QUIZ_1: IQuizFull = {
       }
     },
     {
-      question: ['Chunk 1', 'Chunk 2', 'Chunk 3'],
+      question: ['```js\nconsole.log("', '" + "', '");\n```'],
       answers: [
         [
           {

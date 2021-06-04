@@ -4,7 +4,7 @@ import { IoMdSettings } from 'react-icons/io';
 import { useHistory } from "react-router-dom";
 import { RootContext } from "../../context/RootContext";
 import { useThemeSettings } from '../../hooks';
-import { List, Menu } from "../../shared";
+import { List, Menu, View } from "../../shared";
 import {
   ExtendedTheme
 } from "../../types";
@@ -29,10 +29,13 @@ function Play() {
   return <Menu width={290} contents={[<PlaySettings />, <div className="Play">
     <IoMdSettings size={25} fill={theme.color.opposite_light} className={`${classes.root} Play-settings-icon`} onClick={() => history.push("/settings")} />
     <PlayUpload />
-    <PlayErrorlogs />
-    <List onDelete={(remainingItems) => {
-      setErrorLogs(errorLogs.filter(errorLog => !remainingItems.map(remainingItem => remainingItem._id).includes(errorLog.quiz_id)))
-    }} selectedItems={selectedQuizIds} setSelectedItems={setSelectedQuizIds} header="Uploaded Quizzes" items={uploadedQuizzes} setItems={setUploadedQuizzes} fields={[(item) => `${item.subject} - ${item.topic}`, (item) => item.questions.length + " Qs"]} />
+    <div style={{ gridArea: '2/1/5/2' }}>
+      <View items={
+        [<List onDelete={(remainingItems) => {
+          setErrorLogs(errorLogs.filter(errorLog => !remainingItems.map(remainingItem => remainingItem._id).includes(errorLog.quiz_id)))
+        }} selectedItems={selectedQuizIds} setSelectedItems={setSelectedQuizIds} header="Uploaded Quizzes" items={uploadedQuizzes} setItems={setUploadedQuizzes} fields={[(item) => `${item.subject} - ${item.topic}`, (item) => item.questions.length + " Qs"]} />, <PlayErrorlogs />]}
+      />
+    </div>
     <PlayListTable />
   </div>]} />
 }
