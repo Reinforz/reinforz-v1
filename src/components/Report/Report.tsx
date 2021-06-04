@@ -1,5 +1,5 @@
 import { Button } from '@material-ui/core';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useMemo, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { ReportContext } from '../../context/ReportContext';
 import { RootContext } from '../../context/RootContext';
@@ -28,8 +28,8 @@ export default function Report() {
   });
 
   const history = useHistory();
-  const allQuestionsMap = generateQuestionsMapFromReportResults(report.results);
-  const allQuizzesMap = generateQuizzesFromResults(report.results, allQuestionsMap);
+  const allQuestionsMap = useMemo(() => generateQuestionsMapFromReportResults(report.results), [report.results]);
+  const allQuizzesMap = useMemo(() => generateQuizzesFromResults(report.results, allQuestionsMap), [report.results, allQuestionsMap]);
   const filteredResults = applyReportFilters(report.results, reportFilter);
   const filteredQuizzesMap = generateQuizzesFromResults(filteredResults, allQuestionsMap);
 
@@ -45,8 +45,8 @@ export default function Report() {
           <div className="Report-BackButton">
             <Button variant="contained" color="primary" onClick={() => {
               localStorage.setItem("REPORT_FILTERS", JSON.stringify(reportFilter))
-              setUploadedQuizzes(Object.values(filteredQuizzesMap))
-              setSelectedQuizIds(Object.values(filteredQuizzesMap).map(quiz => quiz._id))
+              setUploadedQuizzes(Array.from(filteredQuizzesMap.values()))
+              setSelectedQuizIds(Array.from(filteredQuizzesMap.keys()))
               history.push("/")
             }}>Back to Home</Button>
           </div>

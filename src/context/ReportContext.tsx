@@ -5,8 +5,8 @@ interface IReportContext {
   report: IReport,
   setReport: React.Dispatch<React.SetStateAction<IReport>>
   filteredResults: IResult[],
-  filteredQuizzesMap: Record<string, IQuizFull>
-  allQuizzesMap: Record<string, IQuizFull>
+  filteredQuizzesMap: Map<string, IQuizFull>
+  allQuizzesMap: Map<string, IQuizFull>
   reportFilter: IReportFilter,
   setReportFilter: React.Dispatch<React.SetStateAction<IReportFilter>>
 }

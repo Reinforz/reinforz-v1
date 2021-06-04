@@ -22,12 +22,11 @@ export default function ReportExport() {
 
   const { export_type, export_as } = exportState;
 
-  // ? Convert to a util function
   const clonedDownload = useCallback((type) => {
-    Object.values(filteredQuizzesMap).forEach(quiz => {
+    for (const [, quiz] of filteredQuizzesMap) {
       quiz.questions = transformFullQuestions(quiz.questions);
       type === "yaml" ? download(`${quiz.subject} - ${quiz.topic}.yaml`, safeDump(quiz)) : download(`${quiz.subject} - ${quiz.topic}.json`, JSON.stringify(quiz, undefined, 2))
-    })
+    }
   }, [filteredQuizzesMap])
 
   const downloadFiles = () => {
