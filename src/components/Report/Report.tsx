@@ -5,8 +5,8 @@ import { ReportContext } from '../../context/ReportContext';
 import { RootContext } from '../../context/RootContext';
 import { useThemeSettings } from '../../hooks';
 import { Menu } from '../../shared';
-import { IReport, IReportFilter, IResult } from "../../types";
-import { applyReportFilters, createDefaultReportFilterState, generateQuestionsMapFromReportResults, generateQuizzesFromResults } from '../../utils';
+import { IReport, IResult } from "../../types";
+import { applyReportFilters, generateQuestionsMapFromReportResults, generateQuizzesFromResults, getReportFilters } from '../../utils';
 import "./Report.scss";
 import { ReportAggregator } from './ReportAggregator/ReportAggregator';
 import ReportExport from './ReportExport/ReportExport';
@@ -20,7 +20,7 @@ export default function Report() {
   const { state } = useLocation<{ results: IResult[] }>();
   const { theme } = useThemeSettings();
   const { playSettings, setUploadedQuizzes, setSelectedQuizIds } = useContext(RootContext);
-  const [reportFilter, setReportFilter] = useState<IReportFilter>(JSON.parse(localStorage.getItem('REPORT_FILTERS') ?? JSON.stringify(createDefaultReportFilterState())));
+  const [reportFilter, setReportFilter] = useState(getReportFilters());
   const [report, setReport] = useState<IReport>({
     results: state?.results ?? [],
     createdAt: Date.now(),
