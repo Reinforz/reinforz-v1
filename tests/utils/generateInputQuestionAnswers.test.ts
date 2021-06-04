@@ -16,6 +16,28 @@ it(`Should work for string`, () => {
   ]);
 });
 
+it(`Should work for an array of strings alternatives`, () => {
+  const [generatedInputQuestionAnswers] = generateInputQuestionAnswers([
+    ['answer 1', 'answer 1.1']
+  ]);
+  expect(generatedInputQuestionAnswers).toStrictEqual([
+    [
+      {
+        text: 'answer 1',
+        modifiers: [],
+        regex: null,
+        explanation: null
+      },
+      {
+        text: 'answer 1.1',
+        modifiers: [],
+        regex: null,
+        explanation: null
+      }
+    ]
+  ]);
+});
+
 it(`Should work for object with all options given`, () => {
   const [generatedInputQuestionAnswers] = generateInputQuestionAnswers([
     {

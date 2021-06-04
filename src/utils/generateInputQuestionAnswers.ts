@@ -52,13 +52,11 @@ export function generateInputQuestionAnswers(
           generatedInputQuestionAnswerFromString(answer)
         ] as TInputQuestionFull['answers'][0];
       else if (Array.isArray(answer)) {
-        return answer.map((answer) => {
-          if (typeof answer === 'string') {
-            return generatedInputQuestionAnswerFromString(answer);
-          } else {
-            return generateInputQuestionAnswerFromPartial(answer);
-          }
-        });
+        return answer.map((answer) =>
+          typeof answer === 'string'
+            ? generatedInputQuestionAnswerFromString(answer)
+            : generateInputQuestionAnswerFromPartial(answer)
+        );
       } else {
         return [generateInputQuestionAnswerFromPartial(answer)];
       }
