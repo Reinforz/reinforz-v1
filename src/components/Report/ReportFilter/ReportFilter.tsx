@@ -27,7 +27,7 @@ export default function ReportFilter() {
     }} setState={setReportFilter} state={reportFilter} stateKey={"excluded_quizzes"} />
     <Select lsKey={"REPORT_FILTERS"} multiple label={"Excluded Columns"}
       renderValue={(selected) => (selected as string[]).map((report_stat, index) => <div key={report_stat + "excluded_columns" + index}>{transformLabel(report_stat)}</div>)}
-      items={["question", "image", "question_stats", "user_stats", "score_breakdown", "quiz_stats", "hints", "answers", "options"]}
+      items={["question", "image", "question_stats", "user_stats", "score_breakdown", "quiz_stats", "hints", "answers", "options", "report_stats", "play_options", "play_filters"]}
       menuItemLabel={(item) => transformLabel(item)}
       setState={setReportFilter}
       state={reportFilter}

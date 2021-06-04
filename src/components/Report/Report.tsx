@@ -38,7 +38,7 @@ export default function Report() {
       return <Menu lsKey="REPORT_MENU" contents={[<ReportFilter />, <div className="Report" style={{ color: theme.palette.text.primary }}>
         <ReportTable />
         <div style={{ gridArea: '1/2/3/3', display: 'flex', flexDirection: 'column', overflow: 'auto' }}>
-          <ReportStats />
+          {!reportFilter.excluded_columns.includes('report_stats') ? <ReportStats /> : null}
           <ReportSettings />
           <ReportExport />
           <ReportAggregator />
