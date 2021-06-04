@@ -16,9 +16,22 @@ export function generateInputQuestionAnswers(
         logs.warns.push(
           `Unknown modifier ${modifier} found at ${index + 1}. Removing it.`
         );
+        modifiers[index] = null as any;
       }
-      modifiers[index] = null as any;
     });
+  }
+
+  function generateInputQuestionAnswer(
+    answer: IInputQuestionAnswerPartial
+  ): TInputQuestionFull['answers'][0][0] {
+    checkModifiers(answer);
+    return {
+      text: answer.text.toString(),
+      modifiers:
+        answer.modifiers?.filter((modifier) => modifier !== null) ?? [],
+      regex: answer.regex ?? null,
+      explanation: answer.explanation ?? null
+    };
   }
 
   const generatedInputQuestionAnswers: TInputQuestionFull['answers'] = answers.map(
@@ -33,25 +46,9 @@ export function generateInputQuestionAnswers(
           }
         ] as TInputQuestionFull['answers'][0];
       else if (Array.isArray(answer)) {
-        return answer.map((answer) => {
-          checkModifiers(answer);
-          return {
-            text: answer.text.toString(),
-            modifiers: answer.modifiers?.filter((modifier) => modifier) ?? [],
-            regex: answer.regex ?? null,
-            explanation: answer.explanation ?? null
-          } as TInputQuestionFull['answers'][0][0];
-        });
+        return answer.map(generateInputQuestionAnswer);
       } else {
-        checkModifiers(answer);
-        return [
-          {
-            text: answer.text.toString(),
-            modifiers: answer.modifiers?.filter((modifier) => modifier) ?? [],
-            regex: answer.regex ?? null,
-            explanation: answer.explanation ?? null
-          }
-        ] as TInputQuestionFull['answers'][0];
+        return [generateInputQuestionAnswer(answer)];
       }
     }
   );
