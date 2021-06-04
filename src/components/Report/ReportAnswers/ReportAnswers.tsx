@@ -1,7 +1,7 @@
 import { AiFillCheckSquare } from "react-icons/ai";
 import { MdCancel } from "react-icons/md";
 import { useThemeSettings } from "../../../hooks";
-import { Markdown } from "../../../shared/Markdown";
+import { Markdown } from "../../../shared";
 import { IResultInputQuestion } from "../../../types";
 import "./ReportAnswers.scss";
 

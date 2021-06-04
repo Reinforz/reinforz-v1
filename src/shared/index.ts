@@ -4,6 +4,7 @@ import Icon from './Icon';
 import InputRange from './InputRange';
 import List from './List';
 import ListTable from './ListTable';
+import Markdown from './Markdown';
 import Menu from './Menu';
 import RadioGroup from './RadioGroup';
 import Select from './Select';
@@ -13,6 +14,7 @@ import Toggles from './Toggles';
 import View from './View';
 
 export {
+  Markdown,
   StackList,
   ListTable,
   InputRange,

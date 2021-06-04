@@ -7,7 +7,7 @@ interface Props {
   content: string
 }
 
-export function Markdown(props: Props) {
+export default function Markdown(props: Props) {
   const refs = useRef<(HTMLElement | null)[]>([]);
 
   useEffect(() => {

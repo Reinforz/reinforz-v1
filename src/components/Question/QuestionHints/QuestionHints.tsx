@@ -1,6 +1,6 @@
 import { Button } from '@material-ui/core';
 import { useDisabled, useThemeSettings } from '../../../hooks';
-import { Markdown } from '../../../shared/Markdown';
+import { Markdown } from '../../../shared';
 import "./QuestionHints.scss";
 
 interface Props {

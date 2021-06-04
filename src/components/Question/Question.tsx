@@ -1,7 +1,7 @@
 import { Button, useTheme } from "@material-ui/core";
 import React, { useContext, useEffect, useState } from "react";
 import { RootContext } from "../../context/RootContext";
-import { Markdown } from "../../shared/Markdown";
+import { Markdown } from "../../shared";
 import { ExtendedTheme, TQuestionFull } from "../../types";
 import { displayTime } from "../../utils";
 import FibQuestionDisplay from "./FibQuestionDisplay";

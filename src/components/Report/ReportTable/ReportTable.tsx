@@ -1,8 +1,7 @@
 import { useContext } from "react";
 import { ReportContext } from "../../../context/ReportContext";
 import { useThemeSettings } from "../../../hooks";
-import { StackList } from "../../../shared";
-import { Markdown } from "../../../shared/Markdown";
+import { Markdown, StackList } from "../../../shared";
 import { IResultInputQuestion } from "../../../types";
 import { ReportAnswers } from "../ReportAnswers/ReportAnswers";
 import { ReportOptions } from "../ReportOptions/ReportOptions";
