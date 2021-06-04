@@ -1,15 +1,18 @@
+import merge from 'lodash.merge';
+import { IPlaySettings } from '../types';
 import {
   createDefaultPlaySettingsFiltersState,
   createDefaultPlaySettingsOptionsState
-} from '.';
-import { IPlaySettings } from '../types';
+} from './';
 
 export function getPlaySettings(): IPlaySettings {
-  return JSON.parse(
-    localStorage.getItem('PLAY_SETTINGS') ??
-      JSON.stringify({
-        options: createDefaultPlaySettingsOptionsState(),
-        filters: createDefaultPlaySettingsFiltersState()
-      })
+  let localStorageValue = localStorage.getItem('PLAY_SETTINGS');
+  localStorageValue = localStorageValue ? JSON.parse(localStorageValue) : {};
+  return merge(
+    {
+      options: createDefaultPlaySettingsOptionsState(),
+      filters: createDefaultPlaySettingsFiltersState()
+    },
+    localStorageValue
   );
 }
