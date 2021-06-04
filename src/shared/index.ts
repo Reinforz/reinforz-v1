@@ -9,8 +9,6 @@ import RadioGroup from './RadioGroup';
 import Select from './Select';
 import StackList from './StackList';
 import Stats from './Stats';
-import Table from './Table';
-import Timer from './Timer';
 import Toggles from './Toggles';
 import View from './View';
 
@@ -23,11 +21,9 @@ export {
   CheckboxGroup,
   Toggles,
   View,
-  Timer,
   Highlighter,
   Icon,
   List,
   Menu,
-  Table,
   Stats
 };
