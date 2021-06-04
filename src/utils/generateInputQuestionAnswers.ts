@@ -21,7 +21,7 @@ export function generateInputQuestionAnswers(
     });
   }
 
-  function generateInputQuestionAnswer(
+  function generateInputQuestionAnswerFromPartial(
     answer: IInputQuestionAnswerPartial
   ): TInputQuestionFull['answers'][0][0] {
     checkModifiers(answer);
@@ -34,21 +34,33 @@ export function generateInputQuestionAnswers(
     };
   }
 
+  function generatedInputQuestionAnswerFromString(
+    answer: string
+  ): TInputQuestionFull['answers'][0][0] {
+    return {
+      text: answer.toString(),
+      modifiers: [],
+      regex: null,
+      explanation: null
+    };
+  }
+
   const generatedInputQuestionAnswers: TInputQuestionFull['answers'] = answers.map(
     (answer) => {
       if (typeof answer === 'string')
         return [
-          {
-            text: answer.toString(),
-            modifiers: [],
-            regex: null,
-            explanation: null
-          }
+          generatedInputQuestionAnswerFromString(answer)
         ] as TInputQuestionFull['answers'][0];
       else if (Array.isArray(answer)) {
-        return answer.map(generateInputQuestionAnswer);
+        return answer.map((answer) => {
+          if (typeof answer === 'string') {
+            return generatedInputQuestionAnswerFromString(answer);
+          } else {
+            return generateInputQuestionAnswerFromPartial(answer);
+          }
+        });
       } else {
-        return [generateInputQuestionAnswer(answer)];
+        return [generateInputQuestionAnswerFromPartial(answer)];
       }
     }
   );

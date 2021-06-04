@@ -91,6 +91,7 @@ export interface ISnippetQuestionPartial extends IQuestionPartial {
     | IInputQuestionAnswerPartial[]
     | IInputQuestionAnswerPartial
     | string
+    | string[]
   )[];
 }
 
@@ -101,6 +102,7 @@ export interface IFibQuestionPartial extends IQuestionPartial {
     | IInputQuestionAnswerPartial[]
     | IInputQuestionAnswerPartial
     | string
+    | string[]
   )[];
 }
 
