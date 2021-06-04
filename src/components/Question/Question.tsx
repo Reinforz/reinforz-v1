@@ -1,8 +1,9 @@
 import { Button, useTheme } from "@material-ui/core";
 import React, { useContext, useEffect, useState } from "react";
 import { RootContext } from "../../context/RootContext";
+import { Markdown } from "../../shared/Markdown";
 import { ExtendedTheme, TQuestionFull } from "../../types";
-import { displayTime, sanitizeMarkdown } from "../../utils";
+import { displayTime } from "../../utils";
 import FibQuestionDisplay from "./FibQuestionDisplay";
 import "./Question.scss";
 import QuestionHints from "./QuestionHints/QuestionHints";
@@ -55,7 +56,9 @@ export default function Question(props: Props) {
 
 
   return <div className="Question" style={{ backgroundColor: theme.color.dark }}>
-    {props.question.type === "FIB" ? <FibQuestionDisplay question={props.question.question} userAnswers={userAnswers} image={props.question.image} /> : <div className="Question-question" style={{ gridArea: image ? `1/1/2/2` : `1/1/2/3`, backgroundColor: theme.color.light }} dangerouslySetInnerHTML={{ __html: sanitizeMarkdown(Array.isArray(question) ? question.join(" _ ") : question) }}></div>}
+    {props.question.type === "FIB" ? <FibQuestionDisplay question={props.question.question} userAnswers={userAnswers} image={props.question.image} /> : <div className="Question-question" style={{ gridArea: image ? `1/1/2/2` : `1/1/2/3`, backgroundColor: theme.color.light }}>
+      <Markdown content={question as string} />
+    </div>}
     {image && <div className="Question-image" style={{ gridArea: `1/2/2/3`, backgroundColor: theme.color.light }}><img src={image} alt="Question" /></div>}
     {props.question.type === "MCQ" || props.question.type === "MS"
       ? <QuestionOptions setUserAnswers={setUserAnswers} userAnswers={userAnswers} question={props.question} />

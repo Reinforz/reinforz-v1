@@ -40,66 +40,8 @@
 
   &-question {
     user-select: none;
-    font-size: 1.5rem;
     border-radius: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     padding: 2.5px;
     margin: 2.5px;
-
-    p {
-      margin: 0px;
-      font-weight: initial;
-      strong {
-        margin: 5px;
-      }
-      code {
-        font-family: "Roboto Mono", monospace;
-        background-color: #111;
-        padding: 3px 10px 5px 10px;
-        border-radius: 5px;
-        margin: 5px;
-        font-size: 1.25rem;
-      }
-    }
-  }
-}
-
-.dark {
-  .Question-question p code {
-    background: rgb(19, 19, 19);
-  }
-
-  .Question-question p {
-    color: rgb(224, 224, 224);
-  }
-}
-
-.light {
-  .Question-question p code {
-    background: rgb(224, 224, 224);
-  }
-
-  .Question-question p {
-    color: rgb(19, 19, 19);
-  }
-}
-
-.Question-question-chunk {
-  display: flex;
-  align-items: center;
-  font-size: 18px;
-
-  &-text{
-    margin: 0px 5px;
-  }
-  
-  &-answer{
-    font-size: 16px;
-    margin: 0px 5px;
-    background: white;
-    padding: 5px;
-    border-radius: 3px;
   }
 }

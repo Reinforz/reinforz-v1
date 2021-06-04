@@ -1,7 +1,7 @@
 import { Checkbox, FormControlLabel, FormGroup, Radio, RadioGroup } from "@material-ui/core";
 import { useThemeSettings } from '../../../hooks';
+import { Markdown } from "../../../shared/Markdown";
 import { TQuestionFull } from '../../../types';
-import { sanitizeMarkdown } from "../../../utils";
 import "./QuestionOptions.scss";
 
 interface Props {
@@ -23,7 +23,7 @@ export default function QuestionOptions(props: Props) {
               <FormControlLabel
                 control={<Radio color="primary" />}
                 value={`${i}`}
-                label={<div dangerouslySetInnerHTML={{ __html: sanitizeMarkdown(option.text) }}></div>}
+                label={<Markdown content={option.text}/>}
                 labelPlacement="end"
               />
             </div>
@@ -41,7 +41,7 @@ export default function QuestionOptions(props: Props) {
             return <div key={`${_id}option${i}`} className={`QuestionOptions-container-item`} style={{ backgroundColor: theme.color.light }}>
               <FormControlLabel
                 control={<Checkbox checked={userAnswers.includes(`${i}`)} value={`${i}`} color="primary" />}
-                label={option.text}
+                label={<Markdown content={option.text}/>}
               /></div>
           })}
         </FormGroup>

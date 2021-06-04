@@ -1,6 +1,6 @@
 import { Button } from '@material-ui/core';
 import { useDisabled, useThemeSettings } from '../../../hooks';
-import { sanitizeMarkdown } from "../../../utils";
+import { Markdown } from '../../../shared/Markdown';
 import "./QuestionHints.scss";
 
 interface Props {
@@ -29,7 +29,9 @@ export default function QuestionHints(props: Props) {
     }}>{hints.length > 0 ? `Show ${"hints"} ${totalUsedHints}/${hints.length}` : `No hints available`}</Button>
     <div className="QuestionHints-list" style={{ backgroundColor: theme.color.dark }}>
       {usedHints.map((hint, i) =>
-        <div key={`hint${i}`} dangerouslySetInnerHTML={{ __html: sanitizeMarkdown(`${i + 1}: ${hint}`.toString()) }} style={{ backgroundColor: theme.color.light }} className="QuestionHints-list-item" />)}
+        <div key={`hint${i}`} style={{ backgroundColor: theme.color.light }} className="QuestionHints-list-item">
+          <Markdown content={hint} />
+        </div>)}
     </div>
   </div>
 }
