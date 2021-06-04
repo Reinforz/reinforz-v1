@@ -14,12 +14,15 @@ it(`Should work`, () => {
     ])
   );
 
-  expect(filteredQuizzes).toStrictEqual({
-    quiz1: {
-      subject: 'Subject 1',
-      topic: 'Topic 1',
-      _id: 'quiz1',
-      questions: [question1, question2]
-    }
-  });
+  expect(Array.from(filteredQuizzes.entries())).toStrictEqual([
+    [
+      'quiz1',
+      {
+        subject: 'Subject 1',
+        topic: 'Topic 1',
+        _id: 'quiz1',
+        questions: [question1, question2]
+      }
+    ]
+  ]);
 });

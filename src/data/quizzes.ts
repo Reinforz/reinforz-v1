@@ -5,21 +5,21 @@ export const QUIZ_1: IQuizFull = {
   subject: 'Subject 1',
   questions: [
     {
-      question: `\`\`\`js\nconsole.log("Hello World");\n\`\`\``,
+      question: 'Question 1',
       answers: [
         {
           text: '0',
-          explanation: `\`\`\`js\nconst explanation = "Hello World";\n\`\`\``
+          explanation: null
         },
         {
           text: '2',
           explanation: null
         }
       ],
-      hints: [`\`\`\`js\nconsole.log("Hint 1");\n\`\`\``, 'Hint 2', 'Hint 3'],
+      hints: [`Hint 1`, 'Hint 2', 'Hint 3'],
       options: [
         {
-          text: `\`\`\`js\nconsole.log("Option 3");\n\`\`\``,
+          text: `Option 3`,
           index: '2'
         },
         {
@@ -53,7 +53,7 @@ export const QUIZ_1: IQuizFull = {
       }
     },
     {
-      question: ['```js\nconsole.log("', '" + "', '");\n```'],
+      question: ['Chunk 1', 'Chunk 2'],
       answers: [
         [
           {
