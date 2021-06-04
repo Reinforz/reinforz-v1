@@ -41,7 +41,13 @@
   &-question {
     user-select: none;
     border-radius: 5px;
-    padding: 2.5px;
+    padding: 5px;
     margin: 2.5px;
+
+    &-chunk{
+      padding: 2px 6px;
+      border-radius: 2px;
+      margin: 0px 5px;
+    }
   }
 }

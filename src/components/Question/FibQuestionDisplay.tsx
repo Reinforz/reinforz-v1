@@ -1,6 +1,6 @@
 import { useTheme } from "@material-ui/styles";
+import { Markdown } from "../../shared";
 import { ExtendedTheme } from "../../types";
-import { sanitizeMarkdown } from "../../utils";
 
 interface Props {
   question: string[]
@@ -10,12 +10,10 @@ interface Props {
 
 export default function FibQuestionDisplay(props: Props) {
   const theme = useTheme() as ExtendedTheme;
-  // ?: Inject userAnswers with the markdown and remove styles
   const { image, question, userAnswers } = props;
-  return <div className="Question-question Question-question--FIB" style={{ backgroundColor: theme.color.light, gridArea: image ? `1/1/2/2` : `1/1/2/3` }}>
-    {question.map((questionChunk, i) => questionChunk !== "" ? <span className="Question-question-chunk" key={questionChunk + i}>
-      <span className="Question-question-chunk-text" dangerouslySetInnerHTML={{ __html: sanitizeMarkdown(questionChunk) }}></span>
-      {i !== question.length - 1 ? <span className="Question-question-chunk-answer">{userAnswers[i]}</span> : null}
-    </span> : null)}
+  const questionString = question.map((questionChunk, index) => questionChunk + (index !== question.length - 1 ? `<span class="Question-question-chunk" style="background-color: ${theme.color.dark}"><strong>${userAnswers[index] ?? ''}</strong></span>` : '')).join("");
+
+  return <div className="Question-question Question-question--FIB" style={{ backgroundColor: theme.color.light, color: theme.palette.text.primary, gridArea: image ? `1/1/2/2` : `1/1/2/3` }}>
+    <Markdown content={questionString} />
   </div>
 }
