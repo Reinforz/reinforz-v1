@@ -28,9 +28,10 @@ export default function Report() {
   });
 
   const history = useHistory();
+  const allQuestionsMap = generateQuestionsMapFromReportResults(report.results);
+  const allQuizzesMap = generateQuizzesFromResults(report.results, allQuestionsMap);
   const filteredResults = applyReportFilters(report.results, reportFilter);
-  const generatedAllQuestionsMap = generateQuestionsMapFromReportResults(filteredResults);
-  const filteredQuizzes = generateQuizzesFromResults(filteredResults, generatedAllQuestionsMap);
+  const filteredQuizzesMap = generateQuizzesFromResults(filteredResults, allQuestionsMap);
 
   const render = () => {
     if (report.results.length !== 0) {
@@ -44,8 +45,8 @@ export default function Report() {
           <div className="Report-BackButton">
             <Button variant="contained" color="primary" onClick={() => {
               localStorage.setItem("REPORT_FILTERS", JSON.stringify(reportFilter))
-              setUploadedQuizzes(Object.values(filteredQuizzes))
-              setSelectedQuizIds(Object.values(filteredQuizzes).map(quiz => quiz._id))
+              setUploadedQuizzes(Object.values(filteredQuizzesMap))
+              setSelectedQuizIds(Object.values(filteredQuizzesMap).map(quiz => quiz._id))
               history.push("/")
             }}>Back to Home</Button>
           </div>
@@ -56,7 +57,7 @@ export default function Report() {
     }
   }
 
-  return <ReportContext.Provider value={{ setReport, report, filteredResults, filteredQuizzes, reportFilter, setReportFilter }}>
+  return <ReportContext.Provider value={{ setReport, report, filteredResults, allQuizzesMap, filteredQuizzesMap, reportFilter, setReportFilter }}>
     {render()}
   </ReportContext.Provider>
 }

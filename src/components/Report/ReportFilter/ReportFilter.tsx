@@ -1,7 +1,6 @@
 import { Button } from '@material-ui/core';
 import React, { useContext } from "react";
 import { ReportContext } from '../../../context/ReportContext';
-import { RootContext } from '../../../context/RootContext';
 import { useThemeSettings } from '../../../hooks';
 import { CheckboxGroup, InputRange, RadioGroup, Select } from '../../../shared';
 import { createDefaultReportFilterState } from '../../../utils';
@@ -14,8 +13,7 @@ const transformLabel = (stat: string) => {
 
 export default function ReportFilter() {
   const { theme } = useThemeSettings();
-  const { selectedQuizIds, selectedQuizzes } = useContext(RootContext);
-  const { setReportFilter, reportFilter } = useContext(ReportContext);
+  const { allQuizzesMap, setReportFilter, reportFilter } = useContext(ReportContext);
 
   return <div className="ReportFilter" style={{ backgroundColor: theme.color.dark }}>
     <InputRange label={"Time taken range"} min={0} max={120} setState={setReportFilter} state={reportFilter} stateKey={"time_taken"} />
@@ -23,8 +21,8 @@ export default function ReportFilter() {
     <RadioGroup lsKey={"REPORT_FILTERS"} items={["0", "1", "2", "any"]} label={"Hints Used"} setState={setReportFilter} state={reportFilter} stateKey={"hints_used"} />
     <CheckboxGroup lsKey={"REPORT_FILTERS"} label={'Excluded Difficulty'} items={['Beginner', 'Intermediate', 'Advanced']} setState={setReportFilter} stateKey={'excluded_difficulty'} state={reportFilter} />
     <CheckboxGroup lsKey={"REPORT_FILTERS"} label={'Excluded Type'} items={['FIB', 'MS', 'MCQ', "Snippet"]} setState={setReportFilter} stateKey={'excluded_types'} state={reportFilter} />
-    <Select multiple label={"Excluded Quizzes"} items={selectedQuizIds} menuItemLabel={(item) => {
-      const selectedQuiz = selectedQuizzes.find(selectedQuiz => selectedQuiz._id === item)!;
+    <Select multiple label={"Excluded Quizzes"} items={Object.keys(allQuizzesMap)} menuItemLabel={(quiz_id) => {
+      const selectedQuiz = allQuizzesMap[quiz_id];
       return `${selectedQuiz.subject} - ${selectedQuiz.topic}`
     }} setState={setReportFilter} state={reportFilter} stateKey={"excluded_quizzes"} />
     <Select lsKey={"REPORT_FILTERS"} multiple label={"Excluded Columns"}

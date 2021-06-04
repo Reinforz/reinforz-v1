@@ -11,7 +11,7 @@ interface IReportExportState {
 }
 
 export default function ReportExport() {
-  const { filteredResults, filteredQuizzes, report: { settings } } = useContext(ReportContext);
+  const { filteredResults, filteredQuizzesMap, report: { settings } } = useContext(ReportContext);
   let REPORT_EXPORT: any = localStorage.getItem('REPORT_EXPORT');
   REPORT_EXPORT = REPORT_EXPORT ? JSON.parse(REPORT_EXPORT) : undefined;
 
@@ -24,11 +24,11 @@ export default function ReportExport() {
 
   // ? Convert to a util function
   const clonedDownload = useCallback((type) => {
-    Object.values(filteredQuizzes).forEach(quiz => {
+    Object.values(filteredQuizzesMap).forEach(quiz => {
       quiz.questions = transformFullQuestions(quiz.questions);
       type === "yaml" ? download(`${quiz.subject} - ${quiz.topic}.yaml`, safeDump(quiz)) : download(`${quiz.subject} - ${quiz.topic}.json`, JSON.stringify(quiz, undefined, 2))
     })
-  }, [filteredQuizzes])
+  }, [filteredQuizzesMap])
 
   const downloadFiles = () => {
     if (export_as === "JSON") {
