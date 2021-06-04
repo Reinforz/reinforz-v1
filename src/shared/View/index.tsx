@@ -14,8 +14,8 @@ interface Props {
 export default function View(props: Props) {
   const { theme } = useThemeSettings();
 
-  const { toggle: toggleOrder, current_toggle: order } = useToggle<number>(0, [0, 1], props.lsKey);
-  const { toggle: toggleLayout, current_toggle: layout } = useToggle<CSS.FlexDirectionProperty>("column", ["row", "column"], props.lsKey);
+  const { toggle: toggleOrder, current_toggle: order } = useToggle<number>(0, [0, 1], props.lsKey + "_ORDER");
+  const { toggle: toggleLayout, current_toggle: layout } = useToggle<CSS.FlexDirectionProperty>("column", ["row", "column"], props.lsKey + "_LAYOUT");
 
   return <div className="View">
     <div className="View-content" style={{ flexDirection: layout + (order === 0 ? '' : '-reverse') as any }}>

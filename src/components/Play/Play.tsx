@@ -26,11 +26,11 @@ function Play() {
   const { theme } = useThemeSettings();
   const { selectedQuizIds, setUploadedQuizzes, setSelectedQuizIds, uploadedQuizzes, errorLogs, setErrorLogs } = useContext(RootContext);
 
-  return <Menu width={290} contents={[<PlaySettings />, <div className="Play">
+  return <Menu lsKey="PLAY_MENU" width={290} contents={[<PlaySettings />, <div className="Play">
     <IoMdSettings size={25} fill={theme.color.opposite_light} className={`${classes.root} Play-settings-icon`} onClick={() => history.push("/settings")} />
     <PlayUpload />
     <div style={{ gridArea: '2/1/5/2' }}>
-      <View items={
+      <View lsKey="PLAY_VIEW" items={
         [<List onDelete={(remainingItems) => {
           setErrorLogs(errorLogs.filter(errorLog => !remainingItems.map(remainingItem => remainingItem._id).includes(errorLog.quiz_id)))
         }} selectedItems={selectedQuizIds} setSelectedItems={setSelectedQuizIds} header="Uploaded Quizzes" items={uploadedQuizzes} setItems={setUploadedQuizzes} fields={[(item) => `${item.subject} - ${item.topic}`, (item) => item.questions.length + " Qs"]} />, <PlayErrorlogs />]}
