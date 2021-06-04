@@ -13,7 +13,7 @@ export function ReportQuestion(props: Props) {
   const { question } = props;
   const { theme } = useThemeSettings();
   const { reportFilter } = useContext(ReportContext);
-  const questionString = Array.isArray(question.question) ? question.question.join(`<span style="width: 5px;height: 3px;display: inline-block;background-color: ${theme.color.dark};padding: 5px;border-radius: 2px;margin: 0px 5px;"></span>`) : question.question;
+  const questionString = Array.isArray(question.question) ? question.question.join(`+`) : question.question;
   return <div style={{ display: 'flex', justifyContent: 'center' }}>
     {!reportFilter.excluded_columns.includes('question') ? <div className="Report-Question" style={{ width: question.image ? `75%` : `100%`, backgroundColor: theme.color.light }} >
       <Markdown content={questionString} />

@@ -12,7 +12,8 @@ import { RootContext } from './context/RootContext';
 import { SettingsContext } from "./context/SettingsContext";
 import { QUIZ_1 } from './data/quizzes';
 import './index.scss';
-import "./styles/vscode-dark.css";
+import "./styles/vs-light.scss";
+import "./styles/vscode-dark.scss";
 import { ExtendedTheme, IErrorLog, IQuizFull } from './types';
 import { applyPlaySettingsOptions, arrayShuffler, generateQuestionsMap, generateTheme, getPlaySettings, getSettings } from './utils';
 
