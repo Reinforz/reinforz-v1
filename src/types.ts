@@ -12,6 +12,11 @@ export interface IErrorLog {
   quiz_id: string;
 }
 
+export interface ILog {
+  warns: string[];
+  errors: string[];
+}
+
 export interface IPlaySettingsOptions {
   shuffle_options: boolean;
   shuffle_quizzes: boolean;

@@ -1,5 +1,6 @@
 import shortid from 'shortid';
 import {
+  ILog,
   TQuestionFull,
   TQuestionPartial,
   TSelectionQuestionPartial
@@ -16,7 +17,7 @@ function setObjectValues(parent: any, arr: [string, any][]) {
 }
 
 export function generateCompleteQuestion(question: TQuestionPartial) {
-  const logs: { warns: string[]; errors: string[] } = { warns: [], errors: [] };
+  const logs: ILog = { warns: [], errors: [] };
 
   const completeQuestion: TQuestionFull = JSON.parse(JSON.stringify(question));
 
@@ -126,16 +127,26 @@ export function generateCompleteQuestion(question: TQuestionPartial) {
         time_allocated = 30;
 
         break;
-      case 'Snippet':
-        completeQuestion.answers = generateInputQuestionAnswers(
-          question.answers
-        );
+      case 'Snippet': {
+        const [
+          generatedInputQuestionAnswers,
+          generatedLogs
+        ] = generateInputQuestionAnswers(question.answers);
+        completeQuestion.answers = generatedInputQuestionAnswers;
+        logs.errors.concat(generatedLogs.errors);
+        logs.warns.concat(generatedLogs.warns);
         time_allocated = 45;
         break;
-      case 'FIB':
-        completeQuestion.answers = generateInputQuestionAnswers(
-          question.answers
-        );
+      }
+
+      case 'FIB': {
+        const [
+          generatedInputQuestionAnswers,
+          generatedLogs
+        ] = generateInputQuestionAnswers(question.answers);
+        completeQuestion.answers = generatedInputQuestionAnswers;
+        logs.errors.concat(generatedLogs.errors);
+        logs.warns.concat(generatedLogs.warns);
         if (
           completeQuestion.answers.length + 1 !==
           completeQuestion.question.length
@@ -148,6 +159,7 @@ export function generateCompleteQuestion(question: TQuestionPartial) {
         }
         time_allocated = 60;
         break;
+      }
     }
     completeQuestion.time_allocated =
       completeQuestion.time_allocated ?? time_allocated;

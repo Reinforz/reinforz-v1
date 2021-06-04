@@ -1,36 +1,60 @@
-import { TInputQuestionFull, TInputQuestionPartial } from '../types';
+import {
+  IInputQuestionAnswerPartial,
+  ILog,
+  TInputQuestionFull,
+  TInputQuestionPartial
+} from '../types';
 
 export function generateInputQuestionAnswers(
   answers: TInputQuestionPartial['answers']
-): TInputQuestionFull['answers'] {
-  return answers.map((answer) => {
-    if (typeof answer === 'string')
-      return [
-        {
-          text: answer.toString(),
-          modifiers: [],
-          regex: null,
-          explanation: null
-        }
-      ] as TInputQuestionFull['answers'][0];
-    else if (Array.isArray(answer)) {
-      return answer.map((answer) => {
-        return {
-          text: answer.text.toString(),
-          modifiers: answer.modifiers ?? [],
-          regex: answer.regex ?? null,
-          explanation: answer.explanation ?? null
-        } as TInputQuestionFull['answers'][0][0];
-      });
-    } else {
-      return [
-        {
-          text: answer.text.toString(),
-          modifiers: answer.modifiers ?? [],
-          regex: answer.regex ?? null,
-          explanation: answer.explanation ?? null
-        }
-      ] as TInputQuestionFull['answers'][0];
+) {
+  const logs: ILog = { warns: [], errors: [] };
+
+  function checkModifiers(answer: IInputQuestionAnswerPartial) {
+    answer.modifiers?.forEach((modifier, index, modifiers) => {
+      if (modifier !== 'IC' && modifier !== 'IS') {
+        logs.warns.push(
+          `Unknown modifier ${modifier} found at ${index + 1}. Removing it.`
+        );
+      }
+      modifiers[index] = null as any;
+    });
+  }
+
+  const generatedInputQuestionAnswers: TInputQuestionFull['answers'] = answers.map(
+    (answer) => {
+      if (typeof answer === 'string')
+        return [
+          {
+            text: answer.toString(),
+            modifiers: [],
+            regex: null,
+            explanation: null
+          }
+        ] as TInputQuestionFull['answers'][0];
+      else if (Array.isArray(answer)) {
+        return answer.map((answer) => {
+          checkModifiers(answer);
+          return {
+            text: answer.text.toString(),
+            modifiers: answer.modifiers?.filter((modifier) => modifier) ?? [],
+            regex: answer.regex ?? null,
+            explanation: answer.explanation ?? null
+          } as TInputQuestionFull['answers'][0][0];
+        });
+      } else {
+        checkModifiers(answer);
+        return [
+          {
+            text: answer.text.toString(),
+            modifiers: answer.modifiers?.filter((modifier) => modifier) ?? [],
+            regex: answer.regex ?? null,
+            explanation: answer.explanation ?? null
+          }
+        ] as TInputQuestionFull['answers'][0];
+      }
     }
-  });
+  );
+
+  return [generatedInputQuestionAnswers, logs] as const;
 }
