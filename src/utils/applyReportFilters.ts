@@ -1,6 +1,6 @@
 import { IReportFilter, IResult } from '../types';
 
-export function applyResultFilters(
+export function applyReportFilters(
   results: IResult[],
   reportFilter: Omit<IReportFilter, 'excluded_columns'>
 ) {

@@ -26,6 +26,7 @@ export default function Quiz() {
       const [transformedQuestion, answerResult] = getAnswerResult(currentQuestion, user_answers, time_taken, hints_used, playSettings.options.partial_score, playSettings.options.disable_timer);
       const newResultState = [...results, { question: transformedQuestion, ...answerResult, time_taken, hints_used, user_answers }];
       if (allQuestions.length - 1 === currentIndex) {
+        console.log(newResultState);
         history.push("/report", {
           results: newResultState,
         })

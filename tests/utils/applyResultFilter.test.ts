@@ -1,5 +1,5 @@
 import { IResult } from '../../src/types';
-import { applyResultFilters } from '../../src/utils';
+import { applyReportFilters } from '../../src/utils';
 
 const result: IResult = {
   verdict: true,
@@ -33,7 +33,7 @@ const result: IResult = {
 };
 
 it(`Should filter out if question type is within excluded_types`, () => {
-  const filteredResults = applyResultFilters([result], {
+  const filteredResults = applyReportFilters([result], {
     excluded_difficulty: [],
     excluded_quizzes: [],
     excluded_types: ['FIB'],
@@ -46,7 +46,7 @@ it(`Should filter out if question type is within excluded_types`, () => {
 });
 
 it(`Should filter out if question difficulty is within excluded_difficulty`, () => {
-  const filteredResults = applyResultFilters([result], {
+  const filteredResults = applyReportFilters([result], {
     excluded_difficulty: ['Advanced'],
     excluded_quizzes: [],
     excluded_types: [],
@@ -59,7 +59,7 @@ it(`Should filter out if question difficulty is within excluded_difficulty`, () 
 });
 
 it(`Should filter out if question verdict is different from filter verdict`, () => {
-  const filteredResults = applyResultFilters([result], {
+  const filteredResults = applyReportFilters([result], {
     excluded_difficulty: [],
     excluded_quizzes: [],
     excluded_types: [],
@@ -72,7 +72,7 @@ it(`Should filter out if question verdict is different from filter verdict`, () 
 });
 
 it(`Should filter out if question time taken is less than lower bound of time_taken`, () => {
-  const filteredResults = applyResultFilters([result], {
+  const filteredResults = applyReportFilters([result], {
     excluded_difficulty: [],
     excluded_quizzes: [],
     excluded_types: [],
@@ -85,7 +85,7 @@ it(`Should filter out if question time taken is less than lower bound of time_ta
 });
 
 it(`Should filter out if question time taken is greater than upper bound of time_taken`, () => {
-  const filteredResults = applyResultFilters([result], {
+  const filteredResults = applyReportFilters([result], {
     excluded_difficulty: [],
     excluded_quizzes: [],
     excluded_types: [],
@@ -98,7 +98,7 @@ it(`Should filter out if question time taken is greater than upper bound of time
 });
 
 it(`Should filter out if quiz id is within excluded_quizzes`, () => {
-  const filteredResults = applyResultFilters([result], {
+  const filteredResults = applyReportFilters([result], {
     excluded_difficulty: [],
     excluded_quizzes: ['1'],
     excluded_types: [],
@@ -111,7 +111,7 @@ it(`Should filter out if quiz id is within excluded_quizzes`, () => {
 });
 
 it(`Should return result if no filter catches it`, () => {
-  const filteredResults = applyResultFilters([result], {
+  const filteredResults = applyReportFilters([result], {
     excluded_difficulty: [],
     excluded_quizzes: [],
     excluded_types: [],

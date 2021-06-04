@@ -6,7 +6,7 @@ import { RootContext } from '../../context/RootContext';
 import { useThemeSettings } from '../../hooks';
 import { Menu } from '../../shared';
 import { IReport, IReportFilter, IResult } from "../../types";
-import { applyResultFilters, createDefaultReportFilterState, generateQuestionsMapFromReportResults, generateQuizzesFromResults } from '../../utils';
+import { applyReportFilters, createDefaultReportFilterState, generateQuestionsMapFromReportResults, generateQuizzesFromResults } from '../../utils';
 import "./Report.scss";
 import { ReportAggregator } from './ReportAggregator/ReportAggregator';
 import ReportExport from './ReportExport/ReportExport';
@@ -28,7 +28,7 @@ export default function Report() {
   });
 
   const history = useHistory();
-  const filteredResults = applyResultFilters(report.results, reportFilter);
+  const filteredResults = applyReportFilters(report.results, reportFilter);
   const generatedAllQuestionsMap = generateQuestionsMapFromReportResults(filteredResults);
   const filteredQuizzes = generateQuizzesFromResults(filteredResults, generatedAllQuestionsMap);
 
