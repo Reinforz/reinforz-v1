@@ -40,8 +40,8 @@ export default function Report() {
         <div style={{ gridArea: '1/2/3/3', display: 'flex', flexDirection: 'column', overflow: 'auto' }}>
           {!reportFilter.excluded_columns.includes('report_stats') ? <ReportStats /> : null}
           <ReportSettings />
-          <ReportExport />
-          <ReportAggregator />
+          {!reportFilter.excluded_columns.includes('report_export') ? <ReportExport /> : null}
+          {!reportFilter.excluded_columns.includes('report_aggregator') ? <ReportAggregator /> : null}
           <div className="Report-BackButton">
             <Button variant="contained" color="primary" onClick={() => {
               localStorage.setItem("REPORT_FILTERS", JSON.stringify(reportFilter))

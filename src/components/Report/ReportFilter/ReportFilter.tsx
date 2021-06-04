@@ -3,13 +3,8 @@ import React, { useContext } from "react";
 import { ReportContext } from '../../../context/ReportContext';
 import { useThemeSettings } from '../../../hooks';
 import { CheckboxGroup, InputRange, RadioGroup, Select } from '../../../shared';
-import { createDefaultReportFilterState } from '../../../utils';
+import { createDefaultReportFilterState, transformTextBySeparator } from '../../../utils';
 import "./ReportFilter.scss";
-
-const transformLabel = (stat: string) => {
-  let label = stat.replace(/(\.|_)/g, " ");
-  return label.split(" ").map(c => c.charAt(0).toUpperCase() + c.substr(1)).join(" ");
-}
 
 export default function ReportFilter() {
   const { theme } = useThemeSettings();
@@ -26,9 +21,9 @@ export default function ReportFilter() {
       return `${selectedQuiz.subject} - ${selectedQuiz.topic}`
     }} setState={setReportFilter} state={reportFilter} stateKey={"excluded_quizzes"} />
     <Select lsKey={"REPORT_FILTERS"} multiple label={"Excluded Columns"}
-      renderValue={(selected) => (selected as string[]).map((report_stat, index) => <div key={report_stat + "excluded_columns" + index}>{transformLabel(report_stat)}</div>)}
-      items={["question", "image", "question_stats", "user_stats", "score_breakdown", "quiz_stats", "hints", "answers", "options", "report_stats", "play_options", "play_filters"]}
-      menuItemLabel={(item) => transformLabel(item)}
+      renderValue={(selected) => (selected as string[]).map((report_stat, index) => <div key={report_stat + "excluded_columns" + index}>{transformTextBySeparator(report_stat)}</div>)}
+      items={["question", "image", "question_stats", "user_stats", "score_breakdown", "quiz_stats", "hints", "answers", "options", "report_stats", "play_options", "play_filters", "report_export", "report_aggregator"]}
+      menuItemLabel={(item) => transformTextBySeparator(item)}
       setState={setReportFilter}
       state={reportFilter}
       stateKey={"excluded_columns"}
