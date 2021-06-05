@@ -18,9 +18,9 @@ function Play() {
 
   return <Menu lsKey="PLAY_MENU" width={290} contents={[<PlaySettings />, <div className="Play">
     <IconGroup className="Play-icons" icons={[
-      [`Go to Settings page`, <IoMdSettings size={25} fill={theme.color.opposite_light} onClick={() => history.push("/settings")} />],
-      [`Go to Report page`, <HiDocumentReport size={25} fill={theme.color.opposite_light} onClick={() => history.push("/report")} />],
-      [`Go to Create page`, <IoMdCreate size={25} fill={theme.color.opposite_light} onClick={() => history.push("/create")} />],
+      [`Go to Settings page`, <IoMdSettings size={20} fill={theme.color.opposite_light} onClick={() => history.push("/settings")} />],
+      [`Go to Report page`, <HiDocumentReport size={20} fill={theme.color.opposite_light} onClick={() => history.push("/report")} />],
+      [`Go to Create page`, <IoMdCreate size={20} fill={theme.color.opposite_light} onClick={() => history.push("/create")} />],
     ]} />
     <PlayUpload />
     <div style={{ gridArea: '2/1/5/2' }}>

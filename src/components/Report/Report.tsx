@@ -36,9 +36,9 @@ export default function Report() {
   const filteredQuizzesMap = generateQuizzesFromResults(filteredResults, allQuestionsMap);
 
   const iconGroup = <IconGroup className="Report-icons" icons={[
-    [`Go to Settings page`, <IoMdSettings size={25} fill={theme.color.opposite_light} onClick={() => history.push("/settings")} />],
-    [`Go to Play page`, <AiFillHome size={25} fill={theme.color.opposite_light} onClick={() => history.push("/")} />],
-    [`Go to Create page`, <IoMdCreate size={25} fill={theme.color.opposite_light} onClick={() => history.push("/create")} />],
+    [`Go to Settings page`, <IoMdSettings size={20} fill={theme.color.opposite_light} onClick={() => history.push("/settings")} />],
+    [`Go to Play page`, <AiFillHome size={20} fill={theme.color.opposite_light} onClick={() => history.push("/")} />],
+    [`Go to Create page`, <IoMdCreate size={20} fill={theme.color.opposite_light} onClick={() => history.push("/create")} />],
   ]} />;
 
   const render = () => {

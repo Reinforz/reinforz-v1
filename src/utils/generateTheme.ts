@@ -103,7 +103,10 @@ export function generateTheme(theme: 'dark' | 'light') {
           fontSize: '1em',
           backgroundColor: dark,
           padding: 5,
-          margin: 2.5
+          margin: 2.5,
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center'
         }
       },
       MuiFormGroup: {

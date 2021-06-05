@@ -40,17 +40,24 @@
       padding: 0px 5px;
     }
 
+    .MuiFormGroup-root{
+      width: calc(100% - 10px);
+      flex-direction: row;
+    }
+
+    .MuiInputLabel-root{
+      margin-right: 20px;
+      width: 100px;
+      font-weight: bolder;
+      text-align: center;
+    }
+
     &-group{
       width: calc(100% - 10px);
       padding: 5px;
       margin: 5px;
       border-radius: 5px;
-      .MuiInputLabel-root{
-        margin-right: 20px;
-        width: 100px;
-        font-weight: bolder;
-        text-align: center;
-      }
+      
       .MuiRadio-root{
         padding: 5px;
       }
