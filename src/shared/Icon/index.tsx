@@ -16,6 +16,7 @@ interface Props {
   className?: string,
   popoverText: string,
   children: JSX.Element
+  style?: React.CSSProperties
 }
 
 export default function Icon(props: Props) {
@@ -38,7 +39,7 @@ export default function Icon(props: Props) {
   }, [])
 
   return settings.hovertips ? <Fragment>
-    <span className={`${className ? className + ' ' : ''}icon`} style={{ display: "flex" }} onMouseEnter={(e: any) => setAnchorEl(e.currentTarget)} onMouseLeave={() => setAnchorEl(null)}>{children}</span>
+    <span className={`${className} icon`} style={{ ...props.style ?? {}, display: "flex" }} onMouseEnter={(e: any) => setAnchorEl(e.currentTarget)} onMouseLeave={() => setAnchorEl(null)}>{children}</span>
     {<Popover className={classes.popover}
       classes={{
         paper: classes.paper,
@@ -47,7 +48,7 @@ export default function Icon(props: Props) {
         horizontal: 'center',
       }}
       transformOrigin={{
-        vertical: 'bottom',
+        vertical: 'top',
         horizontal: 'center',
       }}
       onClose={() => setAnchorEl(null)} disableRestoreFocus ><Typography>{popoverText}</Typography></Popover>}

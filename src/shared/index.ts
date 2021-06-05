@@ -1,6 +1,7 @@
 import CheckboxGroup from './CheckboxGroup';
 import Highlighter from './Highlighter';
 import Icon from './Icon';
+import IconGroup from './IconGroup';
 import InputRange from './InputRange';
 import List from './List';
 import ListTable from './ListTable';
@@ -14,6 +15,7 @@ import Toggles from './Toggles';
 import View from './View';
 
 export {
+  IconGroup,
   Markdown,
   StackList,
   ListTable,

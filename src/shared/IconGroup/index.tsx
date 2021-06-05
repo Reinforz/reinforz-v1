@@ -9,11 +9,11 @@ interface Props {
   className?: string
 }
 
-export function IconGroup(props: Props) {
+export default function IconGroup(props: Props) {
   const { theme } = useThemeSettings();
   const direction = props.direction ?? 'row';
-  <div className={`Icon-Group ${props.className}`} style={{ backgroundColor: theme.color.base, flexDirection: direction }}>
-    {props.icons.map(([popoverText, icon]) => <Icon popoverText={popoverText} className="Icon-Group-item">
+  return <div className={`Icon-Group ${props.className}`} style={{ backgroundColor: theme.color.base, flexDirection: direction }}>
+    {props.icons.map(([popoverText, icon]) => <Icon popoverText={popoverText} className="Icon-Group-item" style={{ backgroundColor: theme.color.light }} >
       {icon}
     </Icon>)}
   </div>

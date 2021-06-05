@@ -12,5 +12,10 @@
       opacity: 1;
       transition: opacity 250ms ease-in-out;
     }
+
+    &-item{
+      padding: 2.5px;
+      margin: 2.5px;
+    }
   }
 }
