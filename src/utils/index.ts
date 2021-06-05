@@ -21,6 +21,8 @@ export * from './generateSelectionQuestionAnswers';
 export * from './generateTheme';
 export * from './getAnswerResult';
 export * from './getPlaySettings';
+export * from './getReportAggregator';
+export * from './getReportExport';
 export * from './getReportFilters';
 export * from './getSettings';
 export * from './transformFullQuestions';

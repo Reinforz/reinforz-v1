@@ -279,3 +279,8 @@ export interface HighlighterProps {
   code: string;
   language: Language;
 }
+
+export interface IReportExport {
+  export_type: 'Original' | 'Report';
+  export_as: 'JSON' | 'YAML';
+}

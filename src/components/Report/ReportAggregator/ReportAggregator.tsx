@@ -2,8 +2,7 @@ import { useContext, useState } from "react";
 import { ReportContext } from "../../../context/ReportContext";
 import { useThemeSettings } from "../../../hooks";
 import { Select } from "../../../shared";
-import { IReportAggregator } from "../../../types";
-import { computeBooleanDataAggregation, computeNumberDataAggregation } from "../../../utils";
+import { computeBooleanDataAggregation, computeNumberDataAggregation, getReportAggregator } from "../../../utils";
 import "./ReportAggregator.scss";
 
 
@@ -11,15 +10,7 @@ export function ReportAggregator() {
   const { filteredResults } = useContext(ReportContext);
 
   const { theme } = useThemeSettings();
-  const REPORT_AGGREGATOR: IReportAggregator = JSON.parse(localStorage.getItem('REPORT_AGGREGATOR') ?? JSON.stringify({
-    time_allocated: 'AVG',
-    time_taken: 'AVG',
-    weight: 'AVG',
-    score: 'AVG',
-    verdict: 'TRUE',
-    hints_used: 'AVG'
-  }));
-  const [reportAggregator, setReportAggregator] = useState<IReportAggregator>(REPORT_AGGREGATOR);
+  const [reportAggregator, setReportAggregator] = useState(getReportAggregator());
 
   const totalWeight = filteredResults.reduce((acc, filteredResult) => acc + filteredResult.question.weight, 0);
 

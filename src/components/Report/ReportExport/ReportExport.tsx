@@ -4,23 +4,14 @@ import React, { useCallback, useContext, useState } from 'react';
 import { ReportContext } from '../../../context/ReportContext';
 import { useThemeSettings } from '../../../hooks';
 import { Icon, Select } from '../../../shared';
-import { download, transformFullQuestions } from "../../../utils";
+import { download, getReportExport, transformFullQuestions } from "../../../utils";
 import "./ReportExport.scss";
-interface IReportExportState {
-  export_type: 'Original' | 'Report',
-  export_as: 'JSON' | 'YAML'
-}
 
 export default function ReportExport() {
   const { filteredResults, filteredQuizzesMap, report: { settings } } = useContext(ReportContext);
-  let REPORT_EXPORT: any = localStorage.getItem('REPORT_EXPORT');
-  REPORT_EXPORT = REPORT_EXPORT ? JSON.parse(REPORT_EXPORT) : undefined;
   const { theme } = useThemeSettings();
 
-  const [exportState, setExportState] = useState<IReportExportState>({
-    export_type: REPORT_EXPORT ? REPORT_EXPORT.export_type : 'Original',
-    export_as: REPORT_EXPORT ? REPORT_EXPORT.export_as : 'YAML'
-  });
+  const [exportState, setExportState] = useState(getReportExport());
 
   const { export_type, export_as } = exportState;
 

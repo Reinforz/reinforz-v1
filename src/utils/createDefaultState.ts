@@ -1,6 +1,8 @@
 import {
   IPlaySettingsFilters,
   IPlaySettingsOptions,
+  IReportAggregator,
+  IReportExport,
   IReportFilter
 } from '../types';
 
@@ -34,4 +36,22 @@ export function createDefaultReportFilterState() {
     excluded_quizzes: [],
     excluded_columns: []
   } as IReportFilter;
+}
+
+export function createDefaultReportExportState() {
+  return {
+    export_type: 'Original',
+    export_as: 'YAML'
+  } as IReportExport;
+}
+
+export function createDefaultReportAggregatorState() {
+  return {
+    time_allocated: 'AVG',
+    time_taken: 'AVG',
+    weight: 'AVG',
+    score: 'AVG',
+    verdict: 'TRUE',
+    hints_used: 'AVG'
+  } as IReportAggregator;
 }
