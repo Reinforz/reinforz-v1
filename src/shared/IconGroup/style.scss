@@ -1,0 +1,16 @@
+.Icon{
+  &-Group{
+    padding: 2.5px;
+    cursor: pointer;
+    display: flex;
+    border-radius: 1px;
+    opacity: 0;
+    transition: opacity 250ms ease-in-out;
+    z-index: 5;
+
+    &:hover{
+      opacity: 1;
+      transition: opacity 250ms ease-in-out;
+    }
+  }
+}
