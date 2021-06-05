@@ -24,7 +24,7 @@ export function generateTheme(theme: 'dark' | 'light') {
       }
     },
     typography: {
-      fontFamily: `"Fira Sans"`,
+      fontFamily: `Lato`,
       fontSize: 14
     },
     color: {

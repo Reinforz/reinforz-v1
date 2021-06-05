@@ -1,4 +1,3 @@
-import { Button } from '@material-ui/core';
 import React, { useContext, useMemo, useState } from 'react';
 import { AiFillHome } from 'react-icons/ai';
 import { IoMdCreate, IoMdSettings } from 'react-icons/io';
@@ -17,7 +16,6 @@ import { ReportSettings } from './ReportSettings/ReportSettings';
 import { ReportStats } from './ReportStats/ReportStats';
 import { ReportTable } from './ReportTable/ReportTable';
 import { ReportUpload } from './ReportUpload/ReportUpload';
-
 export default function Report() {
   const { state } = useLocation<{ results: IResult[] }>();
   const { theme } = useThemeSettings();
@@ -37,7 +35,11 @@ export default function Report() {
 
   const iconGroup = <IconGroup className="Report-icons" icons={[
     [`Go to Settings page`, <IoMdSettings size={20} fill={theme.color.opposite_light} onClick={() => history.push("/settings")} />],
-    [`Go to Play page`, <AiFillHome size={20} fill={theme.color.opposite_light} onClick={() => history.push("/")} />],
+    [`Go to Play page`, <AiFillHome size={20} fill={theme.color.opposite_light} onClick={() => {
+      setUploadedQuizzes(Array.from(filteredQuizzesMap.values()))
+      setSelectedQuizIds(Array.from(filteredQuizzesMap.keys()))
+      history.push("/")}
+    } />],
     [`Go to Create page`, <IoMdCreate size={20} fill={theme.color.opposite_light} onClick={() => history.push("/create")} />],
   ]} />;
 
@@ -51,14 +53,6 @@ export default function Report() {
           <ReportSettings />
           {!reportFilter.excluded_columns.includes('report_export') ? <ReportExport /> : null}
           {!reportFilter.excluded_columns.includes('report_aggregator') ? <ReportAggregator /> : null}
-          <div className="Report-BackButton">
-            <Button variant="contained" color="primary" onClick={() => {
-              localStorage.setItem("REPORT_FILTERS", JSON.stringify(reportFilter))
-              setUploadedQuizzes(Array.from(filteredQuizzesMap.values()))
-              setSelectedQuizIds(Array.from(filteredQuizzesMap.keys()))
-              history.push("/")
-            }}>Back to Home</Button>
-          </div>
         </div>
       </div>]} />
     } else {
