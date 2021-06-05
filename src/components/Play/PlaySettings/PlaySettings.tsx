@@ -1,7 +1,5 @@
 import { Button, Checkbox, FormControlLabel } from "@material-ui/core";
-import { OptionsObject, useSnackbar } from "notistack";
 import React, { useContext } from "react";
-import { useHistory } from "react-router-dom";
 import { RootContext } from "../../../context/RootContext";
 import { useThemeSettings } from "../../../hooks";
 import { CheckboxGroup, InputRange } from '../../../shared';
@@ -9,19 +7,9 @@ import { IPlaySettingsOptions } from "../../../types";
 import { createDefaultPlaySettingsFiltersState, createDefaultPlaySettingsOptionsState } from "../../../utils";
 import "./PlaySettings.scss";
 
-const enqueueSnackbarOptionsObject: OptionsObject = {
-  variant: 'error',
-  anchorOrigin: {
-    vertical: 'bottom',
-    horizontal: 'center',
-  },
-}
-
 export default function PlaySettings() {
   const { selectedQuizIds, playSettings, setPlaySettings, filteredQuizzes } = useContext(RootContext);
   const { theme } = useThemeSettings();
-  const history = useHistory();
-  const { enqueueSnackbar } = useSnackbar();
 
   const filteredQuestions = filteredQuizzes.reduce((acc, filteredQuiz) => acc += filteredQuiz.questions.length, 0);
 
@@ -84,16 +72,5 @@ export default function PlaySettings() {
 
     </div>
     <div className="PlaySettings-total" style={{ backgroundColor: theme.color.dark, color: filteredQuestions === 0 ? theme.palette.error.main : theme.palette.success.main }}>{filteredQuestions} Questions</div>
-    <Button disabled={(filteredQuestions === 0 && selectedQuizIds.length !== 0) || selectedQuizIds.length === 0} className="PlaySettings-button" color="primary" variant="contained" onClick={() => {
-      if (selectedQuizIds.length > 0 && filteredQuestions > 0) {
-        history.push("/play")
-      }
-      else if (filteredQuestions === 0 && selectedQuizIds.length !== 0) {
-        enqueueSnackbar('You must have at least one question to play', enqueueSnackbarOptionsObject)
-      }
-      else if (selectedQuizIds.length === 0) {
-        enqueueSnackbar('You must have at least one quiz selected', enqueueSnackbarOptionsObject)
-      }
-    }}>Start</Button>
   </div>
 }
