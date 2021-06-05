@@ -43,7 +43,7 @@ export default function Icon(props: Props) {
       classes={{
         paper: classes.paper,
       }} open={open} anchorEl={anchorEl} anchorOrigin={{
-        vertical: 'top',
+        vertical: 'bottom',
         horizontal: 'center',
       }}
       transformOrigin={{
