@@ -16,6 +16,7 @@ import { ReportSettings } from './ReportSettings/ReportSettings';
 import { ReportStats } from './ReportStats/ReportStats';
 import { ReportTable } from './ReportTable/ReportTable';
 import { ReportUpload } from './ReportUpload/ReportUpload';
+
 export default function Report() {
   const { state } = useLocation<{ results: IResult[] }>();
   const { theme } = useThemeSettings();
@@ -38,7 +39,8 @@ export default function Report() {
     [`Go to Play page`, <AiFillHome size={20} fill={theme.color.opposite_light} onClick={() => {
       setUploadedQuizzes(Array.from(filteredQuizzesMap.values()))
       setSelectedQuizIds(Array.from(filteredQuizzesMap.keys()))
-      history.push("/")}
+      history.push("/")
+    }
     } />],
     [`Go to Create page`, <IoMdCreate size={20} fill={theme.color.opposite_light} onClick={() => history.push("/create")} />],
   ]} />;
@@ -48,12 +50,12 @@ export default function Report() {
       return <Menu lsKey="REPORT_MENU" contents={[<ReportFilter />, <div className="Report" style={{ color: theme.palette.text.primary }}>
         {iconGroup}
         <ReportTable />
-        <div style={{ gridArea: '1/2/3/3', display: 'flex', flexDirection: 'column', overflow: 'auto' }}>
+        {!reportFilter.excluded_columns.includes("report_info") ? <div style={{ width: 300, display: 'flex', flexDirection: 'column', overflow: 'auto' }}>
           {!reportFilter.excluded_columns.includes('report_stats') ? <ReportStats /> : null}
           <ReportSettings />
           {!reportFilter.excluded_columns.includes('report_export') ? <ReportExport /> : null}
           {!reportFilter.excluded_columns.includes('report_aggregator') ? <ReportAggregator /> : null}
-        </div>
+        </div> : null}
       </div>]} />
     } else {
       return <div className="Report" style={{ color: theme.palette.text.primary }}>
