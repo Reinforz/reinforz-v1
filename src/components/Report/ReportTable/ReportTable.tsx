@@ -26,14 +26,14 @@ export function ReportTable() {
         </div>
         <div style={{ display: 'flex' }}>
           {(filteredResult.question.type === "MCQ" || filteredResult.question.type === "MS") ? !reportFilter.excluded_columns.includes('options') ? <ReportOptions question={filteredResult.question} userAnswers={filteredResult.user_answers} /> : null : !reportFilter.excluded_columns.includes('answers') ? <ReportAnswers question={filteredResult.question as IResultInputQuestion} userAnswers={filteredResult.user_answers} /> : null}
-          <div style={{ width: '25%' }}>
+          {reportFilter.excluded_columns.includes('quiz_stats') && reportFilter.excluded_columns.includes('hints') ? null : <div style={{ width: '25%' }}>
             {!reportFilter.excluded_columns.includes('quiz_stats') ? <StackList header="Quiz Stats" items={[['Topic', filteredResult.question.quiz.topic], ['Subject', filteredResult.question.quiz.subject]]} /> : null}
             {filteredResult.question.hints.length !== 0 && !reportFilter.excluded_columns.includes('hints') ? <div className="Report-Table-item-hints" style={{ backgroundColor: theme.color.base }}>
               {filteredResult.question.hints.map(hint => <div className="Report-Table-item-hints-item" key={hint} style={{ backgroundColor: theme.color.light }}>
                 <Markdown content={hint} />
               </div>)}
             </div> : null}
-          </div>
+          </div>}
         </div>
       </div>)}
   </div>
