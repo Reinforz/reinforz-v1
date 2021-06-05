@@ -15,7 +15,7 @@ import PlayUpload from "./PlayUpload/PlayUpload";
 function Play() {
   const history = useHistory();
   const { theme } = useThemeSettings();
-  const { filteredQuizzes, selectedQuizIds, setUploadedQuizzes, setSelectedQuizIds, uploadedQuizzes, errorLogs, setErrorLogs } = useContext(RootContext);
+  const { setPlaying, filteredQuizzes, selectedQuizIds, setUploadedQuizzes, setSelectedQuizIds, uploadedQuizzes, errorLogs, setErrorLogs } = useContext(RootContext);
   const filteredQuestions = filteredQuizzes.reduce((acc, filteredQuiz) => acc += filteredQuiz.questions.length, 0);
 
   const cantStartPlay = (filteredQuestions === 0 && selectedQuizIds.length !== 0) || selectedQuizIds.length === 0;
@@ -26,6 +26,7 @@ function Play() {
       [`Go to Report page`, <HiDocumentReport size={20} fill={theme.color.opposite_light} onClick={() => history.push("/report")} />],
       [`Go to Create page`, <IoMdCreate size={20} fill={theme.color.opposite_light} onClick={() => history.push("/create")} />],
       ['Play', <FaPlay fill={cantStartPlay ? "#ff3223" : "#36e336"} onClick={() => {
+        setPlaying(true)
         history.push("/play")
       }} />]
     ]} />

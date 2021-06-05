@@ -14,6 +14,8 @@ interface IRootContext {
   setPlaySettings: React.Dispatch<React.SetStateAction<IPlaySettings>>
   allQuestions: TQuestionFull[]
   allQuestionsMap: Map<string, TQuestionFull>
+  setPlaying: React.Dispatch<React.SetStateAction<boolean>>
+  playing: boolean
 }
 
 export const RootContext = React.createContext({} as IRootContext)
