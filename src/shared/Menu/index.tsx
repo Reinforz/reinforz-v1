@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FaArrowAltCircleRight } from "react-icons/fa";
 import { RiArrowLeftRightLine } from "react-icons/ri";
+import { useThemeSettings } from "../../hooks";
 import { generateMenuStyles } from "../../utils";
 import IconGroup from "../IconGroup";
 import "./style.scss";
@@ -14,6 +15,7 @@ export interface MenuProps {
 }
 
 export default function Menu(props: MenuProps) {
+  const { theme } = useThemeSettings();
   const { width = 300, initialPosition, lsKey, initialOpen, contents } = props;
   let menuLsState = {
     position: initialPosition || "right",
@@ -34,7 +36,7 @@ export default function Menu(props: MenuProps) {
     {contents[1]}
     <div className="Menu" style={{ left, width }}>
       <IconGroup className="Menu-icons" direction="column" style={iconsContainerStyle} icons={[
-        [`${isOpen ? "Close" : "Open"} Menu`, <FaArrowAltCircleRight onClick={() => {
+        [`${isOpen ? "Close" : "Open"} Menu`, <FaArrowAltCircleRight fill={theme.color.opposite_light} onClick={() => {
           const newValue = !isOpen
           setIsOpen(newValue)
           lsKey && localStorage.setItem(lsKey, JSON.stringify({
@@ -42,7 +44,7 @@ export default function Menu(props: MenuProps) {
             position
           }))
         }} style={iconStyle} />],
-        [`Switch to ${position === "left" ? "right" : "left"}`, <RiArrowLeftRightLine onClick={() => {
+        [`Switch to ${position === "left" ? "right" : "left"}`, <RiArrowLeftRightLine fill={theme.color.opposite_light} onClick={() => {
           const newValue = position === "left" ? "right" : "left"
           setPosition(newValue)
           lsKey && localStorage.setItem(lsKey, JSON.stringify({
