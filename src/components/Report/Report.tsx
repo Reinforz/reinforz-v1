@@ -1,5 +1,6 @@
 import React, { useContext, useMemo, useState } from 'react';
 import { AiFillHome } from 'react-icons/ai';
+import { FaCloudUploadAlt } from "react-icons/fa";
 import { IoMdCreate, IoMdSettings } from 'react-icons/io';
 import { useHistory, useLocation } from 'react-router-dom';
 import { ReportContext } from '../../context/ReportContext';
@@ -34,7 +35,7 @@ export default function Report() {
   const filteredResults = applyReportFilters(report.results, reportFilter);
   const filteredQuizzesMap = generateQuizzesFromResults(filteredResults, allQuestionsMap);
 
-  const iconGroup = <IconGroup className="Report-icons" icons={[
+  const icons: [string, JSX.Element][] = [
     [`Go to Settings page`, <IoMdSettings size={20} fill={theme.color.opposite_light} onClick={() => history.push("/settings")} />],
     [`Go to Play page`, <AiFillHome size={20} fill={theme.color.opposite_light} onClick={() => {
       setUploadedQuizzes(Array.from(filteredQuizzesMap.values()))
@@ -42,8 +43,19 @@ export default function Report() {
       history.push("/")
     }
     } />],
-    [`Go to Create page`, <IoMdCreate size={20} fill={theme.color.opposite_light} onClick={() => history.push("/create")} />],
-  ]} />;
+    [`Go to Create page`, <IoMdCreate size={20} fill={theme.color.opposite_light} onClick={() => history.push("/create")} />]
+  ];
+
+  if (report.results.length !== 0) {
+    icons.push(["Upload", <FaCloudUploadAlt size={20} fill={theme.color.opposite_light} onClick={() => {
+      setReport({
+        results: [],
+        createdAt: Date.now(),
+        settings: playSettings
+      })
+    }} />])
+  }
+  const iconGroup = <IconGroup className="Report-icons" icons={icons} />;
 
   const render = () => {
     if (report.results.length !== 0) {
