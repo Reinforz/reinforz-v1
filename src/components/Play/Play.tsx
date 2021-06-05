@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { HiDocumentReport } from "react-icons/hi";
-import { IoMdSettings } from 'react-icons/io';
+import { IoMdCreate, IoMdSettings } from 'react-icons/io';
 import { useHistory } from "react-router-dom";
 import { RootContext } from "../../context/RootContext";
 import { useThemeSettings } from '../../hooks';
@@ -17,9 +17,10 @@ function Play() {
   const { selectedQuizIds, setUploadedQuizzes, setSelectedQuizIds, uploadedQuizzes, errorLogs, setErrorLogs } = useContext(RootContext);
 
   return <Menu lsKey="PLAY_MENU" width={290} contents={[<PlaySettings />, <div className="Play">
-    <IconGroup className="Play-settings-icons" icons={[
+    <IconGroup className="Play-icons" icons={[
       [`Go to Settings page`, <IoMdSettings size={25} fill={theme.color.opposite_light} onClick={() => history.push("/settings")} />],
       [`Go to Report page`, <HiDocumentReport size={25} fill={theme.color.opposite_light} onClick={() => history.push("/report")} />],
+      [`Go to Create page`, <IoMdCreate size={25} fill={theme.color.opposite_light} onClick={() => history.push("/create")} />],
     ]} />
     <PlayUpload />
     <div style={{ gridArea: '2/1/5/2' }}>

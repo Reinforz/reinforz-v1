@@ -5,26 +5,10 @@
   grid-template-rows: 100px 327.5px 327.5px;
   padding: 2.5px;
   
-  &-settings-icons{
+  &-icons{
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    padding: 2.5px;
-    cursor: pointer;
-    display: flex;
-    border-radius: 1px;
-    opacity: 0;
-    transition: opacity 250ms ease-in-out;
-    z-index: 5;
-
-    &:hover{
-      opacity: 1;
-      transition: opacity 250ms ease-in-out;
-    }
-
-    &-item{
-      margin: 2.5px;
-    }
   }
 
   .List{

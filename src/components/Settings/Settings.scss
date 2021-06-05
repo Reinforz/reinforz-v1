@@ -8,6 +8,12 @@
   padding: 2.5px;
   max-width: 500px;
 
+  &-icons{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
   &-header{
     text-align: center;
     font-size: 1.25em;
