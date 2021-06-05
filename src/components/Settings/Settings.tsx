@@ -10,7 +10,6 @@ import { useThemeSettings } from '../../hooks';
 import { IconGroup, Toggles } from '../../shared';
 import "./Settings.scss";
 
-
 function Settings() {
   const { settings, setSettings } = useContext(SettingsContext);
   const { theme, animation, hovertips } = settings;

@@ -1,10 +1,12 @@
 import { Button } from '@material-ui/core';
 import React, { useContext, useMemo, useState } from 'react';
+import { AiFillHome } from 'react-icons/ai';
+import { IoMdCreate, IoMdSettings } from 'react-icons/io';
 import { useHistory, useLocation } from 'react-router-dom';
 import { ReportContext } from '../../context/ReportContext';
 import { RootContext } from '../../context/RootContext';
 import { useThemeSettings } from '../../hooks';
-import { Menu } from '../../shared';
+import { IconGroup, Menu } from '../../shared';
 import { IReport, IResult } from "../../types";
 import { applyReportFilters, generateQuestionsMapFromReportResults, generateQuizzesFromResults, getReportFilters } from '../../utils';
 import "./Report.scss";
@@ -33,9 +35,16 @@ export default function Report() {
   const filteredResults = applyReportFilters(report.results, reportFilter);
   const filteredQuizzesMap = generateQuizzesFromResults(filteredResults, allQuestionsMap);
 
+  const iconGroup = <IconGroup className="Report-icons" icons={[
+    [`Go to Settings page`, <IoMdSettings size={25} fill={theme.color.opposite_light} onClick={() => history.push("/settings")} />],
+    [`Go to Play page`, <AiFillHome size={25} fill={theme.color.opposite_light} onClick={() => history.push("/")} />],
+    [`Go to Create page`, <IoMdCreate size={25} fill={theme.color.opposite_light} onClick={() => history.push("/create")} />],
+  ]} />;
+
   const render = () => {
     if (report.results.length !== 0) {
       return <Menu lsKey="REPORT_MENU" contents={[<ReportFilter />, <div className="Report" style={{ color: theme.palette.text.primary }}>
+        {iconGroup}
         <ReportTable />
         <div style={{ gridArea: '1/2/3/3', display: 'flex', flexDirection: 'column', overflow: 'auto' }}>
           {!reportFilter.excluded_columns.includes('report_stats') ? <ReportStats /> : null}
@@ -53,7 +62,10 @@ export default function Report() {
         </div>
       </div>]} />
     } else {
-      return <ReportUpload />
+      return <div className="Report" style={{ color: theme.palette.text.primary }}>
+        {iconGroup}
+        <ReportUpload />
+      </div>
     }
   }
 

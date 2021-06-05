@@ -12,4 +12,10 @@
   &-Table{
     grid-area: 1/1/3/2;
   }
+
+  &-icons{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 }
