@@ -32,7 +32,7 @@ const App = () => {
     <SnackbarProvider maxSnack={4}>
       <SettingsContext.Provider value={{ setSettings, settings }}>
         <RootContext.Provider value={{ playing, setPlaying, selectedQuizzes, allQuestionsMap, allQuestions, filteredQuizzes, setPlaySettings, playSettings, errorLogs, setErrorLogs, uploadedQuizzes, selectedQuizIds, setUploadedQuizzes, setSelectedQuizIds }}>
-          <div className={`App ${generatedTheme.palette.type === "dark" ? "dark" : "light"}`} style={{ backgroundColor: generatedTheme.color.dark }}>
+          <div className={`App ${generatedTheme.palette.type}`} style={{ backgroundColor: generatedTheme.color.dark }}>
             <Switch>
               <Route exact path="/" render={() => <Play />} />
               <Route exact path="/settings" render={() => <Settings />} />

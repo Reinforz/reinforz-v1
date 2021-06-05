@@ -1,5 +1,5 @@
 import { Button, useTheme } from "@material-ui/core";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import { RootContext } from "../../context/RootContext";
 import { Markdown } from "../../shared";
 import { ExtendedTheme, TQuestionFull } from "../../types";
@@ -54,11 +54,15 @@ export default function Question(props: Props) {
     }
   }, [props.question, disable_timer])
 
+  const memoizedQuestionComponent = useMemo(() =>
+    props.question.type === "FIB" ? <FibQuestionDisplay question={props.question.question} userAnswers={userAnswers} image={props.question.image} /> : <div className="Question-question" style={{ gridArea: image ? `1/1/2/2` : `1/1/2/3`, backgroundColor: theme.color.light }}>
+      <Markdown content={question as string} />
+    </div>,
+    // eslint-disable-next-line
+    [props.question, userAnswers])
 
   return <div className="Question" style={{ backgroundColor: theme.color.dark, color: theme.palette.text.primary }}>
-    {props.question.type === "FIB" ? <FibQuestionDisplay question={props.question.question} userAnswers={userAnswers} image={props.question.image} /> : <div className="Question-question" style={{ gridArea: image ? `1/1/2/2` : `1/1/2/3`, backgroundColor: theme.color.light }}>
-      <Markdown content={question as string} />
-    </div>}
+    {memoizedQuestionComponent}
     {image && <div className="Question-image" style={{ gridArea: `1/2/2/3`, backgroundColor: theme.color.light }}><img src={image} alt="Question" /></div>}
     {props.question.type === "MCQ" || props.question.type === "MS"
       ? <QuestionOptions setUserAnswers={setUserAnswers} userAnswers={userAnswers} question={props.question} />

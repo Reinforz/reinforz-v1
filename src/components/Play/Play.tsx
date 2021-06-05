@@ -26,8 +26,10 @@ function Play() {
       [`Go to Report page`, <HiDocumentReport size={20} fill={theme.color.opposite_light} onClick={() => history.push("/report")} />],
       [`Go to Create page`, <IoMdCreate size={20} fill={theme.color.opposite_light} onClick={() => history.push("/create")} />],
       ['Play', <FaPlay fill={cantStartPlay ? "#ff3223" : "#36e336"} onClick={() => {
-        setPlaying(true)
-        history.push("/play")
+        if (!cantStartPlay) {
+          setPlaying(true)
+          history.push("/play")
+        }
       }} />]
     ]} />
     <PlayUpload />
