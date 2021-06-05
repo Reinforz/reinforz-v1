@@ -47,9 +47,13 @@ export function generateInputQuestionAnswers(
 
   const generatedInputQuestionAnswers: TInputQuestionFull['answers'] = answers.map(
     (answer) => {
-      if (typeof answer === 'string')
+      if (
+        typeof answer === 'string' ||
+        typeof answer === 'number' ||
+        typeof answer === 'boolean'
+      )
         return [
-          generatedInputQuestionAnswerFromString(answer)
+          generatedInputQuestionAnswerFromString(answer.toString())
         ] as TInputQuestionFull['answers'][0];
       else if (Array.isArray(answer)) {
         return answer.map((answer) =>
