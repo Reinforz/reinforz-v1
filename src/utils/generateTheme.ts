@@ -65,6 +65,11 @@ export function generateTheme(theme: 'dark' | 'light') {
           height: '18px'
         }
       },
+      MuiRadio: {
+        root: {
+          padding: 5
+        }
+      },
       MuiButtonBase: {
         root: {
           padding: 0

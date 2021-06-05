@@ -9,6 +9,16 @@
     margin: 2.5px;
     margin-bottom: 25px;
 
+    &-index{
+      padding: 2.5px;
+      margin: 2.5px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 20px;
+    }
+
     &-hints{
       margin: 2.5px;
       padding: 5px 0px;

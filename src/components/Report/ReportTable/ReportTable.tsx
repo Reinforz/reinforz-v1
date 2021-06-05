@@ -13,8 +13,9 @@ export function ReportTable() {
 
   const { theme } = useThemeSettings();
   return <div className="Report-Table" style={{ backgroundColor: theme.color.base, color: theme.palette.text.primary }}>
-    {filteredResults.map(filteredResult =>
+    {filteredResults.map((filteredResult, index) =>
       <div key={filteredResult.question._id} className="Report-Table-item" style={{ backgroundColor: theme.color.dark }}>
+        <div className="Report-Table-item-index">{index + 1}</div>
         <ReportQuestion question={filteredResult.question} />
         <div className="Report-Table-item-stats">
           {!reportFilter.excluded_columns.includes('question_stats') ? <StackList header="Question Stats" items={[['Type', filteredResult.question.type], ['Difficulty', filteredResult.question.difficulty], ['Time Allocated', filteredResult.question.time_allocated], ['Weight', filteredResult.question.weight]]} /> : null}
