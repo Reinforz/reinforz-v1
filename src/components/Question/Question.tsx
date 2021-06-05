@@ -55,7 +55,7 @@ export default function Question(props: Props) {
   }, [props.question, disable_timer])
 
 
-  return <div className="Question" style={{ backgroundColor: theme.color.dark }}>
+  return <div className="Question" style={{ backgroundColor: theme.color.dark, color: theme.palette.text.primary }}>
     {props.question.type === "FIB" ? <FibQuestionDisplay question={props.question.question} userAnswers={userAnswers} image={props.question.image} /> : <div className="Question-question" style={{ gridArea: image ? `1/1/2/2` : `1/1/2/3`, backgroundColor: theme.color.light }}>
       <Markdown content={question as string} />
     </div>}

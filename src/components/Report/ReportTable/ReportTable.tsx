@@ -1,7 +1,8 @@
 import { useContext } from "react";
+import { MdDelete } from 'react-icons/md';
 import { ReportContext } from "../../../context/ReportContext";
 import { useThemeSettings } from "../../../hooks";
-import { Markdown, StackList } from "../../../shared";
+import { Icon, Markdown, StackList } from "../../../shared";
 import { IResultInputQuestion } from "../../../types";
 import { ReportAnswers } from "../ReportAnswers/ReportAnswers";
 import { ReportOptions } from "../ReportOptions/ReportOptions";
@@ -9,13 +10,21 @@ import { ReportQuestion } from "../ReportQuestion/ReportQuestion";
 import "./ReportTable.scss";
 
 export function ReportTable() {
-  const { filteredResults, reportFilter } = useContext(ReportContext);
+  const { filteredResults, reportFilter, setReport, report } = useContext(ReportContext);
 
   const { theme } = useThemeSettings();
   return <div className="Report-Table" style={{ backgroundColor: theme.color.base, color: theme.palette.text.primary }}>
     {filteredResults.map((filteredResult, index) =>
       <div key={filteredResult.question._id} className="Report-Table-item" style={{ backgroundColor: theme.color.dark }}>
-        <div className="Report-Table-item-index">{index + 1}</div>
+        <div style={{ padding: 2.5, margin: 2.5, display: 'flex', alignItems: 'center' }}>
+          <div className="Report-Table-item-index">{index + 1}</div>
+          <div className="Report-Table-item-delete" style={{ width: 20 }}><Icon popoverText="Delete"><MdDelete fill="#ff3223" onClick={() => {
+            setReport({
+              ...report,
+              results: report.results.filter(result => result._id !== filteredResult._id)
+            })
+          }} /></Icon></div>
+        </div>
         <ReportQuestion question={filteredResult.question} />
         <div className="Report-Table-item-stats">
           {!reportFilter.excluded_columns.includes('question_stats') ? <StackList header="Question Stats" items={[['Type', filteredResult.question.type], ['Difficulty', filteredResult.question.difficulty], ['Time Allocated', filteredResult.question.time_allocated], ['Weight', filteredResult.question.weight]]} /> : null}
