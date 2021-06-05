@@ -2,6 +2,7 @@ import { Button } from '@material-ui/core';
 import { safeDump } from 'js-yaml';
 import React, { useCallback, useContext, useState } from 'react';
 import { ReportContext } from '../../../context/ReportContext';
+import { useThemeSettings } from '../../../hooks';
 import { Icon, Select } from '../../../shared';
 import { download, transformFullQuestions } from "../../../utils";
 import "./ReportExport.scss";
@@ -14,6 +15,7 @@ export default function ReportExport() {
   const { filteredResults, filteredQuizzesMap, report: { settings } } = useContext(ReportContext);
   let REPORT_EXPORT: any = localStorage.getItem('REPORT_EXPORT');
   REPORT_EXPORT = REPORT_EXPORT ? JSON.parse(REPORT_EXPORT) : undefined;
+  const { theme } = useThemeSettings();
 
   const [exportState, setExportState] = useState<IReportExportState>({
     export_type: REPORT_EXPORT ? REPORT_EXPORT.export_type : 'Original',
@@ -50,14 +52,17 @@ export default function ReportExport() {
   }
 
   return (
-    <div className="Report-Export">
-      <Select lsKey={"REPORT_EXPORT"} items={['Original', 'Report']} label={"Export Type"} menuItemLabel={(item) => item} setState={setExportState} state={exportState} stateKey={"export_type"} />
-      <Select lsKey={"REPORT_EXPORT"} items={['YAML', 'JSON']} label={"Export As"} menuItemLabel={(item) => item} setState={setExportState} state={exportState} stateKey={"export_as"} />
-      <Icon popoverText={`Export ${export_type} as ${export_as}`} className="Report-Export-button">
-        <Button variant="contained" color="primary" onClick={() => {
-          downloadFiles()
-        }}>Download</Button>
-      </Icon>
+    <div className="Report-Export" style={{ color: theme.palette.text.primary, backgroundColor: theme.color.base }}>
+      <div className="Report-Export-header" style={{ backgroundColor: theme.color.dark }}>Report Export</div>
+      <div className="Report-Export-content" style={{ backgroundColor: theme.color.dark }}>
+        <Select lsKey={"REPORT_EXPORT"} items={['Original', 'Report']} label={"Export Type"} menuItemLabel={(item) => item} setState={setExportState} state={exportState} stateKey={"export_type"} />
+        <Select lsKey={"REPORT_EXPORT"} items={['YAML', 'JSON']} label={"Export As"} menuItemLabel={(item) => item} setState={setExportState} state={exportState} stateKey={"export_as"} />
+        <Icon popoverText={`Export ${export_type} as ${export_as}`} className="Report-Export-button">
+          <Button variant="contained" color="primary" onClick={() => {
+            downloadFiles()
+          }}>Download</Button>
+        </Icon>
+      </div>
     </div>
   );
 }
