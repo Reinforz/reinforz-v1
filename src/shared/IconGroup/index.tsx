@@ -12,7 +12,7 @@ interface Props {
 export default function IconGroup(props: Props) {
   const { theme } = useThemeSettings();
   const direction = props.direction ?? 'row';
-  return <div className={`Icon-Group ${props.className}`} style={{ backgroundColor: theme.color.base, flexDirection: direction }}>
+  return <div className={`Icon-Group ${props.className}`} style={{ backgroundColor: theme.color.base, flexDirection: direction, ...props.style ?? {} }}>
     {props.icons.map(([popoverText, icon], index) => <Icon key={popoverText + index} popoverText={popoverText} className="Icon-Group-item" style={{ backgroundColor: theme.color.light }} >
       {icon}
     </Icon>)}
