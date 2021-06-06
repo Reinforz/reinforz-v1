@@ -50,7 +50,8 @@ export const QUIZ_1: IQuizFull = {
         topic: 'Topic 1',
         subject: 'Subject 1',
         _id: 'quiz1'
-      }
+      },
+      format: 'md'
     },
     {
       question: ['Chunk 1', 'Chunk 2'],
@@ -94,7 +95,8 @@ export const QUIZ_1: IQuizFull = {
         topic: 'Topic 1',
         subject: 'Subject 1',
         _id: 'quiz1'
-      }
+      },
+      format: 'md'
     }
   ],
   _id: 'quiz1'
@@ -146,7 +148,8 @@ export const QUIZ_2: IQuizFull = {
         topic: 'Topic 2',
         subject: 'Subject 2',
         _id: 'quiz2'
-      }
+      },
+      format: 'md'
     },
     {
       question: ['Chunk 1', 'Chunk 2', 'Chunk 3'],
@@ -181,7 +184,8 @@ export const QUIZ_2: IQuizFull = {
         topic: 'Topic 2',
         subject: 'Subject 2',
         _id: 'quiz2'
-      }
+      },
+      format: 'md'
     }
   ],
   _id: 'quiz2'

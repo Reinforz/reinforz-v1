@@ -74,6 +74,7 @@ it(`Should filter out uploaded quizzes`, () => {
       subject: 'Subject',
       topic: 'Title',
       _id: expect.any(String),
+      format: 'md',
       questions: [
         {
           answers: [

@@ -40,7 +40,8 @@ export function generateCompleteQuestion(question: TQuestionPartial) {
     ['weight', 1],
     ['difficulty', 'Beginner'],
     ['explanation', 'No explanation available'],
-    ['hints', []]
+    ['hints', []],
+    ['format', 'md'],
   ]);
 
   const dummyQuestion: any = completeQuestion;
