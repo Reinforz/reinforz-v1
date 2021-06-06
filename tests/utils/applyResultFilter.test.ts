@@ -6,7 +6,7 @@ const result: IResult = {
   hints_used: 0,
   time_taken: 20,
   score: {
-    amount: 1,
+    amount: 0.85,
     answers: 0.7,
     hints: 0.15,
     time: 0.15
@@ -83,6 +83,24 @@ it(`Should filter out if question time taken is greater than upper bound of time
   const filteredResults = applyReportFilters([result], {
     ...default_filters,
     time_taken: [10, 15]
+  });
+
+  expect(filteredResults).toStrictEqual([]);
+});
+
+it(`Should filter out if question time taken is less than lower bound of score`, () => {
+  const filteredResults = applyReportFilters([result], {
+    ...default_filters,
+    score: [1, 1]
+  });
+
+  expect(filteredResults).toStrictEqual([]);
+});
+
+it(`Should filter out if question time taken is greater than upper bound of score`, () => {
+  const filteredResults = applyReportFilters([result], {
+    ...default_filters,
+    score: [0, 0.5]
   });
 
   expect(filteredResults).toStrictEqual([]);

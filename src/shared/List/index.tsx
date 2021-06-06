@@ -65,7 +65,9 @@ export default function List<T extends { _id: string }>(props: Props<T>) {
                 }} style={{ fill: theme.palette.error.dark }} />
               </Icon>
             </div>
-            {fields.map((field, index) => <div className="List-content-item-field" key={_id + field + index}>{typeof field === "function" ? field(item) : item[field]}</div>)}
+            <div style={{ display: 'flex', justifyContent: 'space-between', flex: 1 }}>
+              {fields.map((field, index) => <div className="List-content-item-field" key={_id + field + index}>{typeof field === "function" ? field(item) : item[field]}</div>)}
+            </div>
           </div>
         }) : <div style={{ fontSize: "1.25em", fontWeight: "bold", position: "absolute", transform: "translate(-50%,-50%)", top: "50%", left: "50%", textAlign: 'center' }}>No items uploaded</div>}
     </div>
