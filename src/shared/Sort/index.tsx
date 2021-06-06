@@ -1,5 +1,6 @@
 import { FormGroup, InputLabel, MenuItem, Select as MuiSelect } from "@material-ui/core";
 import { AiFillPlusCircle } from "react-icons/ai";
+import { MdDelete } from "react-icons/md";
 import { useThemeSettings } from "../../hooks";
 import Icon from "../Icon";
 import "./Sort.scss";
@@ -20,10 +21,10 @@ export default function Sort(props: Props) {
   return <FormGroup className="Sort">
     <InputLabel className="Sort-header">{header}</InputLabel>
     <div style={{ background: theme.color.dark, display: 'flex', flexDirection: 'column', padding: 2.5, margin: 2.5 }} className="Sort-content">
-      {sorts.map((sort) => {
+      {sorts.map((sort, index) => {
         const [item, order] = sort;
-        return <div className="Sort-content-item" style={{ display: 'flex', background: theme.color.light, padding: 2.5, margin: 2.5 }}>
-          <MuiSelect style={{ flex: 1 }} value={item}
+        return <div className="Sort-content-item" style={{ background: theme.color.base, display: 'flex', padding: 5, margin: 2.5 }}>
+          <MuiSelect style={{ background: theme.color.light, flex: 1, marginRight: 5 }} value={item}
             onChange={(e) => {
               sort[0] = e.target.value as any;
               setSorts(JSON.parse(JSON.stringify(sorts)))
@@ -33,7 +34,7 @@ export default function Sort(props: Props) {
             )}
           </MuiSelect>
 
-          <MuiSelect style={{ flex: 1 }} value={order}
+          <MuiSelect style={{ background: theme.color.light, flex: 1 }} value={order}
             onChange={(e) => {
               sort[1] = e.target.value as any;
               setSorts(JSON.parse(JSON.stringify(sorts)))
@@ -42,6 +43,14 @@ export default function Sort(props: Props) {
               <MenuItem key={item} value={item}>{menuItemLabel(item)}</MenuItem>
             )}
           </MuiSelect>
+          <div className="Sort-delete">
+            <Icon popoverText={`Delete ${item} by ${order} sort`}>
+              <MdDelete size={20} fill="#f44336" onClick={() => {
+                sorts[index] = null as any;
+                setSorts(sorts.filter(sort => sort))
+              }} />
+            </Icon>
+          </div>
         </div>
       })}
     </div>

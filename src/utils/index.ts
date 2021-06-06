@@ -1,5 +1,6 @@
 export * from './applyPlaySettingsOptions';
 export * from './applyReportFilters';
+export * from './applyReportSorts';
 export * from './arrayShuffler';
 export * from './calculateScore';
 export * from './checkInputAnswers';

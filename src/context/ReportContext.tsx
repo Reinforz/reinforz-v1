@@ -11,6 +11,7 @@ interface IReportContext {
   setReportFilter: React.Dispatch<React.SetStateAction<IReportFilter>>
   reportSort: IReportSort
   setReportSort: React.Dispatch<React.SetStateAction<IReportSort>>
+  sortedResults: IResult[]
 }
 
 export const ReportContext = React.createContext({} as IReportContext)

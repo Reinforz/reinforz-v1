@@ -8,7 +8,7 @@ import { RootContext } from '../../context/RootContext';
 import { useThemeSettings } from '../../hooks';
 import { IconGroup, Menu } from '../../shared';
 import { IReport, IReportSort, IResult } from "../../types";
-import { applyReportFilters, generateQuestionsMapFromReportResults, generateQuizzesFromResults, getReportFilters } from '../../utils';
+import { applyReportFilters, applyReportSorts, generateQuestionsMapFromReportResults, generateQuizzesFromResults, getReportFilters } from '../../utils';
 import "./Report.scss";
 import { ReportAggregator } from './ReportAggregator/ReportAggregator';
 import ReportExport from './ReportExport/ReportExport';
@@ -34,6 +34,7 @@ export default function Report() {
   const allQuestionsMap = useMemo(() => generateQuestionsMapFromReportResults(report.results), [report.results]);
   const allQuizzesMap = useMemo(() => generateQuizzesFromResults(report.results, allQuestionsMap), [report.results, allQuestionsMap]);
   const filteredResults = applyReportFilters(report.results, reportFilter);
+  const sortedResults = applyReportSorts(filteredResults, reportSort);
   const filteredQuizzesMap = generateQuizzesFromResults(filteredResults, allQuestionsMap);
 
   const icons: [string, JSX.Element][] = [
@@ -78,7 +79,7 @@ export default function Report() {
     }
   }
 
-  return <ReportContext.Provider value={{ reportSort, setReportSort, setReport, report, filteredResults, allQuizzesMap, filteredQuizzesMap, reportFilter, setReportFilter }}>
+  return <ReportContext.Provider value={{ reportSort, setReportSort, setReport, report, sortedResults, filteredResults, allQuizzesMap, filteredQuizzesMap, reportFilter, setReportFilter }}>
     {render()}
   </ReportContext.Provider>
 }

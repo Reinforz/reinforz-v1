@@ -8,7 +8,7 @@ import { download, getReportExport, transformFullQuestions } from "../../../util
 import "./ReportExport.scss";
 
 export default function ReportExport() {
-  const { filteredResults, filteredQuizzesMap, report: { settings } } = useContext(ReportContext);
+  const { sortedResults, filteredQuizzesMap, report: { settings } } = useContext(ReportContext);
   const { theme } = useThemeSettings();
 
   const [exportState, setExportState] = useState(getReportExport());
@@ -26,7 +26,7 @@ export default function ReportExport() {
     if (export_as === "JSON") {
       if (export_type === "Report") download(`Report${Date.now()}.json`, JSON.stringify({
         settings,
-        results: filteredResults,
+        results: sortedResults,
         createdAt: Date.now()
       }, undefined, 2));
       else
@@ -34,7 +34,7 @@ export default function ReportExport() {
     } else {
       if (export_type === "Report") download(`Report${Date.now()}.yaml`, safeDump({
         settings,
-        results: filteredResults,
+        results: sortedResults,
         createdAt: Date.now()
       }));
       else

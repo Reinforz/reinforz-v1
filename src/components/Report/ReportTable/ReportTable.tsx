@@ -10,35 +10,35 @@ import { ReportQuestion } from "../ReportQuestion/ReportQuestion";
 import "./ReportTable.scss";
 
 export function ReportTable() {
-  const { filteredResults, reportFilter, setReport, report } = useContext(ReportContext);
+  const { sortedResults, reportFilter, setReport, report } = useContext(ReportContext);
 
   const { theme } = useThemeSettings();
   return <div className="Report-Table" style={{ backgroundColor: theme.color.base, color: theme.palette.text.primary }}>
-    {filteredResults.map((filteredResult, index) =>
-      <div key={filteredResult.question._id} className="Report-Table-item" style={{ backgroundColor: theme.color.dark }}>
+    {sortedResults.map((sortedResult, index) =>
+      <div key={sortedResult.question._id} className="Report-Table-item" style={{ backgroundColor: theme.color.dark }}>
         <div style={{ padding: 2.5, margin: 2.5, display: 'flex', alignItems: 'center' }}>
           <div className="Report-Table-item-index">{index + 1}</div>
           <div className="Report-Table-item-delete" style={{ width: 20 }}><Icon popoverText="Delete"><MdDelete fill="#ff3223" onClick={() => {
             setReport({
               ...report,
-              results: report.results.filter(result => result._id !== filteredResult._id)
+              results: report.results.filter(result => result._id !== sortedResult._id)
             })
           }} /></Icon></div>
         </div>
-        <ReportQuestion question={filteredResult.question} />
+        <ReportQuestion question={sortedResult.question} />
         <div className="Report-Table-item-stats">
-          {!reportFilter.excluded_columns.includes('question_stats') ? <StackList header="Question Stats" items={[['Type', filteredResult.question.type], ['Difficulty', filteredResult.question.difficulty], ['Time Allocated', filteredResult.question.time_allocated], ['Weight', filteredResult.question.weight]]} /> : null}
-          {!reportFilter.excluded_columns.includes('user_stats') ? <StackList header="User Stats" items={[['Time Taken', filteredResult.time_taken], ['Hints Used', filteredResult.hints_used], ['Verdict', <div style={{
-            fontWeight: 'bold', color: filteredResult.verdict === false ? "#ff3223" : "#36e336"
-          }}>{filteredResult.verdict === false ? "Incorrect" : "Correct"}</div>]]} /> : null}
-          {!reportFilter.excluded_columns.includes('score_breakdown') ? <StackList header="Score Breakdown" items={[['Amount', filteredResult.score.amount], ['Answers', filteredResult.score.answers], ['Time', filteredResult.score.time], ['Hints', filteredResult.score.hints]]} /> : null}
+          {!reportFilter.excluded_columns.includes('question_stats') ? <StackList header="Question Stats" items={[['Type', sortedResult.question.type], ['Difficulty', sortedResult.question.difficulty], ['Time Allocated', sortedResult.question.time_allocated], ['Weight', sortedResult.question.weight]]} /> : null}
+          {!reportFilter.excluded_columns.includes('user_stats') ? <StackList header="User Stats" items={[['Time Taken', sortedResult.time_taken], ['Hints Used', sortedResult.hints_used], ['Verdict', <div style={{
+            fontWeight: 'bold', color: sortedResult.verdict === false ? "#ff3223" : "#36e336"
+          }}>{sortedResult.verdict === false ? "Incorrect" : "Correct"}</div>]]} /> : null}
+          {!reportFilter.excluded_columns.includes('score_breakdown') ? <StackList header="Score Breakdown" items={[['Amount', sortedResult.score.amount], ['Answers', sortedResult.score.answers], ['Time', sortedResult.score.time], ['Hints', sortedResult.score.hints]]} /> : null}
         </div>
         <div style={{ display: 'flex' }}>
-          {(filteredResult.question.type === "MCQ" || filteredResult.question.type === "MS") ? !reportFilter.excluded_columns.includes('options') ? <ReportOptions question={filteredResult.question} userAnswers={filteredResult.user_answers} /> : null : !reportFilter.excluded_columns.includes('answers') ? <ReportAnswers question={filteredResult.question as IResultInputQuestion} userAnswers={filteredResult.user_answers} /> : null}
+          {(sortedResult.question.type === "MCQ" || sortedResult.question.type === "MS") ? !reportFilter.excluded_columns.includes('options') ? <ReportOptions question={sortedResult.question} userAnswers={sortedResult.user_answers} /> : null : !reportFilter.excluded_columns.includes('answers') ? <ReportAnswers question={sortedResult.question as IResultInputQuestion} userAnswers={sortedResult.user_answers} /> : null}
           {reportFilter.excluded_columns.includes('quiz_stats') && reportFilter.excluded_columns.includes('hints') ? null : <div style={{ width: '25%' }}>
-            {!reportFilter.excluded_columns.includes('quiz_stats') ? <StackList header="Quiz Stats" items={[['Topic', filteredResult.question.quiz.topic], ['Subject', filteredResult.question.quiz.subject]]} /> : null}
-            {filteredResult.question.hints.length !== 0 && !reportFilter.excluded_columns.includes('hints') ? <div className="Report-Table-item-hints" style={{ backgroundColor: theme.color.base }}>
-              {filteredResult.question.hints.map(hint => <div className="Report-Table-item-hints-item" key={hint} style={{ backgroundColor: theme.color.light }}>
+            {!reportFilter.excluded_columns.includes('quiz_stats') ? <StackList header="Quiz Stats" items={[['Topic', sortedResult.question.quiz.topic], ['Subject', sortedResult.question.quiz.subject]]} /> : null}
+            {sortedResult.question.hints.length !== 0 && !reportFilter.excluded_columns.includes('hints') ? <div className="Report-Table-item-hints" style={{ backgroundColor: theme.color.base }}>
+              {sortedResult.question.hints.map(hint => <div className="Report-Table-item-hints-item" key={hint} style={{ backgroundColor: theme.color.light }}>
                 <Markdown content={hint} />
               </div>)}
             </div> : null}

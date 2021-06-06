@@ -50,7 +50,8 @@ export function generateTheme(theme: 'dark' | 'light') {
       },
       MuiInput: {
         root: {
-          padding: 2.5
+          padding: 2.5,
+          paddingLeft: 5
         }
       },
       MuiCheckbox: {

@@ -1,7 +1,8 @@
 .Sort{
-  &-add{
+  &-add, &-delete{
     display: flex;
     justify-content: center;
     cursor: pointer;
+    align-items: center;
   }
 }
