@@ -27,9 +27,7 @@ export default function PlaySettings() {
                 disabled={isDisabled}
                 checked={playSettings.options[key as keyof IPlaySettingsOptions]}
                 onChange={(event, checked) => {
-                  const newState = key === "flatten_mix" ? { ...playSettings, options: { ...playSettings.options, [event.target.name]: checked, shuffle_questions: checked, shuffle_quizzes: checked } } : { ...playSettings, options: { ...playSettings.options, [event.target.name]: checked } };
-                  setPlaySettings(newState)
-                  localStorage.setItem("PLAY_SETTINGS", JSON.stringify(newState))
+                  setPlaySettings(key === "flatten_mix" ? { ...playSettings, options: { ...playSettings.options, [event.target.name]: checked, shuffle_questions: checked, shuffle_quizzes: checked } } : { ...playSettings, options: { ...playSettings.options, [event.target.name]: checked } })
                 }}
                 name={key}
                 color="primary"
@@ -54,16 +52,10 @@ export default function PlaySettings() {
 
         <CheckboxGroup label={'Excluded Difficulty'} items={['Beginner', 'Intermediate', 'Advanced']} setState={(filters: any) => {
           setPlaySettings({ ...playSettings, filters })
-          localStorage.setItem('PLAY_SETTINGS', JSON.stringify({
-            ...playSettings, filters
-          }))
         }} stateKey={'excluded_difficulty'} state={playSettings.filters} />
 
         <CheckboxGroup label={'Excluded Type'} items={['FIB', 'MS', 'MCQ', "Snippet"]} setState={(filters: any) => {
           setPlaySettings({ ...playSettings, filters })
-          localStorage.setItem('PLAY_SETTINGS', JSON.stringify({
-            ...playSettings, filters
-          }))
         }} stateKey={'excluded_types'} state={playSettings.filters} />
       </div>
       <Button className="PlaySettings-group-button" variant="contained" color="primary" onClick={() => {

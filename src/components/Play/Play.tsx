@@ -5,7 +5,7 @@ import { IoMdCreate, IoMdSettings } from 'react-icons/io';
 import { useHistory } from "react-router-dom";
 import { RootContext } from "../../context/RootContext";
 import { useThemeSettings } from '../../hooks';
-import { IconGroup, List, Menu, SimpleModal, View } from '../../shared';
+import { IconGroup, List, Menu, Preset, SimpleModal, View } from '../../shared';
 import "./Play.scss";
 import PlayErrorlogs from "./PlayErrorlogs/PlayErrorlogs";
 import { PlayListTable } from "./PlayListTable/PlayListTable";
@@ -17,14 +17,16 @@ function Play() {
 
   const history = useHistory();
   const { theme } = useThemeSettings();
-  const { setPlaying, filteredQuizzes, selectedQuizIds, setUploadedQuizzes, setSelectedQuizIds, uploadedQuizzes, errorLogs, setErrorLogs } = useContext(RootContext);
+  const { setPlaying, filteredQuizzes, selectedQuizIds, playSettings, setUploadedQuizzes, setSelectedQuizIds, uploadedQuizzes, errorLogs, setErrorLogs } = useContext(RootContext);
   const filteredQuestions = filteredQuizzes.reduce((acc, filteredQuiz) => acc += filteredQuiz.questions.length, 0);
 
   const cantStartPlay = (filteredQuestions === 0 && selectedQuizIds.length !== 0) || selectedQuizIds.length === 0;
 
   return <Menu lsKey="PLAY_MENU" width={290} modalOpen={() => setModalOpen(true)} contents={[<PlaySettings />, <div className="Play">
     <SimpleModal open={modalOpen} setOpen={setModalOpen}>
-      <div>123</div>
+      <Preset closeModal={() => setModalOpen(false)} label={'Save Play Settings'} onSave={() => {
+        localStorage.setItem('PLAY_SETTINGS', JSON.stringify(playSettings))
+      }} />
     </SimpleModal>
     <IconGroup className="Play-icons" icons={[
       [`Go to Settings page`, <IoMdSettings size={20} fill={theme.color.opposite_light} onClick={() => history.push("/settings")} />],
