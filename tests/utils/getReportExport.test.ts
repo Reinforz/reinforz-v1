@@ -12,7 +12,7 @@ it(`Should work if report export exists in ls`, () => {
   const reportExport = getReportExport();
   expect(reportExport).toStrictEqual({
     export_as: 'JSON',
-    export_type: 'Original'
+    export_type: 'Quizzes'
   });
 });
 
@@ -21,6 +21,6 @@ it(`Should work if report export doesn't exist in ls`, () => {
   const reportExport = getReportExport();
   expect(reportExport).toStrictEqual({
     export_as: 'YAML',
-    export_type: 'Original'
+    export_type: 'Quizzes'
   });
 });

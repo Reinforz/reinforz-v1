@@ -14,6 +14,7 @@ it(`Should work if report filters exists in ls`, () => {
   const reportFilters = getReportFilters();
   expect(reportFilters).toStrictEqual({
     time_taken: [0, 120],
+    score: [0, 1],
     verdict: 'false',
     hints_used: 'any',
     excluded_types: [],
@@ -28,6 +29,7 @@ it(`Should work if report filters doesn't exist in ls`, () => {
   const reportFilters = getReportFilters();
   expect(reportFilters).toStrictEqual({
     time_taken: [0, 120],
+    score: [0, 1],
     verdict: 'mixed',
     hints_used: 'any',
     excluded_types: [],

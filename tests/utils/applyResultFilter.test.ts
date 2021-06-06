@@ -1,4 +1,4 @@
-import { IResult } from '../../src/types';
+import { IReportFilter, IResult } from '../../src/types';
 import { applyReportFilters } from '../../src/utils';
 
 const result: IResult = {
@@ -32,14 +32,21 @@ const result: IResult = {
   }
 };
 
+const default_filters: IReportFilter = {
+  excluded_difficulty: [],
+  excluded_quizzes: [],
+  excluded_types: [],
+  hints_used: 0,
+  time_taken: [0, 60],
+  verdict: true,
+  score: [0, 1],
+  excluded_columns: []
+};
+
 it(`Should filter out if question type is within excluded_types`, () => {
   const filteredResults = applyReportFilters([result], {
-    excluded_difficulty: [],
-    excluded_quizzes: [],
-    excluded_types: ['FIB'],
-    hints_used: 0,
-    time_taken: [0, 60],
-    verdict: true
+    ...default_filters,
+    excluded_types: ['FIB']
   });
 
   expect(filteredResults).toStrictEqual([]);
@@ -47,12 +54,8 @@ it(`Should filter out if question type is within excluded_types`, () => {
 
 it(`Should filter out if question difficulty is within excluded_difficulty`, () => {
   const filteredResults = applyReportFilters([result], {
-    excluded_difficulty: ['Advanced'],
-    excluded_quizzes: [],
-    excluded_types: [],
-    hints_used: 0,
-    time_taken: [0, 60],
-    verdict: true
+    ...default_filters,
+    excluded_difficulty: ['Advanced']
   });
 
   expect(filteredResults).toStrictEqual([]);
@@ -60,11 +63,7 @@ it(`Should filter out if question difficulty is within excluded_difficulty`, () 
 
 it(`Should filter out if question verdict is different from filter verdict`, () => {
   const filteredResults = applyReportFilters([result], {
-    excluded_difficulty: [],
-    excluded_quizzes: [],
-    excluded_types: [],
-    hints_used: 0,
-    time_taken: [0, 60],
+    ...default_filters,
     verdict: false
   });
 
@@ -73,12 +72,8 @@ it(`Should filter out if question verdict is different from filter verdict`, () 
 
 it(`Should filter out if question time taken is less than lower bound of time_taken`, () => {
   const filteredResults = applyReportFilters([result], {
-    excluded_difficulty: [],
-    excluded_quizzes: [],
-    excluded_types: [],
-    hints_used: 0,
-    time_taken: [30, 60],
-    verdict: true
+    ...default_filters,
+    time_taken: [30, 60]
   });
 
   expect(filteredResults).toStrictEqual([]);
@@ -86,12 +81,8 @@ it(`Should filter out if question time taken is less than lower bound of time_ta
 
 it(`Should filter out if question time taken is greater than upper bound of time_taken`, () => {
   const filteredResults = applyReportFilters([result], {
-    excluded_difficulty: [],
-    excluded_quizzes: [],
-    excluded_types: [],
-    hints_used: 0,
-    time_taken: [10, 15],
-    verdict: true
+    ...default_filters,
+    time_taken: [10, 15]
   });
 
   expect(filteredResults).toStrictEqual([]);
@@ -99,26 +90,15 @@ it(`Should filter out if question time taken is greater than upper bound of time
 
 it(`Should filter out if quiz id is within excluded_quizzes`, () => {
   const filteredResults = applyReportFilters([result], {
-    excluded_difficulty: [],
-    excluded_quizzes: ['1'],
-    excluded_types: [],
-    hints_used: 0,
-    time_taken: [0, 60],
-    verdict: true
+    ...default_filters,
+    excluded_quizzes: ['1']
   });
 
   expect(filteredResults).toStrictEqual([]);
 });
 
 it(`Should return result if no filter catches it`, () => {
-  const filteredResults = applyReportFilters([result], {
-    excluded_difficulty: [],
-    excluded_quizzes: [],
-    excluded_types: [],
-    hints_used: 0,
-    time_taken: [0, 60],
-    verdict: true
-  });
+  const filteredResults = applyReportFilters([result], default_filters);
 
   expect(filteredResults).toStrictEqual([result]);
 });

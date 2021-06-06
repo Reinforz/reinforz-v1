@@ -35,6 +35,7 @@ describe('createDefaultReportFilterState', () => {
     const defaultReportFiltersState = createDefaultReportFilterState();
     expect(defaultReportFiltersState).toStrictEqual({
       time_taken: [0, 120],
+      score: [0, 1],
       verdict: 'mixed',
       hints_used: 'any',
       excluded_types: [],
