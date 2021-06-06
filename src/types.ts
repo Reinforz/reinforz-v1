@@ -240,6 +240,8 @@ export interface IReportFilter {
   excluded_columns: string[];
 }
 
+export type IReportSort = [string, 'ASC' | 'DESC'][];
+
 type color = {
   dark: string;
   base: string;

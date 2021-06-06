@@ -9,12 +9,14 @@ import Markdown from './Markdown';
 import Menu from './Menu';
 import RadioGroup from './RadioGroup';
 import Select from './Select';
+import Sort from "./Sort";
 import StackList from './StackList';
 import Stats from './Stats';
 import Toggles from './Toggles';
 import View from './View';
 
 export {
+  Sort,
   IconGroup,
   Markdown,
   StackList,
@@ -31,3 +33,4 @@ export {
   Menu,
   Stats
 };
+

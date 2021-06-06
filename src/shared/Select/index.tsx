@@ -22,7 +22,7 @@ export default function Select<T extends Record<string, any>>(props: Props<T>) {
     <InputLabel>{props.label}</InputLabel>
     <div style={{ background: theme.color.light, display: 'flex', flexDirection: 'column', padding: 2.5, margin: 2.5 }} className="Select-content">
       <MuiSelect value={state[stateKey] as string[]}
-        multiple={multiple}
+        multiple={Boolean(multiple)}
         renderValue={renderValue}
         onChange={(e) => {
           setState({ ...state, [stateKey]: e.target.value as string[] })

@@ -7,7 +7,7 @@ import { ReportContext } from '../../context/ReportContext';
 import { RootContext } from '../../context/RootContext';
 import { useThemeSettings } from '../../hooks';
 import { IconGroup, Menu } from '../../shared';
-import { IReport, IResult } from "../../types";
+import { IReport, IReportSort, IResult } from "../../types";
 import { applyReportFilters, generateQuestionsMapFromReportResults, generateQuizzesFromResults, getReportFilters } from '../../utils';
 import "./Report.scss";
 import { ReportAggregator } from './ReportAggregator/ReportAggregator';
@@ -23,6 +23,7 @@ export default function Report() {
   const { theme } = useThemeSettings();
   const { playSettings, setUploadedQuizzes, setSelectedQuizIds } = useContext(RootContext);
   const [reportFilter, setReportFilter] = useState(getReportFilters());
+  const [reportSort, setReportSort] = useState<IReportSort>([]);
   const [report, setReport] = useState<IReport>({
     results: state?.results ?? [],
     createdAt: Date.now(),
@@ -77,7 +78,7 @@ export default function Report() {
     }
   }
 
-  return <ReportContext.Provider value={{ setReport, report, filteredResults, allQuizzesMap, filteredQuizzesMap, reportFilter, setReportFilter }}>
+  return <ReportContext.Provider value={{ reportSort, setReportSort, setReport, report, filteredResults, allQuizzesMap, filteredQuizzesMap, reportFilter, setReportFilter }}>
     {render()}
   </ReportContext.Provider>
 }
