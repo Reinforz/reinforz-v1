@@ -3,7 +3,7 @@ import { AiFillPlusCircle } from "react-icons/ai";
 import { MdDelete } from "react-icons/md";
 import { useThemeSettings } from "../../hooks";
 import Icon from "../Icon";
-import "./Sort.scss";
+import "./style.scss";
 
 interface Props {
   header: string
@@ -23,7 +23,7 @@ export default function Sort(props: Props) {
     <div style={{ background: theme.color.dark, display: 'flex', flexDirection: 'column', padding: 2.5, margin: 2.5 }} className="Sort-content">
       {sorts.map((sort, index) => {
         const [item, order] = sort;
-        return <div className="Sort-content-item" style={{ background: theme.color.base, display: 'flex', padding: 5, margin: 2.5 }}>
+        return <div key={`${item}.${order}`} className="Sort-content-item" style={{ background: theme.color.base, display: 'flex', padding: 5, margin: 2.5 }}>
           <MuiSelect style={{ background: theme.color.light, flex: 1, marginRight: 5 }} value={item}
             onChange={(e) => {
               sort[0] = e.target.value as any;
