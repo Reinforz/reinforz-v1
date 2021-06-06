@@ -1,4 +1,5 @@
 import { FormGroup, InputLabel, MenuItem, Select as MuiSelect } from "@material-ui/core";
+import { green, red } from "@material-ui/core/colors";
 import { AiFillPlusCircle } from "react-icons/ai";
 import { MdDelete } from "react-icons/md";
 import { useThemeSettings } from "../../hooks";
@@ -45,7 +46,7 @@ export default function Sort(props: Props) {
           </MuiSelect>
           <div className="Sort-delete">
             <Icon popoverText={`Delete ${item} by ${order} sort`}>
-              <MdDelete size={20} fill="#f44336" onClick={() => {
+              <MdDelete size={20} fill={red[500]} onClick={() => {
                 sorts[index] = null as any;
                 setSorts(sorts.filter(sort => sort))
               }} />
@@ -56,7 +57,7 @@ export default function Sort(props: Props) {
     </div>
     {sorts.length !== maxSort && <div className="Sort-add">
       <Icon popoverText="Add Sort">
-        <AiFillPlusCircle size={25} fill="#36e336" onClick={() => setSorts([...sorts, [items[0], 'ASC']])} />
+        <AiFillPlusCircle size={25} fill={green[500]} onClick={() => setSorts([...sorts, [items[0], 'ASC']])} />
       </Icon>
     </div>}
   </FormGroup>

@@ -1,3 +1,4 @@
+import { green, red } from "@material-ui/core/colors";
 import { AiFillCheckSquare } from "react-icons/ai";
 import { MdCancel } from "react-icons/md";
 import { useThemeSettings } from "../../../hooks";
@@ -23,7 +24,7 @@ export function ReportAnswers(props: Props) {
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
               <div style={{ backgroundColor: theme.color.light, padding: 10, marginRight: 2.5 }} className="Report-Answers-container-item-text">{answer.text}</div>
               <div style={{ backgroundColor: theme.color.light, width: 50 }} className="Report-Answers-container-item-isCorrect">
-                {answer.isCorrect ? <AiFillCheckSquare fill="#24ce2c" style={{ padding: 5 }} size={20} /> : <MdCancel fill="#ff3d2f" style={{ padding: 5 }} size={20} />}
+                {answer.isCorrect ? <AiFillCheckSquare fill={green[500]} style={{ padding: 5 }} size={20} /> : <MdCancel fill={red[500]} style={{ padding: 5 }} size={20} />}
               </div>
             </div>
             {answer.regex || answer.modifiers.length !== 0 ? <div style={{ display: 'flex', marginBottom: 5, justifyContent: 'space-between', fontWeight: 'bold' }}>

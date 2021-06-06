@@ -1,3 +1,4 @@
+import { green, red } from "@material-ui/core/colors";
 import { useContext } from "react";
 import { MdDelete } from 'react-icons/md';
 import { ReportContext } from "../../../context/ReportContext";
@@ -18,7 +19,7 @@ export function ReportTable() {
       <div key={sortedResult.question._id} className="Report-Table-item" style={{ backgroundColor: theme.color.dark }}>
         <div style={{ padding: 2.5, margin: 2.5, display: 'flex', alignItems: 'center' }}>
           <div className="Report-Table-item-index">{index + 1}</div>
-          <div className="Report-Table-item-delete" style={{ width: 20 }}><Icon popoverText="Delete"><MdDelete fill="#ff3223" onClick={() => {
+          <div className="Report-Table-item-delete" style={{ width: 20 }}><Icon popoverText="Delete"><MdDelete fill={red[500]} onClick={() => {
             setReport({
               ...report,
               results: report.results.filter(result => result._id !== sortedResult._id)
@@ -29,7 +30,7 @@ export function ReportTable() {
         <div className="Report-Table-item-stats">
           {!reportFilter.excluded_columns.includes('question_stats') ? <StackList header="Question Stats" items={[['Type', sortedResult.question.type], ['Difficulty', sortedResult.question.difficulty], ['Time Allocated', sortedResult.question.time_allocated], ['Weight', sortedResult.question.weight]]} /> : null}
           {!reportFilter.excluded_columns.includes('user_stats') ? <StackList header="User Stats" items={[['Time Taken', sortedResult.time_taken], ['Hints Used', sortedResult.hints_used], ['Verdict', <div style={{
-            fontWeight: 'bold', color: sortedResult.verdict === false ? "#ff3223" : "#36e336"
+            fontWeight: 'bold', color: sortedResult.verdict === false ? red[500] : green[500]
           }}>{sortedResult.verdict === false ? "Incorrect" : "Correct"}</div>]]} /> : null}
           {!reportFilter.excluded_columns.includes('score_breakdown') ? <StackList header="Score Breakdown" items={[['Amount', sortedResult.score.amount], ['Answers', sortedResult.score.answers], ['Time', sortedResult.score.time], ['Hints', sortedResult.score.hints]]} /> : null}
         </div>

@@ -1,3 +1,4 @@
+import { green, red } from "@material-ui/core/colors";
 import React, { useContext, useState } from "react";
 import { FaPlay } from "react-icons/fa";
 import { HiDocumentReport } from "react-icons/hi";
@@ -34,7 +35,7 @@ function Play() {
       [`Go to Settings page`, <IoMdSettings size={20} fill={theme.color.opposite_light} onClick={() => history.push("/settings")} />],
       [`Go to Report page`, <HiDocumentReport size={20} fill={theme.color.opposite_light} onClick={() => history.push("/report")} />],
       [`Go to Create page`, <IoMdCreate size={20} fill={theme.color.opposite_light} onClick={() => history.push("/create")} />],
-      ['Play', <FaPlay fill={cantStartPlay ? "#ff3223" : "#36e336"} onClick={() => {
+      ['Play', <FaPlay fill={!cantStartPlay ? red[500] : green[500]} onClick={() => {
         if (!cantStartPlay) {
           setPlaying(true)
           history.push("/play")
