@@ -2,7 +2,7 @@ import { IReportSort, IResult } from '../types';
 
 type TComparison = 'equal' | 'greater' | 'lesser';
 
-function returnSort(comparison: TComparison, order: 'ASC' | 'DESC') {
+export function returnSort(comparison: TComparison, order: 'ASC' | 'DESC') {
   if (comparison === 'greater') {
     if (order === 'DESC') {
       return -1;
@@ -20,19 +20,25 @@ function returnSort(comparison: TComparison, order: 'ASC' | 'DESC') {
   }
 }
 
-function getNumberComparison(number1: number, number2: number): TComparison {
+export function getNumberComparison(
+  number1: number,
+  number2: number
+): TComparison {
   if (number1 > number2) return 'greater';
   else if (number1 < number2) return 'lesser';
   else return 'equal';
 }
 
-function getBooleanComparison(bool1: boolean, bool2: boolean): TComparison {
+export function getBooleanComparison(
+  bool1: boolean,
+  bool2: boolean
+): TComparison {
   if (bool1 === true && bool2 === false) return 'greater';
   else if (bool1 === false && bool2 === true) return 'lesser';
   else return 'equal';
 }
 
-function getStringComparison(str1: string, str2: string): TComparison {
+export function getStringComparison(str1: string, str2: string): TComparison {
   if (str1 > str2) return 'greater';
   else if (str1 < str2) return 'lesser';
   else return 'equal';
