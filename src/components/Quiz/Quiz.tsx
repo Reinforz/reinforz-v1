@@ -4,7 +4,7 @@ import { RootContext } from "../../context/RootContext";
 import { useCycle, useThemeSettings } from "../../hooks";
 import { Stats } from "../../shared";
 import { IResult, TQuestionFull } from "../../types";
-import { arrayShuffler, getAnswerResult } from "../../utils";
+import { getAnswerResult } from "../../utils";
 import Question from "../Question/Question";
 import "./Quiz.scss";
 
@@ -14,7 +14,7 @@ export default function Quiz() {
   const { setPlaying, playSettings, allQuestions, playing } = rootContext;
   const [results, setResults] = useState([] as IResult[]);
   const { theme } = useThemeSettings();
-  const { isLastItem, currentItem, getNextIndex, currentIndex } = useCycle(playSettings.options.flatten_mix ? arrayShuffler(allQuestions) : allQuestions);
+  const { isLastItem, currentItem, getNextIndex, currentIndex } = useCycle(allQuestions);
 
   if (!playing) {
     history.push("/")

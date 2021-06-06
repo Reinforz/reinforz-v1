@@ -1,6 +1,6 @@
 import { ThemeProvider } from '@material-ui/styles';
 import { SnackbarProvider } from "notistack";
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Create } from './components/Create/Create';
@@ -13,7 +13,7 @@ import { SettingsContext } from "./context/SettingsContext";
 import './index.scss';
 import "./styles/vs-light.scss";
 import "./styles/vscode-dark.scss";
-import { ExtendedTheme, IErrorLog, IQuizFull } from './types';
+import { ExtendedTheme, IErrorLog, IQuizFull, TQuestionFull } from './types';
 import { applyPlaySettingsOptions, arrayShuffler, generateQuestionsMap, generateTheme, getPlaySettings, getSettings } from './utils';
 
 const App = () => {
@@ -27,11 +27,14 @@ const App = () => {
   const generatedTheme = generateTheme(settings.theme) as ExtendedTheme;
   const [selectedQuizzes, filteredQuizzes] = applyPlaySettingsOptions(uploadedQuizzes, selectedQuizIds, playSettings.options, arrayShuffler);
   const [allQuestions, allQuestionsMap] = generateQuestionsMap(filteredQuizzes, playSettings.filters);
+  const allShuffledQuestions: TQuestionFull[] = useMemo(() => {
+    return playSettings.options.flatten_mix ? arrayShuffler(allQuestions) : allQuestions
+  }, [allQuestions, playSettings.options.flatten_mix])
 
   return <ThemeProvider theme={generatedTheme}>
     <SnackbarProvider maxSnack={4}>
       <SettingsContext.Provider value={{ setSettings, settings }}>
-        <RootContext.Provider value={{ playing, setPlaying, selectedQuizzes, allQuestionsMap, allQuestions, filteredQuizzes, setPlaySettings, playSettings, errorLogs, setErrorLogs, uploadedQuizzes, selectedQuizIds, setUploadedQuizzes, setSelectedQuizIds }}>
+        <RootContext.Provider value={{ playing, setPlaying, selectedQuizzes, allQuestionsMap, allQuestions: allShuffledQuestions, filteredQuizzes, setPlaySettings, playSettings, errorLogs, setErrorLogs, uploadedQuizzes, selectedQuizIds, setUploadedQuizzes, setSelectedQuizIds }}>
           <div className={`App ${generatedTheme.palette.type}`} style={{ backgroundColor: generatedTheme.color.dark }}>
             <Switch>
               <Route exact path="/" render={() => <Play />} />
