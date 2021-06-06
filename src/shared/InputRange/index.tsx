@@ -8,19 +8,20 @@ interface Props<T extends Record<string, any>> {
   setState: React.Dispatch<React.SetStateAction<T>>
   min: number
   max: number
+  step?: number
 }
 
 export default function InputRange<T extends Record<string, any>>(props: Props<T>) {
-  const { min, max, setState, state, stateKey, label } = props;
+  const { min, max, setState, state, stateKey, label, step = 5 } = props;
   const { theme } = useThemeSettings();
   const range: [number, number] = state[stateKey]
   return <FormGroup>
     <InputLabel>{label}</InputLabel>
     <div style={{ background: theme.color.dark, display: 'flex', flexDirection: 'column', padding: 2.5, margin: 2.5 }} className="InputRange-content">
-      <TextField type="number" inputProps={{ step: 5, min, max: range[1] }} value={range[0]} onChange={(e) => {
+      <TextField type="number" inputProps={{ step, min, max: range[1] }} value={range[0]} onChange={(e) => {
         setState({ ...state, [stateKey]: [e.target.value, range[1]] })
       }} />
-      <TextField type="number" inputProps={{ step: 5, min: range[0], max }} value={range[1]} onChange={(e) => {
+      <TextField type="number" inputProps={{ step, min: range[0], max }} value={range[1]} onChange={(e) => {
         setState({ ...state, [stateKey]: [range[0], e.target.value] })
       }} />
     </div>

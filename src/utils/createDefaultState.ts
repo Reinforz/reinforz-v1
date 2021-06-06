@@ -34,7 +34,8 @@ export function createDefaultReportFilterState() {
     excluded_types: [],
     excluded_difficulty: [],
     excluded_quizzes: [],
-    excluded_columns: []
+    excluded_columns: [],
+    score: [0, 1]
   } as IReportFilter;
 }
 

@@ -12,6 +12,7 @@ export default function ReportFilter() {
 
   return <div className="ReportFilter" style={{ backgroundColor: theme.color.dark }}>
     <InputRange label={"Time taken range"} min={0} max={120} setState={setReportFilter} state={reportFilter} stateKey={"time_taken"} />
+    <InputRange step={0.25} label={"Score"} min={0} max={1} setState={setReportFilter} state={reportFilter} stateKey={"score"} />
     <RadioGroup lsKey={"REPORT_FILTERS"} items={["true", "false", "mixed"]} label={"Verdict"} setState={setReportFilter} state={reportFilter} stateKey={"verdict"} />
     <RadioGroup lsKey={"REPORT_FILTERS"} items={["0", "1", "2", "any"]} label={"Hints Used"} setState={setReportFilter} state={reportFilter} stateKey={"hints_used"} />
     <CheckboxGroup lsKey={"REPORT_FILTERS"} label={'Excluded Difficulty'} items={['Beginner', 'Intermediate', 'Advanced']} setState={setReportFilter} stateKey={'excluded_difficulty'} state={reportFilter} />

@@ -238,6 +238,7 @@ export interface IReportFilter {
   excluded_difficulty: TQuestionDifficulty[];
   excluded_quizzes: string[];
   excluded_columns: string[];
+  score: [number, number];
 }
 
 export type IReportSort = [string, 'ASC' | 'DESC'][];
