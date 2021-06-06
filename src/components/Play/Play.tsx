@@ -24,9 +24,11 @@ function Play() {
 
   return <Menu lsKey="PLAY_MENU" width={290} modalOpen={() => setModalOpen(true)} contents={[<PlaySettings />, <div className="Play">
     <SimpleModal open={modalOpen} setOpen={setModalOpen}>
-      <Preset closeModal={() => setModalOpen(false)} label={'Save Play Settings'} onSave={() => {
-        localStorage.setItem('PLAY_SETTINGS', JSON.stringify(playSettings))
-      }} />
+      <div className="Modal-content">
+        <Preset closeModal={() => setModalOpen(false)} label={'Save Play Settings'} onSave={() => {
+          localStorage.setItem('PLAY_SETTINGS', JSON.stringify(playSettings))
+        }} />
+      </div>
     </SimpleModal>
     <IconGroup className="Play-icons" icons={[
       [`Go to Settings page`, <IoMdSettings size={20} fill={theme.color.opposite_light} onClick={() => history.push("/settings")} />],
