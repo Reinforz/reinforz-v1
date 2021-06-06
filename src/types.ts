@@ -283,6 +283,6 @@ export interface HighlighterProps {
 }
 
 export interface IReportExport {
-  export_type: 'Original' | 'Report';
+  export_type: 'Quizzes' | 'Report';
   export_as: 'JSON' | 'YAML';
 }

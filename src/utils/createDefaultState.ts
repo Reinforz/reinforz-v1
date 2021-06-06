@@ -40,7 +40,7 @@ export function createDefaultReportFilterState() {
 
 export function createDefaultReportExportState() {
   return {
-    export_type: 'Original',
+    export_type: 'Quizzes',
     export_as: 'YAML'
   } as IReportExport;
 }
