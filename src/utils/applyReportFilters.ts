@@ -18,8 +18,7 @@ export function applyReportFilters(
     (result) =>
       !excluded_types.includes(result.question.type) &&
       !excluded_difficulty.includes(result.question.difficulty) &&
-      (verdict === 'mixed' ||
-        verdict.toString() === result.verdict.toString()) &&
+      (verdict === 'any' || verdict.toString() === result.verdict.toString()) &&
       (hints_used === 'any' || result.hints_used <= hints_used) &&
       time_taken[0] <= result.time_taken &&
       time_taken[1] >= result.time_taken &&

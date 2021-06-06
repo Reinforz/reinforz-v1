@@ -35,7 +35,7 @@ function Play() {
       [`Go to Settings page`, <IoMdSettings size={20} fill={theme.color.opposite_light} onClick={() => history.push("/settings")} />],
       [`Go to Report page`, <HiDocumentReport size={20} fill={theme.color.opposite_light} onClick={() => history.push("/report")} />],
       [`Go to Create page`, <IoMdCreate size={20} fill={theme.color.opposite_light} onClick={() => history.push("/create")} />],
-      ['Play', <FaPlay fill={!cantStartPlay ? red[500] : green[500]} onClick={() => {
+      ['Play', <FaPlay fill={cantStartPlay ? red[500] : green[500]} onClick={() => {
         if (!cantStartPlay) {
           setPlaying(true)
           history.push("/play")

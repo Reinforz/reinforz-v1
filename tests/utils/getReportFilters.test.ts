@@ -30,7 +30,7 @@ it(`Should work if report filters doesn't exist in ls`, () => {
   expect(reportFilters).toStrictEqual({
     time_taken: [0, 120],
     score: [0, 1],
-    verdict: 'mixed',
+    verdict: 'any',
     hints_used: 'any',
     excluded_types: [],
     excluded_difficulty: [],

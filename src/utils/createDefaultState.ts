@@ -29,7 +29,7 @@ export function createDefaultPlaySettingsFiltersState() {
 export function createDefaultReportFilterState() {
   return {
     time_taken: [0, 120],
-    verdict: 'mixed',
+    verdict: 'any',
     hints_used: 'any',
     excluded_types: [],
     excluded_difficulty: [],

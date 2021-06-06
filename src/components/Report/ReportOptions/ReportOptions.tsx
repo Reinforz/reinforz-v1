@@ -1,7 +1,6 @@
-import { green, red } from "@material-ui/core/colors";
+import { green } from "@material-ui/core/colors";
 import { AiFillCheckSquare } from "react-icons/ai";
 import { FaUser } from "react-icons/fa";
-import { MdCancel } from "react-icons/md";
 import { useThemeSettings } from "../../../hooks";
 import { Markdown } from "../../../shared";
 import { IResultSelectionQuestion } from "../../../types";
@@ -24,7 +23,7 @@ export function ReportOptions(props: Props) {
             <Markdown content={option.text} />
           </div>
           <div style={{ backgroundColor: theme.color.light }} className="Report-Options-container-item">
-            {option.isCorrect ? <AiFillCheckSquare fill={green[500]} style={{ padding: 5 }} size={15} /> : <MdCancel fill={red[500]} style={{ padding: 5 }} size={15} />}
+            {option.isCorrect ? <AiFillCheckSquare fill={green[500]} style={{ padding: 5 }} size={15} /> : null}
             {option.userSelected ? <FaUser fill={theme.palette.text.primary} style={{ padding: 5 }} size={15} /> : null}
           </div>
         </div>

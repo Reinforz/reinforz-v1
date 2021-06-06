@@ -232,7 +232,7 @@ export interface IReport {
 
 export interface IReportFilter {
   time_taken: [number, number];
-  verdict: boolean | 'mixed';
+  verdict: boolean | 'any';
   hints_used: number | 'any';
   excluded_types: TQuestionType[];
   excluded_difficulty: TQuestionDifficulty[];
