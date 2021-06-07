@@ -286,6 +286,7 @@ export interface IPreset<D> {
   }[];
 }
 export interface ISettingsPreset extends IPreset<ISettings> {}
+export interface IPlaySettingsPreset extends IPreset<IPlaySettings> {}
 
 export type TNumberAggregation = 'MIN' | 'MAX' | 'AVG';
 export type TBooleanAggregation = 'TRUE' | 'FALSE';

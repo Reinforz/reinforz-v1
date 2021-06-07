@@ -9,16 +9,20 @@ import { SettingsContext } from "./context/SettingsContext";
 import './index.scss';
 import "./styles/vs-light.scss";
 import "./styles/vscode-dark.scss";
-import { ExtendedTheme, IErrorLog, IQuizFull, ISettingsPreset, TQuestionFull } from './types';
-import { applyPlaySettingsOptions, arrayShuffler, generateQuestionsMap, generateTheme, getPlaySettings, getSettingsPresets } from './utils';
+import { ExtendedTheme, IErrorLog, IPlaySettingsPreset, IQuizFull, ISettingsPreset, TQuestionFull } from './types';
+import { applyPlaySettingsOptions, arrayShuffler, generateQuestionsMap, generateTheme, getPlaySettingsPresets, getSettingsPresets } from './utils';
 
-function findSettingsFromPresets(settingsPresets: ISettingsPreset) {
-  return settingsPresets.presets.find(settingsPreset => settingsPreset.id === settingsPresets.current)!.data;
+function findSettingsFromPresets(settingsPresets: ISettingsPreset | IPlaySettingsPreset) {
+  return (settingsPresets.presets as any[]).find(settingsPreset => settingsPreset.id === settingsPresets.current)!.data;
 }
 
 const Root = () => {
   const [settingsPresets, setSettingsPresets] = useState(getSettingsPresets());
-  const [playSettings, setPlaySettings] = useState(getPlaySettings());
+  const [settings, setSettings] = useState(findSettingsFromPresets(settingsPresets));
+
+  const [playSettingsPresets, setPlaySettingsPresets] = useState(getPlaySettingsPresets());
+  const [playSettings, setPlaySettings] = useState(findSettingsFromPresets(playSettingsPresets));
+
   const [uploadedQuizzes, setUploadedQuizzes] = useState<IQuizFull[]>([]);
   const [selectedQuizIds, setSelectedQuizIds] = useState<string[]>([]);
   const [errorLogs, setErrorLogs] = useState<IErrorLog[]>([]);
@@ -29,18 +33,22 @@ const Root = () => {
     return playSettings.options.flatten_mix ? arrayShuffler(allQuestions) : allQuestions
   }, [allQuestions, playSettings.options.flatten_mix])
 
-  const [settings, setSettings] = useState(findSettingsFromPresets(settingsPresets));
 
   useEffect(() => {
     setSettings(findSettingsFromPresets(settingsPresets))
     // eslint-disable-next-line
   }, [settingsPresets.current])
 
+  useEffect(() => {
+    setPlaySettingsPresets(findSettingsFromPresets(playSettingsPresets))
+    // eslint-disable-next-line
+  }, [playSettingsPresets.current])
+
   const generatedTheme = generateTheme(settings.theme) as ExtendedTheme;
   return <ThemeProvider theme={generatedTheme}>
     <SnackbarProvider maxSnack={4}>
       <SettingsContext.Provider value={{ settings, setSettingsPresets, settingsPresets, setSettings }}>
-        <RootContext.Provider value={{ playing, setPlaying, selectedQuizzes, allQuestionsMap, allQuestions: allShuffledQuestions, filteredQuizzes, setPlaySettings, playSettings, errorLogs, setErrorLogs, uploadedQuizzes, selectedQuizIds, setUploadedQuizzes, setSelectedQuizIds }}>
+        <RootContext.Provider value={{ playSettingsPresets, setPlaySettingsPresets, playing, setPlaying, selectedQuizzes, allQuestionsMap, allQuestions: allShuffledQuestions, filteredQuizzes, setPlaySettings, playSettings, errorLogs, setErrorLogs, uploadedQuizzes, selectedQuizIds, setUploadedQuizzes, setSelectedQuizIds }}>
           <App />
         </RootContext.Provider>
       </SettingsContext.Provider>

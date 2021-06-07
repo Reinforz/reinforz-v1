@@ -21,7 +21,7 @@ export * from './generateQuizzesFromResults';
 export * from './generateSelectionQuestionAnswers';
 export * from './generateTheme';
 export * from './getAnswerResult';
-export * from './getPlaySettings';
+export * from './getPlaySettingsPresets';
 export * from './getReportAggregator';
 export * from './getReportExport';
 export * from './getReportFilters';

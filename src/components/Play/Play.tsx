@@ -2,15 +2,13 @@ import { green, red } from "@material-ui/core/colors";
 import { OptionsObject, useSnackbar } from "notistack";
 import React, { useContext } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
-import { FaPlay, FaSave } from "react-icons/fa";
+import { FaPlay } from "react-icons/fa";
 import { HiDocumentReport } from "react-icons/hi";
 import { IoMdCreate, IoMdSettings } from 'react-icons/io';
 import { useHistory } from "react-router-dom";
-import shortid from "shortid";
-import { ModalContext } from "../../context/ModalContext";
 import { RootContext } from "../../context/RootContext";
 import { useThemeSettings } from '../../hooks';
-import { IconGroup, List, Menu, ModalPresetInput, View } from '../../shared';
+import { IconGroup, List, Menu, View } from '../../shared';
 import "./Play.scss";
 import PlayErrorlogs from "./PlayErrorlogs/PlayErrorlogs";
 import { PlayListTable } from "./PlayListTable/PlayListTable";
@@ -28,8 +26,7 @@ const centerBottomErrorNotistack = {
 function Play() {
   const history = useHistory();
   const { theme, settings } = useThemeSettings();
-  const { setPlaying, filteredQuizzes, selectedQuizIds, playSettings, setUploadedQuizzes, setSelectedQuizIds, uploadedQuizzes, errorLogs, setErrorLogs } = useContext(RootContext);
-  const { setModalState } = useContext(ModalContext);
+  const { setPlaying, filteredQuizzes, selectedQuizIds, setUploadedQuizzes, setSelectedQuizIds, uploadedQuizzes, errorLogs, setErrorLogs } = useContext(RootContext);
   const { enqueueSnackbar } = useSnackbar();
 
   const filteredQuestions = filteredQuizzes.reduce((acc, filteredQuiz) => acc += filteredQuiz.questions.length, 0);
@@ -62,21 +59,7 @@ function Play() {
     settings.shortcuts && history.push("/create")
   }, [settings.shortcuts])
 
-  return <Menu lsKey="PLAY_MENU" width={290} icons={[
-    ['Save as preset', <FaSave fill={theme.color.opposite_light} onClick={() => {
-      setModalState([true, <ModalPresetInput closeModal={() => setModalState([false, null])} label={'Save Play Settings'} onSave={(input) => {
-        const currentActivePresetId = shortid();
-        localStorage.setItem('reinforz.play.settings', JSON.stringify({
-          current: currentActivePresetId,
-          presets: [{
-            name: input,
-            id: currentActivePresetId,
-            data: playSettings
-          }]
-        }))
-      }} />])
-    }} />]
-  ]} contents={[<PlaySettings />, <div className="Play">
+  return <Menu lsKey="PLAY_MENU" width={290} contents={[<PlaySettings />, <div className="Play">
     <IconGroup className="Play-icons" icons={[
       [`Go to Settings page`, <IoMdSettings size={20} fill={theme.color.opposite_light} onClick={() => history.push("/settings")} />],
       [`Go to Report page`, <HiDocumentReport size={20} fill={theme.color.opposite_light} onClick={() => history.push("/report")} />],

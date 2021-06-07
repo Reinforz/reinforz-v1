@@ -1,5 +1,5 @@
 import React from "react";
-import { IErrorLog, IPlaySettings, IQuizFull, TQuestionFull } from "../types";
+import { IErrorLog, IPlaySettings, IPlaySettingsPreset, IQuizFull, TQuestionFull } from "../types";
 
 interface IRootContext {
   uploadedQuizzes: IQuizFull[],
@@ -16,6 +16,8 @@ interface IRootContext {
   allQuestionsMap: Map<string, TQuestionFull>
   setPlaying: React.Dispatch<React.SetStateAction<boolean>>
   playing: boolean
+  playSettingsPresets: IPlaySettingsPreset
+  setPlaySettingsPresets: React.Dispatch<React.SetStateAction<IPlaySettingsPreset>>
 }
 
 export const RootContext = React.createContext({} as IRootContext)
