@@ -6,7 +6,7 @@ import shortid from "shortid";
 import { Icon, ListSelect, ModalPresetInput } from "../";
 import { ModalContext } from "../../context/ModalContext";
 import { useThemeSettings } from "../../hooks";
-import { ISettings, ISettingsPreset } from "../../types";
+import { IPlaySettings, IPlaySettingsPreset, ISettings, ISettingsPreset } from "../../types";
 import "./style.scss";
 
 interface Props<T, D> {
@@ -18,13 +18,13 @@ interface Props<T, D> {
   lsKey: string
 }
 
-export default function Preset<T extends ISettingsPreset, D extends ISettings>(props: Props<T, D>) {
+export default function Preset<T extends ISettingsPreset | IPlaySettingsPreset, D extends ISettings | IPlaySettings>(props: Props<T, D>) {
   const { setModalState } = useContext(ModalContext);
   const { theme } = useThemeSettings();
   const { lsKey, modalLabel, popoverText, setPresetState, currentPreset, itemPreset } = props;
 
   return <div className="Preset">
-    <ListSelect items={itemPreset.presets.map(preset => preset.id)} menuItemLabel={(id) => itemPreset.presets.find(preset => preset.id === id)!.name} onChange={(id) => {
+    <ListSelect items={itemPreset.presets.map(preset => preset.id)} menuItemLabel={(id) => (itemPreset.presets as any[]).find(preset => preset.id === id)!.name} onChange={(id) => {
       setPresetState({
         current: id,
         presets: itemPreset.presets
@@ -33,6 +33,7 @@ export default function Preset<T extends ISettingsPreset, D extends ISettings>(p
     <Icon popoverText={popoverText}>
       <FaSave fill={theme.color.opposite_light} size={20} onClick={() => {
         setModalState([true, <ModalPresetInput closeModal={() => setModalState([false, null])} label={modalLabel} onSave={(input) => {
+          // ? Convert to a util module
           const currentActivePresetId = shortid();
           const newSettingsPresets: ISettingsPreset = {
             current: currentActivePresetId,
@@ -52,7 +53,7 @@ export default function Preset<T extends ISettingsPreset, D extends ISettings>(p
         if (itemPreset.current !== 'default') {
           setPresetState({
             current: 'default',
-            presets: itemPreset.presets.filter(preset => preset.id !== itemPreset.current)
+            presets: (itemPreset.presets as any[]).filter(preset => preset.id !== itemPreset.current)
           } as any)
         }
       }} />

@@ -12,8 +12,8 @@ import "./styles/vscode-dark.scss";
 import { ExtendedTheme, IErrorLog, IPlaySettingsPreset, IQuizFull, ISettingsPreset, TQuestionFull } from './types';
 import { applyPlaySettingsOptions, arrayShuffler, generateQuestionsMap, generateTheme, getPlaySettingsPresets, getSettingsPresets } from './utils';
 
-function findSettingsFromPresets(settingsPresets: ISettingsPreset | IPlaySettingsPreset) {
-  return (settingsPresets.presets as any[]).find(settingsPreset => settingsPreset.id === settingsPresets.current)!.data;
+function findSettingsFromPresets(preset: ISettingsPreset | IPlaySettingsPreset) {
+  return (preset.presets as any[]).find(settingsPreset => settingsPreset.id === preset.current)!.data;
 }
 
 const Root = () => {
@@ -33,14 +33,13 @@ const Root = () => {
     return playSettings.options.flatten_mix ? arrayShuffler(allQuestions) : allQuestions
   }, [allQuestions, playSettings.options.flatten_mix])
 
-
   useEffect(() => {
     setSettings(findSettingsFromPresets(settingsPresets))
     // eslint-disable-next-line
   }, [settingsPresets.current])
 
   useEffect(() => {
-    setPlaySettingsPresets(findSettingsFromPresets(playSettingsPresets))
+    setPlaySettings(findSettingsFromPresets(playSettingsPresets))
     // eslint-disable-next-line
   }, [playSettingsPresets.current])
 

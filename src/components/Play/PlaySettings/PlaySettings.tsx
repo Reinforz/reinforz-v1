@@ -2,18 +2,21 @@ import { Button, Checkbox, FormControlLabel } from "@material-ui/core";
 import React, { useContext } from "react";
 import { RootContext } from "../../../context/RootContext";
 import { useThemeSettings } from "../../../hooks";
-import { CheckboxGroup, InputRange } from '../../../shared';
+import { CheckboxGroup, InputRange, Preset } from '../../../shared';
 import { IPlaySettingsOptions } from "../../../types";
 import { createDefaultPlaySettingsFiltersState, createDefaultPlaySettingsOptionsState } from "../../../utils";
 import "./PlaySettings.scss";
 
 export default function PlaySettings() {
-  const { selectedQuizIds, playSettings, setPlaySettings, filteredQuizzes } = useContext(RootContext);
+  const { playSettingsPresets, setPlaySettingsPresets, selectedQuizIds, playSettings, setPlaySettings, filteredQuizzes } = useContext(RootContext);
   const { theme } = useThemeSettings();
 
   const filteredQuestions = filteredQuizzes.reduce((acc, filteredQuiz) => acc += filteredQuiz.questions.length, 0);
 
   return <div className="PlaySettings" style={{ backgroundColor: theme.color.base, color: theme.palette.text.primary }}>
+    <div style={{ backgroundColor: theme.color.dark, padding: 2.5, margin: 2.5 }}>
+      <Preset lsKey="reinforz.play.settings" modalLabel="Save Play Settings" popoverText="Save current play settings as preset" currentPreset={playSettings} itemPreset={playSettingsPresets} setPresetState={setPlaySettingsPresets} />
+    </div>
     <div className="PlaySettings-group PlaySettings-group--options">
       <div className="PlaySettings-group-header PlaySettings-group-header--options" style={{ backgroundColor: theme.color.dark }}>Options</div>
       <div className="PlaySettings-group-content PlaySettings-group-content--options" style={{ backgroundColor: theme.color.dark }}>

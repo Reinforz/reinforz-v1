@@ -5,21 +5,26 @@ export const getSettingsPresets = (): ISettingsPreset => {
     'reinforz.settings'
   );
 
-  return localStorageValue
-    ? JSON.parse(localStorageValue)
-    : {
-        current: 'default',
-        presets: [
-          {
-            name: 'Default',
-            id: 'default',
-            data: {
-              animation: true,
-              hovertips: true,
-              theme: 'dark',
-              shortcuts: true
-            }
-          }
-        ]
-      };
+  const presetValue: ISettingsPreset = {
+    current: 'default',
+    presets: [
+      {
+        name: 'Default',
+        id: 'default',
+        data: {
+          animation: true,
+          hovertips: true,
+          theme: 'dark',
+          shortcuts: true
+        }
+      }
+    ]
+  };
+
+  if (!localStorageValue) {
+    localStorage.setItem('reinforz.settings', JSON.stringify(presetValue));
+    return presetValue;
+  }
+
+  return JSON.parse(localStorageValue);
 };
