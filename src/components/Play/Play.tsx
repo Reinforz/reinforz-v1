@@ -10,7 +10,7 @@ import shortid from "shortid";
 import { ModalContext } from "../../context/ModalContext";
 import { RootContext } from "../../context/RootContext";
 import { useThemeSettings } from '../../hooks';
-import { IconGroup, List, Menu, Preset, View } from '../../shared';
+import { IconGroup, List, Menu, ModalPresetInput, View } from '../../shared';
 import "./Play.scss";
 import PlayErrorlogs from "./PlayErrorlogs/PlayErrorlogs";
 import { PlayListTable } from "./PlayListTable/PlayListTable";
@@ -64,7 +64,7 @@ function Play() {
 
   return <Menu lsKey="PLAY_MENU" width={290} icons={[
     ['Save as preset', <FaSave fill={theme.color.opposite_light} onClick={() => {
-      setModalState([true, <Preset closeModal={() => setModalState([false, null])} label={'Save Play Settings'} onSave={(input) => {
+      setModalState([true, <ModalPresetInput closeModal={() => setModalState([false, null])} label={'Save Play Settings'} onSave={(input) => {
         const currentActivePresetId = shortid();
         localStorage.setItem('reinforz.play.settings', JSON.stringify({
           current: currentActivePresetId,

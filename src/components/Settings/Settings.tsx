@@ -9,7 +9,7 @@ import shortid from 'shortid';
 import { ModalContext } from '../../context/ModalContext';
 import { SettingsContext } from '../../context/SettingsContext';
 import { useThemeSettings } from '../../hooks';
-import { Icon, IconGroup, ListSelect, Preset, Select, Toggles } from '../../shared';
+import { Icon, IconGroup, ListSelect, ModalPresetInput, Select, Toggles } from '../../shared';
 import { ISettingsPreset } from '../../types';
 import { transformTextBySeparator } from '../../utils';
 import "./Settings.scss";
@@ -49,7 +49,7 @@ function Settings() {
       <div className="Settings" style={{ backgroundColor: THEME.color.base, color: THEME.palette.text.secondary }}>
         <div className="Settings-header" style={{ backgroundColor: THEME.color.dark }}>
           <div className="Settings-header-text">Settings</div>
-          <div className="Settings-header-presets" >
+          <div className="Settings-header-presets">
             <ListSelect items={settingsPresets.presets.map(preset => preset.id)} menuItemLabel={(id) => settingsPresets.presets.find(preset => preset.id === id)!.name} onChange={(id) => {
               setSettingsPresets({
                 current: id,
@@ -58,7 +58,7 @@ function Settings() {
             }} item={settingsPresets.current} />
             <Icon popoverText="Save current settings as preset">
               <FaSave fill={THEME.color.opposite_light} size={20} onClick={() => {
-                setModalState([true, <Preset closeModal={() => setModalState([false, null])} label={'Save Settings'} onSave={(input) => {
+                setModalState([true, <ModalPresetInput closeModal={() => setModalState([false, null])} label={'Save Settings'} onSave={(input) => {
                   const currentActivePresetId = shortid();
                   const newSettingsPresets: ISettingsPreset = {
                     current: currentActivePresetId,

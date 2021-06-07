@@ -7,7 +7,7 @@ import ListSelect from './ListSelect';
 import ListTable from './ListTable';
 import Markdown from './Markdown';
 import Menu from './Menu';
-import Preset from './Preset';
+import ModalPresetInput from './ModalPresetInput';
 import RadioGroup from './RadioGroup';
 import Select from './Select';
 import SimpleModal from './SimpleModal';
@@ -19,7 +19,7 @@ import View from './View';
 
 export {
   ListSelect,
-  Preset,
+  ModalPresetInput,
   SimpleModal,
   Sort,
   IconGroup,

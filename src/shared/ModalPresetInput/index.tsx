@@ -9,19 +9,19 @@ interface Props {
   onSave: (input: string) => void
 }
 
-export default function Preset(props: Props) {
+export default function ModalPresetInput(props: Props) {
   const [input, setInput] = useState('');
   const { label, onSave, closeModal } = props;
   const { theme } = useThemeSettings();
 
-  return <div className="Preset" style={{ backgroundColor: theme.color.base }}>
+  return <div className="ModalPresetInput" style={{ backgroundColor: theme.color.base }}>
     <FormGroup>
-      <InputLabel className="Preset-header">{label}</InputLabel>
-      <div className="Preset-content">
+      <InputLabel className="ModalPresetInput-header">{label}</InputLabel>
+      <div className="ModalPresetInput-content">
         <TextField value={input} onChange={(e) => setInput(e.target.value)} />
       </div>
     </FormGroup>
-    <div className="Preset-buttons">
+    <div className="ModalPresetInput-buttons">
       <Button variant="contained" color="primary" onClick={() => closeModal()}>
         Close
       </Button>
