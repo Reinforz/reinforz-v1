@@ -268,6 +268,7 @@ export interface ISettings {
   theme: AllowedTheme;
   animation: boolean;
   hovertips: boolean;
+  shortcuts: boolean;
 }
 
 export type TNumberAggregation = 'MIN' | 'MAX' | 'AVG';

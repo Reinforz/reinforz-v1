@@ -13,7 +13,8 @@ it(`Should generate default settings if data is not stored in local storage`, ()
   expect(settings).toStrictEqual({
     animation: true,
     hovertips: true,
-    theme: 'dark'
+    theme: 'dark',
+    shortcuts: true
   });
 });
 
@@ -28,6 +29,7 @@ it(`Should generate overridden settings if data is stored in local storage`, () 
   expect(settings).toStrictEqual({
     animation: true,
     hovertips: false,
-    theme: 'dark'
+    theme: 'dark',
+    shortcuts: true
   });
 });

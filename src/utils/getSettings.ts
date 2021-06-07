@@ -8,7 +8,8 @@ export const getSettings = (): ISettings => {
     {
       animation: true,
       hovertips: true,
-      theme: 'dark'
+      theme: 'dark',
+      shortcuts: true
     },
     localStorageValue
   );
