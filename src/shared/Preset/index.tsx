@@ -1,4 +1,5 @@
 import { grey, red } from "@material-ui/core/colors";
+import { OptionsObject, useSnackbar } from "notistack";
 import { useContext } from "react";
 import { FaSave } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
@@ -18,10 +19,31 @@ interface Props<T, D> {
   lsKey: string
 }
 
+const centerBottomErrorNotistack = {
+  variant: 'error',
+  anchorOrigin: {
+    vertical: 'bottom',
+    horizontal: 'center',
+  },
+} as OptionsObject;
+
 export default function Preset<T extends ISettingsPreset | IPlaySettingsPreset, D extends ISettings | IPlaySettings>(props: Props<T, D>) {
   const { setModalState } = useContext(ModalContext);
   const { theme } = useThemeSettings();
   const { lsKey, modalLabel, popoverText, setPresetState, currentPreset, itemPreset } = props;
+  const { enqueueSnackbar } = useSnackbar();
+
+  function checkPresetInput(input: string) {
+    if (input === '') {
+      enqueueSnackbar("Can't save a preset with no name", centerBottomErrorNotistack)
+    } else if (itemPreset.presets.map(preset => preset.name).includes(input)) {
+      enqueueSnackbar(`A preset with name: ${input} already exists`, centerBottomErrorNotistack)
+    } else {
+      return true;
+    }
+
+    return false
+  }
 
   return <div className="Preset">
     <ListSelect items={itemPreset.presets.map(preset => preset.id)} menuItemLabel={(id) => (itemPreset.presets as any[]).find(preset => preset.id === id)!.name} onChange={(id) => {
@@ -30,21 +52,26 @@ export default function Preset<T extends ISettingsPreset | IPlaySettingsPreset, 
         presets: itemPreset.presets
       } as any)
     }} item={itemPreset.current} />
+
     <Icon popoverText={popoverText}>
       <FaSave fill={theme.color.opposite_light} size={20} onClick={() => {
         setModalState([true, <ModalPresetInput closeModal={() => setModalState([false, null])} label={modalLabel} onSave={(input) => {
-          // ? Convert to a util module
-          const currentActivePresetId = shortid();
-          const newSettingsPresets: ISettingsPreset = {
-            current: currentActivePresetId,
-            presets: [...itemPreset.presets, {
-              name: input,
-              id: currentActivePresetId,
-              data: currentPreset
-            } as any]
+          const isValid = checkPresetInput(input);
+          if (isValid) {
+            // ? Convert to a util module
+            const currentActivePresetId = shortid();
+            const newSettingsPresets: ISettingsPreset = {
+              current: currentActivePresetId,
+              presets: [...itemPreset.presets, {
+                name: input,
+                id: currentActivePresetId,
+                data: currentPreset
+              } as any]
+            }
+            localStorage.setItem(lsKey, JSON.stringify(newSettingsPresets));
+            setPresetState(newSettingsPresets as any);
+            setModalState([false, null])
           }
-          localStorage.setItem(lsKey, JSON.stringify(newSettingsPresets));
-          setPresetState(newSettingsPresets as any)
         }} />])
       }} />
     </Icon>
