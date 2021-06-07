@@ -29,6 +29,16 @@
         margin: 0px;
       }
 
+      &-text{
+        padding: 10px;
+        margin-right: 2.5px;
+      }
+
+      &-explanation{
+        margin-top: 5px;
+        padding: 10px;
+      }
+
       &-isCorrect{
         display: flex;
         justify-content: center;

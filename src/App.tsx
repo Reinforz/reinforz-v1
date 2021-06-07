@@ -23,6 +23,9 @@ const useStyles = makeStyles((theme: ExtendedTheme) => ({
     },
     "& pre": {
       background: theme.color.dark
+    },
+    '& :not(pre) > code[class*="language-"]': {
+      background: theme.color.dark
     }
   }
 }));
