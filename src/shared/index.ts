@@ -3,6 +3,7 @@ import Icon from './Icon';
 import IconGroup from './IconGroup';
 import InputRange from './InputRange';
 import List from './List';
+import ListSelect from './ListSelect';
 import ListTable from './ListTable';
 import Markdown from './Markdown';
 import Menu from './Menu';
@@ -17,6 +18,7 @@ import Toggles from './Toggles';
 import View from './View';
 
 export {
+  ListSelect,
   Preset,
   SimpleModal,
   Sort,

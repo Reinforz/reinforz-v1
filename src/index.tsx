@@ -1,6 +1,6 @@
 import { ThemeProvider } from '@material-ui/styles';
 import { SnackbarProvider } from "notistack";
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from "react-router-dom";
 import App from './App';
@@ -9,8 +9,12 @@ import { SettingsContext } from "./context/SettingsContext";
 import './index.scss';
 import "./styles/vs-light.scss";
 import "./styles/vscode-dark.scss";
-import { ExtendedTheme, IErrorLog, IQuizFull, TQuestionFull } from './types';
+import { ExtendedTheme, IErrorLog, IQuizFull, ISettingsPreset, TQuestionFull } from './types';
 import { applyPlaySettingsOptions, arrayShuffler, generateQuestionsMap, generateTheme, getPlaySettings, getSettingsPresets } from './utils';
+
+function findSettingsFromPresets(settingsPresets: ISettingsPreset) {
+  return settingsPresets.presets.find(settingsPreset => settingsPreset.id === settingsPresets.current)!.data;
+}
 
 const Root = () => {
   const [settingsPresets, setSettingsPresets] = useState(getSettingsPresets());
@@ -24,7 +28,13 @@ const Root = () => {
   const allShuffledQuestions: TQuestionFull[] = useMemo(() => {
     return playSettings.options.flatten_mix ? arrayShuffler(allQuestions) : allQuestions
   }, [allQuestions, playSettings.options.flatten_mix])
-  const [settings, setSettings] = useState(settingsPresets.presets.find(settingsPreset => settingsPreset.id === settingsPresets.current)!.data);
+
+  const [settings, setSettings] = useState(findSettingsFromPresets(settingsPresets));
+
+  useEffect(() => {
+    setSettings(findSettingsFromPresets(settingsPresets))
+    // eslint-disable-next-line
+  }, [settingsPresets.current])
 
   const generatedTheme = generateTheme(settings.theme) as ExtendedTheme;
   return <ThemeProvider theme={generatedTheme}>

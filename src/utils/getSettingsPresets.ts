@@ -11,7 +11,7 @@ export const getSettingsPresets = (): ISettingsPreset => {
         current: 'default',
         presets: [
           {
-            name: 'default',
+            name: 'Default',
             id: 'default',
             data: {
               animation: true,

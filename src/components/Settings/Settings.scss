@@ -7,7 +7,7 @@
   align-items: center;
   padding: 2.5px;
   max-width: 500px;
-
+  
   &-icons{
     position: absolute;
     left: 50%;
@@ -18,9 +18,39 @@
     display: flex;
     font-size: 1.25em;
     font-weight: bolder;
-    text-transform: uppercase;
     padding: 5px;
     margin: 2.5px;
+
+    &-text {
+      flex: 1 1 0%;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-transform: uppercase;
+    }
+
+    &-presets {
+      width: 150px;
+      display: flex;
+      align-items: center; 
+      justify-content: center; 
+      cursor: pointer;
+      display: flex;
+      
+      .icon{
+        width: 35px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .MuiFormGroup-root{
+        flex: 1;
+        padding: 0px;
+        margin: 0px;
+      }
+    }
   }
 
   &-icon {
