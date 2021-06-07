@@ -54,7 +54,7 @@ export default function Menu(props: MenuProps) {
           }))
         }} />,
         ],
-        ['Save as preset', <FaSave onClick={() => modalOpen && modalOpen()} />]
+        ['Save as preset', <FaSave fill={theme.color.opposite_light} onClick={() => modalOpen && modalOpen()} />]
       ]} />
       {contents[0]}
     </div>

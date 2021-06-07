@@ -94,7 +94,17 @@ export function generateTheme(
     },
     color,
     overrides: {
+      MuiPopover: {
+        paper: {
+          backgroundColor: base
+        }
+      },
       MuiListItem: {
+        root: {
+          '&$selected': {
+            backgroundColor: light
+          }
+        },
         button: {
           '&:hover': {
             backgroundColor: dark
