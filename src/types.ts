@@ -244,7 +244,7 @@ export interface IReportFilter {
 
 export type IReportSort = [string, 'ASC' | 'DESC'][];
 
-type color = {
+export type Color = {
   dark: string;
   base: string;
   light: string;
@@ -254,11 +254,11 @@ type color = {
 };
 
 export interface ExtendedThemeOptions extends ThemeOptions {
-  color: color;
+  color: Color;
 }
 
 export interface ExtendedTheme extends Theme {
-  color: color;
+  color: Color;
 }
 
 export type AllowedTheme = 'dark' | 'light';

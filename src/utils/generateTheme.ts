@@ -1,40 +1,91 @@
 import { grey } from '@material-ui/core/colors';
 import { createMuiTheme, darken, lighten } from '@material-ui/core/styles';
-import { ExtendedThemeOptions } from '../types';
+import { Color, ExtendedThemeOptions } from '../types';
 
-export function generateTheme(theme: 'dark' | 'light') {
-  const light = theme === 'dark' ? grey[800] : lighten(grey[200], 0.5);
-  const dark = theme === 'dark' ? grey[900] : grey[300];
-  const base = theme === 'dark' ? darken(grey[800], 0.25) : grey[200];
-  const opposite_dark = theme === 'dark' ? grey[300] : grey[900];
-  const opposite_base = theme === 'dark' ? grey[200] : darken(grey[800], 0.25);
-  const opposite_light = theme === 'dark' ? lighten(grey[200], 0.5) : grey[800];
-  const textPrimary = theme === 'dark' ? grey[100] : grey[900];
-  const textSecondary = theme === 'dark' ? grey[200] : grey[800];
+export function generateTheme(
+  theme: 'dark' | 'light' | 'polar night' | 'snow storm'
+) {
+  const color: Color = {
+    base: '',
+    dark: '',
+    light: '',
+    opposite_base: '',
+    opposite_dark: '',
+    opposite_light: ''
+  };
+  const text: {
+    primary: string;
+    secondary: string;
+  } = {
+    primary: '',
+    secondary: ''
+  };
+
+  switch (theme) {
+    case 'dark': {
+      color.light = grey[800];
+      color.dark = grey[900];
+      color.base = darken(grey[800], 0.25);
+      color.opposite_light = lighten(grey[200], 0.5);
+      color.opposite_dark = grey[300];
+      color.opposite_base = grey[200];
+      text.primary = grey[100];
+      text.secondary = grey[200];
+      break;
+    }
+    case 'light': {
+      color.light = lighten(grey[200], 0.5);
+      color.dark = grey[300];
+      color.base = grey[200];
+      color.opposite_light = grey[800];
+      color.opposite_dark = grey[900];
+      color.opposite_base = darken(grey[800], 0.25);
+      text.primary = grey[900];
+      text.secondary = grey[800];
+      break;
+    }
+    case 'polar night': {
+      color.light = '#434C5E';
+      color.dark = '#2E3440';
+      color.base = '#3B4252';
+      color.opposite_dark = '#D8DEE9';
+      color.opposite_base = '#E5E9F0';
+      color.opposite_light = '#ECEFF4';
+      text.primary = grey[100];
+      text.secondary = grey[200];
+      break;
+    }
+    case 'snow storm': {
+      color.opposite_light = '#434C5E';
+      color.opposite_dark = '#2E3440';
+      color.opposite_base = '#3B4252';
+      color.light = '#ECEFF4';
+      color.dark = '#D8DEE9';
+      color.base = '#E5E9F0';
+      text.primary = grey[900];
+      text.secondary = grey[800];
+      break;
+    }
+  }
+
+  const { light, base, dark } = color;
 
   const themeOptions: ExtendedThemeOptions = {
     palette: {
-      type: theme,
+      type: theme as any,
       text: {
-        primary: textPrimary,
-        secondary: textSecondary
+        primary: text.primary,
+        secondary: text.secondary
       },
       background: {
-        default: base
+        default: color.base
       }
     },
     typography: {
       fontFamily: `Lato`,
       fontSize: 14
     },
-    color: {
-      light,
-      dark,
-      base,
-      opposite_dark,
-      opposite_base,
-      opposite_light
-    },
+    color,
     overrides: {
       MuiListItem: {
         button: {
@@ -100,7 +151,7 @@ export function generateTheme(theme: 'dark' | 'light') {
       },
       MuiTypography: {
         root: {
-          color: textPrimary
+          color: text.primary
         }
       },
       MuiInputLabel: {

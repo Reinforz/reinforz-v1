@@ -15,7 +15,6 @@ import PlayUpload from "./PlayUpload/PlayUpload";
 
 function Play() {
   const [modalOpen, setModalOpen] = useState(false);
-
   const history = useHistory();
   const { theme } = useThemeSettings();
   const { setPlaying, filteredQuizzes, selectedQuizIds, playSettings, setUploadedQuizzes, setSelectedQuizIds, uploadedQuizzes, errorLogs, setErrorLogs } = useContext(RootContext);
