@@ -44,9 +44,9 @@ export default function Report() {
     history.push("/")
   }
 
-  useHotkeys('ctrl+shift+1', () => settings.shortcuts && history.push("/settings"));
-  useHotkeys('ctrl+shift+2', () => settings.shortcuts && homeIconClick());
-  useHotkeys('ctrl+shift+3', () => settings.shortcuts && history.push("/create"));
+  useHotkeys('ctrl+shift+1', () => settings.shortcuts && history.push("/settings"), [settings.shortcuts]);
+  useHotkeys('ctrl+shift+2', () => settings.shortcuts && homeIconClick(), [settings.shortcuts, filteredQuizzesMap]);
+  useHotkeys('ctrl+shift+3', () => settings.shortcuts && history.push("/create"), [settings.shortcuts]);
 
   const icons: [string, JSX.Element][] = [
     [`Go to Settings page`, <IoMdSettings size={20} fill={theme.color.opposite_light} onClick={() => history.push("/settings")} />],

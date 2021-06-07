@@ -1,6 +1,5 @@
 import { Button, useTheme } from "@material-ui/core";
 import React, { useContext, useEffect, useMemo, useState } from "react";
-import { useHotkeys } from "react-hotkeys-hook";
 import { RootContext } from "../../context/RootContext";
 import { Markdown } from "../../shared";
 import { ExtendedTheme, TQuestionFull } from "../../types";
@@ -28,6 +27,13 @@ export default function Question(props: Props) {
 
   const { disable_timer } = playSettings.options
 
+  useEffect(() => {
+    return () => {
+      setTimer(null)
+      setTimeout(null)
+    }
+  }, [])
+
   const onNextButtonPress = () => {
     setUserAnswers([])
     setUsedHints([])
@@ -42,10 +48,6 @@ export default function Question(props: Props) {
   if (timeout === 0) {
     onNextButtonPress()
   }
-
-  useHotkeys("ctrl+shift+z", () => {
-    onNextButtonPress()
-  })
 
   useEffect(() => {
     if (!disable_timer) {

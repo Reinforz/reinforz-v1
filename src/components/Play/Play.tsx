@@ -21,10 +21,10 @@ function Play() {
   const { setPlaying, filteredQuizzes, selectedQuizIds, playSettings, setUploadedQuizzes, setSelectedQuizIds, uploadedQuizzes, errorLogs, setErrorLogs } = useContext(RootContext);
   const filteredQuestions = filteredQuizzes.reduce((acc, filteredQuiz) => acc += filteredQuiz.questions.length, 0);
 
-  const cantStartPlay = (filteredQuestions === 0 && selectedQuizIds.length !== 0) || selectedQuizIds.length === 0;
+  const canStartPlay = (filteredQuestions !== 0 && selectedQuizIds.length !== 0);
 
   const startPlay = () => {
-    if (!cantStartPlay) {
+    if (canStartPlay) {
       setPlaying(true)
       history.push("/play")
     }
@@ -32,19 +32,19 @@ function Play() {
 
   useHotkeys('ctrl+shift+1', () => {
     settings.shortcuts && history.push("/settings")
-  })
+  }, [settings.shortcuts, canStartPlay])
 
   useHotkeys('ctrl+shift+2', () => {
     settings.shortcuts && history.push("/report")
-  })
+  }, [settings.shortcuts, canStartPlay])
 
   useHotkeys('ctrl+shift+3', () => {
     settings.shortcuts && history.push("/create")
-  })
+  }, [settings.shortcuts, canStartPlay])
 
   useHotkeys('ctrl+shift+4', () => {
     settings.shortcuts && startPlay()
-  })
+  }, [settings.shortcuts, canStartPlay])
 
   return <Menu lsKey="PLAY_MENU" width={290} modalOpen={() => setModalOpen(true)} contents={[<PlaySettings />, <div className="Play">
     <SimpleModal open={modalOpen} setOpen={setModalOpen}>
@@ -58,7 +58,7 @@ function Play() {
       [`Go to Settings page`, <IoMdSettings size={20} fill={theme.color.opposite_light} onClick={() => history.push("/settings")} />],
       [`Go to Report page`, <HiDocumentReport size={20} fill={theme.color.opposite_light} onClick={() => history.push("/report")} />],
       [`Go to Create page`, <IoMdCreate size={20} fill={theme.color.opposite_light} onClick={() => history.push("/create")} />],
-      ['Play', <FaPlay fill={cantStartPlay ? red[500] : green[500]} onClick={startPlay} />]
+      ['Play', <FaPlay fill={!canStartPlay ? red[500] : green[500]} onClick={startPlay} />]
     ]} />
     <PlayUpload />
     <div style={{ gridArea: '2/1/5/2' }}>
