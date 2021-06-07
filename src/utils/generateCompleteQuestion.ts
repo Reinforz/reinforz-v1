@@ -163,7 +163,6 @@ export function generateCompleteQuestion(
       ['difficulty', defaultSettings?.difficulty ?? 'Beginner'],
       ['explanation', 'No explanation available'],
       ['hints', []],
-      ['format', defaultSettings?.format ?? 'md'],
       ['time_allocated', defaultSettings?.time_allocated ?? time_allocated]
     ]);
 

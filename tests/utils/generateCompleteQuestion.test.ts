@@ -10,7 +10,7 @@ it(`Should work with default settings`, () => {
     },
     {
       difficulty: 'Advanced',
-      format: 'mixed',
+
       time_allocated: 50,
       weight: 2
     }
@@ -36,8 +36,7 @@ it(`Should work with default settings`, () => {
     explanation: 'No explanation available',
     hints: [],
     time_allocated: 50,
-    _id: expect.any(String),
-    format: 'mixed'
+    _id: expect.any(String)
   });
   expect(logs).toStrictEqual({ warns: [], errors: [] });
 });
@@ -71,8 +70,7 @@ describe('MCQ type questions', () => {
       explanation: 'No explanation available',
       hints: [],
       time_allocated: 15,
-      _id: expect.any(String),
-      format: 'md'
+      _id: expect.any(String)
     });
     expect(logs).toStrictEqual({ warns: [], errors: [] });
   });
@@ -166,8 +164,7 @@ describe('MS type questions', () => {
       explanation: 'No explanation available',
       hints: [],
       time_allocated: 30,
-      _id: expect.any(String),
-      format: 'md'
+      _id: expect.any(String)
     });
     expect(logs).toStrictEqual({ warns: [], errors: [] });
   });
@@ -256,8 +253,7 @@ describe('Snippet type questions', () => {
       explanation: 'No explanation available',
       hints: [],
       time_allocated: 45,
-      _id: expect.any(String),
-      format: 'md'
+      _id: expect.any(String)
     });
     expect(logs).toStrictEqual({ warns: [], errors: [] });
   });
@@ -295,8 +291,7 @@ describe('FIB type questions', () => {
       explanation: 'No explanation available',
       hints: [],
       time_allocated: 60,
-      _id: expect.any(String),
-      format: 'md'
+      _id: expect.any(String)
     });
     expect(logs).toStrictEqual({ warns: [], errors: [] });
   });
@@ -366,8 +361,7 @@ it(`Should populate warns if wrong difficulty, weight and time_allocated are giv
     explanation: 'No explanation available',
     hints: [],
     time_allocated: 60,
-    _id: expect.any(String),
-    format: 'md'
+    _id: expect.any(String)
   });
   expect(logs).toStrictEqual({
     warns: [

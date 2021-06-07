@@ -36,7 +36,6 @@ export interface IPlaySettingsFilters {
 export interface IQuizDefaultSettings {
   difficulty: TQuestionDifficulty | null;
   time_allocated: number | null;
-  format: TQuestionFormat | null;
   weight: number | null;
 }
 
@@ -70,7 +69,6 @@ export interface IQuestionPartial {
   time_allocated?: number;
   difficulty?: TQuestionDifficulty;
   hints?: string[];
-  format?: TQuestionFormat;
   _id?: string;
 }
 

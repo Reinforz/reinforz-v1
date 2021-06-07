@@ -5,7 +5,6 @@ const createQuiz = () => {
   return {
     questions: [
       {
-        format: 'md',
         _id: '1',
         answers: [],
         hints: [],
