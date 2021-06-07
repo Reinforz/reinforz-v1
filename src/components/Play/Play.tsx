@@ -17,7 +17,7 @@ import PlayUpload from "./PlayUpload/PlayUpload";
 function Play() {
   const [modalOpen, setModalOpen] = useState(false);
   const history = useHistory();
-  const { theme } = useThemeSettings();
+  const { theme, settings } = useThemeSettings();
   const { setPlaying, filteredQuizzes, selectedQuizIds, playSettings, setUploadedQuizzes, setSelectedQuizIds, uploadedQuizzes, errorLogs, setErrorLogs } = useContext(RootContext);
   const filteredQuestions = filteredQuizzes.reduce((acc, filteredQuiz) => acc += filteredQuiz.questions.length, 0);
 
@@ -31,19 +31,19 @@ function Play() {
   }
 
   useHotkeys('ctrl+shift+1', () => {
-    history.push("/settings")
+    settings.shortcuts && history.push("/settings")
   })
 
   useHotkeys('ctrl+shift+2', () => {
-    history.push("/report")
+    settings.shortcuts && history.push("/report")
   })
 
   useHotkeys('ctrl+shift+3', () => {
-    history.push("/create")
+    settings.shortcuts && history.push("/create")
   })
 
   useHotkeys('ctrl+shift+4', () => {
-    startPlay()
+    settings.shortcuts && startPlay()
   })
 
   return <Menu lsKey="PLAY_MENU" width={290} modalOpen={() => setModalOpen(true)} contents={[<PlaySettings />, <div className="Play">

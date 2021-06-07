@@ -22,15 +22,15 @@ function Settings() {
   }, [settings])
 
   useHotkeys('ctrl+shift+1', () => {
-    memoizedCallback("/")
+    settings.shortcuts && memoizedCallback("/")
   })
 
   useHotkeys('ctrl+shift+2', () => {
-    memoizedCallback("/report")
+    settings.shortcuts && memoizedCallback("/report")
   })
 
   useHotkeys('ctrl+shift+3', () => {
-    memoizedCallback("/create")
+    settings.shortcuts && memoizedCallback("/create")
   })
 
   return (

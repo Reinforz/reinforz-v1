@@ -21,7 +21,7 @@ import { ReportUpload } from './ReportUpload/ReportUpload';
 
 export default function Report() {
   const { state } = useLocation<{ results: IResult[] }>();
-  const { theme } = useThemeSettings();
+  const { theme, settings } = useThemeSettings();
   const { playSettings, setUploadedQuizzes, setSelectedQuizIds } = useContext(RootContext);
   const [reportFilter, setReportFilter] = useState(getReportFilters());
   const [reportSort, setReportSort] = useState<IReportSort>([]);
@@ -44,9 +44,9 @@ export default function Report() {
     history.push("/")
   }
 
-  useHotkeys('ctrl+shift+1', () => history.push("/settings"));
-  useHotkeys('ctrl+shift+2', () => homeIconClick());
-  useHotkeys('ctrl+shift+3', () => history.push("/create"));
+  useHotkeys('ctrl+shift+1', () => settings.shortcuts && history.push("/settings"));
+  useHotkeys('ctrl+shift+2', () => settings.shortcuts && homeIconClick());
+  useHotkeys('ctrl+shift+3', () => settings.shortcuts && history.push("/create"));
 
   const icons: [string, JSX.Element][] = [
     [`Go to Settings page`, <IoMdSettings size={20} fill={theme.color.opposite_light} onClick={() => history.push("/settings")} />],
