@@ -6,7 +6,7 @@ import "./style.scss";
 interface Props {
   label: string
   closeModal: () => void
-  onSave: () => void
+  onSave: (input: string) => void
 }
 
 export default function Preset(props: Props) {
@@ -26,7 +26,7 @@ export default function Preset(props: Props) {
         Close
       </Button>
       <Button variant="contained" color="primary" onClick={() => {
-        onSave()
+        onSave(input)
         closeModal()
       }}>
         Save

@@ -1,7 +1,9 @@
 import React from "react";
-import { ISettings } from "../types";
+import { ISettings, ISettingsPreset } from "../types";
 
 export const SettingsContext = React.createContext({} as {
-  settings: ISettings;
+  settingsPresets: ISettingsPreset;
+  setSettingsPresets: React.Dispatch<React.SetStateAction<ISettingsPreset>>
+  settings: ISettings
   setSettings: React.Dispatch<React.SetStateAction<ISettings>>
 })

@@ -2,10 +2,11 @@ import { green, red } from "@material-ui/core/colors";
 import { OptionsObject, useSnackbar } from "notistack";
 import React, { useContext, useState } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
-import { FaPlay } from "react-icons/fa";
+import { FaPlay, FaSave } from "react-icons/fa";
 import { HiDocumentReport } from "react-icons/hi";
 import { IoMdCreate, IoMdSettings } from 'react-icons/io';
 import { useHistory } from "react-router-dom";
+import shortid from "shortid";
 import { RootContext } from "../../context/RootContext";
 import { useThemeSettings } from '../../hooks';
 import { IconGroup, List, Menu, Preset, SimpleModal, View } from '../../shared';
@@ -60,11 +61,21 @@ function Play() {
     settings.shortcuts && history.push("/create")
   }, [settings.shortcuts])
 
-  return <Menu lsKey="PLAY_MENU" width={290} modalOpen={() => setModalOpen(true)} contents={[<PlaySettings />, <div className="Play">
+  return <Menu lsKey="PLAY_MENU" width={290} icons={[
+    ['Save as preset', <FaSave fill={theme.color.opposite_light} onClick={() => setModalOpen(true)} />]
+  ]} contents={[<PlaySettings />, <div className="Play">
     <SimpleModal open={modalOpen} setOpen={setModalOpen}>
       <div className="Modal-content">
-        <Preset closeModal={() => setModalOpen(false)} label={'Save Play Settings'} onSave={() => {
-          localStorage.setItem('PLAY_SETTINGS', JSON.stringify(playSettings))
+        <Preset closeModal={() => setModalOpen(false)} label={'Save Play Settings'} onSave={(input) => {
+          const currentActivePresetId = shortid();
+          localStorage.setItem('reinforz.play.settings', JSON.stringify({
+            current: currentActivePresetId,
+            presets: [{
+              name: input,
+              id: currentActivePresetId,
+              data: playSettings
+            }]
+          }))
         }} />
       </div>
     </SimpleModal>

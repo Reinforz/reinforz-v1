@@ -25,7 +25,7 @@ export * from './getPlaySettings';
 export * from './getReportAggregator';
 export * from './getReportExport';
 export * from './getReportFilters';
-export * from './getSettings';
+export * from './getSettingsPresets';
 export * from './transformFullQuestions';
 export * from './transformReportQuestion';
 export * from './transformResultQuestionToRegularQuestion';

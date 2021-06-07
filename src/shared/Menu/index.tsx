@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaArrowAltCircleRight, FaSave } from "react-icons/fa";
+import { FaArrowAltCircleRight } from "react-icons/fa";
 import { RiArrowLeftRightLine } from "react-icons/ri";
 import { useThemeSettings } from "../../hooks";
 import { generateMenuStyles } from "../../utils";
@@ -12,12 +12,12 @@ export interface MenuProps {
   width?: number;
   lsKey?: string;
   contents: [JSX.Element, JSX.Element];
-  modalOpen?: () => void
+  icons?: [string, JSX.Element][]
 }
 
 export default function Menu(props: MenuProps) {
   const { theme } = useThemeSettings();
-  const { modalOpen, width = 300, initialPosition, lsKey, initialOpen, contents } = props;
+  const { icons = [], width = 300, initialPosition, lsKey, initialOpen, contents } = props;
   let menuLsState = {
     position: initialPosition || "right",
     isOpen: initialOpen || true
@@ -54,7 +54,7 @@ export default function Menu(props: MenuProps) {
           }))
         }} />,
         ],
-        ['Save as preset', <FaSave fill={theme.color.opposite_light} onClick={() => modalOpen && modalOpen()} />]
+        ...icons,
       ]} />
       {contents[0]}
     </div>

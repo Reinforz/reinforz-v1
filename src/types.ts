@@ -277,6 +277,16 @@ export interface ISettings {
   shortcuts: boolean;
 }
 
+export interface IPreset<D> {
+  current: string;
+  presets: {
+    name: string;
+    id: string;
+    data: D;
+  }[];
+}
+export interface ISettingsPreset extends IPreset<ISettings> {}
+
 export type TNumberAggregation = 'MIN' | 'MAX' | 'AVG';
 export type TBooleanAggregation = 'TRUE' | 'FALSE';
 export interface IReportAggregator {
