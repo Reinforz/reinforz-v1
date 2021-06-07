@@ -10,14 +10,16 @@ it(`Should filter out uploaded quizzes`, () => {
           answers: ['1'],
           type: 'MCQ',
           options: ['Option 1', 'Option 2', 'Option 3', 'Option 4'],
-          question: 'Question'
+          question: 'Question',
+          format: 'md'
         },
         {
           answers: ['0', '1', '2', '2'],
           type: 'MS',
           question: 'Question',
           options: ['Option 1', 'Option 2', 'Option 3'],
-          time_allocated: 500
+          time_allocated: 500,
+          format: 'md'
         }
       ]
     },
@@ -74,9 +76,9 @@ it(`Should filter out uploaded quizzes`, () => {
       subject: 'Subject',
       topic: 'Title',
       _id: expect.any(String),
-      format: 'md',
       questions: [
         {
+          format: 'md',
           answers: [
             {
               text: '1',

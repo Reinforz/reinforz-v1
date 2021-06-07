@@ -28,7 +28,8 @@ const result: IResult = {
     question: ['Question 1'],
     time_allocated: 30,
     weight: 1,
-    options: null
+    options: null,
+    format: 'md'
   }
 };
 
