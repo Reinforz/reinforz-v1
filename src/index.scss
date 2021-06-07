@@ -10,27 +10,15 @@ div#root {
   }
 }
 
+pre{
+  padding: 2px 5px 4px 5px;
+  border-radius: 3px;
+}
+
 .App {
   height: 100%;
-  &.dark {
-    pre{
-      background: #212121;
-      margin: 0px;
-      padding: 5px;
-    }
-  }
-
-  &.light {
-    pre{
-      background: rgb(224, 224, 224);
-      margin: 0px;
-      padding: 5px;
-    }
-  }
-  .MuiFormGroup-row {
-    align-items: center;
-  }
 }
+
 body {
   margin: 0;
   font-family: "Lato";

@@ -17,6 +17,9 @@ const useStyles = makeStyles((theme: ExtendedTheme) => ({
     },
     "& ::-webkit-scrollbar-thumb": {
       backgroundColor: theme.color.light
+    },
+    "& pre": {
+      background: theme.color.dark
     }
   }
 }));
