@@ -61,10 +61,12 @@ export default function Question(props: Props) {
     }
   }, [props.question, disable_timer])
 
-  const memoizedQuestionComponent = useMemo(() =>
-    props.question.type === "FIB" ? <FibQuestionDisplay question={props.question.question} userAnswers={userAnswers} image={props.question.image} /> : <div className="Question-question" style={{ gridArea: image ? `1/1/2/2` : `1/1/2/3`, backgroundColor: theme.color.light }}>
+  const memoizedQuestionComponent = useMemo(() => {
+    const style: React.CSSProperties = { gridArea: image ? `1/1/2/2` : `1/1/2/3`, backgroundColor: theme.color.light };
+    return props.question.type === "FIB" ? <FibQuestionDisplay question={props.question.question} userAnswers={userAnswers} image={props.question.image} /> : <div className="Question-question" style={style}>
       <Markdown content={question as string} />
-    </div>,
+    </div>
+  },
     // eslint-disable-next-line
     [props.question, userAnswers])
 
