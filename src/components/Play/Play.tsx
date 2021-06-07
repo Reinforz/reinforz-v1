@@ -1,5 +1,6 @@
 import { green, red } from "@material-ui/core/colors";
 import React, { useContext, useState } from "react";
+import { useHotkeys } from "react-hotkeys-hook";
 import { FaPlay } from "react-icons/fa";
 import { HiDocumentReport } from "react-icons/hi";
 import { IoMdCreate, IoMdSettings } from 'react-icons/io';
@@ -22,6 +23,29 @@ function Play() {
 
   const cantStartPlay = (filteredQuestions === 0 && selectedQuizIds.length !== 0) || selectedQuizIds.length === 0;
 
+  const startPlay = () => {
+    if (!cantStartPlay) {
+      setPlaying(true)
+      history.push("/play")
+    }
+  }
+
+  useHotkeys('ctrl+shift+1', () => {
+    history.push("/settings")
+  })
+
+  useHotkeys('ctrl+shift+2', () => {
+    history.push("/report")
+  })
+
+  useHotkeys('ctrl+shift+3', () => {
+    history.push("/create")
+  })
+
+  useHotkeys('ctrl+shift+4', () => {
+    startPlay()
+  })
+
   return <Menu lsKey="PLAY_MENU" width={290} modalOpen={() => setModalOpen(true)} contents={[<PlaySettings />, <div className="Play">
     <SimpleModal open={modalOpen} setOpen={setModalOpen}>
       <div className="Modal-content">
@@ -34,12 +58,7 @@ function Play() {
       [`Go to Settings page`, <IoMdSettings size={20} fill={theme.color.opposite_light} onClick={() => history.push("/settings")} />],
       [`Go to Report page`, <HiDocumentReport size={20} fill={theme.color.opposite_light} onClick={() => history.push("/report")} />],
       [`Go to Create page`, <IoMdCreate size={20} fill={theme.color.opposite_light} onClick={() => history.push("/create")} />],
-      ['Play', <FaPlay fill={cantStartPlay ? red[500] : green[500]} onClick={() => {
-        if (!cantStartPlay) {
-          setPlaying(true)
-          history.push("/play")
-        }
-      }} />]
+      ['Play', <FaPlay fill={cantStartPlay ? red[500] : green[500]} onClick={startPlay} />]
     ]} />
     <PlayUpload />
     <div style={{ gridArea: '2/1/5/2' }}>

@@ -1,4 +1,5 @@
-import React, { useContext } from 'react';
+import React, { useCallback, useContext } from 'react';
+import { useHotkeys } from 'react-hotkeys-hook';
 import { AiFillHome } from 'react-icons/ai';
 import { HiDocumentReport } from 'react-icons/hi';
 import { IoMdCreate } from 'react-icons/io';
@@ -11,22 +12,33 @@ import "./Settings.scss";
 
 function Settings() {
   const { settings, setSettings } = useContext(SettingsContext);
-  const { theme, animation, hovertips } = settings;
   const history = useHistory();
   const { theme: THEME } = useThemeSettings();
+
+  const memoizedCallback = useCallback((path: string) => {
+    localStorage.setItem("SETTINGS", JSON.stringify(settings))
+    history.push(path)
+    // eslint-disable-next-line
+  }, [settings])
+
+  useHotkeys('ctrl+shift+1', () => {
+    memoizedCallback("/")
+  })
+
+  useHotkeys('ctrl+shift+2', () => {
+    memoizedCallback("/report")
+  })
+
+  useHotkeys('ctrl+shift+3', () => {
+    memoizedCallback("/create")
+  })
+
   return (
     <>
       <IconGroup className="Settings-icons" icons={[
-        [`Go to Home page`, <AiFillHome size={20} fill={THEME.color.opposite_light} onClick={() => {
-          localStorage.setItem("SETTINGS", JSON.stringify({
-            animation: String(animation),
-            hovertips: String(hovertips),
-            theme
-          }))
-          history.push("/")
-        }} />],
-        [`Go to Report page`, <HiDocumentReport size={20} fill={THEME.color.opposite_light} onClick={() => history.push("/report")} />],
-        [`Go to Create page`, <IoMdCreate size={20} fill={THEME.color.opposite_light} onClick={() => history.push("/create")} />],
+        [`Go to Home page`, <AiFillHome size={20} fill={THEME.color.opposite_light} onClick={() => memoizedCallback("/")} />],
+        [`Go to Report page`, <HiDocumentReport size={20} fill={THEME.color.opposite_light} onClick={() => memoizedCallback("/report")} />],
+        [`Go to Create page`, <IoMdCreate size={20} fill={THEME.color.opposite_light} onClick={() => memoizedCallback("/create")} />],
       ]} />
 
       <div className="Settings" style={{ backgroundColor: THEME.color.base, color: THEME.palette.text.secondary }}>

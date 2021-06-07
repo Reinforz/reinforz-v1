@@ -62,7 +62,7 @@ export interface IQuestionPartial {
   time_allocated?: number;
   difficulty?: TQuestionDifficulty;
   hints?: string[];
-  format?: 'text' | 'md';
+  format?: 'text' | 'md' | 'mixed';
   _id?: string;
 }
 

@@ -1,4 +1,5 @@
 import React, { useContext, useMemo, useState } from 'react';
+import { useHotkeys } from 'react-hotkeys-hook';
 import { AiFillHome } from 'react-icons/ai';
 import { FaCloudUploadAlt } from "react-icons/fa";
 import { IoMdCreate, IoMdSettings } from 'react-icons/io';
@@ -37,14 +38,19 @@ export default function Report() {
   const sortedResults = applyReportSorts(filteredResults, reportSort);
   const filteredQuizzesMap = generateQuizzesFromResults(filteredResults, allQuestionsMap);
 
+  const homeIconClick = () => {
+    setUploadedQuizzes(Array.from(filteredQuizzesMap.values()))
+    setSelectedQuizIds(Array.from(filteredQuizzesMap.keys()))
+    history.push("/")
+  }
+
+  useHotkeys('ctrl+shift+1', () => history.push("/settings"));
+  useHotkeys('ctrl+shift+2', () => homeIconClick());
+  useHotkeys('ctrl+shift+3', () => history.push("/create"));
+
   const icons: [string, JSX.Element][] = [
     [`Go to Settings page`, <IoMdSettings size={20} fill={theme.color.opposite_light} onClick={() => history.push("/settings")} />],
-    [`Go to Play page`, <AiFillHome size={20} fill={theme.color.opposite_light} onClick={() => {
-      setUploadedQuizzes(Array.from(filteredQuizzesMap.values()))
-      setSelectedQuizIds(Array.from(filteredQuizzesMap.keys()))
-      history.push("/")
-    }
-    } />],
+    [`Go to Home page`, <AiFillHome size={20} fill={theme.color.opposite_light} onClick={() => homeIconClick()} />],
     [`Go to Create page`, <IoMdCreate size={20} fill={theme.color.opposite_light} onClick={() => history.push("/create")} />]
   ];
 
