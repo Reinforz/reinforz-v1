@@ -1,3 +1,4 @@
+import { PaletteType } from '@material-ui/core';
 import { grey } from '@material-ui/core/colors';
 import { createMuiTheme, darken, lighten } from '@material-ui/core/styles';
 import { Color, ExtendedThemeOptions } from '../types';
@@ -21,6 +22,8 @@ export function generateTheme(
     secondary: ''
   };
 
+  let paletteType: PaletteType = 'dark';
+
   switch (theme) {
     case 'dark': {
       color.light = grey[800];
@@ -31,6 +34,7 @@ export function generateTheme(
       color.opposite_base = grey[200];
       text.primary = grey[100];
       text.secondary = grey[200];
+      paletteType = 'dark';
       break;
     }
     case 'light': {
@@ -42,6 +46,7 @@ export function generateTheme(
       color.opposite_base = darken(grey[800], 0.25);
       text.primary = grey[900];
       text.secondary = grey[800];
+      paletteType = 'light';
       break;
     }
     case 'polar night': {
@@ -53,6 +58,7 @@ export function generateTheme(
       color.opposite_light = '#ECEFF4';
       text.primary = grey[100];
       text.secondary = grey[200];
+      paletteType = 'dark';
       break;
     }
     case 'snow storm': {
@@ -64,6 +70,7 @@ export function generateTheme(
       color.base = '#E5E9F0';
       text.primary = grey[900];
       text.secondary = grey[800];
+      paletteType = 'light';
       break;
     }
   }
@@ -72,7 +79,7 @@ export function generateTheme(
 
   const themeOptions: ExtendedThemeOptions = {
     palette: {
-      type: theme as any,
+      type: paletteType,
       text: {
         primary: text.primary,
         secondary: text.secondary

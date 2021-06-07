@@ -39,7 +39,7 @@ export default function Toggles<I extends Record<string, any>>(props: Props<I>) 
     <FormGroup key={item} row className={clsx("Toggles-item", props?.classNames?.FormGroup && props.classNames.FormGroup)} style={{ backgroundColor: THEME.color.base }}>
       <InputLabel className={clsx("Toggles-item-label", props?.classNames?.InputLabel && props.classNames.InputLabel)}>{item.charAt(0).toUpperCase() + item.substr(1)}</InputLabel>
       <OnOffSwitch
-        checked={itemsMap[item]}
+        checked={Boolean(itemsMap[item])}
         onChange={(e) => {
           setItems({ ...itemsMap, [item]: !itemsMap[item] })
         }}

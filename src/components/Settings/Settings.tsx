@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
 import { AiFillHome } from 'react-icons/ai';
-import { BsMoon, BsSun } from 'react-icons/bs';
 import { HiDocumentReport } from 'react-icons/hi';
 import { IoMdCreate } from 'react-icons/io';
 import { useHistory } from 'react-router-dom';
 import { SettingsContext } from '../../context/SettingsContext';
 import { useThemeSettings } from '../../hooks';
-import { IconGroup, RadioGroup, Toggles } from '../../shared';
+import { IconGroup, Select, Toggles } from '../../shared';
+import { transformTextBySeparator } from '../../utils';
 import "./Settings.scss";
 
 function Settings() {
@@ -32,7 +32,7 @@ function Settings() {
       <div className="Settings" style={{ backgroundColor: THEME.color.base, color: THEME.palette.text.secondary }}>
         <div className="Settings-header" style={{ backgroundColor: THEME.color.dark }}>Settings</div>
         <div className="Settings-content" style={{ backgroundColor: THEME.color.dark }}>
-          <RadioGroup lsKey="SETTINGS" items={['light', 'dark']} label={"Theme"} itemDirection="row" setState={setSettings} stateKey={"theme"} state={settings} itemLabel={(item) => item === 'dark' ? <BsMoon size={20} style={{ display: 'flex' }} /> : <BsSun size={20} style={{ display: 'flex' }} />} />
+          <Select items={["light", "dark", "polar night", "snow storm"]} label={"Theme"} setState={setSettings} state={settings} stateKey={"theme"} menuItemLabel={(item) => transformTextBySeparator(item)} />
           <Toggles classNames={{
             FormGroup: 'Settings-content-group',
             InputLabel: 'Settings-content-group-label'

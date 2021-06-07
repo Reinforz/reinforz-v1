@@ -261,7 +261,7 @@ export interface ExtendedTheme extends Theme {
   color: Color;
 }
 
-export type AllowedTheme = 'dark' | 'light';
+export type AllowedTheme = 'dark' | 'light' | 'polar night' | 'snow storm';
 export interface ISettings {
   theme: AllowedTheme;
   animation: boolean;
