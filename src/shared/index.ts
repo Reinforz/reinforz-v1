@@ -1,5 +1,4 @@
 import CheckboxGroup from './CheckboxGroup';
-import Highlighter from './Highlighter';
 import Icon from './Icon';
 import IconGroup from './IconGroup';
 import InputRange from './InputRange';
@@ -31,7 +30,6 @@ export {
   CheckboxGroup,
   Toggles,
   View,
-  Highlighter,
   Icon,
   List,
   Menu,
