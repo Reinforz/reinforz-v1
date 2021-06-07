@@ -21,7 +21,7 @@ export default function Sort(props: Props) {
 
   return <FormGroup className="Sort">
     <InputLabel className="Sort-header">{header}</InputLabel>
-    <div style={{ background: theme.color.dark, display: 'flex', flexDirection: 'column', padding: 2.5, margin: 2.5 }} className="Sort-content">
+    {sorts.length !== 0 && <div style={{ background: theme.color.dark, display: 'flex', flexDirection: 'column', padding: 2.5, margin: 2.5 }} className="Sort-content">
       {sorts.map((sort, index) => {
         const [item, order] = sort;
         return <div key={`${item}.${order}`} className="Sort-content-item" style={{ background: theme.color.base, display: 'flex', padding: 5, margin: 2.5 }}>
@@ -34,7 +34,6 @@ export default function Sort(props: Props) {
               <MenuItem key={item} value={item}>{menuItemLabel(item)}</MenuItem>
             )}
           </MuiSelect>
-
           <MuiSelect style={{ background: theme.color.light, flex: 1 }} value={order}
             onChange={(e) => {
               sort[1] = e.target.value as any;
@@ -54,7 +53,7 @@ export default function Sort(props: Props) {
           </div>
         </div>
       })}
-    </div>
+    </div>}
     {sorts.length !== maxSort && <div className="Sort-add">
       <Icon popoverText="Add Sort">
         <AiFillPlusCircle size={25} fill={green[500]} onClick={() => setSorts([...sorts, [items[0], 'ASC']])} />
