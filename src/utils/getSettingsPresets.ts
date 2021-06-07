@@ -2,7 +2,7 @@ import { ISettingsPreset } from '../types';
 
 export const getSettingsPresets = (): ISettingsPreset => {
   const localStorageValue: string | null = localStorage.getItem(
-    'reinforz.play.settings'
+    'reinforz.settings'
   );
 
   return localStorageValue

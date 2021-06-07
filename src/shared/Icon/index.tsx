@@ -40,9 +40,9 @@ export default function Icon(props: Props) {
     }
   }, [])
 
-  return settings.hovertips ? <Fragment>
+  return <Fragment>
     <span className={`${className ?? ''} icon`} style={{ ...props.style ?? {}, display: "flex", height: 'fit-content' }} onMouseEnter={(e: any) => setAnchorEl(e.currentTarget)} onMouseLeave={() => setAnchorEl(null)}>{children}</span>
-    {<Popover className={classes.popover}
+    {settings.hovertips && <Popover className={classes.popover}
       classes={{
         paper: classes.paper,
       }} open={open} anchorEl={anchorEl} anchorOrigin={{
@@ -54,5 +54,5 @@ export default function Icon(props: Props) {
         horizontal: 'center',
       }}
       onClose={() => setAnchorEl(null)} disableRestoreFocus ><Typography>{popoverText}</Typography></Popover>}
-  </Fragment> : children
+  </Fragment>
 }

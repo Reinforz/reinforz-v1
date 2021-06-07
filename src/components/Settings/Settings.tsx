@@ -44,7 +44,7 @@ function Settings() {
       <div className="Settings" style={{ backgroundColor: THEME.color.base, color: THEME.palette.text.secondary }}>
         <div className="Settings-header" style={{ backgroundColor: THEME.color.dark }}>
           <div className="Settings-header-text">Settings</div>
-          <Preset currentPreset={settings} itemPreset={settingsPresets} setPresetState={setSettingsPresets} />
+          <Preset lsKey="reinforz.settings" modalLabel="Save Settings" popoverText="Save current settings as preset" currentPreset={settings} itemPreset={settingsPresets} setPresetState={setSettingsPresets} />
         </div>
         <div className="Settings-content" style={{ backgroundColor: THEME.color.dark }}>
           <Select items={["light", "dark", "polar_night", "snow_storm"]} label={"Theme"} setState={setSettings} state={settings} stateKey={"theme"} menuItemLabel={(item) => transformTextBySeparator(item)} />

@@ -1,0 +1,20 @@
+.Preset{
+  display: flex;
+  align-items: center; 
+  justify-content: center; 
+  cursor: pointer;
+  display: flex;
+  
+  .icon{
+    width: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .MuiFormGroup-root{
+    flex: 1;
+    padding: 0px;
+    margin: 0px;
+  }
+}
