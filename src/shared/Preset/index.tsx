@@ -1,11 +1,14 @@
+import { grey, red } from "@material-ui/core/colors";
 import { useContext } from "react";
 import { FaSave } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
 import shortid from "shortid";
 import { Icon, ListSelect, ModalPresetInput } from "../";
 import { ModalContext } from "../../context/ModalContext";
 import { useThemeSettings } from "../../hooks";
 import { ISettings, ISettingsPreset } from "../../types";
 import "./style.scss";
+
 interface Props<T, D> {
   setPresetState: React.Dispatch<React.SetStateAction<T>>
   itemPreset: T
@@ -42,6 +45,16 @@ export default function Preset<T extends ISettingsPreset, D extends ISettings>(p
           localStorage.setItem(lsKey, JSON.stringify(newSettingsPresets));
           setPresetState(newSettingsPresets as any)
         }} />])
+      }} />
+    </Icon>
+    <Icon popoverText={itemPreset.current !== 'default' ? "Delete preset" : "Can't delete default preset"}>
+      <MdDelete size={25} fill={itemPreset.current !== 'default' ? red[500] : grey[500]} onClick={() => {
+        if (itemPreset.current !== 'default') {
+          setPresetState({
+            current: 'default',
+            presets: itemPreset.presets.filter(preset => preset.id !== itemPreset.current)
+          } as any)
+        }
       }} />
     </Icon>
   </div>
