@@ -18,7 +18,7 @@ const result: IResult = {
     difficulty: 'Advanced',
     quiz: {
       subject: 'Subject 1',
-      topic: 'Title 1',
+      topic: 'Topic 1',
       _id: '1'
     },
     _id: '1',
@@ -40,13 +40,33 @@ const default_filters: IReportFilter = {
   time_taken: [0, 60],
   verdict: true,
   score: [0, 1],
-  excluded_columns: []
+  excluded_columns: [],
+  excluded_topics: [],
+  excluded_subjects: []
 };
 
 it(`Should filter out if question type is within excluded_types`, () => {
   const filteredResults = applyReportFilters([result], {
     ...default_filters,
     excluded_types: ['FIB']
+  });
+
+  expect(filteredResults).toStrictEqual([]);
+});
+
+it(`Should filter out if quiz subject is within excluded_subjects`, () => {
+  const filteredResults = applyReportFilters([result], {
+    ...default_filters,
+    excluded_subjects: ['Subject 1']
+  });
+
+  expect(filteredResults).toStrictEqual([]);
+});
+
+it(`Should filter out if quiz topic is within excluded_topics`, () => {
+  const filteredResults = applyReportFilters([result], {
+    ...default_filters,
+    excluded_topics: ['Topic 1']
   });
 
   expect(filteredResults).toStrictEqual([]);

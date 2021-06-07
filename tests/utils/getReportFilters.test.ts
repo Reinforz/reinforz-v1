@@ -20,7 +20,9 @@ it(`Should work if report filters exists in ls`, () => {
     excluded_types: [],
     excluded_difficulty: [],
     excluded_quizzes: [],
-    excluded_columns: []
+    excluded_columns: [],
+    excluded_topics: [],
+    excluded_subjects: []
   });
 });
 
@@ -35,6 +37,8 @@ it(`Should work if report filters doesn't exist in ls`, () => {
     excluded_types: [],
     excluded_difficulty: [],
     excluded_quizzes: [],
-    excluded_columns: []
+    excluded_columns: [],
+    excluded_topics: [],
+    excluded_subjects: []
   });
 });

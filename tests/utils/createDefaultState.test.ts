@@ -41,7 +41,9 @@ describe('createDefaultReportFilterState', () => {
       excluded_types: [],
       excluded_difficulty: [],
       excluded_quizzes: [],
-      excluded_columns: []
+      excluded_columns: [],
+      excluded_subjects: [],
+      excluded_topics: []
     });
   });
 });
