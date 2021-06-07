@@ -21,6 +21,8 @@ export default function ReportFilter() {
       const selectedQuiz = allQuizzesMap.get(quiz_id)!;
       return `${selectedQuiz.subject} - ${selectedQuiz.topic}`
     }} setState={setReportFilter} state={reportFilter} stateKey={"excluded_quizzes"} />
+    <Select multiple label={"Excluded Topics"} items={Array.from(allQuizzesMap.values()).map(quiz => quiz.topic)} menuItemLabel={(topic) => topic} setState={setReportFilter} state={reportFilter} stateKey={"excluded_topics"} />
+    <Select multiple label={"Excluded Subjects"} items={Array.from(allQuizzesMap.values()).map(quiz => quiz.subject)} menuItemLabel={(topic) => topic} setState={setReportFilter} state={reportFilter} stateKey={"excluded_subjects"} />
     <Select lsKey={"REPORT_FILTERS"} multiple label={"Excluded Columns"}
       renderValue={(selected) => (selected as string[]).map((report_stat, index) => <div key={report_stat + "excluded_columns" + index}>{transformTextBySeparator(report_stat)}</div>)}
       items={["question", "image", "question_stats", "user_stats", "score_breakdown", "quiz_stats", "hints", "answers", "options", "report_stats", "play_options", "play_filters", "report_export", "report_aggregator", "report_info"]}

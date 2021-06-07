@@ -11,13 +11,17 @@ export function applyReportFilters(
     verdict,
     hints_used,
     time_taken,
-    score
+    score,
+    excluded_subjects,
+    excluded_topics
   } = reportFilter;
 
   const filteredResults = results.filter(
     (result) =>
       !excluded_types.includes(result.question.type) &&
       !excluded_difficulty.includes(result.question.difficulty) &&
+      !excluded_topics.includes(result.question.quiz.topic) &&
+      !excluded_subjects.includes(result.question.quiz.subject) &&
       (verdict === 'any' || verdict.toString() === result.verdict.toString()) &&
       (hints_used === 'any' || result.hints_used <= hints_used) &&
       time_taken[0] <= result.time_taken &&

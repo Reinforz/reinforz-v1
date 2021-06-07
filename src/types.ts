@@ -244,6 +244,8 @@ export interface IReportFilter {
   excluded_types: TQuestionType[];
   excluded_difficulty: TQuestionDifficulty[];
   excluded_quizzes: string[];
+  excluded_topics: string[];
+  excluded_subjects: string[];
   excluded_columns: string[];
   score: [number, number];
 }
