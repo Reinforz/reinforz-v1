@@ -22,10 +22,10 @@ export function ReportOptions(props: Props) {
           <div style={{ backgroundColor: theme.color.light, padding: 10 }} className="Report-Options-container-item Report-Options-container-item--text">
             <Markdown content={option.text} />
           </div>
-          <div style={{ backgroundColor: theme.color.light }} className="Report-Options-container-item">
-            {option.isCorrect ? <AiFillCheckSquare fill={green[500]} style={{ padding: 5 }} size={15} /> : null}
-            {option.userSelected ? <FaUser fill={theme.palette.text.primary} style={{ padding: 5 }} size={15} /> : null}
-          </div>
+          {(option.isCorrect || option.userSelected) ? <div style={{ backgroundColor: theme.color.light }} className="Report-Options-container-item">
+            {option.isCorrect ? <AiFillCheckSquare fill={green[500]} style={{ padding: 5 }} size={20} /> : null}
+            {option.userSelected ? <FaUser fill={theme.palette.text.primary} style={{ padding: 5 }} size={20} /> : null}
+          </div> : null}
         </div>
         {question.answers[index]?.explanation ? <div style={{ backgroundColor: theme.color.light, padding: 5, margin: 2.5 }} className="Report-Options-container-item-explanation">
           <Markdown content={question.answers[index].explanation!} />

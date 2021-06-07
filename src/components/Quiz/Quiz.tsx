@@ -16,6 +16,8 @@ export default function Quiz() {
   const { theme } = useThemeSettings();
   const { isLastItem, currentItem, getNextIndex, currentIndex } = useCycle(allQuestions);
 
+
+
   if (!playing) {
     history.push("/")
   }

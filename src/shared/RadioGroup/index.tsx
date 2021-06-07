@@ -10,7 +10,7 @@ interface Props<I> {
   state: I
   onClick?: (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => any
   lsKey?: string
-  itemLabel?: (item: string) => JSX.Element
+  itemLabel?: (item: string) => JSX.Element | string
   itemDirection?: 'row' | 'column'
 }
 
