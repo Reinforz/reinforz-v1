@@ -1,22 +1,17 @@
 import React, { useCallback, useContext } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { AiFillHome } from 'react-icons/ai';
-import { FaSave } from 'react-icons/fa';
 import { HiDocumentReport } from 'react-icons/hi';
 import { IoMdCreate } from 'react-icons/io';
 import { useHistory } from 'react-router-dom';
-import shortid from 'shortid';
-import { ModalContext } from '../../context/ModalContext';
 import { SettingsContext } from '../../context/SettingsContext';
 import { useThemeSettings } from '../../hooks';
-import { Icon, IconGroup, ListSelect, ModalPresetInput, Select, Toggles } from '../../shared';
-import { ISettingsPreset } from '../../types';
+import { IconGroup, Preset, Select, Toggles } from '../../shared';
 import { transformTextBySeparator } from '../../utils';
 import "./Settings.scss";
 
 function Settings() {
   const { settings, setSettings, settingsPresets, setSettingsPresets } = useContext(SettingsContext);
-  const { setModalState } = useContext(ModalContext);
   const history = useHistory();
   const { theme: THEME } = useThemeSettings();
 
@@ -49,31 +44,7 @@ function Settings() {
       <div className="Settings" style={{ backgroundColor: THEME.color.base, color: THEME.palette.text.secondary }}>
         <div className="Settings-header" style={{ backgroundColor: THEME.color.dark }}>
           <div className="Settings-header-text">Settings</div>
-          <div className="Settings-header-presets">
-            <ListSelect items={settingsPresets.presets.map(preset => preset.id)} menuItemLabel={(id) => settingsPresets.presets.find(preset => preset.id === id)!.name} onChange={(id) => {
-              setSettingsPresets({
-                current: id,
-                presets: settingsPresets.presets
-              })
-            }} item={settingsPresets.current} />
-            <Icon popoverText="Save current settings as preset">
-              <FaSave fill={THEME.color.opposite_light} size={20} onClick={() => {
-                setModalState([true, <ModalPresetInput closeModal={() => setModalState([false, null])} label={'Save Settings'} onSave={(input) => {
-                  const currentActivePresetId = shortid();
-                  const newSettingsPresets: ISettingsPreset = {
-                    current: currentActivePresetId,
-                    presets: [...settingsPresets.presets, {
-                      name: input,
-                      id: currentActivePresetId,
-                      data: settings
-                    }]
-                  }
-                  localStorage.setItem('reinforz.play.settings', JSON.stringify(newSettingsPresets));
-                  setSettingsPresets(newSettingsPresets)
-                }} />])
-              }} />
-            </Icon>
-          </div>
+          <Preset currentPreset={settings} itemPreset={settingsPresets} setPresetState={setSettingsPresets} />
         </div>
         <div className="Settings-content" style={{ backgroundColor: THEME.color.dark }}>
           <Select items={["light", "dark", "polar_night", "snow_storm"]} label={"Theme"} setState={setSettings} state={settings} stateKey={"theme"} menuItemLabel={(item) => transformTextBySeparator(item)} />
