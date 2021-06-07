@@ -33,7 +33,15 @@ export interface IPlaySettingsFilters {
   excluded_types: TQuestionType[];
 }
 
+export interface IQuizDefaultSettings {
+  difficulty: TQuestionDifficulty | null;
+  time_allocated: number | null;
+  format: TQuestionFormat | null;
+  weight: number | null;
+}
+
 export interface IQuizPartial {
+  default?: Partial<IQuizDefaultSettings>;
   topic: string;
   subject: string;
   questions: TQuestionPartial[];
@@ -54,7 +62,7 @@ export interface IPlaySettings {
 
 export type TQuestionType = 'MCQ' | 'MS' | 'FIB' | 'Snippet';
 export type TQuestionDifficulty = 'Beginner' | 'Intermediate' | 'Advanced';
-
+export type TQuestionFormat = 'text' | 'md' | 'mixed';
 export interface IQuestionPartial {
   type?: TQuestionType;
   image?: string | null;
@@ -62,7 +70,7 @@ export interface IQuestionPartial {
   time_allocated?: number;
   difficulty?: TQuestionDifficulty;
   hints?: string[];
-  format?: 'text' | 'md' | 'mixed';
+  format?: TQuestionFormat;
   _id?: string;
 }
 

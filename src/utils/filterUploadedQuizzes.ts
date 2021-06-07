@@ -11,7 +11,10 @@ export function filterUploadedQuizzes(quizzes: IQuizPartial[]) {
     if (quiz.topic && quiz.subject && quiz.questions.length > 0) {
       const filteredQuestions: TQuestionFull[] = [];
       quiz.questions.forEach((question, questionIndex) => {
-        const [generatedQuestion, logs] = generateCompleteQuestion(question);
+        const [generatedQuestion, logs] = generateCompleteQuestion(
+          question,
+          quiz.default
+        );
         if (logs.errors.length === 0) {
           generatedQuestion.quiz = {
             subject: quiz.subject,
@@ -42,7 +45,9 @@ export function filterUploadedQuizzes(quizzes: IQuizPartial[]) {
         if (logs.errors.length === 0) filteredQuestions.push(generatedQuestion);
       });
       quiz.questions = filteredQuestions as any;
-      filteredUploadedQuizzes.push(quiz as any);
+      const duplicateQuiz = JSON.parse(JSON.stringify(quiz));
+      delete duplicateQuiz.default;
+      filteredUploadedQuizzes.push(duplicateQuiz);
     }
 
     if (!quiz.topic)

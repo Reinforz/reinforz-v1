@@ -1,6 +1,7 @@
 import shortid from 'shortid';
 import {
   ILog,
+  IQuizDefaultSettings,
   TQuestionFull,
   TQuestionPartial,
   TSelectionQuestionPartial
@@ -16,7 +17,10 @@ function setObjectValues(parent: any, arr: [string, any][]) {
   });
 }
 
-export function generateCompleteQuestion(question: TQuestionPartial) {
+export function generateCompleteQuestion(
+  question: TQuestionPartial,
+  defaultSettings?: Partial<IQuizDefaultSettings>
+) {
   const logs: ILog = { warns: [], errors: [] };
 
   const completeQuestion: TQuestionFull = JSON.parse(JSON.stringify(question));
@@ -33,16 +37,7 @@ export function generateCompleteQuestion(question: TQuestionPartial) {
     }));
   }
 
-  let time_allocated = 15;
-
-  setObjectValues(completeQuestion, [
-    ['image', null],
-    ['weight', 1],
-    ['difficulty', 'Beginner'],
-    ['explanation', 'No explanation available'],
-    ['hints', []],
-    ['format', 'md'],
-  ]);
+  let time_allocated = defaultSettings?.time_allocated ?? 60;
 
   const dummyQuestion: any = completeQuestion;
 
@@ -162,8 +157,17 @@ export function generateCompleteQuestion(question: TQuestionPartial) {
         break;
       }
     }
-    completeQuestion.time_allocated =
-      completeQuestion.time_allocated ?? time_allocated;
+    console.log(defaultSettings);
+    setObjectValues(completeQuestion, [
+      ['image', null],
+      ['weight', defaultSettings?.weight ?? 1],
+      ['difficulty', defaultSettings?.difficulty ?? 'Beginner'],
+      ['explanation', 'No explanation available'],
+      ['hints', []],
+      ['format', defaultSettings?.format ?? 'md'],
+      ['time_allocated', defaultSettings?.time_allocated ?? time_allocated]
+    ]);
+
     completeQuestion._id = shortid();
 
     if (
