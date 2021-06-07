@@ -19,17 +19,6 @@ div#root {
   }
 }
 
-%AppIcon {
-  position: absolute;
-  cursor: pointer;
-  font-size: 1.25rem;
-  animation-name: spin;
-  animation-duration: 5000ms;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
-  z-index: 5;
-}
-
 .App {
   height: 100%;
   &.dark {
@@ -51,12 +40,10 @@ div#root {
       path {
         fill: rgb(246, 246, 246);
       }
-      @extend %AppIcon;
     }
   }
 
   &.light {
-
     pre{
       background: rgb(224, 224, 224);
       margin: 0px;
@@ -76,7 +63,6 @@ div#root {
       path {
         fill: rgb(66, 66, 66);
       }
-      @extend %AppIcon;
     }
   }
   .MuiFormGroup-row {

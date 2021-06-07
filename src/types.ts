@@ -255,13 +255,15 @@ export type Color = {
 
 export interface ExtendedThemeOptions extends ThemeOptions {
   color: Color;
+  theme: AllowedTheme;
 }
 
 export interface ExtendedTheme extends Theme {
   color: Color;
+  theme: AllowedTheme;
 }
 
-export type AllowedTheme = 'dark' | 'light' | 'polar night' | 'snow storm';
+export type AllowedTheme = 'dark' | 'light' | 'polar_night' | 'snow_storm';
 export interface ISettings {
   theme: AllowedTheme;
   animation: boolean;

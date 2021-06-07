@@ -4,7 +4,7 @@ import { createMuiTheme, darken, lighten } from '@material-ui/core/styles';
 import { Color, ExtendedThemeOptions } from '../types';
 
 export function generateTheme(
-  theme: 'dark' | 'light' | 'polar night' | 'snow storm'
+  theme: 'dark' | 'light' | 'polar_night' | 'snow_storm'
 ) {
   const color: Color = {
     base: '',
@@ -49,7 +49,7 @@ export function generateTheme(
       paletteType = 'light';
       break;
     }
-    case 'polar night': {
+    case 'polar_night': {
       color.light = '#434C5E';
       color.dark = '#2E3440';
       color.base = '#3B4252';
@@ -61,7 +61,7 @@ export function generateTheme(
       paletteType = 'dark';
       break;
     }
-    case 'snow storm': {
+    case 'snow_storm': {
       color.opposite_light = '#434C5E';
       color.opposite_dark = '#2E3440';
       color.opposite_base = '#3B4252';
@@ -78,6 +78,7 @@ export function generateTheme(
   const { light, base, dark } = color;
 
   const themeOptions: ExtendedThemeOptions = {
+    theme,
     palette: {
       type: paletteType,
       text: {
