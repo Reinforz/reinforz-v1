@@ -157,7 +157,6 @@ export function generateCompleteQuestion(
         break;
       }
     }
-    console.log(defaultSettings);
     setObjectValues(completeQuestion, [
       ['image', null],
       ['weight', defaultSettings?.weight ?? 1],
@@ -178,13 +177,6 @@ export function generateCompleteQuestion(
         `Question time allocated must be within 10-120 but given ${completeQuestion.time_allocated}, changing to 60`
       );
       completeQuestion.time_allocated = 60;
-    }
-
-    if (dummyQuestion.weight < 0 || dummyQuestion.weight > 1) {
-      logs.warns.push(
-        `Question weights must be within 0-1 but given ${completeQuestion.weight}, changing to 0`
-      );
-      completeQuestion.weight = 0;
     }
 
     if (

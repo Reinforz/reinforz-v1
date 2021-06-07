@@ -1,5 +1,47 @@
 import { generateCompleteQuestion } from '../../src/utils';
 
+it(`Should work with default settings`, () => {
+  const [completeQuestion, logs] = generateCompleteQuestion(
+    {
+      answers: ['1'],
+      type: 'MCQ',
+      options: ['Option 1', 'Option 2', 'Option 3', 'Option 4'],
+      question: 'Question'
+    },
+    {
+      difficulty: 'Advanced',
+      format: 'mixed',
+      time_allocated: 50,
+      weight: 2
+    }
+  );
+  expect(completeQuestion).toStrictEqual({
+    answers: [
+      {
+        text: '1',
+        explanation: null
+      }
+    ],
+    type: 'MCQ',
+    options: [
+      { text: 'Option 1', index: '0' },
+      { text: 'Option 2', index: '1' },
+      { text: 'Option 3', index: '2' },
+      { text: 'Option 4', index: '3' }
+    ],
+    question: 'Question',
+    image: null,
+    weight: 2,
+    difficulty: 'Advanced',
+    explanation: 'No explanation available',
+    hints: [],
+    time_allocated: 50,
+    _id: expect.any(String),
+    format: 'mixed'
+  });
+  expect(logs).toStrictEqual({ warns: [], errors: [] });
+});
+
 describe('MCQ type questions', () => {
   it(`Should generate default configs`, () => {
     const [completeQuestion, logs] = generateCompleteQuestion({
@@ -319,7 +361,7 @@ it(`Should populate warns if wrong difficulty, weight and time_allocated are giv
     ],
     question: 'Question',
     image: null,
-    weight: 0,
+    weight: 1.5,
     difficulty: 'Beginner',
     explanation: 'No explanation available',
     hints: [],
@@ -330,7 +372,6 @@ it(`Should populate warns if wrong difficulty, weight and time_allocated are giv
   expect(logs).toStrictEqual({
     warns: [
       'Question time allocated must be within 10-120 but given 450, changing to 60',
-      'Question weights must be within 0-1 but given 1.5, changing to 0',
       'Question difficulty must be one of Beginner, Intermediate or Advanced, but given Medium, changing to Beginner'
     ],
     errors: []
