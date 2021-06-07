@@ -4,15 +4,6 @@ div#root {
   height: 100vh;
 }
 
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 .markdown{
   p{
     margin: 0px;
@@ -27,20 +18,6 @@ div#root {
       margin: 0px;
       padding: 5px;
     }
-    ::-webkit-scrollbar {
-      width: 10px;
-    }
-    ::-webkit-scrollbar-track {
-      background: rgb(33, 33, 33);
-    }
-    ::-webkit-scrollbar-thumb {
-      background: rgb(95, 95, 95);
-    }
-    .App-icon {
-      path {
-        fill: rgb(246, 246, 246);
-      }
-    }
   }
 
   &.light {
@@ -48,21 +25,6 @@ div#root {
       background: rgb(224, 224, 224);
       margin: 0px;
       padding: 5px;
-    }
-
-    ::-webkit-scrollbar {
-      width: 10px;
-    }
-    ::-webkit-scrollbar-track {
-      background: rgb(224, 224, 224);
-    }
-    ::-webkit-scrollbar-thumb {
-      background: rgb(255, 254, 254);
-    }
-    .App-icon {
-      path {
-        fill: rgb(66, 66, 66);
-      }
     }
   }
   .MuiFormGroup-row {

@@ -9,14 +9,14 @@ import { ExtendedTheme } from "./types";
 
 const useStyles = makeStyles((theme: ExtendedTheme) => ({
   root: {
-    "&::-webkit-scrollbar": {
+    "& ::-webkit-scrollbar": {
       width: 10
     },
-    "&::-webkit-scrollbar-track": {
-      background: theme.color.dark
+    "& ::-webkit-scrollbar-track": {
+      backgroundColor: theme.color.dark
     },
-    "&::-webkit-scrollbar-thumb": {
-      background: theme.color.light
+    "& ::-webkit-scrollbar-thumb": {
+      backgroundColor: theme.color.light
     }
   }
 }));
