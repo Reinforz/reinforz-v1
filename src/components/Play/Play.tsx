@@ -1,4 +1,5 @@
 import { green, red } from "@material-ui/core/colors";
+import { OptionsObject, useSnackbar } from "notistack";
 import React, { useContext, useState } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 import { FaPlay } from "react-icons/fa";
@@ -14,16 +15,33 @@ import { PlayListTable } from "./PlayListTable/PlayListTable";
 import PlaySettings from "./PlaySettings/PlaySettings";
 import PlayUpload from "./PlayUpload/PlayUpload";
 
+const centerBottomErrorNotistack = {
+  variant: 'error',
+  anchorOrigin: {
+    vertical: 'bottom',
+    horizontal: 'center',
+  },
+} as OptionsObject;
+
 function Play() {
   const [modalOpen, setModalOpen] = useState(false);
   const history = useHistory();
   const { theme, settings } = useThemeSettings();
   const { setPlaying, filteredQuizzes, selectedQuizIds, playSettings, setUploadedQuizzes, setSelectedQuizIds, uploadedQuizzes, errorLogs, setErrorLogs } = useContext(RootContext);
-  const filteredQuestions = filteredQuizzes.reduce((acc, filteredQuiz) => acc += filteredQuiz.questions.length, 0);
+  const { enqueueSnackbar } = useSnackbar();
 
+  const filteredQuestions = filteredQuizzes.reduce((acc, filteredQuiz) => acc += filteredQuiz.questions.length, 0);
   const canStartPlay = (filteredQuestions !== 0 && selectedQuizIds.length !== 0);
 
   const startPlay = () => {
+    if (uploadedQuizzes.length === 0) {
+      enqueueSnackbar(`No quiz has been uploaded.`, centerBottomErrorNotistack);
+    } else if (selectedQuizIds.length === 0) {
+      enqueueSnackbar(`No quiz has been selected.`, centerBottomErrorNotistack);
+    } else if (filteredQuestions === 0) {
+      enqueueSnackbar(`There are in total 0 questions to be played after applying the filters. Make the filters less strict.`, centerBottomErrorNotistack);
+    }
+
     if (canStartPlay) {
       setPlaying(true)
       history.push("/play")
@@ -32,19 +50,15 @@ function Play() {
 
   useHotkeys('ctrl+shift+1', () => {
     settings.shortcuts && history.push("/settings")
-  }, [settings.shortcuts, canStartPlay])
+  }, [settings.shortcuts])
 
   useHotkeys('ctrl+shift+2', () => {
     settings.shortcuts && history.push("/report")
-  }, [settings.shortcuts, canStartPlay])
+  }, [settings.shortcuts])
 
   useHotkeys('ctrl+shift+3', () => {
     settings.shortcuts && history.push("/create")
-  }, [settings.shortcuts, canStartPlay])
-
-  useHotkeys('ctrl+shift+4', () => {
-    settings.shortcuts && startPlay()
-  }, [settings.shortcuts, canStartPlay])
+  }, [settings.shortcuts])
 
   return <Menu lsKey="PLAY_MENU" width={290} modalOpen={() => setModalOpen(true)} contents={[<PlaySettings />, <div className="Play">
     <SimpleModal open={modalOpen} setOpen={setModalOpen}>
