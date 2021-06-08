@@ -22,12 +22,9 @@ export * from './generateSelectionQuestionAnswers';
 export * from './generateTheme';
 export * from './getAnswerResult';
 export * from './getPlaySettingsPresets';
-export * from './getReportAggregator';
-export * from './getReportExport';
 export * from './getReportSettingsPresets';
 export * from './getSettingsPresets';
 export * from './transformFullQuestions';
 export * from './transformReportQuestion';
 export * from './transformResultQuestionToRegularQuestion';
 export * from './transformTextBySeparator';
-

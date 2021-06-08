@@ -1,4 +1,4 @@
-import React, { useContext, useMemo, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { AiFillHome } from 'react-icons/ai';
 import { FaCloudUploadAlt } from "react-icons/fa";
@@ -8,8 +8,8 @@ import { ReportContext } from '../../context/ReportContext';
 import { RootContext } from '../../context/RootContext';
 import { useThemeSettings } from '../../hooks';
 import { IconGroup, Menu } from '../../shared';
-import { IReport, IReportSort, IResult } from "../../types";
-import { applyReportFilters, applyReportSorts, generateQuestionsMapFromReportResults, generateQuizzesFromResults, getReportFilters } from '../../utils';
+import { IReport, IReportSettingsPreset, IResult } from "../../types";
+import { applyReportFilters, applyReportSorts, generateQuestionsMapFromReportResults, generateQuizzesFromResults, getReportSettingsPresets } from '../../utils';
 import "./Report.scss";
 import { ReportAggregator } from './ReportAggregator/ReportAggregator';
 import ReportExport from './ReportExport/ReportExport';
@@ -19,17 +19,27 @@ import { ReportStats } from './ReportStats/ReportStats';
 import { ReportTable } from './ReportTable/ReportTable';
 import { ReportUpload } from './ReportUpload/ReportUpload';
 
+function findSettingsFromPresets(settings: IReportSettingsPreset) {
+  return settings.presets.find(preset => preset.id === settings.current)!.data;
+}
+
 export default function Report() {
   const { state } = useLocation<{ results: IResult[] }>();
   const { theme, settings } = useThemeSettings();
   const { playSettings, setUploadedQuizzes, setSelectedQuizIds } = useContext(RootContext);
-  const [reportFilter, setReportFilter] = useState(getReportFilters());
-  const [reportSort, setReportSort] = useState<IReportSort>([]);
+  const [reportSettingsPresets, setReportSettingsPresets] = useState(getReportSettingsPresets());
+  const [reportSettings, setReportSettings] = useState(findSettingsFromPresets(reportSettingsPresets));
+
   const [report, setReport] = useState<IReport>({
     results: state?.results ?? [],
     createdAt: Date.now(),
     settings: playSettings
   });
+
+  useEffect(() => {
+    setReportSettings(findSettingsFromPresets(reportSettingsPresets))
+    // eslint-disable-next-line
+  }, [reportSettingsPresets.current])
 
   const history = useHistory();
   const allQuestionsMap = useMemo(() => generateQuestionsMapFromReportResults(report.results), [report.results]);
@@ -85,7 +95,7 @@ export default function Report() {
     }
   }
 
-  return <ReportContext.Provider value={{ reportSort, setReportSort, setReport, report, sortedResults, filteredResults, allQuizzesMap, filteredQuizzesMap, reportFilter, setReportFilter }}>
+  return <ReportContext.Provider value={{ reportSettings, setReportSettings, reportSettingsPresets, setReportSettingsPresets, setReport, report, sortedResults, filteredResults, allQuizzesMap, filteredQuizzesMap }}>
     {render()}
   </ReportContext.Provider>
 }
