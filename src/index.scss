@@ -33,3 +33,12 @@ code {
 html {
   height: 100vh;
 }
+
+.center {
+  font-size: 1.25em; 
+  font-weight: bold; 
+  position: absolute; 
+  transform: translate(-50%,-50%);
+  top: 50%;
+  left: 50%;
+}
