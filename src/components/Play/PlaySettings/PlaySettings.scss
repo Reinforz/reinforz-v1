@@ -1,5 +1,5 @@
 .PlaySettings {
-  grid-template-rows: 62.5px 375px 1fr 30px;
+  grid-template-rows: 62.5px 325px 1fr 50px 30px;
   display: grid;
   grid-area: 1/3/4/4;
   margin: 2.5px;
@@ -34,6 +34,7 @@
       margin: 2.5px;
       border-radius: 2px;
       text-align: center;
+      text-transform: uppercase;
     }
     &-content {
       display: flex;

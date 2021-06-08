@@ -5,7 +5,7 @@ import { RootContext } from "../../../context/RootContext";
 import { useThemeSettings } from "../../../hooks";
 import { CheckboxGroup, InputRange, Preset } from '../../../shared';
 import { IPlaySettingsOptions } from "../../../types";
-import { generateDefaultPlaySettingsFiltersState, generateDefaultPlaySettingsOptionsState } from "../../../utils";
+import { generateDefaultPlaySettingsState } from "../../../utils";
 import "./PlaySettings.scss";
 
 export default function PlaySettings() {
@@ -41,9 +41,6 @@ export default function PlaySettings() {
           />
         })}
       </div>
-      <Button className="PlaySettings-group-button" variant="contained" color="primary" onClick={() => {
-        setPlaySettings({ ...playSettings, options: generateDefaultPlaySettingsOptionsState() })
-      }}>Reset</Button>
     </div>
     <div className="PlaySettings-group PlaySettings-group--filters">
       <div className="PlaySettings-group-header PlaySettings-group-header--filters" style={{ backgroundColor: theme.color.dark }}>
@@ -62,11 +59,10 @@ export default function PlaySettings() {
           setPlaySettings({ ...playSettings, filters })
         }} stateKey={'excluded_types'} state={playSettings.filters} />
       </div>
-      <Button className="PlaySettings-group-button" variant="contained" color="primary" onClick={() => {
-        setPlaySettings({ ...playSettings, filters: generateDefaultPlaySettingsFiltersState() })
-      }}>Reset</Button>
-
     </div>
+    <Button className="PlaySettings-group-button" variant="contained" color="primary" onClick={() => {
+      setPlaySettings(generateDefaultPlaySettingsState())
+    }}>Reset</Button>
     <div className="PlaySettings-total" style={{ backgroundColor: theme.color.dark, color: filteredQuestions === 0 ? theme.palette.error.main : theme.palette.success.main }}>{filteredQuestions} Questions</div>
   </div>
 }
