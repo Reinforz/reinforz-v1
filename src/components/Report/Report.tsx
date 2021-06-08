@@ -29,7 +29,6 @@ export default function Report() {
   const { playSettings, setUploadedQuizzes, setSelectedQuizIds } = useContext(RootContext);
   const [reportSettingsPresets, setReportSettingsPresets] = useState(getReportSettingsPresets());
   const [reportSettings, setReportSettings] = useState(findSettingsFromPresets(reportSettingsPresets));
-
   const [report, setReport] = useState<IReport>({
     results: state?.results ?? [],
     createdAt: Date.now(),
@@ -44,8 +43,11 @@ export default function Report() {
   const history = useHistory();
   const allQuestionsMap = useMemo(() => generateQuestionsMapFromReportResults(report.results), [report.results]);
   const allQuizzesMap = useMemo(() => generateQuizzesFromResults(report.results, allQuestionsMap), [report.results, allQuestionsMap]);
-  const filteredResults = applyReportFilters(report.results, reportFilter);
-  const sortedResults = applyReportSorts(filteredResults, reportSort);
+
+  const { filters, sort } = reportSettings;
+
+  const filteredResults = applyReportFilters(report.results, filters);
+  const sortedResults = applyReportSorts(filteredResults, sort);
   const filteredQuizzesMap = generateQuizzesFromResults(filteredResults, allQuestionsMap);
 
   const homeIconClick = () => {
@@ -80,11 +82,11 @@ export default function Report() {
       return <Menu lsKey="REPORT_MENU" contents={[<ReportFilter />, <div className="Report" style={{ color: theme.palette.text.primary }}>
         {iconGroup}
         <ReportTable />
-        {!reportFilter.excluded_columns.includes("report_info") ? <div style={{ width: 300, display: 'flex', flexDirection: 'column', overflow: 'auto' }}>
-          {!reportFilter.excluded_columns.includes('report_stats') ? <ReportStats /> : null}
+        {!filters.excluded_columns.includes("report_info") ? <div style={{ width: 300, display: 'flex', flexDirection: 'column', overflow: 'auto' }}>
+          {!filters.excluded_columns.includes('report_stats') ? <ReportStats /> : null}
           <ReportSettings />
-          {!reportFilter.excluded_columns.includes('report_export') ? <ReportExport /> : null}
-          {!reportFilter.excluded_columns.includes('report_aggregator') ? <ReportAggregator /> : null}
+          {!filters.excluded_columns.includes('report_export') ? <ReportExport /> : null}
+          {!filters.excluded_columns.includes('report_aggregator') ? <ReportAggregator /> : null}
         </div> : null}
       </div>]} />
     } else {
