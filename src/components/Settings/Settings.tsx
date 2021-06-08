@@ -4,6 +4,7 @@ import { AiFillHome } from 'react-icons/ai';
 import { HiDocumentReport } from 'react-icons/hi';
 import { IoMdCreate } from 'react-icons/io';
 import { useHistory } from 'react-router-dom';
+import { REINFORZ_SETTINGS_LS_KEY } from '../../constants';
 import { SettingsContext } from '../../context/SettingsContext';
 import { useThemeSettings } from '../../hooks';
 import { IconGroup, Preset, Select, Toggles } from '../../shared';
@@ -44,7 +45,7 @@ function Settings() {
       <div className="Settings" style={{ backgroundColor: THEME.color.base, color: THEME.palette.text.secondary }}>
         <div className="Settings-header" style={{ backgroundColor: THEME.color.dark }}>
           <div className="Settings-header-text">Settings</div>
-          <Preset lsKey="reinforz.settings" modalLabel="Save Settings" popoverText="Save current settings as preset" currentPreset={settings} itemPreset={settingsPresets} setPresetState={setSettingsPresets} />
+          <Preset lsKey={REINFORZ_SETTINGS_LS_KEY} modalLabel="Save Settings" popoverText="Save current settings as preset" currentPreset={settings} itemPreset={settingsPresets} setPresetState={setSettingsPresets} />
         </div>
         <div className="Settings-content" style={{ backgroundColor: THEME.color.dark }}>
           <Select items={["light", "dark", "polar_night", "snow_storm"]} label={"Theme"} setState={setSettings} state={settings} stateKey={"theme"} menuItemLabel={(item) => transformTextBySeparator(item)} />

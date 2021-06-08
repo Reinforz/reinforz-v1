@@ -1,5 +1,6 @@
 import { Button, Checkbox, FormControlLabel } from "@material-ui/core";
 import React, { useContext } from "react";
+import { REINFORZ_PLAY_SETTINGS_LS_KEY } from "../../../constants";
 import { RootContext } from "../../../context/RootContext";
 import { useThemeSettings } from "../../../hooks";
 import { CheckboxGroup, InputRange, Preset } from '../../../shared';
@@ -15,7 +16,7 @@ export default function PlaySettings() {
 
   return <div className="PlaySettings" style={{ backgroundColor: theme.color.base, color: theme.palette.text.primary }}>
     <div style={{ backgroundColor: theme.color.dark, padding: 2.5, margin: 2.5 }}>
-      <Preset lsKey="reinforz.play.settings" modalLabel="Save Play Settings" popoverText="Save current play settings as preset" currentPreset={playSettings} itemPreset={playSettingsPresets} setPresetState={setPlaySettingsPresets} />
+      <Preset lsKey={REINFORZ_PLAY_SETTINGS_LS_KEY} modalLabel="Save Play Settings" popoverText="Save current play settings as preset" currentPreset={playSettings} itemPreset={playSettingsPresets} setPresetState={setPlaySettingsPresets} />
     </div>
     <div className="PlaySettings-group PlaySettings-group--options">
       <div className="PlaySettings-group-header PlaySettings-group-header--options" style={{ backgroundColor: theme.color.dark }}>Options</div>

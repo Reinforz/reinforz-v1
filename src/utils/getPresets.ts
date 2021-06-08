@@ -4,6 +4,11 @@ import {
   generateDefaultSettingsPreset
 } from '.';
 import {
+  REINFORZ_PLAY_SETTINGS_LS_KEY,
+  REINFORZ_REPORT_SETTINGS_LS_KEY,
+  REINFORZ_SETTINGS_LS_KEY
+} from '../constants';
+import {
   IPlaySettingsPreset,
   IReportSettingsPreset,
   ISettingsPreset
@@ -23,21 +28,21 @@ function getPreset<T>(key: string, fn: () => T) {
 
 export const getPlaySettingsPresets = () => {
   return getPreset<IPlaySettingsPreset>(
-    'reinforz.play.settings',
+    REINFORZ_PLAY_SETTINGS_LS_KEY,
     generateDefaultPlaySettingsPreset
   );
 };
 
 export const getReportSettingsPresets = () => {
   return getPreset<IReportSettingsPreset>(
-    'reinforz.report.settings',
+    REINFORZ_REPORT_SETTINGS_LS_KEY,
     generateDefaultReportSettingsPreset
   );
 };
 
 export const getSettingsPresets = () => {
   return getPreset<ISettingsPreset>(
-    'reinforz.settings',
+    REINFORZ_SETTINGS_LS_KEY,
     generateDefaultSettingsPreset
   );
 };

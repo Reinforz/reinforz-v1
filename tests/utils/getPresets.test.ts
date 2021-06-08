@@ -1,4 +1,9 @@
 import {
+  REINFORZ_PLAY_SETTINGS_LS_KEY,
+  REINFORZ_REPORT_SETTINGS_LS_KEY,
+  REINFORZ_SETTINGS_LS_KEY
+} from '../../src/constants';
+import {
   generateDefaultPlaySettingsPreset,
   generateDefaultReportSettingsPreset,
   generateDefaultSettingsPreset,
@@ -18,7 +23,7 @@ describe('getPlaySettingsPresets', () => {
   it(`Should work`, () => {
     getItemMock.mockReturnValueOnce(null);
     const playSettingsPresets = getPlaySettingsPresets();
-    expect(getItemMock).toHaveBeenCalledWith('reinforz.play.settings');
+    expect(getItemMock).toHaveBeenCalledWith(REINFORZ_PLAY_SETTINGS_LS_KEY);
     expect(playSettingsPresets).toStrictEqual(
       generateDefaultPlaySettingsPreset()
     );
@@ -30,9 +35,9 @@ describe('getSettingsPresets', () => {
     const defaultPreset = generateDefaultSettingsPreset();
     getItemMock.mockReturnValueOnce(null);
     const settingsPresets = getSettingsPresets();
-    expect(getItemMock).toHaveBeenCalledWith('reinforz.settings');
+    expect(getItemMock).toHaveBeenCalledWith(REINFORZ_SETTINGS_LS_KEY);
     expect(setItemMock).toHaveBeenCalledWith(
-      'reinforz.settings',
+      REINFORZ_SETTINGS_LS_KEY,
       JSON.stringify(defaultPreset)
     );
     expect(settingsPresets).toStrictEqual(defaultPreset);
@@ -44,7 +49,7 @@ describe('getReportSettingsPresets', () => {
     const defaultPreset = generateDefaultReportSettingsPreset();
     getItemMock.mockReturnValueOnce(JSON.stringify(defaultPreset));
     const reportSettingsPresets = getReportSettingsPresets();
-    expect(getItemMock).toHaveBeenCalledWith('reinforz.report.settings');
+    expect(getItemMock).toHaveBeenCalledWith(REINFORZ_REPORT_SETTINGS_LS_KEY);
     expect(reportSettingsPresets).toStrictEqual(defaultPreset);
   });
 });
