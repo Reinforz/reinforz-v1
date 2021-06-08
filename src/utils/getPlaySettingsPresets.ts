@@ -7,9 +7,8 @@ export const getPlaySettingsPresets = (): IPlaySettingsPreset => {
     'reinforz.play.settings'
   );
 
-  const presetValue = generateDefaultPlaySettingsPreset();
-
   if (!localStorageValue) {
+    const presetValue = generateDefaultPlaySettingsPreset();
     localStorage.setItem('reinforz.play.settings', JSON.stringify(presetValue));
     return presetValue;
   }

@@ -6,9 +6,8 @@ export const getSettingsPresets = (): ISettingsPreset => {
     'reinforz.settings'
   );
 
-  const defaultPreset = generateDefaultSettingsPreset();
-
   if (!localStorageValue) {
+    const defaultPreset = generateDefaultSettingsPreset();
     localStorage.setItem('reinforz.settings', JSON.stringify(defaultPreset));
     return defaultPreset;
   }
