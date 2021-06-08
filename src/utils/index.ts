@@ -24,9 +24,10 @@ export * from './getAnswerResult';
 export * from './getPlaySettingsPresets';
 export * from './getReportAggregator';
 export * from './getReportExport';
-export * from './getReportFilters';
+export * from './getReportSettingsPresets';
 export * from './getSettingsPresets';
 export * from './transformFullQuestions';
 export * from './transformReportQuestion';
 export * from './transformResultQuestionToRegularQuestion';
 export * from './transformTextBySeparator';
+

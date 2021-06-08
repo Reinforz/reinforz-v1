@@ -287,8 +287,16 @@ export interface IPreset<D> {
     data: D;
   }[];
 }
+export interface IReportSettings {
+  export: IReportExport;
+  aggregator: IReportAggregator;
+  filters: IReportFilter;
+  sort: IReportSort;
+}
+
 export interface ISettingsPreset extends IPreset<ISettings> {}
 export interface IPlaySettingsPreset extends IPreset<IPlaySettings> {}
+export interface IReportSettingsPreset extends IPreset<IReportSettings> {}
 
 export type TNumberAggregation = 'MIN' | 'MAX' | 'AVG';
 export type TBooleanAggregation = 'TRUE' | 'FALSE';

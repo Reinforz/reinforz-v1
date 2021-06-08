@@ -1,5 +1,5 @@
 import React from "react";
-import { IQuizFull, IReport, IReportFilter, IReportSort, IResult } from "../types";
+import { IQuizFull, IReport, IReportSettings, IReportSettingsPreset, IResult } from "../types";
 
 interface IReportContext {
   report: IReport,
@@ -7,11 +7,11 @@ interface IReportContext {
   filteredResults: IResult[],
   filteredQuizzesMap: Map<string, IQuizFull>
   allQuizzesMap: Map<string, IQuizFull>
-  reportFilter: IReportFilter,
-  setReportFilter: React.Dispatch<React.SetStateAction<IReportFilter>>
-  reportSort: IReportSort
-  setReportSort: React.Dispatch<React.SetStateAction<IReportSort>>
   sortedResults: IResult[]
+  reportSettings: IReportSettings
+  setReportSettings: React.Dispatch<React.SetStateAction<IReportSettings>>
+  setReportSettingsPresets: React.Dispatch<React.SetStateAction<IReportSettingsPreset>>
+  reportSettingsPresets: IReportSettingsPreset
 }
 
 export const ReportContext = React.createContext({} as IReportContext)

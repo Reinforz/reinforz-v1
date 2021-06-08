@@ -5,7 +5,7 @@ export const getSettingsPresets = (): ISettingsPreset => {
     'reinforz.settings'
   );
 
-  const presetValue: ISettingsPreset = {
+  const defaultPreset: ISettingsPreset = {
     current: 'default',
     presets: [
       {
@@ -22,8 +22,8 @@ export const getSettingsPresets = (): ISettingsPreset => {
   };
 
   if (!localStorageValue) {
-    localStorage.setItem('reinforz.settings', JSON.stringify(presetValue));
-    return presetValue;
+    localStorage.setItem('reinforz.settings', JSON.stringify(defaultPreset));
+    return defaultPreset;
   }
 
   return JSON.parse(localStorageValue);
