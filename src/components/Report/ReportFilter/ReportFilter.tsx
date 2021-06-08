@@ -4,7 +4,7 @@ import { ReportContext } from '../../../context/ReportContext';
 import { useThemeSettings } from '../../../hooks';
 import { CheckboxGroup, InputRange, RadioGroup, Select, Sort } from '../../../shared';
 import { IReportFilter } from '../../../types';
-import { createDefaultReportFilterState, transformTextBySeparator } from '../../../utils';
+import { generateDefaultReportSettingsFilterState, transformTextBySeparator } from '../../../utils';
 import "./ReportFilter.scss";
 
 export default function ReportFilter() {
@@ -50,7 +50,7 @@ export default function ReportFilter() {
       })
     }} items={["Score", "Time Taken", "Hints Used", "Verdict", "Type", "Difficulty", "Time Allocated", "Weight"]} menuItemLabel={(item) => item} />
     <Button variant="contained" color="primary" onClick={() => {
-      setFilterState(createDefaultReportFilterState())
+      setFilterState(generateDefaultReportSettingsFilterState())
     }} style={{ width: "calc(100% - 5px)" }}>Reset</Button>
   </div>
 }

@@ -6,7 +6,7 @@ import {
   IReportSettingsPreset
 } from '../types';
 
-export function generateDefaultReportFilterState() {
+export function generateDefaultReportSettingsFilterState() {
   return {
     time_taken: [0, 120],
     verdict: 'any',
@@ -21,14 +21,14 @@ export function generateDefaultReportFilterState() {
   } as IReportFilter;
 }
 
-export function generateDefaultReportExportState() {
+export function generateDefaultReportSettingsExportState() {
   return {
     export_type: 'Quizzes',
     export_as: 'YAML'
   } as IReportExport;
 }
 
-export function generateDefaultReportAggregatorState() {
+export function generateDefaultReportSettignsAggregatorState() {
   return {
     time_allocated: 'AVG',
     time_taken: 'AVG',
@@ -41,10 +41,10 @@ export function generateDefaultReportAggregatorState() {
 
 export function generateDefaultReportSettingsState(): IReportSettings {
   return {
-    filters: generateDefaultReportFilterState(),
+    filters: generateDefaultReportSettingsFilterState(),
     sort: [],
-    aggregator: generateDefaultReportAggregatorState(),
-    export: generateDefaultReportExportState()
+    aggregator: generateDefaultReportSettignsAggregatorState(),
+    export: generateDefaultReportSettingsExportState()
   };
 }
 

@@ -4,7 +4,7 @@ import { RootContext } from "../../../context/RootContext";
 import { useThemeSettings } from "../../../hooks";
 import { CheckboxGroup, InputRange, Preset } from '../../../shared';
 import { IPlaySettingsOptions } from "../../../types";
-import { createDefaultPlaySettingsFiltersState, createDefaultPlaySettingsOptionsState } from "../../../utils";
+import { generateDefaultPlaySettingsFiltersState, generateDefaultPlaySettingsOptionsState } from "../../../utils";
 import "./PlaySettings.scss";
 
 export default function PlaySettings() {
@@ -41,7 +41,7 @@ export default function PlaySettings() {
         })}
       </div>
       <Button className="PlaySettings-group-button" variant="contained" color="primary" onClick={() => {
-        setPlaySettings({ ...playSettings, options: createDefaultPlaySettingsOptionsState() })
+        setPlaySettings({ ...playSettings, options: generateDefaultPlaySettingsOptionsState() })
       }}>Reset</Button>
     </div>
     <div className="PlaySettings-group PlaySettings-group--filters">
@@ -62,7 +62,7 @@ export default function PlaySettings() {
         }} stateKey={'excluded_types'} state={playSettings.filters} />
       </div>
       <Button className="PlaySettings-group-button" variant="contained" color="primary" onClick={() => {
-        setPlaySettings({ ...playSettings, filters: createDefaultPlaySettingsFiltersState() })
+        setPlaySettings({ ...playSettings, filters: generateDefaultPlaySettingsFiltersState() })
       }}>Reset</Button>
 
     </div>
