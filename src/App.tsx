@@ -7,7 +7,7 @@ import Quiz from "./components/Quiz/Quiz";
 import Report from "./components/Report/Report";
 import Settings from "./components/Settings/Settings";
 import { ModalContext } from './context/ModalContext';
-import { SimpleModal } from "./shared";
+import { NotFoundPage, SimpleModal } from "./shared";
 import { ExtendedTheme } from "./types";
 
 const useStyles = makeStyles((theme: ExtendedTheme) => ({
@@ -48,6 +48,7 @@ export default function App() {
         <Route exact path="/create" render={() => <Create />} />
         <Route exact path="/report" render={() => <Report />} />
         <Route exact path="/play" render={() => <Quiz />} />
+        <Route path="*" render={() => <NotFoundPage />} />
       </Switch>
     </div>
   </ModalContext.Provider>

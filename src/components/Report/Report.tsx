@@ -75,12 +75,12 @@ export default function Report() {
       })
     }} />])
   }
-  const iconGroup = <IconGroup className="Report-icons" icons={icons} />;
+  const navigationIconGroup = <IconGroup className="Report-icons" icons={icons} />;
 
   const render = () => {
     if (report.results.length !== 0) {
       return <Menu lsKey="REPORT_MENU" contents={[<ReportFilter />, <div className="Report" style={{ color: theme.palette.text.primary }}>
-        {iconGroup}
+        {navigationIconGroup}
         <ReportTable />
         {!filters.excluded_columns.includes("report_info") ? <div style={{ width: 300, display: 'flex', flexDirection: 'column', overflow: 'auto' }}>
           {!filters.excluded_columns.includes('report_stats') ? <ReportStats /> : null}
@@ -91,7 +91,7 @@ export default function Report() {
       </div>]} />
     } else {
       return <div className="Report" style={{ color: theme.palette.text.primary }}>
-        {iconGroup}
+        {navigationIconGroup}
         <ReportUpload />
       </div>
     }

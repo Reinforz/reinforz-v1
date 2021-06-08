@@ -8,6 +8,7 @@ import ListTable from './ListTable';
 import Markdown from './Markdown';
 import Menu from './Menu';
 import ModalPresetInput from './ModalPresetInput';
+import NotFoundPage from './NotFoundPage';
 import Preset from './Preset';
 import RadioGroup from './RadioGroup';
 import Select from './Select';
@@ -19,6 +20,7 @@ import Toggles from './Toggles';
 import View from './View';
 
 export {
+  NotFoundPage,
   Preset,
   ListSelect,
   ModalPresetInput,
