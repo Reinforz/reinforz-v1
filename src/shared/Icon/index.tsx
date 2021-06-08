@@ -1,4 +1,4 @@
-import { Popover, Typography } from '@material-ui/core';
+import { Popover, PopoverOrigin, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import React, { Fragment, useContext, useEffect } from 'react';
 import { SettingsContext } from '../../context/SettingsContext';
@@ -19,6 +19,9 @@ interface Props {
   popoverText: string,
   children: JSX.Element
   style?: React.CSSProperties
+  onClick?: () => void
+  popoverAnchorOrigin?: PopoverOrigin
+  popoverTransformOrigin?: PopoverOrigin
 }
 
 export default function Icon(props: Props) {
@@ -31,7 +34,15 @@ export default function Icon(props: Props) {
   const {
     className,
     popoverText,
-    children
+    children,
+    popoverAnchorOrigin = {
+      vertical: 'bottom',
+      horizontal: 'center',
+    },
+    popoverTransformOrigin = {
+      vertical: 'top',
+      horizontal: 'center',
+    }
   } = props;
 
   useEffect(() => {
@@ -40,19 +51,17 @@ export default function Icon(props: Props) {
     }
   }, [])
 
+  const generatedProps: React.DetailedHTMLProps<React.HTMLAttributes<HTMLSpanElement>, HTMLSpanElement> = {};
+  if (props.onClick)
+    generatedProps.onClick = props.onClick;
+
   return <Fragment>
-    <span className={`${className ?? ''} icon`} style={{ ...props.style ?? {}, display: "flex", height: 'fit-content' }} onMouseEnter={(e: any) => setAnchorEl(e.currentTarget)} onMouseLeave={() => setAnchorEl(null)}>{children}</span>
+    <span {...generatedProps} className={`${className ?? ''} icon`} style={{ display: "flex", height: 'fit-content', ...props.style ?? {}, }} onMouseEnter={(e: any) => setAnchorEl(e.currentTarget)} onMouseLeave={() => setAnchorEl(null)}>{children}</span>
     {settings.hovertips && <Popover className={classes.popover}
       classes={{
         paper: classes.paper,
-      }} open={open} anchorEl={anchorEl} anchorOrigin={{
-        vertical: 'bottom',
-        horizontal: 'center',
-      }}
-      transformOrigin={{
-        vertical: 'top',
-        horizontal: 'center',
-      }}
+      }} open={open} anchorEl={anchorEl} anchorOrigin={popoverAnchorOrigin}
+      transformOrigin={popoverTransformOrigin}
       onClose={() => setAnchorEl(null)} disableRestoreFocus ><Typography>{popoverText}</Typography></Popover>}
   </Fragment>
 }

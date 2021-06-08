@@ -1,7 +1,9 @@
 import { Button, useTheme } from "@material-ui/core";
+import { green, red } from "@material-ui/core/colors";
 import React, { useContext, useEffect, useMemo, useState } from "react";
+import { FaClock } from "react-icons/fa";
 import { RootContext } from "../../context/RootContext";
-import { Markdown } from "../../shared";
+import { Icon, Markdown } from "../../shared";
 import { ExtendedTheme, TQuestionFull } from "../../types";
 import { displayTime } from "../../utils";
 import FibQuestionDisplay from "./FibQuestionDisplay";
@@ -23,6 +25,7 @@ export default function Question(props: Props) {
   const [usedHints, setUsedHints] = useState<string[]>([]);
   const [timeout, setTimeout] = useState<null | number>(null);
   const [timer, setTimer] = useState<null | NodeJS.Timeout>(null);
+  const [timeBreak, setTimeBreak] = useState(false);
   const theme = useTheme() as ExtendedTheme;
 
   const { disable_timer } = playSettings.options
@@ -40,6 +43,7 @@ export default function Question(props: Props) {
     if (!disable_timer) {
       setTimer(null)
       setTimeout(null)
+      setTimeBreak(false)
       typeof timer === "number" && clearInterval(timer)
     }
     changeCounter(userAnswers, !disable_timer ? time_allocated - (timeout as number) : 0, usedHints.length)
@@ -78,8 +82,30 @@ export default function Question(props: Props) {
       : <QuestionInputs setUserAnswers={setUserAnswers} userAnswers={userAnswers} question={props.question} />}
     <QuestionHints usedHints={usedHints} setUsedHints={setUsedHints} hints={hints} />
     {<div style={{ display: 'flex', gridArea: `3/2/4/3`, alignItems: `center`, height: '65px' }}>
-      <Button className="QuestionButton" variant="contained" color="primary" onClick={onNextButtonPress}>{!isLast ? "Next" : "Report"}</Button>
-      {timeout && !playSettings.options.disable_timer && <div style={{ backgroundColor: theme.color.dark, color: theme.palette.text.primary }} className="QuestionTimer">{displayTime(timeout)}</div>}
+      <Icon popoverAnchorOrigin={{
+        vertical: 'top',
+        horizontal: 'center',
+      }} popoverTransformOrigin={{
+        vertical: 'bottom',
+        horizontal: 'center',
+      }} className="Question-timer" popoverText={timeBreak ? "Stop time break" : "Start time break"} style={{ backgroundColor: theme.color.base, height: 'calc(100% - 15px)' }} onClick={() => {
+        setTimeBreak((timeBreak) => !timeBreak);
+        if (timeBreak === false) {
+          setTimer(null);
+          typeof timer === "number" && clearInterval(timer)
+        } else {
+          const timer = setInterval(() => {
+            setTimeout((seconds) => {
+              return typeof seconds === "number" ? seconds - 1 : 0
+            })
+          }, 1000);
+          setTimer(timer)
+        }
+      }}>
+        <FaClock fill={timeBreak ? red[500] : green[500]} size={20} />
+      </Icon>
+      <Button disabled={timeBreak} className="QuestionButton" variant="contained" color="primary" onClick={onNextButtonPress}>{!isLast ? "Next" : "Report"}</Button>
+      {timeout && !playSettings.options.disable_timer && <div style={{ backgroundColor: theme.color.base, color: theme.palette.text.primary }} className="QuestionTimer">{displayTime(timeout)}</div>}
     </div>}
   </div>
 }
