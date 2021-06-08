@@ -36,7 +36,7 @@ const default_filters: IReportFilter = {
   excluded_difficulty: [],
   excluded_quizzes: [],
   excluded_types: [],
-  hints_used: [0, 1],
+  hints_used: [0, 2],
   time_taken: [0, 60],
   verdict: true,
   score: [0, 1],
