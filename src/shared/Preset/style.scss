@@ -6,10 +6,11 @@
   margin: 2.5px;
   
   .icon{
-    width: 35px;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 2.5px;
+    width: fit-content;
   }
 
   .MuiFormGroup-root{

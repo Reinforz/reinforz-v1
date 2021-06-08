@@ -2,7 +2,7 @@ import { grey, red } from "@material-ui/core/colors";
 import { OptionsObject, useSnackbar } from "notistack";
 import { useContext } from "react";
 import { FaSave } from "react-icons/fa";
-import { MdDelete } from "react-icons/md";
+import { MdDelete, MdUpdate } from "react-icons/md";
 import shortid from "shortid";
 import { Icon, ListSelect, ModalPresetInput } from "../";
 import { ModalContext } from "../../context/ModalContext";
@@ -75,8 +75,20 @@ export default function Preset<T extends ISettingsPreset | IPlaySettingsPreset, 
         }} />])
       }} />
     </Icon>
+    <Icon popoverText={itemPreset.current !== 'default' ? "Update preset" : "Can't update default preset"}>
+      <MdUpdate size={20} fill={itemPreset.current !== 'default' ? theme.color.opposite_light : grey[500]} onClick={() => {
+        if (itemPreset.current !== 'default') {
+          const currentPresetIndex = (itemPreset.presets as any[]).findIndex(preset => preset.id === itemPreset.current);
+          console.log(currentPresetIndex)
+          itemPreset.presets[currentPresetIndex].data = currentPreset as any;
+          console.log(itemPreset);
+          setPresetState(JSON.parse(JSON.stringify(itemPreset)))
+          localStorage.setItem(lsKey, JSON.stringify(itemPreset));
+        }
+      }} />
+    </Icon>
     <Icon popoverText={itemPreset.current !== 'default' ? "Delete preset" : "Can't delete default preset"}>
-      <MdDelete size={25} fill={itemPreset.current !== 'default' ? red[500] : grey[500]} onClick={() => {
+      <MdDelete size={20} fill={itemPreset.current !== 'default' ? red[500] : grey[500]} onClick={() => {
         if (itemPreset.current !== 'default') {
           setPresetState({
             current: 'default',
