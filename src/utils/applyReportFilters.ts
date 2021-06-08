@@ -23,7 +23,8 @@ export function applyReportFilters(
       !excluded_topics.includes(result.question.quiz.topic) &&
       !excluded_subjects.includes(result.question.quiz.subject) &&
       (verdict === 'any' || verdict.toString() === result.verdict.toString()) &&
-      (hints_used === 'any' || result.hints_used <= hints_used) &&
+      hints_used[0] <= result.hints_used &&
+      hints_used[1] >= result.hints_used &&
       time_taken[0] <= result.time_taken &&
       time_taken[1] >= result.time_taken &&
       score[0] <= result.score.amount &&

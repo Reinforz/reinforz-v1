@@ -30,7 +30,7 @@ export function createDefaultReportFilterState() {
   return {
     time_taken: [0, 120],
     verdict: 'any',
-    hints_used: 'any',
+    hints_used: [0, 10],
     excluded_types: [],
     excluded_difficulty: [],
     excluded_quizzes: [],

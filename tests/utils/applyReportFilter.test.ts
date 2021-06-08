@@ -3,7 +3,7 @@ import { applyReportFilters } from '../../src/utils';
 
 const result: IResult = {
   verdict: true,
-  hints_used: 0,
+  hints_used: 2,
   time_taken: 20,
   score: {
     amount: 0.85,
@@ -36,7 +36,7 @@ const default_filters: IReportFilter = {
   excluded_difficulty: [],
   excluded_quizzes: [],
   excluded_types: [],
-  hints_used: 0,
+  hints_used: [0, 1],
   time_taken: [0, 60],
   verdict: true,
   score: [0, 1],
@@ -121,6 +121,24 @@ it(`Should filter out if question time taken is greater than upper bound of scor
   const filteredResults = applyReportFilters([result], {
     ...default_filters,
     score: [0, 0.5]
+  });
+
+  expect(filteredResults).toStrictEqual([]);
+});
+
+it(`Should filter out if question hints used is less than lower bound of hints_used`, () => {
+  const filteredResults = applyReportFilters([result], {
+    ...default_filters,
+    hints_used: [0, 1]
+  });
+
+  expect(filteredResults).toStrictEqual([]);
+});
+
+it(`Should filter out if question hints used is greater than upper bound of hints_used`, () => {
+  const filteredResults = applyReportFilters([result], {
+    ...default_filters,
+    hints_used: [3, 10]
   });
 
   expect(filteredResults).toStrictEqual([]);

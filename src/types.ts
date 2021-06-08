@@ -240,7 +240,7 @@ export interface IReport {
 export interface IReportFilter {
   time_taken: [number, number];
   verdict: boolean | 'any';
-  hints_used: number | 'any';
+  hints_used: [number, number];
   excluded_types: TQuestionType[];
   excluded_difficulty: TQuestionDifficulty[];
   excluded_quizzes: string[];

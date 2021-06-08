@@ -7,8 +7,7 @@ it(`Should work if report filters exists in ls`, () => {
   getItemMock.mockReturnValueOnce(
     JSON.stringify({
       time_taken: [0, 120],
-      verdict: 'false',
-      hints_used: 'any'
+      verdict: 'false'
     })
   );
   const reportFilters = getReportFilters();
@@ -16,7 +15,7 @@ it(`Should work if report filters exists in ls`, () => {
     time_taken: [0, 120],
     score: [0, 1],
     verdict: 'false',
-    hints_used: 'any',
+    hints_used: [0, 10],
     excluded_types: [],
     excluded_difficulty: [],
     excluded_quizzes: [],
@@ -33,7 +32,7 @@ it(`Should work if report filters doesn't exist in ls`, () => {
     time_taken: [0, 120],
     score: [0, 1],
     verdict: 'any',
-    hints_used: 'any',
+    hints_used: [0, 10],
     excluded_types: [],
     excluded_difficulty: [],
     excluded_quizzes: [],
