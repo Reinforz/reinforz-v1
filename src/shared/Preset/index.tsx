@@ -7,7 +7,7 @@ import shortid from "shortid";
 import { Icon, ListSelect, ModalPresetInput } from "../";
 import { ModalContext } from "../../context/ModalContext";
 import { useThemeSettings } from "../../hooks";
-import { IPlaySettings, IPlaySettingsPreset, ISettings, ISettingsPreset } from "../../types";
+import { IPlaySettings, IPlaySettingsPreset, IReportSettings, IReportSettingsPreset, ISettings, ISettingsPreset } from "../../types";
 import "./style.scss";
 
 interface Props<T, D> {
@@ -27,7 +27,7 @@ const centerBottomErrorNotistack = {
   },
 } as OptionsObject;
 
-export default function Preset<T extends ISettingsPreset | IPlaySettingsPreset, D extends ISettings | IPlaySettings>(props: Props<T, D>) {
+export default function Preset<T extends ISettingsPreset | IPlaySettingsPreset | IReportSettingsPreset, D extends ISettings | IPlaySettings | IReportSettings>(props: Props<T, D>) {
   const { setModalState } = useContext(ModalContext);
   const { theme } = useThemeSettings();
   const { lsKey, modalLabel, popoverText, setPresetState, currentPreset, itemPreset } = props;

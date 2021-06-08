@@ -4,7 +4,7 @@ import { REINFORZ_PLAY_SETTINGS_LS_KEY } from "../../../constants";
 import { RootContext } from "../../../context/RootContext";
 import { useThemeSettings } from "../../../hooks";
 import { CheckboxGroup, InputRange, Preset } from '../../../shared';
-import { IPlaySettingsOptions } from "../../../types";
+import { IPlaySettingsFilters, IPlaySettingsOptions } from "../../../types";
 import { generateDefaultPlaySettingsState } from "../../../utils";
 import "./PlaySettings.scss";
 
@@ -13,6 +13,10 @@ export default function PlaySettings() {
   const { theme } = useThemeSettings();
 
   const filteredQuestions = filteredQuizzes.reduce((acc, filteredQuiz) => acc += filteredQuiz.questions.length, 0);
+
+  const setPlaySettingsFilters = (newFilterState: React.SetStateAction<IPlaySettingsFilters>) => {
+    setPlaySettings({ ...playSettings, filters: { ...playSettings.filters, ...newFilterState } })
+  }
 
   return <div className="PlaySettings" style={{ backgroundColor: theme.color.base, color: theme.palette.text.primary }}>
     <div style={{ backgroundColor: theme.color.dark, padding: 2.5, margin: 2.5 }}>
@@ -47,17 +51,9 @@ export default function PlaySettings() {
         Filters
       </div>
       <div className="PlaySettings-group-content PlaySettings-group-content--filters" style={{ backgroundColor: theme.color.dark }}>
-        <InputRange label={"Time Allocated range"} min={0} max={120} setState={(filters: any) => {
-          setPlaySettings({ ...playSettings, filters })
-        }} state={playSettings.filters} stateKey={"time_allocated"} />
-
-        <CheckboxGroup label={'Excluded Difficulty'} items={['Beginner', 'Intermediate', 'Advanced']} setState={(filters: any) => {
-          setPlaySettings({ ...playSettings, filters })
-        }} stateKey={'excluded_difficulty'} state={playSettings.filters} />
-
-        <CheckboxGroup label={'Excluded Type'} items={['FIB', 'MS', 'MCQ', "Snippet"]} setState={(filters: any) => {
-          setPlaySettings({ ...playSettings, filters })
-        }} stateKey={'excluded_types'} state={playSettings.filters} />
+        <InputRange label={"Time Allocated range"} min={0} max={120} setState={setPlaySettingsFilters} state={playSettings.filters} stateKey={"time_allocated"} />
+        <CheckboxGroup label={'Excluded Difficulty'} items={['Beginner', 'Intermediate', 'Advanced']} setState={setPlaySettingsFilters} stateKey={'excluded_difficulty'} state={playSettings.filters} />
+        <CheckboxGroup label={'Excluded Type'} items={['FIB', 'MS', 'MCQ', "Snippet"]} setState={setPlaySettingsFilters} stateKey={'excluded_types'} state={playSettings.filters} />
       </div>
     </div>
     <Button className="PlaySettings-group-button" variant="contained" color="primary" onClick={() => {

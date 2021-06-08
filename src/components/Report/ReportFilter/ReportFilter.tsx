@@ -1,15 +1,16 @@
 import { Button } from '@material-ui/core';
 import React, { useContext } from "react";
+import { REINFORZ_REPORT_SETTINGS_LS_KEY } from '../../../constants';
 import { ReportContext } from '../../../context/ReportContext';
 import { useThemeSettings } from '../../../hooks';
-import { CheckboxGroup, InputRange, RadioGroup, Select, Sort } from '../../../shared';
+import { CheckboxGroup, InputRange, Preset, RadioGroup, Select, Sort } from '../../../shared';
 import { IReportFilter } from '../../../types';
-import { generateDefaultReportSettingsFilterState, transformTextBySeparator } from '../../../utils';
+import { generateDefaultReportSettingsState, transformTextBySeparator } from '../../../utils';
 import "./ReportFilter.scss";
 
 export default function ReportFilter() {
   const { theme } = useThemeSettings();
-  const { allQuizzesMap, reportSettings, setReportSettings } = useContext(ReportContext);
+  const { setReportSettingsPresets, reportSettingsPresets, allQuizzesMap, reportSettings, setReportSettings } = useContext(ReportContext);
   const { filters, sort } = reportSettings;
 
   const setFilterState = (newFilterState: React.SetStateAction<IReportFilter>) => {
@@ -23,6 +24,7 @@ export default function ReportFilter() {
   };
 
   return <div className="ReportFilter" style={{ backgroundColor: theme.color.dark }}>
+    <Preset lsKey={REINFORZ_REPORT_SETTINGS_LS_KEY} modalLabel="Save Report Settings" popoverText="Save current report settings as preset" currentPreset={reportSettings} itemPreset={reportSettingsPresets} setPresetState={setReportSettingsPresets} />
     <InputRange label={"Time taken range"} min={0} max={120} setState={setFilterState} state={filters} stateKey={"time_taken"} />
     <InputRange step={0.25} label={"Score"} min={0} max={1} setState={setFilterState} state={filters} stateKey={"score"} />
     <InputRange step={1} label={"Hints Used"} min={0} max={10} setState={setFilterState} state={filters} stateKey={"hints_used"} />
@@ -50,7 +52,7 @@ export default function ReportFilter() {
       })
     }} items={["Score", "Time Taken", "Hints Used", "Verdict", "Type", "Difficulty", "Time Allocated", "Weight"]} menuItemLabel={(item) => item} />
     <Button variant="contained" color="primary" onClick={() => {
-      setFilterState(generateDefaultReportSettingsFilterState())
+      setReportSettings(generateDefaultReportSettingsState())
     }} style={{ width: "calc(100% - 5px)" }}>Reset</Button>
   </div>
 }
