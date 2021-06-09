@@ -2,7 +2,7 @@ import React from 'react';
 import { ISettings } from '../types';
 
 export function generateNavigationStyles(
-  navigationInfo: ISettings['navigation']
+  navigationInfo: Omit<ISettings['navigation'], 'direction'>
 ) {
   const styles: React.CSSProperties = {};
   let translateX = false,
