@@ -23,7 +23,7 @@ export default function ReportExport() {
 
   const downloadFiles = () => {
     if (export_as === "JSON") {
-      if (export_type === "Report") download(`Report${Date.now()}.json`, JSON.stringify({
+      if (export_type === "Report") download(`Report-${Date.now()}.json`, JSON.stringify({
         settings,
         results: sortedResults,
         createdAt: Date.now()
@@ -31,7 +31,7 @@ export default function ReportExport() {
       else
         clonedDownload("json")
     } else {
-      if (export_type === "Report") download(`Report${Date.now()}.yaml`, safeDump({
+      if (export_type === "Report") download(`Report-${Date.now()}.yaml`, safeDump({
         settings,
         results: sortedResults,
         createdAt: Date.now()

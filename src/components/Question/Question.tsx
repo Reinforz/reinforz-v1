@@ -3,6 +3,7 @@ import { green, red } from "@material-ui/core/colors";
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import { FaClock } from "react-icons/fa";
 import { RootContext } from "../../context/RootContext";
+import { SettingsContext } from "../../context/SettingsContext";
 import { Icon, Markdown } from "../../shared";
 import { ExtendedTheme, TQuestionFull } from "../../types";
 import { displayTime } from "../../utils";
@@ -19,6 +20,7 @@ interface Props {
 };
 
 export default function Question(props: Props) {
+  const { settings } = useContext(SettingsContext)
   const { playSettings } = useContext(RootContext);
   const { changeCounter, isLast, question: { image, hints, question, time_allocated } } = props;
   const [userAnswers, setUserAnswers] = useState<string[]>([]);
@@ -74,7 +76,11 @@ export default function Question(props: Props) {
     // eslint-disable-next-line
     [props.question, userAnswers])
 
-  return <div className="Question" style={{ backgroundColor: theme.color.dark, color: theme.palette.text.primary }}>
+  return <div className="Question" style={{ backgroundColor: theme.color.dark, color: theme.palette.text.primary }} onKeyPress={(e) => {
+    if (settings.shortcuts && e.nativeEvent.shiftKey && e.nativeEvent.key === "A") {
+      onNextButtonPress();
+    }
+  }} tabIndex={0}>
     {memoizedQuestionComponent}
     {image && <div className="Question-image" style={{ gridArea: `1/2/2/3`, backgroundColor: theme.color.light }}><img src={image} alt="Question" /></div>}
     {props.question.type === "MCQ" || props.question.type === "MS"

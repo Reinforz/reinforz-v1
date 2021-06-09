@@ -79,9 +79,7 @@ export default function Preset<T extends ISettingsPreset | IPlaySettingsPreset |
       <MdUpdate size={20} fill={itemPreset.current !== 'default' ? theme.color.opposite_light : grey[500]} onClick={() => {
         if (itemPreset.current !== 'default') {
           const currentPresetIndex = (itemPreset.presets as any[]).findIndex(preset => preset.id === itemPreset.current);
-          console.log(currentPresetIndex)
           itemPreset.presets[currentPresetIndex].data = currentPreset as any;
-          console.log(itemPreset);
           setPresetState(JSON.parse(JSON.stringify(itemPreset)))
           localStorage.setItem(lsKey, JSON.stringify(itemPreset));
         }
