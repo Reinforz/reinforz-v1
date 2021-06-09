@@ -6,7 +6,11 @@ export function generateDefaultSettingsState(): ISettings {
     hovertips: true,
     theme: 'dark',
     shortcuts: true,
-    sound: false
+    sound: false,
+    navigation: {
+      location: 'top',
+      position: 'center'
+    }
   };
 }
 

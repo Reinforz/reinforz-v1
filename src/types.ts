@@ -277,6 +277,10 @@ export interface ISettings {
   hovertips: boolean;
   shortcuts: boolean;
   sound: boolean;
+  navigation: {
+    location: 'top' | 'bottom' | 'left' | 'right';
+    position: 'center' | 'left' | 'right';
+  };
 }
 
 export interface IPreset<D> {

@@ -89,6 +89,24 @@ function Settings() {
         </div>
         <div className="Settings-content" style={{ backgroundColor: THEME.color.dark }}>
           <Select items={["dark", "polar_night", "light", "snow_storm"]} label={"Theme"} setState={setSettings} state={settings} stateKey={"theme"} menuItemLabel={(item) => transformTextBySeparator(item)} />
+          <Select items={["center", "right", "left"]} label={"Navigation Position"} setState={(navigation) => {
+            setSettings({
+              ...settings,
+              navigation: {
+                ...settings.navigation,
+                ...navigation
+              }
+            })
+          }} state={settings.navigation} stateKey={"position"} menuItemLabel={(item) => transformTextBySeparator(item)} />
+          <Select items={["top", "right", "left", "bottom"]} label={"Navigation Location"} setState={(navigation) => {
+            setSettings({
+              ...settings,
+              navigation: {
+                ...settings.navigation,
+                ...navigation
+              }
+            })
+          }} state={settings.navigation} stateKey={"location"} menuItemLabel={(item) => transformTextBySeparator(item)} />
           <Toggles classNames={{
             FormGroup: 'Settings-content-group',
             InputLabel: 'Settings-content-group-label'
