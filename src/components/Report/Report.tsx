@@ -1,3 +1,4 @@
+import { green, red } from '@material-ui/core/colors';
 import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { AiFillHome } from 'react-icons/ai';
 import { FaCloudUploadAlt } from "react-icons/fa";
@@ -6,14 +7,13 @@ import { useHistory, useLocation } from 'react-router-dom';
 import { ReportContext } from '../../context/ReportContext';
 import { RootContext } from '../../context/RootContext';
 import { useThemeSettings } from '../../hooks';
-import { IconGroup, Menu } from '../../shared';
+import { IconGroup, Menu, StackList } from '../../shared';
 import { IReport, IReportSettingsPreset, IResult } from "../../types";
-import { applyReportFilters, applyReportSorts, generateQuestionsMapFromReportResults, generateQuizzesFromResults, getReportSettingsPresets } from '../../utils';
+import { applyReportFilters, applyReportSorts, generateQuestionsMapFromReportResults, generateQuizzesFromResults, getReportSettingsPresets, transformTextBySeparator } from '../../utils';
 import "./Report.scss";
 import { ReportAggregator } from './ReportAggregator/ReportAggregator';
 import ReportExport from './ReportExport/ReportExport';
 import ReportFilter from './ReportFilter/ReportFilter';
-import { ReportSettings } from './ReportSettings/ReportSettings';
 import { ReportStats } from './ReportStats/ReportStats';
 import { ReportTable } from './ReportTable/ReportTable';
 import { ReportUpload } from './ReportUpload/ReportUpload';
@@ -98,7 +98,10 @@ export default function Report() {
         <ReportTable />
         {!filters.excluded_columns.includes("report_info") ? <div style={{ width: 300, display: 'flex', flexDirection: 'column', overflow: 'auto' }}>
           {!filters.excluded_columns.includes('report_stats') ? <ReportStats /> : null}
-          <ReportSettings />
+          <div className="Report-Settings">
+            {!filters.excluded_columns.includes('play_options') ? <StackList header={"Play Options"} items={Object.entries(playSettings.options).map(([key, value]) => [transformTextBySeparator(key), <span style={{ color: value === true ? green[500] : red[500] }}>{value === true ? 'On' : 'Off'}</span>])} /> : null}
+            {!filters.excluded_columns.includes('play_filters') ? <StackList header={"Play Filters"} items={Object.entries(playSettings.filters).map(([key, value]) => [transformTextBySeparator(key), Array.isArray(value) ? value.join(",") : value.toString()])} /> : null}
+          </div>
           {!filters.excluded_columns.includes('report_export') ? <ReportExport /> : null}
           {!filters.excluded_columns.includes('report_aggregator') ? <ReportAggregator /> : null}
         </div> : null}
