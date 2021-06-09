@@ -8,7 +8,6 @@ import { ReportContext } from '../../context/ReportContext';
 import { RootContext } from '../../context/RootContext';
 import { useNavigationIcons, useThemeSettings } from '../../hooks';
 import { IconGroup, Menu, StackList } from '../../shared';
-import sounds from '../../sounds';
 import { IReport, IReportSettingsPreset, IResult } from '../../types';
 import {
   applyReportFilters,
@@ -38,7 +37,22 @@ export default function Report() {
     RootContext
   );
   const ref = useRef<HTMLDivElement | null>(null);
-  const { navigationIcons, onKeyPress } = useNavigationIcons(["/settings", "/", "/create"]);
+  const { navigationIcons, onKeyPress } = useNavigationIcons([{
+    path: "/settings",
+    component: IoMdSettings
+  }, {
+    path: "/",
+    page: "Home",
+    component: AiFillHome,
+    onClick: () => {
+      setUploadedQuizzes(Array.from(filteredQuizzesMap.values()));
+      setSelectedQuizIds(Array.from(filteredQuizzesMap.keys()));
+      history.push('/');
+    }
+  }, {
+    path: "/create",
+    component: IoMdCreate
+  }]);
 
   useEffect(() => {
     ref.current && ref.current.focus();
@@ -81,51 +95,8 @@ export default function Report() {
     allQuestionsMap
   );
 
-  const homeIconClick = () => {
-    setUploadedQuizzes(Array.from(filteredQuizzesMap.values()));
-    setSelectedQuizIds(Array.from(filteredQuizzesMap.keys()));
-    history.push('/');
-  };
-
-  const icons: [string, JSX.Element][] = [
-    [
-      `Go to Settings page`,
-      <IoMdSettings
-        size={20}
-        fill={theme.color.opposite_light}
-        onClick={() => {
-          settings.sound && sounds.swoosh.play()
-          history.push('/settings')
-        }}
-      />
-    ],
-    [
-      `Go to Home page`,
-      <AiFillHome
-        size={20}
-        fill={theme.color.opposite_light}
-        onClick={() => {
-          settings.sound && sounds.swoosh.play()
-          homeIconClick()
-        }
-        }
-      />
-    ],
-    [
-      `Go to Create page`,
-      <IoMdCreate
-        size={20}
-        fill={theme.color.opposite_light}
-        onClick={() => {
-          settings.sound && sounds.swoosh.play()
-          history.push('/create')
-        }}
-      />
-    ]
-  ];
-
   if (report.results.length !== 0) {
-    icons.push([
+    navigationIcons.push([
       'Upload',
       <FaCloudUploadAlt
         size={20}
@@ -141,12 +112,8 @@ export default function Report() {
     ]);
   }
 
-  icons.push(
-    ...navigationIcons
-  );
-
   const navigationIconGroup = (
-    <IconGroup className="Report-icons" icons={icons} direction={settings.navigation.direction} style={generatedNavigationStyles} />
+    <IconGroup className="Report-icons" icons={navigationIcons} direction={settings.navigation.direction} style={generatedNavigationStyles} />
   );
   const navigationShortcutProps: React.DetailedHTMLProps<
     React.HTMLAttributes<HTMLDivElement>,

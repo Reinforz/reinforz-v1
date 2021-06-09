@@ -8,7 +8,6 @@ import { useHistory } from "react-router-dom";
 import { RootContext } from "../../context/RootContext";
 import { useNavigationIcons, useThemeSettings } from '../../hooks';
 import { IconGroup, List, Menu, View } from '../../shared';
-import sounds from "../../sounds";
 import { generateNavigationStyles } from "../../utils";
 import "./Play.scss";
 import PlayErrorlogs from "./PlayErrorlogs/PlayErrorlogs";
@@ -26,20 +25,13 @@ const centerBottomErrorNotistack = {
 
 function Play() {
   const history = useHistory();
-  const { theme, settings } = useThemeSettings();
+  const { settings } = useThemeSettings();
   const { setPlaying, filteredQuizzes, selectedQuizIds, setUploadedQuizzes, setSelectedQuizIds, uploadedQuizzes, errorLogs, setErrorLogs } = useContext(RootContext);
   const { enqueueSnackbar } = useSnackbar();
   const ref = useRef<HTMLDivElement | null>(null);
-  const { navigationIcons, onKeyPress } = useNavigationIcons(["/settings", "/report", "/create", "/play"]);
-
-  useEffect(() => {
-    ref.current && ref.current.focus();
-  }, [])
-
   const filteredQuestions = filteredQuizzes.reduce((acc, filteredQuiz) => acc += filteredQuiz.questions.length, 0);
   const canStartPlay = (filteredQuestions !== 0 && selectedQuizIds.length !== 0);
   const generatedNavigationStyles = generateNavigationStyles(settings.navigation);
-
   const startPlay = () => {
     if (uploadedQuizzes.length === 0) {
       enqueueSnackbar(`No quiz has been uploaded.`, centerBottomErrorNotistack);
@@ -54,27 +46,29 @@ function Play() {
       history.push("/play")
     }
   }
+  const { navigationIcons, onKeyPress } = useNavigationIcons([{
+    path: "/settings",
+    component: IoMdSettings
+  }, {
+    path: "/report",
+    component: HiDocumentReport
+  }, {
+    path: "/create",
+    component: IoMdCreate
+  }, {
+    path: "/play",
+    component: FaPlay,
+    onClick: startPlay,
+    fill: !canStartPlay ? red[500] : green[500],
+    size: 17.5
+  }]);
+
+  useEffect(() => {
+    ref.current && ref.current.focus();
+  }, [])
 
   return <Menu lsKey="PLAY_MENU" width={290} contents={[<PlaySettings />, <div className="Play" ref={ref} tabIndex={0} onKeyPress={onKeyPress}>
-    <IconGroup style={generatedNavigationStyles} direction={settings.navigation.direction} className="Play-icons" icons={[
-      [`Go to Settings page`, <IoMdSettings size={20} fill={theme.color.opposite_light} onClick={() => {
-        settings.sound && sounds.swoosh.play()
-        history.push("/settings")
-      }} />],
-      [`Go to Report page`, <HiDocumentReport size={20} fill={theme.color.opposite_light} onClick={() => {
-        settings.sound && sounds.swoosh.play()
-        history.push("/report")
-      }} />],
-      [`Go to Create page`, <IoMdCreate size={20} fill={theme.color.opposite_light} onClick={() => {
-        settings.sound && sounds.swoosh.play()
-        history.push("/create")
-      }} />],
-      ['Play', <FaPlay fill={!canStartPlay ? red[500] : green[500]} onClick={() => {
-        settings.sound && sounds.swoosh.play()
-        startPlay()
-      }} />],
-      ...navigationIcons
-    ]} />
+    <IconGroup style={generatedNavigationStyles} direction={settings.navigation.direction} className="Play-icons" icons={navigationIcons} />
     <PlayUpload />
     <div style={{ gridArea: '2/1/5/2' }}>
       <View lsKey="PLAY_VIEW" items={
