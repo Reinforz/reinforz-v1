@@ -15,13 +15,14 @@ interface Props<T extends Record<string, any>> {
   multiple?: boolean
   onChange?: (e: ChangeEvent<{ name?: string | undefined; value: unknown }>) => void
   lsKey?: string
+  className?: string
 }
 
 export default function Select<T extends Record<string, any>>(props: Props<T>) {
   const { theme } = useThemeSettings();
   const { settings } = useContext(SettingsContext);
-  const { items, multiple, renderValue, menuItemLabel, state, stateKey, setState } = props;
-  return <FormGroup>
+  const { items, multiple, renderValue, className = '', menuItemLabel, state, stateKey, setState } = props;
+  return <FormGroup className={`Select ${className}`}>
     <InputLabel>{props.label}</InputLabel>
     <div style={{ background: theme.color.light, display: 'flex', flexDirection: 'column', padding: 2.5, margin: 2.5 }} className="Select-content">
       <MuiSelect value={state[stateKey] as string[]}

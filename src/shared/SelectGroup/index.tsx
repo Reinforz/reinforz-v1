@@ -13,12 +13,14 @@ interface Props {
 
 export default function SelectGroup(props: Props) {
   const { label, setState, state, stateKey, groupItems } = props;
-  return <FormGroup className="Select-Group">
+  return <FormGroup className="Select-Group" style={{
+    flexDirection: 'column'
+  }}>
     <InputLabel className="Select-Group-header">
       {label}
     </InputLabel>
     <div className="Select-Group-content">
-      {groupItems.map(([items, label, itemStateKey]) => <Select items={items} label={label} setState={(newState) => {
+      {groupItems.map(([items, label, itemStateKey]) => <Select className="Select-Group-content-item" items={items} label={label} setState={(newState) => {
         setState({
           ...state,
           [stateKey]: {

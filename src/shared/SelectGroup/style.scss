@@ -1,21 +1,22 @@
 .Select-Group{
-  &.MuiFormGroup-root{
-    flex-direction: column;
-  }
   &-content{
     display: flex;
     justify-content: center;
     align-items: center;
-    .MuiFormGroup-root{
+  }
+
+  .MuiFormGroup-root.Select.Select-Group-content-item{
+    padding: 0px;
+    margin: 0px;
+
+    .Select-content{
+      width: calc(100% - 10px);
+      margin: 3.5px;
       padding: 0px;
-      margin: 0px;
-    }
-    .MuiInputLabel-root{
-      width: calc(100% - 15px);
-      margin: 2.5px;
     }
   }
-  &-header.MuiInputLabel-root{
+
+  label.MuiFormLabel-root.MuiInputLabel-root{
     width: calc(100% - 25px);
     margin: 2.5px;
     padding: 10px;
