@@ -1,3 +1,4 @@
+import { PopoverOrigin } from "@material-ui/core";
 import React, { useState } from "react";
 import { FaArrowAltCircleRight } from "react-icons/fa";
 import { RiArrowLeftRightLine } from "react-icons/ri";
@@ -32,7 +33,28 @@ export default function Menu(props: MenuProps) {
   const [position, setPosition] = useState(menuLsState.position);
 
   const { left, iconsContainerStyle, iconStyle, contentStyle } = generateMenuStyles(position, isOpen, width);
-
+  const popoverOrigin: {
+    popoverAnchorOrigin: PopoverOrigin
+    popoverTransformOrigin: PopoverOrigin
+  } = position === "left" ? {
+    popoverAnchorOrigin: {
+      vertical: 'center',
+      horizontal: 'right',
+    },
+    popoverTransformOrigin: {
+      vertical: 'center',
+      horizontal: 'left',
+    }
+  } : {
+    popoverAnchorOrigin: {
+      vertical: 'center',
+      horizontal: 'left',
+    },
+    popoverTransformOrigin: {
+      vertical: 'center',
+      horizontal: 'right',
+    }
+  }
   return <div style={contentStyle}>
     {contents[1]}
     <div className="Menu" style={{ left, width }}>
@@ -44,7 +66,7 @@ export default function Menu(props: MenuProps) {
             isOpen: newValue,
             position
           }))
-        }} style={iconStyle} />],
+        }} style={iconStyle} />, popoverOrigin],
         [`Switch to ${position === "left" ? "right" : "left"}`, <RiArrowLeftRightLine fill={theme.color.opposite_light} onClick={() => {
           const newValue = position === "left" ? "right" : "left"
           setPosition(newValue)
@@ -52,7 +74,7 @@ export default function Menu(props: MenuProps) {
             isOpen,
             position: newValue
           }))
-        }} />,
+        }} />,popoverOrigin
         ],
         ...icons,
       ]} />
