@@ -5,6 +5,7 @@ import { FaGithub, FaPlay } from "react-icons/fa";
 import { HiDocumentReport } from "react-icons/hi";
 import { IoMdCreate, IoMdDocument, IoMdSettings } from 'react-icons/io';
 import { useHistory } from "react-router-dom";
+import { REINFORZ_DOC_URL, REINFORZ_REPO_URL } from "../../constants";
 import { RootContext } from "../../context/RootContext";
 import { useThemeSettings } from '../../hooks';
 import { IconGroup, List, Menu, View } from '../../shared';
@@ -68,11 +69,11 @@ function Play() {
       [`Go to Create page`, <IoMdCreate size={20} fill={theme.color.opposite_light} onClick={() => history.push("/create")} />],
       ['Play', <FaPlay fill={!canStartPlay ? red[500] : green[500]} onClick={startPlay} />],
       ['Go to documentation', <IoMdDocument size={20} fill={theme.color.opposite_light} onClick={() => {
-        const win = window.open("https://reinforz.github.io/reinforz-docs", "_blank")!;
+        const win = window.open(REINFORZ_DOC_URL, "_blank")!;
         win.focus();
       }} />],
       ['Go to repo', <FaGithub size={20} fill={theme.color.opposite_light} onClick={() => {
-        const win = window.open("https://github.com/Devorein/reinforz", "_blank")!;
+        const win = window.open(REINFORZ_REPO_URL, "_blank")!;
         win.focus();
       }} />]
     ]} />

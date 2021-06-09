@@ -4,7 +4,7 @@ import { FaGithub } from 'react-icons/fa';
 import { HiDocumentReport } from 'react-icons/hi';
 import { IoMdCreate, IoMdDocument } from 'react-icons/io';
 import { useHistory } from 'react-router-dom';
-import { REINFORZ_SETTINGS_LS_KEY } from '../../constants';
+import { REINFORZ_DOC_URL, REINFORZ_REPO_URL, REINFORZ_SETTINGS_LS_KEY } from '../../constants';
 import { SettingsContext } from '../../context/SettingsContext';
 import { useThemeSettings } from '../../hooks';
 import { IconGroup, Preset, Select, Toggles } from '../../shared';
@@ -44,7 +44,7 @@ function Settings() {
             fill={THEME.color.opposite_light}
             onClick={() => {
               const win = window.open(
-                'https://reinforz.github.io/reinforz-docs',
+                REINFORZ_DOC_URL,
                 '_blank'
               )!;
               win.focus();
@@ -58,7 +58,7 @@ function Settings() {
             fill={THEME.color.opposite_light}
             onClick={() => {
               const win = window.open(
-                'https://github.com/Devorein/reinforz',
+                REINFORZ_REPO_URL,
                 '_blank'
               )!;
               win.focus();

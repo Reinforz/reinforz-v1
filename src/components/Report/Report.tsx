@@ -4,6 +4,7 @@ import { AiFillHome } from 'react-icons/ai';
 import { FaCloudUploadAlt, FaGithub } from 'react-icons/fa';
 import { IoMdCreate, IoMdDocument, IoMdSettings } from 'react-icons/io';
 import { useHistory, useLocation } from 'react-router-dom';
+import { REINFORZ_DOC_URL, REINFORZ_REPO_URL } from '../../constants';
 import { ReportContext } from '../../context/ReportContext';
 import { RootContext } from '../../context/RootContext';
 import { useThemeSettings } from '../../hooks';
@@ -129,7 +130,7 @@ export default function Report() {
         fill={theme.color.opposite_light}
         onClick={() => {
           const win = window.open(
-            'https://reinforz.github.io/reinforz-docs',
+            REINFORZ_DOC_URL,
             '_blank'
           )!;
           win.focus();
@@ -143,7 +144,7 @@ export default function Report() {
         fill={theme.color.opposite_light}
         onClick={() => {
           const win = window.open(
-            'https://github.com/Devorein/reinforz',
+            REINFORZ_REPO_URL,
             '_blank'
           )!;
           win.focus();
