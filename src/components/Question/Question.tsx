@@ -76,8 +76,8 @@ export default function Question(props: Props) {
     // eslint-disable-next-line
     [props.question, userAnswers])
 
-  return <div className="Question" style={{ backgroundColor: theme.color.dark, color: theme.palette.text.primary }} onKeyPress={(e) => {
-    if (settings.shortcuts && e.nativeEvent.shiftKey && e.nativeEvent.key === "A") {
+  return <div className="Question" style={{ backgroundColor: theme.color.dark, color: theme.palette.text.primary }} onKeyUp={(e) => {
+    if (settings.shortcuts && e.nativeEvent.altKey && e.nativeEvent.key === "a") {
       onNextButtonPress();
     }
   }} tabIndex={0}>
@@ -88,7 +88,7 @@ export default function Question(props: Props) {
       : <QuestionInputs setUserAnswers={setUserAnswers} userAnswers={userAnswers} question={props.question} />}
     <QuestionHints usedHints={usedHints} setUsedHints={setUsedHints} hints={hints} />
     {<div style={{ display: 'flex', gridArea: `3/2/4/3`, alignItems: `center`, height: '65px' }}>
-      <Icon popoverAnchorOrigin={{
+      {!disable_timer && <Icon popoverAnchorOrigin={{
         vertical: 'top',
         horizontal: 'center',
       }} popoverTransformOrigin={{
@@ -109,7 +109,7 @@ export default function Question(props: Props) {
         }
       }}>
         <FaClock fill={timeBreak ? red[500] : green[500]} size={20} />
-      </Icon>
+      </Icon>}
       <Button disabled={timeBreak} className="QuestionButton" variant="contained" color="primary" onClick={onNextButtonPress}>{!isLast ? "Next" : "Report"}</Button>
       {timeout && !playSettings.options.disable_timer && <div style={{ backgroundColor: theme.color.base, color: theme.palette.text.primary }} className="QuestionTimer">{displayTime(timeout)}</div>}
     </div>}

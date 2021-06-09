@@ -1,9 +1,9 @@
 import { green, red } from "@material-ui/core/colors";
 import { OptionsObject, useSnackbar } from "notistack";
 import React, { useContext } from "react";
-import { FaPlay } from "react-icons/fa";
+import { FaGithub, FaPlay } from "react-icons/fa";
 import { HiDocumentReport } from "react-icons/hi";
-import { IoMdCreate, IoMdSettings } from 'react-icons/io';
+import { IoMdCreate, IoMdDocument, IoMdSettings } from 'react-icons/io';
 import { useHistory } from "react-router-dom";
 import { RootContext } from "../../context/RootContext";
 import { useThemeSettings } from '../../hooks';
@@ -66,7 +66,15 @@ function Play() {
       [`Go to Settings page`, <IoMdSettings size={20} fill={theme.color.opposite_light} onClick={() => history.push("/settings")} />],
       [`Go to Report page`, <HiDocumentReport size={20} fill={theme.color.opposite_light} onClick={() => history.push("/report")} />],
       [`Go to Create page`, <IoMdCreate size={20} fill={theme.color.opposite_light} onClick={() => history.push("/create")} />],
-      ['Play', <FaPlay fill={!canStartPlay ? red[500] : green[500]} onClick={startPlay} />]
+      ['Play', <FaPlay fill={!canStartPlay ? red[500] : green[500]} onClick={startPlay} />],
+      ['Go to documentation', <IoMdDocument size={20} fill={theme.color.opposite_light} onClick={() => {
+        const win = window.open("https://reinforz.github.io/reinforz-docs", "_blank")!;
+        win.focus();
+      }} />],
+      ['Go to repo', <FaGithub size={20} fill={theme.color.opposite_light} onClick={() => {
+        const win = window.open("https://github.com/Devorein/reinforz", "_blank")!;
+        win.focus();
+      }} />]
     ]} />
     <PlayUpload />
     <div style={{ gridArea: '2/1/5/2' }}>

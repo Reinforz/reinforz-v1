@@ -11,38 +11,50 @@ export function filterUploadedQuizzes(quizzes: IQuizPartial[]) {
     if (quiz.topic && quiz.subject && quiz.questions.length > 0) {
       const filteredQuestions: TQuestionFull[] = [];
       quiz.questions.forEach((question, questionIndex) => {
-        const [generatedQuestion, logs] = generateCompleteQuestion(
-          question,
-          quiz.default
-        );
-        if (logs.errors.length === 0) {
-          generatedQuestion.quiz = {
-            subject: quiz.subject,
-            topic: quiz.topic,
-            _id: quizId
-          };
-        }
-        logs.warns.forEach((warn) => {
-          logMessages.push({
-            _id: shortid(),
-            level: 'WARN',
-            quiz: `${quiz.subject} - ${quiz.topic}`,
-            target: `Question ${questionIndex + 1}`,
-            message: warn,
-            quiz_id: quiz._id as string
+        try {
+          const [generatedQuestion, logs] = generateCompleteQuestion(
+            question,
+            quiz.default
+          );
+          if (logs.errors.length === 0) {
+            generatedQuestion.quiz = {
+              subject: quiz.subject,
+              topic: quiz.topic,
+              _id: quizId
+            };
+          }
+          logs.warns.forEach((warn) => {
+            logMessages.push({
+              _id: shortid(),
+              level: 'WARN',
+              quiz: `${quiz.subject} - ${quiz.topic}`,
+              target: `Question ${questionIndex + 1}`,
+              message: warn,
+              quiz_id: quiz._id as string
+            });
           });
-        });
-        logs.errors.forEach((error) => {
+          logs.errors.forEach((error) => {
+            logMessages.push({
+              _id: shortid(),
+              level: 'ERROR',
+              quiz: `${quiz.subject} - ${quiz.topic}`,
+              target: `Question ${questionIndex + 1}`,
+              message: error,
+              quiz_id: quiz._id as string
+            });
+          });
+          if (logs.errors.length === 0)
+            filteredQuestions.push(generatedQuestion);
+        } catch (err) {
           logMessages.push({
             _id: shortid(),
             level: 'ERROR',
             quiz: `${quiz.subject} - ${quiz.topic}`,
             target: `Question ${questionIndex + 1}`,
-            message: error,
+            message: err.message,
             quiz_id: quiz._id as string
           });
-        });
-        if (logs.errors.length === 0) filteredQuestions.push(generatedQuestion);
+        }
       });
       quiz.questions = filteredQuestions as any;
       const duplicateQuiz = JSON.parse(JSON.stringify(quiz));

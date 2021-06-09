@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
 import { AiFillHome } from 'react-icons/ai';
+import { FaGithub } from 'react-icons/fa';
 import { HiDocumentReport } from 'react-icons/hi';
-import { IoMdCreate } from 'react-icons/io';
+import { IoMdCreate, IoMdDocument } from 'react-icons/io';
 import { useHistory } from 'react-router-dom';
 import { REINFORZ_SETTINGS_LS_KEY } from '../../constants';
 import { SettingsContext } from '../../context/SettingsContext';
@@ -36,6 +37,34 @@ function Settings() {
         [`Go to Home page`, <AiFillHome size={20} fill={THEME.color.opposite_light} onClick={() => history.push("/")} />],
         [`Go to Report page`, <HiDocumentReport size={20} fill={THEME.color.opposite_light} onClick={() => history.push("/report")} />],
         [`Go to Create page`, <IoMdCreate size={20} fill={THEME.color.opposite_light} onClick={() => history.push("/create")} />],
+        [
+          'Go to documentation',
+          <IoMdDocument
+            size={20}
+            fill={THEME.color.opposite_light}
+            onClick={() => {
+              const win = window.open(
+                'https://reinforz.github.io/reinforz-docs',
+                '_blank'
+              )!;
+              win.focus();
+            }}
+          />
+        ],
+        [
+          'Go to repo',
+          <FaGithub
+            size={20}
+            fill={THEME.color.opposite_light}
+            onClick={() => {
+              const win = window.open(
+                'https://github.com/Devorein/reinforz',
+                '_blank'
+              )!;
+              win.focus();
+            }}
+          />
+        ]
       ]} />
 
       <div className="Settings" style={{ backgroundColor: THEME.color.base, color: THEME.palette.text.secondary }}>
