@@ -68,7 +68,8 @@ export default function Report() {
         settings: playSettings
       })
     }} />])
-  }
+  };
+
   const navigationIconGroup = <IconGroup className="Report-icons" icons={icons} />;
   const navigationShortcutProps: React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> = {
     tabIndex: 0,

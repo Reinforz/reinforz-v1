@@ -51,6 +51,10 @@ export default function Preset<T extends ISettingsPreset | IPlaySettingsPreset |
         current: id,
         presets: itemPreset.presets
       } as any)
+      localStorage.setItem(lsKey, JSON.stringify({
+        current: id,
+        presets: itemPreset.presets
+      }))
     }} item={itemPreset.current} />
 
     <Icon popoverText={popoverText}>
