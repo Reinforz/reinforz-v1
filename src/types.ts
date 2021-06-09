@@ -1,5 +1,4 @@
 import { Theme, ThemeOptions } from '@material-ui/core/styles';
-import { Language } from 'prism-react-renderer';
 
 // Basic Components
 
@@ -308,11 +307,6 @@ export interface IReportAggregator {
   score: TNumberAggregation;
   verdict: TBooleanAggregation;
   hints_used: TNumberAggregation;
-}
-
-export interface HighlighterProps {
-  code: string;
-  language: Language;
 }
 
 export interface IReportExport {

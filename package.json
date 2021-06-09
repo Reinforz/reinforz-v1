@@ -7,7 +7,6 @@
     "@material-ui/styles": "^4.11.4",
     "js-yaml": "^3.14.1",
     "notistack": "^1.0.8",
-    "prism-react-renderer": "^1.2.0",
     "prismjs": "^1.23.0",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
