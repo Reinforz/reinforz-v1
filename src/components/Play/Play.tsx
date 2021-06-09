@@ -1,13 +1,12 @@
 import { green, red } from "@material-ui/core/colors";
 import { OptionsObject, useSnackbar } from "notistack";
 import React, { useContext, useEffect, useRef } from "react";
-import { FaGithub, FaPlay } from "react-icons/fa";
+import { FaPlay } from "react-icons/fa";
 import { HiDocumentReport } from "react-icons/hi";
-import { IoMdCreate, IoMdDocument, IoMdSettings } from 'react-icons/io';
+import { IoMdCreate, IoMdSettings } from 'react-icons/io';
 import { useHistory } from "react-router-dom";
-import { REINFORZ_DOC_URL, REINFORZ_REPO_URL } from "../../constants";
 import { RootContext } from "../../context/RootContext";
-import { useThemeSettings } from '../../hooks';
+import { useNavigationIcons, useThemeSettings } from '../../hooks';
 import { IconGroup, List, Menu, View } from '../../shared';
 import sounds from "../../sounds";
 import { generateNavigationStyles } from "../../utils";
@@ -31,6 +30,7 @@ function Play() {
   const { setPlaying, filteredQuizzes, selectedQuizIds, setUploadedQuizzes, setSelectedQuizIds, uploadedQuizzes, errorLogs, setErrorLogs } = useContext(RootContext);
   const { enqueueSnackbar } = useSnackbar();
   const ref = useRef<HTMLDivElement | null>(null);
+  const { navigationIcons, onKeyPress } = useNavigationIcons(["/settings", "/report", "/create", "/play"]);
 
   useEffect(() => {
     ref.current && ref.current.focus();
@@ -55,25 +55,7 @@ function Play() {
     }
   }
 
-  return <Menu lsKey="PLAY_MENU" width={290} contents={[<PlaySettings />, <div className="Play" ref={ref} tabIndex={0} onKeyPress={(e) => {
-    switch (e.nativeEvent.code) {
-      case "Digit1": {
-        settings.sound && sounds.swoosh.play()
-        settings.shortcuts && history.push("/settings")
-        break;
-      }
-      case "Digit2": {
-        settings.sound && sounds.swoosh.play()
-        settings.shortcuts && history.push("/report")
-        break;
-      }
-      case "Digit3": {
-        settings.sound && sounds.swoosh.play()
-        settings.shortcuts && history.push("/create")
-        break;
-      }
-    }
-  }}>
+  return <Menu lsKey="PLAY_MENU" width={290} contents={[<PlaySettings />, <div className="Play" ref={ref} tabIndex={0} onKeyPress={onKeyPress}>
     <IconGroup style={generatedNavigationStyles} direction={settings.navigation.direction} className="Play-icons" icons={[
       [`Go to Settings page`, <IoMdSettings size={20} fill={theme.color.opposite_light} onClick={() => {
         settings.sound && sounds.swoosh.play()
@@ -91,16 +73,7 @@ function Play() {
         settings.sound && sounds.swoosh.play()
         startPlay()
       }} />],
-      ['Go to documentation', <IoMdDocument size={20} fill={theme.color.opposite_light} onClick={() => {
-        settings.sound && sounds.swoosh.play()
-        const win = window.open(REINFORZ_DOC_URL, "_blank")!;
-        win.focus();
-      }} />],
-      ['Go to repo', <FaGithub size={20} fill={theme.color.opposite_light} onClick={() => {
-        settings.sound && sounds.swoosh.play()
-        const win = window.open(REINFORZ_REPO_URL, "_blank")!;
-        win.focus();
-      }} />]
+      ...navigationIcons
     ]} />
     <PlayUpload />
     <div style={{ gridArea: '2/1/5/2' }}>

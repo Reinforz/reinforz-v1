@@ -1,13 +1,12 @@
 import { green, red } from '@material-ui/core/colors';
 import React, { useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { AiFillHome } from 'react-icons/ai';
-import { FaCloudUploadAlt, FaGithub } from 'react-icons/fa';
-import { IoMdCreate, IoMdDocument, IoMdSettings } from 'react-icons/io';
+import { FaCloudUploadAlt } from 'react-icons/fa';
+import { IoMdCreate, IoMdSettings } from 'react-icons/io';
 import { useHistory, useLocation } from 'react-router-dom';
-import { REINFORZ_DOC_URL, REINFORZ_REPO_URL } from '../../constants';
 import { ReportContext } from '../../context/ReportContext';
 import { RootContext } from '../../context/RootContext';
-import { useThemeSettings } from '../../hooks';
+import { useNavigationIcons, useThemeSettings } from '../../hooks';
 import { IconGroup, Menu, StackList } from '../../shared';
 import sounds from '../../sounds';
 import { IReport, IReportSettingsPreset, IResult } from '../../types';
@@ -39,6 +38,7 @@ export default function Report() {
     RootContext
   );
   const ref = useRef<HTMLDivElement | null>(null);
+  const { navigationIcons, onKeyPress } = useNavigationIcons(["/settings", "/", "/create"]);
 
   useEffect(() => {
     ref.current && ref.current.focus();
@@ -142,36 +142,7 @@ export default function Report() {
   }
 
   icons.push(
-    [
-      'Go to documentation',
-      <IoMdDocument
-        size={20}
-        fill={theme.color.opposite_light}
-        onClick={() => {
-          settings.sound && sounds.swoosh.play()
-          const win = window.open(
-            REINFORZ_DOC_URL,
-            '_blank'
-          )!;
-          win.focus();
-        }}
-      />
-    ],
-    [
-      'Go to repo',
-      <FaGithub
-        size={20}
-        fill={theme.color.opposite_light}
-        onClick={() => {
-          settings.sound && sounds.swoosh.play()
-          const win = window.open(
-            REINFORZ_REPO_URL,
-            '_blank'
-          )!;
-          win.focus();
-        }}
-      />
-    ]
+    ...navigationIcons
   );
 
   const navigationIconGroup = (
@@ -182,25 +153,7 @@ export default function Report() {
     HTMLDivElement
   > = {
     tabIndex: 0,
-    onKeyPress: (e) => {
-      switch (e.nativeEvent.code) {
-        case 'Digit1': {
-          settings.sound && sounds.swoosh.play()
-          settings.shortcuts && history.push('/settings');
-          break;
-        }
-        case 'Digit2': {
-          settings.sound && sounds.swoosh.play()
-          settings.shortcuts && homeIconClick();
-          break;
-        }
-        case 'Digit3': {
-          settings.sound && sounds.swoosh.play()
-          settings.shortcuts && history.push('/create');
-          break;
-        }
-      }
-    }
+    onKeyPress
   };
 
   const render = () => {
