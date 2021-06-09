@@ -4,12 +4,13 @@ import React, { useCallback, useContext } from 'react';
 import { ReportContext } from '../../../context/ReportContext';
 import { useThemeSettings } from '../../../hooks';
 import { Icon, Select } from '../../../shared';
+import sounds from '../../../sounds';
 import { download, transformFullQuestions } from "../../../utils";
 import "./ReportExport.scss";
 
 export default function ReportExport() {
-  const { sortedResults, filteredQuizzesMap, report: { settings }, reportSettings, setReportSettings } = useContext(ReportContext);
-  const { theme } = useThemeSettings();
+  const { sortedResults, filteredQuizzesMap, report: { settings: playSettings }, reportSettings, setReportSettings } = useContext(ReportContext);
+  const { theme, settings } = useThemeSettings();
 
   const { export: exportState } = reportSettings;
   const { export_type, export_as } = exportState;
@@ -24,7 +25,7 @@ export default function ReportExport() {
   const downloadFiles = () => {
     if (export_as === "JSON") {
       if (export_type === "Report") download(`Report-${Date.now()}.json`, JSON.stringify({
-        settings,
+        settings: playSettings,
         results: sortedResults,
         createdAt: Date.now()
       }, undefined, 2));
@@ -32,7 +33,7 @@ export default function ReportExport() {
         clonedDownload("json")
     } else {
       if (export_type === "Report") download(`Report-${Date.now()}.yaml`, safeDump({
-        settings,
+        settings: playSettings,
         results: sortedResults,
         createdAt: Date.now()
       }));
@@ -59,6 +60,7 @@ export default function ReportExport() {
         }} state={exportState} stateKey={"export_as"} />
         <Icon popoverText={`Export ${export_type} as ${export_as}`} className="Report-Export-button">
           <Button variant="contained" color="primary" onClick={() => {
+            settings.sound && sounds.swoosh.play();
             downloadFiles()
           }}>Download</Button>
         </Icon>

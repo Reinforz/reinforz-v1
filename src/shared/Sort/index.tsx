@@ -3,6 +3,7 @@ import { green, red } from "@material-ui/core/colors";
 import { AiFillPlusCircle } from "react-icons/ai";
 import { MdDelete } from "react-icons/md";
 import { useThemeSettings } from "../../hooks";
+import sounds from "../../sounds";
 import Icon from "../Icon";
 import "./style.scss";
 
@@ -16,7 +17,7 @@ interface Props {
 }
 
 export default function Sort(props: Props) {
-  const { theme } = useThemeSettings();
+  const { theme, settings } = useThemeSettings();
   const { maxSort, items, header, sorts, setSorts, menuItemLabel } = props;
 
   return <FormGroup className="Sort">
@@ -27,6 +28,7 @@ export default function Sort(props: Props) {
         return <div key={`${item}.${order}`} className="Sort-content-item" style={{ background: theme.color.base, display: 'flex', padding: 5, margin: 2.5 }}>
           <MuiSelect style={{ background: theme.color.light, flex: 1, marginRight: 5 }} value={item}
             onChange={(e) => {
+              settings.sound && sounds.click.play()
               sort[0] = e.target.value as any;
               setSorts(JSON.parse(JSON.stringify(sorts)))
             }}>
@@ -36,6 +38,7 @@ export default function Sort(props: Props) {
           </MuiSelect>
           <MuiSelect style={{ background: theme.color.light, flex: 1 }} value={order}
             onChange={(e) => {
+              settings.sound && sounds.click.play()
               sort[1] = e.target.value as any;
               setSorts(JSON.parse(JSON.stringify(sorts)))
             }}>
@@ -46,6 +49,7 @@ export default function Sort(props: Props) {
           <div className="Sort-delete">
             <Icon popoverText={`Delete ${item} by ${order} sort`}>
               <MdDelete size={20} fill={red[500]} onClick={() => {
+                settings.sound && sounds.remove.play()
                 sorts[index] = null as any;
                 setSorts(sorts.filter(sort => sort))
               }} />
@@ -56,7 +60,10 @@ export default function Sort(props: Props) {
     </div>}
     {sorts.length !== maxSort && <div className="Sort-add">
       <Icon popoverText="Add Sort">
-        <AiFillPlusCircle size={25} fill={green[500]} onClick={() => setSorts([...sorts, [items[0], 'ASC']])} />
+        <AiFillPlusCircle size={25} fill={green[500]} onClick={() => {
+          settings.sound && sounds.click.play()
+          setSorts([...sorts, [items[0], 'ASC']])
+        }} />
       </Icon>
     </div>}
   </FormGroup>
