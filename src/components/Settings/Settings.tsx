@@ -8,6 +8,7 @@ import { REINFORZ_DOC_URL, REINFORZ_REPO_URL, REINFORZ_SETTINGS_LS_KEY } from '.
 import { SettingsContext } from '../../context/SettingsContext';
 import { useThemeSettings } from '../../hooks';
 import { IconGroup, Preset, Select, Toggles } from '../../shared';
+import sounds from '../../sounds';
 import { transformTextBySeparator } from '../../utils';
 import "./Settings.scss";
 
@@ -20,29 +21,42 @@ function Settings() {
     <div style={{ width: '100vw', height: '100vh' }} tabIndex={0} onKeyPress={(e) => {
       switch (e.nativeEvent.code) {
         case "Digit1": {
+          settings.sound && sounds.swoosh.play()
           settings.shortcuts && history.push("/")
           break;
         }
         case "Digit2": {
+          settings.sound && sounds.swoosh.play()
           settings.shortcuts && history.push("/report")
           break;
         }
         case "Digit3": {
+          settings.sound && sounds.swoosh.play()
           settings.shortcuts && history.push("/create")
           break;
         }
       }
     }}>
       <IconGroup className="Settings-icons" icons={[
-        [`Go to Home page`, <AiFillHome size={20} fill={THEME.color.opposite_light} onClick={() => history.push("/")} />],
-        [`Go to Report page`, <HiDocumentReport size={20} fill={THEME.color.opposite_light} onClick={() => history.push("/report")} />],
-        [`Go to Create page`, <IoMdCreate size={20} fill={THEME.color.opposite_light} onClick={() => history.push("/create")} />],
+        [`Go to Home page`, <AiFillHome size={20} fill={THEME.color.opposite_light} onClick={() => {
+          settings.sound && sounds.swoosh.play()
+          history.push("/")
+        }} />],
+        [`Go to Report page`, <HiDocumentReport size={20} fill={THEME.color.opposite_light} onClick={() => {
+          settings.sound && sounds.swoosh.play()
+          history.push("/report")
+        }} />],
+        [`Go to Create page`, <IoMdCreate size={20} fill={THEME.color.opposite_light} onClick={() => {
+          settings.sound && sounds.swoosh.play()
+          history.push("/create")
+        }} />],
         [
           'Go to documentation',
           <IoMdDocument
             size={20}
             fill={THEME.color.opposite_light}
             onClick={() => {
+              settings.sound && sounds.swoosh.play()
               const win = window.open(
                 REINFORZ_DOC_URL,
                 '_blank'
@@ -57,6 +71,7 @@ function Settings() {
             size={20}
             fill={THEME.color.opposite_light}
             onClick={() => {
+              settings.sound && sounds.swoosh.play()
               const win = window.open(
                 REINFORZ_REPO_URL,
                 '_blank'

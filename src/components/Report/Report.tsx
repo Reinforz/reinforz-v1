@@ -9,6 +9,7 @@ import { ReportContext } from '../../context/ReportContext';
 import { RootContext } from '../../context/RootContext';
 import { useThemeSettings } from '../../hooks';
 import { IconGroup, Menu, StackList } from '../../shared';
+import sounds from '../../sounds';
 import { IReport, IReportSettingsPreset, IResult } from '../../types';
 import {
   applyReportFilters,
@@ -84,7 +85,10 @@ export default function Report() {
       <IoMdSettings
         size={20}
         fill={theme.color.opposite_light}
-        onClick={() => history.push('/settings')}
+        onClick={() => {
+          settings.sound && sounds.swoosh.play()
+          history.push('/settings')
+        }}
       />
     ],
     [
@@ -92,7 +96,11 @@ export default function Report() {
       <AiFillHome
         size={20}
         fill={theme.color.opposite_light}
-        onClick={() => homeIconClick()}
+        onClick={() => {
+          settings.sound && sounds.swoosh.play()
+          homeIconClick()
+        }
+        }
       />
     ],
     [
@@ -100,7 +108,10 @@ export default function Report() {
       <IoMdCreate
         size={20}
         fill={theme.color.opposite_light}
-        onClick={() => history.push('/create')}
+        onClick={() => {
+          settings.sound && sounds.swoosh.play()
+          history.push('/create')
+        }}
       />
     ]
   ];
@@ -129,6 +140,7 @@ export default function Report() {
         size={20}
         fill={theme.color.opposite_light}
         onClick={() => {
+          settings.sound && sounds.swoosh.play()
           const win = window.open(
             REINFORZ_DOC_URL,
             '_blank'
@@ -143,6 +155,7 @@ export default function Report() {
         size={20}
         fill={theme.color.opposite_light}
         onClick={() => {
+          settings.sound && sounds.swoosh.play()
           const win = window.open(
             REINFORZ_REPO_URL,
             '_blank'
@@ -164,14 +177,17 @@ export default function Report() {
     onKeyPress: (e) => {
       switch (e.nativeEvent.code) {
         case 'Digit1': {
+          settings.sound && sounds.swoosh.play()
           settings.shortcuts && history.push('/settings');
           break;
         }
         case 'Digit2': {
+          settings.sound && sounds.swoosh.play()
           settings.shortcuts && homeIconClick();
           break;
         }
         case 'Digit3': {
+          settings.sound && sounds.swoosh.play()
           settings.shortcuts && history.push('/create');
           break;
         }

@@ -27,7 +27,7 @@ const sounds: Record<
 
 soundNames.forEach((sound_url) => {
   const audio = new Audio(process.env.PUBLIC_URL + `/sounds/${sound_url}.mp3`);
-  audio.volume = 0.5;
+  audio.volume = 0.25;
   sounds[sound_url] = audio;
 });
 

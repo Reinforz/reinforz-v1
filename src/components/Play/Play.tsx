@@ -9,6 +9,7 @@ import { REINFORZ_DOC_URL, REINFORZ_REPO_URL } from "../../constants";
 import { RootContext } from "../../context/RootContext";
 import { useThemeSettings } from '../../hooks';
 import { IconGroup, List, Menu, View } from '../../shared';
+import sounds from "../../sounds";
 import "./Play.scss";
 import PlayErrorlogs from "./PlayErrorlogs/PlayErrorlogs";
 import { PlayListTable } from "./PlayListTable/PlayListTable";
@@ -50,29 +51,46 @@ function Play() {
   return <Menu lsKey="PLAY_MENU" width={290} contents={[<PlaySettings />, <div className="Play" tabIndex={0} onKeyPress={(e) => {
     switch (e.nativeEvent.code) {
       case "Digit1": {
+        settings.sound && sounds.swoosh.play()
         settings.shortcuts && history.push("/settings")
         break;
       }
       case "Digit2": {
+        settings.sound && sounds.swoosh.play()
         settings.shortcuts && history.push("/report")
         break;
       }
       case "Digit3": {
+        settings.sound && sounds.swoosh.play()
         settings.shortcuts && history.push("/create")
         break;
       }
     }
   }}>
     <IconGroup className="Play-icons" icons={[
-      [`Go to Settings page`, <IoMdSettings size={20} fill={theme.color.opposite_light} onClick={() => history.push("/settings")} />],
-      [`Go to Report page`, <HiDocumentReport size={20} fill={theme.color.opposite_light} onClick={() => history.push("/report")} />],
-      [`Go to Create page`, <IoMdCreate size={20} fill={theme.color.opposite_light} onClick={() => history.push("/create")} />],
-      ['Play', <FaPlay fill={!canStartPlay ? red[500] : green[500]} onClick={startPlay} />],
+      [`Go to Settings page`, <IoMdSettings size={20} fill={theme.color.opposite_light} onClick={() => {
+        settings.sound && sounds.swoosh.play()
+        history.push("/settings")
+      }} />],
+      [`Go to Report page`, <HiDocumentReport size={20} fill={theme.color.opposite_light} onClick={() => {
+        settings.sound && sounds.swoosh.play()
+        history.push("/report")
+      }} />],
+      [`Go to Create page`, <IoMdCreate size={20} fill={theme.color.opposite_light} onClick={() => {
+        settings.sound && sounds.swoosh.play()
+        history.push("/create")
+      }} />],
+      ['Play', <FaPlay fill={!canStartPlay ? red[500] : green[500]} onClick={() => {
+        settings.sound && sounds.swoosh.play()
+        startPlay()
+      }} />],
       ['Go to documentation', <IoMdDocument size={20} fill={theme.color.opposite_light} onClick={() => {
+        settings.sound && sounds.swoosh.play()
         const win = window.open(REINFORZ_DOC_URL, "_blank")!;
         win.focus();
       }} />],
       ['Go to repo', <FaGithub size={20} fill={theme.color.opposite_light} onClick={() => {
+        settings.sound && sounds.swoosh.play()
         const win = window.open(REINFORZ_REPO_URL, "_blank")!;
         win.focus();
       }} />]
