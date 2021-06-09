@@ -12,6 +12,7 @@ import NotFoundPage from './NotFoundPage';
 import Preset from './Preset';
 import RadioGroup from './RadioGroup';
 import Select from './Select';
+import SelectGroup from './SelectGroup';
 import SimpleModal from './SimpleModal';
 import Sort from './Sort';
 import StackList from './StackList';
@@ -20,6 +21,7 @@ import Toggles from './Toggles';
 import View from './View';
 
 export {
+  SelectGroup,
   NotFoundPage,
   Preset,
   ListSelect,

@@ -7,7 +7,7 @@ import { useHistory } from 'react-router-dom';
 import { REINFORZ_DOC_URL, REINFORZ_REPO_URL, REINFORZ_SETTINGS_LS_KEY } from '../../constants';
 import { SettingsContext } from '../../context/SettingsContext';
 import { useThemeSettings } from '../../hooks';
-import { IconGroup, Preset, Select, Toggles } from '../../shared';
+import { IconGroup, Preset, Select, SelectGroup, Toggles } from '../../shared';
 import sounds from '../../sounds';
 import { generateNavigationStyles, transformTextBySeparator } from '../../utils';
 import "./Settings.scss";
@@ -89,33 +89,11 @@ function Settings() {
         </div>
         <div className="Settings-content" style={{ backgroundColor: THEME.color.dark }}>
           <Select items={["dark", "polar_night", "light", "snow_storm"]} label={"Theme"} setState={setSettings} state={settings} stateKey={"theme"} menuItemLabel={(item) => transformTextBySeparator(item)} />
-          <Select items={["center", "right", "left"]} label={"X-Axis"} setState={(navigation) => {
-            setSettings({
-              ...settings,
-              navigation: {
-                ...settings.navigation,
-                ...navigation
-              }
-            })
-          }} state={settings.navigation} stateKey={"x"} menuItemLabel={(item) => transformTextBySeparator(item)} />
-          <Select items={["center", "top", "bottom"]} label={"Y-Axis"} setState={(navigation) => {
-            setSettings({
-              ...settings,
-              navigation: {
-                ...settings.navigation,
-                ...navigation
-              }
-            })
-          }} state={settings.navigation} stateKey={"y"} menuItemLabel={(item) => transformTextBySeparator(item)} />
-          <Select items={["column", "row"]} label={"Direction"} setState={(navigation) => {
-            setSettings({
-              ...settings,
-              navigation: {
-                ...settings.navigation,
-                ...navigation
-              }
-            })
-          }} state={settings.navigation} stateKey={"direction"} menuItemLabel={(item) => transformTextBySeparator(item)} />
+          <SelectGroup groupItems={[
+            [["center", "right", "left"], "X-Axis", "x"],
+            [["center", "top", "bottom"], "Y-Axis", "y"],
+            [["column", "row"], "Direction", "direction"],
+          ]} label={"Navigation"} setState={setSettings} state={settings} stateKey={"navigation"} />
           <Toggles classNames={{
             FormGroup: 'Settings-content-group',
             InputLabel: 'Settings-content-group-label'

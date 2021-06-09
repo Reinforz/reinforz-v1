@@ -1,0 +1,23 @@
+.Select-Group{
+  &.MuiFormGroup-root{
+    flex-direction: column;
+  }
+  &-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .MuiFormGroup-root{
+      padding: 0px;
+      margin: 0px;
+    }
+    .MuiInputLabel-root{
+      width: calc(100% - 15px);
+      margin: 2.5px;
+    }
+  }
+  &-header.MuiInputLabel-root{
+    width: calc(100% - 25px);
+    margin: 2.5px;
+    padding: 10px;
+  }
+}
