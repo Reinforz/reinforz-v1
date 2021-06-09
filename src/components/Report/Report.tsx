@@ -71,25 +71,29 @@ export default function Report() {
     }} />])
   }
   const navigationIconGroup = <IconGroup className="Report-icons" icons={icons} />;
+  const navigationShortcutProps: React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> = {
+    tabIndex: 0,
+    onKeyPress: (e => {
+      switch (e.nativeEvent.code) {
+        case "Digit1": {
+          settings.shortcuts && history.push("/settings")
+          break;
+        }
+        case "Digit2": {
+          settings.shortcuts && homeIconClick()
+          break;
+        }
+        case "Digit3": {
+          settings.shortcuts && history.push("/create")
+          break;
+        }
+      }
+    })
+  };
 
   const render = () => {
     if (report.results.length !== 0) {
-      return <Menu lsKey="REPORT_MENU" contents={[<ReportFilter />, <div className="Report" style={{ color: theme.palette.text.primary }} tabIndex={0} onKeyPress={(e) => {
-        switch (e.nativeEvent.code) {
-          case "Digit1": {
-            settings.shortcuts && history.push("/settings")
-            break;
-          }
-          case "Digit2": {
-            settings.shortcuts && homeIconClick()
-            break;
-          }
-          case "Digit3": {
-            settings.shortcuts && history.push("/create")
-            break;
-          }
-        }
-      }}>
+      return <Menu lsKey="REPORT_MENU" contents={[<ReportFilter />, <div className="Report" style={{ color: theme.palette.text.primary }} {...navigationShortcutProps}>
         {navigationIconGroup}
         <ReportTable />
         {!filters.excluded_columns.includes("report_info") ? <div style={{ width: 300, display: 'flex', flexDirection: 'column', overflow: 'auto' }}>
@@ -100,7 +104,7 @@ export default function Report() {
         </div> : null}
       </div>]} />
     } else {
-      return <div className="Report" style={{ color: theme.palette.text.primary }}>
+      return <div className="Report" style={{ color: theme.palette.text.primary }} {...navigationShortcutProps}>
         {navigationIconGroup}
         <ReportUpload />
       </div>

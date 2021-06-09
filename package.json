@@ -28,7 +28,6 @@
     "@testing-library/user-event": "^7.2.1",
     "@types/jest": "^24.9.1",
     "@types/js-yaml": "^3.12.6",
-    "@types/lodash.merge": "^4.6.6",
     "@types/prismjs": "^1.16.5",
     "@types/react": "^16.14.8",
     "@types/react-dom": "^16.9.13",
@@ -49,7 +48,6 @@
     "test:react": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
     "test:unit": "npx jest --runInBand --config ./jest.config.js"
   },
   "eslintConfig": {
