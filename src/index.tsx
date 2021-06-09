@@ -7,6 +7,7 @@ import App from './App';
 import { RootContext } from './context/RootContext';
 import { SettingsContext } from "./context/SettingsContext";
 import './index.scss';
+import { ErrorBoundary } from './shared';
 import "./styles/vs-light.scss";
 import "./styles/vscode-dark.scss";
 import { ExtendedTheme, IErrorLog, IPlaySettingsPreset, IQuizFull, ISettingsPreset, TQuestionFull } from './types';
@@ -56,5 +57,7 @@ const Root = () => {
 }
 
 ReactDOM.render(<Router>
-  <Root />
+  <ErrorBoundary>
+    <Root />
+  </ErrorBoundary>
 </Router >, document.getElementById('root'));

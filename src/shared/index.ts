@@ -1,4 +1,5 @@
 import CheckboxGroup from './CheckboxGroup';
+import ErrorBoundary from './ErrorBoundary';
 import Icon from './Icon';
 import IconGroup from './IconGroup';
 import InputRange from './InputRange';
@@ -21,6 +22,7 @@ import Toggles from './Toggles';
 import View from './View';
 
 export {
+  ErrorBoundary,
   SelectGroup,
   NotFoundPage,
   Preset,
