@@ -14,10 +14,33 @@ export default function useNavigationIcons(paths: string[]) {
     settings.shortcuts && history.push(path);
   };
 
+  const goToDocumentation = () => {
+    settings.sound && sounds.swoosh.play()
+    const win = window.open(
+      REINFORZ_DOC_URL,
+      '_blank'
+    )!;
+    win.focus();
+  }
+
+  const goToRepo = () => {
+    settings.sound && sounds.swoosh.play()
+    const win = window.open(
+      REINFORZ_REPO_URL,
+      '_blank'
+    )!;
+    win.focus();
+  }
+
   const onKeyPress = (e: React.KeyboardEvent<HTMLDivElement>) => {
     const digit = parseInt(e.nativeEvent.code.replace('Digit', ''));
     if (digit) {
-      navigate(paths[digit - 1]);
+      if (digit < paths.length)
+        navigate(paths[digit - 1]);
+      else if (digit === paths.length + 1)
+        goToDocumentation()
+      else if (digit === paths.length + 2)
+        goToRepo()
     }
   };
 
@@ -27,14 +50,7 @@ export default function useNavigationIcons(paths: string[]) {
       <IoMdDocument
         size={20}
         fill={theme.color.opposite_light}
-        onClick={() => {
-          settings.sound && sounds.swoosh.play()
-          const win = window.open(
-            REINFORZ_DOC_URL,
-            '_blank'
-          )!;
-          win.focus();
-        }}
+        onClick={goToDocumentation}
       />
     ],
     [
@@ -42,14 +58,7 @@ export default function useNavigationIcons(paths: string[]) {
       <FaGithub
         size={20}
         fill={theme.color.opposite_light}
-        onClick={() => {
-          settings.sound && sounds.swoosh.play()
-          const win = window.open(
-            REINFORZ_REPO_URL,
-            '_blank'
-          )!;
-          win.focus();
-        }}
+        onClick={goToRepo}
       />
     ]
   ]
