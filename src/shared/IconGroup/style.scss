@@ -16,6 +16,9 @@
     &-item{
       padding: 2.5px;
       margin: 2.5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
   }
 }

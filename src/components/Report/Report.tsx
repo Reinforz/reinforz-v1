@@ -14,6 +14,7 @@ import { IReport, IReportSettingsPreset, IResult } from '../../types';
 import {
   applyReportFilters,
   applyReportSorts,
+  generateNavigationStyles,
   generateQuestionsMapFromReportResults,
   generateQuizzesFromResults,
   getReportSettingsPresets,
@@ -48,6 +49,7 @@ export default function Report() {
     createdAt: Date.now(),
     settings: playSettings
   });
+  const generatedNavigationStyles = generateNavigationStyles(settings.navigation);
 
   useEffect(() => {
     setReportSettings(findSettingsFromPresets(reportSettingsPresets));
@@ -167,7 +169,7 @@ export default function Report() {
   );
 
   const navigationIconGroup = (
-    <IconGroup className="Report-icons" icons={icons} />
+    <IconGroup className="Report-icons" icons={icons} direction={settings.navigation.direction} style={generatedNavigationStyles} />
   );
   const navigationShortcutProps: React.DetailedHTMLProps<
     React.HTMLAttributes<HTMLDivElement>,

@@ -10,6 +10,7 @@ import { RootContext } from "../../context/RootContext";
 import { useThemeSettings } from '../../hooks';
 import { IconGroup, List, Menu, View } from '../../shared';
 import sounds from "../../sounds";
+import { generateNavigationStyles } from "../../utils";
 import "./Play.scss";
 import PlayErrorlogs from "./PlayErrorlogs/PlayErrorlogs";
 import { PlayListTable } from "./PlayListTable/PlayListTable";
@@ -32,6 +33,7 @@ function Play() {
 
   const filteredQuestions = filteredQuizzes.reduce((acc, filteredQuiz) => acc += filteredQuiz.questions.length, 0);
   const canStartPlay = (filteredQuestions !== 0 && selectedQuizIds.length !== 0);
+  const generatedNavigationStyles = generateNavigationStyles(settings.navigation);
 
   const startPlay = () => {
     if (uploadedQuizzes.length === 0) {
@@ -67,7 +69,7 @@ function Play() {
       }
     }
   }}>
-    <IconGroup className="Play-icons" icons={[
+    <IconGroup style={generatedNavigationStyles} direction={settings.navigation.direction} className="Play-icons" icons={[
       [`Go to Settings page`, <IoMdSettings size={20} fill={theme.color.opposite_light} onClick={() => {
         settings.sound && sounds.swoosh.play()
         history.push("/settings")

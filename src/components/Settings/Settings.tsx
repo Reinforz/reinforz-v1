@@ -16,7 +16,7 @@ function Settings() {
   const { settings, setSettings, settingsPresets, setSettingsPresets } = useContext(SettingsContext);
   const history = useHistory();
   const { theme: THEME } = useThemeSettings();
-  const styles = generateNavigationStyles(settings.navigation);
+  const generatedNavigationStyles = generateNavigationStyles(settings.navigation);
   return (
     <div style={{ width: '100vw', height: '100vh' }} tabIndex={0} onKeyPress={(e) => {
       switch (e.nativeEvent.code) {
@@ -37,7 +37,7 @@ function Settings() {
         }
       }
     }}>
-      <IconGroup className="Settings-icons" direction={settings.navigation.direction} style={styles} icons={[
+      <IconGroup className="Settings-icons" direction={settings.navigation.direction} style={generatedNavigationStyles} icons={[
         [`Go to Home page`, <AiFillHome size={20} fill={THEME.color.opposite_light} onClick={() => {
           settings.sound && sounds.swoosh.play()
           history.push("/")
