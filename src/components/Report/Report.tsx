@@ -14,7 +14,6 @@ import "./Report.scss";
 import { ReportAggregator } from './ReportAggregator/ReportAggregator';
 import ReportExport from './ReportExport/ReportExport';
 import ReportFilter from './ReportFilter/ReportFilter';
-import { ReportStats } from './ReportStats/ReportStats';
 import { ReportTable } from './ReportTable/ReportTable';
 import { ReportUpload } from './ReportUpload/ReportUpload';
 
@@ -97,7 +96,7 @@ export default function Report() {
         {navigationIconGroup}
         <ReportTable />
         {!filters.excluded_columns.includes("report_info") ? <div style={{ width: 300, display: 'flex', flexDirection: 'column', overflow: 'auto' }}>
-          {!filters.excluded_columns.includes('report_stats') ? <ReportStats /> : null}
+          {!filters.excluded_columns.includes('report_stats') ? <StackList header={"Report Stats"} items={[['Created At', (new Date(parseInt(report.createdAt.toString()))).toDateString()], ['Total Quizzes', `${filteredQuizzesMap.size}/${allQuizzesMap.size}`], ['Total Questions', `${filteredResults.length}/${report.results.length}`]]} /> : null}
           <div className="Report-Settings">
             {!filters.excluded_columns.includes('play_options') ? <StackList header={"Play Options"} items={Object.entries(playSettings.options).map(([key, value]) => [transformTextBySeparator(key), <span style={{ color: value === true ? green[500] : red[500] }}>{value === true ? 'On' : 'Off'}</span>])} /> : null}
             {!filters.excluded_columns.includes('play_filters') ? <StackList header={"Play Filters"} items={Object.entries(playSettings.filters).map(([key, value]) => [transformTextBySeparator(key), Array.isArray(value) ? value.join(",") : value.toString()])} /> : null}
