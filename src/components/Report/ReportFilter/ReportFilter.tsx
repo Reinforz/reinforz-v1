@@ -1,5 +1,5 @@
 import { Button } from '@material-ui/core';
-import React, { useContext } from "react";
+import React, { useContext, useMemo } from "react";
 import { REINFORZ_REPORT_SETTINGS_LS_KEY } from '../../../constants';
 import { ReportContext } from '../../../context/ReportContext';
 import { useThemeSettings } from '../../../hooks';
@@ -22,6 +22,8 @@ export default function ReportFilter() {
       }
     })
   };
+  const allTopics = useMemo(() => Array.from(new Set(Array.from(allQuizzesMap.values()).map(quiz => quiz.topic.trim()))), [allQuizzesMap]);
+  const allSubjects = useMemo(() => Array.from(new Set(Array.from(allQuizzesMap.values()).map(quiz => quiz.subject.trim()))), [allQuizzesMap])
 
   return <div className="ReportFilter" style={{ backgroundColor: theme.color.dark }}>
     <Preset lsKey={REINFORZ_REPORT_SETTINGS_LS_KEY} modalLabel="Save Report Settings" popoverText="Save current report settings as preset" currentPreset={reportSettings} itemPreset={reportSettingsPresets} setPresetState={setReportSettingsPresets} />
@@ -35,8 +37,8 @@ export default function ReportFilter() {
       const selectedQuiz = allQuizzesMap.get(quiz_id)!;
       return `${selectedQuiz.subject} - ${selectedQuiz.topic}`
     }} setState={setFilterState} state={filters} stateKey={"excluded_quizzes"} />
-    <Select multiple label={"Excluded Topics"} items={Array.from(allQuizzesMap.values()).map(quiz => quiz.topic)} menuItemLabel={(topic) => topic} setState={setFilterState} state={filters} stateKey={"excluded_topics"} />
-    <Select multiple label={"Excluded Subjects"} items={Array.from(allQuizzesMap.values()).map(quiz => quiz.subject)} menuItemLabel={(topic) => topic} setState={setFilterState} state={filters} stateKey={"excluded_subjects"} />
+    <Select multiple label={"Excluded Topics"} items={allTopics} menuItemLabel={(topic) => topic} setState={setFilterState} state={filters} stateKey={"excluded_topics"} />
+    <Select multiple label={"Excluded Subjects"} items={allSubjects} menuItemLabel={(topic) => topic} setState={setFilterState} state={filters} stateKey={"excluded_subjects"} />
     <Select multiple label={"Excluded Columns"}
       renderValue={(selected) => (selected as string[]).map((report_stat, index) => <div key={report_stat + "excluded_columns" + index}>{transformTextBySeparator(report_stat)}</div>)}
       items={["question", "image", "question_stats", "user_stats", "score_breakdown", "quiz_stats", "hints", "answers", "options", "report_stats", "play_options", "play_filters", "report_export", "report_aggregator", "report_info"]}
