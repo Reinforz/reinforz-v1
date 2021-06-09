@@ -278,8 +278,9 @@ export interface ISettings {
   shortcuts: boolean;
   sound: boolean;
   navigation: {
-    location: 'top' | 'bottom' | 'left' | 'right';
-    position: 'center' | 'left' | 'right';
+    x: 'center' | 'left' | 'right';
+    y: 'center' | 'top' | 'bottom';
+    direction: 'column' | 'row';
   };
 }
 

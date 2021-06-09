@@ -9,14 +9,14 @@ import { SettingsContext } from '../../context/SettingsContext';
 import { useThemeSettings } from '../../hooks';
 import { IconGroup, Preset, Select, Toggles } from '../../shared';
 import sounds from '../../sounds';
-import { transformTextBySeparator } from '../../utils';
+import { generateNavigationStyles, transformTextBySeparator } from '../../utils';
 import "./Settings.scss";
 
 function Settings() {
   const { settings, setSettings, settingsPresets, setSettingsPresets } = useContext(SettingsContext);
   const history = useHistory();
   const { theme: THEME } = useThemeSettings();
-
+  const styles = generateNavigationStyles(settings.navigation);
   return (
     <div style={{ width: '100vw', height: '100vh' }} tabIndex={0} onKeyPress={(e) => {
       switch (e.nativeEvent.code) {
@@ -37,7 +37,7 @@ function Settings() {
         }
       }
     }}>
-      <IconGroup className="Settings-icons" icons={[
+      <IconGroup className="Settings-icons" direction={settings.navigation.direction} style={styles} icons={[
         [`Go to Home page`, <AiFillHome size={20} fill={THEME.color.opposite_light} onClick={() => {
           settings.sound && sounds.swoosh.play()
           history.push("/")
@@ -89,7 +89,7 @@ function Settings() {
         </div>
         <div className="Settings-content" style={{ backgroundColor: THEME.color.dark }}>
           <Select items={["dark", "polar_night", "light", "snow_storm"]} label={"Theme"} setState={setSettings} state={settings} stateKey={"theme"} menuItemLabel={(item) => transformTextBySeparator(item)} />
-          <Select items={["center", "right", "left"]} label={"Navigation Position"} setState={(navigation) => {
+          <Select items={["center", "right", "left"]} label={"X-Axis"} setState={(navigation) => {
             setSettings({
               ...settings,
               navigation: {
@@ -97,8 +97,8 @@ function Settings() {
                 ...navigation
               }
             })
-          }} state={settings.navigation} stateKey={"position"} menuItemLabel={(item) => transformTextBySeparator(item)} />
-          <Select items={["top", "right", "left", "bottom"]} label={"Navigation Location"} setState={(navigation) => {
+          }} state={settings.navigation} stateKey={"x"} menuItemLabel={(item) => transformTextBySeparator(item)} />
+          <Select items={["center", "top", "bottom"]} label={"Y-Axis"} setState={(navigation) => {
             setSettings({
               ...settings,
               navigation: {
@@ -106,7 +106,16 @@ function Settings() {
                 ...navigation
               }
             })
-          }} state={settings.navigation} stateKey={"location"} menuItemLabel={(item) => transformTextBySeparator(item)} />
+          }} state={settings.navigation} stateKey={"y"} menuItemLabel={(item) => transformTextBySeparator(item)} />
+          <Select items={["column", "row"]} label={"Direction"} setState={(navigation) => {
+            setSettings({
+              ...settings,
+              navigation: {
+                ...settings.navigation,
+                ...navigation
+              }
+            })
+          }} state={settings.navigation} stateKey={"direction"} menuItemLabel={(item) => transformTextBySeparator(item)} />
           <Toggles classNames={{
             FormGroup: 'Settings-content-group',
             InputLabel: 'Settings-content-group-label'

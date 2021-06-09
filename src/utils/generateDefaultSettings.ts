@@ -8,8 +8,9 @@ export function generateDefaultSettingsState(): ISettings {
     shortcuts: true,
     sound: false,
     navigation: {
-      location: 'top',
-      position: 'center'
+      x: 'center',
+      y: 'top',
+      direction: 'row'
     }
   };
 }

@@ -17,6 +17,7 @@ export * from './generateDefaultReportSettings';
 export * from './generateDefaultSettings';
 export * from './generateInputQuestionAnswers';
 export * from './generateMenuStyles';
+export * from './generateNavigationStyles';
 export * from './generateQuestionsMap';
 export * from './generateQuestionsMapFromReportResults';
 export * from './generateQuizzesFromResults';
