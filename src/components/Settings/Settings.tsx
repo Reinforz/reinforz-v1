@@ -89,6 +89,7 @@ function Settings() {
         </div>
         <div className="Settings-content" style={{ backgroundColor: THEME.color.dark }}>
           <Select items={["dark", "polar_night", "light", "snow_storm"]} label={"Theme"} setState={setSettings} state={settings} stateKey={"theme"} menuItemLabel={(item) => transformTextBySeparator(item)} />
+          <Select items={["serif", "sans-serif", "monospace"]} label={"Font"} setState={setSettings} state={settings} stateKey={"font"} menuItemLabel={(item) => transformTextBySeparator(item, "-")} />
           <SelectGroup groupItems={[
             [["center", "right", "left"], "X-Axis", "x"],
             [["center", "top", "bottom"], "Y-Axis", "y"],

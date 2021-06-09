@@ -11,7 +11,8 @@ export function generateDefaultSettingsState(): ISettings {
       x: 'center',
       y: 'top',
       direction: 'row'
-    }
+    },
+    font: 'sans-serif'
   };
 }
 

@@ -1,11 +1,10 @@
 import { PaletteType } from '@material-ui/core';
 import { grey } from '@material-ui/core/colors';
 import { createMuiTheme, darken, lighten } from '@material-ui/core/styles';
-import { Color, ExtendedThemeOptions } from '../types';
+import { Color, ExtendedThemeOptions, ISettings } from '../types';
 
-export function generateTheme(
-  theme: 'dark' | 'light' | 'polar_night' | 'snow_storm'
-) {
+export function generateTheme(settings: ISettings) {
+  const { theme, font } = settings;
   const color: Color = {
     base: '',
     dark: '',
@@ -90,7 +89,12 @@ export function generateTheme(
       }
     },
     typography: {
-      fontFamily: `Lato`,
+      fontFamily:
+        font === 'sans-serif'
+          ? 'Lato'
+          : font === 'serif'
+          ? 'Noto Serif'
+          : 'Ubuntu Mono',
       fontSize: 14
     },
     color,

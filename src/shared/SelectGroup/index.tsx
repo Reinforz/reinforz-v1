@@ -20,7 +20,7 @@ export default function SelectGroup(props: Props) {
       {label}
     </InputLabel>
     <div className="Select-Group-content">
-      {groupItems.map(([items, label, itemStateKey]) => <Select className="Select-Group-content-item" items={items} label={label} setState={(newState) => {
+      {groupItems.map(([items, label, itemStateKey], index) => <Select key={index} className="Select-Group-content-item" items={items} label={label} setState={(newState) => {
         setState({
           ...state,
           [stateKey]: {

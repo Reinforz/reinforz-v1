@@ -282,6 +282,7 @@ export interface ISettings {
     y: 'center' | 'top' | 'bottom';
     direction: 'column' | 'row';
   };
+  font: 'monospace' | 'sans-serif' | 'serif';
 }
 
 export interface IPreset<D> {

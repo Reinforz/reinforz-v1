@@ -43,7 +43,7 @@ const Root = () => {
     // eslint-disable-next-line
   }, [playSettingsPresets.current])
 
-  const generatedTheme = generateTheme(settings.theme) as ExtendedTheme;
+  const generatedTheme = generateTheme(settings) as ExtendedTheme;
   return <ThemeProvider theme={generatedTheme}>
     <SnackbarProvider maxSnack={4}>
       <SettingsContext.Provider value={{ settings, setSettingsPresets, settingsPresets, setSettings }}>
