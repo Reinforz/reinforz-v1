@@ -1,8 +1,10 @@
 import { FormGroup, InputLabel, Switch, withStyles } from '@material-ui/core';
 import { green, red } from '@material-ui/core/colors';
 import clsx from "clsx";
-import React from 'react';
+import React, { useContext } from 'react';
+import { SettingsContext } from '../../context/SettingsContext';
 import { useThemeSettings } from '../../hooks';
+import sounds from '../../sounds';
 
 const OnOffSwitch = withStyles({
   switchBase: {
@@ -33,6 +35,7 @@ interface Props<I extends Record<string, any>> {
 
 export default function Toggles<I extends Record<string, any>>(props: Props<I>) {
   const { theme: THEME } = useThemeSettings();
+  const { settings } = useContext(SettingsContext);
   const { itemsMap, setItems } = props;
   const items = props.items as string[];
   return <> {items.map((item) =>
@@ -41,7 +44,13 @@ export default function Toggles<I extends Record<string, any>>(props: Props<I>) 
       <OnOffSwitch
         checked={Boolean(itemsMap[item])}
         onChange={(e) => {
-          setItems({ ...itemsMap, [item]: !itemsMap[item] })
+          const checked = itemsMap[item];
+          if (checked && settings.sound) {
+            sounds.switch_off.play()
+          } else if (!checked && settings.sound) {
+            sounds.switch_on.play()
+          }
+          setItems({ ...itemsMap, [item]: !checked })
         }}
       />
     </FormGroup>

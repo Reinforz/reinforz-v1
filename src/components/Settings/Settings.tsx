@@ -88,7 +88,7 @@ function Settings() {
           <Preset lsKey={REINFORZ_SETTINGS_LS_KEY} modalLabel="Save Settings" popoverText="Save current settings as preset" currentPreset={settings} itemPreset={settingsPresets} setPresetState={setSettingsPresets} />
         </div>
         <div className="Settings-content" style={{ backgroundColor: THEME.color.dark }}>
-          <Select items={["light", "dark", "polar_night", "snow_storm"]} label={"Theme"} setState={setSettings} state={settings} stateKey={"theme"} menuItemLabel={(item) => transformTextBySeparator(item)} />
+          <Select items={["dark", "polar_night", "light", "snow_storm"]} label={"Theme"} setState={setSettings} state={settings} stateKey={"theme"} menuItemLabel={(item) => transformTextBySeparator(item)} />
           <Toggles classNames={{
             FormGroup: 'Settings-content-group',
             InputLabel: 'Settings-content-group-label'

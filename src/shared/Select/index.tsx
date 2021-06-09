@@ -1,6 +1,8 @@
 import { FormGroup, InputLabel, MenuItem, Select as MuiSelect } from "@material-ui/core";
-import { ChangeEvent } from "react";
+import { ChangeEvent, useContext } from "react";
+import { SettingsContext } from "../../context/SettingsContext";
 import { useThemeSettings } from "../../hooks";
+import sounds from "../../sounds";
 
 interface Props<T extends Record<string, any>> {
   label: string
@@ -17,6 +19,7 @@ interface Props<T extends Record<string, any>> {
 
 export default function Select<T extends Record<string, any>>(props: Props<T>) {
   const { theme } = useThemeSettings();
+  const { settings } = useContext(SettingsContext);
   const { items, multiple, renderValue, menuItemLabel, state, stateKey, setState } = props;
   return <FormGroup>
     <InputLabel>{props.label}</InputLabel>
@@ -25,6 +28,7 @@ export default function Select<T extends Record<string, any>>(props: Props<T>) {
         multiple={Boolean(multiple)}
         renderValue={renderValue}
         onChange={(e) => {
+          settings.sound && sounds.click.play();
           setState({ ...state, [stateKey]: e.target.value as string[] })
           props.onChange && props.onChange(e)
           if (props.lsKey) {

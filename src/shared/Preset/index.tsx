@@ -6,7 +6,9 @@ import { MdDelete, MdUpdate } from "react-icons/md";
 import shortid from "shortid";
 import { Icon, ListSelect, ModalPresetInput } from "../";
 import { ModalContext } from "../../context/ModalContext";
+import { SettingsContext } from "../../context/SettingsContext";
 import { useThemeSettings } from "../../hooks";
+import sounds from "../../sounds";
 import { IPlaySettings, IPlaySettingsPreset, IReportSettings, IReportSettingsPreset, ISettings, ISettingsPreset } from "../../types";
 import "./style.scss";
 
@@ -30,6 +32,7 @@ const centerBottomErrorNotistack = {
 export default function Preset<T extends ISettingsPreset | IPlaySettingsPreset | IReportSettingsPreset, D extends ISettings | IPlaySettings | IReportSettings>(props: Props<T, D>) {
   const { setModalState } = useContext(ModalContext);
   const { theme } = useThemeSettings();
+  const { settings } = useContext(SettingsContext)
   const { lsKey, modalLabel, popoverText, setPresetState, currentPreset, itemPreset } = props;
   const { enqueueSnackbar } = useSnackbar();
 
@@ -60,6 +63,7 @@ export default function Preset<T extends ISettingsPreset | IPlaySettingsPreset |
     <Icon popoverText={popoverText}>
       <FaSave fill={theme.color.opposite_light} size={20} onClick={() => {
         setModalState([true, <ModalPresetInput closeModal={() => setModalState([false, null])} label={modalLabel} onSave={(input) => {
+          settings.sound && sounds.click.play()
           const isValid = checkPresetInput(input);
           if (isValid) {
             // ? Convert to a util module
@@ -82,6 +86,7 @@ export default function Preset<T extends ISettingsPreset | IPlaySettingsPreset |
     <Icon popoverText={itemPreset.current !== 'default' ? "Update preset" : "Can't update default preset"}>
       <MdUpdate size={20} fill={itemPreset.current !== 'default' ? theme.color.opposite_light : grey[500]} onClick={() => {
         if (itemPreset.current !== 'default') {
+          settings.sound && sounds.click.play();
           const currentPresetIndex = (itemPreset.presets as any[]).findIndex(preset => preset.id === itemPreset.current);
           itemPreset.presets[currentPresetIndex].data = currentPreset as any;
           setPresetState(JSON.parse(JSON.stringify(itemPreset)))
@@ -92,6 +97,7 @@ export default function Preset<T extends ISettingsPreset | IPlaySettingsPreset |
     <Icon popoverText={itemPreset.current !== 'default' ? "Delete preset" : "Can't delete default preset"}>
       <MdDelete size={20} fill={itemPreset.current !== 'default' ? red[500] : grey[500]} onClick={() => {
         if (itemPreset.current !== 'default') {
+          settings.sound && sounds.remove.play();
           setPresetState({
             current: 'default',
             presets: (itemPreset.presets as any[]).filter(preset => preset.id !== itemPreset.current)
