@@ -1,5 +1,5 @@
 import { green, red } from '@material-ui/core/colors';
-import React, { useContext, useEffect, useMemo, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { AiFillHome } from 'react-icons/ai';
 import { FaCloudUploadAlt, FaGithub } from 'react-icons/fa';
 import { IoMdCreate, IoMdDocument, IoMdSettings } from 'react-icons/io';
@@ -38,6 +38,12 @@ export default function Report() {
   const { playSettings, setUploadedQuizzes, setSelectedQuizIds } = useContext(
     RootContext
   );
+  const ref = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    ref.current && ref.current.focus();
+  }, [])
+
   const [reportSettingsPresets, setReportSettingsPresets] = useState(
     getReportSettingsPresets()
   );
@@ -208,6 +214,7 @@ export default function Report() {
               className="Report"
               style={{ color: theme.palette.text.primary }}
               {...navigationShortcutProps}
+              ref={ref}
             >
               {navigationIconGroup}
               <ReportTable />
@@ -288,6 +295,7 @@ export default function Report() {
     } else {
       return (
         <div
+          ref={ref}
           className="Report"
           style={{ color: theme.palette.text.primary }}
           {...navigationShortcutProps}

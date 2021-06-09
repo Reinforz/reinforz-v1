@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import { AiFillHome } from 'react-icons/ai';
 import { FaGithub } from 'react-icons/fa';
 import { HiDocumentReport } from 'react-icons/hi';
@@ -16,9 +16,15 @@ function Settings() {
   const { settings, setSettings, settingsPresets, setSettingsPresets } = useContext(SettingsContext);
   const history = useHistory();
   const { theme: THEME } = useThemeSettings();
+  const ref = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    ref.current && ref.current.focus();
+  }, [])
+
   const generatedNavigationStyles = generateNavigationStyles(settings.navigation);
   return (
-    <div style={{ width: '100vw', height: '100vh' }} tabIndex={0} onKeyPress={(e) => {
+    <div style={{ width: '100vw', height: '100vh' }} tabIndex={0} ref={ref} onKeyPress={(e) => {
       switch (e.nativeEvent.code) {
         case "Digit1": {
           settings.sound && sounds.swoosh.play()

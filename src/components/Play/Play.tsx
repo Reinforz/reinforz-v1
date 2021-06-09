@@ -1,6 +1,6 @@
 import { green, red } from "@material-ui/core/colors";
 import { OptionsObject, useSnackbar } from "notistack";
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { FaGithub, FaPlay } from "react-icons/fa";
 import { HiDocumentReport } from "react-icons/hi";
 import { IoMdCreate, IoMdDocument, IoMdSettings } from 'react-icons/io';
@@ -30,6 +30,11 @@ function Play() {
   const { theme, settings } = useThemeSettings();
   const { setPlaying, filteredQuizzes, selectedQuizIds, setUploadedQuizzes, setSelectedQuizIds, uploadedQuizzes, errorLogs, setErrorLogs } = useContext(RootContext);
   const { enqueueSnackbar } = useSnackbar();
+  const ref = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    ref.current && ref.current.focus();
+  }, [])
 
   const filteredQuestions = filteredQuizzes.reduce((acc, filteredQuiz) => acc += filteredQuiz.questions.length, 0);
   const canStartPlay = (filteredQuestions !== 0 && selectedQuizIds.length !== 0);
@@ -50,7 +55,7 @@ function Play() {
     }
   }
 
-  return <Menu lsKey="PLAY_MENU" width={290} contents={[<PlaySettings />, <div className="Play" tabIndex={0} onKeyPress={(e) => {
+  return <Menu lsKey="PLAY_MENU" width={290} contents={[<PlaySettings />, <div className="Play" ref={ref} tabIndex={0} onKeyPress={(e) => {
     switch (e.nativeEvent.code) {
       case "Digit1": {
         settings.sound && sounds.swoosh.play()
