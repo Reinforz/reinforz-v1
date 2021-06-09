@@ -62,11 +62,11 @@ export default function Preset<T extends ISettingsPreset | IPlaySettingsPreset |
 
     <Icon popoverText={popoverText}>
       <FaSave fill={theme.color.opposite_light} size={20} onClick={() => {
+        settings.sound && sounds.click.play()
         setModalState([true, <ModalPresetInput closeModal={() => setModalState([false, null])} label={modalLabel} onSave={(input) => {
-          settings.sound && sounds.click.play()
           const isValid = checkPresetInput(input);
           if (isValid) {
-            // ? Convert to a util module
+            settings.sound && sounds.click.play();
             const currentActivePresetId = shortid();
             const newSettingsPresets: ISettingsPreset = {
               current: currentActivePresetId,

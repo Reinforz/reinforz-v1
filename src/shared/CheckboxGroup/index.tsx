@@ -27,9 +27,9 @@ export default function CheckboxGroup<I extends Record<string, any>>(props: Prop
         props.onChange && props.onChange(finalItems)
         props.setState({ ...props.state, [props.stateKey]: finalItems });
         if (e.target.checked) {
-          settings.sound && sounds.pop_on.play();
-        } else {
           settings.sound && sounds.pop_off.play();
+        } else {
+          settings.sound && sounds.pop_on.play();
         }
 
         if (props.lsKey) {

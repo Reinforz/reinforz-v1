@@ -3,7 +3,9 @@ import { OptionsObject, useSnackbar } from "notistack";
 import React, { useContext } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { RootContext } from '../../../context/RootContext';
+import { SettingsContext } from '../../../context/SettingsContext';
 import { useThemeSettings } from '../../../hooks';
+import sounds from '../../../sounds';
 import { IQuizPartial } from '../../../types';
 import { filterUploadedQuizzes } from "../../../utils";
 import "./PlayUpload.scss";
@@ -21,6 +23,7 @@ export default function PlayUpload() {
   const { uploadedQuizzes, setSelectedQuizIds, errorLogs, setUploadedQuizzes, setErrorLogs } = useContext(RootContext);
   const { enqueueSnackbar } = useSnackbar();
   const { theme } = useThemeSettings();
+  const { settings } = useContext(SettingsContext);
 
   const onDrop = (acceptedFiles: any) => {
     let filePromises: Promise<IQuizPartial>[] = [];
@@ -70,7 +73,15 @@ export default function PlayUpload() {
   if (isDragActive)
     borderColor = '#2196f3';
 
-  return <div style={{ borderColor, backgroundColor: theme.color.light, color: theme.palette.text.secondary }} className="PlayUpload" {...getRootProps()}>
+  const rootProps = getRootProps()
+
+  const onClick = rootProps.onClick
+  rootProps.onClick = (e) => {
+    settings.sound && sounds.swoosh.play();
+    onClick && onClick(e)
+  }
+
+  return <div style={{ borderColor, backgroundColor: theme.color.light, color: theme.palette.text.secondary }} className="PlayUpload" {...rootProps}>
     <input {...getInputProps()} />
     {
       isDragActive ?

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useThemeSettings } from "../../hooks";
+import sounds from "../../sounds";
 import { createAggregateItemsMap, createItemMap } from "../../utils";
 import "./style.scss";
 
@@ -14,7 +15,7 @@ interface Props<T> {
 }
 
 export default function ListTable<T extends Record<string, any>>(props: Props<T>) {
-  const { theme } = useThemeSettings();
+  const { theme, settings } = useThemeSettings();
   const [itemsMap, setItemsMap] = useState<Record<string, any>[]>([]);
   const [sort, setSort] = useState<[string, boolean]>(['title', true]);
   useEffect(() => {
@@ -31,6 +32,7 @@ export default function ListTable<T extends Record<string, any>>(props: Props<T>
     <div className="ListTable-headers" style={{ backgroundColor: theme.color.dark }}>
       <div className="ListTable-headers-row">
         {headers.map((header) => <span className={`ListTable-headers-row-item ListTable-headers-row-item--${header}`} key={header} onClick={() => {
+          settings.sound && sounds.click.play()
           if (sort[0] === header) setSort([header, !sort[1]])
           else setSort([header, false])
         }}>
