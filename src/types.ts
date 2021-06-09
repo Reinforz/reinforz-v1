@@ -277,6 +277,7 @@ export interface ISettings {
   animation: boolean;
   hovertips: boolean;
   shortcuts: boolean;
+  sound: boolean;
 }
 
 export interface IPreset<D> {

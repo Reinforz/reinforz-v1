@@ -52,7 +52,7 @@ function Settings() {
           <Toggles classNames={{
             FormGroup: 'Settings-content-group',
             InputLabel: 'Settings-content-group-label'
-          }} items={["animation", "hovertips", "shortcuts"]} setItems={setSettings} itemsMap={settings} />
+          }} items={["animation", "hovertips", "shortcuts", "sound"]} setItems={setSettings} itemsMap={settings} />
         </div>
       </div>
     </>

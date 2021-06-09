@@ -5,7 +5,8 @@ export function generateDefaultSettingsState(): ISettings {
     animation: true,
     hovertips: true,
     theme: 'dark',
-    shortcuts: true
+    shortcuts: true,
+    sound: false
   };
 }
 
