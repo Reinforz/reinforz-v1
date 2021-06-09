@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useMemo, useState } from 'react';
-import { useHotkeys } from 'react-hotkeys-hook';
 import { AiFillHome } from 'react-icons/ai';
 import { FaCloudUploadAlt } from "react-icons/fa";
 import { IoMdCreate, IoMdSettings } from 'react-icons/io';
@@ -56,10 +55,6 @@ export default function Report() {
     history.push("/")
   }
 
-  useHotkeys('ctrl+shift+1', () => settings.shortcuts && history.push("/settings"), [settings.shortcuts]);
-  useHotkeys('ctrl+shift+2', () => settings.shortcuts && homeIconClick(), [settings.shortcuts, filteredQuizzesMap]);
-  useHotkeys('ctrl+shift+3', () => settings.shortcuts && history.push("/create"), [settings.shortcuts]);
-
   const icons: [string, JSX.Element][] = [
     [`Go to Settings page`, <IoMdSettings size={20} fill={theme.color.opposite_light} onClick={() => history.push("/settings")} />],
     [`Go to Home page`, <AiFillHome size={20} fill={theme.color.opposite_light} onClick={() => homeIconClick()} />],
@@ -79,7 +74,22 @@ export default function Report() {
 
   const render = () => {
     if (report.results.length !== 0) {
-      return <Menu lsKey="REPORT_MENU" contents={[<ReportFilter />, <div className="Report" style={{ color: theme.palette.text.primary }}>
+      return <Menu lsKey="REPORT_MENU" contents={[<ReportFilter />, <div className="Report" style={{ color: theme.palette.text.primary }} tabIndex={0} onKeyPress={(e) => {
+        switch (e.nativeEvent.code) {
+          case "Digit1": {
+            settings.shortcuts && history.push("/settings")
+            break;
+          }
+          case "Digit2": {
+            settings.shortcuts && homeIconClick()
+            break;
+          }
+          case "Digit3": {
+            settings.shortcuts && history.push("/create")
+            break;
+          }
+        }
+      }}>
         {navigationIconGroup}
         <ReportTable />
         {!filters.excluded_columns.includes("report_info") ? <div style={{ width: 300, display: 'flex', flexDirection: 'column', overflow: 'auto' }}>

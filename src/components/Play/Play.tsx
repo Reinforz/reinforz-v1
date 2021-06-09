@@ -1,7 +1,6 @@
 import { green, red } from "@material-ui/core/colors";
 import { OptionsObject, useSnackbar } from "notistack";
 import React, { useContext } from "react";
-import { useHotkeys } from "react-hotkeys-hook";
 import { FaPlay } from "react-icons/fa";
 import { HiDocumentReport } from "react-icons/hi";
 import { IoMdCreate, IoMdSettings } from 'react-icons/io';
@@ -47,19 +46,22 @@ function Play() {
     }
   }
 
-  useHotkeys('ctrl+shift+1', () => {
-    settings.shortcuts && history.push("/settings")
-  }, [settings.shortcuts])
-
-  useHotkeys('ctrl+shift+2', () => {
-    settings.shortcuts && history.push("/report")
-  }, [settings.shortcuts])
-
-  useHotkeys('ctrl+shift+3', () => {
-    settings.shortcuts && history.push("/create")
-  }, [settings.shortcuts])
-
-  return <Menu lsKey="PLAY_MENU" width={290} contents={[<PlaySettings />, <div className="Play">
+  return <Menu lsKey="PLAY_MENU" width={290} contents={[<PlaySettings />, <div className="Play" tabIndex={0} onKeyPress={(e) => {
+    switch (e.nativeEvent.code) {
+      case "Digit1": {
+        settings.shortcuts && history.push("/settings")
+        break;
+      }
+      case "Digit2": {
+        settings.shortcuts && history.push("/report")
+        break;
+      }
+      case "Digit3": {
+        settings.shortcuts && history.push("/create")
+        break;
+      }
+    }
+  }}>
     <IconGroup className="Play-icons" icons={[
       [`Go to Settings page`, <IoMdSettings size={20} fill={theme.color.opposite_light} onClick={() => history.push("/settings")} />],
       [`Go to Report page`, <HiDocumentReport size={20} fill={theme.color.opposite_light} onClick={() => history.push("/report")} />],
