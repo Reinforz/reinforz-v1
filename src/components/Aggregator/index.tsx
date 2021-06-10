@@ -3,6 +3,7 @@ import { Select } from "..";
 import { useThemeSettings } from "../../hooks";
 import { TBooleanAggregation, TNumberAggregation } from "../../types";
 import { computeBooleanDataAggregation, computeNumberDataAggregation } from "../../utils";
+import "./style.scss";
 
 interface Props<T> {
   header: string
@@ -29,11 +30,11 @@ export default function Aggregator<T>(props: Props<T>) {
       {header}
     </div>
     <div className="Aggregator-content" style={{ backgroundColor: theme.color.dark }}>
-      {items.map(item => <div className="Aggregator-content-item">
+      {items.map(item => <div key={item.type + item.label + item.stateKey} className="Aggregator-content-item">
         <Select menuItemLabel={(item) => item} label={item.label} items={item.type === "number" ? ["MAX", "MIN", "AVG"] : ["TRUE", "FALSE"]} setState={(aggregator) => {
           setState({
             ...state,
-            [item.stateKey]: aggregator
+            [item.stateKey]: (aggregator as T)[item.stateKey]
           })
         }} stateKey={item.stateKey} state={state} />
         <div className="Aggregator-content-item-value" style={{ backgroundColor: theme.color.light }}>{item.type === "number" ? computeNumberDataAggregation(item.data, { aggregation: state[item.stateKey] as unknown as TNumberAggregation }) : computeBooleanDataAggregation(item.data, state[item.stateKey] as unknown as TBooleanAggregation)}</div>

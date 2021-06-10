@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import { Aggregator } from "../../../components";
 import { ReportContext } from "../../../context/ReportContext";
-import "./ReportAggregator.scss";
 
 export function ReportAggregator() {
   const { filteredResults, reportSettings, setReportSettings } = useContext(ReportContext);
