@@ -8,27 +8,23 @@ export function navigateBetweenPresets(
   lsKey: string
 ) {
   let newPresetId: string | null = null;
-  if (event.nativeEvent.altKey && event.nativeEvent.code === 'KeyS') {
-    if (settings.presets.length !== 1) {
+  if (settings.presets.length !== 1) {
+    if (event.nativeEvent.altKey && event.nativeEvent.code === 'KeyS') {
       const presetIndex = settings.presets.findIndex(
         (preset) => preset.id === settings.current
       );
-      if (presetIndex === settings.presets.length - 1) {
-        newPresetId = 'default';
-      } else {
-        newPresetId = settings.presets[presetIndex + 1].id;
-      }
-    }
-  } else if (event.nativeEvent.altKey && event.nativeEvent.code === 'KeyA') {
-    if (settings.presets.length !== 1) {
+      newPresetId =
+        presetIndex === settings.presets.length - 1
+          ? 'default'
+          : settings.presets[presetIndex + 1].id;
+    } else if (event.nativeEvent.altKey && event.nativeEvent.code === 'KeyA') {
       const presetIndex = settings.presets.findIndex(
         (settingsPreset) => settingsPreset.id === settings.current
       );
-      if (presetIndex === 0) {
-        newPresetId = settings.presets[settings.presets.length - 1].id;
-      } else {
-        newPresetId = settings.presets[presetIndex - 1].id;
-      }
+      newPresetId =
+        presetIndex === 0
+          ? settings.presets[settings.presets.length - 1].id
+          : settings.presets[presetIndex - 1].id;
     }
   }
 

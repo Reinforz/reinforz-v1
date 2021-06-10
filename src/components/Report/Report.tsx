@@ -4,6 +4,7 @@ import { AiFillHome } from 'react-icons/ai';
 import { FaCloudUploadAlt } from 'react-icons/fa';
 import { IoMdCreate, IoMdSettings } from 'react-icons/io';
 import { useHistory, useLocation } from 'react-router-dom';
+import { REINFORZ_REPORT_SETTINGS_LS_KEY } from '../../constants';
 import { ReportContext } from '../../context/ReportContext';
 import { RootContext } from '../../context/RootContext';
 import { useNavigationIcons, useThemeSettings } from '../../hooks';
@@ -16,6 +17,7 @@ import {
   generateQuestionsMapFromReportResults,
   generateQuizzesFromResults,
   getReportSettingsPresets,
+  navigateBetweenPresets,
   transformTextBySeparator
 } from '../../utils';
 import './Report.scss';
@@ -134,6 +136,9 @@ export default function Report() {
               className="Report"
               style={{ color: theme.palette.text.primary }}
               {...navigationShortcutProps}
+              onKeyUp={(e) => {
+                navigateBetweenPresets(e, reportSettingsPresets, setReportSettingsPresets, REINFORZ_REPORT_SETTINGS_LS_KEY)
+              }}
               ref={ref}
             >
               {navigationIconGroup}
