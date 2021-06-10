@@ -25,7 +25,7 @@ export function applyNumberOperator(
       return range[0] <= data && data <= range[1]!;
     }
     case '><': {
-      return range[0] >= data && data >= range[1]!;
+      return range[0] >= data || data >= range[1]!;
     }
     case '=': {
       return range[0] === data;
