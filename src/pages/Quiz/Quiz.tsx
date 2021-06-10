@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
+import { Stats } from "../../components";
 import { RootContext } from "../../context/RootContext";
 import { useCycle, useThemeSettings } from "../../hooks";
-import { Stats } from "../../shared";
 import { IResult, TQuestionFull } from "../../types";
 import { getAnswerResult } from "../../utils";
 import Question from "../Question/Question";

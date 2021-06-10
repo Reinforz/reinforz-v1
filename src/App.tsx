@@ -1,6 +1,7 @@
 import { makeStyles, useTheme } from "@material-ui/core";
 import { useContext, useState } from "react";
 import { Route, Switch, useLocation } from "react-router-dom";
+import { NotFoundPage, SimpleModal } from "./components";
 import { REINFORZ_PLAY_SETTINGS_LS_KEY, REINFORZ_SETTINGS_LS_KEY } from "./constants";
 import { ModalContext } from './context/ModalContext';
 import { RootContext } from "./context/RootContext";
@@ -11,7 +12,6 @@ import Quiz from "./pages/Quiz/Quiz";
 import Report from "./pages/Report/Report";
 import Settings from "./pages/Settings/Settings";
 import Shortcuts from "./pages/Shortcuts/Shortcuts";
-import { NotFoundPage, SimpleModal } from "./shared";
 import { ExtendedTheme } from "./types";
 import { navigateBetweenPresets } from "./utils";
 

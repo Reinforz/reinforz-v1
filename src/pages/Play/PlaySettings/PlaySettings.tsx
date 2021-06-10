@@ -1,10 +1,10 @@
 import { Button, Checkbox, FormControlLabel } from "@material-ui/core";
 import React, { useContext } from "react";
+import { CheckboxGroup, InputRange, Preset } from '../../../components';
 import { REINFORZ_PLAY_SETTINGS_LS_KEY } from "../../../constants";
 import { RootContext } from "../../../context/RootContext";
 import { SettingsContext } from "../../../context/SettingsContext";
 import { useThemeSettings } from "../../../hooks";
-import { CheckboxGroup, InputRange, Preset } from '../../../shared';
 import sounds from "../../../sounds";
 import { IPlaySettingsFilters, IPlaySettingsOptions } from "../../../types";
 import { generateDefaultPlaySettingsState } from "../../../utils";

@@ -4,11 +4,11 @@ import { AiFillHome } from 'react-icons/ai';
 import { FaCloudUploadAlt, FaKeyboard } from 'react-icons/fa';
 import { IoMdCreate, IoMdSettings } from 'react-icons/io';
 import { useHistory, useLocation } from 'react-router-dom';
+import { IconGroup, Menu, StackList } from '../../components';
 import { REINFORZ_REPORT_SETTINGS_LS_KEY } from '../../constants';
 import { ReportContext } from '../../context/ReportContext';
 import { RootContext } from '../../context/RootContext';
 import { useNavigationIcons, useThemeSettings } from '../../hooks';
-import { IconGroup, Menu, StackList } from '../../shared';
 import { IReport, IReportSettingsPreset, IResult } from '../../types';
 import {
   applyReportFilters,

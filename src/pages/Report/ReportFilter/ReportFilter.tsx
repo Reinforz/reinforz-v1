@@ -1,9 +1,9 @@
 import { Button } from '@material-ui/core';
 import React, { useContext, useMemo } from "react";
+import { CheckboxGroup, InputRange, Preset, RadioGroup, Select, Sort } from '../../../components';
 import { REINFORZ_REPORT_SETTINGS_LS_KEY } from '../../../constants';
 import { ReportContext } from '../../../context/ReportContext';
 import { useThemeSettings } from '../../../hooks';
-import { CheckboxGroup, InputRange, Preset, RadioGroup, Select, Sort } from '../../../shared';
 import { IReportFilter } from '../../../types';
 import { generateDefaultReportSettingsState, transformTextBySeparator } from '../../../utils';
 import "./ReportFilter.scss";

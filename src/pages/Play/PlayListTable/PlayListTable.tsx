@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
+import { ListTable } from "../../../components";
 import { RootContext } from "../../../context/RootContext";
-import { ListTable } from "../../../shared";
 import { divideTimeAllocated } from "../../../utils";
 import "./PlayListTable.scss";
 

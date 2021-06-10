@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { FaSave } from "react-icons/fa";
 import { MdDelete, MdUpdate } from "react-icons/md";
 import shortid from "shortid";
-import { Icon, ListSelect, ModalPresetInput } from "../";
+import { Icon, ListSelect, ModalPresetInput } from "..";
 import { ModalContext } from "../../context/ModalContext";
 import { SettingsContext } from "../../context/SettingsContext";
 import { useThemeSettings } from "../../hooks";

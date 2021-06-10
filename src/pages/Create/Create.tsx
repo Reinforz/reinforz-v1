@@ -1,7 +1,7 @@
 import { Button, TextField } from "@material-ui/core";
 import React, { useState } from "react";
 import shortid from "shortid";
-import { List } from "../../shared";
+import { List } from "../../components";
 import { TQuestionFull } from "../../types";
 import "./Create.scss";
 

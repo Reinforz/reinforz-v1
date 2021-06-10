@@ -1,6 +1,6 @@
 import { Checkbox, FormControlLabel, FormGroup, Radio, RadioGroup } from "@material-ui/core";
+import { Markdown } from "../../../components";
 import { useThemeSettings } from '../../../hooks';
-import { Markdown } from "../../../shared";
 import { TQuestionFull } from '../../../types';
 import "./QuestionOptions.scss";
 

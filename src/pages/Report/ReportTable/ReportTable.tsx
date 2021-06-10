@@ -1,9 +1,9 @@
 import { green, red } from "@material-ui/core/colors";
 import { useContext } from "react";
 import { MdDelete } from 'react-icons/md';
+import { Icon, Markdown, StackList } from "../../../components";
 import { ReportContext } from "../../../context/ReportContext";
 import { useThemeSettings } from "../../../hooks";
-import { Icon, Markdown, StackList } from "../../../shared";
 import { IResultInputQuestion } from "../../../types";
 import { ReportAnswers } from "../ReportAnswers/ReportAnswers";
 import { ReportOptions } from "../ReportOptions/ReportOptions";

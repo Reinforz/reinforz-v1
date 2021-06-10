@@ -1,8 +1,8 @@
 import { AiFillHome } from "react-icons/ai";
 import { HiDocumentReport } from "react-icons/hi";
 import { IoMdCreate, IoMdSettings } from "react-icons/io";
+import { IconGroup, StackList } from "../../components";
 import { useNavigationIcons, useThemeSettings } from "../../hooks";
-import { IconGroup, StackList } from "../../shared";
 import { generateNavigationStyles } from "../../utils";
 import "./Shortcuts.scss";
 

@@ -1,5 +1,5 @@
 import { useTheme } from "@material-ui/styles";
-import { Markdown } from "../../shared";
+import { Markdown } from "../../components";
 import { ExtendedTheme } from "../../types";
 
 interface Props {
