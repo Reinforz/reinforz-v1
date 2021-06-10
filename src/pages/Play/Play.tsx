@@ -79,8 +79,8 @@ function Play() {
     <PlayUpload />
     <div style={{ gridArea: '2/1/5/2' }}>
       <View lsKey="PLAY_VIEW" items={
-        [<List onDelete={(remainingItems) => {
-          setErrorLogs(errorLogs.filter(errorLog => !remainingItems.map(remainingItem => remainingItem._id).includes(errorLog.quiz_id)))
+        [<List onDelete={(_, deletedItems) => {
+          setErrorLogs(errorLogs.filter(errorLog => !deletedItems.includes(errorLog.quiz_id)))
         }} selectedItems={selectedQuizIds} setSelectedItems={setSelectedQuizIds} header="Uploaded Quizzes" items={uploadedQuizzes} setItems={setUploadedQuizzes} fields={[(item) => `${item.subject} - ${item.topic}`, (item) => item.questions.length + " Qs"]} />, <PlayErrorlogs />]}
       />
     </div>

@@ -18,10 +18,11 @@ export default function PlayUpload() {
     else
       resolve(quizData);
   }} postRead={(quizzes: IQuizPartial[]) => {
-    const [logMessages, filteredUploadedQuizzes] = filterUploadedQuizzes(quizzes)
+    const [generatedErrorLogs, filteredUploadedQuizzes] = filterUploadedQuizzes(quizzes)
     const mergedUploadedQuizzes = [...uploadedQuizzes, ...filteredUploadedQuizzes];
-    setErrorLogs([...errorLogs, ...logMessages]);
+    const quizIds = mergedUploadedQuizzes.map(mergedUploadedQuiz => mergedUploadedQuiz._id)
+    setErrorLogs([...errorLogs, ...generatedErrorLogs]);
     setUploadedQuizzes(mergedUploadedQuizzes);
-    setSelectedQuizIds(mergedUploadedQuizzes.map(mergedUploadedQuiz => mergedUploadedQuiz._id))
+    setSelectedQuizIds(quizIds)
   }} />
 }

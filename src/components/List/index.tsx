@@ -12,7 +12,7 @@ export interface Props<T extends { _id: string } & Record<string, any>> {
   setSelectedItems: (data: string[]) => void
   fields: (keyof T | ((data: T) => string))[]
   icons?: ((index: number, _id: string) => void)[]
-  onDelete?: (items: T[]) => void
+  onDelete?: (items: T[], deletedItems: string[]) => void
   items: T[]
   selectedItems: string[]
 }
@@ -41,7 +41,7 @@ export default function List<T extends { _id: string }>(props: Props<T>) {
             settings.sound && sounds.remove.play();
             const remainingItems = items.filter(item => !selectedItems.includes(item._id))
             setItems(remainingItems)
-            props.onDelete && props.onDelete(remainingItems)
+            props.onDelete && props.onDelete(remainingItems, selectedItems)
             setSelectedItems([])
           }} />
         </Icon>
@@ -66,8 +66,9 @@ export default function List<T extends { _id: string }>(props: Props<T>) {
               <Icon key={_id + "icon" + index} popoverText="Delete this item">
                 <MdDelete size={20} className="List-content-item-icons--cancel" onClick={() => {
                   settings.sound && sounds.remove.play();
-                  props.onDelete && props.onDelete([item])
-                  setItems(items.filter(_item => _item._id !== _id))
+                  const remainingItems = items.filter(_item => _item._id !== _id);
+                  props.onDelete && props.onDelete(remainingItems, [item._id])
+                  setItems(remainingItems)
                   setSelectedItems(selectedItems.filter(selectedItem => selectedItem !== _id))
                 }} style={{ fill: theme.palette.error.dark }} />
               </Icon>
