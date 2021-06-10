@@ -6,6 +6,7 @@ import Play from "./components/Play/Play";
 import Quiz from "./components/Quiz/Quiz";
 import Report from "./components/Report/Report";
 import Settings from "./components/Settings/Settings";
+import Shortcuts from "./components/Shortcuts/Shortcuts";
 import { REINFORZ_PLAY_SETTINGS_LS_KEY, REINFORZ_SETTINGS_LS_KEY } from "./constants";
 import { ModalContext } from './context/ModalContext';
 import { RootContext } from "./context/RootContext";
@@ -61,6 +62,7 @@ export default function App() {
         <Route exact path="/create" render={() => <Create />} />
         <Route exact path="/report" render={() => <Report />} />
         <Route exact path="/play" render={() => <Quiz />} />
+        <Route exact path="/shortcuts" render={() => <Shortcuts />} />
         <Route path="*" render={() => <NotFoundPage />} />
       </Switch>
     </div>

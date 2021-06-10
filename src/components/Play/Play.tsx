@@ -1,7 +1,7 @@
 import { green, red } from "@material-ui/core/colors";
 import { OptionsObject, useSnackbar } from "notistack";
 import React, { useContext, useEffect, useRef } from "react";
-import { FaPlay } from "react-icons/fa";
+import { FaKeyboard, FaPlay } from "react-icons/fa";
 import { HiDocumentReport } from "react-icons/hi";
 import { IoMdCreate, IoMdSettings } from 'react-icons/io';
 import { useHistory } from "react-router-dom";
@@ -61,6 +61,9 @@ function Play() {
     onClick: startPlay,
     fill: !canStartPlay ? red[500] : green[500],
     size: 17.5
+  }, {
+    component: FaKeyboard,
+    path: "/shortcuts"
   }]);
 
   useEffect(() => {

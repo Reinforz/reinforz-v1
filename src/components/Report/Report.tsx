@@ -1,7 +1,7 @@
 import { green, red } from '@material-ui/core/colors';
 import React, { useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { AiFillHome } from 'react-icons/ai';
-import { FaCloudUploadAlt } from 'react-icons/fa';
+import { FaCloudUploadAlt, FaKeyboard } from 'react-icons/fa';
 import { IoMdCreate, IoMdSettings } from 'react-icons/io';
 import { useHistory, useLocation } from 'react-router-dom';
 import { REINFORZ_REPORT_SETTINGS_LS_KEY } from '../../constants';
@@ -54,6 +54,9 @@ export default function Report() {
   }, {
     path: "/create",
     component: IoMdCreate
+  }, {
+    component: FaKeyboard,
+    path: "/shortcuts"
   }]);
 
   useEffect(() => {

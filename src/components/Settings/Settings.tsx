@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useRef } from 'react';
 import { AiFillHome } from 'react-icons/ai';
+import { FaKeyboard } from 'react-icons/fa';
 import { HiDocumentReport } from 'react-icons/hi';
 import { IoMdCreate } from 'react-icons/io';
 import { REINFORZ_SETTINGS_LS_KEY } from '../../constants';
@@ -22,6 +23,9 @@ function Settings() {
   }, {
     component: IoMdCreate,
     path: "/create"
+  }, {
+    component: FaKeyboard,
+    path: "/shortcuts"
   }]);
 
   const ref = useRef<HTMLDivElement | null>(null);
