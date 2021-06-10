@@ -1,4 +1,4 @@
-import { OptionsObject, useSnackbar } from "notistack";
+import { OptionsObject, SnackbarKey, SnackbarMessage, useSnackbar } from "notistack";
 import { useContext } from "react";
 import { DropzoneOptions, useDropzone } from "react-dropzone";
 import { SettingsContext } from "../../context/SettingsContext";
@@ -6,12 +6,13 @@ import { useThemeSettings } from "../../hooks";
 import sounds from "../../sounds";
 
 interface Props {
-  maxFiles: number
-  onLoad: (result: string, ext: string) => void
+  maxFiles?: number
+  onLoad: (result: string, ext: string, notistack: { enqueueSnackbar: ((message: SnackbarMessage, options?: OptionsObject | undefined) => SnackbarKey), notistackOptionsObject: OptionsObject }, resolve: ((value: any) => void)) => void
   postRead: (files: any[]) => void
+  className?: string
 }
 
-const centerBottomErrorNotistack = {
+const notistackOptionsObject = {
   variant: 'error',
   anchorOrigin: {
     vertical: 'bottom',
@@ -37,12 +38,12 @@ export default function Upload(props: Props) {
           const { result } = reader;
           if (result) {
             try {
-              props.onLoad(result as string, ext);
+              props.onLoad(result as string, ext, { enqueueSnackbar, notistackOptionsObject }, resolve);
             } catch (err: any) {
-              enqueueSnackbar(`${file.name} Error: ${err.message}`, centerBottomErrorNotistack)
+              enqueueSnackbar(`${file.name} Error: ${err.message}`, notistackOptionsObject)
             }
           } else
-            enqueueSnackbar(`${file.name} is empty`, centerBottomErrorNotistack);
+            enqueueSnackbar(`${file.name} is empty`, notistackOptionsObject);
         }
       }));
       reader.readAsText(file);
@@ -74,7 +75,7 @@ export default function Upload(props: Props) {
     onClick && onClick(e)
   }
 
-  return <div style={{ borderColor, backgroundColor: theme.color.light, color: theme.palette.text.secondary }} className="Upload" {...rootProps}>
+  return <div style={{ borderColor, backgroundColor: theme.color.light, color: theme.palette.text.secondary }} className={`Upload ${props.className ?? ''}`} {...rootProps}>
     <input {...getInputProps()} />
     {
       isDragActive ?
