@@ -44,6 +44,15 @@ export function ReportAggregator() {
         <div className="Report-Aggregator-content-item-value" style={{ backgroundColor: theme.color.light }}>{computeNumberDataAggregation(filteredResults.map(filteredResult => filteredResult.score.amount), { aggregation: aggregator.score })}</div>
       </div>
       <div className="Report-Aggregator-content-item">
+        <Select lsKey={"REPORT_AGGREGATOR"} menuItemLabel={(item) => item} label={'Weighted Score'} items={["MAX", "MIN", "AVG"]} setState={(aggregator) => {
+          setReportSettings({
+            ...reportSettings,
+            aggregator: aggregator as any
+          })
+        }} stateKey={"weighted_score"} state={aggregator} />
+        <div className="Report-Aggregator-content-item-value" style={{ backgroundColor: theme.color.light }}>{computeNumberDataAggregation(filteredResults.map(filteredResult => filteredResult.score.amount * filteredResult.question.weight), { aggregation: aggregator.weighted_score })}</div>
+      </div>
+      <div className="Report-Aggregator-content-item">
         <Select lsKey={"REPORT_AGGREGATOR"} menuItemLabel={(item) => item} label={"Verdict"} items={["TRUE", "FALSE"]} setState={(aggregator) => {
           setReportSettings({
             ...reportSettings,

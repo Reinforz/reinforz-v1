@@ -80,7 +80,10 @@ function Play() {
     <div style={{ gridArea: '2/1/5/2' }}>
       <View lsKey="PLAY_VIEW" items={
         [<List onDelete={(_, deletedItems) => {
-          setErrorLogs(errorLogs.filter(errorLog => !deletedItems.includes(errorLog.quiz_id)))
+          const filteredErrorLogs = errorLogs.filter(errorLog => !deletedItems.includes(errorLog.quiz_id))
+          const filteredErrorLogIds = filteredErrorLogs.map(filteredErrorLog => filteredErrorLog._id)
+          setErrorLogs(filteredErrorLogs)
+          setSelectedErrorLogIds(selectedErrorLogIds.filter(selectedErrorLogId => filteredErrorLogIds.includes(selectedErrorLogId)))
         }} selectedItems={selectedQuizIds} setSelectedItems={setSelectedQuizIds} header="Uploaded Quizzes" items={uploadedQuizzes} setItems={setUploadedQuizzes} fields={[(item) => `${item.subject} - ${item.topic}`, (item) => item.questions.length + " Qs"]} />,
         <List className="Play-ErrorLogs" emptyListMessage="No Errors or Warnings!" selectedItems={selectedErrorLogIds} setSelectedItems={setSelectedErrorLogIds} header="Error & Warnings" items={errorLogs} setItems={setErrorLogs} fields={[(errorLog) => <div className="Play-ErrorLogs-item" style={{ backgroundColor: errorLog.level === "ERROR" ? theme.palette.error.main : theme.palette.warning.main }}>{errorLog.quiz}: {errorLog.target}, {errorLog.message}</div>]} />]}
       />

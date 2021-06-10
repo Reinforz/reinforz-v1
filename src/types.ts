@@ -315,6 +315,7 @@ export interface IReportAggregator {
   score: TNumberAggregation;
   verdict: TBooleanAggregation;
   hints_used: TNumberAggregation;
+  weighted_score: TNumberAggregation;
 }
 
 export interface IReportExport {

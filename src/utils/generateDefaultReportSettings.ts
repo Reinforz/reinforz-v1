@@ -28,15 +28,16 @@ export function generateDefaultReportSettingsExportState() {
   } as IReportExport;
 }
 
-export function generateDefaultReportSettignsAggregatorState() {
+export function generateDefaultReportSettignsAggregatorState(): IReportAggregator {
   return {
+    weighted_score: 'AVG',
     time_allocated: 'AVG',
     time_taken: 'AVG',
     weight: 'AVG',
     score: 'AVG',
     verdict: 'TRUE',
     hints_used: 'AVG'
-  } as IReportAggregator;
+  };
 }
 
 export function generateDefaultReportSettingsState(): IReportSettings {
