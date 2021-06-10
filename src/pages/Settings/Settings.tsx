@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useRef } from 'react';
 import { AiFillHome } from 'react-icons/ai';
 import { FaKeyboard } from 'react-icons/fa';
 import { HiDocumentReport } from 'react-icons/hi';
-import { IoMdCreate } from 'react-icons/io';
+import { IoLogoGameControllerB, IoMdCreate } from 'react-icons/io';
 import { IconGroup, Preset, Select, SelectGroup, Toggles } from '../../components';
 import { REINFORZ_SETTINGS_LS_KEY } from '../../constants';
 import { SettingsContext } from '../../context/SettingsContext';
@@ -21,6 +21,10 @@ function Settings() {
     component: HiDocumentReport,
     path: "/report"
   }, {
+    path: "/play",
+    component: IoLogoGameControllerB
+  },
+  {
     component: IoMdCreate,
     path: "/create"
   }, {

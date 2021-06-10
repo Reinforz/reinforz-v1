@@ -7,7 +7,7 @@ import { REINFORZ_DOC_URL, REINFORZ_REPO_URL } from '../constants';
 import sounds from '../sounds';
 import useThemeSettings from './useThemeSettings';
 
-export default function useNavigationIcons(iconInfos: { path: string, component: IconType, size?: number, fill?: string, page?: string, onClick?: (e: React.MouseEventHandler<SVGElement>) => void }[]) {
+export default function useNavigationIcons(iconInfos: { path: string, component: IconType, size?: number, fill?: string, page?: string, onClick?: (e: React.MouseEventHandler<SVGElement>) => void, popoverText?: string }[]) {
   const { theme, settings } = useThemeSettings();
   const history = useHistory();
 
@@ -55,7 +55,7 @@ export default function useNavigationIcons(iconInfos: { path: string, component:
   const generatedIcons: [string, JSX.Element][] = iconInfos.map(iconInfo => {
     let popoverTextPage = iconInfo.path.replace("/", "");
     popoverTextPage = popoverTextPage.charAt(0).toUpperCase() + popoverTextPage.substr(1);
-    return [`Go to ${iconInfo.page ?? popoverTextPage} page`, React.createElement(iconInfo.component, {
+    return [iconInfo.popoverText ?? `Go to ${iconInfo.page ?? popoverTextPage} page`, React.createElement(iconInfo.component, {
       fill: iconInfo.fill ?? theme.color.opposite_light, size: iconInfo.size ?? 20, onClick: (e) => {
         if (iconInfo.onClick) {
           iconInfo.onClick(e as any)

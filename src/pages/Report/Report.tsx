@@ -2,7 +2,7 @@ import { green, red } from '@material-ui/core/colors';
 import React, { useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { AiFillHome } from 'react-icons/ai';
 import { FaCloudUploadAlt, FaKeyboard } from 'react-icons/fa';
-import { IoMdCreate, IoMdSettings } from 'react-icons/io';
+import { IoLogoGameControllerB, IoMdCreate, IoMdSettings } from 'react-icons/io';
 import { useHistory, useLocation } from 'react-router-dom';
 import { IconGroup, Menu, StackList } from '../../components';
 import { REINFORZ_REPORT_SETTINGS_LS_KEY } from '../../constants';
@@ -51,6 +51,9 @@ export default function Report() {
       setSelectedQuizIds(Array.from(filteredQuizzesMap.keys()));
       history.push('/');
     }
+  }, {
+    path: "/play",
+    component: IoLogoGameControllerB
   }, {
     path: "/create",
     component: IoMdCreate
