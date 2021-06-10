@@ -1,10 +1,14 @@
 import React, { useContext, useState } from "react";
+import { AiFillHome } from "react-icons/ai";
+import { FaKeyboard } from "react-icons/fa";
+import { HiDocumentReport } from "react-icons/hi";
+import { IoMdCreate, IoMdSettings } from "react-icons/io";
 import { useHistory } from "react-router-dom";
-import { Stats } from "../../components";
+import { IconGroup, Stats, Upload } from "../../components";
 import { RootContext } from "../../context/RootContext";
-import { useCycle, useThemeSettings } from "../../hooks";
+import { useCycle, useNavigationIcons, useThemeSettings } from "../../hooks";
 import { IResult, TQuestionFull } from "../../types";
-import { getAnswerResult } from "../../utils";
+import { generateNavigationStyles, getAnswerResult } from "../../utils";
 import Question from "../Question/Question";
 import "./Quiz.scss";
 
@@ -13,12 +17,27 @@ export default function Quiz() {
   const rootContext = useContext(RootContext);
   const { setPlaying, playSettings, allQuestions, playing } = rootContext;
   const [results, setResults] = useState([] as IResult[]);
-  const { theme } = useThemeSettings();
+  const { theme, settings } = useThemeSettings();
   const { isLastItem, currentItem, getNextIndex, currentIndex } = useCycle(allQuestions);
+  const generatedNavigationStyles = generateNavigationStyles(settings.navigation);
 
-  if (!playing) {
-    history.push("/")
-  }
+  const { navigationIcons, onKeyPress } = useNavigationIcons([{
+    path: "/settings",
+    component: IoMdSettings
+  }, {
+    path: "/",
+    page: "Home",
+    component: AiFillHome,
+  }, {
+    path: "/report",
+    component: HiDocumentReport
+  }, {
+    path: "/create",
+    component: IoMdCreate
+  }, {
+    component: FaKeyboard,
+    path: "/shortcuts"
+  }]);
 
   const render = () => {
     if (playing) {
@@ -42,7 +61,10 @@ export default function Quiz() {
         }} />
       </div>
     } else {
-      return null;
+      return <div className="Quiz" onKeyPress={onKeyPress}>
+        <IconGroup className="Report-icons" icons={navigationIcons} direction={settings.navigation.direction} style={generatedNavigationStyles} />
+        <Upload uploadMessage="Drag 'n' drop, or click to upload some play files (.json or .yaml)" onLoad={() => { }} postRead={() => { }} />
+      </div>;
     }
   }
 

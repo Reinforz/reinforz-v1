@@ -11,6 +11,7 @@ interface Props {
   onLoad: (result: string, ext: string, notistack: { enqueueSnackbar: ((message: SnackbarMessage, options?: OptionsObject | undefined) => SnackbarKey), notistackOptionsObject: OptionsObject }, resolve: ((value: any) => void)) => void
   postRead: (files: any[]) => void
   className?: string
+  uploadMessage?: string
 }
 
 const notistackOptionsObject = {
@@ -25,6 +26,7 @@ export default function Upload(props: Props) {
   const { theme } = useThemeSettings();
   const { settings } = useContext(SettingsContext);
   const { enqueueSnackbar } = useSnackbar();
+  const { uploadMessage, className, onLoad, postRead, maxFiles } = props;
 
   const onDrop = (acceptedFiles: any) => {
     const filePromises: Promise<any>[] = [];
@@ -39,7 +41,7 @@ export default function Upload(props: Props) {
           const { result } = reader;
           if (result) {
             try {
-              props.onLoad(result as string, ext, { enqueueSnackbar, notistackOptionsObject }, resolve);
+              onLoad(result as string, ext, { enqueueSnackbar, notistackOptionsObject }, resolve);
             } catch (err: any) {
               enqueueSnackbar(`${file.name} Error: ${err.message}`, notistackOptionsObject)
             }
@@ -51,13 +53,13 @@ export default function Upload(props: Props) {
     });
 
     Promise.all(filePromises).then(files => {
-      props.postRead(files);
+      postRead(files);
     });
   };
 
   const useDropZoneOptions: DropzoneOptions = { onDrop, accept: [".yml", ".yaml", "application/json"] };
 
-  if (props.maxFiles) useDropZoneOptions.maxFiles = props.maxFiles
+  if (maxFiles) useDropZoneOptions.maxFiles = maxFiles
 
   const { getRootProps, getInputProps, isDragActive, isDragAccept, isDragReject } = useDropzone(useDropZoneOptions)
   let borderColor = '#404040';
@@ -76,12 +78,12 @@ export default function Upload(props: Props) {
     onClick && onClick(e)
   }
 
-  return <div style={{ borderColor, backgroundColor: theme.color.light, color: theme.palette.text.secondary }} className={`Upload ${props.className ?? ''}`} {...rootProps}>
+  return <div style={{ borderColor, backgroundColor: theme.color.light, color: theme.palette.text.secondary }} className={`Upload ${className ?? ''}`} {...rootProps}>
     <input {...getInputProps()} />
     {
       isDragActive ?
         <p>Drop the files here ...</p> :
-        <p>Drag 'n' drop some files here, or click to upload files (.json or .yaml files)</p>
+        <p>{uploadMessage ?? `Drag 'n' drop some files here, or click to upload files (.json or .yaml files)`}</p>
     }
   </div>
 }
