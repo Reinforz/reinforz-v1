@@ -33,12 +33,12 @@ export function ReportTable() {
           {!filters.excluded_columns.includes('user_stats') ? <StackList header="User Stats" items={[['Time Taken', sortedResult.time_taken], ['Hints Used', sortedResult.hints_used], ['Verdict', <div style={{
             fontWeight: 'bold', color: sortedResult.verdict === false ? red[500] : green[500]
           }}>{sortedResult.verdict === false ? "Incorrect" : "Correct"}</div>]]} /> : null}
-          {!filters.excluded_columns.includes('score_breakdown') ? <StackList header="Score Breakdown" items={[['Amount', sortedResult.score.amount], ['Answers', sortedResult.score.answers], ['Time', sortedResult.score.time], ['Hints', sortedResult.score.hints]]} /> : null}
+          {!filters.excluded_columns.includes('score_breakdown') ? <StackList header="Score Breakdown" items={[['Amount', sortedResult.score.amount], ['Answers', sortedResult.score.answers], ['Time', sortedResult.score.time], ['Hints', sortedResult.score.hints], ['Weighted', sortedResult.question.weight * sortedResult.score.amount]]} /> : null}
         </div>
         <div style={{ display: 'flex' }}>
           {(sortedResult.question.type === "MCQ" || sortedResult.question.type === "MS") ? !filters.excluded_columns.includes('options') ? <ReportOptions question={sortedResult.question} userAnswers={sortedResult.user_answers} /> : null : !filters.excluded_columns.includes('answers') ? <ReportAnswers question={sortedResult.question as IResultInputQuestion} userAnswers={sortedResult.user_answers} /> : null}
-          {filters.excluded_columns.includes('quiz_stats') && filters.excluded_columns.includes('hints') ? null : <div style={{ width: '25%' }}>
-            {!filters.excluded_columns.includes('quiz_stats') ? <StackList header="Quiz Stats" items={[['Topic', sortedResult.question.quiz.topic], ['Subject', sortedResult.question.quiz.subject]]} /> : null}
+          {filters.excluded_columns.includes('quiz_info') && filters.excluded_columns.includes('hints') ? null : <div style={{ width: '25%' }}>
+            {!filters.excluded_columns.includes('quiz_info') ? <StackList header="Quiz Info" items={[['Topic', sortedResult.question.quiz.topic], ['Subject', sortedResult.question.quiz.subject]]} /> : null}
             {sortedResult.question.hints.length !== 0 && !filters.excluded_columns.includes('hints') ? <div className="Report-Table-item-hints" style={{ backgroundColor: theme.color.base }}>
               {sortedResult.question.hints.map(hint => <div className="Report-Table-item-hints-item" key={hint} style={{ backgroundColor: theme.color.light }}>
                 <Markdown content={hint} />

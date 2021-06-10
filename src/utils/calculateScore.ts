@@ -1,7 +1,6 @@
 import { IResult } from '../types';
 
 interface Parameter {
-  weight: number;
   time_taken: number;
   hints_used: number;
   partial_score: boolean;
@@ -15,7 +14,6 @@ interface Parameter {
 
 export function calculateScore(parameter: Parameter): IResult['score'] {
   const {
-    weight,
     time_taken,
     hints_used,
     partial_score,
@@ -41,13 +39,11 @@ export function calculateScore(parameter: Parameter): IResult['score'] {
           (totalTimeDivisions - timeDivisions)
         ).toFixed(3)
       );
-  const score =
-    weight *
-    (partial_score
-      ? Number((correctAnswersScore + hintsScore + timeTakenScore).toFixed(3))
-      : verdict
-      ? 1
-      : 0);
+  const score = partial_score
+    ? Number((correctAnswersScore + hintsScore + timeTakenScore).toFixed(3))
+    : verdict
+    ? 1
+    : 0;
 
   return {
     amount: score,

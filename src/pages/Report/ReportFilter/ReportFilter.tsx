@@ -42,7 +42,7 @@ export default function ReportFilter() {
       <Select multiple label={"Excluded Subjects"} items={allSubjects} menuItemLabel={(topic) => topic} setState={setFilterState} state={filters} stateKey={"excluded_subjects"} />
       <Select multiple label={"Excluded Columns"}
         renderValue={(selected) => (selected as string[]).map((report_stat, index) => <div key={report_stat + "excluded_columns" + index}>{transformTextBySeparator(report_stat)}</div>)}
-        items={["question", "image", "question_stats", "user_stats", "score_breakdown", "quiz_stats", "hints", "answers", "options", "report_stats", "play_options", "play_filters", "report_export", "report_aggregator", "report_info"]}
+        items={["question", "image", "question_stats", "user_stats", "score_breakdown", "quiz_info", "hints", "answers", "options", "report_stats", "play_options", "play_filters", "report_export", "report_aggregator", "report_info"]}
         menuItemLabel={(item) => transformTextBySeparator(item)}
         setState={setFilterState}
         state={filters}

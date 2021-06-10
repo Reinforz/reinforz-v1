@@ -11,8 +11,6 @@ export function ReportAggregator() {
   const { aggregator } = reportSettings;
   const { theme } = useThemeSettings();
 
-  const totalWeight = filteredResults.reduce((acc, filteredResult) => acc + filteredResult.question.weight, 0);
-
   return <div className="Report-Aggregator" style={{ color: theme.palette.text.primary, backgroundColor: theme.color.base }}>
     <div className="Report-Aggregator-header" style={{ backgroundColor: theme.color.dark }}>
       Report Aggregator
@@ -43,7 +41,7 @@ export function ReportAggregator() {
             aggregator: aggregator as any
           })
         }} stateKey={"score"} state={aggregator} />
-        <div className="Report-Aggregator-content-item-value" style={{ backgroundColor: theme.color.light }}>{computeNumberDataAggregation(filteredResults.map(filteredResult => filteredResult.score.amount), { aggregation: aggregator.score, divider: totalWeight !== 0 ? totalWeight : 1 })}</div>
+        <div className="Report-Aggregator-content-item-value" style={{ backgroundColor: theme.color.light }}>{computeNumberDataAggregation(filteredResults.map(filteredResult => filteredResult.score.amount), { aggregation: aggregator.score })}</div>
       </div>
       <div className="Report-Aggregator-content-item">
         <Select lsKey={"REPORT_AGGREGATOR"} menuItemLabel={(item) => item} label={"Verdict"} items={["TRUE", "FALSE"]} setState={(aggregator) => {

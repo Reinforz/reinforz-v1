@@ -17,7 +17,7 @@ export function getAnswerResult(
   timerDisabled: boolean
 ) {
   let totalCorrectAnswers = 0;
-  const { hints, weight, time_allocated } = currentQuestion;
+  const { hints, time_allocated } = currentQuestion;
   userAnswers = userAnswers.filter((user_answer) => user_answer !== '');
   let verdict = false;
   let transformedQuestion: TResultQuestion = null as any;
@@ -68,7 +68,6 @@ export function getAnswerResult(
     {
       verdict,
       score: calculateScore({
-        weight,
         time_allocated,
         time_taken,
         hints_used,
