@@ -1,6 +1,6 @@
 import { green, red } from "@material-ui/core/colors";
 import { OptionsObject, useSnackbar } from "notistack";
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { FaKeyboard, FaPlay } from "react-icons/fa";
 import { HiDocumentReport } from "react-icons/hi";
 import { IoLogoGameControllerB, IoMdCreate, IoMdSettings } from 'react-icons/io';
@@ -10,7 +10,6 @@ import { RootContext } from "../../context/RootContext";
 import { useNavigationIcons, useThemeSettings } from '../../hooks';
 import { generateNavigationStyles } from "../../utils";
 import "./Play.scss";
-import PlayErrorlogs from "./PlayErrorlogs/PlayErrorlogs";
 import { PlayListTable } from "./PlayListTable/PlayListTable";
 import PlaySettings from "./PlaySettings/PlaySettings";
 import PlayUpload from "./PlayUpload/PlayUpload";
@@ -24,8 +23,9 @@ const centerBottomErrorNotistack = {
 } as OptionsObject;
 
 function Play() {
+  const [selectedErrorLogIds, setSelectedErrorLogIds] = useState<string[]>([]);
   const history = useHistory();
-  const { settings } = useThemeSettings();
+  const { settings, theme } = useThemeSettings();
   const { setPlaying, filteredQuizzes, selectedQuizIds, setUploadedQuizzes, setSelectedQuizIds, uploadedQuizzes, errorLogs, setErrorLogs } = useContext(RootContext);
   const { enqueueSnackbar } = useSnackbar();
   const ref = useRef<HTMLDivElement | null>(null);
@@ -81,7 +81,8 @@ function Play() {
       <View lsKey="PLAY_VIEW" items={
         [<List onDelete={(_, deletedItems) => {
           setErrorLogs(errorLogs.filter(errorLog => !deletedItems.includes(errorLog.quiz_id)))
-        }} selectedItems={selectedQuizIds} setSelectedItems={setSelectedQuizIds} header="Uploaded Quizzes" items={uploadedQuizzes} setItems={setUploadedQuizzes} fields={[(item) => `${item.subject} - ${item.topic}`, (item) => item.questions.length + " Qs"]} />, <PlayErrorlogs />]}
+        }} selectedItems={selectedQuizIds} setSelectedItems={setSelectedQuizIds} header="Uploaded Quizzes" items={uploadedQuizzes} setItems={setUploadedQuizzes} fields={[(item) => `${item.subject} - ${item.topic}`, (item) => item.questions.length + " Qs"]} />,
+        <List className="Play-ErrorLogs" emptyListMessage="No Errors or Warnings!" selectedItems={selectedErrorLogIds} setSelectedItems={setSelectedErrorLogIds} header="Error & Warnings" items={errorLogs} setItems={setErrorLogs} fields={[(errorLog) => <div className="Play-ErrorLogs-item" style={{ backgroundColor: errorLog.level === "ERROR" ? theme.palette.error.main : theme.palette.warning.main }}>{errorLog.quiz}: {errorLog.target}, {errorLog.message}</div>]} />]}
       />
     </div>
     <PlayListTable />

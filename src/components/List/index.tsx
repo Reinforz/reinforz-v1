@@ -10,18 +10,20 @@ export interface Props<T extends { _id: string } & Record<string, any>> {
   header: string
   setItems: (data: T[]) => void
   setSelectedItems: (data: string[]) => void
-  fields: (keyof T | ((data: T) => string))[]
+  fields: (keyof T | ((data: T) => string | JSX.Element))[]
   icons?: ((index: number, _id: string) => void)[]
   onDelete?: (items: T[], deletedItems: string[]) => void
   items: T[]
   selectedItems: string[]
+  emptyListMessage?: string
+  className?: string
 }
 
 export default function List<T extends { _id: string }>(props: Props<T>) {
-  const { items, selectedItems, setItems, setSelectedItems, header, fields } = props;
+  const { items, selectedItems, setItems, setSelectedItems, header, fields, emptyListMessage = 'No items', className = '' } = props;
   const { theme, settings } = useThemeSettings();
 
-  return <div className="List" style={{ backgroundColor: theme.color.base }}>
+  return <div className={`List ${className}`} style={{ backgroundColor: theme.color.base }}>
     <div className="List-header" style={{ backgroundColor: theme.color.dark, color: theme.palette.text.primary }}>
       <Checkbox color="primary" key={"checkbox"} onClick={(e) => {
         if ((e.target as any).checked) {
@@ -77,7 +79,7 @@ export default function List<T extends { _id: string }>(props: Props<T>) {
               {fields.map((field, index) => <div className="List-content-item-field" key={_id + field + index}>{typeof field === "function" ? field(item) : item[field]}</div>)}
             </div>
           </div>
-        }) : <div className="center">No items uploaded</div>}
+        }) : <div className="center">{emptyListMessage}</div>}
     </div>
   </div>
 }
