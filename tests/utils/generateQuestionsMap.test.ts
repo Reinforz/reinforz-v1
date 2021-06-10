@@ -32,7 +32,7 @@ it(`Should filter question if difficulty is included in excluded_difficulty`, ()
   const [allQuestions, allQuestionsMap] = generateQuestionsMap([createQuiz()], {
     excluded_difficulty: ['Advanced'],
     excluded_types: [],
-    time_allocated: [0, 25]
+    time_allocated: ['<>', [0, 25]]
   });
 
   expect(allQuestions).toStrictEqual([]);
@@ -43,7 +43,7 @@ it(`Should filter question if types is included in excluded_types`, () => {
   const [allQuestions, allQuestionsMap] = generateQuestionsMap([createQuiz()], {
     excluded_difficulty: [],
     excluded_types: ['FIB'],
-    time_allocated: [0, 25]
+    time_allocated: ['<>', [0, 25]]
   });
 
   expect(allQuestions).toStrictEqual([]);
@@ -54,7 +54,7 @@ it(`Should filter question if time_allocated is greater than lower bound of time
   const [allQuestions, allQuestionsMap] = generateQuestionsMap([createQuiz()], {
     excluded_difficulty: [],
     excluded_types: [],
-    time_allocated: [40, 50]
+    time_allocated: ['<>', [40, 50]]
   });
 
   expect(allQuestions).toStrictEqual([]);
@@ -65,7 +65,7 @@ it(`Should filter question if time_allocated is less than upper bound of time_al
   const [allQuestions, allQuestionsMap] = generateQuestionsMap([createQuiz()], {
     excluded_difficulty: [],
     excluded_types: [],
-    time_allocated: [20, 25]
+    time_allocated: ['<>', [20, 25]]
   });
 
   expect(allQuestions).toStrictEqual([]);
@@ -77,7 +77,7 @@ it(`Should not filter any questions`, () => {
   const [allQuestions, allQuestionsMap] = generateQuestionsMap([quiz], {
     excluded_difficulty: [],
     excluded_types: [],
-    time_allocated: [0, 50]
+    time_allocated: ['<>', [0, 50]]
   });
 
   expect(allQuestions).toStrictEqual(quiz.questions);

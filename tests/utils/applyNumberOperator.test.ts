@@ -25,7 +25,7 @@ it(`Should work for <> operator`, () => {
 });
 
 it(`Should work for >< operator`, () => {
-  expect(applyNumberOperator(['><', [10, 20]], 5)).toBe(true);
+  expect(applyNumberOperator(['><', [10, 20]], 25)).toBe(true);
 });
 
 it(`Should work for = operator`, () => {
