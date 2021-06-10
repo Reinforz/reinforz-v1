@@ -4,7 +4,6 @@ import { Upload } from '../../../components';
 import { RootContext } from '../../../context/RootContext';
 import { IQuizPartial } from '../../../types';
 import { filterUploadedQuizzes } from "../../../utils";
-import "./PlayUpload.scss";
 
 const trimLower = (data: string) => data.replace(/\s/g, '').toLowerCase();
 

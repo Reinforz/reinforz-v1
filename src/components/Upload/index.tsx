@@ -4,6 +4,7 @@ import { DropzoneOptions, useDropzone } from "react-dropzone";
 import { SettingsContext } from "../../context/SettingsContext";
 import { useThemeSettings } from "../../hooks";
 import sounds from "../../sounds";
+import "./style.scss";
 
 interface Props {
   maxFiles?: number
