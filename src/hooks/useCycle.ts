@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from 'react';
 
 export interface UseCycleOutput {
   // Current item obtained from currentIndex
@@ -13,22 +13,23 @@ export interface UseCycleOutput {
   currentIndex: number;
   // Checks whether currentIndex is the last item
   isLastItem: boolean;
+  setCurrentIndex: Dispatch<SetStateAction<number>>;
 }
 
 export default function useCycle(items: any[]): UseCycleOutput {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   return {
+    setCurrentIndex,
     currentItem: items[currentIndex],
     getNextIndex: () => {
-      setCurrentIndex(currentIndex + 1)
+      setCurrentIndex(currentIndex + 1);
     },
     getPrevIndex: () => {
-      setCurrentIndex(currentIndex - 1)
+      setCurrentIndex(currentIndex - 1);
     },
     hasEnded: currentIndex === items.length,
     currentIndex,
     isLastItem: currentIndex === items.length - 1
-  }
+  };
 }
-

@@ -1,4 +1,4 @@
-import { safeDump } from "js-yaml";
+import yaml, { safeDump } from 'js-yaml';
 import React, { useContext, useState } from "react";
 import { AiFillHome } from "react-icons/ai";
 import { FaCloudDownloadAlt, FaKeyboard } from "react-icons/fa";
@@ -8,7 +8,7 @@ import { useHistory } from "react-router-dom";
 import { Icon, IconGroup, Stats, Upload } from "../../components";
 import { RootContext } from "../../context/RootContext";
 import { useCycle, useNavigationIcons, useThemeSettings } from "../../hooks";
-import { IResult, TQuestionFull } from "../../types";
+import { IPlayDownloadedState, IResult, TQuestionFull } from "../../types";
 import { download, generateNavigationStyles, getAnswerResult } from "../../utils";
 import Question from "../Question/Question";
 import "./Quiz.scss";
@@ -16,10 +16,10 @@ import "./Quiz.scss";
 export default function Quiz() {
   const history = useHistory();
   const rootContext = useContext(RootContext);
-  const { setPlaying, playSettings, allQuestions, playing } = rootContext;
+  const { setPlaying, playSettings, selectedQuizzes, setPlaySettings, allQuestions, playing } = rootContext;
   const [results, setResults] = useState([] as IResult[]);
   const { theme, settings } = useThemeSettings();
-  const { isLastItem, currentItem, getNextIndex, currentIndex } = useCycle(allQuestions);
+  const { isLastItem, currentItem, getNextIndex, currentIndex, setCurrentIndex } = useCycle(allQuestions);
   const generatedNavigationStyles = generateNavigationStyles(settings.navigation);
 
   const { navigationIcons, onKeyPress } = useNavigationIcons([{
@@ -51,8 +51,10 @@ export default function Quiz() {
           <Icon popoverText="Download current play state" style={{ height: "calc(100% - 10px)", padding: 5, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <FaCloudDownloadAlt fill={theme.color.opposite_light} size={25} onClick={() => {
               download(`Play-${Date.now()}.yaml`, safeDump({
-                allQuestions,
-                results: results.map(result => ({ ...result, question: result.question._id }))
+                questions: allQuestions,
+                results: results.map(result => ({ ...result, question: result.question._id })),
+                playSettings,
+                quizzes: selectedQuizzes.map(selectedQuiz => ({ _id: selectedQuiz._id, subject: selectedQuiz.subject, topic: selectedQuiz.topic }))
               }))
             }} />
           </Icon>
@@ -74,7 +76,14 @@ export default function Quiz() {
     } else {
       return <div className="Quiz" onKeyPress={onKeyPress}>
         <IconGroup className="Report-icons" icons={navigationIcons} direction={settings.navigation.direction} style={generatedNavigationStyles} />
-        <Upload uploadMessage="Drag 'n' drop, or click to upload some play files (.json or .yaml)" onLoad={() => { }} postRead={() => { }} />
+        <Upload accept={[".yaml", ".yml"]} maxFiles={1} uploadMessage="Drag 'n' drop, or click to upload some play files (.json or .yaml)" onLoad={(result, _, __, resolve) => {
+          const uploadedPlayState = yaml.safeLoad(result as string) as any;
+          resolve(uploadedPlayState);
+        }} postRead={([playState]: IPlayDownloadedState[]) => {
+          setCurrentIndex(playState.results.length)
+          setResults(playState.results as any)
+          setPlaySettings(playState.playSettings)
+        }} />
       </div>;
     }
   }

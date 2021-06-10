@@ -321,3 +321,10 @@ export interface IReportExport {
   export_type: 'Quizzes' | 'Report';
   export_as: 'JSON' | 'YAML';
 }
+
+export interface IPlayDownloadedState {
+  questions: TQuestionFull[];
+  results: Omit<IResult, 'question'> & { question: string }[];
+  playSettings: IPlaySettings;
+  quizzes: Omit<IQuizFull, 'questions'>[];
+}

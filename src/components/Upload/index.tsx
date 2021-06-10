@@ -11,7 +11,8 @@ interface Props {
   onLoad: (result: string, ext: string, notistack: { enqueueSnackbar: ((message: SnackbarMessage, options?: OptionsObject | undefined) => SnackbarKey), notistackOptionsObject: OptionsObject }, resolve: ((value: any) => void)) => void
   postRead: (files: any[]) => void
   className?: string
-  uploadMessage?: string
+  uploadMessage?: string,
+  accept?: string[]
 }
 
 const notistackOptionsObject = {
@@ -57,7 +58,7 @@ export default function Upload(props: Props) {
     });
   };
 
-  const useDropZoneOptions: DropzoneOptions = { onDrop, accept: [".yml", ".yaml", "application/json"] };
+  const useDropZoneOptions: DropzoneOptions = { onDrop, accept: props.accept ?? [".yml", ".yaml", "application/json"] };
 
   if (maxFiles) useDropZoneOptions.maxFiles = maxFiles
 
