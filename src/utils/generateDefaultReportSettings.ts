@@ -8,16 +8,16 @@ import {
 
 export function generateDefaultReportSettingsFilterState() {
   return {
-    time_taken: [0, 120],
+    time_taken: ['<>', [0, 120]],
+    hints_used: ['<>', [0, 10]],
+    score: ['<>', [0, 1]],
     verdict: 'any',
-    hints_used: [0, 10],
     excluded_types: [],
     excluded_difficulty: [],
     excluded_quizzes: [],
     excluded_columns: [],
     excluded_topics: [],
-    excluded_subjects: [],
-    score: [0, 1]
+    excluded_subjects: []
   } as IReportFilter;
 }
 

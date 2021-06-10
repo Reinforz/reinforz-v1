@@ -1,4 +1,5 @@
 import { IReportFilter, IResult } from '../types';
+import { applyNumberOperator } from './applyNumberOperator';
 
 export function applyReportFilters(
   results: IResult[],
@@ -23,12 +24,9 @@ export function applyReportFilters(
       !excluded_topics.includes(result.question.quiz.topic) &&
       !excluded_subjects.includes(result.question.quiz.subject) &&
       (verdict === 'any' || verdict.toString() === result.verdict.toString()) &&
-      hints_used[0] <= result.hints_used &&
-      hints_used[1] >= result.hints_used &&
-      time_taken[0] <= result.time_taken &&
-      time_taken[1] >= result.time_taken &&
-      score[0] <= result.score.amount &&
-      score[1] >= result.score.amount &&
+      applyNumberOperator(hints_used, result.hints_used) &&
+      applyNumberOperator(time_taken, result.time_taken) &&
+      applyNumberOperator(score, result.score.amount) &&
       !excluded_quizzes.includes(result.question.quiz._id)
   );
 

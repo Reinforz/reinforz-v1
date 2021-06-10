@@ -27,8 +27,9 @@ export interface IPlaySettingsOptions {
 }
 
 export type TNumberOperator = '=' | '<=' | '<>' | '>=' | '<' | '>' | '!' | '><';
+export type TNumberFilter = [TNumberOperator, [number, number?]];
 export interface IPlaySettingsFilters {
-  time_allocated: [TNumberOperator, [number, number]];
+  time_allocated: TNumberFilter;
   excluded_difficulty: TQuestionDifficulty[];
   excluded_types: TQuestionType[];
 }
@@ -238,16 +239,16 @@ export interface IReport {
 }
 
 export interface IReportFilter {
-  time_taken: [number, number];
+  time_taken: TNumberFilter;
+  score: TNumberFilter;
+  hints_used: TNumberFilter;
   verdict: boolean | 'any';
-  hints_used: [number, number];
   excluded_types: TQuestionType[];
   excluded_difficulty: TQuestionDifficulty[];
   excluded_quizzes: string[];
   excluded_topics: string[];
   excluded_subjects: string[];
   excluded_columns: string[];
-  score: [number, number];
 }
 
 export type IReportSort = [string, 'ASC' | 'DESC'][];

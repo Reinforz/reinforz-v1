@@ -1,7 +1,7 @@
-import { TNumberOperator } from '../types';
+import { TNumberFilter } from '../types';
 
 export function applyNumberOperator(
-  param: [TNumberOperator, [number, number?]],
+  param: TNumberFilter,
   data: number
 ) {
   const [operator, range] = param;
