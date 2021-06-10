@@ -58,6 +58,7 @@ export default function ReportExport() {
             export: exportState as any
           })
         }} state={exportState} stateKey={"export_as"} />
+        
         <Icon popoverText={`Export ${export_type} as ${export_as}`} className="Report-Export-button">
           <Button variant="contained" color="primary" onClick={() => {
             settings.sound && sounds.swoosh.play();
