@@ -59,7 +59,7 @@ export default function PlaySettings() {
         Filters
       </div>
       <div className="PlaySettings-group-content PlaySettings-group-content--filters" style={{ backgroundColor: theme.color.dark }}>
-        <InputRange label={"Time Allocated range"} min={0} max={120} setState={setPlaySettingsFilters} state={playSettings.filters} stateKey={"time_allocated"} />
+        <InputRange step={1} label={"Time Allocated range"} min={0} max={120} setState={setPlaySettingsFilters} state={playSettings.filters} stateKey={"time_allocated"} />
         <CheckboxGroup label={'Excluded Difficulty'} items={['Beginner', 'Intermediate', 'Advanced']} setState={setPlaySettingsFilters} stateKey={'excluded_difficulty'} state={playSettings.filters} />
         <CheckboxGroup label={'Excluded Type'} items={['FIB', 'MS', 'MCQ', "Snippet"]} setState={setPlaySettingsFilters} stateKey={'excluded_types'} state={playSettings.filters} />
       </div>

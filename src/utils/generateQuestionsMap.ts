@@ -1,4 +1,5 @@
 import { IPlaySettings, IQuizFull, TQuestionFull } from '../types';
+import { applyNumberOperator } from './applyNumberOperator';
 
 export function generateQuestionsMap(
   filteredQuizzes: IQuizFull[],
@@ -14,8 +15,10 @@ export function generateQuestionsMap(
           question.difficulty
         ) &&
         !playSettingsFilters.excluded_types.includes(question.type) &&
-        playSettingsFilters.time_allocated[0] <= question.time_allocated &&
-        playSettingsFilters.time_allocated[1] >= question.time_allocated
+        applyNumberOperator(
+          playSettingsFilters.time_allocated,
+          question.time_allocated
+        )
     );
     allQuestions.push(...filteredQuiz.questions);
     filteredQuiz.questions.forEach((question) =>

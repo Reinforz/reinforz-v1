@@ -10,7 +10,7 @@ import { SettingsContext } from "./context/SettingsContext";
 import './index.scss';
 import "./styles/vs-light.scss";
 import "./styles/vscode-dark.scss";
-import { ExtendedTheme, IErrorLog, IPlaySettingsPreset, IQuizFull, ISettingsPreset, TQuestionFull } from './types';
+import { ExtendedTheme, IErrorLog, IPlaySettings, IPlaySettingsPreset, IQuizFull, ISettings, ISettingsPreset, TQuestionFull } from './types';
 import { applyPlaySettingsOptions, arrayShuffler, generateQuestionsMap, generateTheme, getPlaySettingsPresets, getSettingsPresets } from './utils';
 
 function findSettingsFromPresets(preset: ISettingsPreset | IPlaySettingsPreset) {
@@ -19,15 +19,14 @@ function findSettingsFromPresets(preset: ISettingsPreset | IPlaySettingsPreset) 
 
 const Root = () => {
   const [settingsPresets, setSettingsPresets] = useState(getSettingsPresets());
-  const [settings, setSettings] = useState(findSettingsFromPresets(settingsPresets));
-
+  const [settings, setSettings] = useState<ISettings>(findSettingsFromPresets(settingsPresets));
   const [playSettingsPresets, setPlaySettingsPresets] = useState(getPlaySettingsPresets());
-  const [playSettings, setPlaySettings] = useState(findSettingsFromPresets(playSettingsPresets));
-
+  const [playSettings, setPlaySettings] = useState<IPlaySettings>(findSettingsFromPresets(playSettingsPresets));
   const [uploadedQuizzes, setUploadedQuizzes] = useState<IQuizFull[]>([]);
   const [selectedQuizIds, setSelectedQuizIds] = useState<string[]>([]);
   const [errorLogs, setErrorLogs] = useState<IErrorLog[]>([]);
   const [playing, setPlaying] = useState<boolean>(false);
+
   const [selectedQuizzes, filteredQuizzes] = applyPlaySettingsOptions(uploadedQuizzes, selectedQuizIds, playSettings.options, arrayShuffler);
   const [allQuestions, allQuestionsMap] = generateQuestionsMap(filteredQuizzes, playSettings.filters);
   const allShuffledQuestions: TQuestionFull[] = useMemo(() => {

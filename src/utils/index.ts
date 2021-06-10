@@ -1,3 +1,4 @@
+export * from './applyNumberOperator';
 export * from './applyPlaySettingsOptions';
 export * from './applyReportFilters';
 export * from './applyReportSorts';
