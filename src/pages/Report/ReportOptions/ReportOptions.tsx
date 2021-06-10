@@ -27,7 +27,7 @@ export function ReportOptions(props: Props) {
             {option.userSelected ? <FaUser fill={theme.palette.text.primary} style={{ padding: 5 }} size={17.5} /> : null}
           </div> : null}
         </div>
-        {question.answers[index]?.explanation ? <div style={{ backgroundColor: theme.color.light, padding: 5, margin: 2.5 }} className="Report-Options-container-item-explanation">
+        {question.answers[index]?.explanation ? <div style={{ backgroundColor: theme.color.light }} className="Report-Options-container-item-explanation">
           <Markdown content={question.answers[index].explanation!} />
         </div> : null}
       </div>

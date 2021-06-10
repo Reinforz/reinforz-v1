@@ -2,18 +2,18 @@ import { SetStateAction } from "react";
 import { Select } from "..";
 import { useThemeSettings } from "../../hooks";
 import { TBooleanAggregation, TNumberAggregation } from "../../types";
-import { computeBooleanDataAggregation, computeNumberDataAggregation } from "../../utils";
+import { computeBooleanDataAggregation, computeNumberDataAggregation, transformTextBySeparator } from "../../utils";
 import "./style.scss";
 
 interface Props<T> {
   header: string
   items: ({
-    label: string,
+    label?: string,
     stateKey: keyof T,
     data: number[],
     type: 'number'
   } | {
-    label: string,
+    label?: string,
     stateKey: keyof T,
     data: boolean[],
     type: 'boolean'
@@ -30,8 +30,8 @@ export default function Aggregator<T>(props: Props<T>) {
       {header}
     </div>
     <div className="Aggregator-content" style={{ backgroundColor: theme.color.dark }}>
-      {items.map(item => <div key={item.type + item.label + item.stateKey} className="Aggregator-content-item">
-        <Select menuItemLabel={(item) => item} label={item.label} items={item.type === "number" ? ["MAX", "MIN", "AVG"] : ["TRUE", "FALSE"]} setState={(aggregator) => {
+      {items.map(item => <div key={item.type + item.stateKey} className="Aggregator-content-item">
+        <Select menuItemLabel={(item) => item} label={item.label ?? transformTextBySeparator(item.stateKey as string)} items={item.type === "number" ? ["MAX", "MIN", "AVG"] : ["TRUE", "FALSE"]} setState={(aggregator) => {
           setState({
             ...state,
             [item.stateKey]: (aggregator as T)[item.stateKey]
