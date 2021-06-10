@@ -24,7 +24,7 @@ interface Props<T> {
 export default function Aggregator<T>(props: Props<T>) {
   const { header, items, state, setState } = props;
   const { theme } = useThemeSettings();
-  <div className="Aggregator" style={{ color: theme.palette.text.primary, backgroundColor: theme.color.base }}>
+  return <div className="Aggregator" style={{ color: theme.palette.text.primary, backgroundColor: theme.color.base }}>
     <div className="Aggregator-header" style={{ backgroundColor: theme.color.dark }}>
       {header}
     </div>
