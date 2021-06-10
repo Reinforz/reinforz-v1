@@ -19,7 +19,7 @@ export function generateDefaultPlaySettingsOptionsState() {
 
 export function generateDefaultPlaySettingsFiltersState() {
   return {
-    time_allocated: [5, 120],
+    time_allocated: ['<>', [5, 120]],
     excluded_difficulty: [],
     excluded_types: []
   } as IPlaySettingsFilters;

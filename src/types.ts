@@ -26,8 +26,9 @@ export interface IPlaySettingsOptions {
   disable_timer: boolean;
 }
 
+export type TNumberOperator = '=' | '<=' | '<>' | '>=' | '<' | '>' | '!' | '><';
 export interface IPlaySettingsFilters {
-  time_allocated: [number, number];
+  time_allocated: [TNumberOperator, [number, number]];
   excluded_difficulty: TQuestionDifficulty[];
   excluded_types: TQuestionType[];
 }
