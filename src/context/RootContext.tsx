@@ -18,6 +18,18 @@ interface IRootContext {
   playing: boolean
   playSettingsPresets: IPlaySettingsPreset
   setPlaySettingsPresets: React.Dispatch<React.SetStateAction<IPlaySettingsPreset>>
+  uploadedPlayState: boolean
+  setUploadedPlayState: React.Dispatch<React.SetStateAction<boolean>>
+  playQuizzes: { selected: IQuizFull[], filtered: IQuizFull[] },
+  setPlayQuizzes: React.Dispatch<React.SetStateAction<{ selected: IQuizFull[], filtered: IQuizFull[] }>>
+  playQuestions: {
+    array: TQuestionFull[];
+    map: Map<string, TQuestionFull>;
+  },
+  setPlayQuestions: React.Dispatch<React.SetStateAction<{
+    array: TQuestionFull[];
+    map: Map<string, TQuestionFull>;
+  }>>
 }
 
 export const RootContext = React.createContext({} as IRootContext)

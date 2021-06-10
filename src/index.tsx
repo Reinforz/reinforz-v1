@@ -26,12 +26,40 @@ const Root = () => {
   const [selectedQuizIds, setSelectedQuizIds] = useState<string[]>([]);
   const [errorLogs, setErrorLogs] = useState<IErrorLog[]>([]);
   const [playing, setPlaying] = useState<boolean>(false);
+  const [uploadedPlayState, setUploadedPlayState] = useState(false);
+  const [playQuizzes, setPlayQuizzes] = useState<{ selected: IQuizFull[], filtered: IQuizFull[] }>({
+    filtered: [],
+    selected: []
+  });
 
-  const [selectedQuizzes, filteredQuizzes] = applyPlaySettingsOptions(uploadedQuizzes, selectedQuizIds, playSettings.options, arrayShuffler);
-  const [allQuestions, allQuestionsMap] = generateQuestionsMap(filteredQuizzes, playSettings.filters);
+  const [playQuestions, setPlayQuestions] = useState<{ array: TQuestionFull[], map: Map<string, TQuestionFull> }>({
+    array: [],
+    map: new Map()
+  })
+
+  useEffect(() => {
+    if (!uploadedPlayState) {
+      const [selected, filtered] = applyPlaySettingsOptions(uploadedQuizzes, selectedQuizIds, playSettings.options, arrayShuffler);
+      setPlayQuizzes({
+        selected,
+        filtered
+      })
+    }
+  }, [uploadedQuizzes, selectedQuizIds, playSettings.options, uploadedPlayState]);
+
+  useEffect(() => {
+    if (!uploadedPlayState) {
+      const [allQuestions, allQuestionsMap] = generateQuestionsMap(playQuizzes.filtered, playSettings.filters);
+      setPlayQuestions({
+        array: allQuestions,
+        map: allQuestionsMap
+      })
+    }
+  }, [playQuizzes.filtered, playSettings.filters, uploadedPlayState]);
+
   const allShuffledQuestions: TQuestionFull[] = useMemo(() => {
-    return playSettings.options.flatten_mix ? arrayShuffler(allQuestions) : allQuestions
-  }, [allQuestions, playSettings.options.flatten_mix])
+    return playSettings.options.flatten_mix && !uploadedPlayState ? arrayShuffler(playQuestions.array) : playQuestions.array
+  }, [playQuestions.array, playSettings.options.flatten_mix, uploadedPlayState])
 
   useEffect(() => {
     setSettings(findSettingsFromPresets(settingsPresets))
@@ -47,7 +75,7 @@ const Root = () => {
   return <ThemeProvider theme={generatedTheme}>
     <SnackbarProvider maxSnack={4}>
       <SettingsContext.Provider value={{ settings, setSettingsPresets, settingsPresets, setSettings }}>
-        <RootContext.Provider value={{ playSettingsPresets, setPlaySettingsPresets, playing, setPlaying, selectedQuizzes, allQuestionsMap, allQuestions: allShuffledQuestions, filteredQuizzes, setPlaySettings, playSettings, errorLogs, setErrorLogs, uploadedQuizzes, selectedQuizIds, setUploadedQuizzes, setSelectedQuizIds }}>
+        <RootContext.Provider value={{ playQuestions, setPlayQuestions, playQuizzes, setPlayQuizzes, uploadedPlayState, setUploadedPlayState, playSettingsPresets, setPlaySettingsPresets, playing, setPlaying, selectedQuizzes: playQuizzes.selected, allQuestionsMap: playQuestions.map, allQuestions: allShuffledQuestions, filteredQuizzes: playQuizzes.filtered, setPlaySettings, playSettings, errorLogs, setErrorLogs, uploadedQuizzes, selectedQuizIds, setUploadedQuizzes, setSelectedQuizIds }}>
           <App />
         </RootContext.Provider>
       </SettingsContext.Provider>

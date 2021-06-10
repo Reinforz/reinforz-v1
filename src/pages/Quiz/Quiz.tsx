@@ -9,14 +9,14 @@ import { Icon, IconGroup, Stats, Upload } from "../../components";
 import { RootContext } from "../../context/RootContext";
 import { useCycle, useNavigationIcons, useThemeSettings } from "../../hooks";
 import { IPlayDownloadedState, IResult, TQuestionFull } from "../../types";
-import { download, generateNavigationStyles, getAnswerResult } from "../../utils";
+import { download, generateNavigationStyles, generateQuizzesFromPlayState, getAnswerResult } from "../../utils";
 import Question from "../Question/Question";
 import "./Quiz.scss";
 
 export default function Quiz() {
   const history = useHistory();
   const rootContext = useContext(RootContext);
-  const { setPlaying, playSettings, selectedQuizzes, setPlaySettings, allQuestions, playing } = rootContext;
+  const { setPlayQuestions, setPlayQuizzes, setUploadedPlayState, setPlaying, playSettings, selectedQuizzes, setPlaySettings, allQuestions, playing } = rootContext;
   const [results, setResults] = useState([] as IResult[]);
   const { theme, settings } = useThemeSettings();
   const { isLastItem, currentItem, getNextIndex, currentIndex, setCurrentIndex } = useCycle(allQuestions);
@@ -80,9 +80,25 @@ export default function Quiz() {
           const uploadedPlayState = yaml.safeLoad(result as string) as any;
           resolve(uploadedPlayState);
         }} postRead={([playState]: IPlayDownloadedState[]) => {
+          const allQuestionsMap: Map<string, TQuestionFull> = new Map();
+          playState.questions.forEach((question) =>
+            allQuestionsMap.set(question._id, question)
+          );
+          const generatedQuizzesMap = generateQuizzesFromPlayState(playState, allQuestionsMap);
+          const generatedQuizzesArray = Array.from(generatedQuizzesMap.values());
+          setUploadedPlayState(true)
+          setPlayQuestions({
+            array: playState.questions,
+            map: allQuestionsMap
+          })
+          setPlayQuizzes({
+            filtered: generatedQuizzesArray,
+            selected: generatedQuizzesArray
+          })
           setCurrentIndex(playState.results.length)
           setResults(playState.results as any)
           setPlaySettings(playState.playSettings)
+          setPlaying(true)
         }} />
       </div>;
     }
