@@ -41,8 +41,10 @@ export default function useNavigationIcons(iconInfos: { path: string, component:
   const onKeyPress = (e: React.KeyboardEvent<HTMLDivElement>) => {
     const digit = parseInt(e.nativeEvent.code.replace('Digit', ''));
     if (digit) {
-      if (digit <= iconInfos.length)
-        navigate(iconInfos[digit - 1].path, true);
+      if (digit <= iconInfos.length) {
+        const iconInfo = iconInfos[digit - 1];
+        iconInfo.onClick ? iconInfo.onClick(e as any) : navigate(iconInfo.path, true);
+      }
       else if (digit === iconInfos.length + 1)
         goToDocumentation()
       else if (digit === iconInfos.length + 2)
