@@ -8,11 +8,13 @@
   &-button.MuiButton-containedPrimary{
     margin: 0px 5px 5px 0px;
   }
+
+  .Upload{
+    top: 50%;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
 }
 
-.Upload{
-  top: 50%;
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}

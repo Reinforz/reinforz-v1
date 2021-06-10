@@ -5,13 +5,14 @@ import "./style.scss";
 
 interface Props {
   items: ([string, any] | null)[]
+  style?: React.CSSProperties
 }
 
 function Stats(props: Props) {
   const theme = useTheme() as ExtendedTheme;
   const { items } = props;
   return (
-    <div className="Stats" style={{ backgroundColor: theme.color.dark, color: theme.palette.text.primary }}>
+    <div className="Stats" style={{ backgroundColor: theme.color.dark, color: theme.palette.text.primary, ...(props.style ?? {}) }}>
       {items.map(item => {
         return item ? <div key={`${item[0]}`} className={`Stats-item Stats-item-${item[0]}`}>
           <span className={`Stats-item-key`}>{item[0] + ": "}</span>

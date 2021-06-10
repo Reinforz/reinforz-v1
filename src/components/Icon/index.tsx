@@ -56,7 +56,7 @@ export default function Icon(props: Props) {
     generatedProps.onClick = props.onClick;
 
   return <Fragment>
-    <span {...generatedProps} className={`${className ?? ''} icon`} style={{ display: "flex", height: 'fit-content', ...props.style ?? {}, }} onMouseEnter={(e: any) => setAnchorEl(e.currentTarget)} onMouseLeave={() => setAnchorEl(null)}>{children}</span>
+    <span {...generatedProps} className={`${className ?? ''} icon`} style={{ cursor: 'pointer', display: "flex", height: 'fit-content', ...props.style ?? {}, }} onMouseEnter={(e: any) => setAnchorEl(e.currentTarget)} onMouseLeave={() => setAnchorEl(null)}>{children}</span>
     {settings.hovertips && <Popover className={classes.popover}
       classes={{
         paper: classes.paper,
