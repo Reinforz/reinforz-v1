@@ -33,13 +33,13 @@ const result: IResult = {
 };
 
 const default_filters: IReportFilter = {
+  hints_used: ['<>', [0, 2]],
+  time_taken: ['<>', [0, 60]],
+  score: ['<>', [0, 1]],
   excluded_difficulty: [],
   excluded_quizzes: [],
   excluded_types: [],
-  hints_used: [0, 2],
-  time_taken: [0, 60],
   verdict: true,
-  score: [0, 1],
   excluded_columns: [],
   excluded_topics: [],
   excluded_subjects: []
@@ -93,7 +93,7 @@ it(`Should filter out if question verdict is different from filter verdict`, () 
 it(`Should filter out if question time taken is less than lower bound of time_taken`, () => {
   const filteredResults = applyReportFilters([result], {
     ...default_filters,
-    time_taken: [30, 60]
+    time_taken: ['<>', [30, 60]]
   });
 
   expect(filteredResults).toStrictEqual([]);
@@ -102,7 +102,7 @@ it(`Should filter out if question time taken is less than lower bound of time_ta
 it(`Should filter out if question time taken is greater than upper bound of time_taken`, () => {
   const filteredResults = applyReportFilters([result], {
     ...default_filters,
-    time_taken: [10, 15]
+    time_taken: ['<>', [10, 15]]
   });
 
   expect(filteredResults).toStrictEqual([]);
@@ -111,7 +111,7 @@ it(`Should filter out if question time taken is greater than upper bound of time
 it(`Should filter out if question time taken is less than lower bound of score`, () => {
   const filteredResults = applyReportFilters([result], {
     ...default_filters,
-    score: [1, 1]
+    score: ['<>', [1, 1]]
   });
 
   expect(filteredResults).toStrictEqual([]);
@@ -120,7 +120,7 @@ it(`Should filter out if question time taken is less than lower bound of score`,
 it(`Should filter out if question time taken is greater than upper bound of score`, () => {
   const filteredResults = applyReportFilters([result], {
     ...default_filters,
-    score: [0, 0.5]
+    score: ['<>', [0, 0.5]]
   });
 
   expect(filteredResults).toStrictEqual([]);
@@ -129,7 +129,7 @@ it(`Should filter out if question time taken is greater than upper bound of scor
 it(`Should filter out if question hints used is less than lower bound of hints_used`, () => {
   const filteredResults = applyReportFilters([result], {
     ...default_filters,
-    hints_used: [0, 1]
+    hints_used: ['<>', [0, 1]]
   });
 
   expect(filteredResults).toStrictEqual([]);
@@ -138,7 +138,7 @@ it(`Should filter out if question hints used is less than lower bound of hints_u
 it(`Should filter out if question hints used is greater than upper bound of hints_used`, () => {
   const filteredResults = applyReportFilters([result], {
     ...default_filters,
-    hints_used: [3, 10]
+    hints_used: ['<>', [3, 10]]
   });
 
   expect(filteredResults).toStrictEqual([]);
