@@ -1,41 +1,41 @@
-import React from 'react';
 import clsx from 'clsx';
+import React from 'react';
 import styles from './HomepageFeatures.module.css';
 
 const FeatureList = [
   {
-    title: 'Easy to Use',
-    Svg: require('../../static/img/undraw_docusaurus_mountain.svg').default,
+    title: 'Feature Rich',
+    Svg: require('../../static/img/feature_rich.svg').default,
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        Everything you can possible think of while using the product, is most
+        likely already integrated.
       </>
-    ),
+    )
   },
   {
-    title: 'Focus on What Matters',
-    Svg: require('../../static/img/undraw_docusaurus_tree.svg').default,
+    title: 'Detailed Reports',
+    Svg: require('../../static/img/detailed_reports.svg').default,
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        Get detailed reports of your performance and gain insights of your
+        strengths and weaknesses.
       </>
-    ),
+    )
   },
   {
-    title: 'Powered by React',
-    Svg: require('../../static/img/undraw_docusaurus_react.svg').default,
+    title: 'Easy to use',
+    Svg: require('../../static/img/easy_to_use.svg').default,
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        Despite providing countless features, all of them are easy to use and
+        intuitive.
       </>
-    ),
-  },
+    )
+  }
 ];
 
-function Feature({Svg, title, description}) {
+function Feature({ Svg, title, description }) {
   return (
     <div className={clsx('col col--4')}>
       <div className="text--center">
