@@ -1,6 +1,7 @@
 import { Checkbox, FormControlLabel, FormGroup, Radio, RadioGroup } from "@material-ui/core";
 import { Markdown } from "../../../components";
 import { useThemeSettings } from '../../../hooks';
+import sounds from "../../../sounds";
 import { TQuestionFull } from '../../../types';
 import "./QuestionOptions.scss";
 
@@ -11,13 +12,16 @@ interface Props {
 }
 
 export default function QuestionOptions(props: Props) {
-  const { theme } = useThemeSettings();
+  const { theme, settings } = useThemeSettings();
   const { setUserAnswers, userAnswers, question: { _id } } = props;
 
   const generateOptions = () => {
     switch (props.question.type) {
       case "MCQ": {
-        return <RadioGroup className="QuestionOptions-container QuestionOptions-container--MCQ" style={{ backgroundColor: theme.color.base }} value={userAnswers.length === 0 ? [''] : userAnswers[0]} onChange={e => setUserAnswers([e.target.value])}>
+        return <RadioGroup className="QuestionOptions-container QuestionOptions-container--MCQ" style={{ backgroundColor: theme.color.base }} value={userAnswers.length === 0 ? [''] : userAnswers[0]} onChange={e => {
+          settings.sound && sounds.option_click.play();
+          setUserAnswers([e.target.value])
+        }}>
           {props.question.options.map((option, i) => {
             return <div key={`${_id}option${i}`} className="QuestionOptions-container-item" style={{ backgroundColor: theme.color.light }}>
               <FormControlLabel
@@ -32,10 +36,14 @@ export default function QuestionOptions(props: Props) {
       }
       case "MS": {
         return <FormGroup className="QuestionOptions-container QuestionOptions-container--MS" style={{ backgroundColor: theme.color.base }} onChange={(e: any) => {
-          if (e.target.checked)
+          if (e.target.checked) {
+            settings.sound && sounds.pop_off.play();
             setUserAnswers(userAnswers.concat(e.target.value))
-          else
+          }
+          else {
+            settings.sound && sounds.pop_on.play();
             setUserAnswers(userAnswers.filter(user_answer => user_answer !== e.target.value));
+          }
         }}>
           {props.question.options.map((option, i) => {
             return <div key={`${_id}option${i}`} className={`QuestionOptions-container-item`} style={{ backgroundColor: theme.color.light }}>

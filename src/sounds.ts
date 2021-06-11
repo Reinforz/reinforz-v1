@@ -8,7 +8,11 @@ const soundNames = [
   'reset',
   'horn',
   'click',
-  'option_click'
+  'option_click',
+  'keyboard_1',
+  'keyboard_2',
+  'keyboard_3',
+  'tick'
 ] as const;
 
 const sounds: Record<
@@ -21,7 +25,11 @@ const sounds: Record<
   | 'reset'
   | 'horn'
   | 'click'
-  | 'option_click',
+  | 'option_click'
+  | 'keyboard_1'
+  | 'keyboard_2'
+  | 'keyboard_3'
+  | 'tick',
   HTMLAudioElement
 > = {} as any;
 

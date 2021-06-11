@@ -4,6 +4,7 @@ import { MdDelete } from 'react-icons/md';
 import { Icon, Markdown, StackList } from "../../../components";
 import { ReportContext } from "../../../context/ReportContext";
 import { useThemeSettings } from "../../../hooks";
+import sounds from "../../../sounds";
 import { IResultInputQuestion } from "../../../types";
 import { ReportAnswers } from "../ReportAnswers/ReportAnswers";
 import { ReportOptions } from "../ReportOptions/ReportOptions";
@@ -14,13 +15,14 @@ export function ReportTable() {
   const { sortedResults, reportSettings, setReport, report } = useContext(ReportContext);
   const { filters } = reportSettings;
 
-  const { theme } = useThemeSettings();
+  const { theme, settings } = useThemeSettings();
   return <div className="Report-Table" style={{ backgroundColor: theme.color.base, color: theme.palette.text.primary }}>
     {sortedResults.map((sortedResult, index) =>
       <div key={sortedResult.question._id} className="Report-Table-item" style={{ backgroundColor: theme.color.dark }}>
         <div style={{ padding: 2.5, margin: 2.5, display: 'flex', alignItems: 'center' }}>
           <div className="Report-Table-item-index">{index + 1}</div>
           <div className="Report-Table-item-delete" style={{ width: 20 }}><Icon popoverText="Delete"><MdDelete fill={red[500]} onClick={() => {
+            settings.sound && sounds.remove.play();
             setReport({
               ...report,
               results: report.results.filter(result => result._id !== sortedResult._id)

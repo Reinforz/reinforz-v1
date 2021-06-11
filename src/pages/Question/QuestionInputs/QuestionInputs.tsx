@@ -1,7 +1,9 @@
 import { TextField } from "@material-ui/core";
 import React from 'react';
 import { useThemeSettings } from '../../../hooks';
+import sounds from "../../../sounds";
 import { TInputQuestionFull } from '../../../types';
+import { generateRandomInt } from "../../../utils";
 import "./QuestionInputs.scss";
 
 interface Props {
@@ -11,7 +13,7 @@ interface Props {
 }
 
 export default function QuestionInputs(props: Props) {
-  const { theme } = useThemeSettings();
+  const { theme, settings } = useThemeSettings();
   const { setUserAnswers, userAnswers, question: { _id, type } } = props;
 
   return (
@@ -21,6 +23,8 @@ export default function QuestionInputs(props: Props) {
           <TextField fullWidth inputProps={{
             placeholder: `Answer ${i + 1}`
           }} value={userAnswers[i] ?? ''} onChange={e => {
+            const generatedRandomInt = generateRandomInt(1, 3);
+            settings.sound && sounds[`keyboard_${generatedRandomInt}` as 'keyboard_1'].play()
             userAnswers[i] = e.target.value;
             setUserAnswers([...userAnswers])
           }} /></div>

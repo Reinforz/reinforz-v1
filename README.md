@@ -1,12 +1,11 @@
 <p align="center">
-<img src="https://github.com/Devorein/reinforz/blob/master/public/192.png?raw=true">
+  <img src="https://github.com/Devorein/reinforz/blob/master/public/192.png?raw=true">
 <p>
-<h1 align="center">
-  Reinforz
-</h1>
-<p align="center">
-  Force yourself to master a topic through continuous feedback
-</p>
+
+<div align="center"> <h1>Nishan</h1> </div>
+<div align="center"><b>An online quiz app that force yourself to master a topic through continuous feedback.</b></div>
+
+</br>
 
 <p align="center">
   <a href="https://app.codecov.io/gh/Devorein/reinforz/branch/master"><img src="https://img.shields.io/codecov/c/github/devorein/reinforz?color=blue"/></a>

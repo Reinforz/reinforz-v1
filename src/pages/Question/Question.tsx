@@ -5,6 +5,7 @@ import { FaClock } from "react-icons/fa";
 import { Icon, Markdown } from "../../components";
 import { RootContext } from "../../context/RootContext";
 import { SettingsContext } from "../../context/SettingsContext";
+import sounds from "../../sounds";
 import { ExtendedTheme, TQuestionFull } from "../../types";
 import { displayTime } from "../../utils";
 import FibQuestionDisplay from "./FibQuestionDisplay";
@@ -40,6 +41,7 @@ export default function Question(props: Props) {
   }, [])
 
   const onNextButtonPress = () => {
+    settings.sound && sounds.swoosh.play()
     setUserAnswers([])
     setUsedHints([])
     if (!disable_timer) {
