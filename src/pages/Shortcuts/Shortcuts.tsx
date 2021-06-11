@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { AiFillHome } from "react-icons/ai";
 import { HiDocumentReport } from "react-icons/hi";
 import { IoMdCreate, IoMdSettings } from "react-icons/io";
@@ -22,9 +23,14 @@ export default function Shortcuts() {
     component: IoMdCreate
   }]);
 
+  const ref = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    ref.current && ref.current.focus();
+  }, [])
+
   const generatedNavigationStyles = generateNavigationStyles(settings.navigation);
 
-  return <div className="Shortcuts" tabIndex={0} onKeyPress={onKeyPress}>
+  return <div ref={ref} className="Shortcuts" tabIndex={0} onKeyPress={onKeyPress}>
     <IconGroup style={generatedNavigationStyles} direction={settings.navigation.direction} className="Shortcuts-icons" icons={navigationIcons} />
     <StackList header={"Shortcuts"} items={[['Navigation Icon #', '#'], ['Previous preset', 'Alt+A'], ['Next preset', 'Alt+S'], ['Next question', 'Alt+A']]} />
   </div>
