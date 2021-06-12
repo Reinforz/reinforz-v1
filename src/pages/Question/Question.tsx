@@ -23,7 +23,7 @@ interface Props {
 export default function Question(props: Props) {
   const { settings } = useContext(SettingsContext)
   const { playSettings } = useContext(RootContext);
-  const { changeCounter, isLast, question: { image, hints, question, time_allocated, type, options } } = props;
+  const { changeCounter, isLast, question: { image, hints, time_allocated, type, options } } = props;
   const [userAnswers, setUserAnswers] = useState<string[]>([]);
   const [usedHints, setUsedHints] = useState<string[]>([]);
   const [timeout, setTimeout] = useState<null | number>(null);

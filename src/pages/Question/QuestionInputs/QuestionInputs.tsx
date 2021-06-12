@@ -20,7 +20,7 @@ export default function QuestionInputs(props: Props) {
     <div className={`QuestionInputs QuestionInputs--${type}`} style={{ backgroundColor: theme.color.base }}>
       {props.question.answers.map((_, i) =>
         <div key={`${_id}.${i}`} className={`QuestionInputs-item`} style={{ backgroundColor: theme.color.base, color: theme.palette.text.primary }}>
-          <TextField fullWidth inputProps={{
+          <TextField autoFocus={i === 0} fullWidth inputProps={{
             placeholder: `Answer ${i + 1}`
           }} value={userAnswers[i] ?? ''} onChange={e => {
             const generatedRandomInt = generateRandomInt(1, 3);

@@ -32,6 +32,6 @@ export default function Shortcuts() {
 
   return <div ref={ref} className="Shortcuts" tabIndex={0} onKeyPress={onKeyPress}>
     <IconGroup style={generatedNavigationStyles} direction={settings.navigation.direction} className="Shortcuts-icons" icons={navigationIcons} />
-    <StackList header={"Shortcuts"} items={[['Navigation Icon #', '#'], ['Previous preset', 'Alt+A'], ['Next preset', 'Alt+S'], ['Next question', 'Alt+A']]} />
+    <StackList header={"Shortcuts"} items={[['Navigation Icon #', '#'], ['Selecting Option #', '#'], ['Previous preset', 'Alt+A'], ['Next preset', 'Alt+S'], ['Next question', 'Alt+A']]} />
   </div>
 }
