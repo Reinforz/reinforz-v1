@@ -4,31 +4,14 @@
     return;
   }
 
-  /**
-   * Plugin name which is used as a class name for <pre> which is activating the plugin
-   *
-   * @type {string}
-   */
-  var PLUGIN_NAME = 'line-numbers';
+  const PLUGIN_NAME = 'line-numbers';
 
-  /**
-   * Regular expression used for determining line breaks
-   *
-   * @type {RegExp}
-   */
-  var NEW_LINE_EXP = /\n(?!$)/g;
+  const NEW_LINE_EXP = /\n(?!$)/g;
 
   /**
    * Global exports
    */
-  var config = (Prism.plugins.lineNumbers = {
-    /**
-     * Get node for provided line number
-     *
-     * @param {Element} element pre element
-     * @param {number} number line number
-     * @returns {Element|undefined}
-     */
+  const config = (Prism.plugins.lineNumbers = {
     getLine: function (element, number) {
       if (
         element.tagName !== 'PRE' ||
@@ -37,13 +20,13 @@
         return;
       }
 
-      var lineNumberRows = element.querySelector('.line-numbers-rows');
+      const lineNumberRows = element.querySelector('.line-numbers-rows');
       if (!lineNumberRows) {
         return;
       }
-      var lineNumberStart =
+      const lineNumberStart =
         parseInt(element.getAttribute('data-start'), 10) || 1;
-      var lineNumberEnd =
+      const lineNumberEnd =
         lineNumberStart + (lineNumberRows.children.length - 1);
 
       if (number < lineNumberStart) {
@@ -53,33 +36,15 @@
         number = lineNumberEnd;
       }
 
-      var lineIndex = number - lineNumberStart;
+      const lineIndex = number - lineNumberStart;
 
       return lineNumberRows.children[lineIndex];
     },
 
-    /**
-     * Resizes the line numbers of the given element.
-     *
-     * This function will not add line numbers. It will only resize existing ones.
-     *
-     * @param {HTMLElement} element A `<pre>` element with line numbers.
-     * @returns {void}
-     */
     resize: function (element) {
       resizeElements([element]);
     },
 
-    /**
-     * Whether the plugin can assume that the units font sizes and margins are not depended on the size of
-     * the current viewport.
-     *
-     * Setting this to `true` will allow the plugin to do certain optimizations for better performance.
-     *
-     * Set this to `false` if you use any of the following CSS units: `vh`, `vw`, `vmin`, `vmax`.
-     *
-     * @type {boolean}
-     */
     assumeViewportIndependence: true
   });
 
@@ -90,26 +55,26 @@
    */
   function resizeElements(elements) {
     elements = elements.filter(function (e) {
-      var codeStyles = getStyles(e);
-      var whiteSpace = codeStyles['white-space'];
+      const codeStyles = getStyles(e);
+      const whiteSpace = codeStyles['white-space'];
       return whiteSpace === 'pre-wrap' || whiteSpace === 'pre-line';
     });
 
-    if (elements.length == 0) {
+    if (elements.length === 0) {
       return;
     }
 
-    var infos = elements
+    const infos = elements
       .map(function (element) {
-        var codeElement = element.querySelector('code');
-        var lineNumbersWrapper = element.querySelector('.line-numbers-rows');
+        const codeElement = element.querySelector('code');
+        const lineNumbersWrapper = element.querySelector('.line-numbers-rows');
         if (!codeElement || !lineNumbersWrapper) {
           return undefined;
         }
 
         /** @type {HTMLElement} */
-        var lineNumberSizer = element.querySelector('.line-numbers-sizer');
-        var codeLines = codeElement.textContent.split(NEW_LINE_EXP);
+        let lineNumberSizer = element.querySelector('.line-numbers-sizer');
+        const codeLines = codeElement.textContent.split(NEW_LINE_EXP);
 
         if (!lineNumberSizer) {
           lineNumberSizer = document.createElement('span');
@@ -121,7 +86,7 @@
         lineNumberSizer.innerHTML = '0';
         lineNumberSizer.style.display = 'block';
 
-        var oneLinerHeight = lineNumberSizer.getBoundingClientRect().height;
+        const oneLinerHeight = lineNumberSizer.getBoundingClientRect().height;
         lineNumberSizer.innerHTML = '';
 
         return {
@@ -135,15 +100,15 @@
       .filter(Boolean);
 
     infos.forEach(function (info) {
-      var lineNumberSizer = info.sizer;
-      var lines = info.lines;
-      var lineHeights = info.lineHeights;
-      var oneLinerHeight = info.oneLinerHeight;
+      const lineNumberSizer = info.sizer;
+      const lines = info.lines;
+      const lineHeights = info.lineHeights;
+      const oneLinerHeight = info.oneLinerHeight;
 
       lineHeights[lines.length - 1] = undefined;
       lines.forEach(function (line, index) {
         if (line && line.length > 1) {
-          var e = lineNumberSizer.appendChild(document.createElement('span'));
+          const e = lineNumberSizer.appendChild(document.createElement('span'));
           e.style.display = 'block';
           e.textContent = line;
         } else {
@@ -153,11 +118,11 @@
     });
 
     infos.forEach(function (info) {
-      var lineNumberSizer = info.sizer;
-      var lineHeights = info.lineHeights;
+      const lineNumberSizer = info.sizer;
+      const lineHeights = info.lineHeights;
 
-      var childIndex = 0;
-      for (var i = 0; i < lineHeights.length; i++) {
+      let childIndex = 0;
+      for (let i = 0; i < lineHeights.length; i++) {
         if (lineHeights[i] === undefined) {
           lineHeights[i] = lineNumberSizer.children[
             childIndex++
@@ -167,8 +132,8 @@
     });
 
     infos.forEach(function (info) {
-      var lineNumberSizer = info.sizer;
-      var wrapper = info.element.querySelector('.line-numbers-rows');
+      const lineNumberSizer = info.sizer;
+      const wrapper = info.element.querySelector('.line-numbers-rows');
 
       lineNumberSizer.style.display = 'none';
       lineNumberSizer.innerHTML = '';
@@ -194,7 +159,7 @@
       : element.currentStyle || null;
   }
 
-  var lastWidth = undefined;
+  let lastWidth = undefined;
   window.addEventListener('resize', function () {
     if (config.assumeViewportIndependence && lastWidth === window.innerWidth) {
       return;
@@ -213,8 +178,8 @@
       return;
     }
 
-    var code = /** @type {Element} */ (env.element);
-    var pre = /** @type {HTMLElement} */ (code.parentNode);
+    const code = /** @type {Element} */ (env.element);
+    const pre = /** @type {HTMLElement} */ (code.parentNode);
 
     // works only for <code> wrapped inside <pre> (not inline)
     if (!pre || !/pre/i.test(pre.nodeName)) {
@@ -236,13 +201,12 @@
     // Add the class 'line-numbers' to the <pre>
     pre.classList.add(PLUGIN_NAME);
 
-    var match = env.code.match(NEW_LINE_EXP);
-    var linesNum = match ? match.length + 1 : 1;
-    var lineNumbersWrapper;
+    const match = env.code.match(NEW_LINE_EXP);
+    const linesNum = match ? match.length + 1 : 1;
 
-    var lines = new Array(linesNum + 1).join('<span></span>');
+    const lines = new Array(linesNum + 1).join('<span></span>');
 
-    lineNumbersWrapper = document.createElement('span');
+    const lineNumbersWrapper = document.createElement('span');
     lineNumbersWrapper.setAttribute('aria-hidden', 'true');
     lineNumbersWrapper.className = 'line-numbers-rows';
     lineNumbersWrapper.innerHTML = lines;
