@@ -1,6 +1,7 @@
 export function applyCheckboxShortcut(
   e: React.ChangeEvent<HTMLInputElement>,
-  items: string[],
+  allItems: string[],
+  currentItems: string[],
   index: number
 ) {
   const { altKey, shiftKey, ctrlKey } = (e.nativeEvent as unknown) as {
@@ -10,26 +11,26 @@ export function applyCheckboxShortcut(
   };
 
   const { checked } = e.target,
-    item = items[index];
+    item = allItems[index];
 
   let finalItems: string[] = [];
 
   if (shiftKey && !ctrlKey && !altKey) {
     finalItems = new Array(index + 1)
       .fill(null)
-      .map((_, index) => items[index]);
+      .map((_, index) => allItems[index]);
   } else if (shiftKey && !ctrlKey && altKey) {
     const excludedItems = new Array(index + 1)
       .fill(null)
-      .map((_, index) => items[index]);
-    finalItems = items.filter((item) => !excludedItems.includes(item));
+      .map((_, index) => allItems[index]);
+    finalItems = allItems.filter((item) => !excludedItems.includes(item));
   } else if (!shiftKey && !ctrlKey && altKey) {
-    if (checked) finalItems = [items[index]];
-    else finalItems = items.filter((item) => item !== items[index]);
+    if (checked) finalItems = [allItems[index]];
+    else finalItems = allItems.filter((item) => item !== allItems[index]);
   } else if (!shiftKey && !ctrlKey && !altKey) {
     finalItems = checked
-      ? items.concat(item)
-      : items.filter((_item) => _item !== item);
+      ? currentItems.concat(item)
+      : currentItems.filter((_item) => _item !== item);
   }
 
   return finalItems;

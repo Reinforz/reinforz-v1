@@ -31,7 +31,7 @@ export default function CheckboxGroup<I extends Record<string, any>>(props: Prop
           settings.sound && sounds.pop_on.play();
         }
 
-        const finalItems = applyCheckboxShortcut(e, props.items, index);
+        const finalItems = applyCheckboxShortcut(e, props.items, items, index);
         props.setState({ ...props.state, [props.stateKey]: finalItems });
       }}
         color="primary" />} />)}
