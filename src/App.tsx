@@ -1,4 +1,4 @@
-import { makeStyles, useTheme } from "@material-ui/core";
+import { darken, makeStyles, useTheme } from "@material-ui/core";
 import { useContext, useState } from "react";
 import { Route, Switch, useLocation } from "react-router-dom";
 import { NotFoundPage, SimpleModal } from "./components";
@@ -31,6 +31,9 @@ const useStyles = makeStyles((theme: ExtendedTheme) => ({
     },
     '& :not(pre) > code[class*="language-"]': {
       background: theme.color.dark
+    },
+    "& .line-numbers-rows": {
+      background: darken(theme.color.dark, .25)
     }
   }
 }));
