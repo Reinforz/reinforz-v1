@@ -7,6 +7,16 @@ import { useNavigationIcons, useThemeSettings } from '../../hooks';
 import { generateNavigationStyles } from '../../utils';
 import './Shortcuts.scss';
 
+function StackListItem(props: { contents: [string, string] }) {
+  const { theme } = useThemeSettings();
+  return <div style={{ display: 'flex', flexDirection: 'column' }}>
+    <div>{props.contents[0]}</div>
+    <div style={{ color: theme.palette.text.secondary, marginTop: 5, fontSize: 14 }}>
+      ({props.contents[1]})
+    </div>
+  </div>
+}
+
 export default function Shortcuts() {
   const { settings } = useThemeSettings();
   const { navigationIcons, onKeyPress } = useNavigationIcons([
@@ -54,48 +64,23 @@ export default function Shortcuts() {
           ['Next preset', 'Alt+S'],
           ['Next question', 'Alt+A'],
           [
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <div>Select upto clicked option</div>
-              <div style={{ marginTop: 5, fontSize: 14 }}>
-                (keeping reset of the options in their state)
-              </div>
-            </div>,
+            <StackListItem contents={['Select upto clicked option', 'keeping reset of the options in their state']} />,
             'Shift + LMB'
           ],
           [
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <div>Select upto clicked option</div>
-              <div style={{ marginTop: 5, fontSize: 14 }}>
-                (deselecting rest of the options)
-              </div>
-            </div>,
+            <StackListItem contents={['Select upto clicked option', 'deselecting rest of the options']} />,
             'Shift + Ctrl + LMB'
           ],
           [
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <div>Select from clicked option to end</div>
-              <div style={{ marginTop: 5, fontSize: 14 }}>
-                (keeping reset of the options in their state)
-              </div>
-            </div>,
+            <StackListItem contents={['Select from clicked option to end', 'keeping reset of the options in their state']} />,
             'Shift + Alt + LMB'
           ],
           [
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <div>Select from clicked option to end</div>
-              <div style={{ marginTop: 5, fontSize: 14 }}>
-                (deselecting rest of the options)
-              </div>
-            </div>,
+            <StackListItem contents={['Select from clicked option to end', 'deselecting rest of the options']} />,
             'Shift + Ctrl + Alt + LMB'
           ],
           [
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <div>Reversing checked state</div>
-              <div style={{ marginTop: 5, fontSize: 14 }}>
-                (Based on the checked state of the clicked option)
-              </div>
-            </div>,
+            <StackListItem contents={['Reversing checked state', 'based on the checked state of the clicked option']} />,
             'Alt + LMB'
           ]
         ]}
