@@ -24,6 +24,9 @@
       padding: 10px;
       margin: 2.5px;
       &-value{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         font-weight: bold;
       }
     }
