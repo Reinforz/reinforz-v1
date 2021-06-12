@@ -1,4 +1,4 @@
-(function () {
+export default function initPrismLineNumbers() {
   const { Prism } = window;
   if (typeof Prism === 'undefined' || typeof document === 'undefined') {
     return;
@@ -12,7 +12,7 @@
    * Global exports
    */
   const config = (Prism.plugins.lineNumbers = {
-    getLine: function (element, number) {
+    getLine: function (element: Element, number: number) {
       if (
         element.tagName !== 'PRE' ||
         !element.classList.contains(PLUGIN_NAME)
@@ -25,7 +25,7 @@
         return;
       }
       const lineNumberStart =
-        parseInt(element.getAttribute('data-start'), 10) || 1;
+        parseInt(element.getAttribute('data-start')!, 10) || 1;
       const lineNumberEnd =
         lineNumberStart + (lineNumberRows.children.length - 1);
 
@@ -41,7 +41,7 @@
       return lineNumberRows.children[lineIndex];
     },
 
-    resize: function (element) {
+    resize: function (element: Element) {
       resizeElements([element]);
     },
 
@@ -53,10 +53,10 @@
    *
    * @param {HTMLElement[]} elements
    */
-  function resizeElements(elements) {
+  function resizeElements(elements: Element[]) {
     elements = elements.filter(function (e) {
-      const codeStyles = getStyles(e);
-      const whiteSpace = codeStyles['white-space'];
+      const codeStyles = getStyles(e)!;
+      const whiteSpace = codeStyles['white-space' as any];
       return whiteSpace === 'pre-wrap' || whiteSpace === 'pre-line';
     });
 
@@ -73,8 +73,10 @@
         }
 
         /** @type {HTMLElement} */
-        let lineNumberSizer = element.querySelector('.line-numbers-sizer');
-        const codeLines = codeElement.textContent.split(NEW_LINE_EXP);
+        let lineNumberSizer = element.querySelector(
+          '.line-numbers-sizer'
+        ) as HTMLSpanElement;
+        const codeLines = codeElement.textContent!.split(NEW_LINE_EXP);
 
         if (!lineNumberSizer) {
           lineNumberSizer = document.createElement('span');
@@ -97,7 +99,13 @@
           sizer: lineNumberSizer
         };
       })
-      .filter(Boolean);
+      .filter((element) => element!) as {
+      element: Element;
+      lines: string[];
+      lineHeights: (number | undefined)[];
+      oneLinerHeight: number;
+      sizer: HTMLSpanElement;
+    }[];
 
     infos.forEach(function (info) {
       const lineNumberSizer = info.sizer;
@@ -133,13 +141,16 @@
 
     infos.forEach(function (info) {
       const lineNumberSizer = info.sizer;
-      const wrapper = info.element.querySelector('.line-numbers-rows');
+      const wrapper = info.element.querySelector(
+        '.line-numbers-rows'
+      )! as HTMLSpanElement;
 
       lineNumberSizer.style.display = 'none';
       lineNumberSizer.innerHTML = '';
 
       info.lineHeights.forEach(function (height, lineNumber) {
-        wrapper.children[lineNumber].style.height = height + 'px';
+        (wrapper.children[lineNumber] as HTMLSpanElement).style.height =
+          height + 'px';
       });
     });
   }
@@ -149,17 +160,15 @@
    *
    * @param {Element} element
    */
-  function getStyles(element) {
+  function getStyles(element: Element) {
     if (!element) {
       return null;
     }
 
-    return window.getComputedStyle
-      ? getComputedStyle(element)
-      : element.currentStyle || null;
+    return getComputedStyle(element);
   }
 
-  let lastWidth = undefined;
+  let lastWidth: number | undefined = undefined;
   window.addEventListener('resize', function () {
     if (config.assumeViewportIndependence && lastWidth === window.innerWidth) {
       return;
@@ -178,8 +187,8 @@
       return;
     }
 
-    const code = /** @type {Element} */ (env.element);
-    const pre = /** @type {HTMLElement} */ (code.parentNode);
+    const code = /** @type {Element} */ env.element;
+    const pre = /** @type {HTMLElement} */ code.parentNode as HTMLPreElement;
 
     // works only for <code> wrapped inside <pre> (not inline)
     if (!pre || !/pre/i.test(pre.nodeName)) {
@@ -192,7 +201,7 @@
     }
 
     // only add line numbers if <code> or one of its ancestors has the `line-numbers` class
-    if (!Prism.util.isActive(code, PLUGIN_NAME)) {
+    if (!(Prism.util as any).isActive(code, PLUGIN_NAME)) {
       return;
     }
 
@@ -213,10 +222,10 @@
 
     if (pre.hasAttribute('data-start')) {
       pre.style.counterReset =
-        'linenumber ' + (parseInt(pre.getAttribute('data-start'), 10) - 1);
+        'linenumber ' + (parseInt(pre.getAttribute('data-start')!, 10) - 1);
     }
 
-    env.element.appendChild(lineNumbersWrapper);
+    env.element.parentElement!.appendChild(lineNumbersWrapper);
 
     resizeElements([pre]);
 
@@ -227,4 +236,4 @@
     env.plugins = env.plugins || {};
     env.plugins.lineNumbers = true;
   });
-})();
+}
