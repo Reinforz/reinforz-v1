@@ -1,6 +1,22 @@
 import { generateInputQuestionAnswers } from '../../src/utils';
 
 it(`Should work for string`, () => {
+  const [generatedInputQuestionAnswers] = generateInputQuestionAnswers(
+    'answer 1'
+  );
+  expect(generatedInputQuestionAnswers).toStrictEqual([
+    [
+      {
+        text: 'answer 1',
+        modifiers: [],
+        regex: null,
+        explanation: null
+      }
+    ]
+  ]);
+});
+
+it(`Should work for string array`, () => {
   const [generatedInputQuestionAnswers] = generateInputQuestionAnswers([
     'answer 1'
   ]);
@@ -16,7 +32,7 @@ it(`Should work for string`, () => {
   ]);
 });
 
-it(`Should work for an array of strings alternatives`, () => {
+it(`Should work for an array of strings arrays alternatives`, () => {
   const [generatedInputQuestionAnswers] = generateInputQuestionAnswers([
     ['answer 1', 'answer 1.1']
   ]);
@@ -38,7 +54,7 @@ it(`Should work for an array of strings alternatives`, () => {
   ]);
 });
 
-it(`Should work for object with all options given`, () => {
+it(`Should work for array of object with all options given`, () => {
   const [generatedInputQuestionAnswers] = generateInputQuestionAnswers([
     {
       text: '123',
@@ -65,7 +81,7 @@ it(`Should work for object with all options given`, () => {
   ]);
 });
 
-it(`Should work for object with all options given and incorrect modifiers`, () => {
+it(`Should work for array of object with all options given and incorrect modifiers`, () => {
   const [
     generatedInputQuestionAnswers,
     generatedLogs
@@ -99,7 +115,7 @@ it(`Should work for object with all options given and incorrect modifiers`, () =
   });
 });
 
-it(`Should work for object with no options given`, () => {
+it(`Should work for array of object with no options given`, () => {
   const [generatedInputQuestionAnswers] = generateInputQuestionAnswers([
     {
       text: '123'
@@ -117,7 +133,23 @@ it(`Should work for object with no options given`, () => {
   ]);
 });
 
-it(`Should work for array with all options given`, () => {
+it(`Should work for object with no options given`, () => {
+  const [generatedInputQuestionAnswers] = generateInputQuestionAnswers({
+    text: '123'
+  });
+  expect(generatedInputQuestionAnswers).toStrictEqual([
+    [
+      {
+        text: '123',
+        modifiers: [],
+        regex: null,
+        explanation: null
+      }
+    ]
+  ]);
+});
+
+it(`Should work for array of array with all options given`, () => {
   const [generatedInputQuestionAnswers] = generateInputQuestionAnswers([
     [
       {
@@ -146,7 +178,7 @@ it(`Should work for array with all options given`, () => {
   ]);
 });
 
-it(`Should work for array with no options given`, () => {
+it(`Should work for array of array with no options given`, () => {
   const [generatedInputQuestionAnswers] = generateInputQuestionAnswers([
     [
       {

@@ -1,4 +1,8 @@
-import { TSelectionQuestionFull, TSelectionQuestionPartial } from '../types';
+import {
+  ISelectionQuestionAnswerPartial,
+  TSelectionQuestionFull,
+  TSelectionQuestionPartial
+} from '../types';
 import { isPrimitive } from './isPrimitive';
 
 export function generateSelectionQuestionAnswers(
@@ -25,13 +29,13 @@ export function generateSelectionQuestionAnswers(
         explanation: null
       }
     ];
-  } else if (typeof answers === 'object') {
+  } else {
     return [
       {
-        text: answers.toString(),
-        explanation: answers.explanation ?? null
+        text: (answers as ISelectionQuestionAnswerPartial).text.toString(),
+        explanation:
+          (answers as ISelectionQuestionAnswerPartial).explanation ?? null
       }
     ];
   }
-  return [];
 }

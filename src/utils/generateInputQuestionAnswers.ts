@@ -71,7 +71,7 @@ export function generateInputQuestionAnswers(
     generatedInputQuestionAnswers = [
       [generatedInputQuestionAnswerFromString(answers.toString())]
     ];
-  } else if (typeof answers === 'object') {
+  } else {
     generatedInputQuestionAnswers = [
       [
         generateInputQuestionAnswerFromPartial(

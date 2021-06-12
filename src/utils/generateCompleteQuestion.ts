@@ -8,7 +8,8 @@ import {
 } from '../types';
 import {
   generateInputQuestionAnswers,
-  generateSelectionQuestionAnswers
+  generateSelectionQuestionAnswers,
+  isPrimitive
 } from './';
 
 function setObjectValues(parent: any, arr: [string, any][]) {
@@ -44,7 +45,10 @@ export function generateCompleteQuestion(
   // Auto generation of Question Configs
   if (logs.errors.length === 0) {
     // Auto infer question type
-    if (completeQuestion.answers.length === 1)
+    if (
+      isPrimitive(completeQuestion.answers) ||
+      completeQuestion.answers.length === 1
+    )
       completeQuestion.type =
         completeQuestion.type || (dummyQuestion.options ? 'MCQ' : 'Snippet');
     else
