@@ -18,7 +18,7 @@ export default function Markdown(props: Props) {
 
   return <ReactMarkdown className="markdown" rehypePlugins={[rehypeRaw]} components={{
     code({ node, inline, className, children, ...props }) {
-      return <code className={className} {...props} ref={(ref) => refs.current.push(ref)}>{children}</code>
+      return <code className={`${className ?? ''}`} {...props} ref={(ref) => refs.current.push(ref)}>{children}</code>
     }
   }}>{props.content}</ReactMarkdown>
 }

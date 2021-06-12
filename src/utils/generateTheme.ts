@@ -32,7 +32,7 @@ export function generateTheme(settings: ISettings) {
       color.opposite_dark = grey[300];
       color.opposite_base = grey[200];
       text.primary = grey[100];
-      text.secondary = grey[400];
+      text.secondary = grey[200];
       paletteType = 'dark';
       break;
     }
@@ -56,7 +56,7 @@ export function generateTheme(settings: ISettings) {
       color.opposite_base = '#E5E9F0';
       color.opposite_light = '#ECEFF4';
       text.primary = grey[100];
-      text.secondary = grey[400];
+      text.secondary = grey[200];
       paletteType = 'dark';
       break;
     }

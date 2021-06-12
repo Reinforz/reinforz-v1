@@ -1,3 +1,4 @@
+import { grey } from '@material-ui/core/colors';
 import { useEffect, useRef } from 'react';
 import { AiFillHome } from 'react-icons/ai';
 import { HiDocumentReport } from 'react-icons/hi';
@@ -8,10 +9,9 @@ import { generateNavigationStyles } from '../../utils';
 import './Shortcuts.scss';
 
 function StackListItem(props: { contents: [string, string] }) {
-  const { theme } = useThemeSettings();
   return <div style={{ display: 'flex', flexDirection: 'column' }}>
     <div>{props.contents[0]}</div>
-    <div style={{ color: theme.palette.text.secondary, marginTop: 5, fontSize: 14 }}>
+    <div style={{ color: grey[300], marginTop: 5, fontSize: 14 }}>
       ({props.contents[1]})
     </div>
   </div>

@@ -50,7 +50,7 @@ export default function App() {
       } else if (pathname === "/") {
         navigateBetweenPresets(e, playSettingsPresets, setPlaySettingsPresets, REINFORZ_PLAY_SETTINGS_LS_KEY)
       }
-    }} className={`App ${theme.theme} ${classes.root}`} style={{ fontFamily: settings.font === 'sans-serif' ? 'Lato' : settings.font === 'serif' ? 'Noto Serif' : 'Ubuntu Mono', backgroundColor: theme.color.dark }}>
+    }} className={`App line-numbers ${theme.theme} ${classes.root}`} style={{ fontFamily: settings.font === 'sans-serif' ? 'Lato' : settings.font === 'serif' ? 'Noto Serif' : 'Ubuntu Mono', backgroundColor: theme.color.dark }}>
       <SimpleModal open={modalState[0]} setOpen={() => setModalState([false, null])}>
         <div className="Modal-content">
           {modalState[1]}

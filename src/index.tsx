@@ -8,6 +8,7 @@ import { ErrorBoundary } from './components';
 import { RootContext } from './context/RootContext';
 import { SettingsContext } from "./context/SettingsContext";
 import './index.scss';
+import "./scripts/prism-line-numbers";
 import "./styles/vs-light.scss";
 import "./styles/vscode-dark.scss";
 import { ExtendedTheme, IErrorLog, IPlaySettings, IPlaySettingsPreset, IQuizFull, ISettings, ISettingsPreset, TQuestionFull } from './types';
