@@ -1,6 +1,6 @@
 import { Button, useTheme } from "@material-ui/core";
 import { green, red } from "@material-ui/core/colors";
-import React, { useContext, useEffect, useMemo, useState } from "react";
+import React, { useContext, useEffect, useMemo, useRef, useState } from "react";
 import { FaClock } from "react-icons/fa";
 import { Icon, Markdown } from "../../components";
 import { RootContext } from "../../context/RootContext";
@@ -23,13 +23,14 @@ interface Props {
 export default function Question(props: Props) {
   const { settings } = useContext(SettingsContext)
   const { playSettings } = useContext(RootContext);
-  const { changeCounter, isLast, question: { image, hints, question, time_allocated } } = props;
+  const { changeCounter, isLast, question: { image, hints, question, time_allocated, type, options } } = props;
   const [userAnswers, setUserAnswers] = useState<string[]>([]);
   const [usedHints, setUsedHints] = useState<string[]>([]);
   const [timeout, setTimeout] = useState<null | number>(null);
   const [timer, setTimer] = useState<null | NodeJS.Timeout>(null);
   const [timeBreak, setTimeBreak] = useState(false);
   const theme = useTheme() as ExtendedTheme;
+  const ref = useRef<HTMLDivElement | null>(null);
 
   const { disable_timer } = playSettings.options
 
@@ -38,6 +39,10 @@ export default function Question(props: Props) {
       setTimer(null)
       setTimeout(null)
     }
+  }, [])
+
+  useEffect(() => {
+    ref.current && ref.current.focus();
   }, [])
 
   const onNextButtonPress = () => {
@@ -78,9 +83,27 @@ export default function Question(props: Props) {
     // eslint-disable-next-line
     [props.question, userAnswers])
 
-  return <div className="Question" style={{ backgroundColor: theme.color.dark, color: theme.palette.text.primary }} onKeyUp={(e) => {
-    if (settings.shortcuts && e.nativeEvent.altKey && e.nativeEvent.key === "a") {
-      onNextButtonPress();
+  return <div className="Question" ref={ref} style={{ backgroundColor: theme.color.dark, color: theme.palette.text.primary }} onKeyUp={(e) => {
+    if (settings.shortcuts) {
+      if (e.nativeEvent.altKey && e.nativeEvent.key === "a")
+        onNextButtonPress();
+      if (e.nativeEvent.code.match(/Digit\d/) && type.match(/(MCQ|MS)/)) {
+        const digit = parseInt(e.nativeEvent.code.replace('Digit', ''));
+        if (digit && (digit - 1) < options!.length) {
+          if (type === "MCQ") {
+            userAnswers[0] = `${digit - 1}`;
+            setUserAnswers([...userAnswers])
+          } else {
+            const isChecked = userAnswers.includes(`${digit - 1}`);
+            if (isChecked)
+              setUserAnswers(userAnswers.filter(userAnswer => userAnswer !== `${digit - 1}`))
+            else {
+              userAnswers.push(`${digit - 1}`)
+              setUserAnswers([...userAnswers])
+            }
+          }
+        }
+      }
     }
   }} tabIndex={0}>
     {memoizedQuestionComponent}
