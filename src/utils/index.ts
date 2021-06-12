@@ -1,3 +1,4 @@
+export * from './applyCheckboxShortcut';
 export * from './applyNumberOperator';
 export * from './applyOptionsShortcut';
 export * from './applyPlaySettingsOptions';
