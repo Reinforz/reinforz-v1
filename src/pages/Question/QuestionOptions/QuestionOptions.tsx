@@ -28,7 +28,7 @@ export default function QuestionOptions(props: Props) {
           settings.sound && sounds.option_click.play();
           setUserAnswers([e.target.value])
         }}>
-          {props.question.options.map((option, i) => {
+          {props.question.options.map((_, i) => {
             return <div key={`${_id}option${i}`} className="QuestionOptions-container-item" style={{ backgroundColor: theme.color.light }}>
               <FormControlLabel
                 control={<Radio color="primary" />}
@@ -51,7 +51,7 @@ export default function QuestionOptions(props: Props) {
             setUserAnswers(userAnswers.filter(user_answer => user_answer !== e.target.value));
           }
         }}>
-          {props.question.options.map((option, i) => {
+          {props.question.options.map((_, i) => {
             return <div key={`${_id}option${i}`} className={`QuestionOptions-container-item`} style={{ backgroundColor: theme.color.light }}>
               <FormControlLabel
                 control={<Checkbox checked={userAnswers.includes(`${i}`)} value={`${i}`} color="primary" />}

@@ -16,10 +16,30 @@ export function applyCheckboxShortcut(
   let finalItems: string[] = [];
 
   if (shiftKey && !ctrlKey && !altKey) {
+    finalItems = Array.from(
+      new Set(
+        new Array(index + 1)
+          .fill(null)
+          .map((_, index) => allItems[index])
+          .concat(currentItems)
+      )
+    );
+  } else if (shiftKey && ctrlKey && !altKey) {
     finalItems = new Array(index + 1)
       .fill(null)
       .map((_, index) => allItems[index]);
   } else if (shiftKey && !ctrlKey && altKey) {
+    const excludedItems = new Array(index + 1)
+      .fill(null)
+      .map((_, index) => allItems[index]);
+    finalItems = Array.from(
+      new Set(
+        allItems
+          .filter((item) => !excludedItems.includes(item))
+          .concat(currentItems)
+      )
+    );
+  } else if (shiftKey && ctrlKey && altKey) {
     const excludedItems = new Array(index + 1)
       .fill(null)
       .map((_, index) => allItems[index]);
