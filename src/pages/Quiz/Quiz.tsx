@@ -1,5 +1,5 @@
 import yaml, { safeDump } from 'js-yaml';
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { AiFillHome } from "react-icons/ai";
 import { FaCloudDownloadAlt, FaKeyboard } from "react-icons/fa";
 import { HiDocumentReport } from "react-icons/hi";
@@ -21,6 +21,11 @@ export default function Quiz() {
   const { theme, settings } = useThemeSettings();
   const { isLastItem, currentItem, getNextIndex, currentIndex, setCurrentIndex } = useCycle(allQuestions);
   const generatedNavigationStyles = generateNavigationStyles(settings.navigation);
+  const ref = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    ref.current && ref.current.focus();
+  }, [])
 
   const { navigationIcons, onKeyPress } = useNavigationIcons([{
     path: "/settings",
@@ -75,7 +80,7 @@ export default function Quiz() {
         }} />
       </div>
     } else {
-      return <div className="Quiz" onKeyPress={onKeyPress}>
+      return <div ref={ref} className="Quiz" onKeyPress={onKeyPress} tabIndex={0}>
         <IconGroup className="Report-icons" icons={navigationIcons} direction={settings.navigation.direction} style={generatedNavigationStyles} />
         <Upload accept={[".yaml", ".yml"]} maxFiles={1} uploadMessage="Drag 'n' drop, or click to upload some play files (.json or .yaml)" onLoad={(result, _, __, resolve) => {
           const uploadedPlayState = yaml.safeLoad(result as string) as any;

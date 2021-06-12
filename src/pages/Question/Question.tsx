@@ -42,8 +42,8 @@ export default function Question(props: Props) {
   }, [])
 
   useEffect(() => {
-    ref.current && ref.current.focus();
-  }, [])
+    props.question.type.match(/(MCQ|MS)/) && ref.current && ref.current.focus();
+  }, [props.question])
 
   const onNextButtonPress = () => {
     settings.sound && sounds.swoosh.play()
@@ -89,7 +89,8 @@ export default function Question(props: Props) {
     if (settings.shortcuts) {
       if (e.nativeEvent.altKey && e.nativeEvent.key === "a")
         onNextButtonPress();
-      applyOptionsShortcut(e, type, options!.length, userAnswers, setUserAnswers)
+      if (Array.isArray(options))
+        applyOptionsShortcut(e, type, options.length, userAnswers, setUserAnswers)
     }
   }} tabIndex={0}>
     {props.question.type === "FIB" ? memoizedFIBQuestionComponent : memoizedSelectionQuestionComponent}

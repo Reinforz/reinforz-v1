@@ -1,4 +1,5 @@
 import { Checkbox, FormControlLabel, FormGroup, Radio, RadioGroup } from "@material-ui/core";
+import { useCallback } from "react";
 import { Markdown } from "../../../components";
 import { useThemeSettings } from '../../../hooks';
 import sounds from "../../../sounds";
@@ -15,6 +16,11 @@ export default function QuestionOptions(props: Props) {
   const { theme, settings } = useThemeSettings();
   const { setUserAnswers, userAnswers, question: { _id } } = props;
 
+  const memoizedQuestionOptionTextFn = useCallback((text: string) => {
+    return <Markdown content={text} />
+    // eslint-disable-next-line
+  }, [_id])
+
   const generateOptions = () => {
     switch (props.question.type) {
       case "MCQ": {
@@ -27,7 +33,7 @@ export default function QuestionOptions(props: Props) {
               <FormControlLabel
                 control={<Radio color="primary" />}
                 value={`${i}`}
-                label={<Markdown content={option.text} />}
+                label={memoizedQuestionOptionTextFn(option.text)}
                 labelPlacement="end"
               />
             </div>
@@ -49,7 +55,7 @@ export default function QuestionOptions(props: Props) {
             return <div key={`${_id}option${i}`} className={`QuestionOptions-container-item`} style={{ backgroundColor: theme.color.light }}>
               <FormControlLabel
                 control={<Checkbox checked={userAnswers.includes(`${i}`)} value={`${i}`} color="primary" />}
-                label={<Markdown content={option.text} />}
+                label={memoizedQuestionOptionTextFn(option.text)}
               /></div>
           })}
         </FormGroup>
