@@ -74,19 +74,22 @@ export default function Question(props: Props) {
     }
   }, [props.question, disable_timer])
 
-  const memoizedQuestionComponent = useMemo(() => {
-    const style: React.CSSProperties = { gridArea: image ? `1/1/2/2` : `1/1/2/3`, backgroundColor: theme.color.light };
-    return props.question.type === "FIB" ? <FibQuestionDisplay question={props.question.question} userAnswers={userAnswers} image={props.question.image} /> : <div className="Question-question" style={style}>
-      <Markdown content={question as string} />
+  const memoizedFIBQuestionComponent = useMemo(() => {
+    return <FibQuestionDisplay question={props.question.question as string[]} userAnswers={userAnswers} image={props.question.image} />
+  }, [props.question, userAnswers])
+
+  const memoizedSelectionQuestionComponent = useMemo(() => {
+    return <div className="Question-question" style={{ gridArea: props.question.image ? `1/1/2/2` : `1/1/2/3`, backgroundColor: theme.color.light }}>
+      <Markdown content={props.question.question as string} />
     </div>
-  },
     // eslint-disable-next-line
-    [props.question, userAnswers])
+  }, [props.question])
 
   return <div className="Question" ref={ref} style={{ backgroundColor: theme.color.dark, color: theme.palette.text.primary }} onKeyUp={(e) => {
     if (settings.shortcuts) {
       if (e.nativeEvent.altKey && e.nativeEvent.key === "a")
         onNextButtonPress();
+      // ?: Convert to a util function
       if (e.nativeEvent.code.match(/Digit\d/) && type.match(/(MCQ|MS)/)) {
         const digit = parseInt(e.nativeEvent.code.replace('Digit', ''));
         if (digit && (digit - 1) < options!.length) {
@@ -106,7 +109,7 @@ export default function Question(props: Props) {
       }
     }
   }} tabIndex={0}>
-    {memoizedQuestionComponent}
+    {props.question.type === "FIB" ? memoizedFIBQuestionComponent : memoizedSelectionQuestionComponent}
     {image && <div className="Question-image" style={{ gridArea: `1/2/2/3`, backgroundColor: theme.color.light }}><img src={image} alt="Question" /></div>}
     {props.question.type === "MCQ" || props.question.type === "MS"
       ? <QuestionOptions setUserAnswers={setUserAnswers} userAnswers={userAnswers} question={props.question} />
