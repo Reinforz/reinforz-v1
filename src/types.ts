@@ -78,40 +78,44 @@ export interface SelectionQuestionOptions {
   index: string;
 }
 
+export type TSelectionPartialQuestionAnswer =
+  | string
+  | ISelectionQuestionAnswerPartial
+  | (string | ISelectionQuestionAnswerPartial)[];
+
 export interface IMcqQuestionPartial extends IQuestionPartial {
   question: string;
   options: string[];
   type?: 'MCQ';
-  answers: (string | ISelectionQuestionAnswerPartial)[];
+  answers: TSelectionPartialQuestionAnswer;
 }
 
 export interface IMsQuestionPartial extends IQuestionPartial {
   question: string;
   options: string[];
   type?: 'MS';
-  answers: (string | ISelectionQuestionAnswerPartial)[];
+  answers: TSelectionPartialQuestionAnswer;
 }
 
+export type TInputPartialQuestionAnswer =
+  | IInputQuestionAnswerPartial
+  | string
+  | (
+      | IInputQuestionAnswerPartial[]
+      | IInputQuestionAnswerPartial
+      | string
+      | string[]
+    )[];
 export interface ISnippetQuestionPartial extends IQuestionPartial {
   question: string;
   type?: 'Snippet';
-  answers: (
-    | IInputQuestionAnswerPartial[]
-    | IInputQuestionAnswerPartial
-    | string
-    | string[]
-  )[];
+  answers: TInputPartialQuestionAnswer;
 }
 
 export interface IFibQuestionPartial extends IQuestionPartial {
   question: string[];
   type?: 'FIB';
-  answers: (
-    | IInputQuestionAnswerPartial[]
-    | IInputQuestionAnswerPartial
-    | string
-    | string[]
-  )[];
+  answers: TInputPartialQuestionAnswer;
 }
 
 export type TQuestionAnswerModifiers = 'IC' | 'IS';
