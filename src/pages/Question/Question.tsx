@@ -7,7 +7,7 @@ import { RootContext } from "../../context/RootContext";
 import { SettingsContext } from "../../context/SettingsContext";
 import sounds from "../../sounds";
 import { ExtendedTheme, TQuestionFull } from "../../types";
-import { displayTime } from "../../utils";
+import { applyOptionsShortcut, displayTime } from "../../utils";
 import FibQuestionDisplay from "./FibQuestionDisplay";
 import "./Question.scss";
 import QuestionHints from "./QuestionHints/QuestionHints";
@@ -89,24 +89,7 @@ export default function Question(props: Props) {
     if (settings.shortcuts) {
       if (e.nativeEvent.altKey && e.nativeEvent.key === "a")
         onNextButtonPress();
-      // ?: Convert to a util function
-      if (e.nativeEvent.code.match(/Digit\d/) && type.match(/(MCQ|MS)/)) {
-        const digit = parseInt(e.nativeEvent.code.replace('Digit', ''));
-        if (digit && (digit - 1) < options!.length) {
-          if (type === "MCQ") {
-            userAnswers[0] = `${digit - 1}`;
-            setUserAnswers([...userAnswers])
-          } else {
-            const isChecked = userAnswers.includes(`${digit - 1}`);
-            if (isChecked)
-              setUserAnswers(userAnswers.filter(userAnswer => userAnswer !== `${digit - 1}`))
-            else {
-              userAnswers.push(`${digit - 1}`)
-              setUserAnswers([...userAnswers])
-            }
-          }
-        }
-      }
+      applyOptionsShortcut(e, type, options!.length, userAnswers, setUserAnswers)
     }
   }} tabIndex={0}>
     {props.question.type === "FIB" ? memoizedFIBQuestionComponent : memoizedSelectionQuestionComponent}
