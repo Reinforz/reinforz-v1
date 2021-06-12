@@ -30,6 +30,7 @@ export * from './generateSelectionQuestionAnswers';
 export * from './generateTheme';
 export * from './getAnswerResult';
 export * from './getPresets';
+export * from './isPrimitive';
 export * from './navigateBetweenPresets';
 export * from './transformFullQuestions';
 export * from './transformReportQuestion';

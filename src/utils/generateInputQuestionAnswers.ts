@@ -1,3 +1,4 @@
+import { isPrimitive } from '.';
 import {
   IInputQuestionAnswerPartial,
   ILog,
@@ -45,13 +46,10 @@ export function generateInputQuestionAnswers(
     };
   }
 
-  const generatedInputQuestionAnswers: TInputQuestionFull['answers'] = answers.map(
-    (answer) => {
-      if (
-        typeof answer === 'string' ||
-        typeof answer === 'number' ||
-        typeof answer === 'boolean'
-      )
+  let generatedInputQuestionAnswers: TInputQuestionFull['answers'] = [];
+  if (Array.isArray(answers)) {
+    generatedInputQuestionAnswers = answers.map((answer) => {
+      if (isPrimitive(answer))
         return [
           generatedInputQuestionAnswerFromString(answer.toString())
         ] as TInputQuestionFull['answers'][0];
@@ -62,10 +60,26 @@ export function generateInputQuestionAnswers(
             : generateInputQuestionAnswerFromPartial(answer)
         );
       } else {
-        return [generateInputQuestionAnswerFromPartial(answer)];
+        return [
+          generateInputQuestionAnswerFromPartial(
+            answer as IInputQuestionAnswerPartial
+          )
+        ];
       }
-    }
-  );
+    });
+  } else if (isPrimitive(answers)) {
+    generatedInputQuestionAnswers = [
+      [generatedInputQuestionAnswerFromString(answers.toString())]
+    ];
+  } else if (typeof answers === 'object') {
+    generatedInputQuestionAnswers = [
+      [
+        generateInputQuestionAnswerFromPartial(
+          answers as IInputQuestionAnswerPartial
+        )
+      ]
+    ];
+  }
 
   return [generatedInputQuestionAnswers, logs] as const;
 }
