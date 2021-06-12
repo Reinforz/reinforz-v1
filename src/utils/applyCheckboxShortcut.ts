@@ -47,7 +47,7 @@ export function applyCheckboxShortcut(
   } else if (!shiftKey && !ctrlKey && altKey) {
     if (checked) finalItems = [allItems[index]];
     else finalItems = allItems.filter((item) => item !== allItems[index]);
-  } else if (!shiftKey && !ctrlKey && !altKey) {
+  } else {
     finalItems = checked
       ? currentItems.concat(item)
       : currentItems.filter((_item) => _item !== item);
