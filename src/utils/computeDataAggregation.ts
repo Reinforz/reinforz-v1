@@ -1,5 +1,5 @@
+import { computeMedian, computeMode } from '.';
 import { TBooleanAggregation, TNumberAggregation } from '../types';
-import { computeMedian } from './computeMedian';
 
 export function computeNumberDataAggregation(
   data: number[],
@@ -35,6 +35,9 @@ export function computeNumberDataAggregation(
     }
     case 'MEDIAN': {
       return computeMedian(data);
+    }
+    case 'MODE': {
+      return computeMode(data);
     }
   }
 }

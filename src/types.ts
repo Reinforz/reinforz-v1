@@ -310,7 +310,7 @@ export interface ISettingsPreset extends IPreset<ISettings> {}
 export interface IPlaySettingsPreset extends IPreset<IPlaySettings> {}
 export interface IReportSettingsPreset extends IPreset<IReportSettings> {}
 
-export type TNumberAggregation = 'MIN' | 'MAX' | 'AVG' | 'MEDIAN';
+export type TNumberAggregation = 'MIN' | 'MAX' | 'AVG' | 'MEDIAN' | 'MODE';
 export type TBooleanAggregation = 'TRUE' | 'FALSE';
 export interface IReportAggregator {
   time_allocated: TNumberAggregation;

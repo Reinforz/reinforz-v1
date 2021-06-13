@@ -31,7 +31,7 @@ export default function Aggregator<T>(props: Props<T>) {
     </div>
     <div className="Aggregator-content" style={{ backgroundColor: theme.color.dark }}>
       {items.map(item => <div key={item.type + item.stateKey} className="Aggregator-content-item">
-        <Select menuItemLabel={(item) => item} label={item.label ?? transformTextBySeparator(item.stateKey as string)} items={item.type === "number" ? ["MAX", "MIN", "AVG", 'MEDIAN'] : ["TRUE", "FALSE"]} setState={(aggregator) => {
+        <Select menuItemLabel={(item) => item} label={item.label ?? transformTextBySeparator(item.stateKey as string)} items={item.type === "number" ? ["MAX", "MIN", "AVG", 'MEDIAN', 'MODE'] : ["TRUE", "FALSE"]} setState={(aggregator) => {
           setState({
             ...state,
             [item.stateKey]: (aggregator as T)[item.stateKey]
