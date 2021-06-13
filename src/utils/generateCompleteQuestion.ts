@@ -33,7 +33,7 @@ export function generateCompleteQuestion(
 
   if (completeQuestion.options) {
     completeQuestion.options = completeQuestion.options.map((option, i) => ({
-      text: option.toString(),
+      text: option.toString().trim(),
       index: `${i}`
     }));
   }
@@ -70,14 +70,14 @@ export function generateCompleteQuestion(
         else {
           // If the answer index is greater than total options, or negative add an error
           if (
-            parseInt(dummyQuestion.answers[0].text) < 0 ||
-            parseInt(dummyQuestion.answers[0].text) >
+            parseInt(dummyQuestion.answers[0].text.trim()) < 0 ||
+            parseInt(dummyQuestion.answers[0].text.trim()) >
               dummyQuestion.options.length - 1
           )
             logs.errors.push(
               `MCQ Answer must be within 0-${
                 dummyQuestion.options.length - 1
-              }, provided ${dummyQuestion.answers[0].text}`
+              }, provided ${dummyQuestion.answers[0].text.trim()}`
             );
 
           if (
@@ -114,13 +114,13 @@ export function generateCompleteQuestion(
           }
           completeQuestion.answers.forEach((answer) => {
             if (
-              parseInt(answer.text) < 0 ||
-              parseInt(answer.text) > dummyQuestion.options.length - 1
+              parseInt(answer.text.trim()) < 0 ||
+              parseInt(answer.text.trim()) > dummyQuestion.options.length - 1
             )
               logs.errors.push(
                 `MS Answer must be within 0-${
                   dummyQuestion.options.length - 1
-                }, provided ${answer.text}`
+                }, provided ${answer.text.trim()}`
               );
           });
         }

@@ -27,11 +27,11 @@ export function generateInputQuestionAnswers(
   ): TInputQuestionFull['answers'][0][0] {
     checkModifiers(answer);
     return {
-      text: answer.text.toString(),
+      text: answer.text.toString().trim(),
       modifiers:
         answer.modifiers?.filter((modifier) => modifier !== null) ?? [],
       regex: answer.regex ?? null,
-      explanation: answer.explanation ?? null
+      explanation: answer.explanation?.toString().trim() ?? null
     };
   }
 
@@ -39,7 +39,7 @@ export function generateInputQuestionAnswers(
     answer: string
   ): TInputQuestionFull['answers'][0][0] {
     return {
-      text: answer.toString(),
+      text: answer.toString().trim(),
       modifiers: [],
       regex: null,
       explanation: null
@@ -51,7 +51,7 @@ export function generateInputQuestionAnswers(
     generatedInputQuestionAnswers = answers.map((answer) => {
       if (isPrimitive(answer))
         return [
-          generatedInputQuestionAnswerFromString(answer.toString())
+          generatedInputQuestionAnswerFromString(answer as string)
         ] as TInputQuestionFull['answers'][0];
       else if (Array.isArray(answer)) {
         return answer.map((answer) =>
@@ -69,7 +69,7 @@ export function generateInputQuestionAnswers(
     });
   } else if (isPrimitive(answers)) {
     generatedInputQuestionAnswers = [
-      [generatedInputQuestionAnswerFromString(answers.toString())]
+      [generatedInputQuestionAnswerFromString(answers as string)]
     ];
   } else {
     generatedInputQuestionAnswers = [

@@ -12,29 +12,33 @@ export function generateSelectionQuestionAnswers(
     return answers.map((answer) => {
       if (typeof answer !== 'object') {
         return {
-          text: answer.toString(),
+          text: answer.toString().trim(),
           explanation: null
         };
       } else {
         return {
-          text: answer.text.toString(),
-          explanation: answer.explanation ?? null
+          text: answer.text.toString().trim(),
+          explanation: answer.explanation?.toString().trim() ?? null
         };
       }
     });
   } else if (isPrimitive(answers)) {
     return [
       {
-        text: answers.toString(),
+        text: answers.toString().trim(),
         explanation: null
       }
     ];
   } else {
     return [
       {
-        text: (answers as ISelectionQuestionAnswerPartial).text.toString(),
+        text: (answers as ISelectionQuestionAnswerPartial).text
+          .toString()
+          .trim(),
         explanation:
-          (answers as ISelectionQuestionAnswerPartial).explanation ?? null
+          (answers as ISelectionQuestionAnswerPartial).explanation
+            ?.toString()
+            .trim() ?? null
       }
     ];
   }
