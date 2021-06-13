@@ -10,5 +10,7 @@ export function computeMedian(values: number[]) {
 
   if (copiedValues.length % 2) return copiedValues[half];
 
-  return Number((copiedValues[half - 1] + copiedValues[half]) / 2.0).toFixed(2);
+  return Number(
+    ((copiedValues[half - 1] + copiedValues[half]) / 2.0).toFixed(2)
+  );
 }
