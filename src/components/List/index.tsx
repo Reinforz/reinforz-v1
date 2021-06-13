@@ -3,6 +3,7 @@ import React from "react";
 import { MdDelete } from 'react-icons/md';
 import { useThemeSettings } from "../../hooks";
 import sounds from "../../sounds";
+import { applyCheckboxShortcut } from "../../utils";
 import Icon from "../Icon";
 import "./style.scss";
 
@@ -55,15 +56,10 @@ export default function List<T extends { _id: string }>(props: Props<T>) {
           const { _id } = item
           return <div className="List-content-item" key={_id} style={{ backgroundColor: theme.color.light }}>
             <div className="List-content-item-icons">
-              <Checkbox color="primary" className="List-content-item-icons--checkbox" key={_id + "checkbox" + index} onClick={(e) => {
-                if ((e.target as any).checked) {
-                  settings.sound && sounds.pop_off.play();
-                  setSelectedItems([...selectedItems, _id])
-                }
-                else {
-                  settings.sound && sounds.pop_on.play();
-                  setSelectedItems(selectedItems.filter(selectedItem => selectedItem !== _id))
-                }
+              <Checkbox color="primary" className="List-content-item-icons--checkbox" key={_id + "checkbox" + index} onClick={(e: any) => {
+                e.persist();
+                settings.sound && e.target.checked ? sounds.pop_off.play() : sounds.pop_on.play();
+                setSelectedItems([...applyCheckboxShortcut(e, props.items.map(item => item._id), items.map(item => item._id), index)]);
               }} checked={selectedItems.includes(_id)} value={_id} />
               <Icon key={_id + "icon" + index} popoverText="Delete this item">
                 <MdDelete size={20} className="List-content-item-icons--cancel" onClick={() => {
