@@ -31,7 +31,7 @@ export default function ListTable<T extends Record<string, any>>(props: Props<T>
   return <div className={`ListTable${props.className ? ' ' + props.className : ''}`} style={{ backgroundColor: theme.color.base, color: theme.palette.text.secondary }}>
     <div className="ListTable-headers" style={{ backgroundColor: theme.color.dark }}>
       <div className="ListTable-headers-row">
-        {headers.map((header) => <span className={`ListTable-headers-row-item ListTable-headers-row-item--${header}`} key={header} onClick={() => {
+        {headers.map((header) => <span className={`ListTable-headers-row-item ListTable-headers-row-item-${header}`} key={header} onClick={() => {
           settings.sound && sounds.click.play()
           if (sort[0] === header) setSort([header, !sort[1]])
           else setSort([header, false])
@@ -45,14 +45,14 @@ export default function ListTable<T extends Record<string, any>>(props: Props<T>
     </div>
     <div className="ListTable-body" style={{ backgroundColor: theme.color.dark }}>
       {sortedItems.map((itemMap, index) => <div key={itemMap._id} className="ListTable-body-row" style={{ backgroundColor: theme.color.light }}>
-        <span className={`ListTable-body-row-item ListTable-body-row-item--index`}>{index + 1}</span>
-        {["title", ...props.headers].map(header => <span className={`ListTable-body-row-item ListTable-body-row-item--${header}`} key={header}>{itemMap[header]}</span>)}
+        <span className={`ListTable-body-row-item ListTable-body-row-item-index`}>{index + 1}</span>
+        {["title", ...props.headers].map(header => <span className={`ListTable-body-row-item ListTable-body-row-item-${header}`} key={header}>{itemMap[header]}</span>)}
       </div>)}
     </div>
     <div className="ListTable-footer">
       <div className="ListTable-headers-row" style={{ backgroundColor: theme.color.dark }}>
-        <span className={`ListTable-headers-row-item ListTable-headers-row-item--blank`}></span>
-        {["total", ...props.headers].map(header => <span className={`ListTable-headers-row-item ListTable-headers-row-item--${header}`} key={header}>{aggregateItemsMap[header]}</span>)}
+        <span className={`ListTable-headers-row-item ListTable-headers-row-item-blank`}></span>
+        {["total", ...props.headers].map(header => <span className={`ListTable-headers-row-item ListTable-headers-row-item-${header}`} key={header}>{aggregateItemsMap[header]}</span>)}
       </div>
     </div>
   </div>

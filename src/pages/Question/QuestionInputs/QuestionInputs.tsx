@@ -16,7 +16,7 @@ export default function QuestionInputs(props: Props) {
   const { setUserAnswers, userAnswers, question: { _id, type } } = props;
 
   return (
-    <div className={`QuestionInputs QuestionInputs--${type}`} style={{ backgroundColor: theme.color.base }}>
+    <div className={`QuestionInputs QuestionInputs-${type}`} style={{ backgroundColor: theme.color.base }}>
       {props.question.answers.map((_, i) =>
         <div key={`${_id}.${i}`} className={`QuestionInputs-item`} style={{ backgroundColor: theme.color.base, color: theme.palette.text.primary }}>
           <TextField autoFocus={i === 0} fullWidth inputProps={{

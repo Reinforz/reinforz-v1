@@ -19,7 +19,7 @@ export function ReportOptions(props: Props) {
     {question.options.map((option, index) => {
       return <div className="Report-Options-container" style={{ backgroundColor: theme.color.dark }} key={option.text}>
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <div style={{ backgroundColor: theme.color.light, padding: 10 }} className="Report-Options-container-item Report-Options-container-item--text">
+          <div style={{ backgroundColor: theme.color.light, padding: 10 }} className="Report-Options-container-item Report-Options-container-item-text">
             <Markdown content={option.text} />
           </div>
           {(option.isCorrect || option.userSelected) ? <div style={{ backgroundColor: theme.color.light }} className="Report-Options-container-item">

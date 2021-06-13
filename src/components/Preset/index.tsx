@@ -91,6 +91,13 @@ export default function Preset<T extends ISettingsPreset | IPlaySettingsPreset |
           itemPreset.presets[currentPresetIndex].data = currentPreset as any;
           setPresetState(JSON.parse(JSON.stringify(itemPreset)))
           localStorage.setItem(lsKey, JSON.stringify(itemPreset));
+          enqueueSnackbar(`Preset "${itemPreset.presets[currentPresetIndex].name}" updated`, {
+            variant: 'success',
+            anchorOrigin: {
+              vertical: 'bottom',
+              horizontal: 'center',
+            }
+          })
         }
       }} />
     </Icon>

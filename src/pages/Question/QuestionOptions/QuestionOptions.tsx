@@ -24,7 +24,7 @@ export default function QuestionOptions(props: Props) {
   const generateOptions = () => {
     switch (props.question.type) {
       case "MCQ": {
-        return <RadioGroup className="QuestionOptions-container QuestionOptions-container--MCQ" style={{ backgroundColor: theme.color.base }} value={userAnswers.length === 0 ? [''] : userAnswers[0]} onChange={e => {
+        return <RadioGroup className="QuestionOptions-container QuestionOptions-container-MCQ" style={{ backgroundColor: theme.color.base }} value={userAnswers.length === 0 ? [''] : userAnswers[0]} onChange={e => {
           settings.sound && sounds.option_click.play();
           setUserAnswers([e.target.value])
         }}>
@@ -41,7 +41,7 @@ export default function QuestionOptions(props: Props) {
         </RadioGroup>
       }
       case "MS": {
-        return <FormGroup className="QuestionOptions-container QuestionOptions-container--MS" style={{ backgroundColor: theme.color.base }} onChange={(e: any) => {
+        return <FormGroup className="QuestionOptions-container QuestionOptions-container-MS" style={{ backgroundColor: theme.color.base }} onChange={(e: any) => {
           if (e.target.checked) {
             settings.sound && sounds.pop_off.play();
             setUserAnswers(userAnswers.concat(e.target.value))
