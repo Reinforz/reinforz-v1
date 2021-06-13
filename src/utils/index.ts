@@ -10,6 +10,7 @@ export * from './checkInputAnswers';
 export * from './computeDataAggregation';
 export * from './computeMedian';
 export * from './computeMode';
+export * from './computeStandardDeviation';
 export * from './createAggregateItemsMap';
 export * from './createItemMap';
 export * from './displayTime';

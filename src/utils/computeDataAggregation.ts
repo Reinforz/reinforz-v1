@@ -1,5 +1,9 @@
 import { computeMedian, computeMode } from '.';
 import { TBooleanAggregation, TNumberAggregation } from '../types';
+import {
+  computeStandardDeviation,
+  computeVariance
+} from './computeStandardDeviation';
 
 export function computeNumberDataAggregation(
   data: number[],
@@ -38,6 +42,12 @@ export function computeNumberDataAggregation(
     }
     case 'MODE': {
       return computeMode(data);
+    }
+    case 'STDDEV': {
+      return computeStandardDeviation(data);
+    }
+    case 'VARIANCE': {
+      return computeVariance(data);
     }
   }
 }
