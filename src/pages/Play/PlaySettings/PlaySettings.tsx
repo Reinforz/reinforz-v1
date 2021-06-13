@@ -7,7 +7,7 @@ import { SettingsContext } from "../../../context/SettingsContext";
 import { useThemeSettings } from "../../../hooks";
 import sounds from "../../../sounds";
 import { IPlaySettingsFilters, IPlaySettingsOptions } from "../../../types";
-import { generateDefaultPlaySettingsState } from "../../../utils";
+import { generateDefaultPlaySettingsState, transformTextBySeparator } from "../../../utils";
 import "./PlaySettings.scss";
 
 export default function PlaySettings() {
@@ -25,9 +25,9 @@ export default function PlaySettings() {
     <div style={{ backgroundColor: theme.color.dark, padding: 2.5, margin: 2.5 }}>
       <Preset lsKey={REINFORZ_PLAY_SETTINGS_LS_KEY} modalLabel="Save Play Settings" popoverText="Save current play settings as preset" currentPreset={playSettings} itemPreset={playSettingsPresets} setPresetState={setPlaySettingsPresets} />
     </div>
-    <div className="PlaySettings-group PlaySettings-group--options">
-      <div className="PlaySettings-group-header PlaySettings-group-header--options" style={{ backgroundColor: theme.color.dark }}>Options</div>
-      <div className="PlaySettings-group-content PlaySettings-group-content--options" style={{ backgroundColor: theme.color.dark }}>
+    <div className="PlaySettings-group PlaySettings-group-options">
+      <div className="PlaySettings-group-header PlaySettings-group-header-options" style={{ backgroundColor: theme.color.dark }}>Options</div>
+      <div className="PlaySettings-group-content PlaySettings-group-content-options" style={{ backgroundColor: theme.color.dark }}>
         {Object.keys(playSettings.options).map((key, index) => {
           let isDisabled = false;
           if (Boolean(key.match(/(shuffle_questions|shuffle_quizzes)/) && playSettings.options.flatten_mix)) isDisabled = true;
@@ -49,16 +49,16 @@ export default function PlaySettings() {
                 color="primary"
               />
             }
-            label={key.split("_").map(k => k.charAt(0).toUpperCase() + k.substr(1)).join(" ")}
+            label={transformTextBySeparator(key)}
           />
         })}
       </div>
     </div>
-    <div className="PlaySettings-group PlaySettings-group--filters">
-      <div className="PlaySettings-group-header PlaySettings-group-header--filters" style={{ backgroundColor: theme.color.dark }}>
+    <div className="PlaySettings-group PlaySettings-group-filters">
+      <div className="PlaySettings-group-header PlaySettings-group-header-filters" style={{ backgroundColor: theme.color.dark }}>
         Filters
       </div>
-      <div className="PlaySettings-group-content PlaySettings-group-content--filters" style={{ backgroundColor: theme.color.dark }}>
+      <div className="PlaySettings-group-content PlaySettings-group-content-filters" style={{ backgroundColor: theme.color.dark }}>
         <InputRange step={1} label={"Time Allocated range"} min={0} max={120} setState={setPlaySettingsFilters} state={playSettings.filters} stateKey={"time_allocated"} />
         <CheckboxGroup label={'Excluded Difficulty'} items={['Beginner', 'Intermediate', 'Advanced']} setState={setPlaySettingsFilters} stateKey={'excluded_difficulty'} state={playSettings.filters} />
         <CheckboxGroup label={'Excluded Type'} items={['FIB', 'MS', 'MCQ', "Snippet"]} setState={setPlaySettingsFilters} stateKey={'excluded_types'} state={playSettings.filters} />

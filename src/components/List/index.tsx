@@ -40,7 +40,7 @@ export default function List<T extends { _id: string }>(props: Props<T>) {
       <div className="List-header-title">{header}</div>
       <div className="List-header-icons">
         <Icon popoverText={`Remove ${selectedItems.length} selected items`} key={"delete icon"} >
-          <MdDelete size={20} className={"List-header-icons--cancel"} onClick={() => {
+          <MdDelete size={20} className={"List-header-icons-cancel"} onClick={() => {
             settings.sound && sounds.remove.play();
             const remainingItems = items.filter(item => !selectedItems.includes(item._id))
             setItems(remainingItems)
@@ -56,13 +56,13 @@ export default function List<T extends { _id: string }>(props: Props<T>) {
           const { _id } = item
           return <div className="List-content-item" key={_id} style={{ backgroundColor: theme.color.light }}>
             <div className="List-content-item-icons">
-              <Checkbox color="primary" className="List-content-item-icons--checkbox" key={_id + "checkbox" + index} onClick={(e: any) => {
+              <Checkbox color="primary" className="List-content-item-icons-checkbox" key={_id + "checkbox" + index} onClick={(e: any) => {
                 e.persist();
                 settings.sound && e.target.checked ? sounds.pop_off.play() : sounds.pop_on.play();
                 setSelectedItems([...applyCheckboxShortcut(e, props.items.map(item => item._id), items.map(item => item._id), index)]);
               }} checked={selectedItems.includes(_id)} value={_id} />
               <Icon key={_id + "icon" + index} popoverText="Delete this item">
-                <MdDelete size={20} className="List-content-item-icons--cancel" onClick={() => {
+                <MdDelete size={20} className="List-content-item-icons-cancel" onClick={() => {
                   settings.sound && sounds.remove.play();
                   const remainingItems = items.filter(_item => _item._id !== _id);
                   props.onDelete && props.onDelete(remainingItems, [item._id])

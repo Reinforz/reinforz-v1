@@ -47,6 +47,7 @@ export function generateCompleteQuestion(
     // Auto infer question type
     if (
       isPrimitive(completeQuestion.answers) ||
+      Object.getPrototypeOf(completeQuestion.answers) === Object.prototype ||
       completeQuestion.answers.length === 1
     )
       completeQuestion.type =
