@@ -16,4 +16,12 @@
   <img src="https://img.shields.io/github/contributors/devorein/reinforz?label=contributors&color=red"/>
 </p>
 
+<div align="center">
+  <h2 align="center">Home</h2>
+  <img src="https://raw.githubusercontent.com/Devorein/reinforz/master/media/Home.png"/>
+  <h2 align="center">Report</h2>
+  <img src="https://raw.githubusercontent.com/Devorein/reinforz/master/media/Report.png"/>
+</div>
+
+Please take a look at the [examples](https://github.com/Devorein/reinforz/tree/master/examples) folder to see a few sample quizzes. 
 **Feel free to submit a pull request or open a new issue, contributions are more than welcome !!!**
