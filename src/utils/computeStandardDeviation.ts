@@ -10,5 +10,6 @@ export function computeVariance(data: number[]) {
 }
 
 export function computeStandardDeviation(data: number[]) {
+  if (data.length === 0) return 0;
   return Number((computeVariance(data) / data.length).toFixed(2));
 }

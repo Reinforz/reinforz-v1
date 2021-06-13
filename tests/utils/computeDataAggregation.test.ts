@@ -16,6 +16,30 @@ describe('computeNumberDataAggregation', () => {
     ).toStrictEqual(1);
   });
 
+  it(`Should work for MEDIAN aggregation`, () => {
+    expect(
+      computeNumberDataAggregation([], { aggregation: 'MEDIAN' })
+    ).toStrictEqual(0);
+  });
+
+  it(`Should work for MODE aggregation`, () => {
+    expect(
+      computeNumberDataAggregation([], { aggregation: 'MODE' })
+    ).toStrictEqual(0);
+  });
+
+  it(`Should work for STDDEV aggregation`, () => {
+    expect(
+      computeNumberDataAggregation([], { aggregation: 'STDDEV' })
+    ).toStrictEqual(0);
+  });
+
+  it(`Should work for VARIANCE aggregation`, () => {
+    expect(
+      computeNumberDataAggregation([], { aggregation: 'VARIANCE' })
+    ).toStrictEqual(0);
+  });
+
   it(`Should work for AVG aggregation`, () => {
     expect(
       computeNumberDataAggregation([1, 2, 3, 4, 5], { aggregation: 'AVG' })
