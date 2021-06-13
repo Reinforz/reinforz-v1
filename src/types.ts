@@ -62,7 +62,6 @@ export interface IPlaySettings {
 
 export type TQuestionType = 'MCQ' | 'MS' | 'FIB' | 'Snippet';
 export type TQuestionDifficulty = 'Beginner' | 'Intermediate' | 'Advanced';
-export type TQuestionFormat = 'text' | 'md' | 'mixed';
 export interface IQuestionPartial {
   type?: TQuestionType;
   image?: string | null;
