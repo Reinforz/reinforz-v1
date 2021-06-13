@@ -1,4 +1,5 @@
 import { TBooleanAggregation, TNumberAggregation } from '../types';
+import { computeMedian } from './computeMedian';
 
 export function computeNumberDataAggregation(
   data: number[],
@@ -31,6 +32,9 @@ export function computeNumberDataAggregation(
           (options.divider ?? (data.length === 0 ? 1 : data.length))
         ).toFixed(2)
       );
+    }
+    case 'MEDIAN': {
+      return computeMedian(data);
     }
   }
 }
