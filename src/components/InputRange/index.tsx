@@ -5,7 +5,8 @@ import { useThemeSettings } from "../../hooks";
 import sounds from "../../sounds";
 import { TNumberOperator } from "../../types";
 import { transformTextBySeparator } from "../../utils";
-interface Props<T extends Record<string, any>> {
+
+export interface InputRangeProps<T extends Record<string, any>> {
   label: string
   state: T,
   stateKey: keyof T
@@ -16,7 +17,7 @@ interface Props<T extends Record<string, any>> {
   direction?: 'row' | 'column'
 }
 
-export default function InputRange<T extends Record<string, any>>(props: Props<T>) {
+export default function InputRange<T extends Record<string, any>>(props: InputRangeProps<T>) {
   const { direction = 'row', min, max, setState, state, stateKey, label, step = 5 } = props;
   const { theme } = useThemeSettings();
   const { settings } = useContext(SettingsContext);
