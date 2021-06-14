@@ -1,6 +1,5 @@
 import Aggregator from './Aggregator';
 import CheckboxGroup from './CheckboxGroup';
-import Content from './Content';
 import ErrorBoundary from './ErrorBoundary';
 import Header from './Header';
 import Icon from './Icon';
@@ -25,8 +24,8 @@ import Toggles from './Toggles';
 import Upload from './Upload';
 import View from './View';
 
+export * from './Content';
 export {
-  Content,
   Header,
   Aggregator,
   Upload,
