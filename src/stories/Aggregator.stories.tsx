@@ -1,10 +1,8 @@
-import { ThemeProvider } from '@material-ui/styles';
 import { Meta, Story } from '@storybook/react';
 import { useState } from 'react';
 import Aggregator, { AggregatorProps } from '../components/Aggregator';
-import { SettingsContext } from '../context/SettingsContext';
-import { ExtendedTheme, TBooleanAggregation, TNumberAggregation } from '../types';
-import { generateDefaultSettingsPreset, generateTheme } from '../utils';
+import { TBooleanAggregation, TNumberAggregation } from '../types';
+import Wrapper from "./Wrapper";
 
 export default {
   title: 'Components/Aggregator',
@@ -16,15 +14,9 @@ const Template: Story<AggregatorProps<any>> = (args) => {
     score: 'AVG',
     verdict: 'TRUE'
   });
-  const defaultSettingsPresets = generateDefaultSettingsPreset();
-  const defaultSettingsPreset = defaultSettingsPresets.presets[0].data
-  const generatedTheme = generateTheme(defaultSettingsPreset) as ExtendedTheme;
-
-  return <ThemeProvider theme={generatedTheme}>
-    <SettingsContext.Provider value={{ setSettings: () => { }, setSettingsPresets: () => { }, settings: defaultSettingsPreset, settingsPresets: defaultSettingsPresets }}>
-      <Aggregator {...args as any} state={state} setState={setState} />
-    </SettingsContext.Provider>
-  </ThemeProvider>
+  return <Wrapper>
+    <Aggregator {...args as any} state={state} setState={setState} />
+  </Wrapper>
 };
 
 export const NumberAggregator = Template.bind({});
