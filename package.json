@@ -36,6 +36,7 @@
     "@types/shortid": "^0.0.29",
     "@typescript-eslint/eslint-plugin": "^4.26.0",
     "@typescript-eslint/parser": "^4.26.0",
+    "chromatic": "^5.9.1",
     "jest": "^26.6.3",
     "react-scripts": "^4.0.3",
     "sass": "^1.34.1",
@@ -49,7 +50,8 @@
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "test:unit": "npx jest --runInBand --config ./jest.config.js",
-    "storybook:start": "npx start-storybook"
+    "storybook:start": "npx start-storybook",
+    "storybook:build": "npx build-storybook -- -o dist"
   },
   "eslintConfig": {
     "extends": "react-app"

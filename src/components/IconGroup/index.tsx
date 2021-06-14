@@ -1,9 +1,9 @@
 import { PopoverOrigin } from "@material-ui/core";
+import { Hovertips } from "../";
 import { useThemeSettings } from "../../hooks";
-import Hovertips from "../Hovertips";
 import "./style.scss";
 
-interface Props {
+export interface IconGroupProps {
   icons: [string, JSX.Element, {
     popoverAnchorOrigin?: PopoverOrigin
     popoverTransformOrigin?: PopoverOrigin
@@ -13,7 +13,7 @@ interface Props {
   className?: string
 }
 
-export default function IconGroup(props: Props) {
+export default function IconGroup(props: IconGroupProps) {
   const { theme } = useThemeSettings();
   const direction = props.direction ?? 'row';
   return <div className={`Hovertips-Group ${props.className}`} style={{ backgroundColor: theme.color.base, flexDirection: direction, ...props.style ?? {} }}>

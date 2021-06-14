@@ -1,6 +1,5 @@
 import { Typography } from '@material-ui/core';
 import { Meta, Story } from '@storybook/react';
-import { useState } from 'react';
 import { Content } from '../components';
 import Hovertips, { HovertipsProps } from '../components/Hovertips';
 import Wrapper from "./Wrapper";
@@ -11,11 +10,8 @@ export default {
 } as Meta;
 
 const Template: Story<HovertipsProps> = (args) => {
-  const [state, setState] = useState<Record<string, any>>({
-    options: []
-  });
   return <Wrapper>
-    <Hovertips {...args as any} state={state} setState={setState} stateKey='options'>
+    <Hovertips {...args}>
       <Content style={{ width: '100%' }}>
         <Typography>Hover over me</Typography>
       </Content>
