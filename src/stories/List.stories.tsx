@@ -35,8 +35,30 @@ const DefaultListTemplate: Story<ListProps<any>> = (args) => {
   const [items, setItems] = useState(listItems)
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
   return <Wrapper>
-    <List {...args as any} fields={["title", "subtitle"]} header={"List"} selectedItems={selectedItems} setSelectedItems={setSelectedItems} items={items} setItems={setItems} />
+    <List {...args} fields={["title", "subtitle"]} header={"List"} selectedItems={selectedItems} setSelectedItems={setSelectedItems} items={items} setItems={setItems} />
   </Wrapper>
 };
 
 export const DefaultList = DefaultListTemplate.bind({});
+
+const SelectedItemsListTemplate: Story<ListProps<any>> = (args) => {
+  const [items, setItems] = useState(listItems)
+  const [selectedItems, setSelectedItems] = useState<string[]>(['1', '3']);
+  return <Wrapper>
+    <List {...args} fields={["title", "subtitle"]} header={"List"} selectedItems={selectedItems} setSelectedItems={setSelectedItems} items={items} setItems={setItems} />
+  </Wrapper>
+};
+
+export const SelectedItemsList = SelectedItemsListTemplate.bind({});
+SelectedItemsList.storyName = 'Pre selected List'
+
+const EmptyItemsListTemplate: Story<ListProps<any>> = (args) => {
+  const [items, setItems] = useState([])
+  const [selectedItems, setSelectedItems] = useState<string[]>([]);
+  return <Wrapper>
+    <List {...args} fields={["title", "subtitle"]} header={"List"} selectedItems={selectedItems} setSelectedItems={setSelectedItems} items={items} setItems={setItems} />
+  </Wrapper>
+};
+
+export const EmptyItemsList = EmptyItemsListTemplate.bind({});
+EmptyItemsListTemplate.storyName = 'Empty List'

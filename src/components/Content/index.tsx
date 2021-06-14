@@ -9,7 +9,7 @@ export interface ContentProps {
 
 export function Content(props: ContentProps) {
   const { theme } = useThemeSettings();
-  return <div className={`Content ${props.className ?? ''}`} style={{ backgroundColor: theme.color.dark, ...props.style ?? {} }}>
+  return <div className={`Content ${props.className ?? ''}`} style={{ color: theme.palette.text.primary, backgroundColor: theme.color.dark, ...props.style ?? {} }}>
     {props.children}
   </div>
 }

@@ -96,8 +96,13 @@ export function generateTheme(settings: ISettings) {
           ? 'Noto Serif'
           : 'Ubuntu Mono',
       fontSize: 14,
+      h5: {
+        fontWeight: 'bold',
+        fontSize: '1.25em'
+      },
       h6: {
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        fontSize: '1em'
       }
     },
     color,

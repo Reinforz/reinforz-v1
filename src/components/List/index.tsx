@@ -1,4 +1,4 @@
-import { Checkbox } from "@material-ui/core";
+import { Checkbox, Typography } from "@material-ui/core";
 import React from "react";
 import { MdDelete } from 'react-icons/md';
 import { Hovertips } from "../";
@@ -22,21 +22,29 @@ export interface ListProps<T extends { _id: string } & Record<string, any>> {
 export default function List<T extends { _id: string }>(props: ListProps<T>) {
   const { items, selectedItems, setItems, setSelectedItems, header, fields, emptyListMessage = 'No items', className = '' } = props;
   const { theme, settings } = useThemeSettings();
-
+  const isAllSelected = items.length !== 0 && selectedItems.length === items.length;
   return <div className={`List ${className}`} style={{ backgroundColor: theme.color.base }}>
     <div className="List-header" style={{ backgroundColor: theme.color.dark, color: theme.palette.text.primary }}>
-      <Checkbox color="primary" key={"checkbox"} onClick={(e) => {
-        if ((e.target as any).checked) {
-          settings.sound && sounds.pop_off.play();
-          setSelectedItems(items.map(item => item._id))
-        }
-        else {
-          settings.sound && sounds.pop_on.play();
-          setSelectedItems([])
-        }
-      }} checked={items.length !== 0 && selectedItems.length === items.length} />
-      {selectedItems.length}/{items.length}
-      <div className="List-header-title">{header}</div>
+      <Hovertips popoverText={`${isAllSelected ? "Deselect" : "Select"} all items`}>
+        <Checkbox color="primary" key={"checkbox"} onClick={(e) => {
+          if ((e.target as any).checked) {
+            settings.sound && sounds.pop_off.play();
+            setSelectedItems(items.map(item => item._id))
+          }
+          else {
+            settings.sound && sounds.pop_on.play();
+            setSelectedItems([])
+          }
+        }} checked={isAllSelected} />
+      </Hovertips>
+      <Typography>
+        {selectedItems.length}/{items.length}
+      </Typography>
+      <div className="List-header-title">
+        <Typography variant="h5">
+          {header}
+        </Typography>
+      </div>
       <div className="List-header-icons">
         <Hovertips popoverText={`Remove ${selectedItems.length} selected items`} key={"delete icon"} >
           <MdDelete size={20} className={"List-header-icons-cancel"} onClick={() => {
@@ -71,10 +79,18 @@ export default function List<T extends { _id: string }>(props: ListProps<T>) {
               </Hovertips>
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between', flex: 1 }}>
-              {fields.map((field, index) => <div className="List-content-item-field" key={_id + field + index}>{typeof field === "function" ? field(item) : item[field]}</div>)}
+              {fields.map((field, index) => <div className="List-content-item-field" key={_id + field + index}>
+                <Typography variant="h6">
+                  {typeof field === "function" ? field(item) : item[field]}
+                </Typography>
+              </div>)}
             </div>
           </div>
-        }) : <div className="center">{emptyListMessage}</div>}
+        }) : <div className="center">
+          <Typography>
+            {emptyListMessage}
+          </Typography>
+        </div>}
     </div>
   </div>
 }

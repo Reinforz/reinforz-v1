@@ -10,7 +10,7 @@ interface Props {
 export default function Header(props: Props) {
   const { theme } = useThemeSettings();
   return <div className={`Header ${props.className ?? ''}`} style={{ backgroundColor: theme.color.dark }}>
-    <Typography variant="h6">
+    <Typography variant="h5">
       {props.header}
     </Typography>
   </div>
