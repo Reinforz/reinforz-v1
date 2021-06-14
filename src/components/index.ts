@@ -1,6 +1,7 @@
 import Aggregator from './Aggregator';
 import CheckboxGroup from './CheckboxGroup';
 import ErrorBoundary from './ErrorBoundary';
+import Flex from './Flex';
 import Header from './Header';
 import Hovertips from './Hovertips';
 import IconGroup from './IconGroup';
@@ -26,6 +27,7 @@ import View from './View';
 
 export * from './Content';
 export {
+  Flex,
   Header,
   Aggregator,
   Upload,

@@ -102,7 +102,7 @@ export function generateTheme(settings: ISettings) {
       },
       h6: {
         fontWeight: 'bold',
-        fontSize: '1em'
+        fontSize: '1.15em'
       }
     },
     color,
