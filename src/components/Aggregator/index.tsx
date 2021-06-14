@@ -1,6 +1,6 @@
 import { Typography } from "@material-ui/core";
 import { SetStateAction } from "react";
-import { Header, Select } from "..";
+import { Content, Header, Select } from "..";
 import { useThemeSettings } from "../../hooks";
 import { TBooleanAggregation, TNumberAggregation } from "../../types";
 import { computeBooleanDataAggregation, computeNumberDataAggregation, transformTextBySeparator } from "../../utils";
@@ -28,7 +28,7 @@ export default function Aggregator<T>(props: AggregatorProps<T>) {
   const { theme } = useThemeSettings();
   return <div className="Aggregator" style={{ color: theme.palette.text.primary, backgroundColor: theme.color.base }}>
     <Header header={header} />
-    <div className="Aggregator-content" style={{ backgroundColor: theme.color.dark }}>
+    <Content className="Aggregator-content">
       {items.map(item => <div key={item.type + item.stateKey} className="Aggregator-content-item">
         <Select menuItemLabel={(item) => item} label={item.label ?? transformTextBySeparator(item.stateKey as string)} items={item.type === "number" ? ["MAX", "MIN", "AVG", 'MEDIAN', 'MODE', 'STDDEV', 'VARIANCE'] : ["TRUE", "FALSE"]} setState={(aggregator) => {
           setState({
@@ -42,6 +42,6 @@ export default function Aggregator<T>(props: AggregatorProps<T>) {
           </Typography>
         </div>
       </div>)}
-    </div>
+    </Content>
   </div>
 }

@@ -5,7 +5,7 @@ import { useThemeSettings } from "../../hooks";
 import sounds from "../../sounds";
 import { applyCheckboxShortcut } from "../../utils";
 
-interface Props<I extends Record<string, any>> {
+export interface CheckboxGroupProps<I extends Record<string, any>> {
   label: string
   setState: Dispatch<SetStateAction<I>>
   stateKey: keyof I
@@ -13,7 +13,7 @@ interface Props<I extends Record<string, any>> {
   state: I
 }
 
-export default function CheckboxGroup<I extends Record<string, any>>(props: Props<I>) {
+export default function CheckboxGroup<I extends Record<string, any>>(props: CheckboxGroupProps<I>) {
   const items: string[] = props.state[props.stateKey];
   const { theme } = useThemeSettings();
   const { settings } = useContext(SettingsContext);
