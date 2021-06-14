@@ -5,7 +5,7 @@ import { FaArrowAltCircleDown, FaArrowAltCircleUp } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { useThemeSettings } from "../../hooks";
 import sounds from "../../sounds";
-import Icon from "../Icon";
+import Hovertips from "../Hovertips";
 import "./style.scss";
 
 interface Props {
@@ -48,44 +48,44 @@ export default function Sort(props: Props) {
             )}
           </MuiSelect>
           {index !== sorts.length - 1 && sorts.length !== 1 && <div className="Sort-content-item-down">
-            <Icon popoverText={"Move downwards"}>
+            <Hovertips popoverText={"Move downwards"}>
               <FaArrowAltCircleDown fill={theme.color.opposite_light} size={15} onClick={() => {
                 const nextSort = sorts[index + 1];
                 sorts[index + 1] = sort;
                 sorts[index] = nextSort;
                 setSorts(JSON.parse(JSON.stringify(sorts)))
               }} />
-            </Icon>
+            </Hovertips>
           </div>}
           {index !== 0 && sorts.length !== 1 && <div className="Sort-content-item-up">
-            <Icon popoverText={"Move upwards"}>
+            <Hovertips popoverText={"Move upwards"}>
               <FaArrowAltCircleUp fill={theme.color.opposite_light} size={15} onClick={() => {
                 const prevSort = sorts[index - 1];
                 sorts[index - 1] = sort;
                 sorts[index] = prevSort;
                 setSorts(JSON.parse(JSON.stringify(sorts)))
               }} />
-            </Icon>
+            </Hovertips>
           </div>}
           <div className="Sort-content-item-delete">
-            <Icon popoverText={`Delete ${item} by ${order} sort`}>
+            <Hovertips popoverText={`Delete ${item} by ${order} sort`}>
               <MdDelete size={20} fill={red[500]} onClick={() => {
                 settings.sound && sounds.remove.play()
                 sorts[index] = null as any;
                 setSorts(sorts.filter(sort => sort))
               }} />
-            </Icon>
+            </Hovertips>
           </div>
         </div>
       })}
     </div>}
     {sorts.length !== maxSort && <div className="Sort-add">
-      <Icon popoverText="Add Sort">
+      <Hovertips popoverText="Add Sort">
         <AiFillPlusCircle size={25} fill={green[500]} onClick={() => {
           settings.sound && sounds.click.play()
           setSorts([...sorts, [items[0], 'ASC']])
         }} />
-      </Icon>
+      </Hovertips>
     </div>}
   </FormGroup>
 }

@@ -58,7 +58,7 @@ export default function Shortcuts() {
       <StackList
         header={'Shortcuts'}
         items={[
-          ['Navigation Icon #', '#'],
+          ['Navigation Hovertips #', '#'],
           ['Selecting Option #', '#'],
           ['Previous preset', 'Alt+A'],
           ['Next preset', 'Alt+S'],

@@ -4,7 +4,7 @@ import { MdDelete } from 'react-icons/md';
 import { useThemeSettings } from "../../hooks";
 import sounds from "../../sounds";
 import { applyCheckboxShortcut } from "../../utils";
-import Icon from "../Icon";
+import Hovertips from "../Hovertips";
 import "./style.scss";
 
 export interface Props<T extends { _id: string } & Record<string, any>> {
@@ -39,7 +39,7 @@ export default function List<T extends { _id: string }>(props: Props<T>) {
       {selectedItems.length}/{items.length}
       <div className="List-header-title">{header}</div>
       <div className="List-header-icons">
-        <Icon popoverText={`Remove ${selectedItems.length} selected items`} key={"delete icon"} >
+        <Hovertips popoverText={`Remove ${selectedItems.length} selected items`} key={"delete icon"} >
           <MdDelete size={20} className={"List-header-icons-cancel"} onClick={() => {
             settings.sound && sounds.remove.play();
             const remainingItems = items.filter(item => !selectedItems.includes(item._id))
@@ -47,7 +47,7 @@ export default function List<T extends { _id: string }>(props: Props<T>) {
             props.onDelete && props.onDelete(remainingItems, selectedItems)
             setSelectedItems([])
           }} />
-        </Icon>
+        </Hovertips>
       </div>
     </div>
     <div className="List-content" style={{ color: theme.palette.text.primary, backgroundColor: theme.color.dark }}>
@@ -61,7 +61,7 @@ export default function List<T extends { _id: string }>(props: Props<T>) {
                 settings.sound && e.target.checked ? sounds.pop_off.play() : sounds.pop_on.play();
                 setSelectedItems([...applyCheckboxShortcut(e, props.items.map(item => item._id), items.map(item => item._id), index)]);
               }} checked={selectedItems.includes(_id)} value={_id} />
-              <Icon key={_id + "icon" + index} popoverText="Delete this item">
+              <Hovertips key={_id + "icon" + index} popoverText="Delete this item">
                 <MdDelete size={20} className="List-content-item-icons-cancel" onClick={() => {
                   settings.sound && sounds.remove.play();
                   const remainingItems = items.filter(_item => _item._id !== _id);
@@ -69,7 +69,7 @@ export default function List<T extends { _id: string }>(props: Props<T>) {
                   setItems(remainingItems)
                   setSelectedItems(selectedItems.filter(selectedItem => selectedItem !== _id))
                 }} style={{ fill: theme.palette.error.dark }} />
-              </Icon>
+              </Hovertips>
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between', flex: 1 }}>
               {fields.map((field, index) => <div className="List-content-item-field" key={_id + field + index}>{typeof field === "function" ? field(item) : item[field]}</div>)}

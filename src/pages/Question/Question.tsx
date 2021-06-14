@@ -2,7 +2,7 @@ import { Button, useTheme } from "@material-ui/core";
 import { green, red } from "@material-ui/core/colors";
 import React, { useContext, useEffect, useMemo, useRef, useState } from "react";
 import { FaClock } from "react-icons/fa";
-import { Icon, Markdown } from "../../components";
+import { Hovertips, Markdown } from "../../components";
 import { RootContext } from "../../context/RootContext";
 import { SettingsContext } from "../../context/SettingsContext";
 import sounds from "../../sounds";
@@ -100,7 +100,7 @@ export default function Question(props: Props) {
       : <QuestionInputs setUserAnswers={setUserAnswers} userAnswers={userAnswers} question={props.question} />}
     <QuestionHints usedHints={usedHints} setUsedHints={setUsedHints} hints={hints} />
     {<div style={{ display: 'flex', gridArea: `3/2/4/3`, alignItems: `center`, height: '65px' }}>
-      {!disable_timer && <Icon popoverAnchorOrigin={{
+      {!disable_timer && <Hovertips popoverAnchorOrigin={{
         vertical: 'top',
         horizontal: 'center',
       }} popoverTransformOrigin={{
@@ -121,7 +121,7 @@ export default function Question(props: Props) {
         }
       }}>
         <FaClock fill={timeBreak ? red[500] : green[500]} size={20} />
-      </Icon>}
+      </Hovertips>}
       <Button disabled={timeBreak} className="QuestionButton" variant="contained" color="primary" onClick={onNextButtonPress}>{!isLast ? "Next" : "Report"}</Button>
       {timeout && !playSettings.options.disable_timer && <div style={{ backgroundColor: theme.color.base, color: theme.palette.text.primary }} className="QuestionTimer">{displayTime(timeout)}</div>}
     </div>}

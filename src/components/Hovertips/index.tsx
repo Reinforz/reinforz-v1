@@ -24,7 +24,7 @@ interface Props {
   popoverTransformOrigin?: PopoverOrigin
 }
 
-export default function Icon(props: Props) {
+export default function Hovertips(props: Props) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const { settings } = useContext(SettingsContext);

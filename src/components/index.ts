@@ -2,7 +2,7 @@ import Aggregator from './Aggregator';
 import CheckboxGroup from './CheckboxGroup';
 import ErrorBoundary from './ErrorBoundary';
 import Header from './Header';
-import Icon from './Icon';
+import Hovertips from './Hovertips';
 import IconGroup from './IconGroup';
 import InputRange from './InputRange';
 import List from './List';
@@ -47,7 +47,7 @@ export {
   CheckboxGroup,
   Toggles,
   View,
-  Icon,
+  Hovertips,
   List,
   Menu,
   Stats

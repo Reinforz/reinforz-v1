@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { FaSave } from "react-icons/fa";
 import { MdDelete, MdUpdate } from "react-icons/md";
 import shortid from "shortid";
-import { Icon, ListSelect, ModalPresetInput } from "..";
+import { Hovertips, ListSelect, ModalPresetInput } from "..";
 import { ModalContext } from "../../context/ModalContext";
 import { SettingsContext } from "../../context/SettingsContext";
 import { useThemeSettings } from "../../hooks";
@@ -60,7 +60,7 @@ export default function Preset<T extends ISettingsPreset | IPlaySettingsPreset |
       }))
     }} item={itemPreset.current} />
 
-    <Icon popoverText={popoverText}>
+    <Hovertips popoverText={popoverText}>
       <FaSave fill={theme.color.opposite_light} size={20} onClick={() => {
         settings.sound && sounds.click.play()
         setModalState([true, <ModalPresetInput closeModal={() => setModalState([false, null])} label={modalLabel} onSave={(input) => {
@@ -82,8 +82,8 @@ export default function Preset<T extends ISettingsPreset | IPlaySettingsPreset |
           }
         }} />])
       }} />
-    </Icon>
-    <Icon popoverText={itemPreset.current !== 'default' ? "Update preset" : "Can't update default preset"}>
+    </Hovertips>
+    <Hovertips popoverText={itemPreset.current !== 'default' ? "Update preset" : "Can't update default preset"}>
       <MdUpdate size={20} fill={itemPreset.current !== 'default' ? theme.color.opposite_light : grey[500]} onClick={() => {
         if (itemPreset.current !== 'default') {
           settings.sound && sounds.click.play();
@@ -100,8 +100,8 @@ export default function Preset<T extends ISettingsPreset | IPlaySettingsPreset |
           })
         }
       }} />
-    </Icon>
-    <Icon popoverText={itemPreset.current !== 'default' ? "Delete preset" : "Can't delete default preset"}>
+    </Hovertips>
+    <Hovertips popoverText={itemPreset.current !== 'default' ? "Delete preset" : "Can't delete default preset"}>
       <MdDelete size={20} fill={itemPreset.current !== 'default' ? red[500] : grey[500]} onClick={() => {
         if (itemPreset.current !== 'default') {
           settings.sound && sounds.remove.play();
@@ -111,6 +111,6 @@ export default function Preset<T extends ISettingsPreset | IPlaySettingsPreset |
           } as any)
         }
       }} />
-    </Icon>
+    </Hovertips>
   </div>
 }

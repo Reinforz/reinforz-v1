@@ -1,7 +1,7 @@
 import { Button } from '@material-ui/core';
 import { safeDump } from 'js-yaml';
 import React, { useCallback, useContext } from 'react';
-import { Icon, Select } from '../../../components';
+import { Hovertips, Select } from '../../../components';
 import { ReportContext } from '../../../context/ReportContext';
 import { useThemeSettings } from '../../../hooks';
 import sounds from '../../../sounds';
@@ -58,13 +58,13 @@ export default function ReportExport() {
             export: exportState as any
           })
         }} state={exportState} stateKey={"export_as"} />
-        
-        <Icon popoverText={`Export ${export_type} as ${export_as}`} className="Report-Export-button">
+
+        <Hovertips popoverText={`Export ${export_type} as ${export_as}`} className="Report-Export-button">
           <Button variant="contained" color="primary" onClick={() => {
             settings.sound && sounds.swoosh.play();
             downloadFiles()
           }}>Download</Button>
-        </Icon>
+        </Hovertips>
       </div>
     </div>
   );

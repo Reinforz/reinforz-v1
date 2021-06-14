@@ -1,7 +1,7 @@
 import { green, red } from "@material-ui/core/colors";
 import { useContext } from "react";
 import { MdDelete } from 'react-icons/md';
-import { Icon, Markdown, StackList } from "../../../components";
+import { Hovertips, Markdown, StackList } from "../../../components";
 import { ReportContext } from "../../../context/ReportContext";
 import { useThemeSettings } from "../../../hooks";
 import sounds from "../../../sounds";
@@ -21,13 +21,13 @@ export function ReportTable() {
       <div key={sortedResult.question._id} className="Report-Table-item" style={{ backgroundColor: theme.color.dark }}>
         <div style={{ padding: 2.5, margin: 2.5, display: 'flex', alignItems: 'center' }}>
           <div className="Report-Table-item-index">{index + 1}</div>
-          <div className="Report-Table-item-delete" style={{ width: 20 }}><Icon popoverText="Delete"><MdDelete fill={red[500]} onClick={() => {
+          <div className="Report-Table-item-delete" style={{ width: 20 }}><Hovertips popoverText="Delete"><MdDelete fill={red[500]} onClick={() => {
             settings.sound && sounds.remove.play();
             setReport({
               ...report,
               results: report.results.filter(result => result._id !== sortedResult._id)
             })
-          }} /></Icon></div>
+          }} /></Hovertips></div>
         </div>
         <ReportQuestion question={sortedResult.question} />
         <div className="Report-Table-item-stats">

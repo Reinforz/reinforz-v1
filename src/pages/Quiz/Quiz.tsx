@@ -5,7 +5,7 @@ import { FaCloudDownloadAlt, FaKeyboard } from "react-icons/fa";
 import { HiDocumentReport } from "react-icons/hi";
 import { IoMdCreate, IoMdSettings } from "react-icons/io";
 import { useHistory } from "react-router-dom";
-import { Icon, IconGroup, Stats, Upload } from "../../components";
+import { Hovertips, IconGroup, Stats, Upload } from "../../components";
 import { RootContext } from "../../context/RootContext";
 import { useCycle, useNavigationIcons, useThemeSettings } from "../../hooks";
 import { IPlayDownloadedState, IResult, TQuestionFull } from "../../types";
@@ -53,7 +53,7 @@ export default function Quiz() {
       return <div className="Quiz" style={{ backgroundColor: theme.color.base }}>
         <div style={{ display: 'flex' }}>
           <Stats style={{ flex: 1 }} items={[["Title", `${currentQuestion.quiz.subject} - ${currentQuestion.quiz.topic}`], playSettings.options.instant_feedback ? ['Total Correct', totalCorrectAnswers] : null, ["Current", currentIndex + 1], ["Total", totalQuestions], ["Type", currentQuestion.type], ["Weight", currentQuestion.weight], !playSettings.options.disable_timer ? ["Time Allocated", currentQuestion.time_allocated] : null, ["Difficulty", currentQuestion.difficulty]]} />
-          <Icon popoverText="Download current play state" style={{ height: "calc(100% - 10px)", padding: 5, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <Hovertips popoverText="Download current play state" style={{ height: "calc(100% - 10px)", padding: 5, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <FaCloudDownloadAlt fill={theme.color.opposite_light} size={25} onClick={() => {
               download(`Play-${Date.now()}.yaml`, safeDump({
                 questions: allQuestions,
@@ -62,7 +62,7 @@ export default function Quiz() {
                 quizzes: selectedQuizzes.map(selectedQuiz => ({ _id: selectedQuiz._id, subject: selectedQuiz.subject, topic: selectedQuiz.topic }))
               }))
             }} />
-          </Icon>
+          </Hovertips>
         </div>
         <Question isLast={isLastItem} question={currentQuestion} changeCounter={(user_answers, time_taken, hints_used) => {
           const [transformedQuestion, answerResult] = getAnswerResult(currentQuestion, user_answers, time_taken, hints_used, playSettings.options.partial_score, playSettings.options.disable_timer);
