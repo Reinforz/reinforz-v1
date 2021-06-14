@@ -4,12 +4,19 @@ import "./style.scss";
 export interface ContentProps {
   children: JSX.Element | JSX.Element[] | string
   className?: string
-  style?: React.CSSProperties
+  style?: React.CSSProperties,
+  background?: boolean
 }
 
 export function Content(props: ContentProps) {
   const { theme } = useThemeSettings();
-  return <div className={`Content ${props.className ?? ''}`} style={{ color: theme.palette.text.primary, backgroundColor: theme.color.dark, ...props.style ?? {} }}>
+  const styles: React.CSSProperties = { color: theme.palette.text.primary, ...props.style ?? {} };
+
+  if (props.background) {
+    styles.backgroundColor = theme.color.dark;
+  }
+
+  return <div className={`Content ${props.className ?? ''}`} style={styles}>
     {props.children}
   </div>
 }
