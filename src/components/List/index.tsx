@@ -1,18 +1,17 @@
 import { Checkbox } from "@material-ui/core";
 import React from "react";
 import { MdDelete } from 'react-icons/md';
+import { Hovertips } from "../";
 import { useThemeSettings } from "../../hooks";
 import sounds from "../../sounds";
 import { applyCheckboxShortcut } from "../../utils";
-import Hovertips from "../Hovertips";
 import "./style.scss";
 
-export interface Props<T extends { _id: string } & Record<string, any>> {
+export interface ListProps<T extends { _id: string } & Record<string, any>> {
   header: string
   setItems: (data: T[]) => void
   setSelectedItems: (data: string[]) => void
   fields: (keyof T | ((data: T) => string | JSX.Element))[]
-  icons?: ((index: number, _id: string) => void)[]
   onDelete?: (items: T[], deletedItems: string[]) => void
   items: T[]
   selectedItems: string[]
@@ -20,7 +19,7 @@ export interface Props<T extends { _id: string } & Record<string, any>> {
   className?: string
 }
 
-export default function List<T extends { _id: string }>(props: Props<T>) {
+export default function List<T extends { _id: string }>(props: ListProps<T>) {
   const { items, selectedItems, setItems, setSelectedItems, header, fields, emptyListMessage = 'No items', className = '' } = props;
   const { theme, settings } = useThemeSettings();
 
@@ -59,7 +58,7 @@ export default function List<T extends { _id: string }>(props: Props<T>) {
               <Checkbox color="primary" className="List-content-item-icons-checkbox" key={_id + "checkbox" + index} onClick={(e: any) => {
                 e.persist();
                 settings.sound && e.target.checked ? sounds.pop_off.play() : sounds.pop_on.play();
-                setSelectedItems([...applyCheckboxShortcut(e, props.items.map(item => item._id), items.map(item => item._id), index)]);
+                setSelectedItems(applyCheckboxShortcut(e, items.map(item => item._id), selectedItems, index));
               }} checked={selectedItems.includes(_id)} value={_id} />
               <Hovertips key={_id + "icon" + index} popoverText="Delete this item">
                 <MdDelete size={20} className="List-content-item-icons-cancel" onClick={() => {
