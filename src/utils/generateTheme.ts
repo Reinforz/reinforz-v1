@@ -95,7 +95,10 @@ export function generateTheme(settings: ISettings) {
           : font === 'serif'
           ? 'Noto Serif'
           : 'Ubuntu Mono',
-      fontSize: 14
+      fontSize: 14,
+      h6: {
+        fontWeight: 'bold'
+      }
     },
     color,
     overrides: {

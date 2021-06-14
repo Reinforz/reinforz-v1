@@ -64,7 +64,7 @@ export default function Shortcuts() {
           ['Next preset', 'Alt+S'],
           ['Next question', 'Alt+A'],
           [
-            <StackListItem contents={['Select upto clicked option', 'keeping reset of the options in their state']} />,
+            <StackListItem contents={['Select upto clicked option', 'keeping rest of the options in their state']} />,
             'Shift + LMB'
           ],
           [
@@ -72,7 +72,7 @@ export default function Shortcuts() {
             'Shift + Ctrl + LMB'
           ],
           [
-            <StackListItem contents={['Select from clicked option to end', 'keeping reset of the options in their state']} />,
+            <StackListItem contents={['Select from clicked option to end', 'keeping rest of the options in their state']} />,
             'Shift + Alt + LMB'
           ],
           [
