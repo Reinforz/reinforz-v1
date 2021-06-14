@@ -5,7 +5,7 @@ import { TBooleanAggregation, TNumberAggregation } from "../../types";
 import { computeBooleanDataAggregation, computeNumberDataAggregation, transformTextBySeparator } from "../../utils";
 import "./style.scss";
 
-interface Props<T> {
+export interface AggregatorProps<T> {
   header: string
   items: ({
     label?: string,
@@ -22,7 +22,7 @@ interface Props<T> {
   setState: (state: SetStateAction<T>) => void
 }
 
-export default function Aggregator<T>(props: Props<T>) {
+export default function Aggregator<T>(props: AggregatorProps<T>) {
   const { header, items, state, setState } = props;
   const { theme } = useThemeSettings();
   return <div className="Aggregator" style={{ color: theme.palette.text.primary, backgroundColor: theme.color.base }}>
