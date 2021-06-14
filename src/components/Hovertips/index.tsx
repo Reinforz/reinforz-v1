@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme: ExtendedTheme) => ({
   },
 }));
 
-interface Props {
+export interface HovertipsProps {
   className?: string,
   popoverText: string,
   children: JSX.Element
@@ -24,7 +24,7 @@ interface Props {
   popoverTransformOrigin?: PopoverOrigin
 }
 
-export default function Hovertips(props: Props) {
+export default function Hovertips(props: HovertipsProps) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const { settings } = useContext(SettingsContext);
