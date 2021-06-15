@@ -1,4 +1,5 @@
 .Content{
-  padding: 2.5px;
-  margin: 2.5px;
+  position: relative;
+  height: calc(100% - 25px);
+  overflow: auto;
 }

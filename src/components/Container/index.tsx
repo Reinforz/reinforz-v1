@@ -6,10 +6,16 @@ interface Props extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDi
   children: (JSX.Element | null | string)[] | (JSX.Element | null | string)
 }
 
-export default function Container({ className = '', style = {}, ...props }: Props) {
+export function Container({ className = '', style = {}, ...props }: Props) {
   const { theme } = useThemeSettings();
 
   return <div {...props} className={`Container ${className}`} style={{ backgroundColor: theme.color.base }}>
     {props.children}
   </div>
+}
+
+export function FlexContainer({ className = '', style = {}, ...props }: Props) {
+  return <Container {...props} className={`FlexContainer ${className}`}>
+    {props.children}
+  </Container>
 }

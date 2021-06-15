@@ -25,6 +25,7 @@ import Toggles from './Toggles';
 import Upload from './Upload';
 import View from './View';
 
+export * from './Container';
 export * from './Content';
 export {
   Flex,

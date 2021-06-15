@@ -5,18 +5,13 @@ export interface ContentProps {
   children: JSX.Element | JSX.Element[] | string
   className?: string
   style?: React.CSSProperties,
-  background?: boolean
 }
 
 export function Content(props: ContentProps) {
   const { theme } = useThemeSettings();
-  const styles: React.CSSProperties = { color: theme.palette.text.primary, ...props.style ?? {} };
+  const styles: React.CSSProperties = { color: theme.palette.text.primary, backgroundColor: theme.color.dark, ...props.style ?? {} };
 
-  if (props.background) {
-    styles.backgroundColor = theme.color.dark;
-  }
-
-  return <div className={`Content ${props.className ?? ''}`} style={styles}>
+  return <div className={`Content pad2_5 margin2_5 ${props.className ?? ''}`} style={styles}>
     {props.children}
   </div>
 }

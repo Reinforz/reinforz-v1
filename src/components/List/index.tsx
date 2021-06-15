@@ -2,7 +2,7 @@ import { Checkbox, Typography } from "@material-ui/core";
 import { red } from "@material-ui/core/colors";
 import React from "react";
 import { MdDelete } from 'react-icons/md';
-import { Flex, Header, Hovertips } from "../";
+import { Container, Content, Flex, Header, Hovertips } from "../";
 import { useThemeSettings } from "../../hooks";
 import sounds from "../../sounds";
 import { applyCheckboxShortcut } from "../../utils";
@@ -24,7 +24,7 @@ export default function List<T extends { _id: string }>(props: ListProps<T>) {
   const { items, selectedItems, setItems, setSelectedItems, header, fields, emptyListMessage = 'No items', className = '' } = props;
   const { theme, settings } = useThemeSettings();
   const isAllSelected = items.length !== 0 && selectedItems.length === items.length;
-  return <div className={`List ${className}`} style={{ backgroundColor: theme.color.base }}>
+  return <Container className={`List ${className}`}>
     <Header header={header} sideElements={[
       <Flex>
         <Hovertips popoverText={`${isAllSelected ? "Deselect" : "Select"} all items`}>
@@ -56,7 +56,7 @@ export default function List<T extends { _id: string }>(props: ListProps<T>) {
       </Flex>
     ]} />
 
-    <div className="List-content" style={{ color: theme.palette.text.primary, backgroundColor: theme.color.dark }}>
+    <Content>
       {items.length > 0 ?
         items.map((item, index) => {
           const { _id } = item
@@ -90,6 +90,6 @@ export default function List<T extends { _id: string }>(props: ListProps<T>) {
             {emptyListMessage}
           </Typography>
         </div>}
-    </div>
-  </div>
+    </Content>
+  </Container>
 }

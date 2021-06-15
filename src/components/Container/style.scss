@@ -1,4 +1,13 @@
-.Container {
+%Container {
   margin: 2.5px;
   padding: 2.5px;
+}
+
+.Container {
+  @extend %Container;
+}
+
+.FlexContainer {
+  @extend %Container;
+  display: flex;
 }
