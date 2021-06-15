@@ -79,6 +79,9 @@ export function generateDynamicStyleClasses() {
       '& .jc-c': {
         justifyContent: 'center'
       },
+      '& .jc-sb': {
+        justifyContent: 'space-between'
+      },
       '& .br-2_5': {
         borderRadius: 2.5
       },
@@ -87,6 +90,9 @@ export function generateDynamicStyleClasses() {
       },
       '& .fd-c': {
         flexDirection: 'column'
+      },
+      '& .ta-c': {
+        textAlign: 'column'
       }
     }
   }))();

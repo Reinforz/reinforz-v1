@@ -1,5 +1,4 @@
 import { DetailedHTMLProps, HTMLAttributes } from "react";
-import "./style.scss";
 
 interface Props extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   children: (JSX.Element | null | string)[] | (JSX.Element | null | string)
@@ -7,7 +6,7 @@ interface Props extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDi
 }
 
 export default function Flex({ className = '', style = {}, ...props }: Props) {
-  return <div {...props} className={`Flex ${className}`} style={{ ...style, flexDirection: props.direction ?? 'row' }}>
+  return <div {...props} className={`flex jc-c ai-c ${className ?? ''}`} style={{ ...style, flexDirection: props.direction ?? 'row' }}>
     {props.children}
   </div>
 }

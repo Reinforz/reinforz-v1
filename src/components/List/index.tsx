@@ -24,7 +24,7 @@ export default function List<T extends { _id: string }>(props: ListProps<T>) {
   const { items, selectedItems, setItems, setSelectedItems, header, fields, emptyListMessage = 'No items', className = '' } = props;
   const { theme, settings } = useThemeSettings();
   const isAllSelected = items.length !== 0 && selectedItems.length === items.length;
-  return <Container className={`List ${className}`}>
+  return <Container className={`List flex fd-c ${className}`}>
     <Header header={header} sideElements={[
       <Flex>
         <Hovertips popoverText={`${isAllSelected ? "Deselect" : "Select"} all items`}>
@@ -56,12 +56,12 @@ export default function List<T extends { _id: string }>(props: ListProps<T>) {
       </Flex>
     ]} />
 
-    <Content>
+    <Content className={`${items.length > 0 ? "pb-0" : ""}`}>
       {items.length > 0 ?
         items.map((item, index) => {
           const { _id } = item
-          return <div className="List-content-item bg-light" key={_id}>
-            <div className="List-content-item-icons">
+          return <div className="List-content-item flex ai-c bg-light p-5 mb-5 pr-0" key={_id}>
+            <div className="List-content-item-icons p-5 mr-5 flex ai-c">
               <Checkbox color="primary" className="List-content-item-icons-checkbox" key={_id + "checkbox" + index} onClick={(e: any) => {
                 e.persist();
                 settings.sound && e.target.checked ? sounds.pop_off.play() : sounds.pop_on.play();
@@ -77,16 +77,16 @@ export default function List<T extends { _id: string }>(props: ListProps<T>) {
                 }} style={{ fill: theme.palette.error.dark }} />
               </Hovertips>
             </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', flex: 1 }}>
+            <div className="flex flex-1 jc-sb p-5 mr-5">
               {fields.map((field, index) => <div className="List-content-item-field" key={_id + field + index}>
-                <Typography variant="h6">
+                <Typography variant="body1">
                   {typeof field === "function" ? field(item) : item[field]}
                 </Typography>
               </div>)}
             </div>
           </div>
-        }) : <div className="center">
-          <Typography>
+        }) : <div className="center flex ai-c jc-c bold p-5">
+          <Typography variant="h5">
             {emptyListMessage}
           </Typography>
         </div>}

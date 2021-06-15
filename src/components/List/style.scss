@@ -1,26 +1,9 @@
 .List {
-  display: flex;
-  flex-direction: column;
   user-select: none;
 
   &-content {
     &-item {
-      display: flex;
-      margin: 2.5px;
-      align-items: center;
       border-radius: 3px;
-      padding: 5px;
-
-      &-field {
-        margin: 5px;
-        font-size: 1.15rem;
-        display: flex;
-        align-items: center;
-      }
-      &-icons {
-        display: flex;
-        align-items: center;
-      }
     }
   }
 }
