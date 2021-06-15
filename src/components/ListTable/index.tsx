@@ -44,7 +44,7 @@ export default function ListTable<T extends Record<string, any>>(props: Props<T>
       </div>
     </div>
     <div className="ListTable-body bg-dark">
-      {sortedItems.map((itemMap, index) => <div key={itemMap._id} className="ListTable-body-row" style={{ backgroundColor: theme.color.light }}>
+      {sortedItems.map((itemMap, index) => <div key={itemMap._id} className="ListTable-body-row bg-light">
         <span className={`ListTable-body-row-item ListTable-body-row-item-index`}>{index + 1}</span>
         {["title", ...props.headers].map(header => <span className={`ListTable-body-row-item ListTable-body-row-item-${header}`} key={header}>{itemMap[header]}</span>)}
       </div>)}

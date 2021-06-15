@@ -27,7 +27,7 @@ export default function Sort(props: Props) {
       {sorts.map((sort, index) => {
         const [item, order] = sort;
         return <div key={`${item}.${order}.${index}`} className="Sort-content-item bg-base" style={{ display: 'flex', padding: 5, margin: 2.5 }}>
-          <MuiSelect className="Sort-content-item-category" style={{ background: theme.color.light, flex: 1, marginRight: 5 }} value={item}
+          <MuiSelect className="Sort-content-item-category bg-light" style={{ flex: 1, marginRight: 5 }} value={item}
             onChange={(e) => {
               settings.sound && sounds.click.play()
               sort[0] = e.target.value as any;
@@ -37,7 +37,7 @@ export default function Sort(props: Props) {
               <MenuItem key={item} value={item}>{menuItemLabel(item)}</MenuItem>
             )}
           </MuiSelect>
-          <MuiSelect className="Sort-content-item-order" style={{ background: theme.color.light, flex: 1 }} value={order}
+          <MuiSelect className="Sort-content-item-order bg-light" style={{ flex: 1 }} value={order}
             onChange={(e) => {
               settings.sound && sounds.click.play()
               sort[1] = e.target.value as any;

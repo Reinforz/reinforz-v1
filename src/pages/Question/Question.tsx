@@ -79,7 +79,7 @@ export default function Question(props: Props) {
   }, [props.question, userAnswers])
 
   const memoizedSelectionQuestionComponent = useMemo(() => {
-    return <div className="Question-question" style={{ gridArea: props.question.image ? `1/1/2/2` : `1/1/2/3`, backgroundColor: theme.color.light }}>
+    return <div className="Question-question bg-light" style={{ gridArea: props.question.image ? `1/1/2/2` : `1/1/2/3` }}>
       <Markdown content={props.question.question as string} />
     </div>
     // eslint-disable-next-line
@@ -94,7 +94,7 @@ export default function Question(props: Props) {
     }
   }} tabIndex={0}>
     {props.question.type === "FIB" ? memoizedFIBQuestionComponent : memoizedSelectionQuestionComponent}
-    {image && <div className="Question-image" style={{ gridArea: `1/2/2/3`, backgroundColor: theme.color.light }}><img src={image} alt="Question" /></div>}
+    {image && <div className="Question-image bg-light" style={{ gridArea: `1/2/2/3` }}><img src={image} alt="Question" /></div>}
     {props.question.type === "MCQ" || props.question.type === "MS"
       ? <QuestionOptions setUserAnswers={setUserAnswers} userAnswers={userAnswers} question={props.question} />
       : <QuestionInputs setUserAnswers={setUserAnswers} userAnswers={userAnswers} question={props.question} />}

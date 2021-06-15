@@ -79,7 +79,7 @@ export default function Upload(props: Props) {
     onClick && onClick(e)
   }
 
-  return <div style={{ borderColor, backgroundColor: theme.color.light, color: theme.palette.text.secondary }} className={`Upload ${className ?? ''}`} {...rootProps}>
+  return <div style={{ borderColor, color: theme.palette.text.secondary }} className={`Upload bg-light ${className ?? ''}`} {...rootProps}>
     <input {...getInputProps()} />
     {
       isDragActive ?

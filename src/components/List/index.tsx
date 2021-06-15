@@ -60,7 +60,7 @@ export default function List<T extends { _id: string }>(props: ListProps<T>) {
       {items.length > 0 ?
         items.map((item, index) => {
           const { _id } = item
-          return <div className="List-content-item" key={_id} style={{ backgroundColor: theme.color.light }}>
+          return <div className="List-content-item bg-light" key={_id}>
             <div className="List-content-item-icons">
               <Checkbox color="primary" className="List-content-item-icons-checkbox" key={_id + "checkbox" + index} onClick={(e: any) => {
                 e.persist();

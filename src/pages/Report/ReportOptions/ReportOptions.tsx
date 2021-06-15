@@ -19,15 +19,15 @@ export function ReportOptions(props: Props) {
     {question.options.map((option, index) => {
       return <div className="Report-Options-container bg-dark" key={option.text}>
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <div style={{ backgroundColor: theme.color.light, padding: 10 }} className="Report-Options-container-item Report-Options-container-item-text">
+          <div style={{ padding: 10 }} className="Report-Options-container-item Report-Options-container-item-text bg-light">
             <Markdown content={option.text} />
           </div>
-          {(option.isCorrect || option.userSelected) ? <div style={{ backgroundColor: theme.color.light }} className="Report-Options-container-item">
+          {(option.isCorrect || option.userSelected) ? <div className="Report-Options-container-item bg-light">
             {option.isCorrect ? <AiFillCheckSquare fill={green[500]} style={{ padding: 5 }} size={17.5} /> : null}
             {option.userSelected ? <FaUser fill={theme.palette.text.primary} style={{ padding: 5 }} size={17.5} /> : null}
           </div> : null}
         </div>
-        {question.answers[index]?.explanation ? <div style={{ backgroundColor: theme.color.light }} className="Report-Options-container-item-explanation">
+        {question.answers[index]?.explanation ? <div className="Report-Options-container-item-explanation bg-light">
           <Markdown content={question.answers[index].explanation!} />
         </div> : null}
       </div>

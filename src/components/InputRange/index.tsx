@@ -1,7 +1,6 @@
 import { FormGroup, InputLabel, MenuItem, Select, TextField } from "@material-ui/core";
 import { ChangeEvent, useContext } from "react";
 import { SettingsContext } from "../../context/SettingsContext";
-import { useThemeSettings } from "../../hooks";
 import sounds from "../../sounds";
 import { TNumberOperator } from "../../types";
 import { transformTextBySeparator } from "../../utils";
@@ -19,14 +18,13 @@ export interface InputRangeProps<T extends Record<string, any>> {
 
 export default function InputRange<T extends Record<string, any>>(props: InputRangeProps<T>) {
   const { direction = 'row', min, max, setState, state, stateKey, label, step = 5 } = props;
-  const { theme } = useThemeSettings();
   const { settings } = useContext(SettingsContext);
 
   const [operator, range]: [TNumberOperator, [string, string]] = state[stateKey]
   return <FormGroup>
     <InputLabel>{label}</InputLabel>
     <div style={{ display: 'flex', flexDirection: direction, padding: 2.5, margin: 2.5 }} className="InputRange-content bg-dark">
-      <div style={{ background: theme.color.light, display: 'flex', flexDirection: 'column', padding: 2.5, margin: 2.5 }}>
+      <div className="bg-light" style={{ display: 'flex', flexDirection: 'column', padding: 2.5, margin: 2.5 }}>
         <Select value={operator}
           onChange={(e: ChangeEvent<{ value: unknown }>) => {
             setState({ ...state, [stateKey]: [e.target.value, range] })

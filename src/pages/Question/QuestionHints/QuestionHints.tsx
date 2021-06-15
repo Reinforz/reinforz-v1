@@ -31,7 +31,7 @@ export default function QuestionHints(props: Props) {
     }}>{hints.length > 0 ? `Show ${"hints"} ${totalUsedHints}/${hints.length}` : `No hints available`}</Button>
     <div className="QuestionHints-list bg-dark">
       {usedHints.map((hint, i) =>
-        <div key={`hint${i}`} style={{ backgroundColor: theme.color.light }} className="QuestionHints-list-item">
+        <div key={`hint${i}`} className="QuestionHints-list-item bg-light">
           <Markdown content={hint} />
         </div>)}
     </div>

@@ -29,7 +29,7 @@ export default function QuestionOptions(props: Props) {
           setUserAnswers([e.target.value])
         }}>
           {props.question.options.map((_, i) => {
-            return <div key={`${_id}option${i}`} className="QuestionOptions-container-item" style={{ backgroundColor: theme.color.light }}>
+            return <div key={`${_id}option${i}`} className="QuestionOptions-container-item bg-light">
               <FormControlLabel
                 control={<Radio color="primary" />}
                 value={`${i}`}
@@ -52,7 +52,7 @@ export default function QuestionOptions(props: Props) {
           }
         }}>
           {props.question.options.map((_, i) => {
-            return <div key={`${_id}option${i}`} className={`QuestionOptions-container-item`} style={{ backgroundColor: theme.color.light }}>
+            return <div key={`${_id}option${i}`} className={`QuestionOptions-container-item bg-light`}>
               <FormControlLabel
                 control={<Checkbox checked={userAnswers.includes(`${i}`)} value={`${i}`} color="primary" />}
                 label={memoizedQuestionOptions[i]}

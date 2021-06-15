@@ -15,7 +15,7 @@ export function ReportTable() {
   const { sortedResults, reportSettings, setReport, report } = useContext(ReportContext);
   const { filters } = reportSettings;
 
-  const { theme, settings } = useThemeSettings();
+  const { settings } = useThemeSettings();
   return <div className="Report-Table bg-base">
     {sortedResults.map((sortedResult, index) =>
       <div key={sortedResult.question._id} className="Report-Table-item bg-dark">
@@ -42,7 +42,7 @@ export function ReportTable() {
           {filters.excluded_columns.includes('quiz_info') && filters.excluded_columns.includes('hints') ? null : <div style={{ width: '25%' }}>
             {!filters.excluded_columns.includes('quiz_info') ? <StackList header="Quiz Info" items={[['Topic', sortedResult.question.quiz.topic], ['Subject', sortedResult.question.quiz.subject]]} /> : null}
             {sortedResult.question.hints.length !== 0 && !filters.excluded_columns.includes('hints') ? <div className="Report-Table-item-hints bg-base">
-              {sortedResult.question.hints.map(hint => <div className="Report-Table-item-hints-item" key={hint} style={{ backgroundColor: theme.color.light }}>
+              {sortedResult.question.hints.map(hint => <div className="Report-Table-item-hints-item bg-light" key={hint}>
                 <Markdown content={hint} />
               </div>)}
             </div> : null}
