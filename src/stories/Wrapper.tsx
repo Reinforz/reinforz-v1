@@ -1,20 +1,31 @@
 import { ThemeProvider } from "@material-ui/styles";
 import { SettingsContext } from "../context/SettingsContext";
 import { ExtendedTheme, ISettings } from "../types";
-import { generateDefaultSettingsPreset, generateTheme } from "../utils";
+import { generateDefaultSettingsPreset, generateDynamicStyleClasses, generateTheme } from "../utils";
 
 interface Props {
   children: JSX.Element | ((settings: ISettings, theme: ExtendedTheme) => JSX.Element)
 }
 
+function Root(props: Props & { settings: ISettings, theme: ExtendedTheme }) {
+  const { settings, theme } = props;
+  const classes = generateDynamicStyleClasses();
+  return <div className={classes.root}>
+    {typeof props.children === "function" ? props.children(settings, theme) : props.children}
+  </div>
+}
+
 export default function Wrapper(props: Props) {
   const defaultSettingsPresets = generateDefaultSettingsPreset();
-  const defaultSettings = defaultSettingsPresets.presets[0].data
+  const defaultSettings = defaultSettingsPresets.presets[0].data;
   const generatedTheme = generateTheme(defaultSettings) as ExtendedTheme;
 
   return <ThemeProvider theme={generatedTheme}>
     <SettingsContext.Provider value={{ setSettings: () => { }, setSettingsPresets: () => { }, settings: defaultSettings, settingsPresets: defaultSettingsPresets }}>
-      {typeof props.children === "function" ? props.children(defaultSettings, generatedTheme) : props.children}
+      <Root theme={generatedTheme} settings={defaultSettings}>
+        {props.children}
+      </Root>
     </SettingsContext.Provider>
   </ThemeProvider>
 }
+
