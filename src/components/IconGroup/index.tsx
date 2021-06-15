@@ -14,8 +14,8 @@ export interface IconGroupProps {
 
 export default function IconGroup(props: IconGroupProps) {
   const direction = props.direction ?? 'row';
-  return <div className={`Hovertips-Group ${props.className ?? ''} bg-base`} style={{ flexDirection: direction, ...props.style ?? {} }}>
-    {props.icons.map(([popoverText, icon, popoverOrigin], index) => <Hovertips key={popoverText + index} {...popoverOrigin ?? {}} popoverText={popoverText} className="Hovertips-Group-item bg-light" >
+  return <div className={`IconGroup flex p-5 ${direction === 'row' ? "pr-0" : "pb-0"} bg-base ${props.className ?? ''}`} style={{ flexDirection: direction, ...props.style ?? {} }}>
+    {props.icons.map(([popoverText, icon, popoverOrigin], index) => <Hovertips key={popoverText + index} {...popoverOrigin ?? {}} popoverText={popoverText} className={`IconGroup-item bg-light p-5 ${direction === "row" ? "mr-5" : "mb-5"}`} >
       {icon}
     </Hovertips>)}
   </div>

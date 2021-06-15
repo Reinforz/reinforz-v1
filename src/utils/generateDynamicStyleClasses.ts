@@ -52,6 +52,9 @@ export function generateDynamicStyleClasses() {
       '& .pb-0': {
         paddingBottom: 0
       },
+      '& .pr-0': {
+        paddingRight: 0
+      },
       '& .m-5': {
         margin: 5
       },

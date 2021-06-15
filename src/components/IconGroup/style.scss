@@ -1,25 +1,19 @@
-.Hovertips{
-  &-Group{
-    padding: 2.5px;
-    cursor: pointer;
-    display: flex;
-    border-radius: 1px;
-    opacity: 0.25;
+.IconGroup{
+  cursor: pointer;
+  border-radius: 1px;
+  opacity: 1;
+  transition: opacity 250ms ease-in-out;
+  z-index: 5;
+  width: fit-content;
+
+  &:hover{
+    opacity: 1;
     transition: opacity 250ms ease-in-out;
-    z-index: 5;
-    width: fit-content;
+  }
 
-    &:hover{
-      opacity: 1;
-      transition: opacity 250ms ease-in-out;
-    }
-
-    &-item{
-      padding: 2.5px;
-      margin: 2.5px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+  &-item{
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
