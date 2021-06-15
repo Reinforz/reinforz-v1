@@ -17,7 +17,7 @@ export function ReportOptions(props: Props) {
 
   return <div className="Report-Options" style={{ backgroundColor: theme.color.base }}>
     {question.options.map((option, index) => {
-      return <div className="Report-Options-container" style={{ backgroundColor: theme.color.dark }} key={option.text}>
+      return <div className="Report-Options-container bg-dark" key={option.text}>
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           <div style={{ backgroundColor: theme.color.light, padding: 10 }} className="Report-Options-container-item Report-Options-container-item-text">
             <Markdown content={option.text} />

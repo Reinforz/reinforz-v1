@@ -44,8 +44,8 @@ export default function ReportExport() {
 
   return (
     <div className="Report-Export" style={{ color: theme.palette.text.primary, backgroundColor: theme.color.base }}>
-      <div className="Report-Export-header" style={{ backgroundColor: theme.color.dark }}>Report Export</div>
-      <div className="Report-Export-content" style={{ backgroundColor: theme.color.dark }}>
+      <div className="Report-Export-header bg-dark">Report Export</div>
+      <div className="Report-Export-content bg-dark">
         <Select lsKey={"REPORT_EXPORT"} items={['Quizzes', 'Report']} label={"Export Type"} menuItemLabel={(item) => item} setState={(exportState) => {
           setReportSettings({
             ...reportSettings,

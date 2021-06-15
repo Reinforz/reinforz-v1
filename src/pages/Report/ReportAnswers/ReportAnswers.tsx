@@ -18,7 +18,7 @@ export function ReportAnswers(props: Props) {
   return <div className="Report-Answers" style={{ backgroundColor: theme.color.base }}>
     {
       question.answers.map((answers, index) => {
-        return <div className="Report-Answers-container" key={index} style={{ backgroundColor: theme.color.dark }}>
+        return <div className="Report-Answers-container bg-dark" key={index}>
           <div className="Report-Answers-container-userAnswer" style={{ backgroundColor: theme.color.light }}>{userAnswers[index] ?? 'N/A'}</div>
           {answers.map((answer, _index) => <div className="Report-Answers-container-item" key={_index} style={{ backgroundColor: theme.color.base }}>
             <div style={{ marginBottom: 5, display: 'flex', justifyContent: 'space-between' }}>

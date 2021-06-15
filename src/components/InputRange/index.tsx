@@ -25,7 +25,7 @@ export default function InputRange<T extends Record<string, any>>(props: InputRa
   const [operator, range]: [TNumberOperator, [string, string]] = state[stateKey]
   return <FormGroup>
     <InputLabel>{label}</InputLabel>
-    <div style={{ background: theme.color.dark, display: 'flex', flexDirection: direction, padding: 2.5, margin: 2.5 }} className="InputRange-content">
+    <div style={{ display: 'flex', flexDirection: direction, padding: 2.5, margin: 2.5 }} className="InputRange-content bg-dark">
       <div style={{ background: theme.color.light, display: 'flex', flexDirection: 'column', padding: 2.5, margin: 2.5 }}>
         <Select value={operator}
           onChange={(e: ChangeEvent<{ value: unknown }>) => {

@@ -23,7 +23,7 @@ export default function Sort(props: Props) {
 
   return <FormGroup className="Sort">
     <InputLabel className="Sort-header">{header}</InputLabel>
-    {sorts.length !== 0 && <div style={{ background: theme.color.dark, display: 'flex', flexDirection: 'column', padding: 2.5, margin: 2.5 }} className="Sort-content">
+    {sorts.length !== 0 && <div style={{ display: 'flex', flexDirection: 'column', padding: 2.5, margin: 2.5 }} className="Sort-content bg-dark">
       {sorts.map((sort, index) => {
         const [item, order] = sort;
         return <div key={`${item}.${order}.${index}`} className="Sort-content-item" style={{ background: theme.color.base, display: 'flex', padding: 5, margin: 2.5 }}>

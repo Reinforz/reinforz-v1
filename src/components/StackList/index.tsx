@@ -9,8 +9,8 @@ interface Props {
 export default function StackList(props: Props) {
   const { theme } = useThemeSettings();
   return <div className="StackList" style={{ backgroundColor: theme.color.base, color: theme.palette.text.primary }}>
-    <div className="StackList-header" style={{ backgroundColor: theme.color.dark }}>{props.header}</div>
-    <div className="StackList-content" style={{ backgroundColor: theme.color.dark }}>
+    <div className="StackList-header bg-dark">{props.header}</div>
+    <div className="StackList-content bg-dark">
       {props.items.map(([label, value], index) => <div className="StackList-content-item" key={index} style={{ backgroundColor: theme.color.light }}>
         <div className="StackList-content-item-label">{label}</div>
         <div className="StackList-content-item-value">{value}</div>

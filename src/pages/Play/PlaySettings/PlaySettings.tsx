@@ -22,12 +22,12 @@ export default function PlaySettings() {
   }
 
   return <div className="PlaySettings" style={{ backgroundColor: theme.color.base, color: theme.palette.text.primary }}>
-    <div style={{ backgroundColor: theme.color.dark, padding: 2.5, margin: 2.5 }}>
+    <div className="bg-dark" style={{ padding: 2.5, margin: 2.5 }}>
       <Preset lsKey={REINFORZ_PLAY_SETTINGS_LS_KEY} modalLabel="Save Play Settings" popoverText="Save current play settings as preset" currentPreset={playSettings} itemPreset={playSettingsPresets} setPresetState={setPlaySettingsPresets} />
     </div>
     <div className="PlaySettings-group PlaySettings-group-options">
-      <div className="PlaySettings-group-header" style={{ backgroundColor: theme.color.dark }}>Options</div>
-      <div className="PlaySettings-group-content" style={{ backgroundColor: theme.color.dark }}>
+      <div className="PlaySettings-group-header bg-dark">Options</div>
+      <div className="PlaySettings-group-content bg-dark">
         {Object.keys(playSettings.options).map((key, index) => {
           let isDisabled = false;
           if (Boolean(key.match(/(shuffle_questions|shuffle_quizzes)/) && playSettings.options.flatten_mix)) isDisabled = true;
@@ -55,10 +55,10 @@ export default function PlaySettings() {
       </div>
     </div>
     <div className="PlaySettings-group PlaySettings-group-filters">
-      <div className="PlaySettings-group-header" style={{ backgroundColor: theme.color.dark }}>
+      <div className="PlaySettings-group-header bg-dark">
         Filters
       </div>
-      <div className="PlaySettings-group-content" style={{ backgroundColor: theme.color.dark }}>
+      <div className="PlaySettings-group-content bg-dark">
         <InputRange step={1} label={"Time Allocated range"} min={0} max={120} setState={setPlaySettingsFilters} state={playSettings.filters} stateKey={"time_allocated"} />
         <CheckboxGroup label={'Excluded Difficulty'} items={['Beginner', 'Intermediate', 'Advanced']} setState={setPlaySettingsFilters} stateKey={'excluded_difficulty'} state={playSettings.filters} />
         <CheckboxGroup label={'Excluded Type'} items={['FIB', 'MS', 'MCQ', "Snippet"]} setState={setPlaySettingsFilters} stateKey={'excluded_types'} state={playSettings.filters} />
@@ -68,6 +68,6 @@ export default function PlaySettings() {
       settings.sound && sounds.reset.play()
       setPlaySettings(generateDefaultPlaySettingsState())
     }}>Reset</Button>
-    <div className="PlaySettings-total" style={{ backgroundColor: theme.color.dark, color: filteredQuestions === 0 ? theme.palette.error.main : theme.palette.success.main }}>{filteredQuestions} Questions</div>
+    <div className="PlaySettings-total bg-dark" style={{ color: filteredQuestions === 0 ? theme.palette.error.main : theme.palette.success.main }}>{filteredQuestions} Questions</div>
   </div>
 }

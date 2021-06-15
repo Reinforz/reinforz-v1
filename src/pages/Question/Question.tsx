@@ -85,7 +85,7 @@ export default function Question(props: Props) {
     // eslint-disable-next-line
   }, [props.question])
 
-  return <div className="Question" ref={ref} style={{ backgroundColor: theme.color.dark, color: theme.palette.text.primary }} onKeyUp={(e) => {
+  return <div className="Question bg-dark" ref={ref} style={{ color: theme.palette.text.primary }} onKeyUp={(e) => {
     if (settings.shortcuts) {
       if (e.nativeEvent.altKey && e.nativeEvent.key === "a")
         onNextButtonPress();

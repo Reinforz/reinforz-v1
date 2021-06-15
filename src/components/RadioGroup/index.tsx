@@ -16,12 +16,12 @@ interface Props<I> {
 }
 
 export default function RadioGroup<I>(props: Props<I>) {
-  const { theme, settings } = useThemeSettings();
+  const { settings } = useThemeSettings();
   const itemDirection = props.itemDirection ?? 'column';
 
   return <MuiRadioGroup name={props.stateKey.toString()} value={props.state[props.stateKey]} >
     <InputLabel>{props.label}</InputLabel>
-    <div style={{ background: theme.color.dark, display: 'flex', flexDirection: itemDirection, padding: 2.5, margin: 2.5 }} className="RadioGroup-content">
+    <div style={{ display: 'flex', flexDirection: itemDirection, padding: 2.5, margin: 2.5 }} className="RadioGroup-content bg-dark">
       {props.items.map((item, index) => <FormControlLabel onClick={(e: any) => {
         settings.sound && sounds.click.play()
         props.setState({ ...props.state, [props.stateKey]: e.target.value })

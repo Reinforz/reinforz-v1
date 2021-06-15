@@ -29,7 +29,7 @@ export default function ListTable<T extends Record<string, any>>(props: Props<T>
   const sortedItems: Record<string, any>[] = sort ? itemsMap.sort((sortedItemA, sortedItemB) => sortedItemA[sort[0]] > sortedItemB[sort[0]] ? sort[1] ? 1 : -1 : sort[1] ? -1 : 1) : itemsMap;
 
   return <div className={`ListTable${props.className ? ' ' + props.className : ''}`} style={{ backgroundColor: theme.color.base, color: theme.palette.text.secondary }}>
-    <div className="ListTable-headers" style={{ backgroundColor: theme.color.dark }}>
+    <div className="ListTable-headers bg-dark">
       <div className="ListTable-headers-row">
         {headers.map((header) => <span className={`ListTable-headers-row-item ListTable-headers-row-item-${header}`} key={header} onClick={() => {
           settings.sound && sounds.click.play()
@@ -43,14 +43,14 @@ export default function ListTable<T extends Record<string, any>>(props: Props<T>
         </span>)}
       </div>
     </div>
-    <div className="ListTable-body" style={{ backgroundColor: theme.color.dark }}>
+    <div className="ListTable-body bg-dark">
       {sortedItems.map((itemMap, index) => <div key={itemMap._id} className="ListTable-body-row" style={{ backgroundColor: theme.color.light }}>
         <span className={`ListTable-body-row-item ListTable-body-row-item-index`}>{index + 1}</span>
         {["title", ...props.headers].map(header => <span className={`ListTable-body-row-item ListTable-body-row-item-${header}`} key={header}>{itemMap[header]}</span>)}
       </div>)}
     </div>
     <div className="ListTable-footer">
-      <div className="ListTable-headers-row" style={{ backgroundColor: theme.color.dark }}>
+      <div className="ListTable-headers-row bg-dark">
         <span className={`ListTable-headers-row-item ListTable-headers-row-item-blank`}></span>
         {["total", ...props.headers].map(header => <span className={`ListTable-headers-row-item ListTable-headers-row-item-${header}`} key={header}>{aggregateItemsMap[header]}</span>)}
       </div>

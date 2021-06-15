@@ -29,7 +29,7 @@ export default function QuestionHints(props: Props) {
       settings.sound && sounds.click.play()
       onButtonClick()
     }}>{hints.length > 0 ? `Show ${"hints"} ${totalUsedHints}/${hints.length}` : `No hints available`}</Button>
-    <div className="QuestionHints-list" style={{ backgroundColor: theme.color.dark }}>
+    <div className="QuestionHints-list bg-dark">
       {usedHints.map((hint, i) =>
         <div key={`hint${i}`} style={{ backgroundColor: theme.color.light }} className="QuestionHints-list-item">
           <Markdown content={hint} />

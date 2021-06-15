@@ -1,4 +1,3 @@
-import { useThemeSettings } from "../../hooks";
 import "./style.scss";
 
 export interface ContentProps {
@@ -8,10 +7,9 @@ export interface ContentProps {
 }
 
 export function Content(props: ContentProps) {
-  const { theme } = useThemeSettings();
-  const styles: React.CSSProperties = { color: theme.palette.text.primary, backgroundColor: theme.color.dark, ...props.style ?? {} };
+  const styles: React.CSSProperties = { ...props.style ?? {} };
 
-  return <div className={`Content pad2_5 margin2_5 ${props.className ?? ''}`} style={styles}>
+  return <div className={`Content bg-dark pad2_5 margin2_5 ${props.className ?? ''}`} style={styles}>
     {props.children}
   </div>
 }

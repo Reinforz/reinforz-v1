@@ -18,7 +18,7 @@ export function ReportTable() {
   const { theme, settings } = useThemeSettings();
   return <div className="Report-Table" style={{ backgroundColor: theme.color.base, color: theme.palette.text.primary }}>
     {sortedResults.map((sortedResult, index) =>
-      <div key={sortedResult.question._id} className="Report-Table-item" style={{ backgroundColor: theme.color.dark }}>
+      <div key={sortedResult.question._id} className="Report-Table-item bg-dark">
         <div style={{ padding: 2.5, margin: 2.5, display: 'flex', alignItems: 'center' }}>
           <div className="Report-Table-item-index">{index + 1}</div>
           <div className="Report-Table-item-delete" style={{ width: 20 }}><Hovertips popoverText="Delete"><MdDelete fill={red[500]} onClick={() => {

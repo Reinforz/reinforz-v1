@@ -3,13 +3,11 @@ import React, { useContext, useMemo } from "react";
 import { CheckboxGroup, InputRange, Preset, RadioGroup, Select, Sort } from '../../../components';
 import { REINFORZ_REPORT_SETTINGS_LS_KEY } from '../../../constants';
 import { ReportContext } from '../../../context/ReportContext';
-import { useThemeSettings } from '../../../hooks';
 import { IReportFilter } from '../../../types';
 import { generateDefaultReportSettingsState, transformTextBySeparator } from '../../../utils';
 import "./ReportFilter.scss";
 
 export default function ReportFilter() {
-  const { theme } = useThemeSettings();
   const { setReportSettingsPresets, reportSettingsPresets, allQuizzesMap, reportSettings, setReportSettings } = useContext(ReportContext);
   const { filters, sort } = reportSettings;
 
@@ -25,7 +23,7 @@ export default function ReportFilter() {
   const allTopics = useMemo(() => Array.from(new Set(Array.from(allQuizzesMap.values()).map(quiz => quiz.topic.trim()))), [allQuizzesMap]);
   const allSubjects = useMemo(() => Array.from(new Set(Array.from(allQuizzesMap.values()).map(quiz => quiz.subject.trim()))), [allQuizzesMap])
 
-  return <div className="ReportFilter" style={{ backgroundColor: theme.color.dark }}>
+  return <div className="ReportFilter bg-dark">
     <Preset lsKey={REINFORZ_REPORT_SETTINGS_LS_KEY} modalLabel="Save Report Settings" popoverText="Save current report settings as preset" currentPreset={reportSettings} itemPreset={reportSettingsPresets} setPresetState={setReportSettingsPresets} />
     <div style={{ overflow: 'auto' }}>
       <InputRange label={"Time taken range"} min={0} max={120} setState={setFilterState} state={filters} stateKey={"time_taken"} />

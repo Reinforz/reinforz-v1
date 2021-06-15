@@ -34,6 +34,24 @@ const useStyles = makeStyles((theme: ExtendedTheme) => ({
     },
     "& .line-numbers-rows": {
       background: darken(theme.color.dark, .25)
+    },
+    "& .bg-dark": {
+      background: theme.color.dark
+    },
+    "& .bg-base": {
+      background: theme.color.base
+    },
+    "& .bg-light": {
+      background: theme.color.light
+    },
+    "& .bg-opposite_dark": {
+      background: theme.color.opposite_dark
+    },
+    "& .bg-opposite_base": {
+      background: theme.color.opposite_base
+    },
+    "& .bg-opposite_light": {
+      background: theme.color.opposite_light
     }
   }
 }));
