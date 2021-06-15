@@ -1,4 +1,4 @@
-import { darken, makeStyles, useTheme } from "@material-ui/core";
+import { useTheme } from "@material-ui/core";
 import { useContext, useState } from "react";
 import { Route, Switch, useLocation } from "react-router-dom";
 import { NotFoundPage, SimpleModal } from "./components";
@@ -13,53 +13,12 @@ import Report from "./pages/Report/Report";
 import Settings from "./pages/Settings/Settings";
 import Shortcuts from "./pages/Shortcuts/Shortcuts";
 import { ExtendedTheme } from "./types";
-import { navigateBetweenPresets } from "./utils";
-
-const useStyles = makeStyles((theme: ExtendedTheme) => ({
-  root: {
-    "& ::-webkit-scrollbar": {
-      width: 10
-    },
-    "& ::-webkit-scrollbar-track": {
-      backgroundColor: theme.color.dark
-    },
-    "& ::-webkit-scrollbar-thumb": {
-      backgroundColor: theme.color.light
-    },
-    "& pre": {
-      background: theme.color.dark
-    },
-    '& :not(pre) > code[class*="language-"]': {
-      background: theme.color.dark
-    },
-    "& .line-numbers-rows": {
-      background: darken(theme.color.dark, .25)
-    },
-    "& .bg-dark": {
-      background: theme.color.dark
-    },
-    "& .bg-base": {
-      background: theme.color.base
-    },
-    "& .bg-light": {
-      background: theme.color.light
-    },
-    "& .bg-opposite_dark": {
-      background: theme.color.opposite_dark
-    },
-    "& .bg-opposite_base": {
-      background: theme.color.opposite_base
-    },
-    "& .bg-opposite_light": {
-      background: theme.color.opposite_light
-    }
-  }
-}));
+import { generateDynamicStyleClasses, navigateBetweenPresets } from "./utils";
 
 export default function App() {
   const [modalState, setModalState] = useState<[boolean, JSX.Element | null]>([false, null]);
   const theme = useTheme() as ExtendedTheme;
-  const classes = useStyles();
+  const classes = generateDynamicStyleClasses();
   const { settings, setSettingsPresets, settingsPresets } = useContext(SettingsContext);
   const { pathname } = useLocation();
   const { playSettingsPresets, setPlaySettingsPresets } = useContext(RootContext)
