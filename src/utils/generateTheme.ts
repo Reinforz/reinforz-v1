@@ -159,9 +159,9 @@ export function generateTheme(settings: ISettings) {
       },
       MuiFormControlLabel: {
         root: {
-          marginLeft: 2.5,
-          marginRight: 2.5,
-          margin: 2.5,
+          marginLeft: 0,
+          marginRight: 0,
+          margin: 0,
           padding: 5,
           backgroundColor: light
         }
