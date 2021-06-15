@@ -39,6 +39,48 @@ export function generateDynamicStyleClasses() {
       },
       '& .bg-opposite_light': {
         background: theme.color.opposite_light
+      },
+      '& .p-2_5': {
+        padding: 2.5
+      },
+      '& .m-2_5': {
+        margin: 2.5
+      },
+      '& .p-5': {
+        padding: 5
+      },
+      '& .pb-0': {
+        paddingBottom: 0
+      },
+      '& .m-5': {
+        margin: 5
+      },
+      '& .mr-5': {
+        marginRight: 5
+      },
+      '& .mb-5': {
+        marginBottom: 5
+      },
+      '& .mb-0': {
+        marginBottom: 0
+      },
+      '& .flex': {
+        display: 'flex'
+      },
+      '& .flex-1': {
+        flex: 1
+      },
+      '& .ai-c': {
+        alignItems: 'center'
+      },
+      '& .jc-c': {
+        justifyContent: 'center'
+      },
+      '& .br-2_5': {
+        borderRadius: 2.5
+      },
+      '& .bold': {
+        fontWeight: 'bold'
       }
     }
   }))();

@@ -20,9 +20,9 @@ interface Props<T extends Record<string, any>> {
 export default function Select<T extends Record<string, any>>(props: Props<T>) {
   const { settings } = useContext(SettingsContext);
   const { items, multiple, renderValue, className = '', menuItemLabel, state, stateKey, setState } = props;
-  return <FormGroup className={`Select ${className}`}>
+  return <FormGroup className={`Select p-5 ${className ?? ''}`}>
     <InputLabel>{props.label}</InputLabel>
-    <div style={{ display: 'flex', flexDirection: 'column', padding: 2.5, margin: 2.5 }} className="Select-content bg-light">
+    <div style={{ display: 'flex', flexDirection: 'column' }} className="Select-content bg-light">
       <MuiSelect value={state[stateKey] as string[]}
         multiple={Boolean(multiple)}
         renderValue={renderValue}

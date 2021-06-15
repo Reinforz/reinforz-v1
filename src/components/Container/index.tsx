@@ -1,5 +1,4 @@
 import { DetailedHTMLProps, HTMLAttributes } from "react";
-import { useThemeSettings } from "../../hooks";
 import "./style.scss";
 
 interface Props extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
@@ -7,15 +6,13 @@ interface Props extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDi
 }
 
 export function Container({ className = '', style = {}, ...props }: Props) {
-  const { theme } = useThemeSettings();
-
-  return <div {...props} className={`Container ${className} bg-base`}>
+  return <div {...props} className={`Container p-5 bg-base ${className ?? ''} `}>
     {props.children}
   </div>
 }
 
 export function FlexContainer({ className = '', style = {}, ...props }: Props) {
-  return <Container {...props} className={`FlexContainer ${className}`}>
+  return <Container {...props} className={`FlexContainer ${className ?? ''}`}>
     {props.children}
   </Container>
 }

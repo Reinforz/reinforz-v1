@@ -190,7 +190,8 @@ export function generateTheme(settings: ISettings) {
           fontSize: '1em',
           backgroundColor: dark,
           padding: 5,
-          margin: 2.5,
+          margin: 0,
+          marginBottom: 5,
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center'
@@ -199,8 +200,8 @@ export function generateTheme(settings: ISettings) {
       MuiFormGroup: {
         root: {
           backgroundColor: base,
-          margin: 2.5,
-          padding: 2.5
+          margin: 0,
+          padding: 5
         }
       }
     }

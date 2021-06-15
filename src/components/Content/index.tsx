@@ -8,8 +8,7 @@ export interface ContentProps {
 
 export function Content(props: ContentProps) {
   const styles: React.CSSProperties = { ...props.style ?? {} };
-
-  return <div className={`Content bg-dark p-2_5 m-2_5 ${props.className ?? ''}`} style={styles}>
+  return <div className={`Content bg-dark p-5 ${props.className ?? ''}`} style={styles}>
     {props.children}
   </div>
 }

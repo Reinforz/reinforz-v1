@@ -1,7 +1,6 @@
 import { Typography } from "@material-ui/core";
 import { SetStateAction } from "react";
 import { Content, Header, Select } from "..";
-import { useThemeSettings } from "../../hooks";
 import { TBooleanAggregation, TNumberAggregation } from "../../types";
 import { computeBooleanDataAggregation, computeNumberDataAggregation, transformTextBySeparator } from "../../utils";
 import "./style.scss";
@@ -25,19 +24,18 @@ export interface AggregatorProps<T> {
 
 export default function Aggregator<T>(props: AggregatorProps<T>) {
   const { header, items, state, setState } = props;
-  const { theme } = useThemeSettings();
-  return <div className="Aggregator bg-base" style={{ color: theme.palette.text.primary }}>
+  return <div className="Aggregator bg-base p-5">
     <Header header={header} />
-    <Content className="Aggregator-content">
-      {items.map(item => <div key={item.type + item.stateKey} className="Aggregator-content-item">
-        <Select menuItemLabel={(item) => item} label={item.label ?? transformTextBySeparator(item.stateKey as string)} items={item.type === "number" ? ["MAX", "MIN", "AVG", 'MEDIAN', 'MODE', 'STDDEV', 'VARIANCE'] : ["TRUE", "FALSE"]} setState={(aggregator) => {
+    <Content className="Aggregator-content pb-0">
+      {items.map(item => <div key={item.type + item.stateKey} className="Aggregator-content-item flex mb-5">
+        <Select className="mr-5 flex-1" menuItemLabel={(item) => item} label={item.label ?? transformTextBySeparator(item.stateKey as string)} items={item.type === "number" ? ["MAX", "MIN", "AVG", 'MEDIAN', 'MODE', 'STDDEV', 'VARIANCE'] : ["TRUE", "FALSE"]} setState={(aggregator) => {
           setState({
             ...state,
             [item.stateKey]: (aggregator as T)[item.stateKey]
           })
         }} stateKey={item.stateKey} state={state} />
-        <div className="Aggregator-content-item-value bg-light">
-          <Typography variant="body1">
+        <div className="Aggregator-content-item-value bg-light flex ai-c jc-c br-2_5">
+          <Typography variant="body1" className="bold">
             {item.type === "number" ? computeNumberDataAggregation(item.data, { aggregation: state[item.stateKey] as unknown as TNumberAggregation }) : computeBooleanDataAggregation(item.data, state[item.stateKey] as unknown as TBooleanAggregation)}
           </Typography>
         </div>
