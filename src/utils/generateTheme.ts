@@ -175,8 +175,7 @@ export function generateTheme(settings: ISettings) {
       MuiFormControl: {
         root: {
           backgroundColor: light,
-          margin: 2.5,
-          padding: 2.5
+          padding: 5
         }
       },
       MuiTypography: {

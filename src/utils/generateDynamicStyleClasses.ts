@@ -84,6 +84,9 @@ export function generateDynamicStyleClasses() {
       },
       '& .bold': {
         fontWeight: 'bold'
+      },
+      '& .fd-c': {
+        flexDirection: 'column'
       }
     }
   }))();

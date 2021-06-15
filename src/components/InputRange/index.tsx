@@ -19,12 +19,12 @@ export interface InputRangeProps<T extends Record<string, any>> {
 export default function InputRange<T extends Record<string, any>>(props: InputRangeProps<T>) {
   const { direction = 'row', min, max, setState, state, stateKey, label, step = 5 } = props;
   const { settings } = useContext(SettingsContext);
-
+  const containerPaddingClass = direction === 'row' ? 'pr-0' : 'pb-0', itemMarginClass = direction === 'row' ? 'mr-5' : 'mb-5'
   const [operator, range]: [TNumberOperator, [string, string]] = state[stateKey]
-  return <FormGroup>
+  return <FormGroup className="InputRange p-5">
     <InputLabel>{label}</InputLabel>
-    <div style={{ display: 'flex', flexDirection: direction, padding: 2.5, margin: 2.5 }} className="InputRange-content bg-dark">
-      <div className="bg-light" style={{ display: 'flex', flexDirection: 'column', padding: 2.5, margin: 2.5 }}>
+    <div style={{ flexDirection: direction }} className={`InputRange-content bg-dark p-5 ${containerPaddingClass} flex`}>
+      <div className={`bg-light flex p-5 fd-c ${itemMarginClass}`}>
         <Select value={operator}
           onChange={(e: ChangeEvent<{ value: unknown }>) => {
             setState({ ...state, [stateKey]: [e.target.value, range] })
@@ -35,11 +35,11 @@ export default function InputRange<T extends Record<string, any>>(props: InputRa
           )}
         </Select>
       </div>
-      <TextField style={{ flex: 1 }} type="number" inputProps={{ step, min, max: parseInt(range[1]) }} value={parseInt(range[0])} onChange={(e) => {
+      <TextField className={`flex-1 ${itemMarginClass}`} type="number" inputProps={{ step, min, max: parseInt(range[1]) }} value={parseInt(range[0])} onChange={(e) => {
         setState({ ...state, [stateKey]: [operator, [e.target.value, parseInt(range[1])]] })
         settings.sound && sounds.click.play()
       }} />
-      {["<>", "><"].includes(operator) && <TextField style={{ flex: 1 }} type="number" inputProps={{ step, min: parseInt(range[0]), max }} value={parseInt(range[1])} onChange={(e) => {
+      {["<>", "><"].includes(operator) && <TextField className={`flex-1 ${itemMarginClass}`} type="number" inputProps={{ step, min: parseInt(range[0]), max }} value={parseInt(range[1])} onChange={(e) => {
         settings.sound && sounds.click.play()
         setState({ ...state, [stateKey]: [operator, [parseInt(range[0]), e.target.value]] })
       }} />}
