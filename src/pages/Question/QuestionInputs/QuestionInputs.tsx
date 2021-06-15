@@ -12,13 +12,13 @@ interface Props {
 }
 
 export default function QuestionInputs(props: Props) {
-  const { theme, settings } = useThemeSettings();
+  const { settings } = useThemeSettings();
   const { setUserAnswers, userAnswers, question: { _id, type } } = props;
 
   return (
-    <div className={`QuestionInputs QuestionInputs-${type}`} style={{ backgroundColor: theme.color.base }}>
+    <div className={`QuestionInputs QuestionInputs-${type} bg-base`}>
       {props.question.answers.map((_, i) =>
-        <div key={`${_id}.${i}`} className={`QuestionInputs-item`} style={{ backgroundColor: theme.color.base, color: theme.palette.text.primary }}>
+        <div key={`${_id}.${i}`} className={`QuestionInputs-item`}>
           <TextField autoFocus={i === 0} fullWidth inputProps={{
             placeholder: `Answer ${i + 1}`
           }} value={userAnswers[i] ?? ''} onChange={e => {

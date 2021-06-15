@@ -9,7 +9,7 @@ interface Props extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDi
 export function Container({ className = '', style = {}, ...props }: Props) {
   const { theme } = useThemeSettings();
 
-  return <div {...props} className={`Container ${className}`} style={{ backgroundColor: theme.color.base }}>
+  return <div {...props} className={`Container ${className} bg-base`}>
     {props.children}
   </div>
 }

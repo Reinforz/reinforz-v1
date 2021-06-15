@@ -1,6 +1,4 @@
-import { useTheme } from "@material-ui/styles";
 import React from "react";
-import { ExtendedTheme } from "../../types";
 import "./style.scss";
 
 interface Props {
@@ -9,14 +7,13 @@ interface Props {
 }
 
 function Stats(props: Props) {
-  const theme = useTheme() as ExtendedTheme;
   const { items } = props;
   return (
-    <div className="Stats bg-dark" style={{ color: theme.palette.text.primary, ...(props.style ?? {}) }}>
+    <div className="Stats bg-dark" style={{ ...(props.style ?? {}) }}>
       {items.map(item => {
         return item ? <div key={`${item[0]}`} className={`Stats-item Stats-item-${item[0]}`}>
           <span className={`Stats-item-key`}>{item[0] + ": "}</span>
-          <span style={{ backgroundColor: theme.color.base }} className={"Stats-item-value"}>{item[1]}</span>
+          <span className={"Stats-item-value bg-base"}>{item[1]}</span>
         </div> : null
       })}
     </div>

@@ -15,7 +15,7 @@ export function ReportOptions(props: Props) {
   const { question } = props;
   const { theme } = useThemeSettings();
 
-  return <div className="Report-Options" style={{ backgroundColor: theme.color.base }}>
+  return <div className="Report-Options bg-base">
     {question.options.map((option, index) => {
       return <div className="Report-Options-container bg-dark" key={option.text}>
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>

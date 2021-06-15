@@ -24,7 +24,7 @@ export default function QuestionHints(props: Props) {
     }
   }
 
-  return <div className="QuestionHints" style={{ backgroundColor: theme.color.base, color: theme.palette.text.primary }}>
+  return <div className="QuestionHints bg-base" style={{ color: theme.palette.text.primary }}>
     <Button disabled={is_disabled || hintsExhausted} color="primary" variant="contained" className="QuestionHints-button" onClick={() => {
       settings.sound && sounds.click.play()
       onButtonClick()

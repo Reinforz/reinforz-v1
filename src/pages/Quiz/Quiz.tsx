@@ -50,7 +50,7 @@ export default function Quiz() {
       const totalQuestions = allQuestions.length,
         totalCorrectAnswers = results.filter(result => result.verdict).length,
         currentQuestion = JSON.parse(JSON.stringify(currentItem)) as TQuestionFull;
-      return <div className="Quiz" style={{ backgroundColor: theme.color.base }}>
+      return <div className="Quiz bg-base">
         <div style={{ display: 'flex' }}>
           <Stats style={{ flex: 1 }} items={[["Title", `${currentQuestion.quiz.subject} - ${currentQuestion.quiz.topic}`], playSettings.options.instant_feedback ? ['Total Correct', totalCorrectAnswers] : null, ["Current", currentIndex + 1], ["Total", totalQuestions], ["Type", currentQuestion.type], ["Weight", currentQuestion.weight], !playSettings.options.disable_timer ? ["Time Allocated", currentQuestion.time_allocated] : null, ["Difficulty", currentQuestion.difficulty]]} />
           <Hovertips popoverText="Download current play state" style={{ height: "calc(100% - 10px)", padding: 5, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>

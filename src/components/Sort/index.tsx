@@ -26,7 +26,7 @@ export default function Sort(props: Props) {
     {sorts.length !== 0 && <div style={{ display: 'flex', flexDirection: 'column', padding: 2.5, margin: 2.5 }} className="Sort-content bg-dark">
       {sorts.map((sort, index) => {
         const [item, order] = sort;
-        return <div key={`${item}.${order}.${index}`} className="Sort-content-item" style={{ background: theme.color.base, display: 'flex', padding: 5, margin: 2.5 }}>
+        return <div key={`${item}.${order}.${index}`} className="Sort-content-item bg-base" style={{ display: 'flex', padding: 5, margin: 2.5 }}>
           <MuiSelect className="Sort-content-item-category" style={{ background: theme.color.light, flex: 1, marginRight: 5 }} value={item}
             onChange={(e) => {
               settings.sound && sounds.click.play()

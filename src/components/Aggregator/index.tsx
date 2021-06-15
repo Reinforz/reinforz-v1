@@ -26,7 +26,7 @@ export interface AggregatorProps<T> {
 export default function Aggregator<T>(props: AggregatorProps<T>) {
   const { header, items, state, setState } = props;
   const { theme } = useThemeSettings();
-  return <div className="Aggregator" style={{ color: theme.palette.text.primary, backgroundColor: theme.color.base }}>
+  return <div className="Aggregator bg-base" style={{ color: theme.palette.text.primary }}>
     <Header header={header} />
     <Content className="Aggregator-content">
       {items.map(item => <div key={item.type + item.stateKey} className="Aggregator-content-item">

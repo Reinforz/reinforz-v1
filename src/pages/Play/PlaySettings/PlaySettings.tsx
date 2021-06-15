@@ -21,7 +21,7 @@ export default function PlaySettings() {
     setPlaySettings({ ...playSettings, filters: { ...playSettings.filters, ...newFilterState } })
   }
 
-  return <div className="PlaySettings" style={{ backgroundColor: theme.color.base, color: theme.palette.text.primary }}>
+  return <div className="PlaySettings bg-base" style={{ color: theme.palette.text.primary }}>
     <div className="bg-dark" style={{ padding: 2.5, margin: 2.5 }}>
       <Preset lsKey={REINFORZ_PLAY_SETTINGS_LS_KEY} modalLabel="Save Play Settings" popoverText="Save current play settings as preset" currentPreset={playSettings} itemPreset={playSettingsPresets} setPresetState={setPlaySettingsPresets} />
     </div>

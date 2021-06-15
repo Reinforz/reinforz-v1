@@ -28,7 +28,7 @@ export default function ListTable<T extends Record<string, any>>(props: Props<T>
   const headers = ["Sl", "title", ...props.headers];
   const sortedItems: Record<string, any>[] = sort ? itemsMap.sort((sortedItemA, sortedItemB) => sortedItemA[sort[0]] > sortedItemB[sort[0]] ? sort[1] ? 1 : -1 : sort[1] ? -1 : 1) : itemsMap;
 
-  return <div className={`ListTable${props.className ? ' ' + props.className : ''}`} style={{ backgroundColor: theme.color.base, color: theme.palette.text.secondary }}>
+  return <div className={`ListTable${props.className ? ' ' + props.className : ''} bg-base`} style={{ color: theme.palette.text.secondary }}>
     <div className="ListTable-headers bg-dark">
       <div className="ListTable-headers-row">
         {headers.map((header) => <span className={`ListTable-headers-row-item ListTable-headers-row-item-${header}`} key={header} onClick={() => {

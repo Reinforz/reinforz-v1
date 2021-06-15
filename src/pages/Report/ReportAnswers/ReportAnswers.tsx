@@ -15,12 +15,12 @@ export function ReportAnswers(props: Props) {
   const { theme } = useThemeSettings();
   const { question, userAnswers } = props;
 
-  return <div className="Report-Answers" style={{ backgroundColor: theme.color.base }}>
+  return <div className="Report-Answers bg-base">
     {
       question.answers.map((answers, index) => {
         return <div className="Report-Answers-container bg-dark" key={index}>
           <div className="Report-Answers-container-userAnswer" style={{ backgroundColor: theme.color.light }}>{userAnswers[index] ?? 'N/A'}</div>
-          {answers.map((answer, _index) => <div className="Report-Answers-container-item" key={_index} style={{ backgroundColor: theme.color.base }}>
+          {answers.map((answer, _index) => <div className="Report-Answers-container-item bg-base" key={_index}>
             <div style={{ marginBottom: 5, display: 'flex', justifyContent: 'space-between' }}>
               <div style={{ backgroundColor: theme.color.light }} className="Report-Answers-container-item-text">{answer.text}</div>
               <div style={{ backgroundColor: theme.color.light, width: 50 }} className="Report-Answers-container-item-isCorrect">

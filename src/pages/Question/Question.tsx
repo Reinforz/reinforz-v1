@@ -106,7 +106,7 @@ export default function Question(props: Props) {
       }} popoverTransformOrigin={{
         vertical: 'bottom',
         horizontal: 'center',
-      }} className="Question-timer" popoverText={timeBreak ? "Stop time break" : "Start time break"} style={{ backgroundColor: theme.color.base, height: 'calc(100% - 15px)' }} onClick={() => {
+      }} className="Question-timer bg-base" popoverText={timeBreak ? "Stop time break" : "Start time break"} style={{ height: 'calc(100% - 15px)' }} onClick={() => {
         setTimeBreak((timeBreak) => !timeBreak);
         if (timeBreak === false) {
           setTimer(null);
@@ -123,7 +123,7 @@ export default function Question(props: Props) {
         <FaClock fill={timeBreak ? red[500] : green[500]} size={20} />
       </Hovertips>}
       <Button disabled={timeBreak} className="QuestionButton" variant="contained" color="primary" onClick={onNextButtonPress}>{!isLast ? "Next" : "Report"}</Button>
-      {timeout && !playSettings.options.disable_timer && <div style={{ backgroundColor: theme.color.base, color: theme.palette.text.primary }} className="QuestionTimer">{displayTime(timeout)}</div>}
+      {timeout && !playSettings.options.disable_timer && <div style={{ color: theme.palette.text.primary }} className="QuestionTimer bg-base">{displayTime(timeout)}</div>}
     </div>}
   </div>
 }

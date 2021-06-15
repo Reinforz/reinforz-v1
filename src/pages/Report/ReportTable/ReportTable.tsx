@@ -16,7 +16,7 @@ export function ReportTable() {
   const { filters } = reportSettings;
 
   const { theme, settings } = useThemeSettings();
-  return <div className="Report-Table" style={{ backgroundColor: theme.color.base, color: theme.palette.text.primary }}>
+  return <div className="Report-Table bg-base">
     {sortedResults.map((sortedResult, index) =>
       <div key={sortedResult.question._id} className="Report-Table-item bg-dark">
         <div style={{ padding: 2.5, margin: 2.5, display: 'flex', alignItems: 'center' }}>
@@ -41,7 +41,7 @@ export function ReportTable() {
           {(sortedResult.question.type === "MCQ" || sortedResult.question.type === "MS") ? !filters.excluded_columns.includes('options') ? <ReportOptions question={sortedResult.question} userAnswers={sortedResult.user_answers} /> : null : !filters.excluded_columns.includes('answers') ? <ReportAnswers question={sortedResult.question as IResultInputQuestion} userAnswers={sortedResult.user_answers} /> : null}
           {filters.excluded_columns.includes('quiz_info') && filters.excluded_columns.includes('hints') ? null : <div style={{ width: '25%' }}>
             {!filters.excluded_columns.includes('quiz_info') ? <StackList header="Quiz Info" items={[['Topic', sortedResult.question.quiz.topic], ['Subject', sortedResult.question.quiz.subject]]} /> : null}
-            {sortedResult.question.hints.length !== 0 && !filters.excluded_columns.includes('hints') ? <div className="Report-Table-item-hints" style={{ backgroundColor: theme.color.base }}>
+            {sortedResult.question.hints.length !== 0 && !filters.excluded_columns.includes('hints') ? <div className="Report-Table-item-hints bg-base">
               {sortedResult.question.hints.map(hint => <div className="Report-Table-item-hints-item" key={hint} style={{ backgroundColor: theme.color.light }}>
                 <Markdown content={hint} />
               </div>)}
