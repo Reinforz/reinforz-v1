@@ -24,7 +24,7 @@ export default function ReportFilter() {
   const allSubjects = useMemo(() => Array.from(new Set(Array.from(allQuizzesMap.values()).map(quiz => quiz.subject.trim()))), [allQuizzesMap])
 
   return <div className="ReportFilter bg-dark">
-    <Preset lsKey={REINFORZ_REPORT_SETTINGS_LS_KEY} modalLabel="Save Report Settings" popoverText="Save current report settings as preset" currentPreset={reportSettings} itemPreset={reportSettingsPresets} setPresetState={setReportSettingsPresets} />
+    <Preset lsKey={REINFORZ_REPORT_SETTINGS_LS_KEY} modalLabel="Save Report Settings" popoverText="Save current report settings as preset" currentPreset={reportSettings} itemPresets={reportSettingsPresets} setPresetState={setReportSettingsPresets} />
     <div style={{ overflow: 'auto' }}>
       <InputRange label={"Time taken range"} min={0} max={120} setState={setFilterState} state={filters} stateKey={"time_taken"} />
       <InputRange step={0.25} label={"Score"} min={0} max={1} setState={setFilterState} state={filters} stateKey={"score"} />

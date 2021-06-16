@@ -13,7 +13,7 @@ interface Props {
 }
 
 export default function QuestionOptions(props: Props) {
-  const { theme, settings } = useThemeSettings();
+  const { settings } = useThemeSettings();
   const { setUserAnswers, userAnswers, question: { options, _id } } = props;
 
   const memoizedQuestionOptions = useMemo(() => {
