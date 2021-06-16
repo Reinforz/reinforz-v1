@@ -1,4 +1,5 @@
 import { ThemeProvider } from "@material-ui/styles";
+import { SnackbarProvider } from "notistack";
 import { SettingsContext } from "../context/SettingsContext";
 import initPrismLineNumbers from "../scripts/prism-line-numbers";
 import { ExtendedTheme, ISettings } from "../types";
@@ -23,11 +24,13 @@ export default function Wrapper(props: Props) {
   const generatedTheme = generateTheme(defaultSettings) as ExtendedTheme;
 
   return <ThemeProvider theme={generatedTheme}>
-    <SettingsContext.Provider value={{ setSettings: () => { }, setSettingsPresets: () => { }, settings: defaultSettings, settingsPresets: defaultSettingsPresets }}>
-      <Root theme={generatedTheme} settings={defaultSettings}>
-        {props.children}
-      </Root>
-    </SettingsContext.Provider>
+    <SnackbarProvider maxSnack={4}>
+      <SettingsContext.Provider value={{ setSettings: () => { }, setSettingsPresets: () => { }, settings: defaultSettings, settingsPresets: defaultSettingsPresets }}>
+        <Root theme={generatedTheme} settings={defaultSettings}>
+          {props.children}
+        </Root>
+      </SettingsContext.Provider>
+    </SnackbarProvider>
   </ThemeProvider>
 }
 

@@ -14,11 +14,11 @@ import "./style.scss";
 
 export interface PresetProps {
   setPresetState: React.Dispatch<React.SetStateAction<IPreset<any>>>
-  itemPreset: IPreset<any>
+  itemPresets: IPreset<any>
   currentPreset: any
-  popoverText: string
-  modalLabel: string
-  lsKey: string
+  modalLabel?: string
+  popoverText?: string
+  lsKey?: string
 }
 
 const centerBottomErrorNotistack = {
@@ -33,13 +33,13 @@ export default function Preset(props: PresetProps) {
   const { setModalState } = useContext(ModalContext);
   const { theme } = useThemeSettings();
   const { settings } = useContext(SettingsContext)
-  const { lsKey, modalLabel, popoverText, setPresetState, currentPreset, itemPreset } = props;
+  const { lsKey, modalLabel = 'Save preset', popoverText = 'Save preset', setPresetState, currentPreset, itemPresets } = props;
   const { enqueueSnackbar } = useSnackbar();
 
   function checkPresetInput(input: string) {
     if (input === '') {
       enqueueSnackbar("Can't save a preset with no name", centerBottomErrorNotistack)
-    } else if (itemPreset.presets.map(preset => preset.name).includes(input)) {
+    } else if (itemPresets.presets.map(preset => preset.name).includes(input)) {
       enqueueSnackbar(`A preset with name: ${input} already exists`, centerBottomErrorNotistack)
     } else {
       return true;
@@ -48,16 +48,16 @@ export default function Preset(props: PresetProps) {
   }
 
   return <div className="Preset">
-    <ListSelect items={itemPreset.presets.map(preset => preset.id)} menuItemLabel={(id) => itemPreset.presets.find(preset => preset.id === id)!.name} onChange={(id) => {
+    <ListSelect items={itemPresets.presets.map(preset => preset.id)} menuItemLabel={(id) => itemPresets.presets.find(preset => preset.id === id)!.name} onChange={(id) => {
       setPresetState({
         current: id,
-        presets: itemPreset.presets
+        presets: itemPresets.presets
       })
-      localStorage.setItem(lsKey, JSON.stringify({
+      lsKey && localStorage.setItem(lsKey, JSON.stringify({
         current: id,
-        presets: itemPreset.presets
+        presets: itemPresets.presets
       }))
-    }} item={itemPreset.current} />
+    }} item={itemPresets.current} />
 
     <Hovertips popoverText={popoverText}>
       <FaSave fill={theme.color.opposite_light} size={20} onClick={() => {
@@ -69,28 +69,28 @@ export default function Preset(props: PresetProps) {
             const currentActivePresetId = shortid();
             const newSettingsPresets: IPreset<any> = {
               current: currentActivePresetId,
-              presets: [...itemPreset.presets, {
+              presets: [...itemPresets.presets, {
                 name: input,
                 id: currentActivePresetId,
                 data: currentPreset
               }]
             }
-            localStorage.setItem(lsKey, JSON.stringify(newSettingsPresets));
+            lsKey && localStorage.setItem(lsKey, JSON.stringify(newSettingsPresets));
             setPresetState(newSettingsPresets);
             setModalState([false, null])
           }
         }} />])
       }} />
     </Hovertips>
-    <Hovertips popoverText={itemPreset.current !== 'default' ? "Update preset" : "Can't update default preset"}>
-      <MdUpdate size={20} fill={itemPreset.current !== 'default' ? theme.color.opposite_light : grey[500]} onClick={() => {
-        if (itemPreset.current !== 'default') {
+    <Hovertips popoverText={itemPresets.current !== 'default' ? "Update preset" : "Can't update default preset"}>
+      <MdUpdate size={20} fill={itemPresets.current !== 'default' ? theme.color.opposite_light : grey[500]} onClick={() => {
+        if (itemPresets.current !== 'default') {
           settings.sound && sounds.click.play();
-          const currentPresetIndex = itemPreset.presets.findIndex(preset => preset.id === itemPreset.current);
-          itemPreset.presets[currentPresetIndex].data = currentPreset;
-          setPresetState(JSON.parse(JSON.stringify(itemPreset)))
-          localStorage.setItem(lsKey, JSON.stringify(itemPreset));
-          enqueueSnackbar(`Preset "${itemPreset.presets[currentPresetIndex].name}" updated`, {
+          const currentPresetIndex = itemPresets.presets.findIndex(preset => preset.id === itemPresets.current);
+          itemPresets.presets[currentPresetIndex].data = currentPreset;
+          setPresetState(JSON.parse(JSON.stringify(itemPresets)))
+          lsKey && localStorage.setItem(lsKey, JSON.stringify(itemPresets));
+          enqueueSnackbar(`Preset "${itemPresets.presets[currentPresetIndex].name}" updated`, {
             variant: 'success',
             anchorOrigin: {
               vertical: 'bottom',
@@ -100,13 +100,13 @@ export default function Preset(props: PresetProps) {
         }
       }} />
     </Hovertips>
-    <Hovertips popoverText={itemPreset.current !== 'default' ? "Delete preset" : "Can't delete default preset"}>
-      <MdDelete size={20} fill={itemPreset.current !== 'default' ? red[500] : grey[500]} onClick={() => {
-        if (itemPreset.current !== 'default') {
+    <Hovertips popoverText={itemPresets.current !== 'default' ? "Delete preset" : "Can't delete default preset"}>
+      <MdDelete size={20} fill={itemPresets.current !== 'default' ? red[500] : grey[500]} onClick={() => {
+        if (itemPresets.current !== 'default') {
           settings.sound && sounds.remove.play();
           setPresetState({
             current: 'default',
-            presets: itemPreset.presets.filter(preset => preset.id !== itemPreset.current)
+            presets: itemPresets.presets.filter(preset => preset.id !== itemPresets.current)
           })
         }
       }} />

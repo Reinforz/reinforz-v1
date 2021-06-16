@@ -12,13 +12,13 @@ import initPrismLineNumbers from "./scripts/prism-line-numbers";
 import "./styles/prism-line-highlight.scss";
 import "./styles/vs-light.scss";
 import "./styles/vscode-dark.scss";
-import { ExtendedTheme, IErrorLog, IPlaySettings, IPlaySettingsPreset, IQuizFull, ISettings, ISettingsPreset, TQuestionFull } from './types';
+import { ExtendedTheme, IErrorLog, IPlaySettings, IPreset, IQuizFull, ISettings, TQuestionFull } from './types';
 import { applyPlaySettingsOptions, arrayShuffler, generateQuestionsMap, generateTheme, getPlaySettingsPresets, getSettingsPresets } from './utils';
 
 initPrismLineNumbers();
 
-function findSettingsFromPresets(preset: ISettingsPreset | IPlaySettingsPreset) {
-  return (preset.presets as any[]).find(settingsPreset => settingsPreset.id === preset.current)!.data;
+function findSettingsFromPresets(preset: IPreset<any>) {
+  return preset.presets.find(settingsPreset => settingsPreset.id === preset.current)!.data;
 }
 
 const Root = () => {
