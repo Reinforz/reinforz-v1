@@ -1,5 +1,6 @@
 import { ThemeProvider } from "@material-ui/styles";
 import { SnackbarProvider } from "notistack";
+import { ReactNode } from "react";
 import { SettingsContext } from "../context/SettingsContext";
 import initPrismLineNumbers from "../scripts/prism-line-numbers";
 import { ExtendedTheme, ISettings } from "../types";
@@ -7,7 +8,7 @@ import { generateDefaultSettingsPreset, generateDynamicStyleClasses, generateThe
 
 initPrismLineNumbers();
 interface Props {
-  children: JSX.Element | null | string | ((settings: ISettings, theme: ExtendedTheme) => JSX.Element)
+  children: ReactNode | ReactNode[] | ((settings: ISettings, theme: ExtendedTheme) => JSX.Element)
 }
 
 function Root(props: Props & { settings: ISettings, theme: ExtendedTheme }) {
