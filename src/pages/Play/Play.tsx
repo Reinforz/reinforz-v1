@@ -5,7 +5,7 @@ import { FaKeyboard, FaPlay } from "react-icons/fa";
 import { HiDocumentReport } from "react-icons/hi";
 import { IoLogoGameControllerB, IoMdCreate, IoMdSettings } from 'react-icons/io';
 import { useHistory } from "react-router-dom";
-import { IconGroup, List, Menu, View } from '../../components';
+import { IconGroup, List, SideToggleMenu, View } from '../../components';
 import { RootContext } from "../../context/RootContext";
 import { useNavigationIcons, useThemeSettings } from '../../hooks';
 import { generateNavigationStyles } from "../../utils";
@@ -74,7 +74,7 @@ function Play() {
     ref.current && ref.current.focus();
   }, [])
 
-  return <Menu lsKey="PLAY_MENU" width={290} contents={[<PlaySettings />, <div className="Play" ref={ref} tabIndex={0} onKeyPress={onKeyPress}>
+  return <SideToggleMenu lsKey="PLAY_MENU" width={290} contents={[<PlaySettings />, <div className="Play" ref={ref} tabIndex={0} onKeyPress={onKeyPress}>
     <IconGroup style={generatedNavigationStyles} direction={settings.navigation.direction} className="Play-icons" icons={navigationIcons} />
     <PlayUpload />
     <div style={{ gridArea: '2/1/5/2' }}>

@@ -10,13 +10,13 @@ import List from './List';
 import ListSelect from './ListSelect';
 import ListTable from './ListTable';
 import Markdown from './Markdown';
-import Menu from './Menu';
 import ModalPresetInput from './ModalPresetInput';
 import NotFoundPage from './NotFoundPage';
 import Preset from './Preset';
 import RadioGroup from './RadioGroup';
 import Select from './Select';
 import SelectGroup from './SelectGroup';
+import SideToggleMenu from './SideToggleMenu';
 import SimpleModal from './SimpleModal';
 import Sort from './Sort';
 import StackList from './StackList';
@@ -52,6 +52,6 @@ export {
   View,
   Hovertips,
   List,
-  Menu,
+  SideToggleMenu,
   Stats
 };

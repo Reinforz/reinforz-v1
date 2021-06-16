@@ -4,7 +4,7 @@ import { AiFillHome } from 'react-icons/ai';
 import { FaCloudUploadAlt, FaKeyboard } from 'react-icons/fa';
 import { IoLogoGameControllerB, IoMdCreate, IoMdSettings } from 'react-icons/io';
 import { useHistory, useLocation } from 'react-router-dom';
-import { IconGroup, Menu, StackList } from '../../components';
+import { IconGroup, SideToggleMenu, StackList } from '../../components';
 import { REINFORZ_REPORT_SETTINGS_LS_KEY } from '../../constants';
 import { ReportContext } from '../../context/ReportContext';
 import { RootContext } from '../../context/RootContext';
@@ -134,7 +134,7 @@ export default function Report() {
   const render = () => {
     if (report.results.length !== 0) {
       return (
-        <Menu
+        <SideToggleMenu
           lsKey="REPORT_MENU"
           contents={[
             <ReportFilter />,

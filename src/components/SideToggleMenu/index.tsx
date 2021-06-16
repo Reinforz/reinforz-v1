@@ -8,7 +8,7 @@ import sounds from "../../sounds";
 import { generateMenuStyles } from "../../utils";
 import IconGroup from "../IconGroup";
 import "./style.scss";
-export interface MenuProps {
+export interface SideToggleMenuProps {
   initialPosition?: 'left' | 'right';
   initialOpen?: boolean;
   width?: number;
@@ -17,7 +17,7 @@ export interface MenuProps {
   icons?: [string, JSX.Element][]
 }
 
-export default function Menu(props: MenuProps) {
+export default function SideToggleMenu(props: SideToggleMenuProps) {
   const { theme } = useThemeSettings();
   const { settings } = useContext(SettingsContext);
   const { icons = [], width = 300, initialPosition, lsKey, initialOpen, contents } = props;
@@ -65,12 +65,12 @@ export default function Menu(props: MenuProps) {
     else contentStyle.marginRight = 5;
   }
 
-  return <div style={containerStyle}>
+  return <div style={containerStyle} className="SideToggleMenu">
     <div style={contentStyle}>
       {contents[1]}
     </div>
-    <div className="Menu" style={{ left, width }}>
-      <IconGroup className="Menu-icons" direction="column" style={iconsContainerStyle} icons={[
+    <div className="SideToggleMenu-sidebar" style={{ left, width }}>
+      <IconGroup className="SideToggleMenu-sidebar-icons" direction="column" style={iconsContainerStyle} icons={[
         [`${isOpen ? "Close" : "Open"} Menu`, <FaArrowAltCircleRight fill={theme.color.opposite_light} onClick={() => {
           if (settings.sound && isOpen === false) {
             sounds.switch_on.play();
