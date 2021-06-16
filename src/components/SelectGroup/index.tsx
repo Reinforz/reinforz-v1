@@ -3,7 +3,7 @@ import { Select } from "..";
 import { transformTextBySeparator } from "../../utils";
 import "./style.scss";
 
-interface Props {
+export interface SelectGroupProps {
   label: string
   setState: (state: any) => void
   state: any
@@ -11,11 +11,9 @@ interface Props {
   groupItems: [string[], string, string][]
 }
 
-export default function SelectGroup(props: Props) {
+export default function SelectGroup(props: SelectGroupProps) {
   const { label, setState, state, stateKey, groupItems } = props;
-  return <FormGroup className="Select-Group" style={{
-    flexDirection: 'column'
-  }}>
+  return <FormGroup className="Select-Group fd-c">
     <InputLabel className="Select-Group-header">
       {label}
     </InputLabel>

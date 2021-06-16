@@ -26,7 +26,7 @@ export default function Select<T extends Record<string, any>>(props: SelectProps
     <div className="Select-content flex fd-c bg-light">
       <MuiSelect value={state[stateKey] as string[]}
         multiple={multiple}
-        renderValue={(items) => renderValue ? renderValue(items) : multiple ? (items as string[]).join(",&nbsp;") : items as ReactNode}
+        renderValue={(items) => renderValue ? renderValue(items) : multiple ? (items as string[]).join(", ") : items as ReactNode}
         onChange={(e) => {
           settings.sound && sounds.click.play();
           setState({ ...state, [stateKey]: e.target.value as string[] })
