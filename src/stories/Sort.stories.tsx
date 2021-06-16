@@ -21,8 +21,11 @@ export const DefaultSort = DefaultSortTemplate.bind({});
 const CustomMaxSortTemplate: Story<SortProps> = () => {
   const [sorts, setSorts] = useState<IReportSort>([['Score', 'DESC']]);
   return <Wrapper>
-    <Sort max={5} header={"Sort"} sorts={sorts} setSorts={setSorts} items={["Score", "Time Taken", "Hints Used"]} />
+    <Sort header={"Sort"} sorts={sorts} setSorts={setSorts} items={["Score", "Time Taken", "Hints Used"]} />
   </Wrapper>
 };
 
 export const CustomMaxSort = CustomMaxSortTemplate.bind({});
+CustomMaxSort.args = {
+  max: 5
+}

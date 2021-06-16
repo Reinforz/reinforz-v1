@@ -177,6 +177,12 @@ export function generateTheme(settings: ISettings) {
           color: text.primary
         }
       },
+      MuiInputBase: {
+        input: {
+          padding: 0,
+          paddingBottom: 5
+        }
+      },
       MuiInputLabel: {
         root: {
           fontWeight: 'bolder',
