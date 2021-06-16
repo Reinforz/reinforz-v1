@@ -4,43 +4,43 @@ div#root {
   height: 100vh;
 }
 
-.App {
+.App, .Modal-content {
   height: 100%;
 
   & .p-2_5 {
-    padding: 2.5
+    padding: 2.5px;
   }
 
   & .m-2_5 {
-    margin: 2.5
+    margin: 2.5px
   }
 
   & .p-5 {
-    padding: 5
+    padding: 5px;
   }
 
   & .pb-0 {
-    padding-bottom: 0
+    padding-bottom: 0px;
   }
 
   & .pr-0 {
-    padding-right: 0
+    padding-right: 0px;
   }
 
   & .m-5 {
-    margin: 5
+    margin: 5px;
   }
 
   & .mr-5 {
-    margin-right: 5
+    margin-right: 5px;
   }
 
   & .mb-5 {
-    margin-bottom: 5
+    margin-bottom: 5px;
   }
 
   & .mb-0 {
-    margin-bottom: 0
+    margin-bottom: 0px;
   }
 
   & .flex {
@@ -48,7 +48,7 @@ div#root {
   }
 
   & .flex-1 {
-    flex: 1
+    flex: 1;
   }
 
   & .ai-c {
@@ -64,7 +64,7 @@ div#root {
   }
 
   & .br-2_5 {
-    border-radius: 2.5
+    border-radius: 2.5px
   }
 
   & .bold {
@@ -97,11 +97,11 @@ div#root {
     position: absolute;
     transform: translate(-50%, -50%);
   }
-  
+
 }
 
 body {
-  margin: 0;
+  margin: 0px;;
   height: 100vh;
   overflow: hidden;
 }

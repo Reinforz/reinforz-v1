@@ -124,11 +124,6 @@ export function generateTheme(settings: ISettings) {
           }
         }
       },
-      MuiInput: {
-        root: {
-          padding: 0,
-        }
-      },
       MuiCheckbox: {
         root: {
           padding: 0,
@@ -139,6 +134,11 @@ export function generateTheme(settings: ISettings) {
         root: {
           width: '18px',
           height: '18px'
+        }
+      },
+      MuiSelect: {
+        select: {
+          paddingLeft: 5
         }
       },
       MuiRadio: {

@@ -1,5 +1,6 @@
 import { Button, FormGroup, InputLabel, TextField } from "@material-ui/core";
 import { useState } from "react";
+import { useThemeSettings } from "../../hooks";
 import "./style.scss";
 
 export interface ModalPresetInputProps {
@@ -11,8 +12,9 @@ export interface ModalPresetInputProps {
 export default function ModalPresetInput(props: ModalPresetInputProps) {
   const [input, setInput] = useState('');
   const { label, onSave, closeModal } = props;
+  const { theme } = useThemeSettings();
 
-  return <div className="ModalPresetInput bg-base center">
+  return <div className="ModalPresetInput bg-base center" style={{ backgroundColor: theme.color.base }}>
     <FormGroup className="pb-0">
       <InputLabel className="ModalPresetInput-header">{label}</InputLabel>
       <div className="ModalPresetInput-content">
