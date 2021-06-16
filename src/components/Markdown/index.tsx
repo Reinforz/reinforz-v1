@@ -1,13 +1,14 @@
+import { Typography } from "@material-ui/core";
 import Prism from "prismjs";
 import { useEffect, useRef } from "react";
 import ReactMarkdown from "react-markdown";
 import rehypeRaw from 'rehype-raw';
 
-interface Props {
+export interface MarkdownProps {
   content: string
 }
 
-export default function Markdown(props: Props) {
+export default function Markdown(props: MarkdownProps) {
   const refs = useRef<(HTMLElement | null)[]>([]);
 
   useEffect(() => {
@@ -16,9 +17,9 @@ export default function Markdown(props: Props) {
     })
   });
 
-  return <ReactMarkdown className="markdown" rehypePlugins={[rehypeRaw]} components={{
+  return <Typography component="div" className="p-5"><ReactMarkdown className="markdown p-5 bg-base" rehypePlugins={[rehypeRaw]} components={{
     code({ node, inline, className, children, ...props }) {
       return <code className={`${className ?? ''}`} {...props} ref={(ref) => refs.current.push(ref)}>{children}</code>
     }
-  }}>{props.content}</ReactMarkdown>
+  }}>{props.content}</ReactMarkdown></Typography>
 }

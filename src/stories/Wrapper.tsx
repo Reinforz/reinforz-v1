@@ -1,8 +1,10 @@
 import { ThemeProvider } from "@material-ui/styles";
 import { SettingsContext } from "../context/SettingsContext";
+import initPrismLineNumbers from "../scripts/prism-line-numbers";
 import { ExtendedTheme, ISettings } from "../types";
 import { generateDefaultSettingsPreset, generateDynamicStyleClasses, generateTheme } from "../utils";
 
+initPrismLineNumbers();
 interface Props {
   children: JSX.Element | ((settings: ISettings, theme: ExtendedTheme) => JSX.Element)
 }

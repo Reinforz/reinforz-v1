@@ -14,7 +14,9 @@ export function generateDynamicStyleClasses() {
         backgroundColor: theme.color.light
       },
       '& pre': {
-        background: theme.color.dark
+        background: theme.color.dark,
+        padding: 10,
+        borderRadius: 3
       },
       '& :not(pre) > code[class*="language-"]': {
         background: theme.color.dark
