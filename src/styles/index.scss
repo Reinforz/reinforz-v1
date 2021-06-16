@@ -1,0 +1,120 @@
+@import "./utils/anim";
+
+div#root {
+  height: 100vh;
+}
+
+.App {
+  height: 100%;
+
+  & .p-2_5 {
+    padding: 2.5
+  }
+
+  & .m-2_5 {
+    margin: 2.5
+  }
+
+  & .p-5 {
+    padding: 5
+  }
+
+  & .pb-0 {
+    padding-bottom: 0
+  }
+
+  & .pr-0 {
+    padding-right: 0
+  }
+
+  & .m-5 {
+    margin: 5
+  }
+
+  & .mr-5 {
+    margin-right: 5
+  }
+
+  & .mb-5 {
+    margin-bottom: 5
+  }
+
+  & .mb-0 {
+    margin-bottom: 0
+  }
+
+  & .flex {
+    display: flex
+  }
+
+  & .flex-1 {
+    flex: 1
+  }
+
+  & .ai-c {
+    align-items: center
+  }
+
+  & .jc-c {
+    justify-content: center
+  }
+
+  & .jc-sb {
+    justify-content: space-between
+  }
+
+  & .br-2_5 {
+    border-radius: 2.5
+  }
+
+  & .bold {
+    font-weight: bold
+  }
+
+  & .fd-c {
+    flex-direction: column
+  }
+
+  & .ta-c {
+    text-align: center
+  }
+
+  & .us-n {
+    user-select: none
+  }
+
+  & .tt-c {
+    text-transform: capitalize
+  }
+
+  & .c-p {
+    cursor: pointer
+  }
+
+  & .center {
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+  }
+  
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+.center {
+  font-size: 1.25em;
+  font-weight: bold;
+  position: absolute; 
+  transform: translate(-50%,-50%);
+  top: 50%;
+  left: 50%;
+}
