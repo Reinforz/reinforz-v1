@@ -104,6 +104,12 @@ export function generateDynamicStyleClasses() {
       },
       '& .c-p': {
         cursor: 'pointer'
+      },
+      '& .center': {
+        top: '50%',
+        left: '50%',
+        position: 'absolute',
+        transform: 'translate(-50%, -50%)'
       }
     }
   }))();

@@ -124,15 +124,9 @@ export function generateTheme(settings: ISettings) {
           }
         }
       },
-      MuiButton: {
-        contained: {
-          margin: 2.5
-        }
-      },
       MuiInput: {
         root: {
-          padding: 2.5,
-          paddingLeft: 5
+          padding: 0,
         }
       },
       MuiCheckbox: {
