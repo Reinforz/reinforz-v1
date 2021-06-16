@@ -1,5 +1,5 @@
 import { FormGroup, InputLabel, MenuItem, Select as MuiSelect } from "@material-ui/core";
-import { green, red } from "@material-ui/core/colors";
+import { green, grey, red } from "@material-ui/core/colors";
 import { AiFillPlusCircle } from "react-icons/ai";
 import { FaArrowAltCircleDown, FaArrowAltCircleUp } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
@@ -8,7 +8,6 @@ import sounds from "../../sounds";
 import { IReportSort } from "../../types";
 import { transformTextBySeparator } from "../../utils";
 import Hovertips from "../Hovertips";
-import "./style.scss";
 
 export interface SortProps {
   header: string
@@ -22,14 +21,17 @@ export interface SortProps {
 export default function Sort(props: SortProps) {
   const { theme, settings } = useThemeSettings();
   const { max = 3, items, header, sorts, setSorts, menuItemLabel } = props;
+  const canAddSort = sorts.length !== max;
 
   return <FormGroup className="Sort">
     <InputLabel className="Sort-header">{header}</InputLabel>
-    {sorts.length !== 0 && <div style={{ display: 'flex', flexDirection: 'column', padding: 2.5, margin: 2.5 }} className="Sort-content bg-dark">
+    {sorts.length !== 0 && <div className="Sort-content bg-dark flex p-5 fd-c">
       {sorts.map((sort, index) => {
-        const [item, order] = sort;
-        return <div key={`${item}.${order}.${index}`} className="Sort-content-item bg-base" style={{ display: 'flex', padding: 5, margin: 2.5 }}>
-          <MuiSelect className="Sort-content-item-category bg-light" style={{ flex: 1, marginRight: 5 }} value={item}
+        const [item, order] = sort,
+          canMoveDownwards = index !== sorts.length - 1 && sorts.length !== 1,
+          canMoveUpwards = index !== 0 && sorts.length !== 1;
+        return <div key={`${item}.${order}.${index}`} className={`Sort-content-item bg-base flex p-5 ${index !== sorts.length - 1 ? "pb-0" : ''}`}>
+          <MuiSelect className="Sort-content-item-category bg-light flex-1 mr-5" value={item}
             onChange={(e) => {
               settings.sound && sounds.click.play()
               sort[0] = e.target.value as any;
@@ -39,7 +41,7 @@ export default function Sort(props: SortProps) {
               <MenuItem key={item} value={item}>{menuItemLabel ? menuItemLabel(item) : transformTextBySeparator(item)}</MenuItem>
             )}
           </MuiSelect>
-          <MuiSelect className="Sort-content-item-order bg-light" style={{ flex: 1 }} value={order}
+          <MuiSelect className="Sort-content-item-order bg-light flex-1 mr-5" value={order}
             onChange={(e) => {
               settings.sound && sounds.click.play()
               sort[1] = e.target.value as any;
@@ -49,45 +51,53 @@ export default function Sort(props: SortProps) {
               <MenuItem key={item} value={item}>{menuItemLabel ? menuItemLabel(item) : transformTextBySeparator(item)}</MenuItem>
             )}
           </MuiSelect>
-          {index !== sorts.length - 1 && sorts.length !== 1 && <div className="Sort-content-item-down">
-            <Hovertips popoverText={"Move downwards"}>
-              <FaArrowAltCircleDown fill={theme.color.opposite_light} size={15} onClick={() => {
-                const nextSort = sorts[index + 1];
-                sorts[index + 1] = sort;
-                sorts[index] = nextSort;
-                setSorts(JSON.parse(JSON.stringify(sorts)))
-              }} />
-            </Hovertips>
-          </div>}
-          {index !== 0 && sorts.length !== 1 && <div className="Sort-content-item-up">
-            <Hovertips popoverText={"Move upwards"}>
-              <FaArrowAltCircleUp fill={theme.color.opposite_light} size={15} onClick={() => {
-                const prevSort = sorts[index - 1];
-                sorts[index - 1] = sort;
-                sorts[index] = prevSort;
-                setSorts(JSON.parse(JSON.stringify(sorts)))
-              }} />
-            </Hovertips>
-          </div>}
-          <div className="Sort-content-item-delete">
-            <Hovertips popoverText={`Delete ${item} by ${order} sort`}>
-              <MdDelete size={20} fill={red[500]} onClick={() => {
-                settings.sound && sounds.remove.play()
-                sorts[index] = null as any;
-                setSorts(sorts.filter(sort => sort))
-              }} />
-            </Hovertips>
+          <div className="Sort-content-item-icons bg-light p-5 flex jc-c ai-c">
+            <div className="Sort-content-item-icons-down mr-5">
+              <Hovertips popoverText={"Move downwards"}>
+                <FaArrowAltCircleDown fill={canMoveDownwards ? theme.color.opposite_light : grey[500]} size={15} onClick={() => {
+                  if (canMoveDownwards) {
+                    const nextSort = sorts[index + 1];
+                    sorts[index + 1] = sort;
+                    sorts[index] = nextSort;
+                    setSorts(JSON.parse(JSON.stringify(sorts)))
+                  }
+                }} />
+              </Hovertips>
+            </div>
+            <div className="Sort-content-item-icons-up mr-5">
+              <Hovertips popoverText={"Move upwards"}>
+                <FaArrowAltCircleUp fill={canMoveUpwards ? theme.color.opposite_light : grey[500]} size={15} onClick={() => {
+                  if (canMoveUpwards) {
+                    const prevSort = sorts[index - 1];
+                    sorts[index - 1] = sort;
+                    sorts[index] = prevSort;
+                    setSorts(JSON.parse(JSON.stringify(sorts)))
+                  }
+                }} />
+              </Hovertips>
+            </div>
+            <div className="Sort-content-item-icons-delete">
+              <Hovertips popoverText={`Delete ${item} by ${order} sort`}>
+                <MdDelete size={20} fill={red[500]} onClick={() => {
+                  settings.sound && sounds.remove.play()
+                  sorts[index] = null as any;
+                  setSorts(sorts.filter(sort => sort))
+                }} />
+              </Hovertips>
+            </div>
           </div>
         </div>
       })}
     </div>}
-    {sorts.length !== max && <div className="Sort-add">
-      <Hovertips popoverText="Add Sort">
-        <AiFillPlusCircle size={25} fill={green[500]} onClick={() => {
-          settings.sound && sounds.click.play()
-          setSorts([...sorts, [items[0], 'ASC']])
+    <div className="Sort-add flex jc-c ai-c">
+      <Hovertips popoverText={`${canAddSort ? "Add Sort" : "Max sort limit reached"}`}>
+        <AiFillPlusCircle size={25} fill={canAddSort ? green[500] : grey[500]} onClick={() => {
+          if (canAddSort) {
+            settings.sound && sounds.click.play()
+            setSorts([...sorts, [items[0], 'ASC']])
+          }
         }} />
       </Hovertips>
-    </div>}
+    </div>
   </FormGroup>
 }
