@@ -12,7 +12,7 @@ interface Props {
 function Root(props: Props & { settings: ISettings, theme: ExtendedTheme }) {
   const { settings, theme } = props;
   const classes = generateDynamicStyleClasses();
-  return <div className={`${classes.root}`} style={{ backgroundColor: theme.color.dark, height: '100%', padding: 5 }}>
+  return <div className={`${classes.root}`} style={{ backgroundColor: theme.color.dark, height: 'fit-content', padding: 5, overflow: 'hidden' }}>
     {typeof props.children === "function" ? props.children(settings, theme) : props.children}
   </div>
 }

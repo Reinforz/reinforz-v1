@@ -22,8 +22,8 @@ export default function Menu(props: MenuProps) {
   const { settings } = useContext(SettingsContext);
   const { icons = [], width = 300, initialPosition, lsKey, initialOpen, contents } = props;
   let menuLsState = {
-    position: initialPosition || "right",
-    isOpen: initialOpen || true
+    position: initialPosition ?? "right",
+    isOpen: initialOpen ?? true
   };
 
   if (lsKey) {
@@ -34,7 +34,7 @@ export default function Menu(props: MenuProps) {
   const [isOpen, setIsOpen] = useState<boolean>(menuLsState.isOpen);
   const [position, setPosition] = useState(menuLsState.position);
 
-  const { left, iconsContainerStyle, iconStyle, contentStyle } = generateMenuStyles(position, isOpen, width);
+  const { left, iconsContainerStyle, iconStyle, containerStyle } = generateMenuStyles(position, isOpen, width);
   const popoverOrigin: {
     popoverAnchorOrigin: PopoverOrigin
     popoverTransformOrigin: PopoverOrigin
@@ -58,8 +58,17 @@ export default function Menu(props: MenuProps) {
       }
     };
 
-  return <div style={contentStyle}>
-    {contents[1]}
+  const contentStyle: React.CSSProperties = {};
+
+  if (isOpen) {
+    if (position === 'left') contentStyle.marginLeft = 5;
+    else contentStyle.marginRight = 5;
+  }
+
+  return <div style={containerStyle}>
+    <div style={contentStyle}>
+      {contents[1]}
+    </div>
     <div className="Menu" style={{ left, width }}>
       <IconGroup className="Menu-icons" direction="column" style={iconsContainerStyle} icons={[
         [`${isOpen ? "Close" : "Open"} Menu`, <FaArrowAltCircleRight fill={theme.color.opposite_light} onClick={() => {

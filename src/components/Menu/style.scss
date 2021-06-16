@@ -1,13 +1,13 @@
 .Menu{
   position: absolute;
   top: 0px;
-  height: calc(100vh - 10px);
+  height: 100%;
   transition: left 250ms ease-in-out;
   z-index: 50;
-  padding: 2.5px;
   
   &-icons{
     top: 50%;
     position: absolute;
+    transform: translateY(-50%);
   }
 }
