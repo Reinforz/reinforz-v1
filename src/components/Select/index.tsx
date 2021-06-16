@@ -1,31 +1,32 @@
 import { FormGroup, InputLabel, MenuItem, Select as MuiSelect } from "@material-ui/core";
-import { ChangeEvent, useContext } from "react";
+import { ChangeEvent, ReactNode, useContext } from "react";
 import { SettingsContext } from "../../context/SettingsContext";
 import sounds from "../../sounds";
+import { transformTextBySeparator } from "../../utils";
 
-interface Props<T extends Record<string, any>> {
+export interface SelectProps<T extends Record<string, any>> {
   label: string
   state: T,
   stateKey: keyof T
-  setState: (value: React.SetStateAction<T>) => void
+  setState: React.Dispatch<React.SetStateAction<T>>
   items: string[]
-  menuItemLabel: (item: string) => string
-  renderValue?: (selected: any) => JSX.Element[]
+  menuItemLabel?: (item: string) => string
+  renderValue?: (selected: unknown) => ReactNode
   multiple?: boolean
   onChange?: (e: ChangeEvent<{ name?: string | undefined; value: unknown }>) => void
   lsKey?: string
   className?: string
 }
 
-export default function Select<T extends Record<string, any>>(props: Props<T>) {
+export default function Select<T extends Record<string, any>>(props: SelectProps<T>) {
   const { settings } = useContext(SettingsContext);
-  const { items, multiple, renderValue, className = '', menuItemLabel, state, stateKey, setState } = props;
+  const { items, multiple = false, renderValue, className = '', menuItemLabel, state, stateKey, setState } = props;
   return <FormGroup className={`Select p-5 ${className ?? ''}`}>
     <InputLabel>{props.label}</InputLabel>
-    <div style={{ display: 'flex', flexDirection: 'column' }} className="Select-content bg-light">
+    <div className="Select-content flex fd-c bg-light">
       <MuiSelect value={state[stateKey] as string[]}
-        multiple={Boolean(multiple)}
-        renderValue={renderValue}
+        multiple={multiple}
+        renderValue={(items) => renderValue ? renderValue(items) : multiple ? (items as string[]).join(",&nbsp;") : items as ReactNode}
         onChange={(e) => {
           settings.sound && sounds.click.play();
           setState({ ...state, [stateKey]: e.target.value as string[] })
@@ -38,7 +39,7 @@ export default function Select<T extends Record<string, any>>(props: Props<T>) {
           }
         }}>
         {items.map(item =>
-          <MenuItem key={item} value={item}>{menuItemLabel(item)}</MenuItem>
+          <MenuItem key={item} value={item}>{menuItemLabel ? menuItemLabel(item) : transformTextBySeparator(item)}</MenuItem>
         )}
       </MuiSelect>
     </div>
