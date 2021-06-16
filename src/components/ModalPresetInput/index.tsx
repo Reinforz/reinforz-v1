@@ -2,13 +2,13 @@ import { Button, FormGroup, InputLabel, TextField } from "@material-ui/core";
 import { useState } from "react";
 import "./style.scss";
 
-interface Props {
+export interface ModalPresetInputProps {
   label: string
   closeModal: () => void
   onSave: (input: string) => void
 }
 
-export default function ModalPresetInput(props: Props) {
+export default function ModalPresetInput(props: ModalPresetInputProps) {
   const [input, setInput] = useState('');
   const { label, onSave, closeModal } = props;
 

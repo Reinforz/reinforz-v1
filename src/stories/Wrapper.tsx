@@ -6,7 +6,7 @@ import { generateDefaultSettingsPreset, generateDynamicStyleClasses, generateThe
 
 initPrismLineNumbers();
 interface Props {
-  children: JSX.Element | ((settings: ISettings, theme: ExtendedTheme) => JSX.Element)
+  children: JSX.Element | null | string | ((settings: ISettings, theme: ExtendedTheme) => JSX.Element)
 }
 
 function Root(props: Props & { settings: ISettings, theme: ExtendedTheme }) {
