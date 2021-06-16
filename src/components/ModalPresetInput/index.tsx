@@ -24,7 +24,9 @@ export default function ModalPresetInput(props: ModalPresetInputProps) {
         Close
       </Button>
       <Button variant="contained" color="primary" onClick={() => {
+        setInput('')
         onSave(input)
+        closeModal();
       }}>
         Save
       </Button>

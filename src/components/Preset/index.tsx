@@ -9,13 +9,13 @@ import { ModalContext } from "../../context/ModalContext";
 import { SettingsContext } from "../../context/SettingsContext";
 import { useThemeSettings } from "../../hooks";
 import sounds from "../../sounds";
-import { IPlaySettings, IPlaySettingsPreset, IReportSettings, IReportSettingsPreset, ISettings, ISettingsPreset } from "../../types";
+import { IPreset } from "../../types";
 import "./style.scss";
 
-interface Props<T, D> {
-  setPresetState: React.Dispatch<React.SetStateAction<T>>
-  itemPreset: T
-  currentPreset: D
+export interface PresetProps {
+  setPresetState: React.Dispatch<React.SetStateAction<IPreset<any>>>
+  itemPreset: IPreset<any>
+  currentPreset: any
   popoverText: string
   modalLabel: string
   lsKey: string
@@ -29,7 +29,7 @@ const centerBottomErrorNotistack = {
   },
 } as OptionsObject;
 
-export default function Preset<T extends ISettingsPreset | IPlaySettingsPreset | IReportSettingsPreset, D extends ISettings | IPlaySettings | IReportSettings>(props: Props<T, D>) {
+export default function Preset(props: PresetProps) {
   const { setModalState } = useContext(ModalContext);
   const { theme } = useThemeSettings();
   const { settings } = useContext(SettingsContext)
@@ -44,16 +44,15 @@ export default function Preset<T extends ISettingsPreset | IPlaySettingsPreset |
     } else {
       return true;
     }
-
     return false
   }
 
   return <div className="Preset">
-    <ListSelect items={itemPreset.presets.map(preset => preset.id)} menuItemLabel={(id) => (itemPreset.presets as any[]).find(preset => preset.id === id)!.name} onChange={(id) => {
+    <ListSelect items={itemPreset.presets.map(preset => preset.id)} menuItemLabel={(id) => itemPreset.presets.find(preset => preset.id === id)!.name} onChange={(id) => {
       setPresetState({
         current: id,
         presets: itemPreset.presets
-      } as any)
+      })
       localStorage.setItem(lsKey, JSON.stringify({
         current: id,
         presets: itemPreset.presets
@@ -68,16 +67,16 @@ export default function Preset<T extends ISettingsPreset | IPlaySettingsPreset |
           if (isValid) {
             settings.sound && sounds.click.play();
             const currentActivePresetId = shortid();
-            const newSettingsPresets: ISettingsPreset = {
+            const newSettingsPresets: IPreset<any> = {
               current: currentActivePresetId,
               presets: [...itemPreset.presets, {
                 name: input,
                 id: currentActivePresetId,
                 data: currentPreset
-              } as any]
+              }]
             }
             localStorage.setItem(lsKey, JSON.stringify(newSettingsPresets));
-            setPresetState(newSettingsPresets as any);
+            setPresetState(newSettingsPresets);
             setModalState([false, null])
           }
         }} />])
@@ -87,8 +86,8 @@ export default function Preset<T extends ISettingsPreset | IPlaySettingsPreset |
       <MdUpdate size={20} fill={itemPreset.current !== 'default' ? theme.color.opposite_light : grey[500]} onClick={() => {
         if (itemPreset.current !== 'default') {
           settings.sound && sounds.click.play();
-          const currentPresetIndex = (itemPreset.presets as any[]).findIndex(preset => preset.id === itemPreset.current);
-          itemPreset.presets[currentPresetIndex].data = currentPreset as any;
+          const currentPresetIndex = itemPreset.presets.findIndex(preset => preset.id === itemPreset.current);
+          itemPreset.presets[currentPresetIndex].data = currentPreset;
           setPresetState(JSON.parse(JSON.stringify(itemPreset)))
           localStorage.setItem(lsKey, JSON.stringify(itemPreset));
           enqueueSnackbar(`Preset "${itemPreset.presets[currentPresetIndex].name}" updated`, {
@@ -107,8 +106,8 @@ export default function Preset<T extends ISettingsPreset | IPlaySettingsPreset |
           settings.sound && sounds.remove.play();
           setPresetState({
             current: 'default',
-            presets: (itemPreset.presets as any[]).filter(preset => preset.id !== itemPreset.current)
-          } as any)
+            presets: itemPreset.presets.filter(preset => preset.id !== itemPreset.current)
+          })
         }
       }} />
     </Hovertips>
