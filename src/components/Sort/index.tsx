@@ -5,21 +5,23 @@ import { FaArrowAltCircleDown, FaArrowAltCircleUp } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { useThemeSettings } from "../../hooks";
 import sounds from "../../sounds";
+import { IReportSort } from "../../types";
+import { transformTextBySeparator } from "../../utils";
 import Hovertips from "../Hovertips";
 import "./style.scss";
 
-interface Props {
+export interface SortProps {
   header: string
   items: string[]
-  sorts: [string, 'ASC' | 'DESC'][]
-  setSorts: React.Dispatch<React.SetStateAction<[string, 'ASC' | 'DESC'][]>>
-  menuItemLabel: (item: string) => string
-  maxSort?: number
+  sorts: IReportSort
+  setSorts: React.Dispatch<React.SetStateAction<IReportSort>>
+  menuItemLabel?: (item: string) => string
+  max?: number
 }
 
-export default function Sort(props: Props) {
+export default function Sort(props: SortProps) {
   const { theme, settings } = useThemeSettings();
-  const { maxSort, items, header, sorts, setSorts, menuItemLabel } = props;
+  const { max = 3, items, header, sorts, setSorts, menuItemLabel } = props;
 
   return <FormGroup className="Sort">
     <InputLabel className="Sort-header">{header}</InputLabel>
@@ -34,7 +36,7 @@ export default function Sort(props: Props) {
               setSorts(JSON.parse(JSON.stringify(sorts)))
             }}>
             {items.map(item =>
-              <MenuItem key={item} value={item}>{menuItemLabel(item)}</MenuItem>
+              <MenuItem key={item} value={item}>{menuItemLabel ? menuItemLabel(item) : transformTextBySeparator(item)}</MenuItem>
             )}
           </MuiSelect>
           <MuiSelect className="Sort-content-item-order bg-light" style={{ flex: 1 }} value={order}
@@ -44,7 +46,7 @@ export default function Sort(props: Props) {
               setSorts(JSON.parse(JSON.stringify(sorts)))
             }}>
             {["ASC", "DESC"].map(item =>
-              <MenuItem key={item} value={item}>{menuItemLabel(item)}</MenuItem>
+              <MenuItem key={item} value={item}>{menuItemLabel ? menuItemLabel(item) : transformTextBySeparator(item)}</MenuItem>
             )}
           </MuiSelect>
           {index !== sorts.length - 1 && sorts.length !== 1 && <div className="Sort-content-item-down">
@@ -79,7 +81,7 @@ export default function Sort(props: Props) {
         </div>
       })}
     </div>}
-    {sorts.length !== maxSort && <div className="Sort-add">
+    {sorts.length !== max && <div className="Sort-add">
       <Hovertips popoverText="Add Sort">
         <AiFillPlusCircle size={25} fill={green[500]} onClick={() => {
           settings.sound && sounds.click.play()

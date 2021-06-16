@@ -17,8 +17,8 @@ export default function SelectGroup(props: SelectGroupProps) {
     <InputLabel className="Select-Group-header">
       {label}
     </InputLabel>
-    <div className="Select-Group-content">
-      {groupItems.map(([items, label, itemStateKey], index) => <Select key={index} className="Select-Group-content-item" items={items} label={label} setState={(newState) => {
+    <div className="Select-Group-content flex jc-c ai-c">
+      {groupItems.map(([items, label, itemStateKey], index) => <Select key={index} className={`Select-Group-content-item flex-1 p-0 ${index !== groupItems.length - 1 ? ' mr-5' : ''}`} items={items} label={label} setState={(newState) => {
         setState({
           ...state,
           [stateKey]: {

@@ -19,6 +19,14 @@ div#root {
     padding: 5px;
   }
 
+  & .p-0 {
+    padding: 0px;
+  }
+
+  & .m-0 {
+    margin: 0px;
+  }
+
   & .pb-0 {
     padding-bottom: 0px;
   }
