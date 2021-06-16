@@ -92,7 +92,16 @@ export function generateDynamicStyleClasses() {
         flexDirection: 'column'
       },
       '& .ta-c': {
-        textAlign: 'column'
+        textAlign: 'center'
+      },
+      '& .us-n': {
+        userSelect: 'none'
+      },
+      '& .tt-c': {
+        textTransform: 'capitalize'
+      },
+      '& .c-p': {
+        cursor: 'pointer'
       }
     }
   }))();
