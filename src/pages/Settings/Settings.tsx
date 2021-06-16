@@ -56,10 +56,7 @@ function Settings() {
             [["center", "top", "bottom"], "Y-Axis", "y"],
             [["column", "row"], "Direction", "direction"],
           ]} label={"Navigation"} setState={setSettings} state={settings} stateKey={"navigation"} />
-          <Toggles classNames={{
-            FormGroup: 'Settings-content-group',
-            InputLabel: 'Settings-content-group-label'
-          }} items={["animation", "hovertips", "shortcuts", "sound"]} setItems={setSettings} itemsMap={settings} />
+          <Toggles items={["animation", "hovertips", "shortcuts", "sound"]} setItems={setSettings} itemsMap={settings} />
         </div>
       </div>
     </div>
