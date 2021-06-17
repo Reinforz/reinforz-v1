@@ -39,7 +39,9 @@ export default function Upload(props: UploadProps) {
           const { result } = reader;
           if (result) {
             try {
-              resolve(onLoad(result as string, file, { enqueueSnackbar, notistackOptionsObject }));
+              const data = onLoad(result as string, file, { enqueueSnackbar, notistackOptionsObject });
+              if (data !== null && data !== undefined)
+                resolve(data);
             } catch (err: any) {
               enqueueSnackbar(`${file.name} Error: ${err.message}`, notistackOptionsObject)
             }

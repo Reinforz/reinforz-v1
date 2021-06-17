@@ -46,7 +46,7 @@ export default function ReportFilter() {
         state={filters}
         stateKey={"excluded_columns"}
       />
-      <Sort maxSort={3} header={"Report Sort"} sorts={sort} setSorts={(sort: any) => {
+      <Sort max={3} header={"Report Sort"} sorts={sort} setSorts={(sort: any) => {
         setReportSettings({
           ...reportSettings,
           sort

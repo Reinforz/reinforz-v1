@@ -10,13 +10,15 @@ const trimLower = (data: string) => data.replace(/\s/g, '').toLowerCase();
 export default function PlayUpload() {
   const { uploadedQuizzes, setSelectedQuizIds, errorLogs, setUploadedQuizzes, setErrorLogs } = useContext(RootContext);
 
-  return <Upload uploadMessage="Drag 'n' drop, or click to upload some quiz files (.json or .yaml)" className="PlayUpload" onLoad={(result, ext, { enqueueSnackbar, notistackOptionsObject }, resolve) => {
+  return <Upload uploadMessage="Drag 'n' drop, or click to upload some quiz files (.json or .yaml)" className="PlayUpload" onLoad={(result, file, { enqueueSnackbar, notistackOptionsObject }) => {
+    const dotSeparatedChunks = file.name.split(".");
+    const ext = dotSeparatedChunks[dotSeparatedChunks.length - 1];
     const quizData = ext.match(/(yaml|yml)/) ? yaml.safeLoad(result as string) as any : JSON.parse(result.toString());
     const matchedQuiz = uploadedQuizzes.find((currentQuiz) => trimLower(currentQuiz.topic) === trimLower(quizData.topic) && trimLower(currentQuiz.subject) === trimLower(quizData.subject));
     if (matchedQuiz)
       enqueueSnackbar(`${matchedQuiz.subject} - ${matchedQuiz.topic} has already been added`, notistackOptionsObject);
     else
-      resolve(quizData);
+      return (quizData);
   }} postRead={(quizzes: IQuizPartial[]) => {
     const [generatedErrorLogs, filteredUploadedQuizzes] = filterUploadedQuizzes(quizzes)
     const mergedUploadedQuizzes = [...uploadedQuizzes, ...filteredUploadedQuizzes];

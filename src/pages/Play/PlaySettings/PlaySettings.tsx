@@ -23,7 +23,7 @@ export default function PlaySettings() {
 
   return <div className="PlaySettings bg-base" style={{ color: theme.palette.text.primary }}>
     <div className="bg-dark" style={{ padding: 2.5, margin: 2.5 }}>
-      <Preset lsKey={REINFORZ_PLAY_SETTINGS_LS_KEY} modalLabel="Save Play Settings" popoverText="Save current play settings as preset" currentPreset={playSettings} itemPreset={playSettingsPresets} setPresetState={setPlaySettingsPresets} />
+      <Preset lsKey={REINFORZ_PLAY_SETTINGS_LS_KEY} modalLabel="Save Play Settings" popoverText="Save current play settings as preset" currentPreset={playSettings} itemPresets={playSettingsPresets} setPresetState={setPlaySettingsPresets} />
     </div>
     <div className="PlaySettings-group PlaySettings-group-options">
       <div className="PlaySettings-group-header bg-dark">Options</div>

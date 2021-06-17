@@ -82,9 +82,9 @@ export default function Quiz() {
     } else {
       return <div ref={ref} className="Quiz" onKeyPress={onKeyPress} tabIndex={0}>
         <IconGroup className="Report-icons" icons={navigationIcons} direction={settings.navigation.direction} style={generatedNavigationStyles} />
-        <Upload accept={[".yaml", ".yml"]} maxFiles={1} uploadMessage="Drag 'n' drop, or click to upload some play files (.json or .yaml)" onLoad={(result, _, __, resolve) => {
+        <Upload accept={[".yaml", ".yml"]} maxFiles={1} uploadMessage="Drag 'n' drop, or click to upload some play files (.json or .yaml)" onLoad={(result) => {
           const uploadedPlayState = yaml.safeLoad(result as string) as any;
-          resolve(uploadedPlayState);
+          return uploadedPlayState;
         }} postRead={([playState]: IPlayDownloadedState[]) => {
           const allQuestionsMap: Map<string, TQuestionFull> = new Map();
           playState.questions.forEach((question) =>
