@@ -26,16 +26,23 @@ export interface TogglesProps<I extends Record<string, any>> {
   items: (keyof I)[]
   state: I
   setState: React.Dispatch<React.SetStateAction<I>>
+  classNames?: {
+    container?: string
+    formGroup?: string
+    inputLabel?: string
+    switch?: string
+  }
 }
 
 export default function Toggles<I extends Record<string, any>>(props: TogglesProps<I>) {
   const { settings } = useContext(SettingsContext);
-  const { state, setState } = props;
+  const { state, setState, classNames = {} } = props;
   const items = props.items as string[];
-  return <div className="Toggles bg-dark p-5"> {items.map((item, index) =>
-    <FormGroup key={item} row className={`Toggles-item bg-base p-5${items.length - 1 !== index ? " mb-5" : ""}`}>
-      <InputLabel className={"Toggles-item-label mb-0"}>{transformTextBySeparator(item)}</InputLabel>
+  return <div className={`Toggles bg-dark w-100p ${classNames.container ?? ''}`}> {items.map((item, index) =>
+    <FormGroup key={item} row className={`Toggles-item bg-base p-5${items.length - 1 !== index ? " mb-5" : ""} ${classNames.formGroup ?? ''}`}>
+      <InputLabel className={`Toggles-item-label mb-0 ${classNames.inputLabel ?? ''}`}>{transformTextBySeparator(item)}</InputLabel>
       <OnOffSwitch
+        className={`${classNames.switch ?? ''}`}
         checked={Boolean(state[item])}
         onChange={(e) => {
           const checked = state[item];

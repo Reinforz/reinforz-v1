@@ -43,8 +43,28 @@ div#root {
     margin-right: 5px;
   }
 
+  & .mr-10 {
+    margin-right: 10px;
+  }
+
   & .mb-5 {
     margin-bottom: 5px;
+  }
+
+  & .mb-10 {
+    margin-bottom: 10px;
+  }
+
+  & .fs-14{
+    font-size: 14px;
+  }
+
+  & .fs-16{
+    font-size: 16px;
+  }
+
+  & .fs-18{
+    font-size: 18px;
   }
 
   & .mb-0 {
@@ -95,6 +115,10 @@ div#root {
     text-transform: capitalize
   }
 
+  & .tt-u {
+    text-transform: uppercase
+  }
+
   & .c-p {
     cursor: pointer
   }
@@ -104,6 +128,22 @@ div#root {
     left: 50%;
     position: absolute;
     transform: translate(-50%, -50%);
+  }
+
+  & .w-c_10{
+    width: calc(100% - 10px);
+  }
+
+  & .w-100{
+    width: 100px;
+  }
+
+  & .w-100p{
+    width: 100%;
+  }
+
+  & .fd-r{
+    flex-direction: row;
   }
 
 }

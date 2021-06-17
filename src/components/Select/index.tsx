@@ -16,17 +16,23 @@ export interface SelectProps<T extends Record<string, any>> {
   onChange?: (e: ChangeEvent<{ name?: string | undefined; value: unknown }>) => void
   lsKey?: string
   className?: string
+  classNames?: {
+    formGroup?: string
+    inputLabel?: string
+    content?: string
+    select?: string
+  }
 }
 
 export default function Select<T extends Record<string, any>>(props: SelectProps<T>) {
   const { settings } = useContext(SettingsContext);
-  const { items, multiple = false, renderValue, className = '', menuItemLabel, state, stateKey, setState } = props;
-  return <FormGroup className={`Select p-5 ${className ?? ''}`}>
-    <InputLabel>{props.label}</InputLabel>
-    <div className="Select-content flex fd-c bg-light">
-      <MuiSelect value={state[stateKey] as string[]}
+  const { items, multiple = false, renderValue, className = '', menuItemLabel, state, stateKey, setState, classNames = {} } = props;
+  return <FormGroup className={`Select ${className ?? ''} ${classNames.formGroup ?? ''}`}>
+    <InputLabel className={`${classNames.inputLabel ?? ''}`}>{props.label}</InputLabel>
+    <div className={`Select-content flex fd-c bg-light ${classNames.content ?? ''}`}>
+      <MuiSelect className={`${classNames.select ?? ''}`} value={state[stateKey] as string[]}
         multiple={multiple}
-        renderValue={(items) => renderValue ? renderValue(items) : multiple ? (items as string[]).join(", ") : items as ReactNode}
+        renderValue={(items) => renderValue ? renderValue(items) : multiple ? (items as string[]).map((item) => transformTextBySeparator(item)).join(", ") : transformTextBySeparator(items as string) as ReactNode}
         onChange={(e) => {
           settings.sound && sounds.click.play();
           setState({ ...state, [stateKey]: e.target.value as string[] })
