@@ -2,8 +2,9 @@
   height: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 100px 327.5px 327.5px;
-  padding: 2.5px;
+  grid-template-rows: 100px 1fr;
+  padding: 5px;
+  grid-gap: 5px;
   
   &-icons{
     position: absolute;
@@ -22,9 +23,5 @@
       font-weight: bold;
       font-size: 1rem;
     }
-  }
-
-  .View{
-    height: 100%;
   }
 }

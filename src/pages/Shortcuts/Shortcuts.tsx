@@ -1,3 +1,4 @@
+import { Typography } from '@material-ui/core';
 import { grey } from '@material-ui/core/colors';
 import { useEffect, useRef } from 'react';
 import { AiFillHome } from 'react-icons/ai';
@@ -9,11 +10,11 @@ import { generateNavigationStyles } from '../../utils';
 import './Shortcuts.scss';
 
 function StackListItem(props: { contents: [string, string] }) {
-  return <div style={{ display: 'flex', flexDirection: 'column' }}>
-    <div>{props.contents[0]}</div>
-    <div style={{ color: grey[300], marginTop: 5, fontSize: 14 }}>
+  return <div className="flex fd-c">
+    <Typography>{props.contents[0]}</Typography>
+    <Typography className="mt-5 fs-14" style={{ color: grey[300] }}>
       ({props.contents[1]})
-    </div>
+    </Typography>
   </div>
 }
 
@@ -57,7 +58,8 @@ export default function Shortcuts() {
       />
       <StackList
         classNames={{
-          container: 'center'
+          container: 'center',
+          header: 'fs-18 p-10 tt-u'
         }}
         header={'Shortcuts'}
         items={[
