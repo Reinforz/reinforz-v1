@@ -2,7 +2,7 @@
   &-sidebar{
     position: absolute;
     top: 0px;
-    height: 100%;
+    height: calc(100% - 10px);
     transition: left 250ms ease-in-out;
     z-index: 50;
     
@@ -10,6 +10,7 @@
       top: 50%;
       position: absolute;
       transform: translateY(-50%);
+      transition: left 250ms ease-in-out;
     }
   }
 }

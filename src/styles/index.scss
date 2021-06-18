@@ -83,6 +83,18 @@ div#root {
     margin-bottom: 0px;
   }
 
+  & .overflow-auto{
+    overflow: auto;
+  }
+
+  & .overflowY-auto{
+    overflow-y: auto;
+  }
+
+  & .overflowX-hidden{
+    overflow-x: hidden;
+  }
+
   & .flex {
     display: flex
   }

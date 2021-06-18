@@ -12,15 +12,15 @@ export function generateMenuStyles(
 
   if (position === 'right') {
     if (isOpen) {
-      left = `100%`;
+      left = `calc(100% - 10px)`;
       iconStyle.transform = 'rotate(0deg)';
-      iconsContainerStyle.left = -40;
+      iconsContainerStyle.left = -35;
       containerStyle.width = `calc(100% - ${width}px)`;
       containerStyle.left = `0px`;
     } else {
       left = 'calc(100% + 5px)';
       iconStyle.transform = 'rotate(-180deg)';
-      iconsContainerStyle.left = -40;
+      iconsContainerStyle.left = -50;
       containerStyle.width = `100%`;
       containerStyle.left = `0px`;
     }
@@ -28,7 +28,7 @@ export function generateMenuStyles(
     if (isOpen) {
       left = `-${width}px`;
       iconStyle.transform = 'rotate(-180deg)';
-      iconsContainerStyle.left = 'calc(100% + 10px)';
+      iconsContainerStyle.left = '100%';
       containerStyle.width = `calc(100% - ${width}px)`;
       containerStyle.left = `${width}px`;
     } else {

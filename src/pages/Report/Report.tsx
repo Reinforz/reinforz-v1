@@ -140,7 +140,6 @@ export default function Report() {
             <ReportFilter />,
             <div
               className="Report"
-              style={{ color: theme.palette.text.primary }}
               {...navigationShortcutProps}
               onKeyUp={(e) => {
                 navigateBetweenPresets(e, reportSettingsPresets, setReportSettingsPresets, REINFORZ_REPORT_SETTINGS_LS_KEY)
@@ -150,12 +149,9 @@ export default function Report() {
               {navigationIconGroup}
               <ReportTable />
               {!filters.excluded_columns.includes('report_info') ? (
-                <div
+                <div className="overflow-auto flex fd-c"
                   style={{
                     width: 300,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    overflow: 'auto'
                   }}
                 >
                   {!filters.excluded_columns.includes('report_stats') ? (
@@ -228,7 +224,6 @@ export default function Report() {
         <div
           ref={ref}
           className="Report"
-          style={{ color: theme.palette.text.primary }}
           {...navigationShortcutProps}
         >
           {navigationIconGroup}
