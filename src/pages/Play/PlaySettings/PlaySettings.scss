@@ -1,25 +1,10 @@
 .PlaySettings {
-  grid-template-rows: 62.5px 325px 1fr 50px 30px;
+  grid-template-rows: 65px 327.5px 1fr 50px 55px;
   display: grid;
   grid-area: 1/3/4/4;
-  margin: 2.5px;
-  padding: 2.5px;
   height: calc(100% - 5px);
 
-  &-total {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: bolder;
-    font-size: 1rem;
-    margin: 2.5px;
-    padding: 2.5px;
-  }
-
   &-group {
-    display: flex;
-    flex-direction: column;
-
     &-options {
       grid-area: 2/1/3/2;
     }
@@ -29,28 +14,11 @@
     }
 
     overflow: auto;
-    &-header {
-      font-weight: bold;
-      font-size: 1.15em;
-      padding: 5px;
-      margin: 2.5px;
-      border-radius: 2px;
-      text-align: center;
-      text-transform: uppercase;
-    }
-    &-content {
-      display: flex;
-      flex-direction: column;
-      margin: 2.5px;
-      padding: 2.5px;
-    }
     &-button {
       width: 100%;
     }
   }
-
-  .MuiButton-containedPrimary {
-    margin-top: 5px;
-    width: calc(100% - 5px);
+  &-total{
+    height: 30px;
   }
 }

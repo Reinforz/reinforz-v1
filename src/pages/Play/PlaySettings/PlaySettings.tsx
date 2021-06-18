@@ -1,6 +1,6 @@
-import { Button, Checkbox, FormControlLabel } from "@material-ui/core";
+import { Button, Checkbox, FormControlLabel, Typography } from "@material-ui/core";
 import React, { useContext } from "react";
-import { CheckboxGroup, InputRange, Preset } from '../../../components';
+import { CheckboxGroup, Header, InputRange, Preset } from '../../../components';
 import { REINFORZ_PLAY_SETTINGS_LS_KEY } from "../../../constants";
 import { RootContext } from "../../../context/RootContext";
 import { SettingsContext } from "../../../context/SettingsContext";
@@ -21,18 +21,18 @@ export default function PlaySettings() {
     setPlaySettings({ ...playSettings, filters: { ...playSettings.filters, ...newFilterState } })
   }
 
-  return <div className="PlaySettings bg-base" style={{ color: theme.palette.text.primary }}>
-    <div className="bg-dark" style={{ padding: 2.5, margin: 2.5 }}>
+  return <div className="PlaySettings p-5 bg-base">
+    <div className="bg-dark p-5 mb-5">
       <Preset lsKey={REINFORZ_PLAY_SETTINGS_LS_KEY} modalLabel="Save Play Settings" popoverText="Save current play settings as preset" currentPreset={playSettings} itemPresets={playSettingsPresets} setPresetState={setPlaySettingsPresets} />
     </div>
-    <div className="PlaySettings-group PlaySettings-group-options">
-      <div className="PlaySettings-group-header bg-dark">Options</div>
-      <div className="PlaySettings-group-content bg-dark">
+    <div className="PlaySettings-group mb-5 flex fd-c PlaySettings-group-options">
+      <Header className="PlaySettings-group-header bg-dark tt-u fs-16 p-0" header={"Options"} />
+      <div className="PlaySettings-group-content bg-dark flex fd-c p-5 pb-0">
         {Object.keys(playSettings.options).map((key, index) => {
           let isDisabled = false;
           if (Boolean(key.match(/(shuffle_questions|shuffle_quizzes)/) && playSettings.options.flatten_mix)) isDisabled = true;
           if (selectedQuizIds.length <= 1 && key === "shuffle_quizzes") isDisabled = true;
-          return <FormControlLabel key={key + index}
+          return <FormControlLabel className="mb-5" key={key + index}
             control={
               <Checkbox
                 disabled={isDisabled}
@@ -54,20 +54,22 @@ export default function PlaySettings() {
         })}
       </div>
     </div>
-    <div className="PlaySettings-group PlaySettings-group-filters">
-      <div className="PlaySettings-group-header bg-dark">
-        Filters
-      </div>
-      <div className="PlaySettings-group-content bg-dark">
-        <InputRange step={1} label={"Time Allocated range"} min={0} max={120} setState={setPlaySettingsFilters} state={playSettings.filters} stateKey={"time_allocated"} />
-        <CheckboxGroup label={'Excluded Difficulty'} items={['Beginner', 'Intermediate', 'Advanced']} setState={setPlaySettingsFilters} stateKey={'excluded_difficulty'} state={playSettings.filters} />
+    <div className="PlaySettings-group mb-5 PlaySettings-group-filters">
+      <Header className="PlaySettings-group-header tt-u fs-16 p-0" header={"Filters"} />
+      <div className="PlaySettings-group-content bg-dark p-5">
+        <InputRange classNames={{
+          formGroup: 'mb-5'
+        }} step={1} label={"Time Allocated range"} min={0} max={120} setState={setPlaySettingsFilters} state={playSettings.filters} stateKey={"time_allocated"} />
+        <CheckboxGroup classNames={{
+          formGroup: 'mb-5'
+        }} label={'Excluded Difficulty'} items={['Beginner', 'Intermediate', 'Advanced']} setState={setPlaySettingsFilters} stateKey={'excluded_difficulty'} state={playSettings.filters} />
         <CheckboxGroup label={'Excluded Type'} items={['FIB', 'MS', 'MCQ', "Snippet"]} setState={setPlaySettingsFilters} stateKey={'excluded_types'} state={playSettings.filters} />
       </div>
     </div>
-    <Button className="PlaySettings-group-button" variant="contained" color="primary" onClick={() => {
+    <Button className="PlaySettings-group-button mb-5" variant="contained" color="primary" onClick={() => {
       settings.sound && sounds.reset.play()
       setPlaySettings(generateDefaultPlaySettingsState())
     }}>Reset</Button>
-    <div className="PlaySettings-total bg-dark" style={{ color: filteredQuestions === 0 ? theme.palette.error.main : theme.palette.success.main }}>{filteredQuestions} Questions</div>
+    <Typography className="PlaySettings-total bg-dark flex jc-c ai-c bold fs-16 p-5 mb-5" style={{ color: filteredQuestions === 0 ? theme.palette.error.main : theme.palette.success.main }}>{filteredQuestions} Questions</Typography>
   </div>
 }
