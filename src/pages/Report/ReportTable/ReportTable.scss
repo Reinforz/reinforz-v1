@@ -1,36 +1,14 @@
 .Report-Table{
   height: calc(100% - 15px);
-  padding: 2.5px;
-  margin: 2.5px;
   overflow: auto;
 
   &-item{
-    padding: 2.5px;
-    margin: 2.5px;
     margin-bottom: 25px;
-
-    &-index{
-      flex: 1;
-      display: flex;
-      justify-content: center;
-      font-weight: bold;
-      font-size: 20px;
-    }
 
     &-delete{
       display: flex;
       cursor: pointer;
       justify-content: center;
-    }
-
-    &-hints{
-      margin: 2.5px;
-      padding: 5px 0px;
-
-      &-item{
-        padding: 10px;
-        margin: 5px;
-      }
     }
 
     &-stats{

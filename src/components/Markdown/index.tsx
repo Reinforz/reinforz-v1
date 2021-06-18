@@ -6,10 +6,15 @@ import rehypeRaw from 'rehype-raw';
 
 export interface MarkdownProps {
   content: string
+  classNames?: {
+    typography?: string
+    markdown?: string
+  }
 }
 
 export default function Markdown(props: MarkdownProps) {
   const refs = useRef<(HTMLElement | null)[]>([]);
+  const { classNames = {} } = props;
 
   useEffect(() => {
     refs.current.forEach(ref => {
@@ -17,7 +22,7 @@ export default function Markdown(props: MarkdownProps) {
     })
   });
 
-  return <Typography component="div" className="p-5"><ReactMarkdown className="markdown p-5 bg-base" rehypePlugins={[rehypeRaw]} components={{
+  return <Typography component="div" className={`p-5 ${classNames.typography ?? ''}`}><ReactMarkdown className={`markdown p-5 bg-base ${classNames.markdown ?? ''}`} rehypePlugins={[rehypeRaw]} components={{
     code({ node, inline, className, children, ...props }) {
       return <code className={`${className ?? ''}`} {...props} ref={(ref) => refs.current.push(ref)}>{children}</code>
     }
