@@ -149,7 +149,7 @@ export default function Report() {
               {navigationIconGroup}
               <ReportTable />
               {!filters.excluded_columns.includes('report_info') ? (
-                <div className="overflow-auto flex fd-c"
+                <div className="overflow-auto flex fd-c p-5"
                   style={{
                     width: 300,
                   }}
@@ -157,6 +157,9 @@ export default function Report() {
                   {!filters.excluded_columns.includes('report_stats') ? (
                     <StackList
                       header={'Report Stats'}
+                      classNames={{
+                        container: 'mb-5'
+                      }}
                       items={[
                         [
                           'Created At',
@@ -178,6 +181,9 @@ export default function Report() {
                   <div className="Report-Settings">
                     {!filters.excluded_columns.includes('play_options') ? (
                       <StackList
+                        classNames={{
+                          container: 'mb-5'
+                        }}
                         header={'Play Options'}
                         items={Object.entries(
                           playSettings.options
@@ -195,6 +201,9 @@ export default function Report() {
                     ) : null}
                     {!filters.excluded_columns.includes('play_filters') ? (
                       <StackList
+                        classNames={{
+                          container: 'mb-5'
+                        }}
                         header={'Play Filters'}
                         items={Object.entries(
                           playSettings.filters
