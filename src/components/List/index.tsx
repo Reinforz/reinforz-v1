@@ -79,13 +79,13 @@ export default function List<T extends { _id: string }>(props: ListProps<T>) {
             </div>
             <div className="flex flex-1 jc-sb p-5 mr-5">
               {fields.map((field, index) => <div className="List-content-item-field" key={_id + field + index}>
-                <Typography variant="body1">
+                <Typography variant="body1" className="fs-18">
                   {typeof field === "function" ? field(item) : item[field]}
                 </Typography>
               </div>)}
             </div>
           </div>
-        }) : <div className="center flex ai-c jc-c bold p-5">
+        }) : <div className="center ta-c flex ai-c jc-c bold p-5">
           <Typography variant="h5">
             {emptyListMessage}
           </Typography>

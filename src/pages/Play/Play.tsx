@@ -1,3 +1,4 @@
+import { Typography } from "@material-ui/core";
 import { green, red } from "@material-ui/core/colors";
 import { OptionsObject, useSnackbar } from "notistack";
 import React, { useContext, useEffect, useRef, useState } from "react";
@@ -84,7 +85,7 @@ function Play() {
           const filteredErrorLogIds = filteredErrorLogs.map(filteredErrorLog => filteredErrorLog._id)
           setErrorLogs(filteredErrorLogs)
           setSelectedErrorLogIds(selectedErrorLogIds.filter(selectedErrorLogId => filteredErrorLogIds.includes(selectedErrorLogId)))
-        }} selectedItems={selectedQuizIds} setSelectedItems={setSelectedQuizIds} header="Uploaded Quizzes" items={uploadedQuizzes} setItems={setUploadedQuizzes} fields={[(item) => `${item.subject} - ${item.topic}`, (item) => item.questions.length + " Qs"]} />,
+        }} selectedItems={selectedQuizIds} setSelectedItems={setSelectedQuizIds} header="Uploaded Quizzes" items={uploadedQuizzes} setItems={setUploadedQuizzes} fields={[(item) => `${item.subject} - ${item.topic}`, (item) => <Typography className="bold" variant="body2">{item.questions.length + " Qs"}</Typography>]} />,
         <List className="Play-ErrorLogs" emptyListMessage="No Errors or Warnings!" selectedItems={selectedErrorLogIds} setSelectedItems={setSelectedErrorLogIds} header="Error & Warnings" items={errorLogs} setItems={setErrorLogs} fields={[(errorLog) => <div className="Play-ErrorLogs-item" style={{ backgroundColor: errorLog.level === "ERROR" ? theme.palette.error.main : theme.palette.warning.main }}>{errorLog.quiz}: {errorLog.target}, {errorLog.message}</div>]} />]}
       />
     </div>
