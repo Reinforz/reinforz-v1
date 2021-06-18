@@ -29,7 +29,7 @@ export default function Select<T extends Record<string, any>>(props: SelectProps
   const { items, multiple = false, renderValue, className = '', menuItemLabel, state, stateKey, setState, classNames = {} } = props;
   return <FormGroup className={`Select ${className ?? ''} ${classNames.formGroup ?? ''}`}>
     <InputLabel className={`${classNames.inputLabel ?? ''}`}>{props.label}</InputLabel>
-    <div className={`Select-content flex fd-c bg-light ${classNames.content ?? ''}`}>
+    <div className={`Select-content flex fd-c bg-light p-2_5 ${classNames.content ?? ''}`}>
       <MuiSelect className={`${classNames.select ?? ''}`} value={state[stateKey] as string[]}
         multiple={multiple}
         renderValue={(items) => renderValue ? renderValue(items) : multiple ? (items as string[]).map((item) => transformTextBySeparator(item)).join(", ") : transformTextBySeparator(items as string) as ReactNode}

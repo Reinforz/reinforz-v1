@@ -49,21 +49,21 @@ function Settings() {
         </div>
         <div className="Settings-content bg-dark flex fd-c ai-c p-5">
           <Select classNames={{
-            formGroup: "mb-5 p-5 w-c_10 fd-r ai-c",
-            inputLabel: 'w-100 mr-10 mb-0 fs-16'
+            formGroup: "mb-5 p-5 w-c_10 fd-r",
+            inputLabel: 'w-100 mr-10 mb-0 fs-16',
           }} items={["dark", "polar_night", "light", "snow_storm"]} label={"Theme"} setState={setSettings} state={settings} stateKey={"theme"} menuItemLabel={(item) => transformTextBySeparator(item)} />
           <Select classNames={{
-            formGroup: "mb-5 p-5 w-c_10 fd-r ai-c",
-            inputLabel: 'w-100 mr-10 mb-0 fs-16'
+            formGroup: "mb-5 p-5 w-c_10 fd-r",
+            inputLabel: 'w-100 mr-10 mb-0 fs-16',
           }} items={["serif", "sans-serif", "monospace"]} label={"Font"} setState={setSettings} state={settings} stateKey={"font"} menuItemLabel={(item) => transformTextBySeparator(item, "-")} />
           <SelectGroup className="mb-5 w-c_10" groupItems={[
             [["center", "right", "left"], "X-Axis", "x"],
             [["center", "top", "bottom"], "Y-Axis", "y"],
             [["column", "row"], "Direction", "direction"],
           ]} label={"Navigation"} setState={setSettings} state={settings} stateKey={"navigation"} classNames={{
-            inputLabel: 'fs-18',
+            inputLabel: 'fs-18 p-10',
             select: {
-              inputLabel: 'fs-16'
+              inputLabel: 'fs-16 p-10'
             }
           }} />
           <Toggles classNames={{ inputLabel: 'w-100 fs-16' }} items={["animation", "hovertips", "shortcuts", "sound"]} setState={setSettings} state={settings} />

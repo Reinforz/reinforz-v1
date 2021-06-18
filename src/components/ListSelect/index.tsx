@@ -17,7 +17,7 @@ export default function ListSelect(props: ListSelectProps) {
   const { items, onChange, item, label, menuItemLabel } = props;
   return <FormGroup className="ListSelect pb-0">
     {label && <InputLabel>{label}</InputLabel>}
-    <div className="Select-content bg-light flex fd-c p-5 mb-5">
+    <div className="Select-content bg-light flex fd-c p-5">
       <MuiSelect value={item}
         onChange={(e: ChangeEvent<{ name?: string | undefined; value: unknown }>) => {
           settings.sound && sounds.click.play();

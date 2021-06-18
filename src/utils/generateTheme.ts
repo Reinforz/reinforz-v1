@@ -179,8 +179,11 @@ export function generateTheme(settings: ISettings) {
       },
       MuiInputBase: {
         input: {
-          padding: 0,
           paddingBottom: 5
+        },
+        root: {
+          padding: 5,
+          paddingLeft: 0
         }
       },
       MuiInputLabel: {
