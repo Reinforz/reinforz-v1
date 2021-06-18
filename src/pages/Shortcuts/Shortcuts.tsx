@@ -48,7 +48,7 @@ export default function Shortcuts() {
   );
 
   return (
-    <div ref={ref} className="Shortcuts" tabIndex={0} onKeyPress={onKeyPress}>
+    <div ref={ref} className="Shortcuts page" tabIndex={0} onKeyPress={onKeyPress}>
       <IconGroup
         style={generatedNavigationStyles}
         direction={settings.navigation.direction}
@@ -56,6 +56,9 @@ export default function Shortcuts() {
         icons={navigationIcons}
       />
       <StackList
+        classNames={{
+          container: 'center'
+        }}
         header={'Shortcuts'}
         items={[
           ['Navigation Hovertips #', '#'],
@@ -66,6 +69,22 @@ export default function Shortcuts() {
           [
             <StackListItem contents={['Select upto clicked option', 'keeping rest of the options in their state']} />,
             'Shift + LMB'
+          ],
+          [
+            <StackListItem contents={['Select upto clicked option', 'deselecting rest of the options']} />,
+            'Shift + Ctrl + LMB'
+          ],
+          [
+            <StackListItem contents={['Select from clicked option to end', 'keeping rest of the options in their state']} />,
+            'Shift + Alt + LMB'
+          ],
+          [
+            <StackListItem contents={['Select from clicked option to end', 'deselecting rest of the options']} />,
+            'Shift + Ctrl + Alt + LMB'
+          ],
+          [
+            <StackListItem contents={['Reversing checked state', 'based on the checked state of the clicked option']} />,
+            'Alt + LMB'
           ],
           [
             <StackListItem contents={['Select upto clicked option', 'deselecting rest of the options']} />,
