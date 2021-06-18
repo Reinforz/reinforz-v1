@@ -85,22 +85,6 @@ export default function Shortcuts() {
           [
             <StackListItem contents={['Reversing checked state', 'based on the checked state of the clicked option']} />,
             'Alt + LMB'
-          ],
-          [
-            <StackListItem contents={['Select upto clicked option', 'deselecting rest of the options']} />,
-            'Shift + Ctrl + LMB'
-          ],
-          [
-            <StackListItem contents={['Select from clicked option to end', 'keeping rest of the options in their state']} />,
-            'Shift + Alt + LMB'
-          ],
-          [
-            <StackListItem contents={['Select from clicked option to end', 'deselecting rest of the options']} />,
-            'Shift + Ctrl + Alt + LMB'
-          ],
-          [
-            <StackListItem contents={['Reversing checked state', 'based on the checked state of the clicked option']} />,
-            'Alt + LMB'
           ]
         ]}
       />

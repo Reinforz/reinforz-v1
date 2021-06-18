@@ -6,150 +6,149 @@ div#root {
 
 .App, .Modal-content {
   height: 100%;
+}
 
-  & .p-2_5 {
-    padding: 2.5px;
-  }
+.p-2_5 {
+  padding: 2.5px;
+}
 
-  & .m-2_5 {
-    margin: 2.5px
-  }
+.m-2_5 {
+  margin: 2.5px
+}
 
-  & .p-5 {
-    padding: 5px;
-  }
+.p-5 {
+  padding: 5px;
+}
 
-  & .p-0 {
-    padding: 0px;
-  }
+.p-0 {
+  padding: 0px;
+}
 
-  & .p-10 {
-    padding: 10px;
-  }
+.p-10 {
+  padding: 10px;
+}
 
-  & .m-0 {
-    margin: 0px;
-  }
+.m-0 {
+  margin: 0px;
+}
 
-  & .pb-0 {
-    padding-bottom: 0px;
-  }
+.pb-0 {
+  padding-bottom: 0px;
+}
 
-  & .pr-0 {
-    padding-right: 0px;
-  }
+.pr-0 {
+  padding-right: 0px;
+}
 
-  & .m-5 {
-    margin: 5px;
-  }
+.m-5 {
+  margin: 5px;
+}
 
-  & .mr-5 {
-    margin-right: 5px;
-  }
+.mr-5 {
+  margin-right: 5px;
+}
 
-  & .mr-10 {
-    margin-right: 10px;
-  }
+.mr-10 {
+  margin-right: 10px;
+}
 
-  & .mb-5 {
-    margin-bottom: 5px;
-  }
+.mb-5 {
+  margin-bottom: 5px;
+}
 
-  & .mb-10 {
-    margin-bottom: 10px;
-  }
+.mb-10 {
+  margin-bottom: 10px;
+}
 
-  & .fs-14{
-    font-size: 14px;
-  }
+.fs-14{
+  font-size: 14px;
+}
 
-  & .fs-16{
-    font-size: 16px;
-  }
+.fs-16{
+  font-size: 16px;
+}
 
-  & .fs-18{
-    font-size: 18px;
-  }
+.fs-18{
+  font-size: 18px;
+}
 
-  & .mb-0 {
-    margin-bottom: 0px;
-  }
+.mb-0 {
+  margin-bottom: 0px;
+}
 
-  & .flex {
-    display: flex
-  }
+.flex {
+  display: flex
+}
 
-  & .flex-1 {
-    flex: 1;
-  }
+.flex-1 {
+  flex: 1;
+}
 
-  & .ai-c {
-    align-items: center
-  }
+.ai-c {
+  align-items: center
+}
 
-  & .jc-c {
-    justify-content: center
-  }
+.jc-c {
+  justify-content: center
+}
 
-  & .jc-sb {
-    justify-content: space-between
-  }
+.jc-sb {
+  justify-content: space-between
+}
 
-  & .br-2_5 {
-    border-radius: 2.5px
-  }
+.br-2_5 {
+  border-radius: 2.5px
+}
 
-  & .bold {
-    font-weight: bold
-  }
+.bold {
+  font-weight: bold
+}
 
-  & .fd-c {
-    flex-direction: column
-  }
+.fd-c {
+  flex-direction: column
+}
 
-  & .ta-c {
-    text-align: center
-  }
+.ta-c {
+  text-align: center
+}
 
-  & .us-n {
-    user-select: none
-  }
+.us-n {
+  user-select: none
+}
 
-  & .tt-c {
-    text-transform: capitalize
-  }
+.tt-c {
+  text-transform: capitalize
+}
 
-  & .tt-u {
-    text-transform: uppercase
-  }
+.tt-u {
+  text-transform: uppercase
+}
 
-  & .c-p {
-    cursor: pointer
-  }
+.c-p {
+  cursor: pointer
+}
 
-  & .center {
-    top: 50%;
-    left: 50%;
-    position: absolute;
-    transform: translate(-50%, -50%);
-  }
+.center {
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
 
-  & .w-c_10{
-    width: calc(100% - 10px);
-  }
+.w-c_10{
+  width: calc(100% - 10px);
+}
 
-  & .w-100{
-    width: 100px;
-  }
+.w-100{
+  width: 100px;
+}
 
-  & .w-100p{
-    width: 100%;
-  }
+.w-100p{
+  width: 100%;
+}
 
-  & .fd-r{
-    flex-direction: row;
-  }
-
+.fd-r{
+  flex-direction: row;
 }
 
 body {
@@ -160,15 +159,6 @@ body {
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
-}
-
-.center {
-  font-size: 1.25em;
-  font-weight: bold;
-  position: absolute; 
-  transform: translate(-50%,-50%);
-  top: 50%;
-  left: 50%;
 }
 
 .page {
