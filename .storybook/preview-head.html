@@ -1,6 +1,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700.Appdisplay=swap" rel="stylesheet">
 <style>
+  .App .h-100p,
+  .Modal-content .h-100p {
+    height: 100%;
+  }
+
   .App .p-2_5,
   .Modal-content .p-2_5 {
     padding: 2.5px;
@@ -11,19 +16,24 @@
     margin: 2.5px
   }
 
+  .App .p-5,
+  .Modal-content .p-5 {
+    padding: 5px;
+  }
+
   .App .p-0,
   .Modal-content .p-0 {
-    padding: 0px
+    padding: 0px;
+  }
+
+  .App .p-10,
+  .Modal-content .p-10 {
+    padding: 10px;
   }
 
   .App .m-0,
   .Modal-content .m-0 {
-    margin: 0px
-  }
-
-  .App .p-5,
-  .Modal-content .p-5 {
-    padding: 5px;
+    margin: 0px;
   }
 
   .App .pb-0,
@@ -46,9 +56,52 @@
     margin-right: 5px;
   }
 
+  .App .mr-10,
+  .Modal-content .mr-10 {
+    margin-right: 10px;
+  }
+
+  .mt-0 {
+    margin-top: 0px;
+  }
+
+  .mt-5 {
+    margin-top: 5px;
+  }
+
   .App .mb-5,
   .Modal-content .mb-5 {
     margin-bottom: 5px;
+  }
+
+  .App .mb-10,
+  .Modal-content .mb-10 {
+    margin-bottom: 10px;
+  }
+
+  .App .fs-14,
+  .Modal-content .fs-14 {
+    font-size: 14px;
+  }
+
+  .App .fs-16,
+  .Modal-content .fs-16 {
+    font-size: 16px;
+  }
+
+  .App .fs-18,
+  .Modal-content .fs-18 {
+    font-size: 18px;
+  }
+
+  .App .fs-20,
+  .Modal-content .fs-20 {
+    font-size: 20px;
+  }
+
+  .App .fs-22,
+  .Modal-content .fs-22 {
+    font-size: 22px;
   }
 
   .App .mb-0,
@@ -56,9 +109,29 @@
     margin-bottom: 0px;
   }
 
+  .App .overflow-auto,
+  .Modal-content .overflow-auto {
+    overflow: auto;
+  }
+
+  .App .overflowY-auto,
+  .Modal-content .overflowY-auto {
+    overflow-y: auto;
+  }
+
+  .App .overflowX-hidden,
+  .Modal-content .overflowX-hidden {
+    overflow-x: hidden;
+  }
+
   .App .flex,
   .Modal-content .flex {
     display: flex
+  }
+
+  .App .grid,
+  .Modal-content .grid {
+    display: grid
   }
 
   .App .flex-1,
@@ -111,9 +184,42 @@
     text-transform: capitalize
   }
 
+  .App .tt-u,
+  .Modal-content .tt-u {
+    text-transform: uppercase
+  }
+
   .App .c-p,
   .Modal-content .c-p {
     cursor: pointer
+  }
+
+  .App .center,
+  .Modal-content .center {
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+  }
+
+  .App .w-c_10,
+  .Modal-content .w-c_10 {
+    width: calc(100% - 10px);
+  }
+
+  .App .w-100,
+  .Modal-content .w-100 {
+    width: 100px;
+  }
+
+  .App .w-100p,
+  .Modal-content .w-100p {
+    width: 100%;
+  }
+
+  .App .fd-r,
+  .Modal-content .fd-r {
+    flex-direction: row;
   }
 
   .App .center,

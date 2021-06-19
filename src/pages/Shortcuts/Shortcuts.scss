@@ -3,10 +3,13 @@
     position: absolute;
   }
 
-  .StackList{
+  .StackList {
     width: 50%;
     max-width: 500px;
     max-height: 650px;
-    overflow: auto;
+    
+    &-content {
+      overflow: auto;
+    }
   }
 }
