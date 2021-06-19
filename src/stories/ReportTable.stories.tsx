@@ -118,6 +118,7 @@ const results: IResult[] = [
       ],
       hints: [],
       options: null,
+      format: 'text',
       type: "FIB",
       weight: 1,
       difficulty: "Beginner",
@@ -148,7 +149,7 @@ const results: IResult[] = [
       image: null,
       question: [
         "```js\nconsole.",
-        '("Hello, "World");\n```\n'
+        '("Hello, World");\n```\n'
       ],
       answers: [
         [
@@ -161,6 +162,7 @@ const results: IResult[] = [
           }
         ]
       ],
+      format: 'code',
       hints: [],
       options: null,
       type: "FIB",

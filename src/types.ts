@@ -115,6 +115,7 @@ export interface IFibQuestionPartial extends IQuestionPartial {
   question: string[];
   type?: 'FIB';
   answers: TInputPartialQuestionAnswer;
+  format?: 'code' | 'text';
 }
 
 export type TQuestionAnswerModifiers = 'IC' | 'IS';
@@ -178,6 +179,7 @@ export interface IFibQuestionFull extends Required<IQuestionPartial> {
   type: 'FIB';
   answers: IInputQuestionAnswerFull[][];
   quiz: QuizIdentifiers;
+  format?: 'code' | 'text';
 }
 
 export type TInputQuestionPartial =
@@ -212,13 +214,26 @@ export type IResultSelectionQuestion = Omit<
   })[];
 };
 
-export type IResultInputQuestion = Omit<TInputQuestionFull, 'answers'> & {
+export type IResultInputSnippetQuestion = Omit<
+  ISnippetQuestionFull,
+  'answers'
+> & {
   answers: (IInputQuestionAnswerFull & {
     isCorrect?: boolean;
   })[][];
 };
 
-export type TResultQuestion = IResultSelectionQuestion | IResultInputQuestion;
+export type IResultInputFibQuestion = Omit<IFibQuestionFull, 'answers'> & {
+  answers: (IInputQuestionAnswerFull & {
+    isCorrect?: boolean;
+  })[][];
+};
+
+export type TResultInputQuestion =
+  | IResultInputSnippetQuestion
+  | IResultInputFibQuestion;
+
+export type TResultQuestion = IResultSelectionQuestion | TResultInputQuestion;
 
 export interface IResult {
   user_answers: string[];

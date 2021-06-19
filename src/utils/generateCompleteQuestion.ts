@@ -159,6 +159,7 @@ export function generateCompleteQuestion(
           );
         }
         time_allocated = 60;
+        completeQuestion.format = completeQuestion.format ?? 'text';
         break;
       }
     }
