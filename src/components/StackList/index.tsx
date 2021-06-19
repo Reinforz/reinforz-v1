@@ -19,8 +19,8 @@ export default function StackList(props: StackListProps) {
     <Typography className={`StackList-header bg-dark mb-5 bold ta-c p-5 ${classNames.header ?? ''}`}>{header}</Typography>
     <div className={`StackList-content bg-dark p-5 pb-0 flex fd-c ${classNames.content ?? ''}`}>
       {items.map(([label, value], index) => <div className={`StackList-content-item flex jc-sb p-5 mb-5 bg-light p-10 ${classNames.contentItem ?? ''}`} key={index}>
-        <Typography className={`StackList-content-item-label ${classNames.contentItemLabel ?? ''}`}>{label}</Typography>
-        <Typography className={`StackList-content-item-value flex jc-sb ai-c bold ${classNames.contentItemValue ?? ''}`}>{value}</Typography>
+        <Typography component="div" className={`StackList-content-item-label ${classNames.contentItemLabel ?? ''}`}>{label}</Typography>
+        <Typography component="div" className={`StackList-content-item-value flex jc-sb ai-c bold ${classNames.contentItemValue ?? ''}`}>{value}</Typography>
       </div>)}
     </div>
   </div>
