@@ -66,7 +66,7 @@ export default function SideToggleMenu(props: SideToggleMenuProps) {
   }
 
   return <div style={containerStyle} className="SideToggleMenu">
-    <div style={contentStyle}>
+    <div style={contentStyle} className="SideToggleMenu-content">
       {contents[1]}
     </div>
     <div className="SideToggleMenu-sidebar p-5" style={{ left, width }}>

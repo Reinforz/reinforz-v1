@@ -5,10 +5,10 @@ import { divideTimeAllocated } from "../../../utils";
 import "./PlayListTable.scss";
 
 export function PlayListTable() {
-  const [rowHeight, setRowHeight] = useState((document.body.clientHeight / 3))
+  const [rowHeight, setRowHeight] = useState((document.body.clientHeight / 3) - 7)
   useEffect(() => {
     const resizeObserver = new ResizeObserver(entries =>
-      setRowHeight((entries[0].target.clientHeight / 3) - 5)
+      setRowHeight((entries[0].target.clientHeight / 3) - 7)
     )
     resizeObserver.observe(document.body)
     return () => {

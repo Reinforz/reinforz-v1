@@ -1,5 +1,5 @@
 .Play {
-  height: 100%;
+  height: calc(100% - 10px);
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 100px 1fr;
@@ -11,7 +11,7 @@
   }
 
   .List{
-    height: calc(100% - 15px);
+    height: calc(100% - 10px);
   }
 
   &-ErrorLogs{
@@ -24,4 +24,10 @@
       font-size: 1rem;
     }
   }
+
+  .View{
+    grid-area: 2/1/5/2;
+  }
+
+
 }

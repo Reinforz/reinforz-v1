@@ -20,10 +20,10 @@ export default function View(props: ViewProps) {
   const { theme } = useThemeSettings();
   return <div className="View">
     <div className="View-content" style={{ flexDirection: layout + (order === "0" ? '' : '-reverse') as any }}>
-      <div className="View-content-item" style={{ marginRight: order === "0" && layout === 'row' ? 5 : 0, width: layout === 'column' ? '100%' : '50%', height: layout === 'column' ? '50%' : '100%' }}>
+      <div className="View-content-item" style={{ marginBottom: order === "0" && layout === 'column' ? 5 : 0, marginRight: order === "0" && layout === 'row' ? 5 : 0, width: layout === 'column' ? '100%' : '50%', height: layout === 'column' ? '50%' : '100%' }}>
         {props.items[0]}
       </div>
-      <div className="View-content-item" style={{ marginRight: order === "1" && layout === 'row' ? 5 : 0, width: layout === 'column' ? '100%' : '50%', height: layout === 'column' ? '50%' : '100%' }}>
+      <div className="View-content-item" style={{ marginBottom: order === "1" && layout === 'column' ? 5 : 0, marginRight: order === "1" && layout === 'row' ? 5 : 0, width: layout === 'column' ? '100%' : '50%', height: layout === 'column' ? '50%' : '100%' }}>
         {props.items[1]}
       </div>
     </div>

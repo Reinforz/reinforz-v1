@@ -6,6 +6,10 @@ div#root {
 
 .App, .Modal-content {
   height: 100%;
+  
+  & .h-100p{
+    height: 100%;
+  }
 
   & .p-2_5 {
     padding: 2.5px;
