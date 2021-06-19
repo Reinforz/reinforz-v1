@@ -22,6 +22,7 @@ function Root(props: Props & { settings: ISettings, theme: ExtendedTheme }) {
 export default function Wrapper(props: Props) {
   const defaultSettingsPresets = generateDefaultSettingsPreset();
   const defaultSettings = defaultSettingsPresets.presets[0].data;
+  defaultSettings.theme = 'polar_night';
   const generatedTheme = generateTheme(defaultSettings) as ExtendedTheme;
 
   return <ThemeProvider theme={generatedTheme}>

@@ -25,7 +25,7 @@ export function ReportTable() {
         <div className="flex ai-c jc-c bg-dark mb-5">
           {!filters.excluded_columns.includes('quiz_info') ? <Typography className="p-10 bg-light fs-16 bold">{`${sortedResult.question.quiz.subject} - ${sortedResult.question.quiz.topic}`}</Typography> : null}
           <Typography variant="h6" className="Report-Table-item-index bold flex-1 ta-c">{index + 1}</Typography>
-          <div className="Report-Table-item-delete" style={{ width: 20 }}><Hovertips popoverText="Delete"><MdDelete fill={red[500]} onClick={() => {
+          <div className="Report-Table-item-delete flex jc-c c-p" style={{ width: 20 }}><Hovertips popoverText="Delete"><MdDelete fill={red[500]} onClick={() => {
             settings.sound && sounds.remove.play();
             setReport({
               ...report,
@@ -43,8 +43,8 @@ export function ReportTable() {
         </div>
         <div className="flex">
           {(sortedResult.question.type === "MCQ" || sortedResult.question.type === "MS") ? !filters.excluded_columns.includes('options') ? <ReportOptions question={sortedResult.question} userAnswers={sortedResult.user_answers} /> : null : !filters.excluded_columns.includes('answers') ? <ReportAnswers question={sortedResult.question as IResultInputQuestion} userAnswers={sortedResult.user_answers} /> : null}
-          {sortedResult.question.hints.length !== 0 && !filters.excluded_columns.includes('hints') ? <div className="Report-Table-item-hints bg-base" style={{ width: '25%' }}>
-            {sortedResult.question.hints.map(hint => <div className="Report-Table-item-hints-item bg-light" key={hint}>
+          {sortedResult.question.hints.length !== 0 && !filters.excluded_columns.includes('hints') ? <div className="Report-Table-item-hints bg-base p-5 ml-5 mb-5" style={{ width: '25%' }}>
+            {sortedResult.question.hints.map(hint => <div className="Report-Table-item-hints-item bg-light p-5 mb-5" key={hint}>
               <Markdown content={hint} />
             </div>)}
           </div> : null}

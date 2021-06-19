@@ -15,15 +15,41 @@ export default {
 const results: IResult[] = [
   {
     question: {
-      question: "Which command is used to find the cardinality of a list ?",
+      question: "Question 1",
       answers: [
         [
           {
-            text: "llen",
-            modifiers: [],
+            text: "answer1.alternate1",
+            modifiers: [
+              'IS'
+            ],
             regex: null,
-            explanation: 'Length of the list is also known as the cardinality of the list',
+            explanation: 'Explanation for answer 1 alternate 1',
             isCorrect: true
+          },
+          {
+            text: "answer1.alternate2",
+            modifiers: [],
+            regex: {
+              flags: 'gi',
+              regex: 'answer'
+            },
+            explanation: 'Explanation for answer 1 alternate 2',
+            isCorrect: false
+          }
+        ],
+        [
+          {
+            text: "answer2.alternate1",
+            modifiers: [
+              'IC'
+            ],
+            regex: {
+              flags: 'i',
+              regex: 'answers'
+            },
+            explanation: 'Explanation for answer 2 alternate 1',
+            isCorrect: false
           }
         ]
       ],
@@ -32,7 +58,11 @@ const results: IResult[] = [
       image: null,
       weight: 1,
       difficulty: "Beginner",
-      hints: [],
+      hints: [
+        'Answer 1 Hint 1',
+        'Answer 1 Hint 2',
+        'Answer 2 Hint 1'
+      ],
       time_allocated: 45,
       _id: "3MS238S1EC",
       quiz: {
@@ -52,7 +82,7 @@ const results: IResult[] = [
     time_taken: 0,
     hints_used: 0,
     user_answers: [
-      "llen"
+      "answer1.alternate1"
     ]
   },
   {

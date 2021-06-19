@@ -5,12 +5,10 @@
   &-item{
     margin-bottom: 25px;
 
-    &-delete{
-      display: flex;
-      cursor: pointer;
-      justify-content: center;
+    p {
+      margin: 0
     }
-
+    
     &-stats{
       display: flex;
       .StackList{
