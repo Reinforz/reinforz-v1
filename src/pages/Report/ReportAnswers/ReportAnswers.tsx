@@ -9,12 +9,13 @@ import "./ReportAnswers.scss";
 interface Props {
   question: IResultInputQuestion
   userAnswers: string[]
+  className?: string
 }
 
 export function ReportAnswers(props: Props) {
   const { question, userAnswers } = props;
 
-  return <div className="Report-Answers bg-base p-5 flex-1 mb-5 pb-0">
+  return <div className={`Report-Answers bg-base p-5 flex-1 mb-5 pb-0 ${props.className ?? ''}`}>
     {
       question.answers.map((answers, answerIndex) => {
         return <div className="Report-Answers-container mb-5 p-5 pb-0 flex fd-c bg-dark" key={answerIndex}>

@@ -20,8 +20,9 @@ export function ReportTable() {
 
   const { settings } = useThemeSettings();
   return <div className="Report-Table p-5 bg-base">
-    {sortedResults.map((sortedResult, index) =>
-      <div key={sortedResult.question._id} className="Report-Table-item pb-0 p-5 bg-dark">
+    {sortedResults.map((sortedResult, index) => {
+      const showHints = sortedResult.question.hints.length !== 0 && !filters.excluded_columns.includes('hints');
+      return <div key={sortedResult.question._id} className="Report-Table-item pb-0 p-5 bg-dark">
         <div className="flex ai-c jc-c bg-dark mb-5">
           {!filters.excluded_columns.includes('quiz_info') ? <Typography className="p-10 bg-light fs-16 bold">{`${sortedResult.question.quiz.subject} - ${sortedResult.question.quiz.topic}`}</Typography> : null}
           <Typography variant="h6" className="Report-Table-item-index bold flex-1 ta-c">{index + 1}</Typography>
@@ -42,13 +43,14 @@ export function ReportTable() {
           {!filters.excluded_columns.includes('score_breakdown') ? <StackList header="Score Breakdown" items={[['Amount', sortedResult.score.amount], ['Answers', sortedResult.score.answers], ['Time', sortedResult.score.time], ['Hints', sortedResult.score.hints], ['Weighted', sortedResult.question.weight * sortedResult.score.amount]]} /> : null}
         </div>
         <div className="flex">
-          {(sortedResult.question.type === "MCQ" || sortedResult.question.type === "MS") ? !filters.excluded_columns.includes('options') ? <ReportOptions question={sortedResult.question} userAnswers={sortedResult.user_answers} /> : null : !filters.excluded_columns.includes('answers') ? <ReportAnswers question={sortedResult.question as IResultInputQuestion} userAnswers={sortedResult.user_answers} /> : null}
-          {sortedResult.question.hints.length !== 0 && !filters.excluded_columns.includes('hints') ? <div className="Report-Table-item-hints bg-base p-5 ml-5 mb-5" style={{ width: '25%' }}>
+          {(sortedResult.question.type === "MCQ" || sortedResult.question.type === "MS") ? !filters.excluded_columns.includes('options') ? <ReportOptions question={sortedResult.question} userAnswers={sortedResult.user_answers} className={`${showHints ? 'mr-5' : ''}`} /> : null : !filters.excluded_columns.includes('answers') ? <ReportAnswers question={sortedResult.question as IResultInputQuestion} userAnswers={sortedResult.user_answers} className={`${showHints ? 'mr-5' : ''}`} /> : null}
+          {showHints ? <div className="Report-Table-item-hints bg-base p-5 ml-5 mb-5" style={{ width: '25%' }}>
             {sortedResult.question.hints.map(hint => <div className="Report-Table-item-hints-item bg-light p-5 mb-5" key={hint}>
               <Markdown content={hint} />
             </div>)}
           </div> : null}
         </div>
-      </div>)}
+      </div>
+    })}
   </div>
 }

@@ -15,7 +15,8 @@ export default {
 const results: IResult[] = [
   {
     question: {
-      question: "Question 1",
+      image: 'https://miro.medium.com/max/480/1*7LOWVelUHYS1iqeX34Whzg.png',
+      question: "Question 1\n```js\nconst a = 123;\n```\n",
       answers: [
         [
           {
@@ -24,7 +25,7 @@ const results: IResult[] = [
               'IS'
             ],
             regex: null,
-            explanation: 'Explanation for answer 1 alternate 1',
+            explanation: '**Explanation for answer 1 alternate 1**',
             isCorrect: true
           },
           {
@@ -48,26 +49,25 @@ const results: IResult[] = [
               flags: 'i',
               regex: 'answers'
             },
-            explanation: 'Explanation for answer 2 alternate 1',
+            explanation: 'Explanation for answer 2 alternate 1\n```js\nconst a = 123;\n```\n',
             isCorrect: false
           }
         ]
       ],
       options: null,
       type: "Snippet",
-      image: null,
       weight: 1,
       difficulty: "Beginner",
       hints: [
         'Answer 1 Hint 1',
         'Answer 1 Hint 2',
-        'Answer 2 Hint 1'
+        'Answer 2 Hint 1\n```js\nconst a = 123;\nconsole.log(a);\nfor(let i = 0; i<= 10;i++){\n\tconsole.log(i);\n}\n```\n'
       ],
       time_allocated: 45,
       _id: "3MS238S1EC",
       quiz: {
-        subject: "Redis",
-        topic: "Cardinality & Capped Collections",
+        subject: "Subject 1",
+        topic: "Topic 1",
         _id: "xwqAZRp2X"
       }
     },
@@ -87,25 +87,25 @@ const results: IResult[] = [
   },
   {
     question: {
-      question: "Which commands are used to keep a capped list ?",
+      question: "Question 2\n* List item 1\n* List item 2",
       options: [
         {
-          text: "`lpush`",
+          text: "question2.option1",
           index: "0",
           isCorrect: true,
           userSelected: true
         },
         {
-          text: "`ltrim`",
+          text: "question2.option2",
           index: "1",
           isCorrect: true,
-          userSelected: true
+          userSelected: false
         },
         {
-          text: "`rpush`",
+          text: "```js\nawait client.setAsync('hello','world');\n```\n",
           index: "2",
           isCorrect: false,
-          userSelected: false
+          userSelected: true
         }
       ],
       answers: [
@@ -126,8 +126,8 @@ const results: IResult[] = [
       time_allocated: 30,
       _id: "iERo0WherK",
       quiz: {
-        subject: "Redis",
-        topic: "Cardinality & Capped Collections",
+        subject: "Subject 1",
+        topic: "Topic 1",
         _id: "xwqAZRp2X"
       }
     },
