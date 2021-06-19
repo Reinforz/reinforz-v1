@@ -22,7 +22,8 @@ export function ReportTable() {
   return <div className="Report-Table p-5 bg-base">
     {sortedResults.map((sortedResult, index) =>
       <div key={sortedResult.question._id} className="Report-Table-item pb-0 p-5 bg-dark">
-        <div className="p-5 flex ai-c jc-c bg-dark mb-5">
+        <div className="flex ai-c jc-c bg-dark mb-5">
+          {!filters.excluded_columns.includes('quiz_info') ? <Typography className="p-10 bg-light fs-16 bold">{`${sortedResult.question.quiz.subject} - ${sortedResult.question.quiz.topic}`}</Typography> : null}
           <Typography variant="h6" className="Report-Table-item-index bold flex-1 ta-c">{index + 1}</Typography>
           <div className="Report-Table-item-delete" style={{ width: 20 }}><Hovertips popoverText="Delete"><MdDelete fill={red[500]} onClick={() => {
             settings.sound && sounds.remove.play();
@@ -38,8 +39,7 @@ export function ReportTable() {
           {!filters.excluded_columns.includes('user_stats') ? <StackList classNames={{ container: 'mr-5' }} header="User Stats" items={[['Time Taken', sortedResult.time_taken], ['Hints Used', sortedResult.hints_used], ['Verdict', <Typography className="bold" style={{
             color: sortedResult.verdict === false ? red[500] : green[500]
           }}>{sortedResult.verdict === false ? "Incorrect" : "Correct"}</Typography>]]} /> : null}
-          {!filters.excluded_columns.includes('score_breakdown') ? <StackList classNames={{ container: 'mr-5' }} header="Score Breakdown" items={[['Amount', sortedResult.score.amount], ['Answers', sortedResult.score.answers], ['Time', sortedResult.score.time], ['Hints', sortedResult.score.hints], ['Weighted', sortedResult.question.weight * sortedResult.score.amount]]} /> : null}
-          {!filters.excluded_columns.includes('quiz_info') ? <StackList header="Quiz Info" items={[['Topic', sortedResult.question.quiz.topic], ['Subject', sortedResult.question.quiz.subject], ['Title', `${sortedResult.question.quiz.subject} - ${sortedResult.question.quiz.topic}`]]} /> : null}
+          {!filters.excluded_columns.includes('score_breakdown') ? <StackList header="Score Breakdown" items={[['Amount', sortedResult.score.amount], ['Answers', sortedResult.score.answers], ['Time', sortedResult.score.time], ['Hints', sortedResult.score.hints], ['Weighted', sortedResult.question.weight * sortedResult.score.amount]]} /> : null}
         </div>
         <div className="flex">
           {(sortedResult.question.type === "MCQ" || sortedResult.question.type === "MS") ? !filters.excluded_columns.includes('options') ? <ReportOptions question={sortedResult.question} userAnswers={sortedResult.user_answers} /> : null : !filters.excluded_columns.includes('answers') ? <ReportAnswers question={sortedResult.question as IResultInputQuestion} userAnswers={sortedResult.user_answers} /> : null}

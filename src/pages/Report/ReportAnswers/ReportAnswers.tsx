@@ -21,7 +21,7 @@ export function ReportAnswers(props: Props) {
           <Typography className="Report-Answers-container-userAnswer bg-light p-5 bold flex jc-c ai-c ta-c fs-18 mb-5">{userAnswers[index] ?? 'N/A'}</Typography>
           {answers.map((answer, _index) => <div className="Report-Answers-container-item pb-0 mb-5 bg-base p-5" key={_index}>
             <div className="mb-5 flex jc-sb">
-              <Typography className="Report-Answers-container-item-text bg-light p-5 flex-1 mr-5 ai-c flex">{answer.text}</Typography>
+              <Typography className="Report-Answers-container-item-text bg-light p-10 flex-1 mr-5 ai-c flex">{answer.text}</Typography>
               <div style={{ width: 50 }} className="Report-Answers-container-item-isCorrect bg-light flex ai-c jc-c p-">
                 {answer.isCorrect ? <AiFillCheckSquare fill={green[500]} style={{ padding: 5 }} size={20} /> : <MdCancel fill={red[500]} style={{ padding: 5 }} size={20} />}
               </div>
