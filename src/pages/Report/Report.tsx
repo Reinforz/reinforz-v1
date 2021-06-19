@@ -96,8 +96,8 @@ export default function Report() {
 
   const { filters, sort } = reportSettings;
 
-  const filteredResults = applyReportFilters(report.results, filters);
-  const sortedResults = applyReportSorts(filteredResults, sort);
+  const filteredResults = useMemo(() => applyReportFilters(report.results, reportSettings.filters), [report.results, reportSettings.filters]);
+  const sortedResults = useMemo(() => applyReportSorts(filteredResults, sort), [filteredResults, sort]);
   const filteredQuizzesMap = generateQuizzesFromResults(
     filteredResults,
     allQuestionsMap
