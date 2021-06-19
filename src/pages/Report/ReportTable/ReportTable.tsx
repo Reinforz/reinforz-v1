@@ -21,7 +21,7 @@ export function ReportTable() {
   const { settings } = useThemeSettings();
   return <div className="Report-Table p-5 bg-base">
     {sortedResults.map((sortedResult, index) =>
-      <div key={sortedResult.question._id} className="Report-Table-item p-5 bg-dark">
+      <div key={sortedResult.question._id} className="Report-Table-item pb-0 p-5 bg-dark">
         <div className="p-5 flex ai-c jc-c bg-dark mb-5">
           <Typography variant="h6" className="Report-Table-item-index bold flex-1 ta-c">{index + 1}</Typography>
           <div className="Report-Table-item-delete" style={{ width: 20 }}><Hovertips popoverText="Delete"><MdDelete fill={red[500]} onClick={() => {
@@ -43,13 +43,11 @@ export function ReportTable() {
         </div>
         <div className="flex">
           {(sortedResult.question.type === "MCQ" || sortedResult.question.type === "MS") ? !filters.excluded_columns.includes('options') ? <ReportOptions question={sortedResult.question} userAnswers={sortedResult.user_answers} /> : null : !filters.excluded_columns.includes('answers') ? <ReportAnswers question={sortedResult.question as IResultInputQuestion} userAnswers={sortedResult.user_answers} /> : null}
-          <div style={{ width: '25%' }}>
-            {sortedResult.question.hints.length !== 0 && !filters.excluded_columns.includes('hints') ? <div className="Report-Table-item-hints bg-base">
-              {sortedResult.question.hints.map(hint => <div className="Report-Table-item-hints-item bg-light" key={hint}>
-                <Markdown content={hint} />
-              </div>)}
-            </div> : null}
-          </div>
+          {sortedResult.question.hints.length !== 0 && !filters.excluded_columns.includes('hints') ? <div className="Report-Table-item-hints bg-base" style={{ width: '25%' }}>
+            {sortedResult.question.hints.map(hint => <div className="Report-Table-item-hints-item bg-light" key={hint}>
+              <Markdown content={hint} />
+            </div>)}
+          </div> : null}
         </div>
       </div>)}
   </div>
