@@ -16,7 +16,7 @@ export function ReportTable() {
   const { sortedResults, reportSettings, setReport, report } = useContext(ReportContext);
   const { filters } = reportSettings;
 
-  const memoizedReportQuestions = useMemo(() => sortedResults.map(sortedResult => <ReportQuestion question={sortedResult.question} />), [sortedResults]);
+  const memoizedReportQuestions = useMemo(() => sortedResults.map(sortedResult => <ReportQuestion question={sortedResult.question} userAnswers={sortedResult.user_answers} />), [sortedResults]);
 
   const { settings } = useThemeSettings();
   return <div className="Report-Table p-5 bg-base">
@@ -44,7 +44,7 @@ export function ReportTable() {
         </div>
         <div className="flex">
           {(sortedResult.question.type === "MCQ" || sortedResult.question.type === "MS") ? !filters.excluded_columns.includes('options') ? <ReportOptions question={sortedResult.question} userAnswers={sortedResult.user_answers} className={`${showHints ? 'mr-5' : ''}`} /> : null : !filters.excluded_columns.includes('answers') ? <ReportAnswers question={sortedResult.question as IResultInputQuestion} userAnswers={sortedResult.user_answers} className={`${showHints ? 'mr-5' : ''}`} /> : null}
-          {showHints ? <div className="Report-Table-item-hints bg-base p-5 ml-5 mb-5" style={{ width: '25%' }}>
+          {showHints ? <div className="Report-Table-item-hints bg-base p-5 mb-5" style={{ width: '25%' }}>
             {sortedResult.question.hints.map(hint => <div className="Report-Table-item-hints-item bg-light p-5 mb-5" key={hint}>
               <Markdown content={hint} />
             </div>)}

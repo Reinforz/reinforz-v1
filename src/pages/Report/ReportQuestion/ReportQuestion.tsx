@@ -6,15 +6,16 @@ import "./ReportQuestion.scss";
 
 interface Props {
   question: TResultQuestion,
+  userAnswers: string | string[]
 }
 
 export function ReportQuestion(props: Props) {
-  const { question } = props;
+  const { question, userAnswers } = props;
   const { reportSettings: { filters } } = useContext(ReportContext);
-  const questionString = Array.isArray(question.question) ? question.question.join(`+`) : question.question;
+  const questionString = Array.isArray(question.question) ? question.question.map((chunk, chunkIndex) => chunk + (chunkIndex !== question.question.length - 1 ? `<span class="question-chunk bg-dark m-5 fs-14">${userAnswers[chunkIndex] ?? 'N/A'}</span>` : '')).join("") : question.question;
   const showImage = !filters.excluded_columns.includes('image') && question.image;
   return <div className="flex jc-c mb-5">
-    {!filters.excluded_columns.includes('question') ? <div className={`Report-Question bg-light ${showImage ? 'mr-5' : ''}`} style={{ width: question.image ? `75%` : `100%` }} >
+    {!filters.excluded_columns.includes('question') ? <div className={`Report-Question bg-base ${showImage ? 'mr-5' : ''}`} style={{ width: question.image ? `75%` : `100%` }} >
       <Markdown content={questionString} classNames={{
         typography: 'fs-20 ta-c',
         markdown: 'p-10'

@@ -1,6 +1,8 @@
 .Report-Question{
   font-size: 1.25em;
-  
+  max-height: 250px;
+  overflow: auto;
+
   p{
     margin: 0px;
   }
@@ -16,5 +18,12 @@
       left: 50%;
       width: calc(100% - 10px);
     }
+  }
+
+  .question-chunk {
+    padding: 5px 10px;
+    position: relative;
+    top: -2px;
+    border-radius: 5px;
   }
 }

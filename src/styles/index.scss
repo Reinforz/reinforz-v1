@@ -47,6 +47,18 @@ div#root {
     margin: 5px;
   }
 
+  & .ml-0 {
+    margin-left: 0px;
+  }
+
+  & .ml-5 {
+    margin-left: 5px;
+  }
+
+  & .ml-10 {
+    margin-left: 10px;
+  }
+
   & .mr-5 {
     margin-right: 5px;
   }
