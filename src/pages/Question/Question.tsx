@@ -92,10 +92,12 @@ export default function Question(props: Props) {
     }
   }} tabIndex={0}>
     {props.question.type === "FIB" ? memoizedFIBQuestionComponent : memoizedSelectionQuestionComponent}
-    {props.question.type === "MCQ" || props.question.type === "MS"
-      ? <QuestionOptions setUserAnswers={setUserAnswers} userAnswers={userAnswers} question={props.question} />
-      : <QuestionInputs setUserAnswers={setUserAnswers} userAnswers={userAnswers} question={props.question} />}
-    <QuestionHints usedHints={usedHints} setUsedHints={setUsedHints} hints={hints} />
+    <div className="">
+      {props.question.type === "MCQ" || props.question.type === "MS"
+        ? <QuestionOptions setUserAnswers={setUserAnswers} userAnswers={userAnswers} question={props.question} />
+        : <QuestionInputs setUserAnswers={setUserAnswers} userAnswers={userAnswers} question={props.question} />}
+      <QuestionHints usedHints={usedHints} setUsedHints={setUsedHints} hints={hints} />
+    </div>
     {<div style={{ display: 'flex', gridArea: `3/2/4/3`, alignItems: `center`, height: '65px' }}>
       {!disable_timer && <Hovertips popoverAnchorOrigin={{
         vertical: 'top',

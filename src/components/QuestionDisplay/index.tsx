@@ -7,10 +7,16 @@ interface Props {
   userAnswers: string | string[]
   showImage?: boolean
   showQuestion?: boolean
+  classNames?: {
+    container?: string
+    questionContainer?: string
+    imageContainer?: string
+    image?: string
+  }
 }
 
 export function QuestionDisplay(props: Props) {
-  const { question, userAnswers, showImage = true, showQuestion = true } = props;
+  const { question, userAnswers, showImage = true, showQuestion = true, classNames = {} } = props;
   let questionString = '';
   if (question.type === "FIB") {
     for (let chunkIndex = 0; chunkIndex < question.question.length; chunkIndex++) {
@@ -27,13 +33,13 @@ export function QuestionDisplay(props: Props) {
   } else {
     questionString = question.question;
   }
-  return <div className="flex jc-c mb-5">
-    {showQuestion ? <div className={`QuestionDisplay bg-base ${showImage ? 'mr-5' : ''}`} style={{ width: question.image ? `75%` : `100%` }} >
+  return <div className={`QuestionDisplay flex jc-c mb-5 ${classNames.container ?? ''}`}>
+    {showQuestion ? <div className={`QuestionDisplay-question bg-base ${classNames.questionContainer ?? ''} ${showImage ? 'mr-5' : ''}`} style={{ width: question.image ? `75%` : `100%` }} >
       <Markdown content={questionString} classNames={{
         typography: 'fs-20 ta-c',
         markdown: 'p-10'
       }} />
     </div> : null}
-    {showImage ? <div className="QuestionDisplay-image bg-light" style={{ width: `25%`, minWidth: 350 }}><img src={question.image!} alt="Question" /></div> : null}
+    {showImage ? <div className={`QuestionDisplay-image bg-light ${classNames.imageContainer ?? ''}`} style={{ width: `25%`, minWidth: 350 }}><img className={`${classNames.image ?? ''}`} src={question.image!} alt="Question" /></div> : null}
   </div>
 }

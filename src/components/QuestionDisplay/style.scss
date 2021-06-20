@@ -1,10 +1,13 @@
 .QuestionDisplay{
-  font-size: 1.25em;
-  max-height: 250px;
-  overflow: auto;
+  
+  &-question{
+    font-size: 1.25em;
+    max-height: 250px;
+    overflow: auto;
 
-  p{
-    margin: 0px;
+    p{
+      margin: 0px;
+    }
   }
 
   &-image {
