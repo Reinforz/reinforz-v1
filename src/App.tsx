@@ -1,21 +1,19 @@
 import { useTheme } from "@material-ui/core";
-import { useContext, useState } from "react";
-import { Route, Switch, useLocation } from "react-router-dom";
-import { NotFoundPage, SimpleModal } from "./components";
+import { ReactNode, useContext, useState } from "react";
+import { useLocation } from "react-router-dom";
+import { SimpleModal } from "./components";
 import { REINFORZ_PLAY_SETTINGS_LS_KEY, REINFORZ_SETTINGS_LS_KEY } from "./constants";
 import { ModalContext } from './context/ModalContext';
 import { RootContext } from "./context/RootContext";
 import { SettingsContext } from "./context/SettingsContext";
-import { Create } from "./pages/Create/Create";
-import Play from "./pages/Play/Play";
-import Quiz from "./pages/Quiz/Quiz";
-import Report from "./pages/Report/Report";
-import Settings from "./pages/Settings/Settings";
-import Shortcuts from "./pages/Shortcuts/Shortcuts";
 import { ExtendedTheme } from "./types";
 import { generateDynamicStyleClasses, navigateBetweenPresets } from "./utils";
 
-export default function App() {
+interface Props {
+  children: ReactNode | ReactNode[]
+}
+
+export default function App(props: Props) {
   const [modalState, setModalState] = useState<[boolean, JSX.Element | null]>([false, null]);
   const theme = useTheme() as ExtendedTheme;
   const classes = generateDynamicStyleClasses();
@@ -36,15 +34,7 @@ export default function App() {
           {modalState[1]}
         </div>
       </SimpleModal>
-      <Switch>
-        <Route exact path="/" render={() => <Play />} />
-        <Route exact path="/settings" render={() => <Settings />} />
-        <Route exact path="/create" render={() => <Create />} />
-        <Route exact path="/report" render={() => <Report />} />
-        <Route exact path="/play" render={() => <Quiz />} />
-        <Route exact path="/shortcuts" render={() => <Shortcuts />} />
-        <Route path="*" render={() => <NotFoundPage />} />
-      </Switch>
+      {props.children}
     </div>
   </ModalContext.Provider>
 }
