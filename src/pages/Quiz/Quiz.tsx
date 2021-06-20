@@ -15,12 +15,15 @@ import "./Quiz.scss";
 
 export default function Quiz() {
   const history = useHistory();
-  const { setPlayQuestions, setPlayQuizzes, setUploadedPlayState, setPlaying, playSettings, selectedQuizzes, setPlaySettings, allQuestions, playing } = useContext(RootContext);
+  const rootContext = useContext(RootContext);
+  const { setPlayQuestions, setPlayQuizzes, setUploadedPlayState, setPlaying, playSettings, selectedQuizzes, setPlaySettings, allQuestions, playing } = rootContext;
   const [results, setResults] = useState([] as IResult[]);
   const { theme, settings } = useThemeSettings();
   const { isLastItem, currentItem, getNextIndex, currentIndex, setCurrentIndex } = useCycle(allQuestions);
   const generatedNavigationStyles = generateNavigationStyles(settings.navigation);
   const ref = useRef<HTMLDivElement | null>(null);
+
+  console.log(rootContext)
 
   useEffect(() => {
     ref.current && ref.current.focus();

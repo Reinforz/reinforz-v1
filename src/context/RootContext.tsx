@@ -12,6 +12,11 @@ export interface IRootContextData {
   playSettings: IPlaySettings
   allQuestions: TQuestionFull[]
   uploadedPlayState: boolean
+  playQuestions: {
+    array: TQuestionFull[];
+    map: Map<string, TQuestionFull>;
+  },
+  playQuizzes: { selected: IQuizFull[], filtered: IQuizFull[] },
 }
 
 export interface IRootContext extends IRootContextData {

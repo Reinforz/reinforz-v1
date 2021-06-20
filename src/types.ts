@@ -48,11 +48,8 @@ export interface IQuizPartial {
   _id?: string;
 }
 
-export interface IQuizFull {
-  topic: string;
-  subject: string;
+export interface IQuizFull extends QuizIdentifiers{
   questions: TQuestionFull[];
-  _id: string;
 }
 
 export interface IPlaySettings {

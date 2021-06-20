@@ -24,12 +24,12 @@ export const Root = (props: RootProps) => {
   const [errorLogs, setErrorLogs] = useState<IErrorLog[]>(props.errorLogs ?? []);
   const [playing, setPlaying] = useState<boolean>(props.playing ?? false);
   const [uploadedPlayState, setUploadedPlayState] = useState(props.uploadedPlayState ?? false);
-  const [playQuizzes, setPlayQuizzes] = useState<{ selected: IQuizFull[], filtered: IQuizFull[] }>({
+  const [playQuizzes, setPlayQuizzes] = useState<{ selected: IQuizFull[], filtered: IQuizFull[] }>(props.playQuizzes ?? {
     filtered: [],
     selected: []
   });
 
-  const [playQuestions, setPlayQuestions] = useState<{ array: TQuestionFull[], map: Map<string, TQuestionFull> }>({
+  const [playQuestions, setPlayQuestions] = useState<{ array: TQuestionFull[], map: Map<string, TQuestionFull> }>(props.playQuestions ?? {
     array: [],
     map: new Map()
   })
