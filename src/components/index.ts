@@ -7,6 +7,7 @@ import Hovertips from './Hovertips';
 import IconGroup from './IconGroup';
 import InputRange from './InputRange';
 import List from './List';
+import ListCheckboxGroup from './ListCheckboxGroup';
 import ListRadioGroup from './ListRadioGroup';
 import ListSelect from './ListSelect';
 import ListTable from './ListTable';
@@ -28,6 +29,7 @@ import View from './View';
 export * from './Container';
 export * from './Content';
 export {
+  ListCheckboxGroup,
   ListRadioGroup,
   Flex,
   Header,
