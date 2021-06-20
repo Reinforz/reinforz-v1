@@ -20,7 +20,6 @@ import SideToggleMenu from './SideToggleMenu';
 import SimpleModal from './SimpleModal';
 import Sort from './Sort';
 import StackList from './StackList';
-import Stats from './Stats';
 import Toggles from './Toggles';
 import Upload from './Upload';
 import View from './View';
@@ -52,6 +51,5 @@ export {
   View,
   Hovertips,
   List,
-  SideToggleMenu,
-  Stats
+  SideToggleMenu
 };
