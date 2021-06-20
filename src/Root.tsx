@@ -1,12 +1,12 @@
 import { ThemeProvider } from "@material-ui/styles";
 import { SnackbarProvider } from "notistack";
 import { ReactNode, useEffect, useMemo, useState } from "react";
-import { RootContext } from "./context/RootContext";
+import { IRootContextData, RootContext } from "./context/RootContext";
 import { SettingsContext } from "./context/SettingsContext";
 import { ExtendedTheme, IErrorLog, IPlaySettings, IPreset, IQuizFull, ISettings, TQuestionFull } from "./types";
 import { applyPlaySettingsOptions, arrayShuffler, generateQuestionsMap, generateTheme, getPlaySettingsPresets, getSettingsPresets } from "./utils";
 
-export interface RootProps {
+export interface RootProps extends Partial<IRootContextData> {
   children: ReactNode | ReactNode[]
 }
 
@@ -17,13 +17,13 @@ function findSettingsFromPresets(preset: IPreset<any>) {
 export const Root = (props: RootProps) => {
   const [settingsPresets, setSettingsPresets] = useState(getSettingsPresets());
   const [settings, setSettings] = useState<ISettings>(findSettingsFromPresets(settingsPresets));
-  const [playSettingsPresets, setPlaySettingsPresets] = useState(getPlaySettingsPresets());
-  const [playSettings, setPlaySettings] = useState<IPlaySettings>(findSettingsFromPresets(playSettingsPresets));
-  const [uploadedQuizzes, setUploadedQuizzes] = useState<IQuizFull[]>([]);
-  const [selectedQuizIds, setSelectedQuizIds] = useState<string[]>([]);
-  const [errorLogs, setErrorLogs] = useState<IErrorLog[]>([]);
-  const [playing, setPlaying] = useState<boolean>(false);
-  const [uploadedPlayState, setUploadedPlayState] = useState(false);
+  const [playSettingsPresets, setPlaySettingsPresets] = useState(props.playSettingsPresets ?? getPlaySettingsPresets());
+  const [playSettings, setPlaySettings] = useState<IPlaySettings>(props.playSettings ?? findSettingsFromPresets(playSettingsPresets));
+  const [uploadedQuizzes, setUploadedQuizzes] = useState<IQuizFull[]>(props.uploadedQuizzes ?? []);
+  const [selectedQuizIds, setSelectedQuizIds] = useState<string[]>(props.selectedQuizIds ?? []);
+  const [errorLogs, setErrorLogs] = useState<IErrorLog[]>(props.errorLogs ?? []);
+  const [playing, setPlaying] = useState<boolean>(props.playing ?? false);
+  const [uploadedPlayState, setUploadedPlayState] = useState(props.uploadedPlayState ?? false);
   const [playQuizzes, setPlayQuizzes] = useState<{ selected: IQuizFull[], filtered: IQuizFull[] }>({
     filtered: [],
     selected: []
