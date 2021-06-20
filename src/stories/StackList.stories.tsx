@@ -7,9 +7,10 @@ export default {
   component: StackList,
 } as Meta;
 
-const DefaultStackListTemplate: Story<StackListProps> = () => {
+const DefaultStackListTemplate: Story<StackListProps> = (args) => {
   return <Wrapper>
     <StackList
+      {...args}
       header={'Shortcuts'}
       items={[
         ['Navigation Hovertips #', '#'],
@@ -22,4 +23,8 @@ const DefaultStackListTemplate: Story<StackListProps> = () => {
   </Wrapper>
 };
 
-export const DefaultStackList = DefaultStackListTemplate.bind({});
+export const ColumnStackList = DefaultStackListTemplate.bind({});
+export const RowStackList = DefaultStackListTemplate.bind({});
+RowStackList.args = {
+  direction: 'row'
+}
