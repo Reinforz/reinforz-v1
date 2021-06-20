@@ -2,13 +2,13 @@ import { Button, useTheme } from "@material-ui/core";
 import { green, red } from "@material-ui/core/colors";
 import React, { useContext, useEffect, useMemo, useRef, useState } from "react";
 import { FaClock } from "react-icons/fa";
-import { Hovertips, Markdown } from "../../components";
+import { Hovertips } from "../../components";
+import { QuestionDisplay } from "../../components/QuestionDisplay";
 import { RootContext } from "../../context/RootContext";
 import { SettingsContext } from "../../context/SettingsContext";
 import sounds from "../../sounds";
 import { ExtendedTheme, TQuestionFull } from "../../types";
 import { applyOptionsShortcut, displayTime } from "../../utils";
-import FibQuestionDisplay from "./FibQuestionDisplay";
 import "./Question.scss";
 import QuestionHints from "./QuestionHints/QuestionHints";
 import QuestionInputs from "./QuestionInputs/QuestionInputs";
@@ -23,7 +23,7 @@ interface Props {
 export default function Question(props: Props) {
   const { settings } = useContext(SettingsContext)
   const { playSettings } = useContext(RootContext);
-  const { changeCounter, isLast, question: { image, hints, time_allocated, type, options } } = props;
+  const { changeCounter, isLast, question: { hints, time_allocated, type, options } } = props;
   const [userAnswers, setUserAnswers] = useState<string[]>([]);
   const [usedHints, setUsedHints] = useState<string[]>([]);
   const [timeout, setTimeout] = useState<null | number>(null);
@@ -75,13 +75,11 @@ export default function Question(props: Props) {
   }, [props.question, disable_timer])
 
   const memoizedFIBQuestionComponent = useMemo(() => {
-    return <FibQuestionDisplay question={props.question.question as string[]} userAnswers={userAnswers} image={props.question.image} />
+    return <QuestionDisplay question={props.question} userAnswers={userAnswers} />
   }, [props.question, userAnswers])
 
   const memoizedSelectionQuestionComponent = useMemo(() => {
-    return <div className="Question-question bg-light" style={{ gridArea: props.question.image ? `1/1/2/2` : `1/1/2/3` }}>
-      <Markdown content={props.question.question as string} />
-    </div>
+    return <QuestionDisplay question={props.question} userAnswers={userAnswers} />
     // eslint-disable-next-line
   }, [props.question])
 
@@ -94,7 +92,6 @@ export default function Question(props: Props) {
     }
   }} tabIndex={0}>
     {props.question.type === "FIB" ? memoizedFIBQuestionComponent : memoizedSelectionQuestionComponent}
-    {image && <div className="Question-image bg-light" style={{ gridArea: `1/2/2/3` }}><img src={image} alt="Question" /></div>}
     {props.question.type === "MCQ" || props.question.type === "MS"
       ? <QuestionOptions setUserAnswers={setUserAnswers} userAnswers={userAnswers} question={props.question} />
       : <QuestionInputs setUserAnswers={setUserAnswers} userAnswers={userAnswers} question={props.question} />}

@@ -1,17 +1,16 @@
-import { useContext } from "react";
 import { Markdown } from "..";
-import { ReportContext } from "../../context/ReportContext";
-import { TResultQuestion } from "../../types";
+import { TQuestionFull } from "../../types";
 import "./style.scss";
 
 interface Props {
-  question: TResultQuestion,
+  question: TQuestionFull,
   userAnswers: string | string[]
+  showImage?: boolean
+  showQuestion?: boolean
 }
 
 export function QuestionDisplay(props: Props) {
-  const { question, userAnswers } = props;
-  const { reportSettings: { filters } } = useContext(ReportContext);
+  const { question, userAnswers, showImage = true, showQuestion = true } = props;
   let questionString = '';
   if (question.type === "FIB") {
     for (let chunkIndex = 0; chunkIndex < question.question.length; chunkIndex++) {
@@ -28,9 +27,8 @@ export function QuestionDisplay(props: Props) {
   } else {
     questionString = question.question;
   }
-  const showImage = !filters.excluded_columns.includes('image') && question.image;
   return <div className="flex jc-c mb-5">
-    {!filters.excluded_columns.includes('question') ? <div className={`QuestionDisplay bg-base ${showImage ? 'mr-5' : ''}`} style={{ width: question.image ? `75%` : `100%` }} >
+    {showQuestion ? <div className={`QuestionDisplay bg-base ${showImage ? 'mr-5' : ''}`} style={{ width: question.image ? `75%` : `100%` }} >
       <Markdown content={questionString} classNames={{
         typography: 'fs-20 ta-c',
         markdown: 'p-10'

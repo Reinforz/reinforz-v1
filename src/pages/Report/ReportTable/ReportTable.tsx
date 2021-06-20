@@ -16,7 +16,7 @@ export function ReportTable() {
   const { sortedResults, reportSettings, setReport, report } = useContext(ReportContext);
   const { filters } = reportSettings;
 
-  const memoizedReportQuestions = useMemo(() => sortedResults.map(sortedResult => <QuestionDisplay question={sortedResult.question} userAnswers={sortedResult.user_answers} />), [sortedResults]);
+  const memoizedReportQuestions = useMemo(() => sortedResults.map(sortedResult => <QuestionDisplay question={sortedResult.question} userAnswers={sortedResult.user_answers} showImage={Boolean(!filters.excluded_columns.includes("image") && sortedResult.question.image)} showQuestion={!filters.excluded_columns.includes("question")} />), [sortedResults, filters]);
 
   const { settings } = useThemeSettings();
   return <div className="Report-Table p-5 bg-base overflowY-auto">
