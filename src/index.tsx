@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from "react-router-dom";
 import App from './App';
 import { ErrorBoundary } from './components';
+import { Root } from './Root';
 import initPrismLineNumbers from "./scripts/prism-line-numbers";
 import './styles/index.scss';
 import "./styles/prism-line-highlight.scss";
