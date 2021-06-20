@@ -11,12 +11,9 @@
     position: relative;
     height: 250px;
     img {
-      object-fit: cover;
-      position: absolute;
-      transform: translate(-50%, -50%);
-      top: 50%;
-      left: 50%;
-      width: calc(100% - 10px);
+      object-fit: contain;
+      height: 100%;
+      width: 100%;
     }
   }
 

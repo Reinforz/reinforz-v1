@@ -3,23 +3,23 @@ import { green, red } from "@material-ui/core/colors";
 import { useContext, useMemo } from "react";
 import { MdDelete } from 'react-icons/md';
 import { Hovertips, Markdown, StackList } from "../../../components";
+import { QuestionDisplay } from "../../../components/QuestionDisplay";
 import { ReportContext } from "../../../context/ReportContext";
 import { useThemeSettings } from "../../../hooks";
 import sounds from "../../../sounds";
-import { IResultInputQuestion } from "../../../types";
+import { TResultInputQuestion } from "../../../types";
 import { ReportAnswers } from "../ReportAnswers/ReportAnswers";
 import { ReportOptions } from "../ReportOptions/ReportOptions";
-import { ReportQuestion } from "../ReportQuestion/ReportQuestion";
 import "./ReportTable.scss";
 
 export function ReportTable() {
   const { sortedResults, reportSettings, setReport, report } = useContext(ReportContext);
   const { filters } = reportSettings;
 
-  const memoizedReportQuestions = useMemo(() => sortedResults.map(sortedResult => <ReportQuestion question={sortedResult.question} userAnswers={sortedResult.user_answers} />), [sortedResults]);
+  const memoizedReportQuestions = useMemo(() => sortedResults.map(sortedResult => <QuestionDisplay question={sortedResult.question} userAnswers={sortedResult.user_answers} />), [sortedResults]);
 
   const { settings } = useThemeSettings();
-  return <div className="Report-Table p-5 bg-base">
+  return <div className="Report-Table p-5 bg-base overflowY-auto">
     {sortedResults.map((sortedResult, index) => {
       const showHints = sortedResult.question.hints.length !== 0 && !filters.excluded_columns.includes('hints');
       return <div key={sortedResult.question._id} className="Report-Table-item pb-0 p-5 bg-dark">
@@ -43,7 +43,7 @@ export function ReportTable() {
           {!filters.excluded_columns.includes('score_breakdown') ? <StackList header="Score Breakdown" items={[['Amount', sortedResult.score.amount], ['Answers', sortedResult.score.answers], ['Time', sortedResult.score.time], ['Hints', sortedResult.score.hints], ['Weighted', sortedResult.question.weight * sortedResult.score.amount]]} /> : null}
         </div>
         <div className="flex">
-          {(sortedResult.question.type === "MCQ" || sortedResult.question.type === "MS") ? !filters.excluded_columns.includes('options') ? <ReportOptions question={sortedResult.question} userAnswers={sortedResult.user_answers} className={`${showHints ? 'mr-5' : ''}`} /> : null : !filters.excluded_columns.includes('answers') ? <ReportAnswers question={sortedResult.question as IResultInputQuestion} userAnswers={sortedResult.user_answers} className={`${showHints ? 'mr-5' : ''}`} /> : null}
+          {(sortedResult.question.type === "MCQ" || sortedResult.question.type === "MS") ? !filters.excluded_columns.includes('options') ? <ReportOptions question={sortedResult.question} userAnswers={sortedResult.user_answers} className={`${showHints ? 'mr-5' : ''}`} /> : null : !filters.excluded_columns.includes('answers') ? <ReportAnswers question={sortedResult.question as TResultInputQuestion} userAnswers={sortedResult.user_answers} className={`${showHints ? 'mr-5' : ''}`} /> : null}
           {showHints ? <div className="Report-Table-item-hints bg-base p-5 mb-5" style={{ width: '25%' }}>
             {sortedResult.question.hints.map(hint => <div className="Report-Table-item-hints-item bg-light p-5 mb-5" key={hint}>
               <Markdown content={hint} />

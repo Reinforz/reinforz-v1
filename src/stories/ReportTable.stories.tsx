@@ -1,11 +1,13 @@
 import { Meta, Story } from '@storybook/react';
 import React, { useState } from 'react';
+import App from '../App';
 import { ReportContext } from "../context/ReportContext";
+import "../pages/Report/Report.scss";
 import { ReportTable } from "../pages/Report/ReportTable/ReportTable";
 import "../pages/Report/ReportTable/ReportTable.scss";
+import { Root } from '../Root';
 import { IReport, IResult } from '../types';
 import { generateDefaultPlaySettingsState, generateDefaultReportSettingsState } from '../utils';
-import Wrapper from "./Wrapper";
 
 export default {
   title: 'Components/Pages/Report/ReportTable',
@@ -269,13 +271,15 @@ const DefaultReportTableTemplate: Story = () => {
   const sortedResults: IResult[] = report.results;
   const reportSettings = generateDefaultReportSettingsState();
 
-  return <Wrapper>
-    <ReportContext.Provider value={{ report, setReport, sortedResults, reportSettings } as any}>
-      <div className="Report">
-        <ReportTable />
-      </div>
-    </ReportContext.Provider>
-  </Wrapper>
+  return <Root>
+    <App>
+      <ReportContext.Provider value={{ report, setReport, sortedResults, reportSettings } as any}>
+        <div className="Report">
+          <ReportTable />
+        </div>
+      </ReportContext.Provider>
+    </App>
+  </Root>
 };
 
 export const DefaultReportTable = DefaultReportTableTemplate.bind({});
