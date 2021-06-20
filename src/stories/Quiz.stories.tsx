@@ -3,7 +3,7 @@ import React from 'react';
 import Quiz from "../pages/Quiz/Quiz";
 import "../pages/Quiz/Quiz.scss";
 import { Root } from '../Root';
-import { IFibQuestionFull, IMsQuestionFull, IQuizFull, ISnippetQuestionFull, QuizIdentifiers } from '../types';
+import { IFibQuestionFull, IMsQuestionFull, IPlaySettingsPreset, IQuizFull, ISnippetQuestionFull, QuizIdentifiers } from '../types';
 import { generateDefaultPlaySettingsState } from '../utils';
 
 const quiz_identifiers: QuizIdentifiers = {
@@ -184,13 +184,29 @@ const NoTimerQuizTemplate: Story = () => {
   }
 
   const playSettings = generateDefaultPlaySettingsState();
+  const playSettingsPresets: IPlaySettingsPreset = {
+    current: 'no_timer',
+    presets: [
+      {
+        data: playSettings,
+        id: 'default',
+        name: "Default"
+      },
+      {
+        data: { filters: playSettings.filters, options: { ...playSettings.options, disable_timer: true } },
+        id: 'no_timer',
+        name: "No Timer"
+      }
+    ]
+  };
+
   return <Root playQuizzes={{
     selected: [quiz],
     filtered: [quiz]
   }} playQuestions={{
     array: [msQuestions[0]],
     map: new Map([[msQuestions[0]._id, msQuestions[0]]])
-  }} playing={true} uploadedQuizzes={[quiz]} selectedQuizzes={[quiz]} selectedQuizIds={[quiz._id]} playSettings={{ filters: playSettings.filters, options: { ...playSettings.options, disable_timer: true } }} >
+  }} playing={true} uploadedQuizzes={[quiz]} selectedQuizzes={[quiz]} playSettingsPresets={playSettingsPresets} selectedQuizIds={[quiz._id]} >
     <Quiz />
   </Root>
 };

@@ -23,8 +23,6 @@ export default function Quiz() {
   const generatedNavigationStyles = generateNavigationStyles(settings.navigation);
   const ref = useRef<HTMLDivElement | null>(null);
 
-  console.log(rootContext)
-
   useEffect(() => {
     ref.current && ref.current.focus();
   }, [])
