@@ -4,7 +4,7 @@ import { useThemeSettings } from "../../hooks";
 import sounds from "../../sounds";
 
 interface Props {
-  setState: React.Dispatch<React.SetStateAction<[string]>>
+  setState: (items: string[]) => any
   items: ReactNode[]
   value: string[]
 }

@@ -1,6 +1,6 @@
-import { Checkbox, FormControlLabel, FormGroup, Radio, RadioGroup } from "@material-ui/core";
+import { Checkbox, FormControlLabel, FormGroup } from "@material-ui/core";
 import { useMemo } from "react";
-import { Markdown } from "../../../components";
+import { ListRadioGroup, Markdown } from "../../../components";
 import { useThemeSettings } from '../../../hooks';
 import sounds from "../../../sounds";
 import { TQuestionFull } from '../../../types';
@@ -23,23 +23,8 @@ export default function QuestionOptions(props: Props) {
 
   const generateOptions = () => {
     switch (props.question.type) {
-      case "MCQ": {
-        return <RadioGroup className="QuestionOptions-container QuestionOptions-container-MCQ bg-base" value={userAnswers.length === 0 ? [''] : userAnswers[0]} onChange={e => {
-          settings.sound && sounds.option_click.play();
-          setUserAnswers([e.target.value])
-        }}>
-          {props.question.options.map((_, i) => {
-            return <div key={`${_id}option${i}`} className="QuestionOptions-container-item bg-light">
-              <FormControlLabel
-                control={<Radio color="primary" />}
-                value={`${i}`}
-                label={memoizedQuestionOptions[i]}
-                labelPlacement="end"
-              />
-            </div>
-          })}
-        </RadioGroup>
-      }
+      case "MCQ":
+        return <ListRadioGroup setState={setUserAnswers} items={memoizedQuestionOptions} value={userAnswers} />
       case "MS": {
         return <FormGroup className="QuestionOptions-container QuestionOptions-container-MS mb-5 bg-base" onChange={(e: any) => {
           if (e.target.checked) {
