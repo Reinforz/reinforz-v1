@@ -15,8 +15,7 @@ import "./Quiz.scss";
 
 export default function Quiz() {
   const history = useHistory();
-  const rootContext = useContext(RootContext);
-  const { setPlayQuestions, setPlayQuizzes, setUploadedPlayState, setPlaying, playSettings, selectedQuizzes, setPlaySettings, allQuestions, playing } = rootContext;
+  const { setPlayQuestions, setPlayQuizzes, setUploadedPlayState, setPlaying, playSettings, selectedQuizzes, setPlaySettings, allQuestions, playing } = useContext(RootContext);
   const [results, setResults] = useState([] as IResult[]);
   const { theme, settings } = useThemeSettings();
   const { isLastItem, currentItem, getNextIndex, currentIndex, setCurrentIndex } = useCycle(allQuestions);
