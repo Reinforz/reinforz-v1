@@ -134,6 +134,7 @@ const fibQuestions: Record<'text' | 'code', IFibQuestionFull[]> = {
 }
 
 const msQuestions: IMsQuestionFull[] = [{
+  image: 'https://miro.medium.com/max/480/1*7LOWVelUHYS1iqeX34Whzg.png',
   question: "Question 2\n* List item 1\n* List item 2",
   options: [
     {
@@ -151,6 +152,14 @@ const msQuestions: IMsQuestionFull[] = [{
     {
       text: "question2.option4",
       index: "3",
+    },
+    {
+      text: "question2.option5",
+      index: "4",
+    },
+    {
+      text: "question2.option6",
+      index: "5",
     }
   ],
   answers: [
@@ -164,7 +173,6 @@ const msQuestions: IMsQuestionFull[] = [{
     }
   ],
   type: "MS",
-  image: null,
   weight: 1,
   difficulty: "Beginner",
   hints: [],

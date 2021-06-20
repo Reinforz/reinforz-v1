@@ -56,8 +56,8 @@ export default function Quiz() {
       stackListItems.push(["Current", currentIndex + 1], ["Total", totalQuestions], ["Type", currentQuestion.type], ["Weight", currentQuestion.weight], ["Difficulty", currentQuestion.difficulty])
       if (!playSettings.options.disable_timer)
         stackListItems.push(["Time Allocated", currentQuestion.time_allocated])
-      return <div className="Quiz bg-base">
-        <div className="flex ai-c">
+      return <div className="Quiz bg-base flex fd-c p-5">
+        <div className="flex ai-c mb-5">
           <StackList direction="row" items={stackListItems} classNames={{
             container: 'p-0 flex-1',
             content: 'jc-sb'
