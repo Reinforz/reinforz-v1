@@ -7,9 +7,10 @@ import { HiDocumentReport } from "react-icons/hi";
 import { IoLogoGameControllerB, IoMdCreate, IoMdSettings } from 'react-icons/io';
 import { useHistory } from "react-router-dom";
 import { IconGroup, List, SideToggleMenu, View } from '../../components';
+import { REINFORZ_PLAY_SETTINGS_LS_KEY } from "../../constants";
 import { RootContext } from "../../context/RootContext";
 import { useNavigationIcons, useThemeSettings } from '../../hooks';
-import { generateNavigationStyles } from "../../utils";
+import { generateNavigationStyles, navigateBetweenPresets } from "../../utils";
 import "./Play.scss";
 import { PlayListTable } from "./PlayListTable/PlayListTable";
 import PlaySettings from "./PlaySettings/PlaySettings";
@@ -27,7 +28,7 @@ function Play() {
   const [selectedErrorLogIds, setSelectedErrorLogIds] = useState<string[]>([]);
   const history = useHistory();
   const { settings, theme } = useThemeSettings();
-  const { setPlaying, filteredQuizzes, selectedQuizIds, setUploadedQuizzes, setSelectedQuizIds, uploadedQuizzes, errorLogs, setErrorLogs } = useContext(RootContext);
+  const { setPlaying, filteredQuizzes, selectedQuizIds, setUploadedQuizzes, setSelectedQuizIds, uploadedQuizzes, errorLogs, setErrorLogs, playSettingsPresets, setPlaySettingsPresets } = useContext(RootContext);
   const { enqueueSnackbar } = useSnackbar();
   const ref = useRef<HTMLDivElement | null>(null);
   const filteredQuestions = filteredQuizzes.reduce((acc, filteredQuiz) => acc += filteredQuiz.questions.length, 0);
@@ -75,7 +76,10 @@ function Play() {
     ref.current && ref.current.focus();
   }, [])
 
-  return <SideToggleMenu lsKey="PLAY_MENU" width={290} contents={[<PlaySettings />, <div className="Play" ref={ref} tabIndex={0} onKeyPress={onKeyPress}>
+  return <SideToggleMenu lsKey="PLAY_MENU" width={290} contents={[<PlaySettings />, <div className="Play" ref={ref} tabIndex={0} onKeyPress={(e) => {
+    settings.shortcuts && navigateBetweenPresets(e, playSettingsPresets, setPlaySettingsPresets, REINFORZ_PLAY_SETTINGS_LS_KEY)
+    onKeyPress(e)
+  }}>
     <IconGroup style={generatedNavigationStyles} direction={settings.navigation.direction} className="Play-icons" icons={navigationIcons} />
     <PlayUpload />
     <View lsKey="PLAY_VIEW" items={

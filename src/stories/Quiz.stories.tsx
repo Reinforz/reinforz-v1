@@ -1,5 +1,6 @@
 import { Meta, Story } from '@storybook/react';
 import React from 'react';
+import App from '../App';
 import Quiz from "../pages/Quiz/Quiz";
 import "../pages/Quiz/Quiz.scss";
 import { Root } from '../Root';
@@ -207,7 +208,9 @@ const NoTimerQuizTemplate: Story = () => {
     array: [msQuestions[0]],
     map: new Map([[msQuestions[0]._id, msQuestions[0]]])
   }} playing={true} uploadedQuizzes={[quiz]} selectedQuizzes={[quiz]} playSettingsPresets={playSettingsPresets} selectedQuizIds={[quiz._id]} >
-    <Quiz />
+    <App>
+      <Quiz />
+    </App>
   </Root>
 };
 

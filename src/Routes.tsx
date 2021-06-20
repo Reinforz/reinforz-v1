@@ -8,6 +8,7 @@ import Settings from "./pages/Settings/Settings";
 import Shortcuts from "./pages/Shortcuts/Shortcuts";
 
 export default function Routes() {
+
   return <Switch>
     <Route exact path="/" render={() => <Play />} />
     <Route exact path="/settings" render={() => <Settings />} />

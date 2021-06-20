@@ -8,7 +8,7 @@ import { IconGroup, Preset, Select, SelectGroup, Toggles } from '../../component
 import { REINFORZ_SETTINGS_LS_KEY } from '../../constants';
 import { SettingsContext } from '../../context/SettingsContext';
 import { useNavigationIcons } from '../../hooks';
-import { generateNavigationStyles, transformTextBySeparator } from '../../utils';
+import { generateNavigationStyles, navigateBetweenPresets, transformTextBySeparator } from '../../utils';
 import "./Settings.scss";
 
 function Settings() {
@@ -40,7 +40,9 @@ function Settings() {
 
   const generatedNavigationStyles = generateNavigationStyles(settings.navigation);
   return (
-    <div style={{ width: '100vw', height: '100vh' }} tabIndex={0} ref={ref} onKeyPress={onKeyPress}>
+    <div onKeyUp={(e) => {
+      settings.shortcuts && navigateBetweenPresets(e, settingsPresets, setSettingsPresets, REINFORZ_SETTINGS_LS_KEY)
+    }} style={{ width: '100vw', height: '100vh' }} tabIndex={0} ref={ref} onKeyPress={onKeyPress}>
       <IconGroup className="Settings-icons" direction={settings.navigation.direction} style={generatedNavigationStyles} icons={navigationIcons} />
       <div className="Settings p-5 center bg-base">
         <div className="Settings-header flex mb-5 p-5 bg-dark">
