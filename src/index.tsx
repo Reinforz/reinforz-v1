@@ -5,13 +5,6 @@ import App from './App';
 import { ErrorBoundary } from './components';
 import { Root } from './Root';
 import Routes from './Routes';
-import initPrismLineNumbers from "./scripts/prism-line-numbers";
-import './styles/index.scss';
-import "./styles/prism-line-highlight.scss";
-import "./styles/vs-light.scss";
-import "./styles/vscode-dark.scss";
-
-initPrismLineNumbers();
 
 ReactDOM.render(<Router>
   <ErrorBoundary>

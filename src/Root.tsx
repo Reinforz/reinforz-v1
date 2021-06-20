@@ -3,9 +3,15 @@ import { SnackbarProvider } from "notistack";
 import { ReactNode, useEffect, useMemo, useState } from "react";
 import { IRootContextData, RootContext } from "./context/RootContext";
 import { SettingsContext } from "./context/SettingsContext";
+import initPrismLineNumbers from "./scripts/prism-line-numbers";
+import './styles/index.scss';
+import "./styles/prism-line-highlight.scss";
+import "./styles/vs-light.scss";
+import "./styles/vscode-dark.scss";
 import { ExtendedTheme, IErrorLog, IPlaySettings, IPreset, IQuizFull, ISettings, TQuestionFull } from "./types";
 import { applyPlaySettingsOptions, arrayShuffler, generateQuestionsMap, generateTheme, getPlaySettingsPresets, getSettingsPresets } from "./utils";
 
+initPrismLineNumbers();
 export interface RootProps extends Partial<IRootContextData> {
   children: ReactNode | ReactNode[]
 }
