@@ -41,7 +41,7 @@ export default function QuestionOptions(props: Props) {
         </RadioGroup>
       }
       case "MS": {
-        return <FormGroup className="QuestionOptions-container QuestionOptions-container-MS bg-base" onChange={(e: any) => {
+        return <FormGroup className="QuestionOptions-container QuestionOptions-container-MS mb-5 bg-base" onChange={(e: any) => {
           if (e.target.checked) {
             settings.sound && sounds.pop_off.play();
             setUserAnswers(userAnswers.concat(e.target.value))

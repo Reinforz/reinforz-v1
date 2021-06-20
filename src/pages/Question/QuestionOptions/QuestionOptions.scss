@@ -21,15 +21,7 @@
 
     &-item {
       font-size: 1.5rem;
-      cursor: pointer;
       border-radius: 5px;
-      display: flex;
-      justify-content: center;
-      font-weight: bolder;
-      margin: 5px;
-      align-items: center;
-      padding: 2.5px;
-      min-height: 50px;
 
       .MuiTypography-body1 {
         font-size: 18px;
@@ -43,13 +35,6 @@
         background: white;
       }
     }
-  }
-  pre.Highlighter {
-    margin: 0px;
-    font-family: "Roboto Mono", monospace;
-    font-size: 0.75em;
-    padding: 5px;
-    border-radius: 5px;
   }
 }
 

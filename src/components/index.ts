@@ -7,6 +7,7 @@ import Hovertips from './Hovertips';
 import IconGroup from './IconGroup';
 import InputRange from './InputRange';
 import List from './List';
+import ListRadioGroup from './ListRadioGroup';
 import ListSelect from './ListSelect';
 import ListTable from './ListTable';
 import Markdown from './Markdown';
@@ -27,6 +28,7 @@ import View from './View';
 export * from './Container';
 export * from './Content';
 export {
+  ListRadioGroup,
   Flex,
   Header,
   Aggregator,

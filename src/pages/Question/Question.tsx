@@ -92,7 +92,7 @@ export default function Question(props: Props) {
     }
   }} tabIndex={0}>
     {props.question.type === "FIB" ? memoizedFIBQuestionComponent : memoizedSelectionQuestionComponent}
-    <div className="">
+    <div className="flex" style={{ display: 'grid', gridTemplateColumns: '75%' }}>
       {props.question.type === "MCQ" || props.question.type === "MS"
         ? <QuestionOptions setUserAnswers={setUserAnswers} userAnswers={userAnswers} question={props.question} />
         : <QuestionInputs setUserAnswers={setUserAnswers} userAnswers={userAnswers} question={props.question} />}
