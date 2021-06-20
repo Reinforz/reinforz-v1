@@ -25,7 +25,7 @@ export default function ListCheckboxGroup(props: ListCheckboxGroupProps) {
     {items.map((item, i) => {
       return <FormControlLabel
         key={`option${i}`} className={`ListCheckboxGroup-FormControlLabel bg-light`}
-        control={<Checkbox checked={items.includes(`${i}`)} value={`${i}`} color="primary" />}
+        control={<Checkbox checked={value.includes(`${i}`)} value={`${i}`} color="primary" />}
         label={item}
       />
     })}
