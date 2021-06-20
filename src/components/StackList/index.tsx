@@ -2,7 +2,7 @@ import { Typography } from "@material-ui/core";
 import { ReactNode } from "react";
 export interface StackListProps {
   items: [ReactNode, ReactNode][]
-  header: string
+  header?: string
   classNames?: {
     container?: string
     header?: string
@@ -11,16 +11,17 @@ export interface StackListProps {
     contentItemLabel?: string
     contentItemValue?: string
   }
+  direction?: 'row' | 'column'
 }
 
 export default function StackList(props: StackListProps) {
-  const { items, header, classNames = {} } = props;
-  return <div className={`StackList bg-base p-5 flex fd-c ${classNames.container ?? ''}`}>
-    <Typography className={`StackList-header bg-dark mb-5 bold ta-c p-5 ${classNames.header ?? ''}`}>{header}</Typography>
-    <div className={`StackList-content bg-dark p-5 pb-0 flex fd-c ${classNames.content ?? ''}`}>
-      {items.map(([label, value], index) => <div className={`StackList-content-item flex jc-sb p-5 mb-5 bg-light p-10 ${classNames.contentItem ?? ''}`} key={index}>
-        <Typography component="div" className={`StackList-content-item-label ${classNames.contentItemLabel ?? ''}`}>{label}</Typography>
-        <Typography component="div" className={`StackList-content-item-value flex jc-sb ai-c bold ${classNames.contentItemValue ?? ''}`}>{value}</Typography>
+  const { items, header, classNames = {}, direction = 'column' } = props;
+  return <div className={`StackList bg-base p-5 flex ${direction === 'column' ? 'fd-c' : ''} ${classNames.container ?? ''}`}>
+    {header && <Typography className={`StackList-header bg-dark mb-5 bold ta-c p-5 ${classNames.header ?? ''}`}>{header}</Typography>}
+    <div className={`StackList-content bg-dark p-5 flex ${direction === 'column' ? 'pb-0' : 'pr-0'} ${direction === 'column' ? 'fd-c' : ''} ${classNames.content ?? ''}`}>
+      {items.map(([label, value], index) => <div className={`StackList-content-item flex jc-sb p-5 bg-base p-5 ${direction === 'column' ? 'pb-0' : 'pr-0'} ${direction === 'column' ? 'mb-5' : 'mr-5'} ${classNames.contentItem ?? ''}`} key={index}>
+        <Typography component="div" className={`StackList-content-item-label flex mr-5 p-5 bg-light jc-sb ai-c ${classNames.contentItemLabel ?? ''}`}>{label}</Typography>
+        <Typography component="div" className={`StackList-content-item-value flex mr-5 p-5 bg-light jc-sb ai-c bold ${classNames.contentItemValue ?? ''}`}>{value}</Typography>
       </div>)}
     </div>
   </div>

@@ -1,11 +1,11 @@
 import yaml, { safeDump } from 'js-yaml';
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { ReactNode, useContext, useEffect, useRef, useState } from "react";
 import { AiFillHome } from "react-icons/ai";
 import { FaCloudDownloadAlt, FaKeyboard } from "react-icons/fa";
 import { HiDocumentReport } from "react-icons/hi";
 import { IoMdCreate, IoMdSettings } from "react-icons/io";
 import { useHistory } from "react-router-dom";
-import { Hovertips, IconGroup, Stats, Upload } from "../../components";
+import { Hovertips, IconGroup, StackList, Upload } from "../../components";
 import { RootContext } from "../../context/RootContext";
 import { useCycle, useNavigationIcons, useThemeSettings } from "../../hooks";
 import { IPlayDownloadedState, IResult, TQuestionFull } from "../../types";
@@ -50,10 +50,19 @@ export default function Quiz() {
       const totalQuestions = allQuestions.length,
         totalCorrectAnswers = results.filter(result => result.verdict).length,
         currentQuestion = JSON.parse(JSON.stringify(currentItem)) as TQuestionFull;
+      const stackListItems: [ReactNode, ReactNode][] = [["Title", `${currentQuestion.quiz.subject} - ${currentQuestion.quiz.topic}`], ["Title", `${currentQuestion.quiz.subject} - ${currentQuestion.quiz.topic}`]];
+      if (playSettings.options.instant_feedback)
+        stackListItems.push(['Total Correct', totalCorrectAnswers])
+      stackListItems.push(["Current", currentIndex + 1], ["Total", totalQuestions], ["Type", currentQuestion.type], ["Weight", currentQuestion.weight], ["Difficulty", currentQuestion.difficulty])
+      if (!playSettings.options.disable_timer)
+        stackListItems.push(["Time Allocated", currentQuestion.time_allocated])
       return <div className="Quiz bg-base">
-        <div style={{ display: 'flex' }}>
-          <Stats style={{ flex: 1 }} items={[["Title", `${currentQuestion.quiz.subject} - ${currentQuestion.quiz.topic}`], playSettings.options.instant_feedback ? ['Total Correct', totalCorrectAnswers] : null, ["Current", currentIndex + 1], ["Total", totalQuestions], ["Type", currentQuestion.type], ["Weight", currentQuestion.weight], !playSettings.options.disable_timer ? ["Time Allocated", currentQuestion.time_allocated] : null, ["Difficulty", currentQuestion.difficulty]]} />
-          <Hovertips popoverText="Download current play state" style={{ height: "calc(100% - 10px)", padding: 5, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <div className="flex ai-c">
+          <StackList direction="row" items={stackListItems} classNames={{
+            container: 'p-0 flex-1',
+            content: 'jc-sb'
+          }} />
+          <Hovertips popoverText="Download current play state" className="p-5 bg-light flex jc-c ai-c">
             <FaCloudDownloadAlt fill={theme.color.opposite_light} size={25} onClick={() => {
               download(`Play-${Date.now()}.yaml`, safeDump({
                 questions: allQuestions,
@@ -80,9 +89,9 @@ export default function Quiz() {
         }} />
       </div>
     } else {
-      return <div ref={ref} className="Quiz" onKeyPress={onKeyPress} tabIndex={0}>
+      return <div ref={ref} className="Quiz flex fd-c" onKeyPress={onKeyPress} tabIndex={0}>
         <IconGroup className="Report-icons" icons={navigationIcons} direction={settings.navigation.direction} style={generatedNavigationStyles} />
-        <Upload accept={[".yaml", ".yml"]} maxFiles={1} uploadMessage="Drag 'n' drop, or click to upload some play files (.json or .yaml)" onLoad={(result) => {
+        <Upload className="center" accept={[".yaml", ".yml"]} maxFiles={1} uploadMessage="Drag 'n' drop, or click to upload some play files (.json or .yaml)" onLoad={(result) => {
           const uploadedPlayState = yaml.safeLoad(result as string) as any;
           return uploadedPlayState;
         }} postRead={([playState]: IPlayDownloadedState[]) => {
