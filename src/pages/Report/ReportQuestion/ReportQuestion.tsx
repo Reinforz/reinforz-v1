@@ -25,7 +25,6 @@ export function ReportQuestion(props: Props) {
         }
       }
     }
-    console.log(questionString)
   } else {
     questionString = question.question;
   }

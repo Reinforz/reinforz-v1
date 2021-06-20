@@ -34,9 +34,16 @@ const sounds: Record<
 > = {} as any;
 
 soundNames.forEach((sound_url) => {
-  const audio = new Audio(process.env.PUBLIC_URL + `/sounds/${sound_url}.mp3`);
-  audio.volume = 0.25;
-  sounds[sound_url] = audio;
+  if (
+    window.location.host === 'http://localhost:3000' ||
+    window.location.host === 'https://reinforz.vercel.app'
+  ) {
+    const audio = new Audio(
+      process.env.PUBLIC_URL + `/sounds/${sound_url}.mp3`
+    );
+    audio.volume = 0.25;
+    sounds[sound_url] = audio;
+  }
 });
 
 export default sounds;
