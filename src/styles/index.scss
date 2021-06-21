@@ -190,6 +190,10 @@ div#root {
     width: calc(100% - 10px);
   }
 
+  & .w-calc_100p_m_10px{
+    width: calc(100% - 10px);
+  }
+
   & .h-calc_100p_m_10px{
     height: calc(100% - 10px);
   }
