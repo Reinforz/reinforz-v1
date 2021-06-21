@@ -2,8 +2,8 @@ import {
   IFibQuestionFull,
   IMsQuestionFull,
   IResult,
-  IResultInputQuestion,
-  IResultSelectionQuestion
+  IResultSelectionQuestion,
+  TResultInputQuestion
 } from '../types';
 import { QUIZ_1 } from './quizzes';
 
@@ -44,7 +44,7 @@ export const RESULT_2: IResult = {
         ...answer,
         isCorrect: _index === 0
       }))
-    ) as IResultInputQuestion['answers']
+    ) as TResultInputQuestion['answers']
   },
   user_answers: ['answer 1', 'answer 2'],
   hints_used: 2,

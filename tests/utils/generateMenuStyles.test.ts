@@ -9,18 +9,17 @@ it(`Should work correctly for position=right, isOpen=false`, () => {
   } = generateMenuStyles('right', false, 500);
 
   expect(containerStyle).toStrictEqual({
-    height: '100%',
     width: `100%`,
     left: `0px`,
-    position: 'absolute',
+    position: 'relative',
     transition: 'width 250ms ease-in-out, left 250ms ease-in-out'
   });
   expect(iconStyle).toStrictEqual({
     transform: 'rotate(-180deg)'
   });
-  expect(left).toStrictEqual(`100%`);
+  expect(left).toStrictEqual(`calc(100% + 5px)`);
   expect(iconsContainerStyle).toStrictEqual({
-    left: '-35px'
+    left: -50
   });
 });
 
@@ -33,18 +32,17 @@ it(`Should work correctly for position=right, isOpen=true`, () => {
   } = generateMenuStyles('right', true, 500);
 
   expect(containerStyle).toStrictEqual({
-    height: '100%',
     width: `calc(100% - 500px)`,
     left: `0px`,
-    position: 'absolute',
+    position: 'relative',
     transition: 'width 250ms ease-in-out, left 250ms ease-in-out'
   });
   expect(iconStyle).toStrictEqual({
     transform: 'rotate(0deg)'
   });
-  expect(left).toStrictEqual(`calc(100% - 5px)`);
+  expect(left).toStrictEqual(`calc(100% - 10px)`);
   expect(iconsContainerStyle).toStrictEqual({
-    left: '-35px'
+    left: -35
   });
 });
 
@@ -57,10 +55,9 @@ it(`Should work correctly for position=left, isOpen=true`, () => {
   } = generateMenuStyles('left', true, 500);
 
   expect(containerStyle).toStrictEqual({
-    height: '100%',
     width: `calc(100% - 500px)`,
     left: `500px`,
-    position: 'absolute',
+    position: 'relative',
     transition: 'width 250ms ease-in-out, left 250ms ease-in-out'
   });
   expect(iconStyle).toStrictEqual({
@@ -81,17 +78,16 @@ it(`Should work correctly for position=left, isOpen=false`, () => {
   } = generateMenuStyles('left', false, 500);
 
   expect(containerStyle).toStrictEqual({
-    height: '100%',
     width: `100%`,
     left: `0px`,
-    position: 'absolute',
+    position: 'relative',
     transition: 'width 250ms ease-in-out, left 250ms ease-in-out'
   });
   expect(iconStyle).toStrictEqual({
     transform: 'rotate(0deg)'
   });
-  expect(left).toStrictEqual(`-500px`);
+  expect(left).toStrictEqual(`-510px`);
   expect(iconsContainerStyle).toStrictEqual({
-    left: '100%'
+    left: 'calc(100% + 10px)'
   });
 });

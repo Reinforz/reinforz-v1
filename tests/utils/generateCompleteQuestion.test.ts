@@ -291,7 +291,8 @@ describe('FIB type questions', () => {
       explanation: 'No explanation available',
       hints: [],
       time_allocated: 60,
-      _id: expect.any(String)
+      _id: expect.any(String),
+      format: 'text'
     });
     expect(logs).toStrictEqual({ warns: [], errors: [] });
   });
