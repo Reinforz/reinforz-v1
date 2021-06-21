@@ -148,6 +148,7 @@ export function generateTheme(settings: ISettings) {
       },
       MuiButtonBase: {
         root: {
+          margin: 0,
           padding: 0
         }
       },
@@ -201,6 +202,7 @@ export function generateTheme(settings: ISettings) {
       },
       MuiFormGroup: {
         root: {
+          flexWrap: 'nowrap',
           backgroundColor: base,
           margin: 0,
           padding: 5

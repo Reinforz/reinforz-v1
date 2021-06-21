@@ -12,7 +12,7 @@ export interface ListCheckboxGroupProps {
 export default function ListCheckboxGroup(props: ListCheckboxGroupProps) {
   const { items, setState, value } = props;
   const { settings } = useThemeSettings();
-  return <FormGroup className="ListCheckboxGroup mb-5 bg-base" onChange={(e: any) => {
+  return <FormGroup className="ListCheckboxGroup bg-base pb-0" onChange={(e: any) => {
     if (e.target.checked) {
       settings.sound && sounds.pop_off.play();
       setState(value.concat(e.target.value))
@@ -24,8 +24,8 @@ export default function ListCheckboxGroup(props: ListCheckboxGroupProps) {
   }}>
     {items.map((item, i) => {
       return <FormControlLabel
-        key={`option${i}`} className={`ListCheckboxGroup-FormControlLabel bg-light`}
-        control={<Checkbox checked={value.includes(`${i}`)} value={`${i}`} color="primary" />}
+        key={`option${i}`} className={`ListCheckboxGroup-FormControlLabel bg-light mb-5 p-10`}
+        control={<Checkbox className="mr-10" checked={value.includes(`${i}`)} value={`${i}`} color="primary" />}
         label={item}
       />
     })}
