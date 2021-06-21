@@ -22,10 +22,12 @@ export default function QuestionInputs(props: Props) {
           <TextField autoFocus={i === 0} fullWidth inputProps={{
             placeholder: `Answer ${i + 1}`
           }} value={userAnswers[i] ?? ''} onChange={e => {
-            const min = Math.ceil(1);
-            const max = Math.floor(3);
-            const generatedRandomInt = Math.floor(Math.random() * (max - min + 1)) + min;
-            settings.sound && sounds[`keyboard_${generatedRandomInt}` as 'keyboard_1'].play()
+            if (settings.sound) {
+              const min = Math.ceil(1);
+              const max = Math.floor(3);
+              const generatedRandomInt = Math.floor(Math.random() * (max - min + 1)) + min;
+              sounds[`keyboard_${generatedRandomInt}` as 'keyboard_1'].play()
+            }
             userAnswers[i] = e.target.value;
             setUserAnswers([...userAnswers])
           }} /></div>

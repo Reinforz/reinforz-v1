@@ -1,7 +1,6 @@
 import { useMemo } from "react";
 import { ListCheckboxGroup, ListRadioGroup, Markdown } from "../../../components";
 import { TQuestionFull } from '../../../types';
-import "./QuestionOptions.scss";
 
 interface Props {
   setUserAnswers: (val: string[]) => any,
@@ -17,17 +16,13 @@ export default function QuestionOptions(props: Props) {
     // eslint-disable-next-line
   }, [_id])
 
-  const generateOptions = () => {
-    switch (props.question.type) {
-      case "MCQ":
-        return <ListRadioGroup setState={setUserAnswers} items={memoizedQuestionOptions} value={userAnswers} />
-      case "MS":
-        return <ListCheckboxGroup setState={setUserAnswers} items={memoizedQuestionOptions} value={userAnswers} />
-      default:
-        return null
-    }
+  switch (props.question.type) {
+    case "MCQ":
+      return <ListRadioGroup setState={setUserAnswers} items={memoizedQuestionOptions} value={userAnswers} />
+    case "MS":
+      return <ListCheckboxGroup setState={setUserAnswers} items={memoizedQuestionOptions} value={userAnswers} />
+    default:
+      return null
   }
-
-  return generateOptions()
 }
 

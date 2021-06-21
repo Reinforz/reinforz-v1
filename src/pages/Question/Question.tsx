@@ -122,7 +122,14 @@ export default function Question(props: Props) {
           }}>
             <FaClock fill={timeBreak ? red[500] : green[500]} size={20} />
           </Hovertips>}
-          <Button disabled={timeBreak} className="QuestionButton flex-1" variant="contained" color="primary" onClick={onNextButtonPress}>{!isLast ? "Next" : "Report"}</Button>
+          <Button disabled={timeBreak} className="QuestionButton flex-1" variant="contained" color="primary" onClick={() => {
+            if (
+              window.location.host === 'http://localhost:3000' ||
+              window.location.host === 'https://reinforz.vercel.app'
+            ) {
+              onNextButtonPress()
+            }
+          }}>{!isLast ? "Next" : "Report"}</Button>
           {timeout && !playSettings.options.disable_timer && <Typography className="QuestionTimer bg-light p-5 flex jc-c ai-c flex-1 bold fs-20 ml-5 h-calc_100p_m_10px">{displayTime(timeout)}</Typography>}
         </div>}
       </div>

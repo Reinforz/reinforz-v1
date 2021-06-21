@@ -286,3 +286,8 @@ export const NoTimerMultiChoiceQuestion = NoTimerQuestionTemplate.bind({});
 NoTimerMultiChoiceQuestion.args = {
   question: mcqQuestions[0]
 }
+
+export const NoTimerSnippetQuestion = NoTimerQuestionTemplate.bind({});
+NoTimerSnippetQuestion.args = {
+  question: snippetQuestions[0]
+}
