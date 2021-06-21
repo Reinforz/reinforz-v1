@@ -50,7 +50,7 @@ export default function Quiz() {
       const totalQuestions = allQuestions.length,
         totalCorrectAnswers = results.filter(result => result.verdict).length,
         currentQuestion = JSON.parse(JSON.stringify(currentItem)) as TQuestionFull;
-      const stackListItems: [ReactNode, ReactNode][] = [["Title", `${currentQuestion.quiz.subject} - ${currentQuestion.quiz.topic}`], ["Title", `${currentQuestion.quiz.subject} - ${currentQuestion.quiz.topic}`]];
+      const stackListItems: [ReactNode, ReactNode][] = [["Title", `${currentQuestion.quiz.subject} - ${currentQuestion.quiz.topic}`]];
       if (playSettings.options.instant_feedback)
         stackListItems.push(['Total Correct', totalCorrectAnswers])
       stackListItems.push(["Current", currentIndex + 1], ["Total", totalQuestions], ["Type", currentQuestion.type], ["Weight", currentQuestion.weight], ["Difficulty", currentQuestion.difficulty])

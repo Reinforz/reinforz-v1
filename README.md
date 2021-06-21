@@ -4,7 +4,7 @@
 
 <div align="center"> <h1>Nishan</h1> </div>
 <div align="center"><b>An online quiz app that force yourself to master a topic through continuous feedback.</b></div>
-<div align="center"><a href="https://reinforz.vercel.app/">App</a> | <a href="https://reinforz.github.io/reinforz-docs">Docs</a> | <a href="https://github.com/Devorein/reinforz/">Github</a> | <a href="https://vercel.com/devorein/reinforz">Vercel</a> | <a href="https://app.codecov.io/gh/Devorein/reinforz">Codecov</a></div>
+<div align="center"><a href="https://reinforz.vercel.app/">App</a> | <a href="https://reinforz.github.io/reinforz-docs">Docs</a> | <a href="https://github.com/Devorein/reinforz/">Github</a> | <a href="https://vercel.com/devorein/reinforz">Vercel</a> | <a href="https://app.codecov.io/gh/Devorein/reinforz">Codecov</a> | <a href="https://www.chromatic.com/builds?appId=60c72fca65eb86003902c8b1&branch=master">Chromatic</a></div>
 
 </br>
 
