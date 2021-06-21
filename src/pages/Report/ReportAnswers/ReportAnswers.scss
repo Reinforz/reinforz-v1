@@ -1,49 +1,13 @@
 .Report-Answers{
-  padding: 2.5px;
-  margin: 2.5px;
-  padding-bottom: 1.5px;
-  flex: 1;
-
   &-container{
-    padding: 2.5px;
-    margin: 2.5px;
-    margin-bottom: 5px;
-    padding-bottom: 1.5px;
-
     &-userAnswer{
       padding: 10px;
-      margin: 2.5px;
-      text-align: center;
       font-size: 18px;
-      margin-bottom: 5px;
     }
 
     &-item{
-      margin: 2.5px;
-      margin-bottom: 5px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 5px;
       p{
         margin: 0px;
-      }
-
-      &-text{
-        padding: 10px;
-        margin-right: 2.5px;
-      }
-
-      &-explanation{
-        padding: 10px;
-        margin: 2.5px;
-      }
-
-      &-isCorrect{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-left: 5px;
       }
     }
   }

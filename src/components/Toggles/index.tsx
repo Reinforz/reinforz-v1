@@ -1,10 +1,9 @@
 import { FormGroup, InputLabel, Switch, withStyles } from '@material-ui/core';
 import { green, red } from '@material-ui/core/colors';
-import clsx from "clsx";
 import React, { useContext } from 'react';
 import { SettingsContext } from '../../context/SettingsContext';
-import { useThemeSettings } from '../../hooks';
 import sounds from '../../sounds';
+import { transformTextBySeparator } from '../../utils';
 
 const OnOffSwitch = withStyles({
   switchBase: {
@@ -23,37 +22,39 @@ const OnOffSwitch = withStyles({
   checked: {},
 })(Switch);
 
-interface Props<I extends Record<string, any>> {
+export interface TogglesProps<I extends Record<string, any>> {
   items: (keyof I)[]
-  itemsMap: I
-  setItems: (item: I) => void
+  state: I
+  setState: React.Dispatch<React.SetStateAction<I>>
   classNames?: {
-    FormGroup?: string
-    InputLabel?: string
+    container?: string
+    formGroup?: string
+    inputLabel?: string
+    switch?: string
   }
 }
 
-export default function Toggles<I extends Record<string, any>>(props: Props<I>) {
-  const { theme: THEME } = useThemeSettings();
+export default function Toggles<I extends Record<string, any>>(props: TogglesProps<I>) {
   const { settings } = useContext(SettingsContext);
-  const { itemsMap, setItems } = props;
+  const { state, setState, classNames = {} } = props;
   const items = props.items as string[];
-  return <> {items.map((item) =>
-    <FormGroup key={item} row className={clsx("Toggles-item", props?.classNames?.FormGroup && props.classNames.FormGroup)} style={{ backgroundColor: THEME.color.base }}>
-      <InputLabel className={clsx("Toggles-item-label", props?.classNames?.InputLabel && props.classNames.InputLabel)}>{item.charAt(0).toUpperCase() + item.substr(1)}</InputLabel>
+  return <div className={`Toggles bg-dark w-100p ${classNames.container ?? ''}`}> {items.map((item, index) =>
+    <FormGroup key={item} row className={`Toggles-item bg-base p-5${items.length - 1 !== index ? " mb-5" : ""} ${classNames.formGroup ?? ''}`}>
+      <InputLabel className={`Toggles-item-label mb-0 ${classNames.inputLabel ?? ''}`}>{transformTextBySeparator(item)}</InputLabel>
       <OnOffSwitch
-        checked={Boolean(itemsMap[item])}
+        className={`${classNames.switch ?? ''}`}
+        checked={Boolean(state[item])}
         onChange={(e) => {
-          const checked = itemsMap[item];
+          const checked = state[item];
           if (checked && settings.sound) {
             sounds.switch_off.play()
           } else if (!checked && settings.sound) {
             sounds.switch_on.play()
           }
-          setItems({ ...itemsMap, [item]: !checked })
+          setState({ ...state, [item]: !checked })
         }}
       />
     </FormGroup>
   )}
-  </>
+  </div>
 }

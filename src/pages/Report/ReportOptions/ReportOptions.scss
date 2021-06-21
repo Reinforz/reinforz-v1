@@ -1,31 +1,7 @@
 .Report-Options{
-  padding: 2.5px;
-  margin: 2.5px;
-  padding-bottom: 1.5px;
-  flex: 1;
-
   &-container{
-    padding: 2.5px;
-    margin: 2.5px;
-    margin-bottom: 5px;
-    padding-bottom: 1.5px;
-
-    &-item{
-      padding: 5px;
-      margin: 2.5px;
-      margin-bottom: 5px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      &-explanation{
-        padding: 10px;
-        margin: 2.5px;
-      }
-
-      p{
-        margin: 0px;
-      }
+    p{
+      margin: 0px;
     }
   }
 }

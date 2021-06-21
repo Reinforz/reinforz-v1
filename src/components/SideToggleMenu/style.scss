@@ -1,0 +1,23 @@
+.SideToggleMenu{
+  height: 100%;
+
+  &-content{
+    height: 100%;
+  }
+  
+  &-sidebar{
+    position: absolute;
+    top: 0px;
+    height: calc(100% - 10px);
+    transition: left 250ms ease-in-out;
+    z-index: 50;
+    
+    &-icons{
+      top: 50%;
+      position: absolute;
+      transform: translateY(-50%);
+      transition: left 250ms ease-in-out opacity 250ms ease-in-out;
+      box-shadow: 3px 3px 10px 0px #212223;
+    }
+  }
+}

@@ -1,0 +1,25 @@
+.QuestionDisplay{
+  height: 250px;
+  max-height: 250px;
+  
+  &-question{
+    font-size: 1.25em;
+  }
+
+  &-image {
+    position: relative;
+    height: 250px;
+    img {
+      object-fit: contain;
+      width: calc(100% - 10px);
+      height: calc(100% - 10px);
+    }
+  }
+
+  .question-chunk {
+    padding: 5px 10px;
+    position: relative;
+    top: -2px;
+    border-radius: 5px;
+  }
+}

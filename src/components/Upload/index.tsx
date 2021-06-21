@@ -1,18 +1,18 @@
+import { Typography } from "@material-ui/core";
 import { OptionsObject, SnackbarKey, SnackbarMessage, useSnackbar } from "notistack";
 import { useContext } from "react";
 import { DropzoneOptions, useDropzone } from "react-dropzone";
 import { SettingsContext } from "../../context/SettingsContext";
-import { useThemeSettings } from "../../hooks";
 import sounds from "../../sounds";
 import "./style.scss";
 
-interface Props {
-  maxFiles?: number
-  onLoad: (result: string, ext: string, notistack: { enqueueSnackbar: ((message: SnackbarMessage, options?: OptionsObject | undefined) => SnackbarKey), notistackOptionsObject: OptionsObject }, resolve: ((value: any) => void)) => void
+export interface UploadProps {
+  onLoad: (result: string, file: File, notistack: { enqueueSnackbar: ((message: SnackbarMessage, options?: OptionsObject | undefined) => SnackbarKey), notistackOptionsObject: OptionsObject }) => any
   postRead: (files: any[]) => void
   className?: string
   uploadMessage?: string,
-  accept?: string[]
+  accept?: string[],
+  maxFiles?: number
 }
 
 const notistackOptionsObject = {
@@ -23,8 +23,7 @@ const notistackOptionsObject = {
   },
 } as OptionsObject
 
-export default function Upload(props: Props) {
-  const { theme } = useThemeSettings();
+export default function Upload(props: UploadProps) {
   const { settings } = useContext(SettingsContext);
   const { enqueueSnackbar } = useSnackbar();
   const { uploadMessage, className, onLoad, postRead, maxFiles } = props;
@@ -37,12 +36,12 @@ export default function Upload(props: Props) {
         reader.onabort = () => reject('file reading was aborted');
         reader.onerror = () => reject('file reading has failed');
         reader.onload = () => {
-          const dotSplitChunks = file.name.split(".");
-          const ext = dotSplitChunks[dotSplitChunks.length - 1]
           const { result } = reader;
           if (result) {
             try {
-              onLoad(result as string, ext, { enqueueSnackbar, notistackOptionsObject }, resolve);
+              const data = onLoad(result as string, file, { enqueueSnackbar, notistackOptionsObject });
+              if (data !== null && data !== undefined)
+                resolve(data);
             } catch (err: any) {
               enqueueSnackbar(`${file.name} Error: ${err.message}`, notistackOptionsObject)
             }
@@ -79,12 +78,12 @@ export default function Upload(props: Props) {
     onClick && onClick(e)
   }
 
-  return <div style={{ borderColor, backgroundColor: theme.color.light, color: theme.palette.text.secondary }} className={`Upload ${className ?? ''}`} {...rootProps}>
+  return <Typography component="div" variant="h6" style={{ borderColor }} className={`Upload bold bg-light ${className ?? ''}`} {...rootProps as any}>
     <input {...getInputProps()} />
     {
       isDragActive ?
         <p>Drop the files here ...</p> :
         <p>{uploadMessage ?? `Drag 'n' drop some files here, or click to upload files (.json or .yaml files)`}</p>
     }
-  </div>
+  </Typography>
 }

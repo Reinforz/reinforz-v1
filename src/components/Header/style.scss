@@ -1,11 +1,11 @@
 .Header {
-  padding: 5px;
-  margin: 2.5px;
-  margin-bottom: 5px;
   user-select: none;
 
+  &-item{
+    height: 100%;
+  }
+  
   &-title{
-    flex: 1;
     text-align: center;
   }
 }

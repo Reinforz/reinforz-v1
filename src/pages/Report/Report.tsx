@@ -4,7 +4,7 @@ import { AiFillHome } from 'react-icons/ai';
 import { FaCloudUploadAlt, FaKeyboard } from 'react-icons/fa';
 import { IoLogoGameControllerB, IoMdCreate, IoMdSettings } from 'react-icons/io';
 import { useHistory, useLocation } from 'react-router-dom';
-import { IconGroup, Menu, StackList } from '../../components';
+import { IconGroup, SideToggleMenu, StackList } from '../../components';
 import { REINFORZ_REPORT_SETTINGS_LS_KEY } from '../../constants';
 import { ReportContext } from '../../context/ReportContext';
 import { RootContext } from '../../context/RootContext';
@@ -96,8 +96,8 @@ export default function Report() {
 
   const { filters, sort } = reportSettings;
 
-  const filteredResults = applyReportFilters(report.results, filters);
-  const sortedResults = applyReportSorts(filteredResults, sort);
+  const filteredResults = useMemo(() => applyReportFilters(report.results, reportSettings.filters), [report.results, reportSettings.filters]);
+  const sortedResults = useMemo(() => applyReportSorts(filteredResults, sort), [filteredResults, sort]);
   const filteredQuizzesMap = generateQuizzesFromResults(
     filteredResults,
     allQuestionsMap
@@ -134,13 +134,12 @@ export default function Report() {
   const render = () => {
     if (report.results.length !== 0) {
       return (
-        <Menu
+        <SideToggleMenu
           lsKey="REPORT_MENU"
           contents={[
             <ReportFilter />,
             <div
               className="Report"
-              style={{ color: theme.palette.text.primary }}
               {...navigationShortcutProps}
               onKeyUp={(e) => {
                 navigateBetweenPresets(e, reportSettingsPresets, setReportSettingsPresets, REINFORZ_REPORT_SETTINGS_LS_KEY)
@@ -150,17 +149,17 @@ export default function Report() {
               {navigationIconGroup}
               <ReportTable />
               {!filters.excluded_columns.includes('report_info') ? (
-                <div
+                <div className="overflow-auto flex fd-c p-5"
                   style={{
                     width: 300,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    overflow: 'auto'
                   }}
                 >
                   {!filters.excluded_columns.includes('report_stats') ? (
                     <StackList
                       header={'Report Stats'}
+                      classNames={{
+                        container: 'mb-5'
+                      }}
                       items={[
                         [
                           'Created At',
@@ -182,6 +181,9 @@ export default function Report() {
                   <div className="Report-Settings">
                     {!filters.excluded_columns.includes('play_options') ? (
                       <StackList
+                        classNames={{
+                          container: 'mb-5'
+                        }}
                         header={'Play Options'}
                         items={Object.entries(
                           playSettings.options
@@ -199,6 +201,9 @@ export default function Report() {
                     ) : null}
                     {!filters.excluded_columns.includes('play_filters') ? (
                       <StackList
+                        classNames={{
+                          container: 'mb-5'
+                        }}
                         header={'Play Filters'}
                         items={Object.entries(
                           playSettings.filters
@@ -228,7 +233,6 @@ export default function Report() {
         <div
           ref={ref}
           className="Report"
-          style={{ color: theme.palette.text.primary }}
           {...navigationShortcutProps}
         >
           {navigationIconGroup}

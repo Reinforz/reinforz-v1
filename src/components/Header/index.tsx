@@ -1,6 +1,5 @@
 import { Typography } from "@material-ui/core";
 import { Flex } from "..";
-import { useThemeSettings } from "../../hooks";
 import "./style.scss";
 
 interface Props {
@@ -10,12 +9,11 @@ interface Props {
 }
 
 export default function Header(props: Props) {
-  const { theme } = useThemeSettings();
-  return <Flex className={`Header ${props.className ?? ''}`} style={{ backgroundColor: theme.color.dark, color: theme.palette.text.primary }}>
-    {props.sideElements?.[0] ?? null}
-    <Typography variant="h6" className="Header-title">
+  return <Flex className={`Header p-5 pr-0 mb-5 bg-dark ${props.className ?? ''}`}>
+    {props.sideElements?.[0] ? <Flex className="p-5 mr-5 Header-item Header-leftContent">{props.sideElements[0]}</Flex> : null}
+    <Typography variant="h6" className="p-5 mr-5 flex-1 ta-c Header-item Header-title flex jc-c ai-c">
       {props.header}
     </Typography>
-    {props.sideElements?.[1] ?? null}
+    {props.sideElements?.[1] ? <Flex className="p-5 mr-5 Header-item Header-rightContent">{props.sideElements[1]}</Flex> : null}
   </Flex>
 }

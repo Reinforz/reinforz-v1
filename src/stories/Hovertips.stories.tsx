@@ -1,6 +1,5 @@
 import { Typography } from '@material-ui/core';
 import { Meta, Story } from '@storybook/react';
-import { Content } from '../components';
 import Hovertips, { HovertipsProps } from '../components/Hovertips';
 import Wrapper from "./Wrapper";
 
@@ -12,9 +11,7 @@ export default {
 const Template: Story<HovertipsProps> = (args) => {
   return <Wrapper>
     <Hovertips {...args}>
-      <Content style={{ width: '100%' }}>
-        <Typography>Hover over me</Typography>
-      </Content>
+      <Typography>Hover over me</Typography>
     </Hovertips>
   </Wrapper>
 };

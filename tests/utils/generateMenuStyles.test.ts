@@ -2,13 +2,13 @@ import { generateMenuStyles } from '../../src/utils';
 
 it(`Should work correctly for position=right, isOpen=false`, () => {
   const {
-    contentStyle,
+    containerStyle,
     left,
     iconStyle,
     iconsContainerStyle
   } = generateMenuStyles('right', false, 500);
 
-  expect(contentStyle).toStrictEqual({
+  expect(containerStyle).toStrictEqual({
     height: '100%',
     width: `100%`,
     left: `0px`,
@@ -26,13 +26,13 @@ it(`Should work correctly for position=right, isOpen=false`, () => {
 
 it(`Should work correctly for position=right, isOpen=true`, () => {
   const {
-    contentStyle,
+    containerStyle,
     left,
     iconStyle,
     iconsContainerStyle
   } = generateMenuStyles('right', true, 500);
 
-  expect(contentStyle).toStrictEqual({
+  expect(containerStyle).toStrictEqual({
     height: '100%',
     width: `calc(100% - 500px)`,
     left: `0px`,
@@ -50,13 +50,13 @@ it(`Should work correctly for position=right, isOpen=true`, () => {
 
 it(`Should work correctly for position=left, isOpen=true`, () => {
   const {
-    contentStyle,
+    containerStyle,
     left,
     iconStyle,
     iconsContainerStyle
   } = generateMenuStyles('left', true, 500);
 
-  expect(contentStyle).toStrictEqual({
+  expect(containerStyle).toStrictEqual({
     height: '100%',
     width: `calc(100% - 500px)`,
     left: `500px`,
@@ -74,13 +74,13 @@ it(`Should work correctly for position=left, isOpen=true`, () => {
 
 it(`Should work correctly for position=left, isOpen=false`, () => {
   const {
-    contentStyle,
+    containerStyle,
     left,
     iconStyle,
     iconsContainerStyle
   } = generateMenuStyles('left', false, 500);
 
-  expect(contentStyle).toStrictEqual({
+  expect(containerStyle).toStrictEqual({
     height: '100%',
     width: `100%`,
     left: `0px`,

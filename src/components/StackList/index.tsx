@@ -1,19 +1,27 @@
-import { useThemeSettings } from "../../hooks";
-import "./style.scss";
-
-interface Props {
-  items: [string | number | boolean | JSX.Element, string | number | boolean | JSX.Element][]
-  header: string
+import { Typography } from "@material-ui/core";
+import { ReactNode } from "react";
+export interface StackListProps {
+  items: [ReactNode, ReactNode][]
+  header?: string
+  classNames?: {
+    container?: string
+    header?: string
+    content?: string
+    contentItem?: string
+    contentItemLabel?: string
+    contentItemValue?: string
+  }
+  direction?: 'row' | 'column'
 }
 
-export default function StackList(props: Props) {
-  const { theme } = useThemeSettings();
-  return <div className="StackList" style={{ backgroundColor: theme.color.base, color: theme.palette.text.primary }}>
-    <div className="StackList-header" style={{ backgroundColor: theme.color.dark }}>{props.header}</div>
-    <div className="StackList-content" style={{ backgroundColor: theme.color.dark }}>
-      {props.items.map(([label, value], index) => <div className="StackList-content-item" key={index} style={{ backgroundColor: theme.color.light }}>
-        <div className="StackList-content-item-label">{label}</div>
-        <div className="StackList-content-item-value">{value}</div>
+export default function StackList(props: StackListProps) {
+  const { items, header, classNames = {}, direction = 'column' } = props;
+  return <div className={`StackList bg-base p-5 flex ${direction === 'column' ? 'fd-c' : ''} ${classNames.container ?? ''}`}>
+    {header && <Typography className={`StackList-header bg-dark bold ta-c p-5 flex jc-c ai-c p-10 ${direction === 'column' ? 'mb-5' : 'mr-5'} ${classNames.header ?? ''}`}>{header}</Typography>}
+    <div className={`StackList-content bg-dark p-5 flex ${direction === 'column' ? 'pb-0' : 'pr-0'} ${direction === 'column' ? 'fd-c' : ''} ${classNames.content ?? ''}`}>
+      {items.map(([label, value], index) => <div className={`StackList-content-item flex jc-sb p-5 bg-base p-5 pr-0 ${direction === 'column' ? 'mb-5' : 'mr-5'} ${classNames.contentItem ?? ''}`} key={index}>
+        <Typography component="div" className={`StackList-content-item-label flex mr-5 p-10 bg-light jc-sb ai-c ${classNames.contentItemLabel ?? ''}`}>{label}</Typography>
+        <Typography component="div" className={`StackList-content-item-value flex mr-5 p-10 bg-light jc-sb ai-c bold ${classNames.contentItemValue ?? ''}`}>{value}</Typography>
       </div>)}
     </div>
   </div>

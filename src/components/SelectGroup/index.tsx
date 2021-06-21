@@ -3,24 +3,34 @@ import { Select } from "..";
 import { transformTextBySeparator } from "../../utils";
 import "./style.scss";
 
-interface Props {
+export interface SelectGroupProps {
   label: string
   setState: (state: any) => void
   state: any
   stateKey: string
   groupItems: [string[], string, string][]
+  className?: string
+  classNames?: {
+    formGroup?: string
+    inputLabel?: string
+    content?: string
+    select?: {
+      formGroup?: string
+      inputLabel?: string
+      content?: string
+      select?: string
+    }
+  }
 }
 
-export default function SelectGroup(props: Props) {
-  const { label, setState, state, stateKey, groupItems } = props;
-  return <FormGroup className="Select-Group" style={{
-    flexDirection: 'column'
-  }}>
-    <InputLabel className="Select-Group-header">
+export default function SelectGroup(props: SelectGroupProps) {
+  const { label, setState, state, stateKey, className = '', groupItems, classNames = {} } = props;
+  return <FormGroup className={`Select-Group fd-c ${className} ${classNames.formGroup}`}>
+    <InputLabel className={`Select-Group-header ${classNames.inputLabel}`}>
       {label}
     </InputLabel>
-    <div className="Select-Group-content">
-      {groupItems.map(([items, label, itemStateKey], index) => <Select key={index} className="Select-Group-content-item" items={items} label={label} setState={(newState) => {
+    <div className={`Select-Group-content flex jc-c ai-c ${classNames.content}`}>
+      {groupItems.map(([items, label, itemStateKey], index) => <Select key={index} classNames={classNames.select ?? {}} className={`Select-Group-content-item flex-1 p-0 ${index !== groupItems.length - 1 ? ' mr-5' : ''}`} items={items} label={label} setState={(newState) => {
         setState({
           ...state,
           [stateKey]: {

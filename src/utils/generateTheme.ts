@@ -124,17 +124,6 @@ export function generateTheme(settings: ISettings) {
           }
         }
       },
-      MuiButton: {
-        contained: {
-          margin: 2.5
-        }
-      },
-      MuiInput: {
-        root: {
-          padding: 2.5,
-          paddingLeft: 5
-        }
-      },
       MuiCheckbox: {
         root: {
           padding: 0,
@@ -147,6 +136,11 @@ export function generateTheme(settings: ISettings) {
           height: '18px'
         }
       },
+      MuiSelect: {
+        select: {
+          paddingLeft: 5
+        }
+      },
       MuiRadio: {
         root: {
           padding: 5
@@ -154,14 +148,15 @@ export function generateTheme(settings: ISettings) {
       },
       MuiButtonBase: {
         root: {
+          margin: 0,
           padding: 0
         }
       },
       MuiFormControlLabel: {
         root: {
-          marginLeft: 2.5,
-          marginRight: 2.5,
-          margin: 2.5,
+          marginLeft: 0,
+          marginRight: 0,
+          margin: 0,
           padding: 5,
           backgroundColor: light
         }
@@ -175,13 +170,21 @@ export function generateTheme(settings: ISettings) {
       MuiFormControl: {
         root: {
           backgroundColor: light,
-          margin: 2.5,
-          padding: 2.5
+          padding: 5
         }
       },
       MuiTypography: {
         root: {
           color: text.primary
+        }
+      },
+      MuiInputBase: {
+        input: {
+          paddingBottom: 5
+        },
+        root: {
+          padding: 5,
+          paddingLeft: 0
         }
       },
       MuiInputLabel: {
@@ -190,7 +193,8 @@ export function generateTheme(settings: ISettings) {
           fontSize: '1em',
           backgroundColor: dark,
           padding: 5,
-          margin: 2.5,
+          margin: 0,
+          marginBottom: 5,
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center'
@@ -198,9 +202,10 @@ export function generateTheme(settings: ISettings) {
       },
       MuiFormGroup: {
         root: {
+          flexWrap: 'nowrap',
           backgroundColor: base,
-          margin: 2.5,
-          padding: 2.5
+          margin: 0,
+          padding: 5
         }
       }
     }

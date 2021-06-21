@@ -1,15 +1,14 @@
-import { useThemeSettings } from "../../hooks";
 import "./style.scss";
 
 export interface ContentProps {
   children: JSX.Element | JSX.Element[] | string
   className?: string
-  style?: React.CSSProperties
+  style?: React.CSSProperties,
 }
 
 export function Content(props: ContentProps) {
-  const { theme } = useThemeSettings();
-  return <div className={`Content ${props.className ?? ''}`} style={{ color: theme.palette.text.primary, backgroundColor: theme.color.dark, ...props.style ?? {} }}>
+  const styles: React.CSSProperties = { ...props.style ?? {} };
+  return <div className={`Content bg-dark p-5 ${props.className ?? ''}`} style={styles}>
     {props.children}
   </div>
 }

@@ -1,11 +1,6 @@
 .Settings {
-  position: absolute;
-  left: 50%;
-  top: 50%;
   transform: translate(-50%,-50%);
   width: 50%;
-  align-items: center;
-  padding: 2.5px;
   max-width: 500px;
   
   &-icons{
@@ -13,68 +8,8 @@
   }
   
   &-header{
-    display: flex;
-    font-size: 1.25em;
-    font-weight: bolder;
-    padding: 5px;
-    margin: 2.5px;
-
-    &-text {
-      flex: 1 1 0%;
-      text-align: center;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-transform: uppercase;
-    }
-
     .Preset {
       width: 200px;
-    }
-  }
-
-  &-icon {
-    font-size: 1em;
-    padding: 2;
-    cursor: pointer;
-  }
-  
-  &-content{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 2.5px;
-    margin: 2.5px;
-
-    .MuiFormControlLabel-root{
-      padding: 0px 5px;
-    }
-
-    .MuiFormGroup-root{
-      width: calc(100% - 10px);
-      flex-direction: row;
-    }
-
-    .MuiInputLabel-root{
-      margin-right: 20px;
-      width: 100px;
-      font-weight: bolder;
-      text-align: center;
-    }
-
-    &-group{
-      width: calc(100% - 10px);
-      padding: 5px;
-      margin: 5px;
-      border-radius: 5px;
-      
-      .MuiRadio-root{
-        padding: 5px;
-      }
-      .MuiTypography-root{
-        display: flex;
-        padding-left: 5px;
-      }
     }
   }
 }

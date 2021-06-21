@@ -1,7 +1,7 @@
 import { Button } from '@material-ui/core';
 import { safeDump } from 'js-yaml';
 import React, { useCallback, useContext } from 'react';
-import { Hovertips, Select } from '../../../components';
+import { Header, Hovertips, Select } from '../../../components';
 import { ReportContext } from '../../../context/ReportContext';
 import { useThemeSettings } from '../../../hooks';
 import sounds from '../../../sounds';
@@ -10,7 +10,7 @@ import "./ReportExport.scss";
 
 export default function ReportExport() {
   const { sortedResults, filteredQuizzesMap, report: { settings: playSettings }, reportSettings, setReportSettings } = useContext(ReportContext);
-  const { theme, settings } = useThemeSettings();
+  const { settings } = useThemeSettings();
 
   const { export: exportState } = reportSettings;
   const { export_type, export_as } = exportState;
@@ -43,23 +43,29 @@ export default function ReportExport() {
   }
 
   return (
-    <div className="Report-Export" style={{ color: theme.palette.text.primary, backgroundColor: theme.color.base }}>
-      <div className="Report-Export-header" style={{ backgroundColor: theme.color.dark }}>Report Export</div>
-      <div className="Report-Export-content" style={{ backgroundColor: theme.color.dark }}>
-        <Select lsKey={"REPORT_EXPORT"} items={['Quizzes', 'Report']} label={"Export Type"} menuItemLabel={(item) => item} setState={(exportState) => {
+    <div className="Report-Export bg-base p-5 mb-5">
+      <Header header={"Report Export"} />
+      <div className="Report-Export-content bg-dark p-5">
+        <Select classNames={{ formGroup: 'mb-5' }} lsKey={"REPORT_EXPORT"} items={['Quizzes', 'Report']} label={"Export Type"} menuItemLabel={(item) => item} setState={(exportState) => {
           setReportSettings({
             ...reportSettings,
-            export: exportState as any
+            export: {
+              ...reportSettings.export,
+              ...exportState
+            }
           })
         }} state={exportState} stateKey={"export_type"} />
-        <Select lsKey={"REPORT_EXPORT"} items={['YAML', 'JSON']} label={"Export As"} menuItemLabel={(item) => item} setState={(exportState) => {
+        <Select classNames={{ formGroup: 'mb-5' }} lsKey={"REPORT_EXPORT"} items={['YAML', 'JSON']} label={"Export As"} menuItemLabel={(item) => item} setState={(exportState) => {
           setReportSettings({
             ...reportSettings,
-            export: exportState as any
+            export: {
+              ...reportSettings.export,
+              ...exportState
+            }
           })
         }} state={exportState} stateKey={"export_as"} />
 
-        <Hovertips popoverText={`Export ${export_type} as ${export_as}`} className="Report-Export-button">
+        <Hovertips popoverText={`Export ${export_type} as ${export_as}`} className="Report-Export-button jc-c flex p-5">
           <Button variant="contained" color="primary" onClick={() => {
             settings.sound && sounds.swoosh.play();
             downloadFiles()

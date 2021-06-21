@@ -21,6 +21,7 @@ export * from './generateCompleteQuestion';
 export * from './generateDefaultPlaySettings';
 export * from './generateDefaultReportSettings';
 export * from './generateDefaultSettings';
+export * from './generateDynamicStyleClasses';
 export * from './generateInputQuestionAnswers';
 export * from './generateMenuStyles';
 export * from './generateNavigationStyles';

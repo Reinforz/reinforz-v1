@@ -1,14 +1,14 @@
-import { Button, useTheme } from "@material-ui/core";
+import { Button, Typography } from "@material-ui/core";
 import { green, red } from "@material-ui/core/colors";
 import React, { useContext, useEffect, useMemo, useRef, useState } from "react";
 import { FaClock } from "react-icons/fa";
-import { Hovertips, Markdown } from "../../components";
+import { Hovertips } from "../../components";
+import { QuestionDisplay } from "../../components/QuestionDisplay";
 import { RootContext } from "../../context/RootContext";
 import { SettingsContext } from "../../context/SettingsContext";
 import sounds from "../../sounds";
-import { ExtendedTheme, TQuestionFull } from "../../types";
+import { TQuestionFull } from "../../types";
 import { applyOptionsShortcut, displayTime } from "../../utils";
-import FibQuestionDisplay from "./FibQuestionDisplay";
 import "./Question.scss";
 import QuestionHints from "./QuestionHints/QuestionHints";
 import QuestionInputs from "./QuestionInputs/QuestionInputs";
@@ -23,13 +23,12 @@ interface Props {
 export default function Question(props: Props) {
   const { settings } = useContext(SettingsContext)
   const { playSettings } = useContext(RootContext);
-  const { changeCounter, isLast, question: { image, hints, time_allocated, type, options } } = props;
+  const { changeCounter, isLast, question: { hints, time_allocated, type, options } } = props;
   const [userAnswers, setUserAnswers] = useState<string[]>([]);
   const [usedHints, setUsedHints] = useState<string[]>([]);
   const [timeout, setTimeout] = useState<null | number>(null);
   const [timer, setTimer] = useState<null | NodeJS.Timeout>(null);
   const [timeBreak, setTimeBreak] = useState(false);
-  const theme = useTheme() as ExtendedTheme;
   const ref = useRef<HTMLDivElement | null>(null);
 
   const { disable_timer } = playSettings.options
@@ -75,17 +74,15 @@ export default function Question(props: Props) {
   }, [props.question, disable_timer])
 
   const memoizedFIBQuestionComponent = useMemo(() => {
-    return <FibQuestionDisplay question={props.question.question as string[]} userAnswers={userAnswers} image={props.question.image} />
+    return <QuestionDisplay question={props.question} userAnswers={userAnswers} showImage={Boolean(props.question.image)} />
   }, [props.question, userAnswers])
 
   const memoizedSelectionQuestionComponent = useMemo(() => {
-    return <div className="Question-question" style={{ gridArea: props.question.image ? `1/1/2/2` : `1/1/2/3`, backgroundColor: theme.color.light }}>
-      <Markdown content={props.question.question as string} />
-    </div>
+    return <QuestionDisplay question={props.question} userAnswers={userAnswers} showImage={Boolean(props.question.image)} />
     // eslint-disable-next-line
   }, [props.question])
 
-  return <div className="Question" ref={ref} style={{ backgroundColor: theme.color.dark, color: theme.palette.text.primary }} onKeyUp={(e) => {
+  return <div className="Question bg-dark p-5" ref={ref} onKeyUp={(e) => {
     if (settings.shortcuts) {
       if (e.nativeEvent.altKey && e.nativeEvent.key === "a")
         onNextButtonPress();
@@ -94,36 +91,49 @@ export default function Question(props: Props) {
     }
   }} tabIndex={0}>
     {props.question.type === "FIB" ? memoizedFIBQuestionComponent : memoizedSelectionQuestionComponent}
-    {image && <div className="Question-image" style={{ gridArea: `1/2/2/3`, backgroundColor: theme.color.light }}><img src={image} alt="Question" /></div>}
-    {props.question.type === "MCQ" || props.question.type === "MS"
-      ? <QuestionOptions setUserAnswers={setUserAnswers} userAnswers={userAnswers} question={props.question} />
-      : <QuestionInputs setUserAnswers={setUserAnswers} userAnswers={userAnswers} question={props.question} />}
-    <QuestionHints usedHints={usedHints} setUsedHints={setUsedHints} hints={hints} />
-    {<div style={{ display: 'flex', gridArea: `3/2/4/3`, alignItems: `center`, height: '65px' }}>
-      {!disable_timer && <Hovertips popoverAnchorOrigin={{
-        vertical: 'top',
-        horizontal: 'center',
-      }} popoverTransformOrigin={{
-        vertical: 'bottom',
-        horizontal: 'center',
-      }} className="Question-timer" popoverText={timeBreak ? "Stop time break" : "Start time break"} style={{ backgroundColor: theme.color.base, height: 'calc(100% - 15px)' }} onClick={() => {
-        setTimeBreak((timeBreak) => !timeBreak);
-        if (timeBreak === false) {
-          setTimer(null);
-          typeof timer === "number" && clearInterval(timer)
-        } else {
-          const timer = setInterval(() => {
-            setTimeout((seconds) => {
-              return typeof seconds === "number" ? seconds - 1 : 0
-            })
-          }, 1000);
-          setTimer(timer)
-        }
-      }}>
-        <FaClock fill={timeBreak ? red[500] : green[500]} size={20} />
-      </Hovertips>}
-      <Button disabled={timeBreak} className="QuestionButton" variant="contained" color="primary" onClick={onNextButtonPress}>{!isLast ? "Next" : "Report"}</Button>
-      {timeout && !playSettings.options.disable_timer && <div style={{ backgroundColor: theme.color.base, color: theme.palette.text.primary }} className="QuestionTimer">{displayTime(timeout)}</div>}
-    </div>}
+    <div className="flex" style={{ height: "calc(100% - 255px)" }}>
+      <div className="overflowY-auto flex-1 mr-5">
+        {props.question.type === "MCQ" || props.question.type === "MS"
+          ? <QuestionOptions setUserAnswers={setUserAnswers} userAnswers={userAnswers} question={props.question} />
+          : <QuestionInputs setUserAnswers={setUserAnswers} userAnswers={userAnswers} question={props.question} />}
+      </div>
+      <div className="flex fd-c bg-base p-5 pb-0" style={{ width: 300 }}>
+        <QuestionHints usedHints={usedHints} setUsedHints={setUsedHints} hints={hints} />
+        {<div className="flex ai-c mb-5" style={{ height: '65px' }}>
+          {!disable_timer && <Hovertips popoverAnchorOrigin={{
+            vertical: 'top',
+            horizontal: 'center',
+          }} popoverTransformOrigin={{
+            vertical: 'bottom',
+            horizontal: 'center',
+          }} className="Question-timerBreak bg-light p-5 mr-5 jc-c ai-c flex br-5 c-p h-calc_100p_m_10px" popoverText={timeBreak ? "Stop time break" : "Start time break"} onClick={() => {
+            setTimeBreak((timeBreak) => !timeBreak);
+            if (timeBreak === false) {
+              setTimer(null);
+              typeof timer === "number" && clearInterval(timer)
+            } else {
+              const timer = setInterval(() => {
+                setTimeout((seconds) => {
+                  return typeof seconds === "number" ? seconds - 1 : 0
+                })
+              }, 1000);
+              setTimer(timer)
+            }
+          }}>
+            <FaClock fill={timeBreak ? red[500] : green[500]} size={20} />
+          </Hovertips>}
+          <Button disabled={timeBreak} className="QuestionButton flex-1" variant="contained" color="primary" onClick={() => {
+            if (
+              window.location.host === 'http://localhost:3000' ||
+              window.location.host === 'https://reinforz.vercel.app'
+            ) {
+              onNextButtonPress()
+            }
+          }}>{!isLast ? "Next" : "Report"}</Button>
+          {timeout && !playSettings.options.disable_timer && <Typography className="QuestionTimer bg-light p-5 flex jc-c ai-c flex-1 bold fs-20 ml-5 h-calc_100p_m_10px">{displayTime(timeout)}</Typography>}
+        </div>}
+      </div>
+    </div>
+
   </div>
 }

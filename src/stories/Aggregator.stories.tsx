@@ -12,6 +12,7 @@ export default {
 const Template: Story<AggregatorProps<any>> = (args) => {
   const [state, setState] = useState<Record<string, TNumberAggregation | TBooleanAggregation>>({
     score: 'AVG',
+    time_taken: 'AVG',
     verdict: 'TRUE'
   });
   return <Wrapper>
@@ -26,6 +27,11 @@ NumberAggregator.args = {
     label: 'Score',
     stateKey: 'score',
     data: [1, 2, 3, 4, 5, 5, 2, 3, 1, 4],
+    type: 'number'
+  }, {
+    label: 'Time Taken',
+    stateKey: 'time_taken',
+    data: [10, 32, 23, 14, 52, 35, 21, 33, 18, 42],
     type: 'number'
   }],
 };

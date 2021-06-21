@@ -1,6 +1,5 @@
 import { PopoverOrigin } from "@material-ui/core";
 import { Hovertips } from "../";
-import { useThemeSettings } from "../../hooks";
 import "./style.scss";
 
 export interface IconGroupProps {
@@ -14,10 +13,9 @@ export interface IconGroupProps {
 }
 
 export default function IconGroup(props: IconGroupProps) {
-  const { theme } = useThemeSettings();
   const direction = props.direction ?? 'row';
-  return <div className={`Hovertips-Group ${props.className}`} style={{ backgroundColor: theme.color.base, flexDirection: direction, ...props.style ?? {} }}>
-    {props.icons.map(([popoverText, icon, popoverOrigin], index) => <Hovertips key={popoverText + index} {...popoverOrigin ?? {}} popoverText={popoverText} className="Hovertips-Group-item" style={{ backgroundColor: theme.color.light }} >
+  return <div className={`IconGroup flex p-5 ${direction === 'row' ? "pr-0" : "pb-0"} bg-base ${props.className ?? ''}`} style={{ flexDirection: direction, ...props.style ?? {} }}>
+    {props.icons.map(([popoverText, icon, popoverOrigin], index) => <Hovertips key={popoverText + index} {...popoverOrigin ?? {}} popoverText={popoverText} className={`IconGroup-item bg-light flex jc-c ai-c p-5 ${direction === "row" ? "mr-5" : "mb-5"}`} >
       {icon}
     </Hovertips>)}
   </div>
