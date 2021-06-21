@@ -2,7 +2,7 @@ import { ThemeProvider } from "@material-ui/styles";
 import { SnackbarProvider } from "notistack";
 import { ReactNode, useEffect, useMemo, useState } from "react";
 import { IRootContextData, RootContext } from "./context/RootContext";
-import { SettingsContext } from "./context/SettingsContext";
+import { SettingsContext, SettingsContextData } from "./context/SettingsContext";
 import initPrismLineNumbers from "./scripts/prism-line-numbers";
 import './styles/index.scss';
 import "./styles/prism-line-highlight.scss";
@@ -12,7 +12,7 @@ import { ExtendedTheme, IErrorLog, IPlaySettings, IPreset, IQuizFull, ISettings,
 import { applyPlaySettingsOptions, arrayShuffler, generateQuestionsMap, generateTheme, getPlaySettingsPresets, getSettingsPresets } from "./utils";
 
 initPrismLineNumbers();
-export interface RootProps extends Partial<IRootContextData> {
+export interface RootProps extends Partial<IRootContextData>, Partial<SettingsContextData> {
   children: ReactNode | ReactNode[]
 }
 
@@ -21,8 +21,8 @@ function findSettingsFromPresets(preset: IPreset<any>) {
 }
 
 export const Root = (props: RootProps) => {
-  const [settingsPresets, setSettingsPresets] = useState(getSettingsPresets());
-  const [settings, setSettings] = useState<ISettings>(findSettingsFromPresets(settingsPresets));
+  const [settingsPresets, setSettingsPresets] = useState(props.settingsPresets ?? getSettingsPresets());
+  const [settings, setSettings] = useState<ISettings>(props.settings ?? findSettingsFromPresets(settingsPresets));
   const [playSettingsPresets, setPlaySettingsPresets] = useState(props.playSettingsPresets ?? getPlaySettingsPresets());
   const [playSettings, setPlaySettings] = useState<IPlaySettings>(props.playSettings ?? findSettingsFromPresets(playSettingsPresets));
   const [uploadedQuizzes, setUploadedQuizzes] = useState<IQuizFull[]>(props.uploadedQuizzes ?? []);

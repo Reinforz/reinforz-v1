@@ -4,8 +4,8 @@ import App from '../App';
 import Quiz from "../pages/Quiz/Quiz";
 import "../pages/Quiz/Quiz.scss";
 import { Root } from '../Root';
-import { IFibQuestionFull, IMsQuestionFull, IPlaySettingsPreset, IQuizFull, ISnippetQuestionFull, QuizIdentifiers } from '../types';
-import { generateDefaultPlaySettingsState } from '../utils';
+import { IFibQuestionFull, IMcqQuestionFull, IMsQuestionFull, IPlaySettingsPreset, IQuizFull, ISettingsPreset, ISnippetQuestionFull, QuizIdentifiers, TQuestionFull } from '../types';
+import { generateDefaultPlaySettingsState, generateDefaultSettingsState } from '../utils';
 
 const quiz_identifiers: QuizIdentifiers = {
   subject: "Subject 1",
@@ -184,15 +184,50 @@ const msQuestions: IMsQuestionFull[] = [{
   quiz: quiz_identifiers
 }];
 
+const mcqQuestions: IMcqQuestionFull[] = [{
+  image: 'https://miro.medium.com/max/480/1*7LOWVelUHYS1iqeX34Whzg.png',
+  question: "Mcq Question 1",
+  options: [
+    {
+      text: "question2.option1",
+      index: "0",
+    },
+    {
+      text: "question2.option2",
+      index: "1",
+    },
+    {
+      text: "question2.option3",
+      index: "2",
+    }
+  ],
+  hints: [
+    'Hint 1',
+    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"
+  ],
+  answers: [
+    {
+      text: "0",
+      explanation: "Pushes an element to the left of the list"
+    }
+  ],
+  type: "MCQ",
+  weight: 5,
+  difficulty: "Intermediate",
+  time_allocated: 25,
+  _id: "iERo0Wherj",
+  quiz: quiz_identifiers
+}];
+
 export default {
   title: 'Components/Quiz',
   component: Quiz,
 } as Meta;
 
-const NoTimerQuizTemplate: Story = () => {
+const NoTimerQuestionTemplate: Story<{ question: TQuestionFull }> = (args) => {
   const quiz: IQuizFull = {
     ...quiz_identifiers,
-    questions: [msQuestions[0]]
+    questions: [args.question]
   }
 
   const playSettings = generateDefaultPlaySettingsState();
@@ -212,17 +247,42 @@ const NoTimerQuizTemplate: Story = () => {
     ]
   };
 
+  const settings = generateDefaultSettingsState();
+  const settingsPresets: ISettingsPreset = {
+    current: 'polar_night',
+    presets: [
+      {
+        data: settings,
+        id: 'default',
+        name: 'Default'
+      },
+      {
+        data: { ...settings, theme: 'polar_night' },
+        id: 'polar_night',
+        name: 'Polar Night'
+      }
+    ]
+  }
+
   return <Root playQuizzes={{
     selected: [quiz],
     filtered: [quiz]
   }} playQuestions={{
-    array: [msQuestions[0]],
-    map: new Map([[msQuestions[0]._id, msQuestions[0]]])
-  }} playing={true} uploadedQuizzes={[quiz]} selectedQuizzes={[quiz]} playSettingsPresets={playSettingsPresets} selectedQuizIds={[quiz._id]} >
+    array: [args.question],
+    map: new Map([[args.question._id, args.question]])
+  }} playing={true} uploadedQuizzes={[quiz]} selectedQuizzes={[quiz]} settingsPresets={settingsPresets} playSettingsPresets={playSettingsPresets} selectedQuizIds={[quiz._id]} >
     <App>
       <Quiz />
     </App>
   </Root>
 };
 
-export const NoTimerQuiz = NoTimerQuizTemplate.bind({});
+export const NoTimerMultiSelectQuestion = NoTimerQuestionTemplate.bind({});
+NoTimerMultiSelectQuestion.args = {
+  question: msQuestions[0]
+}
+
+export const NoTimerMultiChoiceQuestion = NoTimerQuestionTemplate.bind({});
+NoTimerMultiChoiceQuestion.args = {
+  question: mcqQuestions[0]
+}
