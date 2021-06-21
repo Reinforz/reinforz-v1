@@ -8,7 +8,8 @@ module.exports = async () => {
       '<rootDir>/node_modules',
       '<rootDir>/dist',
       '<rootDir>/src/utils/generateTheme.ts',
-      '<rootDir>/src/utils/arrayShuffler.ts'
+      '<rootDir>/src/utils/arrayShuffler.ts',
+      '<rootDir>/src/utils/generateDynamicStyleClasses.ts'
     ],
     modulePathIgnorePatterns: ['<rootDir>/dist'],
     roots: ['<rootDir>/tests'],
@@ -18,7 +19,9 @@ module.exports = async () => {
     },
     collectCoverage: true,
     coverageDirectory: './coverage',
-    collectCoverageFrom: ['src/**/{!(generateTheme|arrayShuffler),}.ts'],
+    collectCoverageFrom: [
+      'src/**/{!(generateTheme|arrayShuffler|generateDynamicStyleClasses),}.ts'
+    ],
     coverageThreshold: {
       global: {
         branches: 95,

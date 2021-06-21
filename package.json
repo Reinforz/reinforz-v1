@@ -51,7 +51,7 @@
     "predeploy": "npm run build",
     "test:unit": "npx jest --runInBand --config ./jest.config.js",
     "sb:start": "npx start-storybook -p 3001",
-    "sb:build": "npx build-storybook -- -o dist"
+    "sb:build": "npx build-storybook"
   },
   "eslintConfig": {
     "extends": "react-app"
