@@ -6,6 +6,7 @@ div#root {
 
 .App, .Modal-content {
   height: 100%;
+  outline: none;
   
   & .h-100p{
     height: 100%;
@@ -186,6 +187,26 @@ div#root {
     transform: translate(-50%, -50%);
   }
 
+  & .absolute{
+    position: absolute;
+  }
+
+  & .mh-mc {
+    min-height: min-content;
+  }
+
+  & .h-fc{
+    height: fit-content;
+  }
+
+  & .relative{
+    position: relative;
+  }
+
+  & .top-0px{
+    top: 0px;
+  }
+
   & .w-c_10{
     width: calc(100% - 10px);
   }
@@ -198,12 +219,26 @@ div#root {
     height: calc(100% - 10px);
   }
 
+  & .h-calc_100p_m_20px{
+    height: calc(100% - 20px);
+  }
+
+
+
   & .w-100{
     width: 100px;
   }
 
   & .w-100p{
     width: 100%;
+  }
+
+  & .h-100p{
+    height: 100%;
+  }
+
+  & .h-100px{
+    height: 100px;
   }
 
   & .fd-r{

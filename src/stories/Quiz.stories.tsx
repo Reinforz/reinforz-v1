@@ -55,15 +55,25 @@ const snippetQuestions: ISnippetQuestionFull[] = [
 
 const fibQuestions: Record<'text' | 'code', IFibQuestionFull[]> = {
   code: [{
-    image: null,
+    image: 'https://raw.githubusercontent.com/alDuncanson/react-hooks-snippets/master/icon.png',
     question: [
-      "```js\nconsole.",
-      '("Hello, World");\n```\n'
+      "**Hello World**\n```js\nconsole.",
+      '("Hello, World");\nconst [state, setState] = ',
+      '(false);',
+      '\n```\n'
     ],
     answers: [
       [
         {
           text: "log",
+          modifiers: [],
+          regex: null,
+          explanation: null,
+        }
+      ],
+      [
+        {
+          text: "useState",
           modifiers: [],
           regex: null,
           explanation: null,
@@ -290,4 +300,14 @@ NoTimerMultiChoiceQuestion.args = {
 export const NoTimerSnippetQuestion = NoTimerQuestionTemplate.bind({});
 NoTimerSnippetQuestion.args = {
   question: snippetQuestions[0]
+}
+
+export const NoTimerCodeFormatFibQuestion = NoTimerQuestionTemplate.bind({});
+NoTimerCodeFormatFibQuestion.args = {
+  question: fibQuestions.code[0]
+}
+
+export const NoTimerTextFormatFibQuestion = NoTimerQuestionTemplate.bind({});
+NoTimerTextFormatFibQuestion.args = {
+  question: fibQuestions.text[0]
 }

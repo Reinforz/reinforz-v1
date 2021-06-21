@@ -1,21 +1,14 @@
 .QuestionDisplay{
+  height: 250px;
+  max-height: 250px;
   
   &-question{
     font-size: 1.25em;
-    max-height: 250px;
-    overflow: auto;
-
-    p{
-      margin: 0px;
-    }
   }
 
   &-image {
     position: relative;
     height: 250px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     img {
       object-fit: contain;
       width: calc(100% - 10px);

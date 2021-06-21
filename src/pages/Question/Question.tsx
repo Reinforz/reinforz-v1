@@ -74,11 +74,11 @@ export default function Question(props: Props) {
   }, [props.question, disable_timer])
 
   const memoizedFIBQuestionComponent = useMemo(() => {
-    return <QuestionDisplay question={props.question} userAnswers={userAnswers} />
+    return <QuestionDisplay question={props.question} userAnswers={userAnswers} showImage={Boolean(props.question.image)} />
   }, [props.question, userAnswers])
 
   const memoizedSelectionQuestionComponent = useMemo(() => {
-    return <QuestionDisplay question={props.question} userAnswers={userAnswers} />
+    return <QuestionDisplay question={props.question} userAnswers={userAnswers} showImage={Boolean(props.question.image)} />
     // eslint-disable-next-line
   }, [props.question])
 
