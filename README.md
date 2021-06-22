@@ -2,9 +2,9 @@
   <img src="https://github.com/Devorein/reinforz/blob/master/public/192.png?raw=true">
 <p>
 
-<div align="center"> <h1>Nishan</h1> </div>
+<div align="center"> <h1>Reinforz</h1> </div>
 <div align="center"><b>An online quiz app that force yourself to master a topic through continuous feedback.</b></div>
-<div align="center"><a href="https://reinforz.vercel.app/">App</a> | <a href="https://reinforz.github.io/reinforz-docs">Docs</a> | <a href="https://github.com/Devorein/reinforz/">Github</a> | <a href="https://vercel.com/devorein/reinforz">Vercel</a> | <a href="https://app.codecov.io/gh/Devorein/reinforz">Codecov</a> | <a href="https://www.chromatic.com/builds?appId=60c72fca65eb86003902c8b1&branch=master">Chromatic</a></div>
+<div align="center"><img align="center" src="https://raw.githubusercontent.com/Devorein/reinforz/master/public/192.png" width="25"/><a href="https://reinforz.vercel.app/">Apps</a> | <img align="center" src="https://docusaurus.io/img/docusaurus.png" width="20"/><a href="https://reinforz.github.io/reinforz-docs">Docs</a> | <img align="center" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Octicons-mark-github.svg/2048px-Octicons-mark-github.svg.png" width="20"/><a href="https://github.com/Devorein/reinforz/">Github</a> | <img align="center" src="https://i.pinimg.com/originals/c4/35/6c/c4356cd5454d06585e0a46066b555172.png" width="20"/><a href="https://vercel.com/devorein/reinforz">Vercel</a> | <img align="center" src="https://seeklogo.com/images/C/codecov-new-logo-D45767B802-seeklogo.com.png" width="20"/><a href="https://app.codecov.io/gh/Devorein/reinforz">Codecov</a> | <img align="center" src="https://seeklogo.com/images/C/chromatic-logo-4A0803FA76-seeklogo.com.png" width="20"/><a href="https://www.chromatic.com/builds?appId=60c72fca65eb86003902c8b1&branch=master">Chromatic</a></div>
 
 </br>
 
