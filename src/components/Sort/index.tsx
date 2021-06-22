@@ -18,6 +18,22 @@ export interface SortProps {
   max?: number
 }
 
+function SortSelect(props: { items: string[], menuItemLabel: SortProps["menuItemLabel"], sort: [string, "ASC" | "DESC"], index: number, sorts: SortProps["sorts"], setSorts: SortProps["setSorts"] }) {
+  const { settings } = useThemeSettings();
+  const { items, sort, menuItemLabel, index, sorts, setSorts } = props;
+  const item = sort[index];
+  return <MuiSelect className="Sort-content-item-category bg-light flex-1 mr-5" value={item}
+    onChange={(e) => {
+      settings.sound && sounds.click.play()
+      sort[index] = e.target.value as any;
+      setSorts(JSON.parse(JSON.stringify(sorts)))
+    }}>
+    {items.map(item =>
+      <MenuItem key={item} value={item}>{menuItemLabel ? menuItemLabel(item) : transformTextBySeparator(item)}</MenuItem>
+    )}
+  </MuiSelect>
+}
+
 export default function Sort(props: SortProps) {
   const { theme, settings } = useThemeSettings();
   const { max = 3, items, header, sorts, setSorts, menuItemLabel } = props;
@@ -30,27 +46,15 @@ export default function Sort(props: SortProps) {
         const [item, order] = sort,
           canMoveDownwards = index !== sorts.length - 1 && sorts.length !== 1,
           canMoveUpwards = index !== 0 && sorts.length !== 1;
+        const props = {
+          menuItemLabel,
+          setSorts,
+          sort,
+          sorts
+        };
         return <div key={`${item}.${order}.${index}`} className={`Sort-content-item bg-base flex p-5 ${index !== sorts.length - 1 ? "pb-0" : ''}`}>
-          <MuiSelect className="Sort-content-item-category bg-light flex-1 mr-5" value={item}
-            onChange={(e) => {
-              settings.sound && sounds.click.play()
-              sort[0] = e.target.value as any;
-              setSorts(JSON.parse(JSON.stringify(sorts)))
-            }}>
-            {items.map(item =>
-              <MenuItem key={item} value={item}>{menuItemLabel ? menuItemLabel(item) : transformTextBySeparator(item)}</MenuItem>
-            )}
-          </MuiSelect>
-          <MuiSelect className="Sort-content-item-order bg-light flex-1 mr-5" value={order}
-            onChange={(e) => {
-              settings.sound && sounds.click.play()
-              sort[1] = e.target.value as any;
-              setSorts(JSON.parse(JSON.stringify(sorts)))
-            }}>
-            {["ASC", "DESC"].map(item =>
-              <MenuItem key={item} value={item}>{menuItemLabel ? menuItemLabel(item) : transformTextBySeparator(item)}</MenuItem>
-            )}
-          </MuiSelect>
+          <SortSelect index={0} items={items} {...props} />
+          <SortSelect index={1} items={["ASC", "DESC"]} {...props} />
           <div className="Sort-content-item-icons bg-light p-5 flex jc-c ai-c">
             <div className="Sort-content-item-icons-down mr-5">
               <Hovertips popoverText={"Move downwards"}>
