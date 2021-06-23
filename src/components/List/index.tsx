@@ -64,7 +64,9 @@ export default function List<T extends { _id: string }>(props: ListProps<T>) {
             <div className="List-content-item-icons p-5 mr-5 flex ai-c">
               <Checkbox color="primary" className="List-content-item-icons-checkbox" key={_id + "checkbox" + index} onClick={(e: any) => {
                 e.persist();
-                settings.sound && e.target.checked ? sounds.pop_off.play() : sounds.pop_on.play();
+                if (settings.sound) {
+                  e.target.checked ? sounds.pop_off.play() : sounds.pop_on.play();
+                }
                 setSelectedItems(applyCheckboxShortcut(e, items.map(item => item._id), selectedItems, index));
               }} checked={selectedItems.includes(_id)} value={_id} />
               <Hovertips key={_id + "icon" + index} popoverText="Delete this item">

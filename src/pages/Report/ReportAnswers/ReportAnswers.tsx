@@ -26,7 +26,7 @@ export function ReportAnswers(props: Props) {
             <div className="mb-5 flex jc-sb">
               <Typography className="flex p-10 jc-c ai-c bold fs-16 mr-5">{alternateIndex + 1}</Typography>
               <Typography className="Report-Answers-container-item-text bg-light p-10 flex-1 ai-c flex">{answer.text}</Typography>
-              {answer.regex ? <Typography className="Report-Answers-container-item-regex bg-light p-10 ml-5 bold">/{answer.regex.regex ?? 'N/A'}/{answer.regex.flags ?? 'N/A'}</Typography> : null}
+              {answer.regex ? <Typography className="Report-Answers-container-item-regex bg-light p-10 ml-5 bold">{answer.regex.regex ? "/" + answer.regex.regex + "/" : 'N/A'}{answer.regex.flags ? answer.regex.flags : ''}</Typography> : null}
               {answer.modifiers.length !== 0 ? <Typography className="Report-Answers-container-item-modifiers bg-light p-10 ml-5 bold">{answer.modifiers.join(",")}</Typography> : null}
               {answer.isCorrect && <div style={{ width: 50 }} className="Report-Answers-container-item-isCorrect bg-light flex ai-c ml-5 jc-c"> <AiFillCheckSquare fill={green[500]} style={{ padding: 5 }} size={20} /></div>}
             </div>
