@@ -79,7 +79,7 @@ export default function List<T extends { _id: string }>(props: ListProps<T>) {
             </div>
             <div className="flex flex-1 jc-sb p-5 mr-5">
               {fields.map((field, index) => <div className="List-content-item-field" key={_id + field + index}>
-                <Typography variant="body1" className="fs-18">
+                <Typography variant="body1" component="div" className="fs-18">
                   {typeof field === "function" ? field(item) : item[field]}
                 </Typography>
               </div>)}

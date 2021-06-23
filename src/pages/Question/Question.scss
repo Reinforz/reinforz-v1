@@ -5,10 +5,6 @@
     height: calc(100% - 65px);
   }
 
-  &Display{
-    height: 250px;
-  }
-
   &-timerBreak{
     width: 50px;
   }
@@ -16,4 +12,8 @@
   &Button.MuiButton-containedPrimary{
     height: 100%;
   }
+}
+
+.Question .QuestionDisplay{
+  height: 250px;
 }

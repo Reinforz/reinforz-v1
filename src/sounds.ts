@@ -35,8 +35,8 @@ const sounds: Record<
 
 soundNames.forEach((sound_url) => {
   if (
-    window.location.host === 'http://localhost:3000' ||
-    window.location.host === 'https://reinforz.vercel.app'
+    window.location.host === 'localhost:3000' ||
+    window.location.host === 'reinforz.vercel.app'
   ) {
     const audio = new Audio(
       process.env.PUBLIC_URL + `/sounds/${sound_url}.mp3`

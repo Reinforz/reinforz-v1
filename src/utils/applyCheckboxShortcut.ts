@@ -53,5 +53,7 @@ export function applyCheckboxShortcut(
       : currentItems.filter((_item) => _item !== item);
   }
 
+  console.log(finalItems)
+
   return finalItems;
 }
