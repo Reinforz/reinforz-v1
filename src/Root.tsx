@@ -17,7 +17,6 @@ import "prismjs/components/prism-latex";
 import "prismjs/components/prism-lua";
 import "prismjs/components/prism-markdown";
 import "prismjs/components/prism-perl";
-import "prismjs/components/prism-php";
 import "prismjs/components/prism-powershell";
 import "prismjs/components/prism-ruby";
 import "prismjs/components/prism-rust";

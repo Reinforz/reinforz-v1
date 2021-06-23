@@ -1,4 +1,4 @@
-import { darken, makeStyles } from '@material-ui/core';
+import { darken, lighten, makeStyles } from '@material-ui/core';
 import { ExtendedTheme } from '../types';
 
 export function generateDynamicStyleClasses() {
@@ -22,7 +22,15 @@ export function generateDynamicStyleClasses() {
         background: theme.color.dark
       },
       '& .line-numbers-rows': {
-        background: darken(theme.color.dark, 0.25)
+        background:
+          theme.palette.type === 'dark'
+            ? darken(theme.color.dark, 0.25)
+            : lighten(theme.color.dark, 0.25),
+        height:
+          theme.palette.type === 'dark'
+            ? 'calc(100% - 10px)'
+            : 'calc(100% - 8px)',
+        paddingTop: theme.palette.type === 'dark' ? 8 : 10
       },
       '& .bg-dark': {
         background: theme.color.dark
