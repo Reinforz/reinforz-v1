@@ -124,8 +124,8 @@ export default function Question(props: Props) {
           </Hovertips>}
           <Button disabled={timeBreak} className="QuestionButton flex-1" variant="contained" color="primary" onClick={() => {
             if (
-              window.location.host === 'http://localhost:3000' ||
-              window.location.host === 'https://reinforz.vercel.app'
+              window.location.host === 'localhost:3000' ||
+              window.location.host === 'reinforz.vercel.app'
             ) {
               onNextButtonPress()
             }

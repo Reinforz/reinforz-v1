@@ -1,11 +1,7 @@
 .QuestionDisplay{
-  height: 250px;
+  height: fit-content;
   max-height: 250px;
   
-  &-question{
-    font-size: 1.25em;
-  }
-
   &-image {
     position: relative;
     height: 250px;
