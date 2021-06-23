@@ -19,7 +19,7 @@ export default function App(props: Props) {
   return <ModalContext.Provider value={{ modalState, setModalState }}>
     <div className={`App line-numbers ${theme.theme} ${classes.root}`} style={{ fontFamily: settings.font === 'sans-serif' ? 'Lato' : settings.font === 'serif' ? 'Noto Serif' : 'Ubuntu Mono', backgroundColor: theme.color.dark }}>
       <SimpleModal open={modalState[0]} setOpen={() => setModalState([false, null])}>
-        <div className={`Modal-content ${classes.root}`}>
+        <div className={`Modal-content line-numbers ${theme.theme} ${classes.root}`} style={{ fontFamily: settings.font === 'sans-serif' ? 'Lato' : settings.font === 'serif' ? 'Noto Serif' : 'Ubuntu Mono', backgroundColor: theme.color.dark }}>
           {modalState[1]}
         </div>
       </SimpleModal>

@@ -1,7 +1,8 @@
 import { Typography } from "@material-ui/core";
 import { green, red } from "@material-ui/core/colors";
-import { ReactNode, useContext, useMemo } from "react";
-import { BsFilm } from "react-icons/bs";
+import { ReactNode, useContext, useMemo, useState } from "react";
+import { BsFillCaretLeftFill, BsFillCaretRightFill, BsFilm } from "react-icons/bs";
+import { ImCross } from "react-icons/im";
 import { MdDelete } from 'react-icons/md';
 import { Hovertips, Markdown, StackList } from "../../../components";
 import { QuestionDisplay } from "../../../components/QuestionDisplay";
@@ -17,18 +18,22 @@ import "./ReportTable.scss";
 interface ReportTableRowProps {
   results: IResult[],
   header: ReactNode,
-  reportQuestion: ReactNode,
+  reportQuestions: ReactNode[],
   index: number,
   excludedColumns: Record<string, boolean>
   style?: React.CSSProperties
 };
 
 function ReportTableModal(props: ReportTableRowProps) {
-  return <ReportTableRow {...props} />
+  const { setModalState } = useContext(ModalContext);
+  const [currentIndex, setCurrentIndex] = useState(props.index)
+  return <ReportTableRow {...props} index={currentIndex} header={<Typography className="bold flex jc-sb ai-c mr-10" style={{ width: 100 }}><Hovertips popoverText="Move left">
+    <BsFillCaretLeftFill onClick={() => setCurrentIndex((currentIndex) => (currentIndex === 0 ? props.results.length - 1 : currentIndex - 1))} /></Hovertips>{currentIndex + 1}/{props.results.length}<Hovertips popoverText="Move left">
+      <BsFillCaretRightFill onClick={() => setCurrentIndex((currentIndex) => ((currentIndex + 1) % props.results.length))} /></Hovertips><Hovertips popoverText="Go back"><ImCross size={15} fill={red[500]} onClick={() => setModalState([false, null])} /></Hovertips></Typography>} />
 }
 
 function ReportTableRow(props: ReportTableRowProps) {
-  const { reportQuestion, index, results, header, excludedColumns, style } = props;
+  const { reportQuestions, index, results, header, excludedColumns, style } = props;
   const result = results[index];
   const showHints = result.question.hints.length !== 0 && !excludedColumns['hints'];
   return <div key={result.question._id} className="ReportTable-item pb-0 p-5 bg-dark" style={style}>
@@ -37,7 +42,7 @@ function ReportTableRow(props: ReportTableRowProps) {
       <Typography variant="h6" className="ReportTable-item-index bold flex-1 ta-c">{index + 1}</Typography>
       {header}
     </div>
-    {reportQuestion}
+    {reportQuestions[index]}
     <div className="ReportTable-item-stats mb-5">
       {!excludedColumns['question_stats'] ? <StackList header="Question Stats" items={[['Type', result.question.type], ['Difficulty', result.question.difficulty], ['Time Allocated', result.question.time_allocated], ['Weight', result.question.weight]]} classNames={{ container: 'mr-5' }} /> : null}
       {!excludedColumns['user_stats'] ? <StackList classNames={{ container: 'mr-5' }} header="User Stats" items={[['Time Taken', result.time_taken], ['Hints Used', result.hints_used], ['Verdict', <Typography className="bold" style={{
@@ -63,11 +68,11 @@ export function ReportTable() {
   const { setReport, report } = useContext(ReportContext);
   const memoizedReportQuestions = useMemo(() => sortedResults.map(sortedResult => <QuestionDisplay question={sortedResult.question} userAnswers={sortedResult.user_answers} showImage={Boolean(!excludedColumns["image"] && sortedResult.question.image)} showQuestion={!excludedColumns["question"]} />), [sortedResults, excludedColumns]);
   return <div className="ReportTable p-5 bg-base overflowY-auto">
-    {sortedResults.map((sortedResult, index) => <ReportTableRow key={sortedResult._id} reportQuestion={memoizedReportQuestions[index]} index={index} results={sortedResults} excludedColumns={excludedColumns} header={<div className="ReportTable-item-icons flex jc-sb c-p ai-c" style={{ width: 40 }}><Hovertips popoverText="View separate"><BsFilm fill={theme.color.opposite_dark} size={15} onClick={() => {
+    {sortedResults.map((sortedResult, index) => <ReportTableRow key={sortedResult._id} reportQuestions={memoizedReportQuestions} index={index} results={sortedResults} excludedColumns={excludedColumns} header={<div className="ReportTable-item-icons flex jc-sb c-p ai-c" style={{ width: 40 }}><Hovertips popoverText="View separate"><BsFilm fill={theme.color.opposite_dark} size={15} onClick={() => {
       setModalState([true, <ReportTableModal style={{
         height: "100%",
         overflowY: 'auto'
-      }} reportQuestion={memoizedReportQuestions[index]} index={index} results={sortedResults} excludedColumns={excludedColumns} header={null} />])
+      }} reportQuestions={memoizedReportQuestions} index={index} results={sortedResults} excludedColumns={excludedColumns} header={null} />])
     }} /></Hovertips>
       <Hovertips popoverText="Delete"><MdDelete size={20} fill={red[500]} onClick={() => {
         settings.sound && sounds.remove.play();
