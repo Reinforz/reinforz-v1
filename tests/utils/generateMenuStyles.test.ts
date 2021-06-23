@@ -19,7 +19,7 @@ it(`Should work correctly for position=right, isOpen=false`, () => {
   });
   expect(left).toStrictEqual(`calc(100% + 5px)`);
   expect(iconsContainerStyle).toStrictEqual({
-    left: -50
+    left: -40
   });
 });
 
@@ -42,7 +42,7 @@ it(`Should work correctly for position=right, isOpen=true`, () => {
   });
   expect(left).toStrictEqual(`calc(100% - 10px)`);
   expect(iconsContainerStyle).toStrictEqual({
-    left: -35
+    left: -30
   });
 });
 
@@ -65,7 +65,7 @@ it(`Should work correctly for position=left, isOpen=true`, () => {
   });
   expect(left).toStrictEqual(`-500px`);
   expect(iconsContainerStyle).toStrictEqual({
-    left: '100%'
+    left: 'calc(100% - 5px)'
   });
 });
 
@@ -88,6 +88,6 @@ it(`Should work correctly for position=left, isOpen=false`, () => {
   });
   expect(left).toStrictEqual(`-510px`);
   expect(iconsContainerStyle).toStrictEqual({
-    left: 'calc(100% + 10px)'
+    left: '100%'
   });
 });

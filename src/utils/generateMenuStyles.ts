@@ -14,13 +14,13 @@ export function generateMenuStyles(
     if (isOpen) {
       left = `calc(100% - 10px)`;
       iconStyle.transform = 'rotate(0deg)';
-      iconsContainerStyle.left = -35;
+      iconsContainerStyle.left = -30;
       containerStyle.width = `calc(100% - ${width}px)`;
       containerStyle.left = `0px`;
     } else {
       left = 'calc(100% + 5px)';
       iconStyle.transform = 'rotate(-180deg)';
-      iconsContainerStyle.left = -50;
+      iconsContainerStyle.left = -40;
       containerStyle.width = `100%`;
       containerStyle.left = `0px`;
     }
@@ -28,13 +28,13 @@ export function generateMenuStyles(
     if (isOpen) {
       left = `-${width}px`;
       iconStyle.transform = 'rotate(-180deg)';
-      iconsContainerStyle.left = '100%';
+      iconsContainerStyle.left = 'calc(100% - 5px)';
       containerStyle.width = `calc(100% - ${width}px)`;
       containerStyle.left = `${width}px`;
     } else {
       left = `-${width + 10}px`;
       iconStyle.transform = 'rotate(0deg)';
-      iconsContainerStyle.left = 'calc(100% + 10px)';
+      iconsContainerStyle.left = '100%';
       containerStyle.width = `100%`;
       containerStyle.left = `0px`;
     }
