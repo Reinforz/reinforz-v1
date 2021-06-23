@@ -12,6 +12,7 @@ interface IReportContext {
   setReportSettings: React.Dispatch<React.SetStateAction<IReportSettings>>
   setReportSettingsPresets: React.Dispatch<React.SetStateAction<IReportSettingsPreset>>
   reportSettingsPresets: IReportSettingsPreset
+  excludedColumns: Record<string, boolean>
 }
 
 export const ReportContext = React.createContext({} as IReportContext)

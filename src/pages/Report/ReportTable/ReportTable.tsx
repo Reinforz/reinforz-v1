@@ -13,18 +13,17 @@ import { ReportOptions } from "../ReportOptions/ReportOptions";
 import "./ReportTable.scss";
 
 export function ReportTable() {
-  const { sortedResults, reportSettings, setReport, report } = useContext(ReportContext);
-  const { filters } = reportSettings;
+  const { sortedResults, excludedColumns, setReport, report } = useContext(ReportContext);
 
-  const memoizedReportQuestions = useMemo(() => sortedResults.map(sortedResult => <QuestionDisplay question={sortedResult.question} userAnswers={sortedResult.user_answers} showImage={Boolean(!filters.excluded_columns.includes("image") && sortedResult.question.image)} showQuestion={!filters.excluded_columns.includes("question")} />), [sortedResults, filters]);
+  const memoizedReportQuestions = useMemo(() => sortedResults.map(sortedResult => <QuestionDisplay question={sortedResult.question} userAnswers={sortedResult.user_answers} showImage={Boolean(!excludedColumns["image"] && sortedResult.question.image)} showQuestion={!excludedColumns["question"]} />), [sortedResults, excludedColumns]);
 
   const { settings } = useThemeSettings();
   return <div className="Report-Table p-5 bg-base overflowY-auto">
     {sortedResults.map((sortedResult, index) => {
-      const showHints = sortedResult.question.hints.length !== 0 && !filters.excluded_columns.includes('hints');
+      const showHints = sortedResult.question.hints.length !== 0 && !excludedColumns['hints'];
       return <div key={sortedResult.question._id} className="Report-Table-item pb-0 p-5 bg-dark">
         <div className="flex ai-c jc-c bg-dark mb-5">
-          {!filters.excluded_columns.includes('quiz_info') ? <Typography className="p-10 bg-light fs-16 bold">{`${sortedResult.question.quiz.subject} - ${sortedResult.question.quiz.topic}`}</Typography> : null}
+          {!excludedColumns['quiz_info'] ? <Typography className="p-10 bg-light fs-16 bold">{`${sortedResult.question.quiz.subject} - ${sortedResult.question.quiz.topic}`}</Typography> : null}
           <Typography variant="h6" className="Report-Table-item-index bold flex-1 ta-c">{index + 1}</Typography>
           <div className="Report-Table-item-delete flex jc-c c-p" style={{ width: 20 }}><Hovertips popoverText="Delete"><MdDelete fill={red[500]} onClick={() => {
             settings.sound && sounds.remove.play();
@@ -36,14 +35,14 @@ export function ReportTable() {
         </div>
         {memoizedReportQuestions[index]}
         <div className="Report-Table-item-stats mb-5">
-          {!filters.excluded_columns.includes('question_stats') ? <StackList header="Question Stats" items={[['Type', sortedResult.question.type], ['Difficulty', sortedResult.question.difficulty], ['Time Allocated', sortedResult.question.time_allocated], ['Weight', sortedResult.question.weight]]} classNames={{ container: 'mr-5' }} /> : null}
-          {!filters.excluded_columns.includes('user_stats') ? <StackList classNames={{ container: 'mr-5' }} header="User Stats" items={[['Time Taken', sortedResult.time_taken], ['Hints Used', sortedResult.hints_used], ['Verdict', <Typography className="bold" style={{
+          {!excludedColumns['question_stats'] ? <StackList header="Question Stats" items={[['Type', sortedResult.question.type], ['Difficulty', sortedResult.question.difficulty], ['Time Allocated', sortedResult.question.time_allocated], ['Weight', sortedResult.question.weight]]} classNames={{ container: 'mr-5' }} /> : null}
+          {!excludedColumns['user_stats'] ? <StackList classNames={{ container: 'mr-5' }} header="User Stats" items={[['Time Taken', sortedResult.time_taken], ['Hints Used', sortedResult.hints_used], ['Verdict', <Typography className="bold" style={{
             color: sortedResult.verdict === false ? red[500] : green[500]
           }}>{sortedResult.verdict === false ? "Incorrect" : "Correct"}</Typography>]]} /> : null}
-          {!filters.excluded_columns.includes('score_breakdown') ? <StackList header="Score Breakdown" items={[['Amount', sortedResult.score.amount], ['Answers', sortedResult.score.answers], ['Time', sortedResult.score.time], ['Hints', sortedResult.score.hints], ['Weighted', sortedResult.question.weight * sortedResult.score.amount]]} /> : null}
+          {!excludedColumns['score_breakdown'] ? <StackList header="Score Breakdown" items={[['Amount', sortedResult.score.amount], ['Answers', sortedResult.score.answers], ['Time', sortedResult.score.time], ['Hints', sortedResult.score.hints], ['Weighted', sortedResult.question.weight * sortedResult.score.amount]]} /> : null}
         </div>
         <div className="flex">
-          {(sortedResult.question.type === "MCQ" || sortedResult.question.type === "MS") ? !filters.excluded_columns.includes('options') ? <ReportOptions question={sortedResult.question} userAnswers={sortedResult.user_answers} className={`${showHints ? 'mr-5' : ''}`} /> : null : !filters.excluded_columns.includes('answers') ? <ReportAnswers question={sortedResult.question as TResultInputQuestion} userAnswers={sortedResult.user_answers} className={`${showHints ? 'mr-5' : ''}`} /> : null}
+          {(sortedResult.question.type === "MCQ" || sortedResult.question.type === "MS") ? !excludedColumns['options'] ? <ReportOptions question={sortedResult.question} userAnswers={sortedResult.user_answers} className={`${showHints ? 'mr-5' : ''}`} /> : null : !excludedColumns['answers'] ? <ReportAnswers question={sortedResult.question as TResultInputQuestion} userAnswers={sortedResult.user_answers} className={`${showHints ? 'mr-5' : ''}`} /> : null}
           {showHints ? <div className="Report-Table-item-hints bg-base p-5 mb-5" style={{ width: '25%' }}>
             {sortedResult.question.hints.map(hint => <div className="Report-Table-item-hints-item bg-light p-5 mb-5" key={hint}>
               <Markdown content={hint} />

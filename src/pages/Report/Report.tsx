@@ -131,6 +131,9 @@ export default function Report() {
     onKeyPress
   };
 
+  const excludedColumns: Record<string, boolean> = {};
+  filters.excluded_columns.forEach(excludedColumn => excludedColumns[excludedColumn] = true);
+
   const render = () => {
     if (report.results.length !== 0) {
       return (
@@ -148,13 +151,13 @@ export default function Report() {
             >
               {navigationIconGroup}
               <ReportTable />
-              {!filters.excluded_columns.includes('report_info') ? (
+              {!excludedColumns['report_info'] ? (
                 <div className="overflow-auto flex fd-c p-5"
                   style={{
                     width: 300,
                   }}
                 >
-                  {!filters.excluded_columns.includes('report_stats') ? (
+                  {!excludedColumns['report_stats'] ? (
                     <StackList
                       header={'Report Stats'}
                       classNames={{
@@ -179,7 +182,7 @@ export default function Report() {
                     />
                   ) : null}
                   <div className="Report-Settings">
-                    {!filters.excluded_columns.includes('play_options') ? (
+                    {!excludedColumns['play_options'] ? (
                       <StackList
                         classNames={{
                           container: 'mb-5'
@@ -199,7 +202,7 @@ export default function Report() {
                         ])}
                       />
                     ) : null}
-                    {!filters.excluded_columns.includes('play_filters') ? (
+                    {!excludedColumns['play_filters'] ? (
                       <StackList
                         classNames={{
                           container: 'mb-5'
@@ -216,10 +219,10 @@ export default function Report() {
                       />
                     ) : null}
                   </div>
-                  {!filters.excluded_columns.includes('report_export') ? (
+                  {!excludedColumns['report_export'] ? (
                     <ReportExport />
                   ) : null}
-                  {!filters.excluded_columns.includes('report_aggregator') ? (
+                  {!excludedColumns['report_aggregator'] ? (
                     <ReportAggregator />
                   ) : null}
                 </div>
@@ -254,7 +257,8 @@ export default function Report() {
         sortedResults,
         filteredResults,
         allQuizzesMap,
-        filteredQuizzesMap
+        filteredQuizzesMap,
+        excludedColumns
       }}
     >
       {render()}
