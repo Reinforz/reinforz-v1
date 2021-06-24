@@ -46,9 +46,10 @@ export interface IQuizPartial {
   subject: string;
   questions: TQuestionPartial[];
   _id?: string;
+  contexts?: string[];
 }
 
-export interface IQuizFull extends QuizIdentifiers{
+export interface IQuizFull extends QuizIdentifiers {
   questions: TQuestionFull[];
 }
 
@@ -67,6 +68,7 @@ export interface IQuestionPartial {
   difficulty?: TQuestionDifficulty;
   hints?: string[];
   _id?: string;
+  context?: number[];
 }
 
 export interface SelectionQuestionOptions {
