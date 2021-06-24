@@ -1,7 +1,7 @@
 import shortid from 'shortid';
 import {
   ILog,
-  IQuizPartial,
+  IQuizDefaultSettings,
   TQuestionFull,
   TQuestionPartial,
   TSelectionQuestionPartial
@@ -20,8 +20,8 @@ function setObjectValues(parent: any, arr: [string, any][]) {
 
 export function generateCompleteQuestion(
   question: TQuestionPartial,
-  contexts: IQuizPartial['contexts'] = [],
-  defaultSettings?: IQuizPartial['default']
+  contexts: string[],
+  defaultSettings: Partial<IQuizDefaultSettings>
 ) {
   const logs: ILog = { warns: [], errors: [] };
 
@@ -39,7 +39,7 @@ export function generateCompleteQuestion(
     }));
   }
 
-  let time_allocated = defaultSettings?.time_allocated ?? 60;
+  let time_allocated = defaultSettings.time_allocated ?? 60;
 
   const dummyQuestion: any = completeQuestion;
 
@@ -166,17 +166,17 @@ export function generateCompleteQuestion(
     }
     setObjectValues(completeQuestion, [
       ['image', null],
-      ['weight', defaultSettings?.weight ?? 1],
-      ['difficulty', defaultSettings?.difficulty ?? 'Beginner'],
+      ['weight', defaultSettings.weight ?? 1],
+      ['difficulty', defaultSettings.difficulty ?? 'Beginner'],
       ['explanation', 'No explanation available'],
       ['hints', []],
-      ['time_allocated', defaultSettings?.time_allocated ?? time_allocated],
+      ['time_allocated', defaultSettings.time_allocated ?? time_allocated],
       [
         'contexts',
-        typeof defaultSettings?.contexts === 'number'
+        typeof defaultSettings.contexts === 'number'
           ? [defaultSettings.contexts]
-          : Array.isArray(defaultSettings?.contexts)
-          ? defaultSettings?.contexts
+          : Array.isArray(defaultSettings.contexts)
+          ? defaultSettings.contexts
           : []
       ]
     ]);

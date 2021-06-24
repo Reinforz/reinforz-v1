@@ -143,6 +143,7 @@ export interface IMcqQuestionFull extends Required<IQuestionPartial> {
   type: 'MCQ';
   answers: ISelectionQuestionAnswerFull[];
   quiz: QuizIdentifiers;
+  contexts: number[];
 }
 
 export interface IMsQuestionFull extends Required<IQuestionPartial> {
@@ -151,6 +152,7 @@ export interface IMsQuestionFull extends Required<IQuestionPartial> {
   type: 'MS';
   answers: ISelectionQuestionAnswerFull[];
   quiz: QuizIdentifiers;
+  contexts: number[];
 }
 
 export interface IInputQuestionAnswerFull {
@@ -171,6 +173,7 @@ export interface ISnippetQuestionFull extends Required<IQuestionPartial> {
   type: 'Snippet';
   answers: IInputQuestionAnswerFull[][];
   quiz: QuizIdentifiers;
+  contexts: number[];
 }
 
 export interface IFibQuestionFull extends Required<IQuestionPartial> {
@@ -180,6 +183,7 @@ export interface IFibQuestionFull extends Required<IQuestionPartial> {
   answers: IInputQuestionAnswerFull[][];
   quiz: QuizIdentifiers;
   format?: 'code' | 'text';
+  contexts: number[];
 }
 
 export type TInputQuestionPartial =

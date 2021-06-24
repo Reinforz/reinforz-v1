@@ -24,13 +24,16 @@ export function filterUploadedQuizzes(quizzes: IQuizPartial[]) {
   quizzes.forEach((quiz, quizIndex) => {
     const quizId = shortid();
     quiz._id = quizId;
+    quiz.default = quiz.default ?? {};
+    quiz.contexts = quiz.contexts ?? [];
     if (quiz.topic && quiz.subject && quiz.questions.length > 0) {
       const filteredQuestions: TQuestionFull[] = [];
       quiz.questions.forEach((question, questionIndex) => {
         try {
           const [generatedQuestion, logs] = generateCompleteQuestion(
             question,
-            quiz.default
+            quiz.contexts!,
+            quiz.default!
           );
           if (logs.errors.length === 0) {
             generatedQuestion.quiz = {
