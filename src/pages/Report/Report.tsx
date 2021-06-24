@@ -9,7 +9,7 @@ import { REINFORZ_REPORT_SETTINGS_LS_KEY } from '../../constants';
 import { ReportContext } from '../../context/ReportContext';
 import { RootContext } from '../../context/RootContext';
 import { useNavigationIcons, useThemeSettings } from '../../hooks';
-import { IReport, IReportSettingsPreset, IResult } from '../../types';
+import { IQuizFull, IReport, IReportSettingsPreset, IResult } from '../../types';
 import {
   applyReportFilters,
   applyReportSorts,
@@ -33,7 +33,7 @@ function findSettingsFromPresets(settings: IReportSettingsPreset) {
 }
 
 export default function Report() {
-  const { state } = useLocation<{ results: IResult[] }>();
+  const { state } = useLocation<{ results: IResult[], allQuizzesMap: Map<string, IQuizFull> }>();
   const { theme, settings } = useThemeSettings();
   const { playSettings, setUploadedQuizzes, setSelectedQuizIds } = useContext(
     RootContext
@@ -72,11 +72,19 @@ export default function Report() {
   const [reportSettings, setReportSettings] = useState(
     findSettingsFromPresets(reportSettingsPresets)
   );
-  const [report, setReport] = useState<IReport>({
-    results: state?.results ?? [],
-    createdAt: Date.now(),
-    settings: playSettings,
-    quizzes: {}
+  const [report, setReport] = useState<IReport>(() => {
+    const quizzes: Record<string, Omit<IQuizFull, "questions">> = {};
+    for (const [key, value] of state?.allQuizzesMap) {
+      const duplicateQuiz = JSON.parse(JSON.stringify(value))
+      delete duplicateQuiz.questions;
+      quizzes[key] = duplicateQuiz;
+    }
+    return {
+      results: state?.results ?? [],
+      createdAt: Date.now(),
+      settings: playSettings,
+      quizzes
+    }
   });
   const generatedNavigationStyles = generateNavigationStyles(settings.navigation);
 
@@ -97,7 +105,7 @@ export default function Report() {
 
   const { filters, sort } = reportSettings;
 
-  const filteredResults = useMemo(() => applyReportFilters(report.results, reportSettings.filters), [report.results, reportSettings.filters]);
+  const filteredResults = useMemo(() => applyReportFilters(allQuizzesMap, report.results, reportSettings.filters), [allQuizzesMap, report.results, reportSettings.filters]);
   const sortedResults = useMemo(() => applyReportSorts(filteredResults, sort), [filteredResults, sort]);
   const filteredQuizzesMap = generateQuizzesFromResults(
     report,

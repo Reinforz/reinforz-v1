@@ -49,11 +49,7 @@ export const QUIZ_1: IQuizFull = {
       type: 'MS',
       time_allocated: 120,
       _id: 'quiz1.question1',
-      quiz: {
-        topic: 'Topic 1',
-        subject: 'Subject 1',
-        _id: 'quiz1'
-      }
+      quiz: 'quiz1'
     },
     {
       contexts: [],
@@ -94,11 +90,7 @@ export const QUIZ_1: IQuizFull = {
       type: 'FIB',
       time_allocated: 60,
       _id: 'quiz1.question2',
-      quiz: {
-        topic: 'Topic 1',
-        subject: 'Subject 1',
-        _id: 'quiz1'
-      }
+      quiz: 'quiz1'
     }
   ],
   _id: 'quiz1'
@@ -149,11 +141,7 @@ export const QUIZ_2: IQuizFull = {
       type: 'MCQ',
       time_allocated: 120,
       _id: 'quiz2.question1',
-      quiz: {
-        topic: 'Topic 2',
-        subject: 'Subject 2',
-        _id: 'quiz2'
-      }
+      quiz: 'quiz2'
     },
     {
       contexts: [],
@@ -185,11 +173,7 @@ export const QUIZ_2: IQuizFull = {
       type: 'FIB',
       time_allocated: 120,
       _id: 'quiz2.question2',
-      quiz: {
-        topic: 'Topic 2',
-        subject: 'Subject 2',
-        _id: 'quiz2'
-      }
+      quiz: 'quiz2'
     }
   ],
   _id: 'quiz2'

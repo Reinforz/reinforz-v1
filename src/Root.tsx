@@ -99,11 +99,14 @@ export const Root = (props: RootProps) => {
     // eslint-disable-next-line
   }, [playSettingsPresets.current])
 
+  const allQuizzesMap: Map<string, IQuizFull> = new Map();
+  playQuizzes.filtered.forEach(filteredQuiz => allQuizzesMap.set(filteredQuiz._id, filteredQuiz))
+
   const generatedTheme = generateTheme(settings) as ExtendedTheme;
   return <ThemeProvider theme={generatedTheme}>
     <SnackbarProvider maxSnack={4}>
       <SettingsContext.Provider value={{ settings, setSettingsPresets, settingsPresets, setSettings }}>
-        <RootContext.Provider value={{ playQuestions, setPlayQuestions, playQuizzes, setPlayQuizzes, uploadedPlayState, setUploadedPlayState, playSettingsPresets, setPlaySettingsPresets, playing, setPlaying, selectedQuizzes: playQuizzes.selected, allQuestionsMap: playQuestions.map, allQuestions: allShuffledQuestions, filteredQuizzes: playQuizzes.filtered, setPlaySettings, playSettings, errorLogs, setErrorLogs, uploadedQuizzes, selectedQuizIds, setUploadedQuizzes, setSelectedQuizIds }}>
+        <RootContext.Provider value={{ allQuizzesMap, playQuestions, setPlayQuestions, playQuizzes, setPlayQuizzes, uploadedPlayState, setUploadedPlayState, playSettingsPresets, setPlaySettingsPresets, playing, setPlaying, selectedQuizzes: playQuizzes.selected, allQuestionsMap: playQuestions.map, allQuestions: allShuffledQuestions, filteredQuizzes: playQuizzes.filtered, setPlaySettings, playSettings, errorLogs, setErrorLogs, uploadedQuizzes, selectedQuizIds, setUploadedQuizzes, setSelectedQuizIds }}>
           {props.children}
         </RootContext.Provider>
       </SettingsContext.Provider>

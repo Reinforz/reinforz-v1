@@ -83,6 +83,7 @@ export default function Quiz() {
             setUploadedPlayState(false)
             history.push("/report", {
               results: newResultState,
+              allQuizzesMap: allQuizzesMap
             })
           } else {
             setResults(newResultState)
@@ -101,7 +102,7 @@ export default function Quiz() {
           playState.questions.forEach((question) =>
             allQuestionsMap.set(question._id, question)
           );
-          const generatedQuizzesMap = generateQuizzesFromPlayState(playState, allQuestionsMap);
+          const generatedQuizzesMap = generateQuizzesFromPlayState(allQuizzesMap, playState, allQuestionsMap);
           const generatedQuizzesArray = Array.from(generatedQuizzesMap.values());
           setUploadedPlayState(true)
           setPlayQuestions({

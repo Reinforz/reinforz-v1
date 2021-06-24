@@ -36,11 +36,7 @@ export function filterUploadedQuizzes(quizzes: IQuizPartial[]) {
             quiz.default!
           );
           if (logs.errors.length === 0) {
-            generatedQuestion.quiz = {
-              subject: quiz.subject,
-              topic: quiz.topic,
-              _id: quizId
-            };
+            generatedQuestion.quiz = quizId;
           }
           logMessages.push(
             ...logs.warns.map((warn) =>
