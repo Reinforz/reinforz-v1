@@ -39,6 +39,40 @@ export default function Report() {
   const { playSettings, setUploadedQuizzes, setSelectedQuizIds } = useContext(
     RootContext
   );
+  const history = useHistory();
+  const [reportSettingsPresets, setReportSettingsPresets] = useState(
+    getReportSettingsPresets()
+  );
+  const [reportSettings, setReportSettings] = useState(
+    findSettingsFromPresets(reportSettingsPresets)
+  );
+  const [report, setReport] = useState<IReport>(() => {
+    return {
+      results: state?.results ?? [],
+      createdAt: Date.now(),
+      settings: playSettings,
+      quizzes: generateReportQuizzesFromQuizzesMap(filteredQuizzesMap)
+    }
+  });
+  const generatedNavigationStyles = generateNavigationStyles(settings.navigation);
+  const allQuestionsMap = useMemo(
+    () => generateQuestionsMapFromReportResults(report.results),
+    [report.results]
+  );
+  const allQuizzesMap = useMemo(
+    () => generateQuizzesFromResults(report, report.results, allQuestionsMap),
+    [report, allQuestionsMap]
+  );
+
+  const { filters, sort } = reportSettings;
+
+  const filteredResults = useMemo(() => applyReportFilters(allQuizzesMap, report.results, reportSettings.filters), [allQuizzesMap, report.results, reportSettings.filters]);
+  const sortedResults = useMemo(() => applyReportSorts(filteredResults, sort), [filteredResults, sort]);
+  const filteredQuizzesMap = generateQuizzesFromResults(
+    report,
+    filteredResults,
+    allQuestionsMap
+  );
   const ref = useRef<HTMLDivElement | null>(null);
   const { navigationIcons, onKeyPress } = useNavigationIcons([{
     path: "/settings",
@@ -67,46 +101,12 @@ export default function Report() {
     ref.current && ref.current.focus();
   }, [])
 
-  const [reportSettingsPresets, setReportSettingsPresets] = useState(
-    getReportSettingsPresets()
-  );
-  const [reportSettings, setReportSettings] = useState(
-    findSettingsFromPresets(reportSettingsPresets)
-  );
-  const [report, setReport] = useState<IReport>(() => {
-    return {
-      results: state?.results ?? [],
-      createdAt: Date.now(),
-      settings: playSettings,
-      quizzes: generateReportQuizzesFromQuizzesMap(filteredQuizzesMap)
-    }
-  });
-  const generatedNavigationStyles = generateNavigationStyles(settings.navigation);
+
 
   useEffect(() => {
     setReportSettings(findSettingsFromPresets(reportSettingsPresets));
     // eslint-disable-next-line
   }, [reportSettingsPresets.current]);
-
-  const history = useHistory();
-  const allQuestionsMap = useMemo(
-    () => generateQuestionsMapFromReportResults(report.results),
-    [report.results]
-  );
-  const allQuizzesMap = useMemo(
-    () => generateQuizzesFromResults(report, report.results, allQuestionsMap),
-    [report, allQuestionsMap]
-  );
-
-  const { filters, sort } = reportSettings;
-
-  const filteredResults = useMemo(() => applyReportFilters(allQuizzesMap, report.results, reportSettings.filters), [allQuizzesMap, report.results, reportSettings.filters]);
-  const sortedResults = useMemo(() => applyReportSorts(filteredResults, sort), [filteredResults, sort]);
-  const filteredQuizzesMap = generateQuizzesFromResults(
-    report,
-    filteredResults,
-    allQuestionsMap
-  );
 
   if (report.results.length !== 0) {
     navigationIcons.push([

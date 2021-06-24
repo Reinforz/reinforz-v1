@@ -1,4 +1,4 @@
-import { IReportFilter, IResult } from '../../src/types';
+import { IQuizFull, IReportFilter, IResult } from '../../src/types';
 import { applyReportFilters } from '../../src/utils';
 
 const result: IResult = {
@@ -14,13 +14,10 @@ const result: IResult = {
   user_answers: [],
   _id: 'result_1',
   question: {
+    contexts: [],
     type: 'FIB',
     difficulty: 'Advanced',
-    quiz: {
-      subject: 'Subject 1',
-      topic: 'Topic 1',
-      _id: '1'
-    },
+    quiz: '1',
     _id: '1',
     answers: [],
     hints: [],
@@ -31,6 +28,16 @@ const result: IResult = {
     options: null
   }
 };
+const quizzesMap: Map<string, IQuizFull> = new Map([
+  [
+    '1',
+    {
+      subject: 'Subject 1',
+      topic: 'Topic 1',
+      _id: '1'
+    } as any
+  ]
+]);
 
 const default_filters: IReportFilter = {
   hints_used: ['<>', [0, 2]],
@@ -46,7 +53,7 @@ const default_filters: IReportFilter = {
 };
 
 it(`Should filter out if question type is within excluded_types`, () => {
-  const filteredResults = applyReportFilters([result], {
+  const filteredResults = applyReportFilters(quizzesMap, [result], {
     ...default_filters,
     excluded_types: ['FIB']
   });
@@ -55,7 +62,7 @@ it(`Should filter out if question type is within excluded_types`, () => {
 });
 
 it(`Should filter out if quiz subject is within excluded_subjects`, () => {
-  const filteredResults = applyReportFilters([result], {
+  const filteredResults = applyReportFilters(quizzesMap, [result], {
     ...default_filters,
     excluded_subjects: ['Subject 1']
   });
@@ -64,7 +71,7 @@ it(`Should filter out if quiz subject is within excluded_subjects`, () => {
 });
 
 it(`Should filter out if quiz topic is within excluded_topics`, () => {
-  const filteredResults = applyReportFilters([result], {
+  const filteredResults = applyReportFilters(quizzesMap, [result], {
     ...default_filters,
     excluded_topics: ['Topic 1']
   });
@@ -73,7 +80,7 @@ it(`Should filter out if quiz topic is within excluded_topics`, () => {
 });
 
 it(`Should filter out if question difficulty is within excluded_difficulty`, () => {
-  const filteredResults = applyReportFilters([result], {
+  const filteredResults = applyReportFilters(quizzesMap, [result], {
     ...default_filters,
     excluded_difficulty: ['Advanced']
   });
@@ -82,7 +89,7 @@ it(`Should filter out if question difficulty is within excluded_difficulty`, () 
 });
 
 it(`Should filter out if question verdict is different from filter verdict`, () => {
-  const filteredResults = applyReportFilters([result], {
+  const filteredResults = applyReportFilters(quizzesMap, [result], {
     ...default_filters,
     verdict: false
   });
@@ -91,7 +98,7 @@ it(`Should filter out if question verdict is different from filter verdict`, () 
 });
 
 it(`Should filter out if question time taken is less than lower bound of time_taken`, () => {
-  const filteredResults = applyReportFilters([result], {
+  const filteredResults = applyReportFilters(quizzesMap, [result], {
     ...default_filters,
     time_taken: ['<>', [30, 60]]
   });
@@ -100,7 +107,7 @@ it(`Should filter out if question time taken is less than lower bound of time_ta
 });
 
 it(`Should filter out if question time taken is greater than upper bound of time_taken`, () => {
-  const filteredResults = applyReportFilters([result], {
+  const filteredResults = applyReportFilters(quizzesMap, [result], {
     ...default_filters,
     time_taken: ['<>', [10, 15]]
   });
@@ -109,7 +116,7 @@ it(`Should filter out if question time taken is greater than upper bound of time
 });
 
 it(`Should filter out if question time taken is less than lower bound of score`, () => {
-  const filteredResults = applyReportFilters([result], {
+  const filteredResults = applyReportFilters(quizzesMap, [result], {
     ...default_filters,
     score: ['<>', [1, 1]]
   });
@@ -118,7 +125,7 @@ it(`Should filter out if question time taken is less than lower bound of score`,
 });
 
 it(`Should filter out if question time taken is greater than upper bound of score`, () => {
-  const filteredResults = applyReportFilters([result], {
+  const filteredResults = applyReportFilters(quizzesMap, [result], {
     ...default_filters,
     score: ['<>', [0, 0.5]]
   });
@@ -127,7 +134,7 @@ it(`Should filter out if question time taken is greater than upper bound of scor
 });
 
 it(`Should filter out if question hints used is less than lower bound of hints_used`, () => {
-  const filteredResults = applyReportFilters([result], {
+  const filteredResults = applyReportFilters(quizzesMap, [result], {
     ...default_filters,
     hints_used: ['<>', [0, 1]]
   });
@@ -136,7 +143,7 @@ it(`Should filter out if question hints used is less than lower bound of hints_u
 });
 
 it(`Should filter out if question hints used is greater than upper bound of hints_used`, () => {
-  const filteredResults = applyReportFilters([result], {
+  const filteredResults = applyReportFilters(quizzesMap, [result], {
     ...default_filters,
     hints_used: ['<>', [3, 10]]
   });
@@ -145,7 +152,7 @@ it(`Should filter out if question hints used is greater than upper bound of hint
 });
 
 it(`Should filter out if quiz id is within excluded_quizzes`, () => {
-  const filteredResults = applyReportFilters([result], {
+  const filteredResults = applyReportFilters(quizzesMap, [result], {
     ...default_filters,
     excluded_quizzes: ['1']
   });
@@ -154,7 +161,11 @@ it(`Should filter out if quiz id is within excluded_quizzes`, () => {
 });
 
 it(`Should return result if no filter catches it`, () => {
-  const filteredResults = applyReportFilters([result], default_filters);
+  const filteredResults = applyReportFilters(
+    quizzesMap,
+    [result],
+    default_filters
+  );
 
   expect(filteredResults).toStrictEqual([result]);
 });
