@@ -22,6 +22,7 @@ interface ReportTableRowProps {
   index: number,
   excludedColumns: Record<string, boolean>
   style?: React.CSSProperties
+  quiz: string
 };
 
 function ReportTableModal(props: ReportTableRowProps) {
@@ -33,12 +34,12 @@ function ReportTableModal(props: ReportTableRowProps) {
 }
 
 function ReportTableRow(props: ReportTableRowProps) {
-  const { reportQuestions, index, results, header, excludedColumns, style } = props;
+  const { reportQuestions, index, results, header, excludedColumns, style, quiz } = props;
   const result = results[index];
   const showHints = result.question.hints.length !== 0 && !excludedColumns['hints'];
   return <div key={result.question._id} className="ReportTable-item pb-0 p-5 bg-dark" style={style}>
     <div className="flex ai-c jc-c bg-dark mb-5">
-      {!excludedColumns['quiz_info'] ? <Typography className="p-10 bg-light fs-16 bold">{`${result.question.quiz.subject} - ${result.question.quiz.topic}`}</Typography> : null}
+      {!excludedColumns['quiz_info'] ? <Typography className="p-10 bg-light fs-16 bold">{quiz}</Typography> : null}
       <Typography variant="h6" className="ReportTable-item-index bold flex-1 ta-c">{index + 1}</Typography>
       {header}
     </div>
@@ -62,24 +63,26 @@ function ReportTableRow(props: ReportTableRowProps) {
 }
 
 export function ReportTable() {
-  const { sortedResults, excludedColumns } = useContext(ReportContext);
+  const { setReport, sortedResults, excludedColumns, report } = useContext(ReportContext);
   const { settings, theme } = useThemeSettings();
   const { setModalState } = useContext(ModalContext);
-  const { setReport, report } = useContext(ReportContext);
   const memoizedReportQuestions = useMemo(() => sortedResults.map(sortedResult => <QuestionDisplay question={sortedResult.question} userAnswers={sortedResult.user_answers} showImage={Boolean(!excludedColumns["image"] && sortedResult.question.image)} showQuestion={!excludedColumns["question"]} />), [sortedResults, excludedColumns]);
   return <div className="ReportTable p-5 bg-base overflowY-auto">
-    {sortedResults.map((sortedResult, index) => <ReportTableRow key={sortedResult._id} reportQuestions={memoizedReportQuestions} index={index} results={sortedResults} excludedColumns={excludedColumns} header={<div className="ReportTable-item-icons flex jc-sb c-p ai-c" style={{ width: 40 }}><Hovertips popoverText="View separate"><BsFilm fill={theme.color.opposite_dark} size={15} onClick={() => {
-      setModalState([true, <ReportTableModal style={{
-        height: "100%",
-        overflowY: 'auto'
-      }} reportQuestions={memoizedReportQuestions} index={index} results={sortedResults} excludedColumns={excludedColumns} header={null} />])
-    }} /></Hovertips>
-      <Hovertips popoverText="Delete"><MdDelete size={20} fill={red[500]} onClick={() => {
-        settings.sound && sounds.remove.play();
-        setReport({
-          ...report,
-          results: report.results.filter(result => result._id !== sortedResult._id)
-        })
-      }} /></Hovertips></div>} />)}
+    {sortedResults.map((sortedResult, index) => {
+      const quiz = report.quizzes[sortedResult.question.quiz];
+      return <ReportTableRow quiz={`${quiz.subject} - ${quiz.topic}`} key={sortedResult._id} reportQuestions={memoizedReportQuestions} index={index} results={sortedResults} excludedColumns={excludedColumns} header={<div className="ReportTable-item-icons flex jc-sb c-p ai-c" style={{ width: 40 }}><Hovertips popoverText="View separate"><BsFilm fill={theme.color.opposite_dark} size={15} onClick={() => {
+        setModalState([true, <ReportTableModal quiz={`${quiz.subject} - ${quiz.topic}`} style={{
+          height: "100%",
+          overflowY: 'auto'
+        }} reportQuestions={memoizedReportQuestions} index={index} results={sortedResults} excludedColumns={excludedColumns} header={null} />])
+      }} /></Hovertips>
+        <Hovertips popoverText="Delete"><MdDelete size={20} fill={red[500]} onClick={() => {
+          settings.sound && sounds.remove.play();
+          setReport({
+            ...report,
+            results: report.results.filter(result => result._id !== sortedResult._id)
+          })
+        }} /></Hovertips></div>} />
+    })}
   </div>
 }

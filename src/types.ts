@@ -139,22 +139,22 @@ export interface ISelectionQuestionAnswerPartial {
   explanation?: string | null;
 }
 
-export interface IMcqQuestionFull extends Required<IQuestionPartial> {
+export interface IMcqQuestionFull extends IQuestionFull {
   question: string;
   options: SelectionQuestionOptions[];
   type: 'MCQ';
   answers: ISelectionQuestionAnswerFull[];
-  quiz: QuizIdentifiers;
-  contexts: number[];
 }
 
-export interface IMsQuestionFull extends Required<IQuestionPartial> {
+interface IQuestionFull extends Required<IQuestionPartial> {
+  contexts: number[];
+  quiz: string;
+}
+export interface IMsQuestionFull extends IQuestionFull {
   question: string;
   options: SelectionQuestionOptions[];
   type: 'MS';
   answers: ISelectionQuestionAnswerFull[];
-  quiz: QuizIdentifiers;
-  contexts: number[];
 }
 
 export interface IInputQuestionAnswerFull {
@@ -169,23 +169,19 @@ export interface ISelectionQuestionAnswerFull {
   explanation: string | null;
 }
 
-export interface ISnippetQuestionFull extends Required<IQuestionPartial> {
+export interface ISnippetQuestionFull extends IQuestionFull {
   question: string;
   options: null;
   type: 'Snippet';
   answers: IInputQuestionAnswerFull[][];
-  quiz: QuizIdentifiers;
-  contexts: number[];
 }
 
-export interface IFibQuestionFull extends Required<IQuestionPartial> {
+export interface IFibQuestionFull extends IQuestionFull {
   question: string[];
   options: null;
   type: 'FIB';
   answers: IInputQuestionAnswerFull[][];
-  quiz: QuizIdentifiers;
   format?: 'code' | 'text';
-  contexts: number[];
 }
 
 export type TInputQuestionPartial =
@@ -260,6 +256,7 @@ export interface IReport {
   settings: IPlaySettings;
   results: IResult[];
   createdAt: number;
+  quizzes: Record<string, Omit<IQuizFull, 'questions'>>;
 }
 
 export interface IReportFilter {

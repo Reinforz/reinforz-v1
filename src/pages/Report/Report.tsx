@@ -75,7 +75,8 @@ export default function Report() {
   const [report, setReport] = useState<IReport>({
     results: state?.results ?? [],
     createdAt: Date.now(),
-    settings: playSettings
+    settings: playSettings,
+    quizzes: {}
   });
   const generatedNavigationStyles = generateNavigationStyles(settings.navigation);
 
@@ -90,8 +91,8 @@ export default function Report() {
     [report.results]
   );
   const allQuizzesMap = useMemo(
-    () => generateQuizzesFromResults(report.results, allQuestionsMap),
-    [report.results, allQuestionsMap]
+    () => generateQuizzesFromResults(report, report.results, allQuestionsMap),
+    [report, allQuestionsMap]
   );
 
   const { filters, sort } = reportSettings;
@@ -99,6 +100,7 @@ export default function Report() {
   const filteredResults = useMemo(() => applyReportFilters(report.results, reportSettings.filters), [report.results, reportSettings.filters]);
   const sortedResults = useMemo(() => applyReportSorts(filteredResults, sort), [filteredResults, sort]);
   const filteredQuizzesMap = generateQuizzesFromResults(
+    report,
     filteredResults,
     allQuestionsMap
   );
@@ -113,7 +115,8 @@ export default function Report() {
           setReport({
             results: [],
             createdAt: Date.now(),
-            settings: playSettings
+            settings: playSettings,
+            quizzes: {}
           });
         }}
       />

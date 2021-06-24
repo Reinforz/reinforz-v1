@@ -16,7 +16,7 @@ import "./Quiz.scss";
 export default function Quiz() {
   const history = useHistory();
   const rootContext = useContext(RootContext);
-  const { setPlayQuestions, setPlayQuizzes, setUploadedPlayState, setPlaying, playSettings, selectedQuizzes, setPlaySettings, allQuestions, playing } = rootContext;
+  const { setPlayQuestions, setPlayQuizzes, setUploadedPlayState, setPlaying, playSettings, selectedQuizzes, setPlaySettings, allQuestions, playing, allQuizzesMap } = rootContext;
   const [results, setResults] = useState([] as IResult[]);
   const { theme, settings } = useThemeSettings();
   const { isLastItem, currentItem, getNextIndex, currentIndex, setCurrentIndex } = useCycle(allQuestions);
@@ -45,12 +45,14 @@ export default function Quiz() {
     path: "/shortcuts"
   }]);
 
+
   const render = () => {
     if (playing) {
       const totalQuestions = allQuestions.length,
         totalCorrectAnswers = results.filter(result => result.verdict).length,
         currentQuestion = JSON.parse(JSON.stringify(currentItem)) as TQuestionFull;
-      const stackListItems: [ReactNode, ReactNode][] = [["Title", `${currentQuestion.quiz.subject} - ${currentQuestion.quiz.topic}`]];
+      const currentQuiz = allQuizzesMap.get(currentQuestion.quiz)!;
+      const stackListItems: [ReactNode, ReactNode][] = [["Title", `${currentQuiz.subject} - ${currentQuiz.topic}`]];
       if (playSettings.options.instant_feedback)
         stackListItems.push(['Total Correct', totalCorrectAnswers])
       stackListItems.push(["Current", currentIndex + 1], ["Total", totalQuestions], ["Type", currentQuestion.type], ["Weight", currentQuestion.weight], ["Difficulty", currentQuestion.difficulty])

@@ -25,6 +25,7 @@ export interface IRootContext extends IRootContextData {
   setErrorLogs: React.Dispatch<React.SetStateAction<IErrorLog[]>>
   setPlaySettings: React.Dispatch<React.SetStateAction<IPlaySettings>>
   allQuestionsMap: Map<string, TQuestionFull>
+  allQuizzesMap: Map<string, IQuizFull>
   setPlaying: React.Dispatch<React.SetStateAction<boolean>>
   setPlaySettingsPresets: React.Dispatch<React.SetStateAction<IPlaySettingsPreset>>
   setUploadedPlayState: React.Dispatch<React.SetStateAction<boolean>>
