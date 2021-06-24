@@ -16,6 +16,7 @@ import {
   generateNavigationStyles,
   generateQuestionsMapFromReportResults,
   generateQuizzesFromResults,
+  generateReportQuizzesFromQuizzesMap,
   getReportSettingsPresets,
   navigateBetweenPresets,
   transformTextBySeparator
@@ -73,17 +74,11 @@ export default function Report() {
     findSettingsFromPresets(reportSettingsPresets)
   );
   const [report, setReport] = useState<IReport>(() => {
-    const quizzes: Record<string, Omit<IQuizFull, "questions">> = {};
-    for (const [key, value] of state?.allQuizzesMap) {
-      const duplicateQuiz = JSON.parse(JSON.stringify(value))
-      delete duplicateQuiz.questions;
-      quizzes[key] = duplicateQuiz;
-    }
     return {
       results: state?.results ?? [],
       createdAt: Date.now(),
       settings: playSettings,
-      quizzes
+      quizzes: generateReportQuizzesFromQuizzesMap(filteredQuizzesMap)
     }
   });
   const generatedNavigationStyles = generateNavigationStyles(settings.navigation);

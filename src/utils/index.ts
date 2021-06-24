@@ -29,6 +29,7 @@ export * from './generateQuestionsMap';
 export * from './generateQuestionsMapFromReportResults';
 export * from './generateQuizzesFromPlayState';
 export * from './generateQuizzesFromResults';
+export * from './generateReportQuizzesFromQuizzesMap';
 export * from './generateSelectionQuestionAnswers';
 export * from './generateTheme';
 export * from './getAnswerResult';

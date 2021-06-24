@@ -5,20 +5,13 @@ import { Header, Hovertips, Select } from '../../../components';
 import { ReportContext } from '../../../context/ReportContext';
 import { useThemeSettings } from '../../../hooks';
 import sounds from '../../../sounds';
-import { IQuizFull } from '../../../types';
-import { download, transformFullQuestions } from "../../../utils";
+import { download, generateReportQuizzesFromQuizzesMap, transformFullQuestions } from "../../../utils";
 import "./ReportExport.scss";
 
 export default function ReportExport() {
   const { sortedResults, filteredQuizzesMap, report: { settings: playSettings }, reportSettings, setReportSettings } = useContext(ReportContext);
   const { settings } = useThemeSettings();
-  // ?: Convert to util module
-  const quizzes: Record<string, Omit<IQuizFull, "questions">> = {};
-  for (const [key, value] of filteredQuizzesMap) {
-    const duplicateQuiz = JSON.parse(JSON.stringify(value))
-    delete duplicateQuiz.questions;
-    quizzes[key] = duplicateQuiz;
-  }
+  const generatedReportQuizzes = generateReportQuizzesFromQuizzesMap(filteredQuizzesMap);
   const { export: exportState } = reportSettings;
   const { export_type, export_as } = exportState;
 
@@ -35,7 +28,7 @@ export default function ReportExport() {
         settings: playSettings,
         results: sortedResults,
         createdAt: Date.now(),
-        quizzes
+        quizzes: generatedReportQuizzes
       }, undefined, 2));
       else
         clonedDownload("json")
@@ -44,7 +37,7 @@ export default function ReportExport() {
         settings: playSettings,
         results: sortedResults,
         createdAt: Date.now(),
-        quizzes
+        quizzes: generatedReportQuizzes
       }));
       else
         clonedDownload("yaml")
