@@ -1,7 +1,7 @@
 import shortid from 'shortid';
 import {
   ILog,
-  IQuizDefaultSettings,
+  IQuizPartial,
   TQuestionFull,
   TQuestionPartial,
   TSelectionQuestionPartial
@@ -20,7 +20,8 @@ function setObjectValues(parent: any, arr: [string, any][]) {
 
 export function generateCompleteQuestion(
   question: TQuestionPartial,
-  defaultSettings?: Partial<IQuizDefaultSettings>
+  contexts: IQuizPartial['contexts'] = [],
+  defaultSettings?: IQuizPartial['default']
 ) {
   const logs: ILog = { warns: [], errors: [] };
 
@@ -169,7 +170,15 @@ export function generateCompleteQuestion(
       ['difficulty', defaultSettings?.difficulty ?? 'Beginner'],
       ['explanation', 'No explanation available'],
       ['hints', []],
-      ['time_allocated', defaultSettings?.time_allocated ?? time_allocated]
+      ['time_allocated', defaultSettings?.time_allocated ?? time_allocated],
+      [
+        'contexts',
+        typeof defaultSettings?.contexts === 'number'
+          ? [defaultSettings.contexts]
+          : Array.isArray(defaultSettings?.contexts)
+          ? defaultSettings?.contexts
+          : []
+      ]
     ]);
 
     completeQuestion._id = shortid();
@@ -194,6 +203,26 @@ export function generateCompleteQuestion(
       );
       completeQuestion.difficulty = 'Beginner';
     }
+
+    if (typeof completeQuestion.contexts === 'number')
+      completeQuestion.contexts = [completeQuestion.contexts];
+    else if (
+      completeQuestion.contexts === undefined ||
+      completeQuestion.contexts === null
+    )
+      completeQuestion.contexts = [];
+
+    completeQuestion.contexts = completeQuestion.contexts.filter((context) => {
+      if (context < 0 || context > contexts.length) {
+        logs.warns.push(
+          `Question referred a context ${context} that is not within the range 0-${
+            contexts.length - 1
+          }. Removing it.`
+        );
+        return false;
+      }
+      return true;
+    });
   }
   return [completeQuestion, logs] as const;
 }

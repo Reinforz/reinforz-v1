@@ -38,6 +38,7 @@ export interface IQuizDefaultSettings {
   difficulty: TQuestionDifficulty | null;
   time_allocated: number | null;
   weight: number | null;
+  contexts: number | number[] | null;
 }
 
 export interface IQuizPartial {
@@ -68,7 +69,7 @@ export interface IQuestionPartial {
   difficulty?: TQuestionDifficulty;
   hints?: string[];
   _id?: string;
-  context?: number[];
+  contexts?: number | number[];
 }
 
 export interface SelectionQuestionOptions {
