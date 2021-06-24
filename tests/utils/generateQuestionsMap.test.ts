@@ -5,6 +5,7 @@ const createQuiz = () => {
   return {
     questions: [
       {
+        format: 'code',
         _id: '1',
         answers: [],
         hints: [],
@@ -15,16 +16,15 @@ const createQuiz = () => {
         options: null,
         type: 'FIB',
         difficulty: 'Advanced',
-        quiz: {
-          subject: 'Subject 1',
-          topic: 'Title 1',
-          _id: '1'
-        }
+        quiz: '1',
+        contexts: []
       }
     ],
     _id: '1',
     subject: 'Subject 1',
-    topic: 'Title 1'
+    topic: 'Title 1',
+    contexts: [],
+    default: {}
   } as IQuizFull;
 };
 

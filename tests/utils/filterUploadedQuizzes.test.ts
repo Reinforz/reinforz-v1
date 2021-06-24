@@ -25,8 +25,6 @@ it(`Should filter out uploaded quizzes`, () => {
     {} as any
   ]);
 
-  console.log(logMessages);
-
   expect(logMessages).toStrictEqual([
     {
       _id: expect.any(String),
