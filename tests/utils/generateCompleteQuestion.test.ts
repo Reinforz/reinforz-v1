@@ -8,10 +8,10 @@ it(`Should work with default settings`, () => {
       options: ['Option 1', 'Option 2', 'Option 3', 'Option 4'],
       question: 'Question'
     },
-    [],
+    ['Context 1'],
     {
       difficulty: 'Advanced',
-
+      contexts: [0],
       time_allocated: 50,
       weight: 2
     }
@@ -30,7 +30,7 @@ it(`Should work with default settings`, () => {
       { text: 'Option 3', index: '2' },
       { text: 'Option 4', index: '3' }
     ],
-    contexts: [],
+    contexts: [0],
     question: 'Question',
     image: null,
     weight: 2,
@@ -52,8 +52,10 @@ describe('MCQ type questions', () => {
         options: ['Option 1', 'Option 2', 'Option 3', 'Option 4'],
         question: 'Question'
       },
-      [],
-      {}
+      ['Context 1'],
+      {
+        contexts: 0
+      }
     );
     expect(completeQuestion).toStrictEqual({
       answers: [
@@ -62,7 +64,7 @@ describe('MCQ type questions', () => {
           explanation: null
         }
       ],
-      contexts: [],
+      contexts: [0],
       type: 'MCQ',
       options: [
         { text: 'Option 1', index: '0' },
@@ -201,11 +203,15 @@ describe('MS type questions', () => {
           type: 'MS',
           question: 'Question'
         } as any,
-        [],
-        {}
+        ['Content 1'],
+        {
+          contexts: [1]
+        }
       );
       expect(logs).toStrictEqual({
-        warns: [],
+        warns: [
+          `Question referred a context 1 that is not within the range 0-0. Removing it.`
+        ],
         errors: [`Options must be provided for MS questions`]
       });
     });

@@ -18,6 +18,16 @@ function setObjectValues(parent: any, arr: [string, any][]) {
   });
 }
 
+function generateDefaultSettingsContexts(
+  contexts: number | number[] | null | undefined
+): number[] {
+  return typeof contexts === 'number'
+    ? [contexts]
+    : Array.isArray(contexts)
+    ? contexts
+    : [];
+}
+
 export function generateCompleteQuestion(
   question: TQuestionPartial,
   contexts: string[],
@@ -171,14 +181,7 @@ export function generateCompleteQuestion(
       ['explanation', 'No explanation available'],
       ['hints', []],
       ['time_allocated', defaultSettings.time_allocated ?? time_allocated],
-      [
-        'contexts',
-        typeof defaultSettings.contexts === 'number'
-          ? [defaultSettings.contexts]
-          : Array.isArray(defaultSettings.contexts)
-          ? defaultSettings.contexts
-          : []
-      ]
+      ['contexts', generateDefaultSettingsContexts(defaultSettings.contexts)]
     ]);
 
     completeQuestion._id = shortid();
@@ -204,16 +207,12 @@ export function generateCompleteQuestion(
       completeQuestion.difficulty = 'Beginner';
     }
 
-    if (typeof completeQuestion.contexts === 'number')
-      completeQuestion.contexts = [completeQuestion.contexts];
-    else if (
-      completeQuestion.contexts === undefined ||
-      completeQuestion.contexts === null
-    )
-      completeQuestion.contexts = [];
+    completeQuestion.contexts = generateDefaultSettingsContexts(
+      completeQuestion.contexts
+    );
 
     completeQuestion.contexts = completeQuestion.contexts.filter((context) => {
-      if (context < 0 || context > contexts.length) {
+      if (context < 0 || context > contexts.length - 1) {
         logs.warns.push(
           `Question referred a context ${context} that is not within the range 0-${
             contexts.length - 1

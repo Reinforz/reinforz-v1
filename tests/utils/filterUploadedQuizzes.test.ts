@@ -18,11 +18,14 @@ it(`Should filter out uploaded quizzes`, () => {
           question: 'Question',
           options: ['Option 1', 'Option 2', 'Option 3'],
           time_allocated: 500
-        }
+        },
+        null as any
       ]
     },
     {} as any
   ]);
+
+  console.log(logMessages);
 
   expect(logMessages).toStrictEqual([
     {
@@ -42,6 +45,14 @@ it(`Should filter out uploaded quizzes`, () => {
       target: 'Question 2',
       message:
         'Provided more answers than options, given 3 options, but provided 4 answers'
+    },
+    {
+      _id: expect.any(String),
+      level: 'ERROR',
+      quiz: 'Subject - Title',
+      target: 'Question 3',
+      message: "Cannot read property 'question' of null",
+      quiz_id: expect.any(String)
     },
     {
       _id: expect.any(String),
