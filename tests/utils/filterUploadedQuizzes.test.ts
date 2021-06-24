@@ -74,6 +74,8 @@ it(`Should filter out uploaded quizzes`, () => {
       subject: 'Subject',
       topic: 'Title',
       _id: expect.any(String),
+      contexts: [],
+      default: {},
       questions: [
         {
           answers: [
@@ -89,6 +91,7 @@ it(`Should filter out uploaded quizzes`, () => {
             { text: 'Option 3', index: '2' },
             { text: 'Option 4', index: '3' }
           ],
+          contexts: [],
           question: 'Question',
           image: null,
           weight: 1,

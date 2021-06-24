@@ -4,6 +4,7 @@ export function generateQuizzesFromResults(
   filteredResults: IResult[],
   allQuestionsMap: Map<string, TQuestionFull>
 ) {
+  // ?: recreate quiz using report rather than result, for getting contexts and default settings
   const filteredQuizzes: Map<string, IQuizFull> = new Map();
   filteredResults.forEach((filteredResult) => {
     const targetQuestion = allQuestionsMap.get(filteredResult.question._id)!;
@@ -14,7 +15,9 @@ export function generateQuizzesFromResults(
     if (!filteredQuiz)
       filteredQuizzes.set(targetQuestion.quiz._id, {
         ...targetQuestion.quiz,
-        questions: [clonedTargetQuestion]
+        questions: [clonedTargetQuestion],
+        contexts: [],
+        default: {}
       });
     else filteredQuiz.questions.push(clonedTargetQuestion);
   });

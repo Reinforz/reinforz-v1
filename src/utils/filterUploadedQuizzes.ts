@@ -76,9 +76,7 @@ export function filterUploadedQuizzes(quizzes: IQuizPartial[]) {
         }
       });
       quiz.questions = filteredQuestions as any;
-      const duplicateQuiz = JSON.parse(JSON.stringify(quiz));
-      delete duplicateQuiz.default;
-      filteredUploadedQuizzes.push(duplicateQuiz);
+      filteredUploadedQuizzes.push(JSON.parse(JSON.stringify(quiz)));
     }
 
     if (!quiz.topic)

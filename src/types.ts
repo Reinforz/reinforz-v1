@@ -42,16 +42,18 @@ export interface IQuizDefaultSettings {
 }
 
 export interface IQuizPartial {
-  default?: Partial<IQuizDefaultSettings>;
   topic: string;
   subject: string;
-  questions: TQuestionPartial[];
   _id?: string;
+  default?: Partial<IQuizDefaultSettings>;
+  questions: TQuestionPartial[];
   contexts?: string[];
 }
 
 export interface IQuizFull extends QuizIdentifiers {
   questions: TQuestionFull[];
+  default: Partial<IQuizDefaultSettings>;
+  contexts: string[];
 }
 
 export interface IPlaySettings {
