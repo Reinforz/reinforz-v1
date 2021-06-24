@@ -60,7 +60,7 @@ export default function Report() {
     [report.results]
   );
   const allQuizzesMap = useMemo(
-    () => generateQuizzesFromResults(report, report.results, allQuestionsMap),
+    () => generateQuizzesFromResults(report.quizzes, report.results, allQuestionsMap),
     [report, allQuestionsMap]
   );
 
@@ -69,7 +69,7 @@ export default function Report() {
   const filteredResults = useMemo(() => applyReportFilters(allQuizzesMap, report.results, reportSettings.filters), [allQuizzesMap, report.results, reportSettings.filters]);
   const sortedResults = useMemo(() => applyReportSorts(filteredResults, sort), [filteredResults, sort]);
   const filteredQuizzesMap = generateQuizzesFromResults(
-    report,
+    report.quizzes,
     filteredResults,
     allQuestionsMap
   );

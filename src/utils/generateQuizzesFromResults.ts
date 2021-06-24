@@ -1,7 +1,7 @@
-import { IQuizFull, IReport, IResult, TQuestionFull } from '../types';
+import { IQuizFull, IResult, TQuestionFull } from '../types';
 
 export function generateQuizzesFromResults(
-  report: IReport,
+  quizzes: Record<string, Omit<IQuizFull, 'questions'>>,
   filteredResults: IResult[],
   allQuestionsMap: Map<string, TQuestionFull>
 ) {
@@ -14,7 +14,7 @@ export function generateQuizzesFromResults(
     const filteredQuiz = filteredQuizzes.get(targetQuestion.quiz);
     if (!filteredQuiz)
       filteredQuizzes.set(targetQuestion.quiz, {
-        ...report.quizzes[targetQuestion.quiz],
+        ...quizzes[targetQuestion.quiz],
         questions: [clonedTargetQuestion]
       });
     else filteredQuiz.questions.push(clonedTargetQuestion);
