@@ -51,7 +51,7 @@ export default function Report() {
       results: state?.results ?? [],
       createdAt: Date.now(),
       settings: playSettings,
-      quizzes: generateReportQuizzesFromQuizzesMap(filteredQuizzesMap)
+      quizzes: generateReportQuizzesFromQuizzesMap(state.allQuizzesMap)
     }
   });
   const generatedNavigationStyles = generateNavigationStyles(settings.navigation);

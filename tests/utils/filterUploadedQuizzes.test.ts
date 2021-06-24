@@ -100,11 +100,7 @@ it(`Should filter out uploaded quizzes`, () => {
           hints: [],
           time_allocated: 15,
           _id: expect.any(String),
-          quiz: {
-            subject: 'Subject',
-            topic: 'Title',
-            _id: expect.any(String)
-          }
+          quiz: expect.any(String)
         }
       ]
     }
