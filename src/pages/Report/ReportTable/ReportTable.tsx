@@ -67,7 +67,7 @@ export function ReportTable() {
   const { settings, theme } = useThemeSettings();
   const { setModalState } = useContext(ModalContext);
   const memoizedReportQuestions = useMemo(() => sortedResults.map(sortedResult => <QuestionDisplay question={sortedResult.question} userAnswers={sortedResult.user_answers} showImage={Boolean(!excludedColumns["image"] && sortedResult.question.image)} showQuestion={!excludedColumns["question"]} />), [sortedResults, excludedColumns]);
-  return <div className="ReportTable p-5 bg-base overflowY-auto">
+  return <div className="ReportTable flex-1 p-5 bg-base overflowY-auto">
     {sortedResults.map((sortedResult, index) => {
       const quiz = report.quizzes[sortedResult.question.quiz];
       return <ReportTableRow quiz={`${quiz.subject} - ${quiz.topic}`} key={sortedResult._id} reportQuestions={memoizedReportQuestions} index={index} results={sortedResults} excludedColumns={excludedColumns} header={<div className="ReportTable-item-icons flex jc-sb c-p ai-c" style={{ width: 40 }}><Hovertips popoverText="View separate"><BsFilm fill={theme.color.opposite_dark} size={15} onClick={() => {
