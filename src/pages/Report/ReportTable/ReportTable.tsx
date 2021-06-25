@@ -66,7 +66,7 @@ export function ReportTable() {
   const { setReport, sortedResults, excludedColumns, report } = useContext(ReportContext);
   const { settings, theme } = useThemeSettings();
   const { setModalState } = useContext(ModalContext);
-  const memoizedReportQuestions = useMemo(() => sortedResults.map(sortedResult => <QuestionDisplay contexts={report.quizzes[sortedResult.question.quiz].contexts} question={sortedResult.question} userAnswers={sortedResult.user_answers} showImage={Boolean(!excludedColumns["image"] && sortedResult.question.image)} showQuestion={!excludedColumns["question"]} />), [report, sortedResults, excludedColumns]);
+  const memoizedReportQuestions = useMemo(() => sortedResults.map(sortedResult => <QuestionDisplay contexts={report.quizzes[sortedResult.question.quiz].contexts} question={sortedResult.question} userAnswers={sortedResult.user_answers} showContexts={!excludedColumns['contexts']} showImage={Boolean(!excludedColumns["image"])} showQuestion={!excludedColumns["question"]} />), [report, sortedResults, excludedColumns]);
   return <div className="ReportTable flex-1 p-5 bg-base overflowY-auto">
     {sortedResults.map((sortedResult, index) => {
       const quiz = report.quizzes[sortedResult.question.quiz];
