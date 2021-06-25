@@ -223,7 +223,13 @@ div#root {
     height: calc(100% - 20px);
   }
 
+  & .h-calc_100p_m_5px{
+    height: calc(100% - 5px);
+  }
 
+  & .w-calc_100p_m_5px{
+    width: calc(100% - 5px);
+  }
 
   & .w-100{
     width: 100px;

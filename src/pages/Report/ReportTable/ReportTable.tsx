@@ -41,7 +41,7 @@ function ReportTableRow(props: ReportTableRowProps) {
   const { reportQuestions, index, results, header, excludedColumns, style = {}, quiz } = props;
   const result = results[index];
   const showHints = result.question.hints.length !== 0 && !excludedColumns['hints'];
-  return <div key={result.question._id} className="ReportTableRow pb-0 p-5 bg-dark h-100p" style={style.container}>
+  return <div key={result.question._id} className="ReportTableRow pb-0 p-5 bg-dark h-calc_100p_m_5px" style={style.container}>
     <div className="ReportTableRow-header flex ai-c jc-c bg-dark mb-5" style={style.header}>
       {!excludedColumns['quiz_info'] ? <Typography className="p-10 bg-light fs-16 bold">{quiz}</Typography> : null}
       <Typography variant="h6" className="ReportTableRow-index bold flex-1 ta-c">{index + 1}</Typography>

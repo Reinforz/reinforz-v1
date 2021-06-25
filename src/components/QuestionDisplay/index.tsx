@@ -35,14 +35,14 @@ export function QuestionDisplay(props: QuestionDisplayProps) {
   } else {
     questionString = question.question;
   }
-  return <div className={`QuestionDisplay flex jc-c mb-5 ${classNames.container ?? ''}`}>
-    {showContexts && question.contexts.length !== 0 && <div className="QuestionDisplay-contexts bg-base p-5 pb-0">
+  return <div className={`QuestionDisplay p-5 flex jc-c mb-5 bg-base ${classNames.container ?? ''}`}>
+    {showContexts && question.contexts.length !== 0 && <div className="QuestionDisplay-contexts overflowY-auto bg-dark p-5 pb-0 mr-5">
       {question.contexts.map(context => <Markdown content={contexts[context]} classNames={{
         typography: 'QuestionDisplay-contexts-item bg-light fs-20 overflowY-auto flex-1 p-10 mb-5',
       }} />)}
     </div>}
     {showQuestion && <Markdown content={questionString} classNames={{
-      typography: 'QuestionDisplay-question bg-base fs-20 overflowY-auto flex-1 p-10',
+      typography: 'QuestionDisplay-question bg-light fs-20 overflowY-auto flex-1 p-10',
     }} />}
     {showImage && question.image ? <div className={`QuestionDisplay-image bg-light flex jc-c ai-c ml-5 ${classNames.imageContainer ?? ''}`} style={{ width: `25%`, minWidth: 350, maxWidth: 500 }}><img className={`${classNames.image ?? ''}`} src={question.image!} alt="Question" /></div> : null}
   </div>
