@@ -2,17 +2,19 @@
   height: calc(100% - 15px);
   overflow: auto;
 
-  &-item{
-    margin-bottom: 25px;
-
-    p {
-      margin: 0
-    }
-    
-    &-stats{
-      display: flex;
-      .StackList{
-        flex: 1;
+  &Row{
+    &-content{
+      margin-bottom: 25px;
+  
+      p {
+        margin: 0
+      }
+      
+      &-stats{
+        display: flex;
+        .StackList{
+          flex: 1;
+        }
       }
     }
   }
