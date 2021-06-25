@@ -44,6 +44,6 @@ export function QuestionDisplay(props: QuestionDisplayProps) {
     {showQuestion && <Markdown content={questionString} classNames={{
       typography: 'QuestionDisplay-question bg-base fs-20 overflowY-auto flex-1 p-10',
     }} />}
-    {showImage ? <div className={`QuestionDisplay-image bg-light flex jc-c ai-c ml-5 ${classNames.imageContainer ?? ''}`} style={{ width: `25%`, minWidth: 350, maxWidth: 500 }}><img className={`${classNames.image ?? ''}`} src={question.image!} alt="Question" /></div> : null}
+    {showImage && question.image ? <div className={`QuestionDisplay-image bg-light flex jc-c ai-c ml-5 ${classNames.imageContainer ?? ''}`} style={{ width: `25%`, minWidth: 350, maxWidth: 500 }}><img className={`${classNames.image ?? ''}`} src={question.image!} alt="Question" /></div> : null}
   </div>
 }

@@ -17,6 +17,17 @@ const QuestionDisplayTemplate: Story<QuestionDisplayProps> = (args) => {
   </Root>
 }
 
+const contexts: string[] = [
+  `Context 1Est est reprehenderit anim officia esse eiusmod voluptate in. Ex minim amet labore adipisicing adipisicing veniam ipsum eiusmod nisi Lorem adipisicing pariatur. Cupidatat non qui aliqua eiusmod excepteur. Culpa sint id Lorem elit culpa labore eiusmod mollit ex. Consequat eu incididunt mollit ullamco consequat cillum elit. Ad adipisicing ex nisi ipsum veniam do est irure culpa eu enim. Ipsum tempor et elit laboris occaecat nulla.
+  Occaecat ut sunt magna velit cupidatat. Ad esse culpa veniam voluptate aute ex ex voluptate tempor veniam est aliquip. Nisi enim duis deserunt ipsum qui. Eu non consequat ea tempor adipisicing consectetur est fugiat id eiusmod. Pariatur laboris laboris est aute in reprehenderit enim et labore aliqua magna labore elit ea. Tempor laborum dolor proident qui reprehenderit quis duis quis nostrud eiusmod ut sit consequat amet.
+  Nostrud laboris aute amet id quis ut. Ullamco est sunt commodo sit aliqua officia deserunt excepteur reprehenderit mollit laboris culpa. Commodo dolor eu occaecat minim voluptate occaecat enim tempor do sint occaecat.
+  Labore minim id ut proident duis exercitation. Incididunt culpa quis quis ullamco do dolor ea eiusmod fugiat. Enim qui culpa labore mollit ex anim qui pariatur irure est dolore.
+  Dolore proident ullamco id est nostrud laboris Lorem non. Veniam cillum quis et quis ullamco magna. Nostrud irure cillum veniam ut magna aute enim laboris duis sint. Aliquip nostrud consectetur voluptate Lorem proident et sint.`,
+  `Context 1Est est reprehenderit anim officia esse eiusmod voluptate in. Ex minim amet labore adipisicing adipisicing veniam ipsum eiusmod nisi Lorem adipisicing pariatur. Cupidatat non qui aliqua eiusmod excepteur. Culpa sint id Lorem elit culpa labore eiusmod mollit ex. Consequat eu incididunt mollit ullamco consequat cillum elit. Ad adipisicing ex nisi ipsum veniam do est irure culpa eu enim. Ipsum tempor et elit laboris occaecat nulla.
+  Occaecat ut sunt magna velit cupidatat. Ad esse culpa veniam voluptate aute ex ex voluptate tempor veniam est aliquip. Nisi enim duis deserunt ipsum qui. Eu non consequat ea tempor adipisicing consectetur est fugiat id eiusmod. Pariatur laboris laboris est aute in reprehenderit enim et labore aliqua magna labore elit ea. Tempor laborum dolor proident qui reprehenderit quis duis quis nostrud eiusmod ut sit consequat amet.
+  Dolore proident ullamco id est nostrud laboris Lorem non. Veniam cillum quis et quis ullamco magna. Nostrud irure cillum veniam ut magna aute enim laboris duis sint. Aliquip nostrud consectetur voluptate Lorem proident et sint.`
+];
+
 export const QuestionDisplayWithImageQuestionAndContext = QuestionDisplayTemplate.bind({});
 QuestionDisplayWithImageQuestionAndContext.args = {
   question: {
@@ -29,17 +40,57 @@ QuestionDisplayWithImageQuestionAndContext.args = {
     ]
   },
   userAnswers: [],
-  contexts: [
-    `Context 1Est est reprehenderit anim officia esse eiusmod voluptate in. Ex minim amet labore adipisicing adipisicing veniam ipsum eiusmod nisi Lorem adipisicing pariatur. Cupidatat non qui aliqua eiusmod excepteur. Culpa sint id Lorem elit culpa labore eiusmod mollit ex. Consequat eu incididunt mollit ullamco consequat cillum elit. Ad adipisicing ex nisi ipsum veniam do est irure culpa eu enim. Ipsum tempor et elit laboris occaecat nulla.
-    Occaecat ut sunt magna velit cupidatat. Ad esse culpa veniam voluptate aute ex ex voluptate tempor veniam est aliquip. Nisi enim duis deserunt ipsum qui. Eu non consequat ea tempor adipisicing consectetur est fugiat id eiusmod. Pariatur laboris laboris est aute in reprehenderit enim et labore aliqua magna labore elit ea. Tempor laborum dolor proident qui reprehenderit quis duis quis nostrud eiusmod ut sit consequat amet.
-    Nostrud laboris aute amet id quis ut. Ullamco est sunt commodo sit aliqua officia deserunt excepteur reprehenderit mollit laboris culpa. Commodo dolor eu occaecat minim voluptate occaecat enim tempor do sint occaecat.
-    Labore minim id ut proident duis exercitation. Incididunt culpa quis quis ullamco do dolor ea eiusmod fugiat. Enim qui culpa labore mollit ex anim qui pariatur irure est dolore.
-    Dolore proident ullamco id est nostrud laboris Lorem non. Veniam cillum quis et quis ullamco magna. Nostrud irure cillum veniam ut magna aute enim laboris duis sint. Aliquip nostrud consectetur voluptate Lorem proident et sint.`,
-    `Context 1Est est reprehenderit anim officia esse eiusmod voluptate in. Ex minim amet labore adipisicing adipisicing veniam ipsum eiusmod nisi Lorem adipisicing pariatur. Cupidatat non qui aliqua eiusmod excepteur. Culpa sint id Lorem elit culpa labore eiusmod mollit ex. Consequat eu incididunt mollit ullamco consequat cillum elit. Ad adipisicing ex nisi ipsum veniam do est irure culpa eu enim. Ipsum tempor et elit laboris occaecat nulla.
-    Occaecat ut sunt magna velit cupidatat. Ad esse culpa veniam voluptate aute ex ex voluptate tempor veniam est aliquip. Nisi enim duis deserunt ipsum qui. Eu non consequat ea tempor adipisicing consectetur est fugiat id eiusmod. Pariatur laboris laboris est aute in reprehenderit enim et labore aliqua magna labore elit ea. Tempor laborum dolor proident qui reprehenderit quis duis quis nostrud eiusmod ut sit consequat amet.
-    Dolore proident ullamco id est nostrud laboris Lorem non. Veniam cillum quis et quis ullamco magna. Nostrud irure cillum veniam ut magna aute enim laboris duis sint. Aliquip nostrud consectetur voluptate Lorem proident et sint.`
-  ],
+  contexts,
   showImage: true,
   showQuestion: true,
+  showContexts: true
+}
+
+export const QuestionDisplayWithImageAndQuestion = QuestionDisplayTemplate.bind({});
+QuestionDisplayWithImageAndQuestion.args = {
+  question: {
+    type: "MCQ",
+    question: '```js\nconst app = express();\n```\n',
+    image: 'https://wallpapercave.com/wp/wp6606918.jpg',
+    contexts: []
+  },
+  userAnswers: [],
+  contexts,
+  showImage: true,
+  showQuestion: true,
+  showContexts: false
+}
+
+export const QuestionDisplayWithContextAndQuestion = QuestionDisplayTemplate.bind({});
+QuestionDisplayWithContextAndQuestion.args = {
+  question: {
+    type: "MCQ",
+    question: '```js\nconst app = express();\n```\n',
+    image: null,
+    contexts: [
+      1,
+    ]
+  },
+  userAnswers: [],
+  contexts,
+  showImage: false,
+  showQuestion: true,
+  showContexts: true
+}
+
+export const QuestionDisplayWithContextAndImage = QuestionDisplayTemplate.bind({});
+QuestionDisplayWithContextAndImage.args = {
+  question: {
+    type: "MCQ",
+    question: '```js\nconst app = express();\n```\n',
+    image: 'https://wallpapercave.com/wp/wp6606918.jpg',
+    contexts: [
+      1,
+    ]
+  },
+  userAnswers: [],
+  contexts,
+  showImage: true,
+  showQuestion: false,
   showContexts: true
 }
