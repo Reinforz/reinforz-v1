@@ -101,28 +101,20 @@ describe('MCQ type questions', () => {
       });
     });
 
-    it(`Should catch error when options provided is more than 6`, () => {
+    it(`Should catch error when options provided is less than 2`, () => {
       const [, logs] = generateCompleteQuestion(
         {
-          answers: ['1'],
+          answers: ['0'],
           type: 'MCQ',
           question: 'Question',
-          options: [
-            'Option 1',
-            'Option 2',
-            'Option 3',
-            'Option 4',
-            'Option 5',
-            'Option 6',
-            'Option 7'
-          ]
+          options: ['Option 1']
         },
         [],
         {}
       );
       expect(logs).toStrictEqual({
         warns: [],
-        errors: [`Question must have 2-6 options, but given 7`]
+        errors: [`MCQ Question must have at least 2 options`]
       });
     });
 
@@ -216,28 +208,20 @@ describe('MS type questions', () => {
       });
     });
 
-    it(`Should catch error when options provided is more than 6`, () => {
+    it(`Should catch error when options provided is less than 2`, () => {
       const [, logs] = generateCompleteQuestion(
         {
-          answers: ['1', '2'],
+          answers: ['0'],
           type: 'MS',
           question: 'Question',
-          options: [
-            'Option 1',
-            'Option 2',
-            'Option 3',
-            'Option 4',
-            'Option 5',
-            'Option 6',
-            'Option 7'
-          ]
+          options: ['Option 1']
         },
         [],
         {}
       );
       expect(logs).toStrictEqual({
         warns: [],
-        errors: [`Question must have 2-6 options, but given 7`]
+        errors: [`MS Question must have at least 2 options`]
       });
     });
 

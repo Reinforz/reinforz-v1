@@ -92,13 +92,8 @@ export function generateCompleteQuestion(
               }, provided ${dummyQuestion.answers[0].text.trim()}`
             );
 
-          if (
-            dummyQuestion.options.length < 2 ||
-            dummyQuestion.options.length > 6
-          )
-            logs.errors.push(
-              `Question must have 2-6 options, but given ${dummyQuestion.options.length}`
-            );
+          if (dummyQuestion.options.length < 2)
+            logs.errors.push(`MCQ Question must have at least 2 options`);
         }
         break;
       case 'MS':
@@ -110,13 +105,8 @@ export function generateCompleteQuestion(
             `Options must be provided for ${dummyQuestion.type} questions`
           );
         else {
-          if (
-            dummyQuestion.options.length < 2 ||
-            dummyQuestion.options.length > 6
-          )
-            logs.errors.push(
-              `Question must have 2-6 options, but given ${dummyQuestion.options.length}`
-            );
+          if (dummyQuestion.options.length < 2)
+            logs.errors.push(`MS Question must have at least 2 options`);
 
           // If more answers are given than options
           if (dummyQuestion.answers.length > dummyQuestion.options.length) {
