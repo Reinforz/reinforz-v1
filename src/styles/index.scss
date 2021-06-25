@@ -269,6 +269,20 @@ code {
   height: 100%;
 }
 
-.markdown p{
-  margin: 0px;
+.markdown{
+  table {
+    margin: 0 auto;
+    border: none;
+    border-collapse: collapse;
+
+    th, td {
+      text-align: center;
+      padding: .5em;
+    }
+  }
+
+  p{
+    margin: 5px;
+    margin-bottom: 10px;
+  }
 }

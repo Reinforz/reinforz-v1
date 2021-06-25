@@ -49,6 +49,15 @@ export function generateDynamicStyleClasses() {
       },
       '& .bg-opposite_light': {
         background: theme.color.opposite_light
+      },
+      '& thead th, & tfoot th': {
+        background: theme.color.dark
+      },
+      '& tbody tr:nth-of-type(odd)': {
+        background: theme.color.base
+      },
+      '& tbody tr:nth-of-type(even)': {
+        background: theme.color.light
       }
     }
   }))();
