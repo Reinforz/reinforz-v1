@@ -49,7 +49,8 @@ const snippetQuestions: ISnippetQuestionFull[] = [
     ],
     time_allocated: 45,
     _id: "3MS238S1ED",
-    quiz: quiz_identifiers
+    quiz: "xwqAZRp2X",
+    contexts: []
   }
 ]
 
@@ -88,7 +89,8 @@ const fibQuestions: Record<'text' | 'code', IFibQuestionFull[]> = {
     difficulty: "Beginner",
     time_allocated: 45,
     _id: "3MS238S1EC",
-    quiz: quiz_identifiers
+    quiz: "xwqAZRp2X",
+    contexts: []
   }],
   text: [{
     image: null,
@@ -139,7 +141,8 @@ const fibQuestions: Record<'text' | 'code', IFibQuestionFull[]> = {
     difficulty: "Beginner",
     time_allocated: 45,
     _id: "3MS238S1EE",
-    quiz: quiz_identifiers
+    quiz: "xwqAZRp2X",
+    contexts: []
   }]
 }
 
@@ -191,7 +194,8 @@ const msQuestions: IMsQuestionFull[] = [{
   difficulty: "Beginner",
   time_allocated: 30,
   _id: "iERo0WherK",
-  quiz: quiz_identifiers
+  quiz: "xwqAZRp2X",
+  contexts: []
 }];
 
 const mcqQuestions: IMcqQuestionFull[] = [{
@@ -226,7 +230,8 @@ const mcqQuestions: IMcqQuestionFull[] = [{
   difficulty: "Intermediate",
   time_allocated: 25,
   _id: "iERo0Wherj",
-  quiz: quiz_identifiers
+  quiz: "xwqAZRp2X",
+  contexts: []
 }];
 
 export default {
@@ -237,6 +242,8 @@ export default {
 const NoTimerQuestionTemplate: Story<{ question: TQuestionFull }> = (args) => {
   const quiz: IQuizFull = {
     ...quiz_identifiers,
+    contexts: [],
+    default: {},
     questions: [args.question]
   }
 

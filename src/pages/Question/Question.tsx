@@ -22,7 +22,7 @@ interface Props {
 
 export default function Question(props: Props) {
   const { settings } = useContext(SettingsContext)
-  const { playSettings } = useContext(RootContext);
+  const { playSettings, allQuizzesMap } = useContext(RootContext);
   const { changeCounter, isLast, question: { hints, time_allocated, type, options } } = props;
   const [userAnswers, setUserAnswers] = useState<string[]>([]);
   const [usedHints, setUsedHints] = useState<string[]>([]);
@@ -74,13 +74,13 @@ export default function Question(props: Props) {
   }, [props.question, disable_timer])
 
   const memoizedFIBQuestionComponent = useMemo(() => {
-    return <QuestionDisplay question={props.question} userAnswers={userAnswers} showImage={Boolean(props.question.image)} />
-  }, [props.question, userAnswers])
+    return <QuestionDisplay contexts={allQuizzesMap.get(props.question.quiz)!.contexts} question={props.question} userAnswers={userAnswers} showImage={Boolean(props.question.image)} />
+  }, [allQuizzesMap, props.question, userAnswers])
 
   const memoizedSelectionQuestionComponent = useMemo(() => {
-    return <QuestionDisplay question={props.question} userAnswers={userAnswers} showImage={Boolean(props.question.image)} />
+    return <QuestionDisplay contexts={allQuizzesMap.get(props.question.quiz)!.contexts} question={props.question} userAnswers={userAnswers} showImage={Boolean(props.question.image)} />
     // eslint-disable-next-line
-  }, [props.question])
+  }, [allQuizzesMap, props.question])
 
   return <div className="Question bg-dark p-5" ref={ref} onKeyUp={(e) => {
     if (settings.shortcuts) {
