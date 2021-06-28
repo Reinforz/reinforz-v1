@@ -14,7 +14,7 @@ export function generateDefaultSettingsState(): ISettings {
     },
     font: 'sans-serif',
     color: {
-      primary: 'default'
+      primary: '#3f51b5'
     }
   };
 }
