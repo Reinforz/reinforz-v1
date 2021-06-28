@@ -100,13 +100,13 @@ export default function Question(props: Props) {
       <div className="flex fd-c bg-base p-5 pb-0" style={{ width: 300 }}>
         <QuestionHints usedHints={usedHints} setUsedHints={setUsedHints} hints={hints} />
         {<div className="flex ai-c mb-5" style={{ height: '65px' }}>
-          {!disable_timer && <Hovertips popoverAnchorOrigin={{
+          {<Hovertips popoverAnchorOrigin={{
             vertical: 'top',
             horizontal: 'center',
           }} popoverTransformOrigin={{
             vertical: 'bottom',
             horizontal: 'center',
-          }} className="Question-timerBreak bg-light p-5 mr-5 jc-c ai-c flex br-5 c-p h-calc_100p_m_10px" popoverText={timeBreak ? "Stop time break" : "Start time break"} onClick={() => {
+          }} style={{ height: 'calc(100% - 10px)' }} className="Question-timerBreak bg-light p-5 mr-5 jc-c ai-c flex br-5 c-p h-calc_100p_m_10px" popoverText={timeBreak ? "Stop time break" : "Start time break"} onClick={() => {
             setTimeBreak((timeBreak) => !timeBreak);
             if (timeBreak === false) {
               setTimer(null);

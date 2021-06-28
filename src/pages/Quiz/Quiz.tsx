@@ -59,12 +59,12 @@ export default function Quiz() {
       if (!playSettings.options.disable_timer)
         stackListItems.push(["Time Allocated", currentQuestion.time_allocated])
       return <div className="Quiz bg-base flex fd-c p-5">
-        <div className="flex ai-c mb-5">
+        <div className="flex ai-c mb-5" style={{ height: 60 }}>
           <StackList direction="row" items={stackListItems} classNames={{
             container: 'p-0 flex-1',
             content: 'jc-sb'
           }} />
-          <Hovertips popoverText="Download current play state" className="p-5 bg-light flex jc-c ai-c">
+          <Hovertips popoverText="Download current play state" className="p-5 bg-light flex jc-c ai-c" style={{ height: 'calc(100% - 20px)', marginLeft: 5 }}>
             <FaCloudDownloadAlt fill={theme.color.opposite_light} size={25} onClick={() => {
               download(`Play-${Date.now()}.yaml`, safeDump({
                 questions: allQuestions,
