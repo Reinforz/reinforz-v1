@@ -12,7 +12,10 @@ export function generateDefaultSettingsState(): ISettings {
       y: 'top',
       direction: 'row'
     },
-    font: 'sans-serif'
+    font: 'sans-serif',
+    color: {
+      primary: 'default'
+    }
   };
 }
 

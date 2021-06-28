@@ -4,6 +4,13 @@ import { SettingsContext } from "../../context/SettingsContext";
 import sounds from "../../sounds";
 import { transformTextBySeparator } from "../../utils";
 
+export interface ISelectClassNames {
+  formGroup?: string
+  inputLabel?: string
+  content?: string
+  select?: string
+}
+
 export interface SelectProps<T extends Record<string, any>> {
   label: string
   state: T,
@@ -16,12 +23,7 @@ export interface SelectProps<T extends Record<string, any>> {
   onChange?: (e: ChangeEvent<{ name?: string | undefined; value: unknown }>) => void
   lsKey?: string
   className?: string
-  classNames?: {
-    formGroup?: string
-    inputLabel?: string
-    content?: string
-    select?: string
-  }
+  classNames?: ISelectClassNames
 }
 
 export default function Select<T extends Record<string, any>>(props: SelectProps<T>) {

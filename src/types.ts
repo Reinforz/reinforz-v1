@@ -306,6 +306,9 @@ export interface ISettings {
     direction: 'column' | 'row';
   };
   font: 'monospace' | 'sans-serif' | 'serif';
+  color: {
+    primary: string;
+  };
 }
 
 export interface IPreset<D> {

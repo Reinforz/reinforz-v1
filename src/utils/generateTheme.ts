@@ -86,6 +86,9 @@ export function generateTheme(settings: ISettings) {
       },
       background: {
         default: color.base
+      },
+      primary: {
+        main: settings.color.primary
       }
     },
     typography: {

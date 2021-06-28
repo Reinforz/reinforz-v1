@@ -1,4 +1,5 @@
 import { Typography } from '@material-ui/core';
+import { blue, green, indigo, orange, red, yellow } from '@material-ui/core/colors';
 import React, { useContext, useEffect, useRef } from 'react';
 import { AiFillHome } from 'react-icons/ai';
 import { FaKeyboard } from 'react-icons/fa';
@@ -10,6 +11,16 @@ import { SettingsContext } from '../../context/SettingsContext';
 import { useNavigationIcons } from '../../hooks';
 import { generateNavigationStyles, navigateBetweenPresets, transformTextBySeparator } from '../../utils';
 import "./Settings.scss";
+
+const colorMap: Record<string, string> = {
+  [`${red[500]}`]: "Red",
+  [`${orange[500]}`]: "Orange",
+  [`${yellow[500]}`]: "Yellow",
+  [`${green[500]}`]: "Green",
+  [`${blue[500]}`]: "Blue",
+  [`${indigo[500]}`]: "Indigo",
+  '#3f51b5': 'Default'
+}
 
 function Settings() {
   const { settings, setSettings, settingsPresets, setSettingsPresets } = useContext(SettingsContext);
@@ -68,6 +79,14 @@ function Settings() {
               inputLabel: 'fs-16 p-10'
             }
           }} />
+          <SelectGroup className="mb-5 w-c_10" groupItems={[
+            [[...Object.keys(colorMap)], "Primary", "primary"],
+          ]} label={"Color"} setState={setSettings} state={settings} stateKey={"color"} classNames={{
+            inputLabel: 'fs-18 p-10',
+            select: {
+              inputLabel: 'fs-16 p-10'
+            }
+          }} renderValue={(item) => colorMap[item as string]} menuItemLabel={(item) => colorMap[item]} />
           <Toggles classNames={{ inputLabel: 'w-100 fs-16' }} items={["animation", "hovertips", "shortcuts", "sound"]} setState={setSettings} state={settings} />
         </div>
       </div>
