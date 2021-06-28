@@ -21,7 +21,7 @@ export default function StackList(props: StackListProps) {
     <div className={`StackList-content bg-dark p-5 flex ${direction === 'column' ? 'pb-0' : 'pr-0'} ${direction === 'column' ? 'fd-c' : ''} ${classNames.content ?? ''}`}>
       {items.map(([label, value], index) => <div className={`StackList-content-item flex jc-sb p-5 bg-base p-5 pr-0 ${direction === 'column' ? 'mb-5' : 'mr-5'} ${classNames.contentItem ?? ''}`} key={index}>
         <Typography component="div" className={`StackList-content-item-label flex mr-5 p-10 bg-light jc-sb ai-c ${classNames.contentItemLabel ?? ''}`}>{label}</Typography>
-        {value !== null && value !== undefined ? <Typography component="div" className={`StackList-content-item-value flex mr-5 p-10 bg-light jc-sb ai-c bold ${classNames.contentItemValue ?? ''}`}>{value}</Typography> : null}
+        {value !== null && value !== undefined && value !== '' ? <Typography component="div" className={`StackList-content-item-value flex mr-5 p-10 bg-light jc-sb ai-c bold ${classNames.contentItemValue ?? ''}`}>{value}</Typography> : null}
       </div>)}
     </div>
   </div>

@@ -112,6 +112,12 @@ export function generateTheme(settings: ISettings) {
           backgroundColor: base
         }
       },
+      MuiButton: {
+        contained: {
+          fontSize: '1em',
+          fontWeight: 'bold'
+        }
+      },
       MuiListItem: {
         root: {
           '&$selected': {
@@ -205,7 +211,8 @@ export function generateTheme(settings: ISettings) {
           flexWrap: 'nowrap',
           backgroundColor: base,
           margin: 0,
-          padding: 5
+          padding: 5,
+          boxShadow: `1px 1px 2px 2px ${dark}`
         }
       }
     }
