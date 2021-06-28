@@ -51,7 +51,8 @@ export function modifyAnswers(
   userAnswer: string,
   answer: Omit<IInputQuestionAnswerFull, 'regex'>
 ) {
-  let answerText = answer.text;
+  let answerText = answer.text.trim();
+  userAnswer = userAnswer.trim();
   answer.modifiers.forEach((modifier) => {
     switch (modifier) {
       case 'IC': {
