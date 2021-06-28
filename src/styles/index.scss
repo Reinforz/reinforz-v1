@@ -7,6 +7,7 @@ div#root {
 .App, .Modal-content {
   height: 100%;
   outline: none;
+
   
   & .h-100p{
     height: 100%;
@@ -114,6 +115,10 @@ div#root {
 
   & .overflowY-auto{
     overflow-y: auto;
+  }
+
+  & .overflowX-auto{
+    overflow-x: auto;
   }
 
   & .overflowX-hidden{

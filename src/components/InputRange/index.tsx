@@ -32,7 +32,7 @@ export default function InputRange<T extends Record<string, any>>(props: InputRa
     <InputLabel className={`${classNames.inputLabel ?? ''}`}>{label}</InputLabel>
     <div style={{ flexDirection: direction }} className={`InputRange-content bg-dark p-5 ${containerPaddingClass} flex ${classNames.content ?? ''}`}>
       <div className={`bg-light flex p-5 fd-c ${itemMarginClass}`}>
-        <Select className={`${classNames.operatorSelect ?? ''}`} value={operator}
+        <Select disableUnderline className={`${classNames.operatorSelect ?? ''}`} value={operator}
           onChange={(e: ChangeEvent<{ value: unknown }>) => {
             setState({ ...state, [stateKey]: [e.target.value, range] })
             settings.sound && sounds.click.play();
@@ -42,11 +42,11 @@ export default function InputRange<T extends Record<string, any>>(props: InputRa
           )}
         </Select>
       </div>
-      <TextField className={`flex-1 ${itemMarginClass} ${classNames.numberField ?? ''}`} type="number" inputProps={{ step, min, max: parseInt(range[1]) }} value={parseInt(range[0])} onChange={(e) => {
+      <TextField InputProps={{ disableUnderline: true }} className={`flex-1 ${itemMarginClass} ${classNames.numberField ?? ''}`} type="number" inputProps={{ step, min, max: parseInt(range[1]) }} value={parseInt(range[0])} onChange={(e) => {
         setState({ ...state, [stateKey]: [operator, [e.target.value, parseInt(range[1])]] })
         settings.sound && sounds.click.play()
       }} />
-      {["<>", "><"].includes(operator) && <TextField className={`flex-1 ${itemMarginClass} ${classNames.numberField ?? ''}`} type="number" inputProps={{ step, min: parseInt(range[0]), max }} value={parseInt(range[1])} onChange={(e) => {
+      {["<>", "><"].includes(operator) && <TextField InputProps={{ disableUnderline: true }} className={`flex-1 ${itemMarginClass} ${classNames.numberField ?? ''}`} type="number" inputProps={{ step, min: parseInt(range[0]), max }} value={parseInt(range[1])} onChange={(e) => {
         settings.sound && sounds.click.play()
         setState({ ...state, [stateKey]: [operator, [parseInt(range[0]), e.target.value]] })
       }} />}

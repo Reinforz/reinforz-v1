@@ -49,7 +49,7 @@ function ReportTableRow(props: ReportTableRowProps) {
     </div>
     <div className="ReportTableRow-content" style={style.content}>
       {reportQuestions[index]}
-      <div className="ReportTableRow-content-stats mb-5">
+      <div className="ReportTableRow-content-stats mb-5 overflowX-auto">
         {!excludedColumns['question_stats'] ? <StackList header="Question Stats" items={[['Type', result.question.type], ['Difficulty', result.question.difficulty], ['Time Allocated', result.question.time_allocated], ['Weight', result.question.weight]]} classNames={{ container: 'mr-5' }} /> : null}
         {!excludedColumns['user_stats'] ? <StackList classNames={{ container: 'mr-5' }} header="User Stats" items={[['Time Taken', result.time_taken], ['Hints Used', result.hints_used], ['Verdict', <Typography className="bold" style={{
           color: result.verdict === false ? red[500] : green[500]
@@ -59,7 +59,7 @@ function ReportTableRow(props: ReportTableRowProps) {
       <div className="flex">
         {(result.question.type === "MCQ" || result.question.type === "MS") ? !excludedColumns['options'] ? <ReportOptions question={result.question} userAnswers={result.user_answers} className={`${showHints ? 'mr-5' : ''}`} /> : null : !excludedColumns['answers'] ? <ReportAnswers question={result.question as TResultInputQuestion} userAnswers={result.user_answers} className={`${showHints ? 'mr-5' : ''}`} /> : null}
         {showHints ? <div className="ReportTableRow-content-hints bg-base p-5 mb-5" style={{ width: '25%' }}>
-          {result.question.hints.map(hint => <div className="ReportTableRow-content-hints bg-light p-5 mb-5" key={hint}>
+          {result.question.hints.map(hint => <div className="ReportTableRow-content-hints overflowX-auto bg-light p-5 mb-5" key={hint}>
             <Markdown content={hint} />
           </div>)}
         </div> : null}

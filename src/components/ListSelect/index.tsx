@@ -18,7 +18,7 @@ export default function ListSelect(props: ListSelectProps) {
   return <FormGroup className="ListSelect pb-0">
     {label && <InputLabel>{label}</InputLabel>}
     <div className="Select-content bg-light flex fd-c p-5">
-      <MuiSelect value={item}
+      <MuiSelect disableUnderline value={item}
         onChange={(e: ChangeEvent<{ name?: string | undefined; value: unknown }>) => {
           settings.sound && sounds.click.play();
           onChange(e.target.value as string)

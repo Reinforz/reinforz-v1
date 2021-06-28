@@ -17,7 +17,7 @@ export default function QuestionInputs(props: Props) {
   return (
     <div className={`QuestionInputs QuestionInputs-${type} bg-base p-5 pb-0 flex fd-c`}>
       {props.question.answers.map((_, i) =>
-        <TextField key={`${_id}.${i}`} className={`QuestionInputs-item mb-5 w-calc_100p_m_10px`} autoFocus={i === 0} fullWidth inputProps={{
+        <TextField InputProps={{ disableUnderline: true }} key={`${_id}.${i}`} className={`QuestionInputs-item mb-5 w-calc_100p_m_10px`} autoFocus={i === 0} fullWidth inputProps={{
           placeholder: `Answer ${i + 1}`
         }} value={userAnswers[i] ?? ''} onChange={e => {
           if (settings.sound) {
