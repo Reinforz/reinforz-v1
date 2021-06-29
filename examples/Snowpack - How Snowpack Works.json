@@ -1,0 +1,61 @@
+{
+  "topic": "How Snowpack Works",
+  "subject": "Snowpack",
+  "questions": [
+    {
+      "question": "What sort of tool is snowpack ?",
+      "options": [
+        "build",
+        "linter",
+        "parser",
+        "formatter"
+      ],
+      "answers": [
+        0
+      ]
+    },
+    {
+      "question": "Does webpack rebuilds entire application code for a single file change ?",
+      "options": [
+        true,
+        false
+      ],
+      "answers": [
+        0
+      ]
+    },
+    {
+      "question": "In which stage does snowpack serve unbundled application code ?",
+      "answers": [
+        {
+          "text": "development",
+          "modifiers": [
+            "IC"
+          ]
+        }
+      ]
+    },
+    {
+      "question": "Does snowpack rebuilds entire application code for a single file change ?",
+      "options": [
+        false,
+        true
+      ],
+      "answers": [
+        0
+      ]
+    },
+    {
+      "question": "What does HMR stand for ?",
+      "answers": [
+        {
+          "text": "Hot Module Replacement",
+          "modifiers": [
+            "IS",
+            "IC"
+          ]
+        }
+      ]
+    }
+  ]
+}
