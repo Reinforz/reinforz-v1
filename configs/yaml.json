@@ -1,0 +1,399 @@
+{
+  "Snippet": {
+    "prefix": "sn",
+    "body": [
+      "- question: $1",
+      "\tanswers:",
+      "\t\t- $2",
+      "$3"
+    ],
+    "description": "Snippet question"
+  },
+  "TF Question-True": {
+    "prefix": "tf0",
+    "body": [
+      "- question: $1",
+      "\toptions:",
+      "\t\t- True",
+      "\t\t- False",
+      "\tanswers:",
+      "\t\t- 0",
+      "$2"
+    ],
+    "description": "True False Question with True being the answer"
+  },
+  "TF Question-False": {
+    "prefix": "tf1",
+    "body": [
+      "- question: $1",
+      "\toptions:",
+      "\t\t- True",
+      "\t\t- False",
+      "\tanswers:",
+      "\t\t- 1",
+      "$2"
+    ],
+    "description": "True False Question with False being the answer"
+  },
+  "Yes No Question-yes": {
+    "prefix": "yn0",
+    "body": [
+      "- question: $1",
+      "\toptions:",
+      "\t\t- Yes",
+      "\t\t- No",
+      "\tanswers:",
+      "\t\t- 0",
+      "$2"
+    ],
+    "description": "Yes No Question with Yes being the answer"
+  },
+  "Yes No Question-no": {
+    "prefix": "yn1",
+    "body": [
+      "- question: $1",
+      "\toptions:",
+      "\t\t- Yes",
+      "\t\t- No",
+      "\tanswers:",
+      "\t\t- 1",
+      "$2"
+    ],
+    "description": "Yes No Question with No being the answer"
+  },
+  "1 answers 2 options": {
+    "prefix": "12",
+    "description": "Question : 1 Answer : 2 Options",
+    "body": [
+      "- question: $1",
+      "\tanswers:",
+      "\t\t- 0",
+      "\toptions:",
+      "\t\t- $2",
+      "\t\t- $3",
+      "$4"
+    ]
+  },
+  "1 answers 3 options": {
+    "prefix": "13",
+    "description": "Question : 1 Answer : 3 Options",
+    "body": [
+      "- question: $1",
+      "\tanswers:",
+      "\t\t- 0",
+      "\toptions:",
+      "\t\t- $2",
+      "\t\t- $3",
+      "\t\t- $4",
+      "$4"
+    ]
+  },
+  "2 answers 3 options": {
+    "prefix": "23",
+    "description": "Question : 2 Answers : 3 Options",
+    "body": [
+      "- question: $1",
+      "\tanswers:",
+      "\t\t- 0",
+      "\t\t- 1",
+      "\toptions:",
+      "\t\t- $2",
+      "\t\t- $3",
+      "\t\t- $4",
+      "$5"
+    ]
+  },
+  "1 answers 4 options": {
+    "prefix": "14",
+    "description": "Question : 1 Answer : 4 Options",
+    "body": [
+      "- question: $1",
+      "\tanswers:",
+      "\t\t- 0",
+      "\toptions:",
+      "\t\t- $2",
+      "\t\t- $3",
+      "\t\t- $4",
+      "\t\t- $5",
+      "$4"
+    ]
+  },
+  "2 answers 4 options": {
+    "prefix": "24",
+    "description": "Question : 2 Answers : 4 Options",
+    "body": [
+      "- question: $1",
+      "\tanswers:",
+      "\t\t- 0",
+      "\t\t- 1",
+      "\toptions:",
+      "\t\t- $2",
+      "\t\t- $3",
+      "\t\t- $4",
+      "\t\t- $5",
+      "$5"
+    ]
+  },
+  "3 answers 4 options": {
+    "prefix": "34",
+    "description": "Question : 3 Answers : 4 Options",
+    "body": [
+      "- question: $1",
+      "\tanswers:",
+      "\t\t- 0",
+      "\t\t- 1",
+      "\t\t- 2",
+      "\toptions:",
+      "\t\t- $2",
+      "\t\t- $3",
+      "\t\t- $4",
+      "\t\t- $5",
+      "$6"
+    ]
+  },
+  "1 answers 5 options": {
+    "prefix": "15",
+    "description": "Question : 1 Answer : 5 Options",
+    "body": [
+      "- question: $1",
+      "\tanswers:",
+      "\t\t- 0",
+      "\toptions:",
+      "\t\t- $2",
+      "\t\t- $3",
+      "\t\t- $4",
+      "\t\t- $5",
+      "\t\t- $6",
+      "$4"
+    ]
+  },
+  "2 answers 5 options": {
+    "prefix": "25",
+    "description": "Question : 2 Answers : 5 Options",
+    "body": [
+      "- question: $1",
+      "\tanswers:",
+      "\t\t- 0",
+      "\t\t- 1",
+      "\toptions:",
+      "\t\t- $2",
+      "\t\t- $3",
+      "\t\t- $4",
+      "\t\t- $5",
+      "\t\t- $6",
+      "$5"
+    ]
+  },
+  "3 answers 5 options": {
+    "prefix": "35",
+    "description": "Question : 3 Answers : 5 Options",
+    "body": [
+      "- question: $1",
+      "\tanswers:",
+      "\t\t- 0",
+      "\t\t- 1",
+      "\t\t- 2",
+      "\toptions:",
+      "\t\t- $2",
+      "\t\t- $3",
+      "\t\t- $4",
+      "\t\t- $5",
+      "\t\t- $6",
+      "$6"
+    ]
+  },
+  "4 answers 5 options": {
+    "prefix": "45",
+    "description": "Question : 4 Answers : 5 Options",
+    "body": [
+      "- question: $1",
+      "\tanswers:",
+      "\t\t- 0",
+      "\t\t- 1",
+      "\t\t- 2",
+      "\t\t- 3",
+      "\toptions:",
+      "\t\t- $2",
+      "\t\t- $3",
+      "\t\t- $4",
+      "\t\t- $5",
+      "\t\t- $6",
+      "$7"
+    ]
+  },
+  "1 answers 6 options": {
+    "prefix": "16",
+    "description": "Question : 1 Answer : 6 Options",
+    "body": [
+      "- question: $1",
+      "\tanswers:",
+      "\t\t- 0",
+      "\toptions:",
+      "\t\t- $2",
+      "\t\t- $3",
+      "\t\t- $4",
+      "\t\t- $5",
+      "\t\t- $6",
+      "\t\t- $7",
+      "$4"
+    ]
+  },
+  "2 answers 6 options": {
+    "prefix": "26",
+    "description": "Question : 2 Answers : 6 Options",
+    "body": [
+      "- question: $1",
+      "\tanswers:",
+      "\t\t- 0",
+      "\t\t- 1",
+      "\toptions:",
+      "\t\t- $2",
+      "\t\t- $3",
+      "\t\t- $4",
+      "\t\t- $5",
+      "\t\t- $6",
+      "\t\t- $7",
+      "$5"
+    ]
+  },
+  "3 answers 6 options": {
+    "prefix": "36",
+    "description": "Question : 3 Answers : 6 Options",
+    "body": [
+      "- question: $1",
+      "\tanswers:",
+      "\t\t- 0",
+      "\t\t- 1",
+      "\t\t- 2",
+      "\toptions:",
+      "\t\t- $2",
+      "\t\t- $3",
+      "\t\t- $4",
+      "\t\t- $5",
+      "\t\t- $6",
+      "\t\t- $7",
+      "$6"
+    ]
+  },
+  "4 answers 6 options": {
+    "prefix": "46",
+    "description": "Question : 4 Answers : 6 Options",
+    "body": [
+      "- question: $1",
+      "\tanswers:",
+      "\t\t- 0",
+      "\t\t- 1",
+      "\t\t- 2",
+      "\t\t- 3",
+      "\toptions:",
+      "\t\t- $2",
+      "\t\t- $3",
+      "\t\t- $4",
+      "\t\t- $5",
+      "\t\t- $6",
+      "\t\t- $7",
+      "$7"
+    ]
+  },
+  "5 answers 6 options": {
+    "prefix": "56",
+    "description": "Question : 5 Answers : 6 Options",
+    "body": [
+      "- question: $1",
+      "\tanswers:",
+      "\t\t- 0",
+      "\t\t- 1",
+      "\t\t- 2",
+      "\t\t- 3",
+      "\t\t- 4",
+      "\toptions:",
+      "\t\t- $2",
+      "\t\t- $3",
+      "\t\t- $4",
+      "\t\t- $5",
+      "\t\t- $6",
+      "\t\t- $7",
+      "$8"
+    ]
+  },
+  "fib question 2 answers": {
+    "prefix": "2",
+    "description": "FIB Question : 2 Answers",
+    "body": [
+      "- question:",
+      "\t\t- $1",
+      "\t\t- $2",
+      "\tanswers:",
+      "\t\t- $3",
+      "$4"
+    ]
+  },
+  "fib question 3 answers": {
+    "prefix": "3",
+    "description": "FIB Question : 3 Answers",
+    "body": [
+      "- question:",
+      "\t\t- $1",
+      "\t\t- $2",
+      "\t\t- $3",
+      "\tanswers:",
+      "\t\t- $4",
+      "\t\t- $5",
+      "$6"
+    ]
+  },
+  "fib question 4 answers": {
+    "prefix": "4",
+    "description": "FIB Question : 4 Answers",
+    "body": [
+      "- question:",
+      "\t\t- $1",
+      "\t\t- $2",
+      "\t\t- $3",
+      "\t\t- $4",
+      "\tanswers:",
+      "\t\t- $5",
+      "\t\t- $6",
+      "\t\t- $7",
+      "$8"
+    ]
+  },
+  "fib question 5 answers": {
+    "prefix": "5",
+    "description": "FIB Question : 5 Answers",
+    "body": [
+      "- question:",
+      "\t\t- $1",
+      "\t\t- $2",
+      "\t\t- $3",
+      "\t\t- $4",
+      "\t\t- $5",
+      "\tanswers:",
+      "\t\t- $6",
+      "\t\t- $7",
+      "\t\t- $8",
+      "\t\t- $9",
+      "$10"
+    ]
+  },
+  "fib question 6 answers": {
+    "prefix": "6",
+    "description": "FIB Question : 6 Answers",
+    "body": [
+      "- question:",
+      "\t\t- $1",
+      "\t\t- $2",
+      "\t\t- $3",
+      "\t\t- $4",
+      "\t\t- $5",
+      "\t\t- $6",
+      "\tanswers:",
+      "\t\t- $7",
+      "\t\t- $8",
+      "\t\t- $9",
+      "\t\t- $10",
+      "\t\t- $11",
+      "$12"
+    ]
+  }
+}
