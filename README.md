@@ -3,7 +3,7 @@
 <p>
 
 <div align="center"> <h1>Reinforz</h1> </div>
-<div align="center"><b>An online quiz app that forces you to master a topic through continuous feedback.</b></div>
+<div align="center"><b>A quiz app that forces you to master a topic through continuous feedback.</b></div>
 <div align="center"><img align="center" src="https://raw.githubusercontent.com/Devorein/reinforz/master/public/192.png" width="25"/><a href="https://reinforz.vercel.app/">App</a> | <img align="center" src="https://docusaurus.io/img/docusaurus.png" width="20"/><a href="https://reinforz.github.io/reinforz-docs">Docs</a> | <img align="center" src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" width="25"/><a href="https://github.com/Devorein/reinforz/">Github</a> | <img align="center" src="https://i.pinimg.com/originals/c4/35/6c/c4356cd5454d06585e0a46066b555172.png" width="20"/><a href="https://vercel.com/devorein/reinforz">Vercel</a> | <img align="center" src="https://seeklogo.com/images/C/codecov-new-logo-D45767B802-seeklogo.com.png" width="20"/><a href="https://app.codecov.io/gh/Devorein/reinforz">Codecov</a> | <img align="center" src="https://seeklogo.com/images/C/chromatic-logo-4A0803FA76-seeklogo.com.png" width="20"/><a href="https://www.chromatic.com/builds?appId=60c72fca65eb86003902c8b1&branch=master">Chromatic</a> | <img align="center" src="https://codeclimate.com/favicon.png" width="20"/><a href="https://codeclimate.com/github/Devorein/reinforz">Code Climate</a></div>
 
 </br>
