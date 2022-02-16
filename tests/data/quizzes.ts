@@ -1,6 +1,6 @@
-import { IQuizFull } from '../../src/types';
+import { IQuiz } from '../../src/types';
 
-export const QUIZ_1: IQuizFull = {
+export const QUIZ_1: IQuiz = {
   topic: 'Topic 1',
   subject: 'Subject 1',
   contexts: [],
@@ -96,7 +96,7 @@ export const QUIZ_1: IQuizFull = {
   _id: 'quiz1'
 };
 
-export const QUIZ_2: IQuizFull = {
+export const QUIZ_2: IQuiz = {
   topic: 'Topic 2',
   subject: 'Subject 2',
   contexts: [],

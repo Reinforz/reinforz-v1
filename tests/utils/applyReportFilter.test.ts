@@ -1,7 +1,7 @@
-import { IQuizFull, IReportFilter, IResult } from '../../src/types';
+import { IQuestionResult, IQuiz, IReportFilter } from '../../src/types';
 import { applyReportFilters } from '../../src/utils';
 
-const result: IResult = {
+const result: IQuestionResult = {
   verdict: true,
   hints_used: 2,
   time_taken: 20,
@@ -28,7 +28,7 @@ const result: IResult = {
     options: null
   }
 };
-const quizzesMap: Map<string, IQuizFull> = new Map([
+const quizzesMap: Map<string, IQuiz> = new Map([
   [
     '1',
     {

@@ -9,7 +9,7 @@ import { REINFORZ_REPORT_SETTINGS_LS_KEY } from '../../constants';
 import { ReportContext } from '../../context/ReportContext';
 import { RootContext } from '../../context/RootContext';
 import { useNavigationIcons, useThemeSettings } from '../../hooks';
-import { IQuizFull, IReport, IReportSettingsPreset, IResult } from '../../types';
+import { IQuestionResult, IQuiz, IReport, IReportSettingsPresetConfig } from '../../types';
 import {
   applyReportFilters,
   applyReportSorts,
@@ -28,13 +28,13 @@ import ReportFilter from './ReportFilter/ReportFilter';
 import { ReportTable } from './ReportTable/ReportTable';
 import { ReportUpload } from './ReportUpload/ReportUpload';
 
-function findSettingsFromPresets(settings: IReportSettingsPreset) {
+function findSettingsFromPresets(settings: IReportSettingsPresetConfig) {
   return settings.presets.find((preset) => preset.id === settings.current)!
     .data;
 }
 
 export default function Report() {
-  const { state } = useLocation<{ results: IResult[], allQuizzesMap: Map<string, IQuizFull> }>();
+  const { state } = useLocation<{ results: IQuestionResult[], allQuizzesMap: Map<string, IQuiz> }>();
   const { theme, settings } = useThemeSettings();
   const { playSettings, setUploadedQuizzes, setSelectedQuizIds } = useContext(
     RootContext

@@ -1,6 +1,6 @@
-import { TQuestionFull } from '../types';
+import { TQuestion } from '../types';
 
-export function transformFullQuestions(questions: TQuestionFull[]) {
+export function transformFullQuestions(questions: TQuestion[]) {
   return questions.map((question) => {
     const clonedQuestion = JSON.parse(JSON.stringify(question));
     delete clonedQuestion.quiz;
@@ -11,6 +11,6 @@ export function transformFullQuestions(questions: TQuestionFull[]) {
         )
         .map((option) => option.text);
     }
-    return clonedQuestion as TQuestionFull;
+    return clonedQuestion as TQuestion;
   });
 }

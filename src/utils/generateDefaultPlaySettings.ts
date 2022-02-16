@@ -1,8 +1,8 @@
 import {
-  IPlaySettings,
-  IPlaySettingsFilters,
-  IPlaySettingsOptions,
-  IPlaySettingsPreset
+    IPlaySettings,
+    IPlaySettingsFilters,
+    IPlaySettingsOptions,
+    IPlaySettingsPresetConfig
 } from '../types';
 
 export function generateDefaultPlaySettingsOptionsState() {
@@ -32,7 +32,7 @@ export function generateDefaultPlaySettingsState(): IPlaySettings {
   };
 }
 
-export function generateDefaultPlaySettingsPreset(): IPlaySettingsPreset {
+export function generateDefaultPlaySettingsPreset(): IPlaySettingsPresetConfig {
   return {
     current: 'default',
     presets: [

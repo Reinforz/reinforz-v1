@@ -1,4 +1,4 @@
-import { IQuizFull } from '../../src/types';
+import { IQuiz } from '../../src/types';
 import { generateQuizzesFromResults } from '../../src/utils';
 import { QUIZ_1 } from '../data/quizzes';
 import { RESULT_1, RESULT_2 } from '../data/results';
@@ -6,7 +6,7 @@ import { RESULT_1, RESULT_2 } from '../data/results';
 const question1 = QUIZ_1.questions[0],
   question2 = QUIZ_1.questions[1];
 
-const allQuizzes: Record<string, Omit<IQuizFull, 'questions'>> = {
+const allQuizzes: Record<string, Omit<IQuiz, 'questions'>> = {
   quiz1: {
     subject: 'Subject 1',
     topic: 'Topic 1',

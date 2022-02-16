@@ -1,8 +1,8 @@
+import { Theme } from '@emotion/react';
 import { darken, lighten, makeStyles } from '@material-ui/core';
-import { ExtendedTheme } from '../types';
 
 export function generateDynamicStyleClasses() {
-  return makeStyles((theme: ExtendedTheme) => ({
+  return makeStyles((theme: Theme) => ({
     root: {
       '& ::-webkit-scrollbar': {
         width: 10

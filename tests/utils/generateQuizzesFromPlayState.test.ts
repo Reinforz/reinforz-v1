@@ -1,7 +1,7 @@
-import { IQuizFull } from '../../src/types';
+import { IQuiz } from '../../src/types';
 import { generateQuizzesFromPlayState } from '../../src/utils';
 
-const allQuizzesMap: Map<string, IQuizFull> = new Map([
+const allQuizzesMap: Map<string, IQuiz> = new Map([
   ['quiz.1', { _id: 'quiz.1' } as any]
 ]);
 

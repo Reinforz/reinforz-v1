@@ -1,10 +1,10 @@
 import { Popover, PopoverOrigin, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { Theme } from '@mui/material';
 import React, { Fragment, useContext, useEffect } from 'react';
 import { SettingsContext } from '../../context/SettingsContext';
-import { ExtendedTheme } from '../../types';
 
-const useStyles = makeStyles((theme: ExtendedTheme) => ({
+const useStyles = makeStyles((theme: Theme) => ({
   popover: {
     pointerEvents: 'none',
   },

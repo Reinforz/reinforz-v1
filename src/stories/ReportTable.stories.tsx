@@ -1,12 +1,12 @@
 import { Meta, Story } from '@storybook/react';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import App from '../App';
 import { ReportContext } from "../context/ReportContext";
 import "../pages/Report/Report.scss";
 import { ReportTable } from "../pages/Report/ReportTable/ReportTable";
 import "../pages/Report/ReportTable/ReportTable.scss";
 import { Root } from '../Root';
-import { IReport, IResult } from '../types';
+import { IQuestionResult, IReport } from '../types';
 import { generateDefaultPlaySettingsState, generateDefaultReportSettingsState } from '../utils';
 
 export default {
@@ -14,7 +14,7 @@ export default {
   component: ReportTable,
 } as Meta;
 
-const results: IResult[] = [
+const results: IQuestionResult[] = [
   {
     question: {
       image: 'https://miro.medium.com/max/480/1*7LOWVelUHYS1iqeX34Whzg.png',
@@ -268,7 +268,7 @@ const DefaultReportTableTemplate: Story = () => {
     settings: generateDefaultPlaySettingsState()
   });
 
-  const sortedResults: IResult[] = report.results;
+  const sortedResults: IQuestionResult[] = report.results;
   const reportSettings = generateDefaultReportSettingsState();
 
   return <Root>

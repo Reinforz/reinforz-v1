@@ -1,10 +1,10 @@
-import { IResult, TQuestionFull } from '../types';
+import { IQuestionResult, TQuestion } from '../types';
 import { transformResultQuestionToRegularQuestion } from './';
 
 export function generateQuestionsMapFromReportResults(
-  results: IResult[]
-): Map<string, TQuestionFull> {
-  const generatedQuestionsMap: Map<string, TQuestionFull> = new Map();
+  results: IQuestionResult[]
+): Map<string, TQuestion> {
+  const generatedQuestionsMap: Map<string, TQuestion> = new Map();
   results.forEach((result) => {
     generatedQuestionsMap.set(
       result.question._id,

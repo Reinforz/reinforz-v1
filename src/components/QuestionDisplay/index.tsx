@@ -1,10 +1,10 @@
 import { Markdown } from "..";
-import { TQuestionFull } from "../../types";
+import { TQuestion } from "../../types";
 import "./style.scss";
 
 export interface QuestionDisplayProps {
   contexts: string[],
-  question: TQuestionFull,
+  question: TQuestion,
   userAnswers: string | string[]
   showImage?: boolean
   showQuestion?: boolean

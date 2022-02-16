@@ -1,11 +1,10 @@
 import {
-  IInputQuestionAnswerFull,
-  TQuestionFull,
-  TResultQuestion
+  TQuestion,
+  TQuestionResult, TypeQuestionAnswerDetailed
 } from '../types';
 
 export function transformResultQuestionToRegularQuestion(
-  question: TResultQuestion
+  question: TQuestionResult
 ) {
   if (question.type === 'MS' || question.type === 'MCQ') {
     question.options.forEach((option: any) => {
@@ -13,11 +12,11 @@ export function transformResultQuestionToRegularQuestion(
       delete option.userSelected;
     });
   } else {
-    (question.answers as IInputQuestionAnswerFull[][]).forEach((answers) => {
+    (question.answers as TypeQuestionAnswerDetailed[][]).forEach((answers) => {
       answers.forEach((answer: any) => {
         delete answer.isCorrect;
       });
     });
   }
-  return question as TQuestionFull;
+  return question as TQuestion;
 }

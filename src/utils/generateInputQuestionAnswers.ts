@@ -1,9 +1,7 @@
 import { isPrimitive } from '.';
 import {
-  IInputQuestionAnswerPartial,
-  ILog,
-  TInputQuestionFull,
-  TInputQuestionPartial
+    IInputQuestionAnswerPartial,
+    ILog, TInputQuestionPartial, TTypeQuestion
 } from '../types';
 
 export function generateInputQuestionAnswers(
@@ -24,7 +22,7 @@ export function generateInputQuestionAnswers(
 
   function generateInputQuestionAnswerFromPartial(
     answer: IInputQuestionAnswerPartial
-  ): TInputQuestionFull['answers'][0][0] {
+  ): TTypeQuestion['answers'][0][0] {
     checkModifiers(answer);
     return {
       text: answer.text.toString().trim(),
@@ -37,7 +35,7 @@ export function generateInputQuestionAnswers(
 
   function generatedInputQuestionAnswerFromString(
     answer: string
-  ): TInputQuestionFull['answers'][0][0] {
+  ): TTypeQuestion['answers'][0][0] {
     return {
       text: answer.toString().trim(),
       modifiers: [],
@@ -46,13 +44,13 @@ export function generateInputQuestionAnswers(
     };
   }
 
-  let generatedInputQuestionAnswers: TInputQuestionFull['answers'] = [];
+  let generatedInputQuestionAnswers: TTypeQuestion['answers'] = [];
   if (Array.isArray(answers)) {
     generatedInputQuestionAnswers = answers.map((answer) => {
       if (isPrimitive(answer))
         return [
           generatedInputQuestionAnswerFromString(answer as string)
-        ] as TInputQuestionFull['answers'][0];
+        ] as TTypeQuestion['answers'][0];
       else if (Array.isArray(answer)) {
         return answer.map((answer) =>
           typeof answer === 'string'

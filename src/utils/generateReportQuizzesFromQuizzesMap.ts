@@ -1,9 +1,9 @@
-import { IQuizFull } from '../types';
+import { IQuiz } from '../types';
 
 export function generateReportQuizzesFromQuizzesMap(
-  filteredQuizzesMap: Map<string, IQuizFull>
+  filteredQuizzesMap: Map<string, IQuiz>
 ) {
-  const quizzes: Record<string, Omit<IQuizFull, 'questions'>> = {};
+  const quizzes: Record<string, Omit<IQuiz, 'questions'>> = {};
   for (const [key, value] of filteredQuizzesMap) {
     const duplicateQuiz = JSON.parse(JSON.stringify(value));
     delete duplicateQuiz.questions;

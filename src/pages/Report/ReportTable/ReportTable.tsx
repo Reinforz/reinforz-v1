@@ -10,13 +10,13 @@ import { ModalContext } from "../../../context/ModalContext";
 import { ReportContext } from "../../../context/ReportContext";
 import { useThemeSettings } from "../../../hooks";
 import sounds from "../../../sounds";
-import { IResult, TResultInputQuestion } from "../../../types";
+import { IQuestionResult, TResultInputQuestion } from "../../../types";
 import { ReportAnswers } from "../ReportAnswers/ReportAnswers";
 import { ReportOptions } from "../ReportOptions/ReportOptions";
 import "./ReportTable.scss";
 
 interface ReportTableRowProps {
-  results: IResult[],
+  results: IQuestionResult[],
   header: ReactNode,
   reportQuestions: ReactNode[],
   index: number,

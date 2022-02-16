@@ -1,13 +1,11 @@
 import {
-  ISelectionQuestionAnswerPartial,
-  TSelectionQuestionFull,
-  TSelectionQuestionPartial
+  InputSelectQuestionAnswerDetailed, TInputSelectQuestion, TSelectQuestion
 } from '../types';
 import { isPrimitive } from './isPrimitive';
 
 export function generateSelectionQuestionAnswers(
-  answers: TSelectionQuestionPartial['answers']
-): TSelectionQuestionFull['answers'] {
+  answers: TInputSelectQuestion['answers']
+): TSelectQuestion['answers'] {
   if (Array.isArray(answers)) {
     return answers.map((answer) => {
       if (typeof answer !== 'object') {
@@ -32,11 +30,11 @@ export function generateSelectionQuestionAnswers(
   } else {
     return [
       {
-        text: (answers as ISelectionQuestionAnswerPartial).text
+        text: (answers as InputSelectQuestionAnswerDetailed).text
           .toString()
           .trim(),
         explanation:
-          (answers as ISelectionQuestionAnswerPartial).explanation
+          (answers as InputSelectQuestionAnswerDetailed).explanation
             ?.toString()
             .trim() ?? null
       }

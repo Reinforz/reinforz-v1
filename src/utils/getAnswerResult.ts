@@ -1,15 +1,15 @@
 import shortid from 'shortid';
 import {
-  TQuestionFull,
-  TResultQuestion,
-  TSelectionQuestionFull
+  TQuestion,
+  TQuestionResult,
+  TSelectQuestion
 } from '../types';
 import { calculateScore } from './calculateScore';
 import { checkInputAnswers } from './checkInputAnswers';
 import { transformReportSelectionQuestion } from './transformReportQuestion';
 
 export function getAnswerResult(
-  currentQuestion: TQuestionFull,
+  currentQuestion: TQuestion,
   userAnswers: string[],
   time_taken: number,
   hints_used: number,
@@ -20,10 +20,10 @@ export function getAnswerResult(
   const { hints, time_allocated } = currentQuestion;
   userAnswers = userAnswers.filter((user_answer) => user_answer !== '');
   let verdict = false;
-  let transformedQuestion: TResultQuestion = null as any;
+  let transformedQuestion: TQuestionResult = null as any;
   const copiedCurrentQuestion = JSON.parse(
     JSON.stringify(currentQuestion)
-  ) as TQuestionFull;
+  ) as TQuestion;
 
   switch (currentQuestion.type) {
     case 'MCQ':
@@ -33,7 +33,7 @@ export function getAnswerResult(
           currentQuestion.options![parseInt(userAnswers[0])].index;
       totalCorrectAnswers = verdict ? 1 : 0;
       transformedQuestion = transformReportSelectionQuestion(
-        copiedCurrentQuestion as TSelectionQuestionFull,
+        copiedCurrentQuestion as TSelectQuestion,
         userAnswers
       );
       break;
@@ -48,7 +48,7 @@ export function getAnswerResult(
           return isCorrect;
         });
       transformedQuestion = transformReportSelectionQuestion(
-        copiedCurrentQuestion as TSelectionQuestionFull,
+        copiedCurrentQuestion as TSelectQuestion,
         userAnswers
       );
       break;

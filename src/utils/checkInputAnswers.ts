@@ -1,4 +1,4 @@
-import { IInputQuestionAnswerFull, TResultInputQuestion } from '../types';
+import { TResultInputQuestion, TypeQuestionAnswerDetailed } from '../types';
 
 /**
  * Checks user's answer against an answer object and returns whether or not it matches the given answers including its alternates
@@ -8,7 +8,7 @@ import { IInputQuestionAnswerFull, TResultInputQuestion } from '../types';
  */
 export function checkInputAnswer(
   userAnswer: string | undefined,
-  answers: IInputQuestionAnswerFull[]
+  answers: TypeQuestionAnswerDetailed[]
 ) {
   let isCorrect = false;
   const transformedAnswers: TResultInputQuestion['answers'][0] = JSON.parse(
@@ -49,7 +49,7 @@ export function checkInputAnswer(
  */
 export function modifyAnswers(
   userAnswer: string,
-  answer: Omit<IInputQuestionAnswerFull, 'regex'>
+  answer: Omit<TypeQuestionAnswerDetailed, 'regex'>
 ) {
   let answerText = answer.text.trim();
   userAnswer = userAnswer.trim();
@@ -78,7 +78,7 @@ export function modifyAnswers(
  */
 export function checkInputAnswers(
   userAnswers: string[],
-  answers: IInputQuestionAnswerFull[][]
+  answers: TypeQuestionAnswerDetailed[][]
 ) {
   const transformedUserAnswers: TResultInputQuestion['answers'] = JSON.parse(
     JSON.stringify(answers)

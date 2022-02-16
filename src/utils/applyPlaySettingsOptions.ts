@@ -1,7 +1,7 @@
-import { IPlaySettingsOptions, IQuizFull } from '../types';
+import { IPlaySettingsOptions, IQuiz } from '../types';
 
 export function applyPlaySettingsOptions(
-  uploadedQuizzes: IQuizFull[],
+  uploadedQuizzes: IQuiz[],
   selectedQuizIds: string[],
   playSettingsOptions: IPlaySettingsOptions,
   shuffleFn: (items: any[]) => any[]
@@ -9,7 +9,7 @@ export function applyPlaySettingsOptions(
   const selectedQuizzes = uploadedQuizzes.filter((uploadedQuiz) =>
     selectedQuizIds.includes(uploadedQuiz._id)
   );
-  let filteredQuizzes: IQuizFull[] = JSON.parse(
+  let filteredQuizzes: IQuiz[] = JSON.parse(
     JSON.stringify(selectedQuizzes)
   );
   if (playSettingsOptions.shuffle_quizzes && !playSettingsOptions.flatten_mix)

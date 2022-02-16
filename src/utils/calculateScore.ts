@@ -1,4 +1,4 @@
-import { IResult } from '../types';
+import { IQuestionResult } from '../types';
 
 interface Parameter {
   time_taken: number;
@@ -12,7 +12,7 @@ interface Parameter {
   timerDisabled: boolean;
 }
 
-export function calculateScore(parameter: Parameter): IResult['score'] {
+export function calculateScore(parameter: Parameter): IQuestionResult['score'] {
   const {
     time_taken,
     hints_used,

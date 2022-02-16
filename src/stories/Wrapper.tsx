@@ -1,17 +1,18 @@
+import { Theme } from "@emotion/react";
 import { ThemeProvider } from "@material-ui/styles";
 import { SnackbarProvider } from "notistack";
 import { ReactNode } from "react";
 import { SettingsContext } from "../context/SettingsContext";
 import initPrismLineNumbers from "../scripts/prism-line-numbers";
-import { ExtendedTheme, ISettings } from "../types";
+import { IGlobalSettings } from "../types";
 import { generateDefaultSettingsPreset, generateDynamicStyleClasses, generateTheme } from "../utils";
 
 initPrismLineNumbers();
 interface Props {
-  children: ReactNode | ReactNode[] | ((settings: ISettings, theme: ExtendedTheme) => JSX.Element)
+  children: ReactNode | ReactNode[] | ((settings: IGlobalSettings, theme: Theme) => JSX.Element)
 }
 
-function Root(props: Props & { settings: ISettings, theme: ExtendedTheme }) {
+function Root(props: Props & { settings: IGlobalSettings, theme: Theme }) {
   const { settings, theme } = props;
   const classes = generateDynamicStyleClasses();
   return <div className={`App ${classes.root}`} style={{ backgroundColor: theme.palette.color.dark, height: 'fit-content', padding: 5, overflow: 'hidden' }}>
@@ -23,7 +24,7 @@ export default function Wrapper(props: Props) {
   const defaultSettingsPresets = generateDefaultSettingsPreset();
   const defaultSettings = defaultSettingsPresets.presets[0].data;
   defaultSettings.theme = 'polar_night';
-  const generatedTheme = generateTheme(defaultSettings) as ExtendedTheme;
+  const generatedTheme = generateTheme(defaultSettings) as Theme;
 
   return <ThemeProvider theme={generatedTheme}>
     <SnackbarProvider maxSnack={4}>

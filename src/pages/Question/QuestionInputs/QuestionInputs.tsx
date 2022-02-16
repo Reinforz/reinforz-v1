@@ -2,12 +2,12 @@ import { TextField } from "@mui/material";
 import React from 'react';
 import { useThemeSettings } from '../../../hooks';
 import sounds from "../../../sounds";
-import { TInputQuestionFull } from '../../../types';
+import { TTypeQuestion } from '../../../types';
 
 interface Props {
   setUserAnswers: React.Dispatch<React.SetStateAction<string[]>>
   userAnswers: string[],
-  question: TInputQuestionFull,
+  question: TTypeQuestion,
 }
 
 export default function QuestionInputs(props: Props) {

@@ -1,7 +1,7 @@
 import { Meta, Story } from '@storybook/react';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Preset, { PresetProps } from '../components/Preset';
-import { IPreset } from '../types';
+import { IPresetConfig } from '../types';
 import ModalWrapper from './ModalWrapper';
 import Wrapper from "./Wrapper";
 
@@ -10,12 +10,12 @@ export default {
   component: Preset,
 } as Meta;
 
-function findSettingsFromPresets(preset: IPreset<any>) {
+function findSettingsFromPresets(preset: IPresetConfig<any>) {
   return preset.presets.find(settingsPreset => settingsPreset.id === preset.current)!.data;
 }
 
 const DefaultPresetTemplate: Story<PresetProps> = () => {
-  const [settingsPresets, setSettingsPresets] = useState<IPreset<any>>({
+  const [settingsPresets, setSettingsPresets] = useState<IPresetConfig<any>>({
     current: 'default',
     presets: [
       {

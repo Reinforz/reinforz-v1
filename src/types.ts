@@ -330,3 +330,10 @@ export interface IPresetConfig<D> {
 export interface IGlobalSettingsPresetConfig extends IPresetConfig<IGlobalSettings> {}
 export interface IPlaySettingsPresetConfig extends IPresetConfig<IPlaySettings> {}
 export interface IReportSettingsPresetConfig extends IPresetConfig<IReportSettings> {}
+
+export interface IPlayDownloadedState {
+  questions: TQuestion[];
+  results: Omit<IQuestionResult, 'question'> & { question: string }[];
+  playSettings: IPlaySettings;
+  quizzes: Omit<IQuiz, 'questions'>[];
+}

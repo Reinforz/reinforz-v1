@@ -1,16 +1,16 @@
-import { IQuizFull, IResult, TQuestionFull } from '../types';
+import { IQuestionResult, IQuiz, TQuestion } from '../types';
 
 export function generateQuizzesFromResults(
-  quizzes: Record<string, Omit<IQuizFull, 'questions'>>,
-  filteredResults: IResult[],
-  allQuestionsMap: Map<string, TQuestionFull>
+  quizzes: Record<string, Omit<IQuiz, 'questions'>>,
+  filteredResults: IQuestionResult[],
+  allQuestionsMap: Map<string, TQuestion>
 ) {
-  const filteredQuizzes: Map<string, IQuizFull> = new Map();
+  const filteredQuizzes: Map<string, IQuiz> = new Map();
   filteredResults.forEach((filteredResult) => {
     const targetQuestion = allQuestionsMap.get(filteredResult.question._id)!;
     const clonedTargetQuestion = JSON.parse(
       JSON.stringify(targetQuestion)
-    ) as TQuestionFull;
+    ) as TQuestion;
     const filteredQuiz = filteredQuizzes.get(targetQuestion.quiz);
     if (!filteredQuiz)
       filteredQuizzes.set(targetQuestion.quiz, {

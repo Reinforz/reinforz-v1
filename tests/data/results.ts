@@ -1,16 +1,16 @@
 import {
-  IFibQuestionFull,
-  IMsQuestionFull,
-  IResult,
-  IResultSelectionQuestion,
-  TResultInputQuestion
+    IFibQuestionFull,
+    IMsQuestionFull,
+    IQuestionResult,
+    ISelectQuestionResult,
+    TResultInputQuestion
 } from '../../src/types';
 import { QUIZ_1 } from './quizzes';
 
 const question1 = QUIZ_1.questions[0] as IMsQuestionFull,
   question2 = QUIZ_1.questions[1] as IFibQuestionFull;
 
-export const RESULT_1: IResult = {
+export const RESULT_1: IQuestionResult = {
   question: {
     ...question1,
     options: question1.options
@@ -21,7 +21,7 @@ export const RESULT_1: IResult = {
         ...option,
         isCorrect: [0, 2].includes(index),
         userSelected: [0, 2].includes(index)
-      })) as IResultSelectionQuestion['options']
+      })) as ISelectQuestionResult['options']
   },
   user_answers: ['0', '2'],
   hints_used: 1,
@@ -36,7 +36,7 @@ export const RESULT_1: IResult = {
   _id: 'result_1'
 };
 
-export const RESULT_2: IResult = {
+export const RESULT_2: IQuestionResult = {
   question: {
     ...question2,
     answers: question2.answers.map((answers, index) =>

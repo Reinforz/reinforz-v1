@@ -1,14 +1,14 @@
 import React from "react";
-import { ISettings, ISettingsPreset } from "../types";
+import { IGlobalSettings, IGlobalSettingsPresetConfig } from "../types";
 
 export interface SettingsContextData {
-  settingsPresets: ISettingsPreset;
-  settings: ISettings
+  settingsPresets: IGlobalSettingsPresetConfig;
+  settings: IGlobalSettings
 }
 
 export interface ISettingsContext extends SettingsContextData {
-  setSettingsPresets: React.Dispatch<React.SetStateAction<ISettingsPreset>>
-  setSettings: React.Dispatch<React.SetStateAction<ISettings>>
+  setSettingsPresets: React.Dispatch<React.SetStateAction<IGlobalSettingsPresetConfig>>
+  setSettings: React.Dispatch<React.SetStateAction<IGlobalSettings>>
 }
 
 export const SettingsContext = React.createContext({} as ISettingsContext)

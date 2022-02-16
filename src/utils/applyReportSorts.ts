@@ -1,4 +1,4 @@
-import { IReportSort, IResult } from '../types';
+import { IQuestionResult, IReportSort } from '../types';
 
 type TComparison = 'equal' | 'greater' | 'lesser';
 
@@ -44,7 +44,7 @@ export function getStringComparison(str1: string, str2: string): TComparison {
   else return 'equal';
 }
 
-export function applyReportSorts(results: IResult[], reportSorts: IReportSort) {
+export function applyReportSorts(results: IQuestionResult[], reportSorts: IReportSort) {
   return results.sort((resultA, resultB) => {
     let res = 0;
     for (let index = 0; index < reportSorts.length; index++) {

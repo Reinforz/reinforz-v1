@@ -1,43 +1,43 @@
 import React from "react";
-import { IErrorLog, IPlaySettings, IPlaySettingsPreset, IQuizFull, TQuestionFull } from "../types";
+import { IErrorLog, IPlaySettings, IPlaySettingsPresetConfig, IQuiz, TQuestion } from "../types";
 
 export interface IRootContextData {
-  uploadedQuizzes: IQuizFull[],
+  uploadedQuizzes: IQuiz[],
   selectedQuizIds: string[],
-  selectedQuizzes: IQuizFull[],
-  filteredQuizzes: IQuizFull[],
+  selectedQuizzes: IQuiz[],
+  filteredQuizzes: IQuiz[],
   errorLogs: IErrorLog[],
   playing: boolean
-  playSettingsPresets: IPlaySettingsPreset
+  playSettingsPresets: IPlaySettingsPresetConfig
   playSettings: IPlaySettings
-  allQuestions: TQuestionFull[]
+  allQuestions: TQuestion[]
   uploadedPlayState: boolean
   playQuestions: {
-    array: TQuestionFull[];
-    map: Map<string, TQuestionFull>;
+    array: TQuestion[];
+    map: Map<string, TQuestion>;
   },
-  playQuizzes: { selected: IQuizFull[], filtered: IQuizFull[] },
+  playQuizzes: { selected: IQuiz[], filtered: IQuiz[] },
 }
 
 export interface IRootContext extends IRootContextData {
-  setUploadedQuizzes: React.Dispatch<React.SetStateAction<IQuizFull[]>>
+  setUploadedQuizzes: React.Dispatch<React.SetStateAction<IQuiz[]>>
   setSelectedQuizIds: React.Dispatch<React.SetStateAction<string[]>>
   setErrorLogs: React.Dispatch<React.SetStateAction<IErrorLog[]>>
   setPlaySettings: React.Dispatch<React.SetStateAction<IPlaySettings>>
-  allQuestionsMap: Map<string, TQuestionFull>
-  allQuizzesMap: Map<string, IQuizFull>
+  allQuestionsMap: Map<string, TQuestion>
+  allQuizzesMap: Map<string, IQuiz>
   setPlaying: React.Dispatch<React.SetStateAction<boolean>>
-  setPlaySettingsPresets: React.Dispatch<React.SetStateAction<IPlaySettingsPreset>>
+  setPlaySettingsPresets: React.Dispatch<React.SetStateAction<IPlaySettingsPresetConfig>>
   setUploadedPlayState: React.Dispatch<React.SetStateAction<boolean>>
-  setPlayQuizzes: React.Dispatch<React.SetStateAction<{ selected: IQuizFull[], filtered: IQuizFull[] }>>
+  setPlayQuizzes: React.Dispatch<React.SetStateAction<{ selected: IQuiz[], filtered: IQuiz[] }>>
   playQuestions: {
-    array: TQuestionFull[];
-    map: Map<string, TQuestionFull>;
+    array: TQuestion[];
+    map: Map<string, TQuestion>;
   },
-  playQuizzes: { selected: IQuizFull[], filtered: IQuizFull[] },
+  playQuizzes: { selected: IQuiz[], filtered: IQuiz[] },
   setPlayQuestions: React.Dispatch<React.SetStateAction<{
-    array: TQuestionFull[];
-    map: Map<string, TQuestionFull>;
+    array: TQuestion[];
+    map: Map<string, TQuestion>;
   }>>
 }
 

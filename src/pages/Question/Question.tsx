@@ -7,7 +7,7 @@ import { QuestionDisplay } from "../../components/QuestionDisplay";
 import { RootContext } from "../../context/RootContext";
 import { SettingsContext } from "../../context/SettingsContext";
 import sounds from "../../sounds";
-import { TQuestionFull } from "../../types";
+import { TQuestion } from "../../types";
 import { applyOptionsShortcut, displayTime } from "../../utils";
 import "./Question.scss";
 import QuestionHints from "./QuestionHints/QuestionHints";
@@ -15,7 +15,7 @@ import QuestionInputs from "./QuestionInputs/QuestionInputs";
 import QuestionOptions from "./QuestionOptions/QuestionOptions";
 
 interface Props {
-  question: TQuestionFull,
+  question: TQuestion,
   changeCounter: (userAnswers: string[], time_taken: number, hints_used: number) => void,
   isLast: boolean,
 };

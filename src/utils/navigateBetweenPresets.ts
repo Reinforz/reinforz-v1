@@ -1,10 +1,10 @@
 import { KeyboardEvent, SetStateAction } from 'react';
-import { IPreset } from '../types';
+import { IPresetConfig } from '../types';
 
 export function navigateBetweenPresets(
   event: KeyboardEvent<HTMLDivElement>,
-  settings: IPreset<any>,
-  setSettings: (value: SetStateAction<IPreset<any>>) => void,
+  settings: IPresetConfig<any>,
+  setSettings: (value: SetStateAction<IPresetConfig<any>>) => void,
   lsKey: string
 ) {
   let newPresetId: string | null = null;

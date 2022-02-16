@@ -1,11 +1,11 @@
-import { IPlayDownloadedState, IQuizFull, TQuestionFull } from '../types';
+import { IPlayDownloadedState, IQuiz, TQuestion } from '../types';
 
 export function generateQuizzesFromPlayState(
-  allQuizzesMap: Map<string, IQuizFull>,
+  allQuizzesMap: Map<string, IQuiz>,
   playDownloadState: IPlayDownloadedState,
-  allQuestionsMap: Map<string, TQuestionFull>
+  allQuestionsMap: Map<string, TQuestion>
 ) {
-  const quizzes: Map<string, IQuizFull> = new Map();
+  const quizzes: Map<string, IQuiz> = new Map();
   playDownloadState.questions.forEach((question) => {
     const targetQuestion = allQuestionsMap.get(question._id)!;
     const filteredQuiz = quizzes.get(targetQuestion.quiz);

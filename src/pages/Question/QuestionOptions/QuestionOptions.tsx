@@ -1,11 +1,11 @@
 import { useMemo } from "react";
 import { ListCheckboxGroup, ListRadioGroup, Markdown } from "../../../components";
-import { TQuestionFull } from '../../../types';
+import { TQuestion } from '../../../types';
 
 interface Props {
   setUserAnswers: (val: string[]) => any,
   userAnswers: string[],
-  question: TQuestionFull,
+  question: TQuestion,
 }
 
 export default function QuestionOptions(props: Props) {

@@ -9,12 +9,12 @@ import { ModalContext } from "../../context/ModalContext";
 import { SettingsContext } from "../../context/SettingsContext";
 import { useThemeSettings } from "../../hooks";
 import sounds from "../../sounds";
-import { IPreset } from "../../types";
+import { IPresetConfig } from "../../types";
 import "./style.scss";
 
 export interface PresetProps {
-  setPresetState: React.Dispatch<React.SetStateAction<IPreset<any>>>
-  itemPresets: IPreset<any>
+  setPresetState: React.Dispatch<React.SetStateAction<IPresetConfig<any>>>
+  itemPresets: IPresetConfig<any>
   currentPreset: any
   modalLabel?: string
   popoverText?: string
@@ -67,7 +67,7 @@ export default function Preset(props: PresetProps) {
           if (isValid) {
             settings.sound && sounds.click.play();
             const currentActivePresetId = shortid();
-            const newSettingsPresets: IPreset<any> = {
+            const newSettingsPresets: IPresetConfig<any> = {
               current: currentActivePresetId,
               presets: [...itemPresets.presets, {
                 name: input,

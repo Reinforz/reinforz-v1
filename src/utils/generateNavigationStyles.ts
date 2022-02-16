@@ -1,8 +1,8 @@
 import React from 'react';
-import { ISettings } from '../types';
+import { IGlobalSettings } from '../types';
 
 export function generateNavigationStyles(
-  navigationInfo: Omit<ISettings['navigation'], 'direction'>
+  navigationInfo: Omit<IGlobalSettings['navigation'], 'direction'>
 ) {
   const styles: React.CSSProperties = {};
   let translateX = false,

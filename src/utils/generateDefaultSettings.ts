@@ -1,6 +1,6 @@
-import { ISettings, ISettingsPreset } from '../types';
+import { IGlobalSettings, IGlobalSettingsPresetConfig } from '../types';
 
-export function generateDefaultSettingsState(): ISettings {
+export function generateDefaultSettingsState(): IGlobalSettings {
   return {
     animation: true,
     hovertips: true,
@@ -19,7 +19,7 @@ export function generateDefaultSettingsState(): ISettings {
   };
 }
 
-export function generateDefaultSettingsPreset(): ISettingsPreset {
+export function generateDefaultSettingsPreset(): IGlobalSettingsPresetConfig {
   return {
     current: 'default',
     presets: [

@@ -1,10 +1,9 @@
 import { Meta, Story } from '@storybook/react';
-import React from 'react';
 import App from '../App';
 import Quiz from "../pages/Quiz/Quiz";
 import "../pages/Quiz/Quiz.scss";
 import { Root } from '../Root';
-import { IFibQuestionFull, IMcqQuestionFull, IMsQuestionFull, IPlaySettingsPreset, IQuizFull, ISettingsPreset, ISnippetQuestionFull, QuizIdentifiers, TQuestionFull } from '../types';
+import { IFibQuestionFull, IGlobalSettingsPresetConfig, IMcqQuestionFull, IMsQuestionFull, IPlaySettingsPresetConfig, IQuiz, ISnippetQuestionFull, QuizIdentifiers, TQuestion } from '../types';
 import { generateDefaultPlaySettingsState, generateDefaultSettingsState } from '../utils';
 
 const quiz_identifiers: QuizIdentifiers = {
@@ -239,8 +238,8 @@ export default {
   component: Quiz,
 } as Meta;
 
-const NoTimerQuestionTemplate: Story<{ question: TQuestionFull }> = (args) => {
-  const quiz: IQuizFull = {
+const NoTimerQuestionTemplate: Story<{ question: TQuestion }> = (args) => {
+  const quiz: IQuiz = {
     ...quiz_identifiers,
     contexts: [],
     default: {},
@@ -248,7 +247,7 @@ const NoTimerQuestionTemplate: Story<{ question: TQuestionFull }> = (args) => {
   }
 
   const playSettings = generateDefaultPlaySettingsState();
-  const playSettingsPresets: IPlaySettingsPreset = {
+  const playSettingsPresets: IPlaySettingsPresetConfig = {
     current: 'no_timer',
     presets: [
       {
@@ -265,7 +264,7 @@ const NoTimerQuestionTemplate: Story<{ question: TQuestionFull }> = (args) => {
   };
 
   const settings = generateDefaultSettingsState();
-  const settingsPresets: ISettingsPreset = {
+  const settingsPresets: IGlobalSettingsPresetConfig = {
     current: 'polar_night',
     presets: [
       {

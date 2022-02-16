@@ -8,7 +8,7 @@ import { useHistory } from "react-router-dom";
 import { Hovertips, IconGroup, StackList, Upload } from "../../components";
 import { RootContext } from "../../context/RootContext";
 import { useCycle, useNavigationIcons, useThemeSettings } from "../../hooks";
-import { IPlayDownloadedState, IResult, TQuestionFull } from "../../types";
+import { IPlayDownloadedState, IQuestionResult, TQuestion } from "../../types";
 import { download, generateNavigationStyles, generateQuizzesFromPlayState, getAnswerResult } from "../../utils";
 import Question from "../Question/Question";
 import "./Quiz.scss";
@@ -17,7 +17,7 @@ export default function Quiz() {
   const history = useHistory();
   const rootContext = useContext(RootContext);
   const { setPlayQuestions, setPlayQuizzes, setUploadedPlayState, setPlaying, playSettings, selectedQuizzes, setPlaySettings, allQuestions, playing, allQuizzesMap } = rootContext;
-  const [results, setResults] = useState([] as IResult[]);
+  const [results, setResults] = useState([] as IQuestionResult[]);
   const { theme, settings } = useThemeSettings();
   const { isLastItem, currentItem, getNextIndex, currentIndex, setCurrentIndex } = useCycle(allQuestions);
   const generatedNavigationStyles = generateNavigationStyles(settings.navigation);
@@ -50,7 +50,7 @@ export default function Quiz() {
     if (playing) {
       const totalQuestions = allQuestions.length,
         totalCorrectAnswers = results.filter(result => result.verdict).length,
-        currentQuestion = JSON.parse(JSON.stringify(currentItem)) as TQuestionFull;
+        currentQuestion = JSON.parse(JSON.stringify(currentItem)) as TQuestion;
       const currentQuiz = allQuizzesMap.get(currentQuestion.quiz)!;
       const stackListItems: [ReactNode, ReactNode][] = [["Title", `${currentQuiz.subject} - ${currentQuiz.topic}`]];
       if (playSettings.options.instant_feedback)
@@ -98,7 +98,7 @@ export default function Quiz() {
           const uploadedPlayState = yaml.safeLoad(result as string) as any;
           return uploadedPlayState;
         }} postRead={([playState]: IPlayDownloadedState[]) => {
-          const allQuestionsMap: Map<string, TQuestionFull> = new Map();
+          const allQuestionsMap: Map<string, TQuestion> = new Map();
           playState.questions.forEach((question) =>
             allQuestionsMap.set(question._id, question)
           );

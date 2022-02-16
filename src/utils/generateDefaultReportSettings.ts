@@ -1,9 +1,9 @@
 import {
-  IReportAggregator,
-  IReportExport,
-  IReportFilter,
-  IReportSettings,
-  IReportSettingsPreset
+    IReportAggregator,
+    IReportExport,
+    IReportFilter,
+    IReportSettings,
+    IReportSettingsPresetConfig
 } from '../types';
 
 export function generateDefaultReportSettingsFilterState() {
@@ -49,7 +49,7 @@ export function generateDefaultReportSettingsState(): IReportSettings {
   };
 }
 
-export function generateDefaultReportSettingsPreset(): IReportSettingsPreset {
+export function generateDefaultReportSettingsPreset(): IReportSettingsPresetConfig {
   return {
     current: 'default',
     presets: [

@@ -4,11 +4,11 @@ import { AiFillCheckSquare } from "react-icons/ai";
 import { FaUser } from "react-icons/fa";
 import { Markdown } from "../../../components";
 import { useThemeSettings } from "../../../hooks";
-import { IResultSelectionQuestion } from "../../../types";
+import { ISelectQuestionResult } from "../../../types";
 import "./ReportOptions.scss";
 
 interface Props {
-  question: IResultSelectionQuestion
+  question: ISelectQuestionResult
   userAnswers: string[]
   className?: string
 }

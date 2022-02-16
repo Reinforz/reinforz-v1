@@ -33,7 +33,7 @@ import './styles/index.scss';
 import "./styles/prism-line-highlight.scss";
 import "./styles/vs-light.scss";
 import "./styles/vscode-dark.scss";
-import { ExtendedTheme, IErrorLog, IPlaySettings, IPreset, IQuizFull, ISettings, TQuestionFull } from "./types";
+import { IErrorLog, IGlobalSettings, IPlaySettings, IPresetConfig, IQuiz, TQuestion } from "./types";
 import { applyPlaySettingsOptions, arrayShuffler, generateQuestionsMap, generateTheme, getPlaySettingsPresets, getSettingsPresets } from "./utils";
 
 initPrismLineNumbers();
@@ -41,26 +41,26 @@ export interface RootProps extends Partial<IRootContextData>, Partial<SettingsCo
   children: ReactNode | ReactNode[]
 }
 
-function findSettingsFromPresets(preset: IPreset<any>) {
+function findSettingsFromPresets(preset: IPresetConfig<any>) {
   return preset.presets.find(settingsPreset => settingsPreset.id === preset.current)!.data;
 }
 
 export const Root = (props: RootProps) => {
   const [settingsPresets, setSettingsPresets] = useState(props.settingsPresets ?? getSettingsPresets());
-  const [settings, setSettings] = useState<ISettings>(props.settings ?? findSettingsFromPresets(settingsPresets));
+  const [settings, setSettings] = useState<IGlobalSettings>(props.settings ?? findSettingsFromPresets(settingsPresets));
   const [playSettingsPresets, setPlaySettingsPresets] = useState(props.playSettingsPresets ?? getPlaySettingsPresets());
   const [playSettings, setPlaySettings] = useState<IPlaySettings>(props.playSettings ?? findSettingsFromPresets(playSettingsPresets));
-  const [uploadedQuizzes, setUploadedQuizzes] = useState<IQuizFull[]>(props.uploadedQuizzes ?? []);
+  const [uploadedQuizzes, setUploadedQuizzes] = useState<IQuiz[]>(props.uploadedQuizzes ?? []);
   const [selectedQuizIds, setSelectedQuizIds] = useState<string[]>(props.selectedQuizIds ?? []);
   const [errorLogs, setErrorLogs] = useState<IErrorLog[]>(props.errorLogs ?? []);
   const [playing, setPlaying] = useState<boolean>(props.playing ?? false);
   const [uploadedPlayState, setUploadedPlayState] = useState(props.uploadedPlayState ?? false);
-  const [playQuizzes, setPlayQuizzes] = useState<{ selected: IQuizFull[], filtered: IQuizFull[] }>(props.playQuizzes ?? {
+  const [playQuizzes, setPlayQuizzes] = useState<{ selected: IQuiz[], filtered: IQuiz[] }>(props.playQuizzes ?? {
     filtered: [],
     selected: []
   });
 
-  const [playQuestions, setPlayQuestions] = useState<{ array: TQuestionFull[], map: Map<string, TQuestionFull> }>(props.playQuestions ?? {
+  const [playQuestions, setPlayQuestions] = useState<{ array: TQuestion[], map: Map<string, TQuestion> }>(props.playQuestions ?? {
     array: [],
     map: new Map()
   })
@@ -85,7 +85,7 @@ export const Root = (props: RootProps) => {
     }
   }, [playQuizzes.filtered, playSettings.filters, uploadedPlayState]);
 
-  const allShuffledQuestions: TQuestionFull[] = useMemo(() => {
+  const allShuffledQuestions: TQuestion[] = useMemo(() => {
     return playSettings.options.flatten_mix && !uploadedPlayState ? arrayShuffler(playQuestions.array) : playQuestions.array
   }, [playQuestions.array, playSettings.options.flatten_mix, uploadedPlayState])
 
@@ -99,10 +99,10 @@ export const Root = (props: RootProps) => {
     // eslint-disable-next-line
   }, [playSettingsPresets.current])
 
-  const allQuizzesMap: Map<string, IQuizFull> = new Map();
+  const allQuizzesMap: Map<string, IQuiz> = new Map();
   playQuizzes.filtered.forEach(filteredQuiz => allQuizzesMap.set(filteredQuiz._id, filteredQuiz))
 
-  const generatedTheme = generateTheme(settings) as ExtendedTheme;
+  const generatedTheme = generateTheme(settings);
   return <ThemeProvider theme={generatedTheme}>
     <SnackbarProvider maxSnack={4}>
       <SettingsContext.Provider value={{ settings, setSettingsPresets, settingsPresets, setSettings }}>

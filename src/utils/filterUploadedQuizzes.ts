@@ -1,5 +1,5 @@
 import shortid from 'shortid';
-import { IErrorLog, IQuizFull, IQuizPartial, TQuestionFull } from '../types';
+import { IErrorLog, IQuiz, IQuizPartial, TQuestion } from '../types';
 import { generateCompleteQuestion } from './';
 
 function generateLogMessage(
@@ -20,14 +20,14 @@ function generateLogMessage(
 
 export function filterUploadedQuizzes(quizzes: IQuizPartial[]) {
   const logMessages: IErrorLog[] = [];
-  const filteredUploadedQuizzes: IQuizFull[] = [];
+  const filteredUploadedQuizzes: IQuiz[] = [];
   quizzes.forEach((quiz, quizIndex) => {
     const quizId = shortid();
     quiz._id = quizId;
     quiz.default = quiz.default ?? {};
     quiz.contexts = quiz.contexts ?? [];
     if (quiz.topic && quiz.subject && quiz.questions.length > 0) {
-      const filteredQuestions: TQuestionFull[] = [];
+      const filteredQuestions: TQuestion[] = [];
       quiz.questions.forEach((question, questionIndex) => {
         try {
           const [generatedQuestion, logs] = generateCompleteQuestion(

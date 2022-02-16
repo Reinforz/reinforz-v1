@@ -1,12 +1,12 @@
-import { IPlaySettings, IQuizFull, TQuestionFull } from '../types';
+import { IPlaySettings, IQuiz, TQuestion } from '../types';
 import { applyNumberOperator } from './applyNumberOperator';
 
 export function generateQuestionsMap(
-  filteredQuizzes: IQuizFull[],
+  filteredQuizzes: IQuiz[],
   playSettingsFilters: IPlaySettings['filters']
 ) {
-  const allQuestions: TQuestionFull[] = [];
-  const allQuestionsMap: Map<string, TQuestionFull> = new Map();
+  const allQuestions: TQuestion[] = [];
+  const allQuestionsMap: Map<string, TQuestion> = new Map();
 
   filteredQuizzes.forEach((filteredQuiz) => {
     filteredQuiz.questions = filteredQuiz.questions.filter(

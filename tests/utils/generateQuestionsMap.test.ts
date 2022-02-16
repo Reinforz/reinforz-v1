@@ -1,4 +1,4 @@
-import { IQuizFull } from '../../src/types';
+import { IQuiz } from '../../src/types';
 import { generateQuestionsMap } from '../../src/utils';
 
 const createQuiz = () => {
@@ -25,7 +25,7 @@ const createQuiz = () => {
     topic: 'Title 1',
     contexts: [],
     default: {}
-  } as IQuizFull;
+  } as IQuiz;
 };
 
 it(`Should filter question if difficulty is included in excluded_difficulty`, () => {

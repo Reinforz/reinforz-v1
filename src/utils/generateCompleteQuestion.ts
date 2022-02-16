@@ -1,15 +1,13 @@
 import shortid from 'shortid';
 import {
-  ILog,
-  IQuizDefaultSettings,
-  TQuestionFull,
-  TQuestionPartial,
-  TSelectionQuestionPartial
+    ILog,
+    IQuizDefaultSettings, TInputSelectQuestion, TQuestion,
+    TQuestionPartial
 } from '../types';
 import {
-  generateInputQuestionAnswers,
-  generateSelectionQuestionAnswers,
-  isPrimitive
+    generateInputQuestionAnswers,
+    generateSelectionQuestionAnswers,
+    isPrimitive
 } from './';
 
 function setObjectValues(parent: any, arr: [string, any][]) {
@@ -35,7 +33,7 @@ export function generateCompleteQuestion(
 ) {
   const logs: ILog = { warns: [], errors: [] };
 
-  const completeQuestion: TQuestionFull = JSON.parse(JSON.stringify(question));
+  const completeQuestion: TQuestion = JSON.parse(JSON.stringify(question));
 
   (['question', 'answers'] as const).forEach((field) => {
     completeQuestion[field] ??
@@ -71,7 +69,7 @@ export function generateCompleteQuestion(
       case 'MCQ':
         // Convert all the answers to string
         completeQuestion.answers = generateSelectionQuestionAnswers(
-          (question as TSelectionQuestionPartial).answers
+          (question as TInputSelectQuestion).answers
         );
         time_allocated = 15;
         // If there are no options for MCQ question, add an error
@@ -98,7 +96,7 @@ export function generateCompleteQuestion(
         break;
       case 'MS':
         completeQuestion.answers = generateSelectionQuestionAnswers(
-          (question as TSelectionQuestionPartial).answers
+          (question as TInputSelectQuestion).answers
         );
         if (!dummyQuestion.options)
           logs.errors.push(

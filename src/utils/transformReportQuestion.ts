@@ -1,13 +1,13 @@
-import { IResultSelectionQuestion, TSelectionQuestionFull } from '../types';
+import { ISelectQuestionResult, TSelectQuestion } from '../types';
 
 export function transformReportSelectionQuestion(
-  question: TSelectionQuestionFull,
+  question: TSelectQuestion,
   userAnswers: string[]
 ) {
   userAnswers.forEach((userAnswer, index) => {
     userAnswers[index] = question.options[parseInt(userAnswer)].index;
   });
-  const sortedOptions: IResultSelectionQuestion['options'] = question.options.sort(
+  const sortedOptions: ISelectQuestionResult['options'] = question.options.sort(
     (optionA, optionB) =>
       parseInt(optionA.index) > parseInt(optionB.index) ? 1 : -1
   ) as any;
@@ -17,5 +17,5 @@ export function transformReportSelectionQuestion(
     sortedOption.userSelected = userAnswers.includes(index.toString());
   });
   question.options = sortedOptions;
-  return question as IResultSelectionQuestion;
+  return question as ISelectQuestionResult;
 }

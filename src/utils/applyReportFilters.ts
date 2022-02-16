@@ -1,9 +1,9 @@
-import { IQuizFull, IReportFilter, IResult } from '../types';
+import { IQuestionResult, IQuiz, IReportFilter } from '../types';
 import { applyNumberOperator } from './applyNumberOperator';
 
 export function applyReportFilters(
-  allQuizzesMap: Map<string, IQuizFull>,
-  results: IResult[],
+  allQuizzesMap: Map<string, IQuiz>,
+  results: IQuestionResult[],
   reportFilter: Omit<IReportFilter, 'excluded_columns'>
 ) {
   const {
