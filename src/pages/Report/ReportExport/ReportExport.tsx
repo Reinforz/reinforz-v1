@@ -1,6 +1,6 @@
-import { Button } from '@material-ui/core';
+import { Button } from '@mui/material';
 import { safeDump } from 'js-yaml';
-import React, { useCallback, useContext } from 'react';
+import { useCallback, useContext } from 'react';
 import { Header, Hovertips, Select } from '../../../components';
 import { ReportContext } from '../../../context/ReportContext';
 import { useThemeSettings } from '../../../hooks';

@@ -1,5 +1,5 @@
-import { Typography } from "@material-ui/core";
-import { green, red } from "@material-ui/core/colors";
+import { Typography } from "@mui/material";
+import { green, red } from "@mui/material/colors";
 import { ReactNode, useContext, useMemo, useState } from "react";
 import { BsFillCaretLeftFill, BsFillCaretRightFill, BsFilm } from "react-icons/bs";
 import { ImCross } from "react-icons/im";

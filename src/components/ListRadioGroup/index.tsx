@@ -1,11 +1,11 @@
-import { FormControlLabel, Radio, RadioGroup } from "@material-ui/core";
-import { ReactNode } from "react";
+import { FormControlLabel, Radio, RadioGroup } from "@mui/material";
+import { ReactElement } from "react";
 import { useThemeSettings } from "../../hooks";
 import sounds from "../../sounds";
 
 export interface ListRadioGroupProps {
   setState: (items: string[]) => any
-  items: ReactNode[]
+  items: ReactElement[]
   value: string[]
 }
 

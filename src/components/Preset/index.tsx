@@ -1,4 +1,4 @@
-import { grey, red } from "@material-ui/core/colors";
+import { grey, red } from "@mui/material/colors";
 import { OptionsObject, useSnackbar } from "notistack";
 import { useContext } from "react";
 import { FaSave } from "react-icons/fa";

@@ -1,4 +1,4 @@
-import { Typography } from "@material-ui/core";
+import { Typography } from "@mui/material";
 import { SetStateAction } from "react";
 import { Content, Header, Select } from "..";
 import { TBooleanAggregation, TNumberAggregation } from "../../types";

@@ -1,5 +1,5 @@
-import { FormGroup, InputLabel, MenuItem, Select, TextField } from "@material-ui/core";
-import { ChangeEvent, useContext } from "react";
+import { FormGroup, InputLabel, MenuItem, Select, TextField } from "@mui/material";
+import { useContext } from "react";
 import { SettingsContext } from "../../context/SettingsContext";
 import sounds from "../../sounds";
 import { TNumberOperator } from "../../types";
@@ -33,7 +33,7 @@ export default function InputRange<T extends Record<string, any>>(props: InputRa
     <div style={{ flexDirection: direction }} className={`InputRange-content bg-dark p-5 ${containerPaddingClass} flex ${classNames.content ?? ''}`}>
       <div className={`bg-light flex p-5 fd-c ${itemMarginClass}`}>
         <Select disableUnderline className={`${classNames.operatorSelect ?? ''}`} value={operator}
-          onChange={(e: ChangeEvent<{ value: unknown }>) => {
+          onChange={(e) => {
             setState({ ...state, [stateKey]: [e.target.value, range] })
             settings.sound && sounds.click.play();
           }}>

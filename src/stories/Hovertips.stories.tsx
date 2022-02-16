@@ -1,4 +1,4 @@
-import { Typography } from '@material-ui/core';
+import { Typography } from '@mui/material';
 import { Meta, Story } from '@storybook/react';
 import Hovertips, { HovertipsProps } from '../components/Hovertips';
 import Wrapper from "./Wrapper";

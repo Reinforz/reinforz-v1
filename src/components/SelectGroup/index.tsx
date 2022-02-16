@@ -1,4 +1,4 @@
-import { FormGroup, InputLabel } from "@material-ui/core";
+import { FormGroup, InputLabel } from "@mui/material";
 import { ReactNode } from "react";
 import { Select } from "..";
 import { transformTextBySeparator } from "../../utils";

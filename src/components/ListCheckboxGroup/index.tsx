@@ -1,11 +1,11 @@
-import { Checkbox, FormControlLabel, FormGroup } from "@material-ui/core";
-import { ReactNode } from "react";
+import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
+import { ReactElement } from "react";
 import { useThemeSettings } from "../../hooks";
 import sounds from "../../sounds";
 
 export interface ListCheckboxGroupProps {
   setState: (items: string[]) => any
-  items: ReactNode[]
+  items: ReactElement[]
   value: string[]
 }
 

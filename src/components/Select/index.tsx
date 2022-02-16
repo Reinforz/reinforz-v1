@@ -1,5 +1,5 @@
-import { FormGroup, InputLabel, MenuItem, Select as MuiSelect } from "@material-ui/core";
-import { ChangeEvent, ReactNode, useContext } from "react";
+import { FormGroup, InputLabel, MenuItem, Select as MuiSelect, SelectChangeEvent } from "@mui/material";
+import { ReactNode, useContext } from "react";
 import { SettingsContext } from "../../context/SettingsContext";
 import sounds from "../../sounds";
 import { transformTextBySeparator } from "../../utils";
@@ -20,7 +20,7 @@ export interface SelectProps<T extends Record<string, any>> {
   menuItemLabel?: (item: string) => string
   renderValue?: (selected: unknown) => ReactNode
   multiple?: boolean
-  onChange?: (e: ChangeEvent<{ name?: string | undefined; value: unknown }>) => void
+  onChange?: (e: SelectChangeEvent<string[]>) => void
   lsKey?: string
   className?: string
   classNames?: ISelectClassNames
@@ -34,7 +34,7 @@ export default function Select<T extends Record<string, any>>(props: SelectProps
     <div className={`Select-content flex fd-c bg-light p-2_5 ${classNames.content ?? ''}`}>
       <MuiSelect disableUnderline className={`${classNames.select ?? ''}`} value={state[stateKey] as string[]}
         multiple={multiple}
-        renderValue={(items) => renderValue ? renderValue(items) : multiple ? (items as string[]).map((item) => transformTextBySeparator(item)).join(", ") : transformTextBySeparator(items as string) as ReactNode}
+        renderValue={(items) => renderValue ? renderValue(items) : multiple ? (items as string[]).map((item) => transformTextBySeparator(item)).join(", ") : transformTextBySeparator(items.join("") as string) as ReactNode}
         onChange={(e) => {
           settings.sound && sounds.click.play();
           setState({ ...state, [stateKey]: e.target.value as string[] })

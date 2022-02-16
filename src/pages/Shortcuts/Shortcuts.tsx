@@ -1,5 +1,5 @@
-import { Typography } from '@material-ui/core';
-import { grey } from '@material-ui/core/colors';
+import { Typography } from '@mui/material';
+import { grey } from '@mui/material/colors';
 import { useEffect, useRef } from 'react';
 import { AiFillHome } from 'react-icons/ai';
 import { HiDocumentReport } from 'react-icons/hi';

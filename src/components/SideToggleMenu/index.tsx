@@ -1,4 +1,4 @@
-import { PopoverOrigin } from "@material-ui/core";
+import { PopoverOrigin } from "@mui/material";
 import React, { useContext, useState } from "react";
 import { FaArrowAltCircleRight } from "react-icons/fa";
 import { RiArrowLeftRightLine } from "react-icons/ri";

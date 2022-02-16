@@ -1,5 +1,5 @@
-import { Typography } from "@material-ui/core";
-import { green } from "@material-ui/core/colors";
+import { Typography } from "@mui/material";
+import { green } from "@mui/material/colors";
 import { AiFillCheckSquare } from "react-icons/ai";
 import { FaUser } from "react-icons/fa";
 import { Markdown } from "../../../components";

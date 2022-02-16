@@ -1,4 +1,4 @@
-import { FormControlLabel, InputLabel, Radio, RadioGroup as MuiRadioGroup } from "@material-ui/core";
+import { FormControlLabel, InputLabel, Radio, RadioGroup as MuiRadioGroup } from "@mui/material";
 import React, { Dispatch, SetStateAction } from "react";
 import { useThemeSettings } from "../../hooks";
 import sounds from "../../sounds";

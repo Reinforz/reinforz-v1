@@ -1,4 +1,4 @@
-import { useTheme } from "@material-ui/core";
+import { useTheme } from "@mui/material";
 import { ReactNode, useContext, useState } from "react";
 import { SimpleModal } from "./components";
 import { ModalContext } from './context/ModalContext';

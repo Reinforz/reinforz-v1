@@ -1,5 +1,5 @@
-import { FormGroup, InputLabel, MenuItem, Select as MuiSelect } from "@material-ui/core";
-import { green, grey, red } from "@material-ui/core/colors";
+import { FormGroup, InputLabel, MenuItem, Select as MuiSelect } from "@mui/material";
+import { green, grey, red } from "@mui/material/colors";
 import { AiFillPlusCircle } from "react-icons/ai";
 import { FaArrowAltCircleDown, FaArrowAltCircleUp } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";

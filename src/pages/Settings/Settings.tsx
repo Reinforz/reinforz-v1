@@ -1,6 +1,6 @@
-import { Typography } from '@material-ui/core';
-import { blue, green, indigo, orange, red, yellow } from '@material-ui/core/colors';
-import React, { useContext, useEffect, useRef } from 'react';
+import { Typography } from '@mui/material';
+import { blue, green, indigo, orange, red, yellow } from '@mui/material/colors';
+import { useContext, useEffect, useRef } from 'react';
 import { AiFillHome } from 'react-icons/ai';
 import { FaKeyboard } from 'react-icons/fa';
 import { HiDocumentReport } from 'react-icons/hi';

@@ -1,5 +1,5 @@
-import { FormGroup, InputLabel, MenuItem, Select as MuiSelect } from "@material-ui/core";
-import { ChangeEvent, useContext } from "react";
+import { FormGroup, InputLabel, MenuItem, Select as MuiSelect } from "@mui/material";
+import { useContext } from "react";
 import { SettingsContext } from "../../context/SettingsContext";
 import sounds from "../../sounds";
 import { transformTextBySeparator } from "../../utils";
@@ -19,7 +19,7 @@ export default function ListSelect(props: ListSelectProps) {
     {label && <InputLabel>{label}</InputLabel>}
     <div className="Select-content bg-light flex fd-c p-5">
       <MuiSelect disableUnderline value={item}
-        onChange={(e: ChangeEvent<{ name?: string | undefined; value: unknown }>) => {
+        onChange={(e) => {
           settings.sound && sounds.click.play();
           onChange(e.target.value as string)
         }}>

@@ -1,4 +1,4 @@
-import { Typography } from "@material-ui/core";
+import { Typography } from "@mui/material";
 import { ReactNode } from "react";
 export interface StackListProps {
   items: [ReactNode, ReactNode][]

@@ -1,6 +1,5 @@
-import { Checkbox, Typography } from "@material-ui/core";
-import { red } from "@material-ui/core/colors";
-import React from "react";
+import { Checkbox, Typography } from "@mui/material";
+import { red } from "@mui/material/colors";
 import { MdDelete } from 'react-icons/md';
 import { Container, Content, Flex, Header, Hovertips } from "../";
 import { useThemeSettings } from "../../hooks";

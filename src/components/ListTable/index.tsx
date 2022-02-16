@@ -1,4 +1,4 @@
-import { Typography } from "@material-ui/core";
+import { Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useThemeSettings } from "../../hooks";
 import sounds from "../../sounds";

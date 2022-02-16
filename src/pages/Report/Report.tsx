@@ -1,4 +1,4 @@
-import { green, red } from '@material-ui/core/colors';
+import { green, red } from '@mui/material/colors';
 import React, { useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { AiFillHome } from 'react-icons/ai';
 import { FaCloudUploadAlt, FaKeyboard } from 'react-icons/fa';

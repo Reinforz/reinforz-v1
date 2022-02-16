@@ -1,4 +1,4 @@
-import { Button, Checkbox, FormControlLabel, Typography } from "@material-ui/core";
+import { Button, Checkbox, FormControlLabel, Typography } from "@mui/material";
 import React, { useContext } from "react";
 import { CheckboxGroup, Header, InputRange, Preset } from '../../../components';
 import { REINFORZ_PLAY_SETTINGS_LS_KEY } from "../../../constants";

@@ -1,4 +1,4 @@
-import { PopoverOrigin } from "@material-ui/core";
+import { PopoverOrigin } from "@mui/material";
 import { Hovertips } from "../";
 import "./style.scss";
 

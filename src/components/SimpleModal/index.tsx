@@ -1,4 +1,4 @@
-import Modal from '@material-ui/core/Modal';
+import Modal from '@mui/material/Modal';
 
 interface Props {
   open: boolean

@@ -1,4 +1,4 @@
-import { Button } from '@material-ui/core';
+import { Button } from '@mui/material';
 import React, { useContext, useMemo } from "react";
 import { CheckboxGroup, InputRange, Preset, RadioGroup, Select, Sort } from '../../../components';
 import { REINFORZ_REPORT_SETTINGS_LS_KEY } from '../../../constants';

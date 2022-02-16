@@ -1,4 +1,4 @@
-import { Checkbox, FormControlLabel, FormGroup, InputLabel } from "@material-ui/core";
+import { Checkbox, FormControlLabel, FormGroup, InputLabel } from "@mui/material";
 import { Dispatch, SetStateAction, useContext } from "react";
 import { FlexContent } from "../";
 import { SettingsContext } from "../../context/SettingsContext";

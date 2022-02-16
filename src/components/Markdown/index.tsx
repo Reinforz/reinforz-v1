@@ -1,4 +1,4 @@
-import { Typography } from "@material-ui/core";
+import { Typography } from "@mui/material";
 import Prism from "prismjs";
 import { useEffect, useRef } from "react";
 import ReactMarkdown from "react-markdown";

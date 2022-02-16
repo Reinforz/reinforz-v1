@@ -1,4 +1,4 @@
-import { Button } from '@material-ui/core';
+import { Button } from '@mui/material';
 import { Markdown } from '../../../components';
 import { useDisabled, useThemeSettings } from '../../../hooks';
 import sounds from '../../../sounds';

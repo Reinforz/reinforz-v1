@@ -1,4 +1,4 @@
-import { Typography } from '@material-ui/core';
+import { Typography } from '@mui/material';
 import { Meta, Story } from '@storybook/react';
 import { useState } from 'react';
 import ModalPresetInput, { ModalPresetInputProps } from '../components/ModalPresetInput';

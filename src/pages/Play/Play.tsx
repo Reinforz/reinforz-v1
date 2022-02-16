@@ -1,7 +1,7 @@
-import { Typography } from "@material-ui/core";
-import { green, red } from "@material-ui/core/colors";
+import { Typography } from "@mui/material";
+import { green, red } from "@mui/material/colors";
 import { OptionsObject, useSnackbar } from "notistack";
-import React, { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { FaKeyboard, FaPlay } from "react-icons/fa";
 import { HiDocumentReport } from "react-icons/hi";
 import { IoLogoGameControllerB, IoMdCreate, IoMdSettings } from 'react-icons/io';

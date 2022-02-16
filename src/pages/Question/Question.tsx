@@ -1,6 +1,6 @@
-import { Button, Typography } from "@material-ui/core";
-import { green, red } from "@material-ui/core/colors";
-import React, { useContext, useEffect, useMemo, useRef, useState } from "react";
+import { Button, Typography } from "@mui/material";
+import { green, red } from "@mui/material/colors";
+import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import { FaClock } from "react-icons/fa";
 import { Hovertips } from "../../components";
 import { QuestionDisplay } from "../../components/QuestionDisplay";

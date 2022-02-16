@@ -1,4 +1,4 @@
-import { Button, FormGroup, InputLabel, TextField } from "@material-ui/core";
+import { Button, FormGroup, InputLabel, TextField } from "@mui/material";
 import { useState } from "react";
 import { useThemeSettings } from "../../hooks";
 import "./style.scss";

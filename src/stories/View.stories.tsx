@@ -1,6 +1,5 @@
-import { Typography } from '@material-ui/core';
+import { Typography } from '@mui/material';
 import { Meta, Story } from '@storybook/react';
-import React from 'react';
 import View, { ViewProps } from '../components/View';
 import Wrapper from "./Wrapper";
 
