@@ -1,9 +1,42 @@
-import { PaletteType } from '@material-ui/core';
-import { grey } from '@material-ui/core/colors';
-import { createMuiTheme, darken, lighten } from '@material-ui/core/styles';
-import { Color, ExtendedThemeOptions, ISettings } from '../types';
+import { createTheme, darken, lighten, Theme as MaterialUITheme, ThemeOptions } from "@mui/material";
+import { grey } from "@mui/material/colors";
+import { AllowedTheme, IGlobalSettings } from "../types";
 
-export function generateTheme(settings: ISettings) {
+declare module '@emotion/react' {
+  export interface Theme extends MaterialUITheme {}
+}
+
+interface Color {
+  dark: string;
+  base: string;
+  light: string;
+  opposite_dark: string;
+  opposite_base: string;
+  opposite_light: string;
+};
+
+declare module '@mui/material/styles/createPalette' {
+  interface Palette {
+    type: "dark" | "light"
+    theme: AllowedTheme
+    color: Color
+  }
+
+  interface PaletteOptions {
+    type: "dark" | "light"
+    theme: AllowedTheme
+    color: Color
+  }
+}
+
+declare module "@mui/material/styles/createTheme" {
+  interface PaletteOptions {
+    theme: AllowedTheme
+    color: Color
+  }
+}
+
+export function generateTheme(settings: IGlobalSettings) {
   const { theme, font } = settings;
   const color: Color = {
     base: '',
@@ -21,7 +54,7 @@ export function generateTheme(settings: ISettings) {
     secondary: ''
   };
 
-  let paletteType: PaletteType = 'dark';
+  let paletteType: "dark" | "light" = 'dark';
 
   switch (theme) {
     case 'dark': {
@@ -76,21 +109,23 @@ export function generateTheme(settings: ISettings) {
 
   const { light, base, dark } = color;
 
-  const themeOptions: ExtendedThemeOptions = {
-    theme,
+  const themeOptions: ThemeOptions = {
     palette: {
+      theme,
+      color,
       type: paletteType,
       text: {
         primary: text.primary,
         secondary: text.secondary
       },
       background: {
-        default: color.base
+        default: color.opposite_dark
       },
       primary: {
         main: settings.color.primary
-      }
+      },
     },
+    
     typography: {
       fontFamily:
         font === 'sans-serif'
@@ -108,118 +143,164 @@ export function generateTheme(settings: ISettings) {
         fontSize: '1.15em'
       }
     },
-    color,
-    overrides: {
+    components: {
+      MuiPaper: {
+        styleOverrides: {
+          root: {
+            backgroundColor: color.dark
+          }
+        }
+      },
       MuiPopover: {
-        paper: {
-          backgroundColor: base
+        styleOverrides: {
+          paper: {
+            backgroundColor: base
+          }
         }
       },
       MuiButton: {
-        contained: {
-          fontSize: '1em',
-          fontWeight: 'bold'
+        styleOverrides: {
+          contained: {
+            fontSize: '1em',
+            fontWeight: 'bold'
+          }
         }
       },
       MuiListItem: {
-        root: {
-          '&$selected': {
-            backgroundColor: light
-          }
-        },
-        button: {
-          '&:hover': {
-            backgroundColor: dark
+        styleOverrides: {
+          root: {
+            '&$selected': {
+              backgroundColor: light
+            }
+          },
+          button: {
+            '&:hover': {
+              backgroundColor: dark
+            }
           }
         }
       },
       MuiCheckbox: {
-        root: {
-          padding: 0,
-          marginRight: 5
+        styleOverrides: {
+          root: {
+            padding: 0,
+            marginRight: 5
+          }
         }
       },
       MuiIconButton: {
-        root: {
-          width: '18px',
-          height: '18px'
+        styleOverrides: {
+          root: {
+            width: '18px',
+            height: '18px'
+          }
         }
       },
       MuiSelect: {
-        select: {
-          paddingLeft: 5
+        styleOverrides: {
+          select: {
+            paddingLeft: 5
+          }
+        },
+        defaultProps: {
+          disableUnderline: true
         }
       },
       MuiRadio: {
-        root: {
-          padding: 5
+        styleOverrides: {
+          root: {
+            padding: 5
+          }
         }
       },
       MuiButtonBase: {
-        root: {
-          margin: 0,
-          padding: 0
+        styleOverrides: {
+          root: {
+            margin: 0,
+            padding: 0
+          }
         }
       },
       MuiFormControlLabel: {
-        root: {
-          marginLeft: 0,
-          marginRight: 0,
-          margin: 0,
-          padding: 5,
-          backgroundColor: light
+        styleOverrides: {
+          root: {
+            marginLeft: 0,
+            marginRight: 0,
+            margin: 0,
+            padding: 5,
+            backgroundColor: light
+          }
         }
       },
       MuiFormLabel: {
-        root: {
-          margin: 2.5,
-          padding: 5
+        styleOverrides: {
+          root: {
+            margin: 2.5,
+            padding: 5
+          }
         }
       },
       MuiFormControl: {
-        root: {
-          backgroundColor: light,
-          padding: 5
+        styleOverrides: {
+          root: {
+            backgroundColor: light,
+            padding: 5
+          }
         }
       },
       MuiTypography: {
-        root: {
-          color: text.primary
+        styleOverrides: {
+          root: {
+            color: text.primary
+          }
+        }
+      },
+      MuiTextField: {
+        defaultProps: {
+          InputProps: {
+            disableUnderline: true
+          }
         }
       },
       MuiInputBase: {
-        input: {
-          paddingBottom: 5
-        },
-        root: {
-          padding: 5,
-          paddingLeft: 0
+        styleOverrides: {
+          input: {
+            paddingBottom: 5
+          },
+          root: {
+            padding: 5,
+            paddingLeft: 0
+          }
         }
       },
       MuiInputLabel: {
-        root: {
-          fontWeight: 'bolder',
-          fontSize: '1em',
-          backgroundColor: dark,
-          padding: 5,
-          margin: 0,
-          marginBottom: 5,
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center'
+        styleOverrides: {
+          root: {
+            fontWeight: 'bolder',
+            fontSize: '1em',
+            backgroundColor: dark,
+            padding: 5,
+            margin: 0,
+            marginBottom: 5,
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center'
+          }
         }
       },
       MuiFormGroup: {
-        root: {
-          flexWrap: 'nowrap',
-          backgroundColor: base,
-          margin: 0,
-          padding: 5,
-          boxShadow: `1px 1px 2px 2px ${dark}`
+        styleOverrides: {
+          root: {
+            flexWrap: 'nowrap',
+            backgroundColor: base,
+            margin: 0,
+            padding: 5,
+            boxShadow: `1px 1px 2px 2px ${dark}`
+          }
         }
       }
     }
   };
 
-  return createMuiTheme(themeOptions);
+  return createTheme(themeOptions);
 }
