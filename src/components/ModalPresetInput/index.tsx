@@ -14,7 +14,7 @@ export default function ModalPresetInput(props: ModalPresetInputProps) {
   const { label, onSave, closeModal } = props;
   const { theme } = useThemeSettings();
 
-  return <div className="ModalPresetInput bg-base center" style={{ backgroundColor: theme.color.base }}>
+  return <div className="ModalPresetInput bg-base center" style={{ backgroundColor: theme.palette.color.base }}>
     <FormGroup className="pb-0">
       <InputLabel className="ModalPresetInput-header">{label}</InputLabel>
       <div className="ModalPresetInput-content">

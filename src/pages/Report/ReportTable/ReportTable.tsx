@@ -76,7 +76,7 @@ export function ReportTable() {
   return <div className="ReportTable flex-1 p-5 bg-base overflowY-auto">
     {sortedResults.map((sortedResult, index) => {
       const quiz = report.quizzes[sortedResult.question.quiz];
-      return <ReportTableRow quiz={`${quiz.subject} - ${quiz.topic}`} key={sortedResult._id} reportQuestions={memoizedReportQuestions} index={index} results={sortedResults} excludedColumns={excludedColumns} header={<div className="ReportTable-item-icons flex jc-sb c-p ai-c" style={{ width: 40 }}><Hovertips popoverText="View separate"><BsFilm fill={theme.color.opposite_dark} size={15} onClick={() => {
+      return <ReportTableRow quiz={`${quiz.subject} - ${quiz.topic}`} key={sortedResult._id} reportQuestions={memoizedReportQuestions} index={index} results={sortedResults} excludedColumns={excludedColumns} header={<div className="ReportTable-item-icons flex jc-sb c-p ai-c" style={{ width: 40 }}><Hovertips popoverText="View separate"><BsFilm fill={theme.palette.color.opposite_dark} size={15} onClick={() => {
         setModalState([true, <ReportTableModal quiz={`${quiz.subject} - ${quiz.topic}`} style={{
           content: {
             height: "calc(100% - 60px)",

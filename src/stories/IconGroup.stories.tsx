@@ -12,7 +12,7 @@ export default {
 
 const DefaultIconGroupTemplate: Story<IconGroupProps> = () => {
   return <Wrapper>
-    {(_, theme) => <IconGroup icons={[['Settings', <IoMdSettings fill={theme.color.opposite_light} />], ['Home', <AiFillHome fill={theme.color.opposite_light} />], ['Create', <IoMdCreate fill={theme.color.opposite_light} />], ['Shortcuts', <FaKeyboard fill={theme.color.opposite_light} />]]} />}
+    {(_, theme) => <IconGroup icons={[['Settings', <IoMdSettings fill={theme.palette.color.opposite_light} />], ['Home', <AiFillHome fill={theme.palette.color.opposite_light} />], ['Create', <IoMdCreate fill={theme.palette.color.opposite_light} />], ['Shortcuts', <FaKeyboard fill={theme.palette.color.opposite_light} />]]} />}
   </Wrapper>
 };
 
@@ -20,7 +20,7 @@ export const DefaultIconGroup = DefaultIconGroupTemplate.bind({});
 
 const CustomIconGroupTemplate: Story<IconGroupProps> = () => {
   return <Wrapper>
-    {(_, theme) => <IconGroup direction="column" icons={[['Settings', <IoMdSettings fill={theme.color.opposite_light} />, {
+    {(_, theme) => <IconGroup direction="column" icons={[['Settings', <IoMdSettings fill={theme.palette.color.opposite_light} />, {
       popoverAnchorOrigin: {
         horizontal: 'right',
         vertical: 'center'
@@ -29,7 +29,7 @@ const CustomIconGroupTemplate: Story<IconGroupProps> = () => {
         horizontal: 'right',
         vertical: 'center'
       }
-    }], ['Home', <AiFillHome fill={theme.color.opposite_light} />, {
+    }], ['Home', <AiFillHome fill={theme.palette.color.opposite_light} />, {
       popoverAnchorOrigin: {
         horizontal: 'left',
         vertical: 'bottom'
@@ -38,7 +38,7 @@ const CustomIconGroupTemplate: Story<IconGroupProps> = () => {
         horizontal: 'left',
         vertical: 'bottom'
       }
-    }], ['Create', <IoMdCreate fill={theme.color.opposite_light} />, {
+    }], ['Create', <IoMdCreate fill={theme.palette.color.opposite_light} />, {
       popoverAnchorOrigin: {
         horizontal: 'center',
         vertical: 'top'
@@ -47,7 +47,7 @@ const CustomIconGroupTemplate: Story<IconGroupProps> = () => {
         horizontal: 'center',
         vertical: 'top'
       }
-    }], ['Shortcuts', <FaKeyboard fill={theme.color.opposite_light} />]]} />}
+    }], ['Shortcuts', <FaKeyboard fill={theme.palette.color.opposite_light} />]]} />}
   </Wrapper>
 };
 

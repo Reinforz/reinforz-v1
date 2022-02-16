@@ -1,5 +1,5 @@
 import * as CSS from 'csstype';
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { BiGridHorizontal, BiGridVertical } from "react-icons/bi";
 import { HiSwitchHorizontal, HiSwitchVertical } from "react-icons/hi";
 import { SettingsContext } from '../../context/SettingsContext';
@@ -28,17 +28,17 @@ export default function View(props: ViewProps) {
       </div>
     </div>
     <IconGroup className="View-icons" icons={[
-      [`Click to switch to ${layout} layout`, layout === "row" ? <BiGridHorizontal size={15} fill={theme.color.opposite_light} onClick={() => {
+      [`Click to switch to ${layout} layout`, layout === "row" ? <BiGridHorizontal size={15} fill={theme.palette.color.opposite_light} onClick={() => {
         settings.sound && sounds.swoosh.play()
         toggleLayout();
-      }} /> : <BiGridVertical size={15} fill={theme.color.opposite_light} onClick={() => {
+      }} /> : <BiGridVertical size={15} fill={theme.palette.color.opposite_light} onClick={() => {
         settings.sound && sounds.swoosh.play()
         toggleLayout();
       }} />],
-      [`Click to switch to alternate order`, layout === "column" ? <HiSwitchVertical size={15} fill={theme.color.opposite_light} onClick={() => {
+      [`Click to switch to alternate order`, layout === "column" ? <HiSwitchVertical size={15} fill={theme.palette.color.opposite_light} onClick={() => {
         settings.sound && sounds.swoosh.play()
         toggleOrder();
-      }} /> : <HiSwitchHorizontal size={15} fill={theme.color.opposite_light} onClick={() => {
+      }} /> : <HiSwitchHorizontal size={15} fill={theme.palette.color.opposite_light} onClick={() => {
         settings.sound && sounds.swoosh.play()
         toggleOrder();
       }} />]

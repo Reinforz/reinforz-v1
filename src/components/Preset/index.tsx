@@ -60,7 +60,7 @@ export default function Preset(props: PresetProps) {
     }} item={itemPresets.current} />
 
     <Hovertips popoverText={popoverText}>
-      <FaSave fill={theme.color.opposite_light} size={20} onClick={() => {
+      <FaSave fill={theme.palette.color.opposite_light} size={20} onClick={() => {
         settings.sound && sounds.click.play()
         setModalState([true, <ModalPresetInput closeModal={() => setModalState([false, null])} label={modalLabel} onSave={(input) => {
           const isValid = checkPresetInput(input);
@@ -83,7 +83,7 @@ export default function Preset(props: PresetProps) {
       }} />
     </Hovertips>
     <Hovertips popoverText={itemPresets.current !== 'default' ? "Update preset" : "Can't update default preset"}>
-      <MdUpdate size={20} fill={itemPresets.current !== 'default' ? theme.color.opposite_light : grey[500]} onClick={() => {
+      <MdUpdate size={20} fill={itemPresets.current !== 'default' ? theme.palette.color.opposite_light : grey[500]} onClick={() => {
         if (itemPresets.current !== 'default') {
           settings.sound && sounds.click.play();
           const currentPresetIndex = itemPresets.presets.findIndex(preset => preset.id === itemPresets.current);

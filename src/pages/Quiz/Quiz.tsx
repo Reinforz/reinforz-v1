@@ -1,5 +1,5 @@
 import yaml, { safeDump } from 'js-yaml';
-import React, { ReactNode, useContext, useEffect, useRef, useState } from "react";
+import { ReactNode, useContext, useEffect, useRef, useState } from "react";
 import { AiFillHome } from "react-icons/ai";
 import { FaCloudDownloadAlt, FaKeyboard } from "react-icons/fa";
 import { HiDocumentReport } from "react-icons/hi";
@@ -65,7 +65,7 @@ export default function Quiz() {
             content: 'jc-sb'
           }} />
           <Hovertips popoverText="Download current play state" className="p-5 bg-light flex jc-c ai-c" style={{ height: 'calc(100% - 20px)', marginLeft: 5 }}>
-            <FaCloudDownloadAlt fill={theme.color.opposite_light} size={25} onClick={() => {
+            <FaCloudDownloadAlt fill={theme.palette.color.opposite_light} size={25} onClick={() => {
               download(`Play-${Date.now()}.yaml`, safeDump({
                 questions: allQuestions,
                 results: results.map(result => ({ ...result, question: result.question._id })),

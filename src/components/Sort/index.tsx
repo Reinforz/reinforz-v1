@@ -58,7 +58,7 @@ export default function Sort(props: SortProps) {
           <div className="Sort-content-item-icons bg-light p-5 flex jc-c ai-c">
             <div className="Sort-content-item-icons-down mr-5">
               <Hovertips popoverText={"Move downwards"}>
-                <FaArrowAltCircleDown fill={canMoveDownwards ? theme.color.opposite_light : grey[500]} size={15} onClick={() => {
+                <FaArrowAltCircleDown fill={canMoveDownwards ? theme.palette.color.opposite_light : grey[500]} size={15} onClick={() => {
                   if (canMoveDownwards) {
                     const nextSort = sorts[index + 1];
                     sorts[index + 1] = sort;
@@ -70,7 +70,7 @@ export default function Sort(props: SortProps) {
             </div>
             <div className="Sort-content-item-icons-up mr-5">
               <Hovertips popoverText={"Move upwards"}>
-                <FaArrowAltCircleUp fill={canMoveUpwards ? theme.color.opposite_light : grey[500]} size={15} onClick={() => {
+                <FaArrowAltCircleUp fill={canMoveUpwards ? theme.palette.color.opposite_light : grey[500]} size={15} onClick={() => {
                   if (canMoveUpwards) {
                     const prevSort = sorts[index - 1];
                     sorts[index - 1] = sort;

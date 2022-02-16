@@ -56,7 +56,7 @@ export default function useNavigationIcons(iconInfos: { path: string, component:
     let popoverTextPage = iconInfo.path.replace("/", "");
     popoverTextPage = popoverTextPage.charAt(0).toUpperCase() + popoverTextPage.substr(1);
     return [iconInfo.popoverText ?? `Go to ${iconInfo.page ?? popoverTextPage} page`, React.createElement(iconInfo.component, {
-      fill: iconInfo.fill ?? theme.color.opposite_light, size: iconInfo.size ?? 20, onClick: (e) => {
+      fill: iconInfo.fill ?? theme.palette.color.opposite_light, size: iconInfo.size ?? 20, onClick: (e) => {
         if (iconInfo.onClick) {
           iconInfo.onClick(e as any)
         } else {
@@ -72,7 +72,7 @@ export default function useNavigationIcons(iconInfos: { path: string, component:
       'Go to documentation',
       <IoMdDocument
         size={20}
-        fill={theme.color.opposite_light}
+        fill={theme.palette.color.opposite_light}
         onClick={goToDocumentation}
       />
     ],
@@ -80,7 +80,7 @@ export default function useNavigationIcons(iconInfos: { path: string, component:
       'Go to repo',
       <FaGithub
         size={20}
-        fill={theme.color.opposite_light}
+        fill={theme.palette.color.opposite_light}
         onClick={goToRepo}
       />
     ]

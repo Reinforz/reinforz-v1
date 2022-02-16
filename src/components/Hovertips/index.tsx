@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme: ExtendedTheme) => ({
     pointerEvents: 'none',
   },
   paper: {
-    backgroundColor: theme.color.dark,
+    backgroundColor: theme.palette.color.dark,
     padding: theme.spacing(1),
   },
 }));

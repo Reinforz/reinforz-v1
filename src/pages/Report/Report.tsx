@@ -113,7 +113,7 @@ export default function Report() {
       'Upload',
       <FaCloudUploadAlt
         size={20}
-        fill={theme.color.opposite_light}
+        fill={theme.palette.color.opposite_light}
         onClick={() => {
           setReport({
             results: [],

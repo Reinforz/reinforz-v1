@@ -71,7 +71,7 @@ export default function SideToggleMenu(props: SideToggleMenuProps) {
     </div>
     <div className="SideToggleMenu-sidebar p-5" style={{ left, width }}>
       <IconGroup className="SideToggleMenu-sidebar-icons" direction="column" style={iconsContainerStyle} icons={[
-        [`${isOpen ? "Close" : "Open"} Menu`, <FaArrowAltCircleRight fill={theme.color.opposite_light} onClick={() => {
+        [`${isOpen ? "Close" : "Open"} Menu`, <FaArrowAltCircleRight fill={theme.palette.color.opposite_light} onClick={() => {
           if (settings.sound && isOpen === false) {
             sounds.switch_on.play();
           } else if (settings.sound && isOpen === true) {
@@ -84,7 +84,7 @@ export default function SideToggleMenu(props: SideToggleMenuProps) {
             position
           }))
         }} style={iconStyle} />, popoverOrigin],
-        [`Switch to ${position === "left" ? "right" : "left"}`, <RiArrowLeftRightLine fill={theme.color.opposite_light} onClick={() => {
+        [`Switch to ${position === "left" ? "right" : "left"}`, <RiArrowLeftRightLine fill={theme.palette.color.opposite_light} onClick={() => {
           settings.sound && sounds.swoosh.play();
           const newValue = position === "left" ? "right" : "left"
           setPosition(newValue)
