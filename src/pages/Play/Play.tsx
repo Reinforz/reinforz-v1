@@ -5,7 +5,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { FaKeyboard, FaPlay } from "react-icons/fa";
 import { HiDocumentReport } from "react-icons/hi";
 import { IoLogoGameControllerB, IoMdCreate, IoMdSettings } from 'react-icons/io';
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { IconGroup, List, SideToggleMenu, View } from '../../components';
 import { REINFORZ_PLAY_SETTINGS_LS_KEY } from "../../constants";
 import { RootContext } from "../../context/RootContext";
@@ -26,7 +26,7 @@ const centerBottomErrorNotistack = {
 
 function Play() {
   const [selectedErrorLogIds, setSelectedErrorLogIds] = useState<string[]>([]);
-  const history = useHistory();
+  const navigate = useNavigate();
   const { settings, theme } = useThemeSettings();
   const { setPlaying, filteredQuizzes, selectedQuizIds, setUploadedQuizzes, setSelectedQuizIds, uploadedQuizzes, errorLogs, setErrorLogs, playSettingsPresets, setPlaySettingsPresets } = useContext(RootContext);
   const { enqueueSnackbar } = useSnackbar();
@@ -45,7 +45,7 @@ function Play() {
 
     if (canStartPlay) {
       setPlaying(true)
-      history.push("/play")
+      navigate("/play")
     }
   }
   const { navigationIcons, onKeyPress } = useNavigationIcons([{

@@ -2,11 +2,11 @@ import { Typography } from "@mui/material";
 import { green } from "@mui/material/colors";
 import { AiFillCheckSquare } from "react-icons/ai";
 import { Markdown } from "../../../components";
-import { TResultInputQuestion } from "../../../types";
+import { TInputQuestionResult } from "../../../types";
 import "./ReportAnswers.scss";
 
 interface Props {
-  question: TResultInputQuestion
+  question: TInputQuestionResult
   userAnswers: string[]
   className?: string
 }

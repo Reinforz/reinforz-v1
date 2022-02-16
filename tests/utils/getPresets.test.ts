@@ -1,7 +1,6 @@
 import {
-  REINFORZ_PLAY_SETTINGS_LS_KEY,
-  REINFORZ_REPORT_SETTINGS_LS_KEY,
-  REINFORZ_SETTINGS_LS_KEY
+  REINFORZ_GLOBAL_SETTINGS_LS_KEY, REINFORZ_PLAY_SETTINGS_LS_KEY,
+  REINFORZ_REPORT_SETTINGS_LS_KEY
 } from '../../src/constants';
 import {
   generateDefaultPlaySettingsPreset,
@@ -35,9 +34,9 @@ describe('getSettingsPresets', () => {
     const defaultPreset = generateDefaultSettingsPreset();
     getItemMock.mockReturnValueOnce(null);
     const settingsPresets = getSettingsPresets();
-    expect(getItemMock).toHaveBeenCalledWith(REINFORZ_SETTINGS_LS_KEY);
+    expect(getItemMock).toHaveBeenCalledWith(REINFORZ_GLOBAL_SETTINGS_LS_KEY);
     expect(setItemMock).toHaveBeenCalledWith(
-      REINFORZ_SETTINGS_LS_KEY,
+      REINFORZ_GLOBAL_SETTINGS_LS_KEY,
       JSON.stringify(defaultPreset)
     );
     expect(settingsPresets).toStrictEqual(defaultPreset);

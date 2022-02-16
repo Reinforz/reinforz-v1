@@ -1,15 +1,19 @@
 import shortid from 'shortid';
+import { MAX_QUESTION_TIME, MIN_QUESTION_TIME } from '../constants';
 import {
-    ILog,
-    IQuizDefaultSettings, TInputSelectQuestion, TQuestion,
-    TQuestionPartial
+  ILog,
+  IMcqQuestion,
+  IMsQuestion, InputFibQuestion, InputQuestion, InputSnippetQuestion, IQuizDefaultSettings, TInputSelectQuestion, TQuestion, TSelectQuestion
 } from '../types';
-import {
-    generateInputQuestionAnswers,
-    generateSelectionQuestionAnswers,
-    isPrimitive
-} from './';
+import { generateSelectionQuestionAnswers } from './generateSelectionQuestionAnswers';
+import { generateTypeQuestionAnswers } from './generateTypeQuestionAnswers';
+import { isPrimitive } from './isPrimitive';
 
+/**
+ * Updates the parent object to use the 2nd value in tuple if the value is undefined for a field in 1st value
+ * @param parent Parent object
+ * @param arr Array of tuple [parent object field, value]
+ */
 function setObjectValues(parent: any, arr: [string, any][]) {
   arr.forEach((entry) => {
     parent[entry[0]] = parent[entry[0]] ?? entry[1];
@@ -26,22 +30,35 @@ function generateDefaultSettingsContexts(
     : [];
 }
 
+/**
+ * Generate complete question (with all properties maintaining a shape) with error/warn logs
+ * @param question Input question
+ * @param contexts Array of contexts
+ * @param defaultSettings Default settings
+ * @returns A tuple [array of complete question, array of log messages]
+ */
 export function generateCompleteQuestion(
-  question: TQuestionPartial,
+  question: InputQuestion,
   contexts: string[],
   defaultSettings: Partial<IQuizDefaultSettings>
 ) {
   const logs: ILog = { warns: [], errors: [] };
 
+  // Creating a deep clone so as not to modify the original question
   const completeQuestion: TQuestion = JSON.parse(JSON.stringify(question));
 
+  // question and answers are required fields
+  // These must be present in all question
+  // If they are not then its an error
   (['question', 'answers'] as const).forEach((field) => {
     completeQuestion[field] ??
       logs.errors.push(`Question ${field} is required`);
   });
 
-  if (completeQuestion.options) {
-    completeQuestion.options = completeQuestion.options.map((option, i) => ({
+  // If the question have options in them, we need to add the index information
+  // index is required in order to track which is the right answer even after shuffling
+  if ((completeQuestion as TSelectQuestion).options) {
+    (completeQuestion as TSelectQuestion).options = (completeQuestion as TSelectQuestion).options.map((option, i) => ({
       text: option.toString().trim(),
       index: `${i}`
     }));
@@ -49,92 +66,101 @@ export function generateCompleteQuestion(
 
   let time_allocated = defaultSettings.time_allocated ?? 60;
 
-  const dummyQuestion: any = completeQuestion;
-
   // Auto generation of Question Configs
   if (logs.errors.length === 0) {
-    // Auto infer question type
+    // Auto infer question type, if they are not explicitly present
+    // 1. If the answer is a primitive value
+    // 2. if the answer is an object
+    // 3. If the answer is an array of single value
+    // Its either snippet or MCQ 
     if (
       isPrimitive(completeQuestion.answers) ||
       Object.getPrototypeOf(completeQuestion.answers) === Object.prototype ||
       completeQuestion.answers.length === 1
-    )
+    ) {
+      completeQuestion.type = completeQuestion.type || ((completeQuestion as IMcqQuestion).options ? 'MCQ' : 'Snippet');
+    }
+    // otherwise its either MS or FIB, question that will have multiple answers
+    else {
       completeQuestion.type =
-        completeQuestion.type || (dummyQuestion.options ? 'MCQ' : 'Snippet');
-    else
-      completeQuestion.type =
-        completeQuestion.type || (dummyQuestion.options ? 'MS' : 'FIB');
+        completeQuestion.type || ((completeQuestion as IMsQuestion).options ? 'MS' : 'FIB');
+    }
 
     switch (completeQuestion.type) {
-      case 'MCQ':
-        // Convert all the answers to string
+      case 'MCQ': {
+        const mcqQuestion: IMcqQuestion = completeQuestion;
+        // Convert all the answers to string to aid in comparison later
         completeQuestion.answers = generateSelectionQuestionAnswers(
           (question as TInputSelectQuestion).answers
         );
+        // Default time allocated for MCQ questions
         time_allocated = 15;
         // If there are no options for MCQ question, add an error
-        if (!dummyQuestion.options)
+        if (!mcqQuestion.options)
           logs.errors.push(
-            `Options must be provided for ${dummyQuestion.type} questions`
+            `Options must be provided for ${mcqQuestion.type} questions`
           );
         else {
           // If the answer index is greater than total options, or negative add an error
           if (
-            parseInt(dummyQuestion.answers[0].text.trim()) < 0 ||
-            parseInt(dummyQuestion.answers[0].text.trim()) >
-              dummyQuestion.options.length - 1
+            parseInt(mcqQuestion.answers[0].text.trim()) < 0 ||
+            parseInt(mcqQuestion.answers[0].text.trim()) >
+            mcqQuestion.options.length - 1
           )
             logs.errors.push(
               `MCQ Answer must be within 0-${
-                dummyQuestion.options.length - 1
-              }, provided ${dummyQuestion.answers[0].text.trim()}`
+                mcqQuestion.options.length - 1
+              }, provided ${mcqQuestion.answers[0].text.trim()}`
             );
-
-          if (dummyQuestion.options.length < 2)
+          // it makes no sense to have only a single option as that will be the answer
+          if (mcqQuestion.options.length < 2)
             logs.errors.push(`MCQ Question must have at least 2 options`);
         }
         break;
-      case 'MS':
+      }
+      case 'MS': {
+        const msQuestion: IMsQuestion = completeQuestion;
         completeQuestion.answers = generateSelectionQuestionAnswers(
           (question as TInputSelectQuestion).answers
         );
-        if (!dummyQuestion.options)
+        if (!msQuestion.options)
           logs.errors.push(
-            `Options must be provided for ${dummyQuestion.type} questions`
+            `Options must be provided for ${msQuestion.type} questions`
           );
         else {
-          if (dummyQuestion.options.length < 2)
+          if (msQuestion.options.length < 2)
             logs.errors.push(`MS Question must have at least 2 options`);
 
           // If more answers are given than options
-          if (dummyQuestion.answers.length > dummyQuestion.options.length) {
+          if (msQuestion.answers.length > msQuestion.options.length) {
             logs.errors.push(
-              `Provided more answers than options, given ${dummyQuestion.options.length} options, but provided ${dummyQuestion.answers.length} answers`
+              `Provided more answers than options, given ${msQuestion.options.length} options, but provided ${msQuestion.answers.length} answers`
             );
           }
-          completeQuestion.answers.forEach((answer) => {
+          completeQuestion.answers.forEach((answer, answerIndex) => {
+            // Each answer index must be less than options index and greater than or equal to 0
             if (
               parseInt(answer.text.trim()) < 0 ||
-              parseInt(answer.text.trim()) > dummyQuestion.options.length - 1
+              parseInt(answer.text.trim()) > msQuestion.options.length - 1
             )
               logs.errors.push(
-                `MS Answer must be within 0-${
-                  dummyQuestion.options.length - 1
+                `MS Answer ${answerIndex + 1} must be within 0-${
+                  msQuestion.options.length - 1
                 }, provided ${answer.text.trim()}`
               );
           });
         }
         time_allocated = 30;
-
         break;
+      }
       case 'Snippet': {
         const [
           generatedInputQuestionAnswers,
           generatedLogs
-        ] = generateInputQuestionAnswers(question.answers);
+        ] = generateTypeQuestionAnswers((question as InputSnippetQuestion).answers);
         completeQuestion.answers = generatedInputQuestionAnswers;
-        logs.errors.concat(generatedLogs.errors);
-        logs.warns.concat(generatedLogs.warns);
+        logs.errors.push(...generatedLogs.errors);
+        logs.warns.push(...generatedLogs.warns);
         time_allocated = 45;
         break;
       }
@@ -143,10 +169,11 @@ export function generateCompleteQuestion(
         const [
           generatedInputQuestionAnswers,
           generatedLogs
-        ] = generateInputQuestionAnswers(question.answers);
+        ] = generateTypeQuestionAnswers((question as InputFibQuestion).answers);
         completeQuestion.answers = generatedInputQuestionAnswers;
-        logs.errors.concat(generatedLogs.errors);
-        logs.warns.concat(generatedLogs.warns);
+        logs.errors.push(...generatedLogs.errors);
+        logs.warns.push(...generatedLogs.warns);
+        // The number of gaps must be 1 less than the number of answers
         if (
           completeQuestion.answers.length + 1 !==
           completeQuestion.question.length
@@ -158,25 +185,27 @@ export function generateCompleteQuestion(
           );
         }
         time_allocated = 60;
-        completeQuestion.format = completeQuestion.format ?? 'text';
         break;
       }
     }
+
     setObjectValues(completeQuestion, [
       ['image', null],
       ['weight', defaultSettings.weight ?? 1],
       ['difficulty', defaultSettings.difficulty ?? 'Beginner'],
-      ['explanation', 'No explanation available'],
+      ['explanation', null],
       ['hints', []],
       ['time_allocated', defaultSettings.time_allocated ?? time_allocated],
       ['contexts', generateDefaultSettingsContexts(defaultSettings.contexts)]
     ]);
 
+    // Add a unique id for the question
     completeQuestion._id = shortid();
 
+    // If the time allocated is no within a range then use the default time allocation
     if (
-      completeQuestion.time_allocated < 10 ||
-      completeQuestion.time_allocated > 120
+      completeQuestion.time_allocated < MIN_QUESTION_TIME ||
+      completeQuestion.time_allocated > MAX_QUESTION_TIME
     ) {
       logs.warns.push(
         `Question time allocated must be within 10-120 but given ${completeQuestion.time_allocated}, changing to 60`
@@ -184,6 +213,7 @@ export function generateCompleteQuestion(
       completeQuestion.time_allocated = 60;
     }
 
+    // If the difficulty level is not within allowed domain, set to Beginner
     if (
       !['Beginner', 'Intermediate', 'Advanced'].includes(
         completeQuestion.difficulty
@@ -199,6 +229,7 @@ export function generateCompleteQuestion(
       completeQuestion.contexts
     );
 
+    // Context must be greater than 0 and less than total context length
     completeQuestion.contexts = completeQuestion.contexts.filter((context) => {
       if (context < 0 || context > contexts.length - 1) {
         logs.warns.push(

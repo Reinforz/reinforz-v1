@@ -10,7 +10,7 @@ import { ModalContext } from "../../../context/ModalContext";
 import { ReportContext } from "../../../context/ReportContext";
 import { useThemeSettings } from "../../../hooks";
 import sounds from "../../../sounds";
-import { IQuestionResult, TResultInputQuestion } from "../../../types";
+import { IQuestionResult, TInputQuestionResult } from "../../../types";
 import { ReportAnswers } from "../ReportAnswers/ReportAnswers";
 import { ReportOptions } from "../ReportOptions/ReportOptions";
 import "./ReportTable.scss";
@@ -57,7 +57,7 @@ function ReportTableRow(props: ReportTableRowProps) {
         {!excludedColumns['score_breakdown'] ? <StackList header="Score Breakdown" items={[['Amount', result.score.amount], ['Answers', result.score.answers], ['Time', result.score.time], ['Hints', result.score.hints], ['Weighted', result.question.weight * result.score.amount]]} /> : null}
       </div>
       <div className="flex">
-        {(result.question.type === "MCQ" || result.question.type === "MS") ? !excludedColumns['options'] ? <ReportOptions question={result.question} userAnswers={result.user_answers} className={`${showHints ? 'mr-5' : ''}`} /> : null : !excludedColumns['answers'] ? <ReportAnswers question={result.question as TResultInputQuestion} userAnswers={result.user_answers} className={`${showHints ? 'mr-5' : ''}`} /> : null}
+        {(result.question.type === "MCQ" || result.question.type === "MS") ? !excludedColumns['options'] ? <ReportOptions question={result.question} userAnswers={result.user_answers} className={`${showHints ? 'mr-5' : ''}`} /> : null : !excludedColumns['answers'] ? <ReportAnswers question={result.question as TInputQuestionResult} userAnswers={result.user_answers} className={`${showHints ? 'mr-5' : ''}`} /> : null}
         {showHints ? <div className="ReportTableRow-content-hints bg-base p-5 mb-5" style={{ width: '25%' }}>
           {result.question.hints.map(hint => <div className="ReportTableRow-content-hints overflowX-auto bg-light p-5 mb-5" key={hint}>
             <Markdown content={hint} />

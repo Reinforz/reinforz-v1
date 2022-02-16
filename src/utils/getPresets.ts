@@ -4,9 +4,8 @@ import {
   generateDefaultSettingsPreset
 } from '.';
 import {
-  REINFORZ_PLAY_SETTINGS_LS_KEY,
-  REINFORZ_REPORT_SETTINGS_LS_KEY,
-  REINFORZ_SETTINGS_LS_KEY
+  REINFORZ_GLOBAL_SETTINGS_LS_KEY, REINFORZ_PLAY_SETTINGS_LS_KEY,
+  REINFORZ_REPORT_SETTINGS_LS_KEY
 } from '../constants';
 import {
   IGlobalSettingsPresetConfig, IPlaySettingsPresetConfig,
@@ -41,7 +40,7 @@ export const getReportSettingsPresets = () => {
 
 export const getSettingsPresets = () => {
   return getPreset<IGlobalSettingsPresetConfig>(
-    REINFORZ_SETTINGS_LS_KEY,
+    REINFORZ_GLOBAL_SETTINGS_LS_KEY,
     generateDefaultSettingsPreset
   );
 };

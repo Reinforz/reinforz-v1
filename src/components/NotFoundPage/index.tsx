@@ -1,7 +1,7 @@
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function NotFoundPage() {
-  const history = useHistory();
-  history.push("/")
+  const navigate = useNavigate();
+  navigate("/")
   return null;
 }

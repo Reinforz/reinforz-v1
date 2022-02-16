@@ -1,9 +1,9 @@
 import {
-    IFibQuestionFull,
-    IMsQuestionFull,
-    IQuestionResult,
-    ISelectQuestionResult,
-    TResultInputQuestion
+  IFibQuestionFull,
+  IMsQuestionFull,
+  IQuestionResult,
+  ISelectQuestionResult,
+  TInputQuestionResult
 } from '../../src/types';
 import { QUIZ_1 } from './quizzes';
 
@@ -44,7 +44,7 @@ export const RESULT_2: IQuestionResult = {
         ...answer,
         isCorrect: _index === 0
       }))
-    ) as TResultInputQuestion['answers']
+    ) as TInputQuestionResult['answers']
   },
   user_answers: ['answer 1', 'answer 2'],
   hints_used: 2,

@@ -4,7 +4,7 @@ import { AiFillHome } from "react-icons/ai";
 import { FaCloudDownloadAlt, FaKeyboard } from "react-icons/fa";
 import { HiDocumentReport } from "react-icons/hi";
 import { IoMdCreate, IoMdSettings } from "react-icons/io";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Hovertips, IconGroup, StackList, Upload } from "../../components";
 import { RootContext } from "../../context/RootContext";
 import { useCycle, useNavigationIcons, useThemeSettings } from "../../hooks";
@@ -14,7 +14,7 @@ import Question from "../Question/Question";
 import "./Quiz.scss";
 
 export default function Quiz() {
-  const history = useHistory();
+  const navigate = useNavigate();
   const rootContext = useContext(RootContext);
   const { setPlayQuestions, setPlayQuizzes, setUploadedPlayState, setPlaying, playSettings, selectedQuizzes, setPlaySettings, allQuestions, playing, allQuizzesMap } = rootContext;
   const [results, setResults] = useState([] as IQuestionResult[]);
@@ -81,9 +81,11 @@ export default function Quiz() {
           if (allQuestions.length - 1 === currentIndex) {
             setPlaying(false);
             setUploadedPlayState(false)
-            history.push("/report", {
-              results: newResultState,
-              allQuizzesMap: allQuizzesMap
+            navigate("/report", {
+              state: {
+                results: newResultState,
+                allQuizzesMap: allQuizzesMap
+              }
             })
           } else {
             setResults(newResultState)

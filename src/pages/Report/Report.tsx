@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { AiFillHome } from 'react-icons/ai';
 import { FaCloudUploadAlt, FaKeyboard } from 'react-icons/fa';
 import { IoLogoGameControllerB, IoMdCreate, IoMdSettings } from 'react-icons/io';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { IconGroup, SideToggleMenu, StackList } from '../../components';
 import { REINFORZ_REPORT_SETTINGS_LS_KEY } from '../../constants';
 import { ReportContext } from '../../context/ReportContext';
@@ -34,12 +34,13 @@ function findSettingsFromPresets(settings: IReportSettingsPresetConfig) {
 }
 
 export default function Report() {
-  const { state } = useLocation<{ results: IQuestionResult[], allQuizzesMap: Map<string, IQuiz> }>();
+  const location = useLocation();
+  const state = location.state as { results: IQuestionResult[], allQuizzesMap: Map<string, IQuiz> };
   const { theme, settings } = useThemeSettings();
   const { playSettings, setUploadedQuizzes, setSelectedQuizIds } = useContext(
     RootContext
   );
-  const history = useHistory();
+  const navigate = useNavigate();
   const [reportSettingsPresets, setReportSettingsPresets] = useState(
     getReportSettingsPresets()
   );
@@ -84,7 +85,7 @@ export default function Report() {
     onClick: () => {
       setUploadedQuizzes(Array.from(filteredQuizzesMap.values()));
       setSelectedQuizIds(Array.from(filteredQuizzesMap.keys()));
-      history.push('/');
+      navigate('/');
     }
   }, {
     path: "/play",

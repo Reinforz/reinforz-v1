@@ -2,28 +2,28 @@ import React from 'react';
 import { FaGithub } from 'react-icons/fa';
 import { IoMdDocument } from 'react-icons/io';
 import { IconType } from 'react-icons/lib';
-import { useHistory } from 'react-router-dom';
-import { REINFORZ_DOC_URL, REINFORZ_REPO_URL } from '../constants';
+import { useNavigate } from 'react-router-dom';
+import { REINFORZ_DOCS_URL, REINFORZ_REPO_URL } from '../constants';
 import sounds from '../sounds';
 import useThemeSettings from './useThemeSettings';
 
 export default function useNavigationIcons(iconInfos: { path: string, component: IconType, size?: number, fill?: string, page?: string, onClick?: (e: React.MouseEventHandler<SVGElement>) => void, popoverText?: string }[]) {
   const { theme, settings } = useThemeSettings();
-  const history = useHistory();
+  const navigate = useNavigate();
 
-  const navigate = (path: string, forShortcuts: boolean) => {
+  const goto = (path: string, forShortcuts: boolean) => {
     settings.sound && sounds.swoosh.play();
     if (forShortcuts) {
-      settings.shortcuts && history.push(path);
+      settings.shortcuts && navigate(path);
     } else {
-      history.push(path);
+      navigate(path);
     }
   };
 
   const goToDocumentation = () => {
     settings.sound && sounds.swoosh.play()
     const win = window.open(
-      REINFORZ_DOC_URL,
+      REINFORZ_DOCS_URL,
       '_blank'
     )!;
     win.focus();
@@ -43,7 +43,7 @@ export default function useNavigationIcons(iconInfos: { path: string, component:
     if (digit) {
       if (digit <= iconInfos.length) {
         const iconInfo = iconInfos[digit - 1];
-        iconInfo.onClick ? iconInfo.onClick(e as any) : navigate(iconInfo.path, true);
+        iconInfo.onClick ? iconInfo.onClick(e as any) : goto(iconInfo.path, true);
       }
       else if (digit === iconInfos.length + 1)
         goToDocumentation()
@@ -60,7 +60,7 @@ export default function useNavigationIcons(iconInfos: { path: string, component:
         if (iconInfo.onClick) {
           iconInfo.onClick(e as any)
         } else {
-          navigate(iconInfo.path, false)
+          goto(iconInfo.path, false)
         }
       }
     })]
