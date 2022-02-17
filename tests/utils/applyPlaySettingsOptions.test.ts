@@ -125,7 +125,6 @@ it(`Should shuffle questions when flatten_mix=true`, () => {
   const shuffleFn = jest.fn();
   applyPlaySettingsOptions(
     dummyQuizzes,
-    ['quiz_1', 'quiz_2'],
     {
       flatten_mix: true,
       instant_feedback: false,
@@ -135,7 +134,6 @@ it(`Should shuffle questions when flatten_mix=true`, () => {
       shuffle_quizzes: false,
       disable_timer: false
     },
-    shuffleFn
   );
 
   expect(shuffleFn).toHaveBeenCalledTimes(0);

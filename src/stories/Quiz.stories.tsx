@@ -3,7 +3,7 @@ import App from '../App';
 import Quiz from "../pages/Quiz/Quiz";
 import "../pages/Quiz/Quiz.scss";
 import { Root } from '../Root';
-import { IFibQuestionFull, IGlobalSettingsPresetConfig, IMcqQuestionFull, IMsQuestionFull, IPlaySettingsPresetConfig, IQuiz, ISnippetQuestionFull, QuizIdentifiers, TQuestion } from '../types';
+import { IFibQuestionFull, IGlobalSettingsPresetConfig, IMcqQuestionFull, IMsQuestion, IPlaySettingsPresetConfig, IQuiz, ISnippetQuestionFull, QuizIdentifiers, TQuestion } from '../types';
 import { generateDefaultPlaySettingsState, generateDefaultSettingsState } from '../utils';
 
 const quiz_identifiers: QuizIdentifiers = {
@@ -145,7 +145,7 @@ const fibQuestions: Record<'text' | 'code', IFibQuestionFull[]> = {
   }]
 }
 
-const msQuestions: IMsQuestionFull[] = [{
+const msQuestions: IMsQuestion[] = [{
   image: 'https://miro.medium.com/max/480/1*7LOWVelUHYS1iqeX34Whzg.png',
   question: "Question 2\n* List item 1\n* List item 2",
   options: [

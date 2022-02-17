@@ -1,14 +1,14 @@
 import {
-  IFibQuestionFull,
-  IMsQuestionFull,
+  IFibQuestion,
+  IMsQuestion,
   IQuestionResult,
   ISelectQuestionResult,
   TInputQuestionResult
 } from '../../src/types';
 import { QUIZ_1 } from './quizzes';
 
-const question1 = QUIZ_1.questions[0] as IMsQuestionFull,
-  question2 = QUIZ_1.questions[1] as IFibQuestionFull;
+const question1 = QUIZ_1.questions[0] as IMsQuestion,
+  question2 = QUIZ_1.questions[1] as IFibQuestion;
 
 export const RESULT_1: IQuestionResult = {
   question: {

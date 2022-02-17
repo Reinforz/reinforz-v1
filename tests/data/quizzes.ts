@@ -82,7 +82,6 @@ export const QUIZ_1: IQuiz = {
         ]
       ],
       hints: ['Hint 1', 'Hint 2', 'Hint 3'],
-      options: null,
       image:
         'https://www.freecodecamp.org/news/content/images/2020/02/Ekran-Resmi-2019-11-18-18.08.13.png',
       weight: 0.5,
@@ -165,7 +164,6 @@ export const QUIZ_2: IQuiz = {
         ]
       ],
       hints: ['Hint 1', 'Hint 2', 'Hint 3'],
-      options: null,
       image:
         'https://www.freecodecamp.org/news/content/images/2020/02/Ekran-Resmi-2019-11-18-18.08.13.png',
       weight: 1,
