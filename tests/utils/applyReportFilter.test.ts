@@ -25,7 +25,6 @@ const result: IQuestionResult = {
     question: ['Question 1'],
     time_allocated: 30,
     weight: 1,
-    options: null
   }
 };
 const quizzesMap: Map<string, IQuiz> = new Map([

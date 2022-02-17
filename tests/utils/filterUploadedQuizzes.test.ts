@@ -105,7 +105,7 @@ it(`Should filter out uploaded quizzes`, () => {
           image: null,
           weight: 1,
           difficulty: 'Beginner',
-          explanation: 'No explanation available',
+          explanation: null,
           hints: [],
           time_allocated: 15,
           _id: expect.any(String),

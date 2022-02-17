@@ -35,7 +35,7 @@ it(`Should work with default settings`, () => {
     image: null,
     weight: 2,
     difficulty: 'Advanced',
-    explanation: 'No explanation available',
+    explanation: null,
     hints: [],
     time_allocated: 50,
     _id: expect.any(String)
@@ -76,7 +76,7 @@ describe('MCQ type questions', () => {
       image: null,
       weight: 1,
       difficulty: 'Beginner',
-      explanation: 'No explanation available',
+      explanation: null,
       hints: [],
       time_allocated: 15,
       _id: expect.any(String)
@@ -179,7 +179,7 @@ describe('MS type questions', () => {
       image: null,
       weight: 1,
       difficulty: 'Beginner',
-      explanation: 'No explanation available',
+      explanation: null,
       hints: [],
       time_allocated: 30,
       _id: expect.any(String)
@@ -240,7 +240,7 @@ describe('MS type questions', () => {
         warns: [],
         errors: [
           `Provided more answers than options, given 3 options, but provided 4 answers`,
-          'MS Answer must be within 0-2, provided 3'
+          'MS Answer 4 must be within 0-2, provided 3'
         ]
       });
     });
@@ -281,7 +281,7 @@ describe('Snippet type questions', () => {
       image: null,
       weight: 1,
       difficulty: 'Beginner',
-      explanation: 'No explanation available',
+      explanation: null,
       hints: [],
       time_allocated: 45,
       _id: expect.any(String)
@@ -324,11 +324,10 @@ describe('FIB type questions', () => {
       image: null,
       weight: 1,
       difficulty: 'Beginner',
-      explanation: 'No explanation available',
+      explanation: null,
       hints: [],
       time_allocated: 60,
       _id: expect.any(String),
-      format: 'text'
     });
     expect(logs).toStrictEqual({ warns: [], errors: [] });
   });
@@ -404,7 +403,7 @@ it(`Should populate warns if wrong difficulty, weight and time_allocated are giv
     image: null,
     weight: 1.5,
     difficulty: 'Beginner',
-    explanation: 'No explanation available',
+    explanation: null,
     hints: [],
     time_allocated: 60,
     _id: expect.any(String)

@@ -21,7 +21,8 @@ export function generateTypeQuestionAnswers(
    */
   function filterModifiers(answer: InputTypeQuestionAnswerDetailed) {
     const modifiers: TQuestionAnswerModifiers[] = []
-    answer.modifiers?.forEach((modifier, index, modifiers) => {
+    
+    answer.modifiers?.forEach((modifier, index) => {
       // If its not a valid modifier
       if (!VALID_MODIFIERS.has(modifier)) {
         // Push the warn message

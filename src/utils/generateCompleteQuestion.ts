@@ -3,7 +3,7 @@ import { MAX_QUESTION_TIME, MIN_QUESTION_TIME } from '../constants';
 import {
   ILog,
   IMcqQuestion,
-  IMsQuestion, InputFibQuestion, InputQuestion, InputSnippetQuestion, IQuizDefaultSettings, TInputSelectQuestion, TQuestion, TSelectQuestion
+  IMsQuestion, InputFibQuestion, InputSnippetQuestion, IQuizDefaultSettings, TInputQuestion, TInputSelectQuestion, TQuestion, TSelectQuestion
 } from '../types';
 import { generateSelectionQuestionAnswers } from './generateSelectionQuestionAnswers';
 import { generateTypeQuestionAnswers } from './generateTypeQuestionAnswers';
@@ -38,7 +38,7 @@ function generateDefaultSettingsContexts(
  * @returns A tuple [array of complete question, array of log messages]
  */
 export function generateCompleteQuestion(
-  question: InputQuestion,
+  question: TInputQuestion,
   contexts: string[],
   defaultSettings: Partial<IQuizDefaultSettings>
 ) {
