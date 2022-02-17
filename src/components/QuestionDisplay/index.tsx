@@ -25,11 +25,7 @@ export function QuestionDisplay(props: QuestionDisplayProps) {
       const chunk = question.question[chunkIndex];
       questionString += chunk;
       if (chunkIndex !== question.question.length - 1) {
-        if (question.format === "text") {
-          questionString += `<span class="question-chunk bg-dark m-5 fs-14">${userAnswers[chunkIndex] ?? 'N/A'}</span>`
-        } else {
-          questionString += `${userAnswers[chunkIndex] ?? ''}`
-        }
+        questionString += `${userAnswers[chunkIndex] ?? ''}`
       }
     }
   } else {

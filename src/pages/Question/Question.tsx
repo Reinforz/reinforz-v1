@@ -7,7 +7,7 @@ import { QuestionDisplay } from "../../components/QuestionDisplay";
 import { RootContext } from "../../context/RootContext";
 import { SettingsContext } from "../../context/SettingsContext";
 import sounds from "../../sounds";
-import { TQuestion } from "../../types";
+import { TQuestion, TSelectQuestion } from "../../types";
 import { applyOptionsShortcut, displayTime } from "../../utils";
 import "./Question.scss";
 import QuestionHints from "./QuestionHints/QuestionHints";
@@ -23,7 +23,7 @@ interface Props {
 export default function Question(props: Props) {
   const { settings } = useContext(SettingsContext)
   const { playSettings, allQuizzesMap } = useContext(RootContext);
-  const { changeCounter, isLast, question: { hints, time_allocated, type, options } } = props;
+  const { changeCounter, isLast, question: { hints, time_allocated, type } } = props;
   const [userAnswers, setUserAnswers] = useState<string[]>([]);
   const [usedHints, setUsedHints] = useState<string[]>([]);
   const [timeout, setTimeout] = useState<null | number>(null);
@@ -32,6 +32,8 @@ export default function Question(props: Props) {
   const ref = useRef<HTMLDivElement | null>(null);
 
   const { disable_timer } = playSettings.options
+  const options = (props.question as TSelectQuestion).options;
+
 
   useEffect(() => {
     return () => {
