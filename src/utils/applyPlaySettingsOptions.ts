@@ -23,6 +23,13 @@ export function applyPlaySettingsOptions(
     settingsAppliedQuizzes.forEach(
       (quiz) =>  {
         quiz.questions = arrayShuffler(quiz.questions);
+      }
+    );
+  }
+
+  if (playSettingsOptions.shuffle_options) {
+    settingsAppliedQuizzes.forEach(
+      (quiz) =>  {
         // If we are shuffling options for each question
         if (playSettingsOptions.shuffle_options) {
           // Manually casting so that options property is available in question
@@ -36,5 +43,6 @@ export function applyPlaySettingsOptions(
       }
     );
   }
+
   return settingsAppliedQuizzes;
 }

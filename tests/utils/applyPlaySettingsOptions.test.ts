@@ -1,5 +1,3 @@
-import { applyPlaySettingsOptions } from '../../src/utils';
-
 function createDummyQuizzes() {
   return [
     {
@@ -12,9 +10,6 @@ function createDummyQuizzes() {
               index: '0'
             }
           ]
-        },
-        {
-          options: null
         }
       ],
       _id: 'quiz_1'
@@ -36,11 +31,17 @@ function createDummyQuizzes() {
   ];
 }
 
-it(`Should work when all options are false`, () => {
+afterEach(() => {
+  jest.resetAllMocks();
+  jest.restoreAllMocks();
+  jest.resetModules();
+})
+
+it(`Should work when all options are false`, async () => {
+  const { applyPlaySettingsOptions } = await import("../../src/utils/applyPlaySettingsOptions");
   const dummyQuizzes = createDummyQuizzes();
-  const [selectedQuizzes, filteredQuizzes] = applyPlaySettingsOptions(
+  const settingsAppliedQuizzes = applyPlaySettingsOptions(
     dummyQuizzes,
-    ['quiz_1'],
     {
       flatten_mix: false,
       instant_feedback: false,
@@ -50,19 +51,21 @@ it(`Should work when all options are false`, () => {
       shuffle_quizzes: false,
       disable_timer: false
     },
-    () => []
   );
 
-  expect(selectedQuizzes).toStrictEqual([dummyQuizzes[0]]);
-  expect(filteredQuizzes).toStrictEqual([dummyQuizzes[0]]);
+  expect(settingsAppliedQuizzes).toStrictEqual(dummyQuizzes);
 });
 
-it(`Should shuffle quizzes`, () => {
-  const dummyQuizzes = createDummyQuizzes();
+it(`Should shuffle quizzes`, async () => {
   const shuffleFn = jest.fn();
+  jest.mock("../../src/utils/arrayShuffler", () => ({
+    arrayShuffler: shuffleFn
+  }))
+  const { applyPlaySettingsOptions } = await import("../../src/utils/applyPlaySettingsOptions");
+
+  const dummyQuizzes = createDummyQuizzes();
   applyPlaySettingsOptions(
     dummyQuizzes,
-    ['quiz_1', 'quiz_2'],
     {
       flatten_mix: false,
       instant_feedback: false,
@@ -72,18 +75,21 @@ it(`Should shuffle quizzes`, () => {
       shuffle_quizzes: true,
       disable_timer: false
     },
-    shuffleFn
   );
 
   expect(shuffleFn).toHaveBeenCalledTimes(1);
 });
 
-it(`Should shuffle questions`, () => {
-  const dummyQuizzes = createDummyQuizzes();
+it(`Should shuffle questions`, async () => {
   const shuffleFn = jest.fn();
+  jest.mock("../../src/utils/arrayShuffler", () => ({
+    arrayShuffler: shuffleFn
+  }))
+  const { applyPlaySettingsOptions } = await import("../../src/utils/applyPlaySettingsOptions");
+
+  const dummyQuizzes = createDummyQuizzes();
   applyPlaySettingsOptions(
     dummyQuizzes,
-    ['quiz_1', 'quiz_2'],
     {
       flatten_mix: false,
       instant_feedback: false,
@@ -93,18 +99,21 @@ it(`Should shuffle questions`, () => {
       shuffle_quizzes: false,
       disable_timer: false
     },
-    shuffleFn
   );
 
   expect(shuffleFn).toHaveBeenCalledTimes(2);
 });
 
-it(`Should not shuffle quizzes when flatten_mix=true`, () => {
-  const dummyQuizzes = createDummyQuizzes();
+it(`Should not shuffle quizzes when flatten_mix=true`, async () => {
   const shuffleFn = jest.fn();
+  jest.mock("../../src/utils/arrayShuffler", () => ({
+    arrayShuffler: shuffleFn
+  }))
+  const { applyPlaySettingsOptions } = await import("../../src/utils/applyPlaySettingsOptions");
+
+  const dummyQuizzes = createDummyQuizzes();
   applyPlaySettingsOptions(
     dummyQuizzes,
-    ['quiz_1', 'quiz_2'],
     {
       flatten_mix: true,
       instant_feedback: false,
@@ -114,15 +123,19 @@ it(`Should not shuffle quizzes when flatten_mix=true`, () => {
       shuffle_quizzes: true,
       disable_timer: false
     },
-    shuffleFn
   );
 
   expect(shuffleFn).toHaveBeenCalledTimes(0);
 });
 
-it(`Should shuffle questions when flatten_mix=true`, () => {
-  const dummyQuizzes = createDummyQuizzes();
+it(`Should shuffle questions when flatten_mix=true`, async () => {
   const shuffleFn = jest.fn();
+  jest.mock("../../src/utils/arrayShuffler", () => ({
+    arrayShuffler: shuffleFn
+  }))
+  const { applyPlaySettingsOptions } = await import("../../src/utils/applyPlaySettingsOptions");
+
+  const dummyQuizzes = createDummyQuizzes();
   applyPlaySettingsOptions(
     dummyQuizzes,
     {
@@ -139,12 +152,16 @@ it(`Should shuffle questions when flatten_mix=true`, () => {
   expect(shuffleFn).toHaveBeenCalledTimes(0);
 });
 
-it(`Should shuffle options`, () => {
-  const dummyQuizzes = createDummyQuizzes();
+it(`Should shuffle options`, async () => {
   const shuffleFn = jest.fn();
+  jest.mock("../../src/utils/arrayShuffler", () => ({
+    arrayShuffler: shuffleFn
+  }))
+  const { applyPlaySettingsOptions } = await import("../../src/utils/applyPlaySettingsOptions");
+
+  const dummyQuizzes = createDummyQuizzes();
   applyPlaySettingsOptions(
     dummyQuizzes,
-    ['quiz_1', 'quiz_2'],
     {
       flatten_mix: false,
       instant_feedback: false,
@@ -154,7 +171,6 @@ it(`Should shuffle options`, () => {
       shuffle_quizzes: false,
       disable_timer: false
     },
-    shuffleFn
   );
 
   expect(shuffleFn).toHaveBeenCalledTimes(2);
