@@ -23,7 +23,7 @@ const colorMap: Record<string, string> = {
 }
 
 function Settings() {
-  const { settings, setSettings, settingsPresets, setSettingsPresets } = useContext(SettingsContext);
+  const { settings, setSettings, settingsPresets, setSettingsPresetsConfigs } = useContext(SettingsContext);
   const { navigationIcons, onKeyPress } = useNavigationIcons([{
     path: "/",
     page: "Home",
@@ -52,13 +52,13 @@ function Settings() {
   const generatedNavigationStyles = generateNavigationStyles(settings.navigation);
   return (
     <div onKeyUp={(e) => {
-      settings.shortcuts && navigateBetweenPresets(e, settingsPresets, setSettingsPresets, REINFORZ_GLOBAL_SETTINGS_LS_KEY)
+      settings.shortcuts && navigateBetweenPresets(e, settingsPresets, setSettingsPresetsConfigs, REINFORZ_GLOBAL_SETTINGS_LS_KEY)
     }} style={{ width: '100vw', height: '100vh' }} tabIndex={0} ref={ref} onKeyPress={onKeyPress}>
       <IconGroup className="Settings-icons" direction={settings.navigation.direction} style={generatedNavigationStyles} icons={navigationIcons} />
       <div className="Settings p-5 center bg-base">
         <div className="Settings-header flex mb-5 p-5 bg-dark">
           <Typography variant="h6" className="Settings-header-text bold flex-1 ta-c flex ai-c jc-c tt-u">Settings</Typography>
-          <Preset lsKey={REINFORZ_GLOBAL_SETTINGS_LS_KEY} modalLabel="Save Settings" popoverText="Save current settings as preset" currentPreset={settings} itemPresets={settingsPresets} setPresetState={setSettingsPresets} />
+          <Preset lsKey={REINFORZ_GLOBAL_SETTINGS_LS_KEY} modalLabel="Save Settings" popoverText="Save current settings as preset" currentPreset={settings} itemPresets={settingsPresets} setPresetState={setSettingsPresetsConfigs} />
         </div>
         <div className="Settings-content bg-dark flex fd-c ai-c p-5">
           <Select classNames={{

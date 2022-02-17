@@ -1,29 +1,42 @@
 import { IPlaySettings, IQuiz, TQuestion } from '../types';
 import { applyNumberOperator } from './applyNumberOperator';
 
+/**
+ * Applies play settings filter on questions and generates map of it
+ * @param quizzes Array of quizzes to generate map for
+ * @param playSettingsFilters Play settings filter to filter questions
+ * @returns A map where key is the question id and value is the question
+ */
 export function generateQuestionsMap(
-  filteredQuizzes: IQuiz[],
+  quizzes: IQuiz[],
   playSettingsFilters: IPlaySettings['filters']
 ) {
-  const allQuestions: TQuestion[] = [];
   const allQuestionsMap: Map<string, TQuestion> = new Map();
+  const excludedDifficulties = new Set(playSettingsFilters.excluded_difficulty);
+  const excludedTypes = new Set(playSettingsFilters.excluded_types);
 
-  filteredQuizzes.forEach((filteredQuiz) => {
-    filteredQuiz.questions = filteredQuiz.questions.filter(
-      (question) =>
-        !playSettingsFilters.excluded_difficulty.includes(
+  quizzes.forEach((quiz) => {
+    // Filter the questions of the quiz
+    quiz.questions = quiz.questions.filter(
+      (question) => {
+        const keepQuestion = // If the questions' difficulty is not present in excluded difficulties
+        !excludedDifficulties.has(
           question.difficulty
         ) &&
-        !playSettingsFilters.excluded_types.includes(question.type) &&
+        // If the questions' type is not present in excluded difficulties
+        !excludedTypes.has(question.type) &&
         applyNumberOperator(
           playSettingsFilters.time_allocated,
           question.time_allocated
-        )
-    );
-    allQuestions.push(...filteredQuiz.questions);
-    filteredQuiz.questions.forEach((question) =>
-      allQuestionsMap.set(question._id, question)
+        );
+        // If the question should be kept
+        if (keepQuestion) {
+          // Add it to map
+          allQuestionsMap.set(question._id, question);
+        }
+        return keepQuestion;
+      }
     );
   });
-  return [allQuestions, allQuestionsMap] as const;
+  return allQuestionsMap;
 }

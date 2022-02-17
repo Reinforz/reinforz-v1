@@ -7,7 +7,7 @@ export interface SettingsContextData {
 }
 
 export interface ISettingsContext extends SettingsContextData {
-  setSettingsPresets: React.Dispatch<React.SetStateAction<IGlobalSettingsPresetConfig>>
+  setSettingsPresetsConfigs: React.Dispatch<React.SetStateAction<IGlobalSettingsPresetConfig>>
   setSettings: React.Dispatch<React.SetStateAction<IGlobalSettings>>
 }
 

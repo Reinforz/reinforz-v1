@@ -16,7 +16,7 @@ export interface IRootContextData {
     array: TQuestion[];
     map: Map<string, TQuestion>;
   },
-  playQuizzes: { selected: IQuiz[], filtered: IQuiz[] },
+  playQuizzes: { selected: IQuiz[], settingsApplied: IQuiz[] },
 }
 
 export interface IRootContext extends IRootContextData {
@@ -29,12 +29,7 @@ export interface IRootContext extends IRootContextData {
   setPlaying: React.Dispatch<React.SetStateAction<boolean>>
   setPlaySettingsPresets: React.Dispatch<React.SetStateAction<IPlaySettingsPresetConfig>>
   setUploadedPlayState: React.Dispatch<React.SetStateAction<boolean>>
-  setPlayQuizzes: React.Dispatch<React.SetStateAction<{ selected: IQuiz[], filtered: IQuiz[] }>>
-  playQuestions: {
-    array: TQuestion[];
-    map: Map<string, TQuestion>;
-  },
-  playQuizzes: { selected: IQuiz[], filtered: IQuiz[] },
+  setPlayQuizzes: React.Dispatch<React.SetStateAction<{ selected: IQuiz[], settingsApplied: IQuiz[] }>>
   setPlayQuestions: React.Dispatch<React.SetStateAction<{
     array: TQuestion[];
     map: Map<string, TQuestion>;

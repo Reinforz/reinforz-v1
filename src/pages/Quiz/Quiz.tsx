@@ -112,7 +112,7 @@ export default function Quiz() {
             map: allQuestionsMap
           })
           setPlayQuizzes({
-            filtered: generatedQuizzesArray,
+            settingsApplied: generatedQuizzesArray,
             selected: generatedQuizzesArray
           })
           setCurrentIndex(playState.results.length)

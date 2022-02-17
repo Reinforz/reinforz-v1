@@ -46,44 +46,55 @@ function findSettingsFromPresets(preset: IPresetConfig<any>) {
 }
 
 export const Root = (props: RootProps) => {
-  const [settingsPresets, setSettingsPresets] = useState(props.settingsPresets ?? getSettingsPresets());
-  const [settings, setSettings] = useState<IGlobalSettings>(props.settings ?? findSettingsFromPresets(settingsPresets));
-  const [playSettingsPresets, setPlaySettingsPresets] = useState(props.playSettingsPresets ?? getPlaySettingsPresets());
-  const [playSettings, setPlaySettings] = useState<IPlaySettings>(props.playSettings ?? findSettingsFromPresets(playSettingsPresets));
-  const [uploadedQuizzes, setUploadedQuizzes] = useState<IQuiz[]>(props.uploadedQuizzes ?? []);
-  const [selectedQuizIds, setSelectedQuizIds] = useState<string[]>(props.selectedQuizIds ?? []);
-  const [errorLogs, setErrorLogs] = useState<IErrorLog[]>(props.errorLogs ?? []);
-  const [playing, setPlaying] = useState<boolean>(props.playing ?? false);
-  const [uploadedPlayState, setUploadedPlayState] = useState(props.uploadedPlayState ?? false);
-  const [playQuizzes, setPlayQuizzes] = useState<{ selected: IQuiz[], filtered: IQuiz[] }>(props.playQuizzes ?? {
-    filtered: [],
+  const [settingsPresets, setSettingsPresetsConfigs] = useState(getSettingsPresets());
+  const [settings, setSettings] = useState<IGlobalSettings>(findSettingsFromPresets(settingsPresets));
+  const [playSettingsPresets, setPlaySettingsPresets] = useState(getPlaySettingsPresets());
+  const [playSettings, setPlaySettings] = useState<IPlaySettings>(findSettingsFromPresets(playSettingsPresets));
+
+  const [uploadedQuizzes, setUploadedQuizzes] = useState<IQuiz[]>([]);
+  const [selectedQuizIds, setSelectedQuizIds] = useState<string[]>([]);
+  const [errorLogs, setErrorLogs] = useState<IErrorLog[]>([]);
+  const [playing, setPlaying] = useState(false);
+  const [uploadedPlayState, setUploadedPlayState] = useState(false);
+  const [playQuizzes, setPlayQuizzes] = useState<{ selected: IQuiz[], settingsApplied: IQuiz[] }>({
+    settingsApplied: [],
     selected: []
   });
 
-  const [playQuestions, setPlayQuestions] = useState<{ array: TQuestion[], map: Map<string, TQuestion> }>(props.playQuestions ?? {
+  const [playQuestions, setPlayQuestions] = useState<{ array: TQuestion[], map: Map<string, TQuestion> }>({
     array: [],
     map: new Map()
   })
+  const allQuizzesMap: Map<string, IQuiz> = new Map();
 
   useEffect(() => {
     if (!uploadedPlayState) {
-      const [selected, filtered] = applyPlaySettingsOptions(uploadedQuizzes, selectedQuizIds, playSettings.options, arrayShuffler);
+      const selectedQuizIdsSet = new Set(selectedQuizIds);
+
+      // Filter the selected quizzes
+      const selectedQuizzes = uploadedQuizzes.filter((uploadedQuiz) =>
+        selectedQuizIdsSet.has(uploadedQuiz._id)
+      );
+
+      const settingsAppliedQuizzes = applyPlaySettingsOptions(selectedQuizzes, playSettings.options);
+      
       setPlayQuizzes({
-        selected,
-        filtered
+        selected: selectedQuizzes,
+        settingsApplied: settingsAppliedQuizzes
       })
     }
+    // Call this effect if the uploaded quiz, selected quiz or the play settings option changes
   }, [uploadedQuizzes, selectedQuizIds, playSettings.options, uploadedPlayState]);
 
   useEffect(() => {
     if (!uploadedPlayState) {
-      const [allQuestions, allQuestionsMap] = generateQuestionsMap(playQuizzes.filtered, playSettings.filters);
+      const allQuestionsMap = generateQuestionsMap(playQuizzes.settingsApplied, playSettings.filters);
       setPlayQuestions({
-        array: allQuestions,
+        array: Array.from(allQuestionsMap.values()),
         map: allQuestionsMap
       })
     }
-  }, [playQuizzes.filtered, playSettings.filters, uploadedPlayState]);
+  }, [playQuizzes.settingsApplied, playSettings.filters, uploadedPlayState]);
 
   const allShuffledQuestions: TQuestion[] = useMemo(() => {
     return playSettings.options.flatten_mix && !uploadedPlayState ? arrayShuffler(playQuestions.array) : playQuestions.array
@@ -92,21 +103,21 @@ export const Root = (props: RootProps) => {
   useEffect(() => {
     setSettings(findSettingsFromPresets(settingsPresets))
     // eslint-disable-next-line
-  }, [settingsPresets.current])
+  }, [settingsPresets.current]);
 
   useEffect(() => {
     setPlaySettings(findSettingsFromPresets(playSettingsPresets))
     // eslint-disable-next-line
-  }, [playSettingsPresets.current])
-
-  const allQuizzesMap: Map<string, IQuiz> = new Map();
-  playQuizzes.filtered.forEach(filteredQuiz => allQuizzesMap.set(filteredQuiz._id, filteredQuiz))
+  }, [playSettingsPresets.current]);
 
   const generatedTheme = generateTheme(settings);
+
+  playQuizzes.settingsApplied.forEach(filteredQuiz => allQuizzesMap.set(filteredQuiz._id, filteredQuiz));
+
   return <ThemeProvider theme={generatedTheme}>
     <SnackbarProvider maxSnack={4}>
-      <SettingsContext.Provider value={{ settings, setSettingsPresets, settingsPresets, setSettings }}>
-        <RootContext.Provider value={{ allQuizzesMap, playQuestions, setPlayQuestions, playQuizzes, setPlayQuizzes, uploadedPlayState, setUploadedPlayState, playSettingsPresets, setPlaySettingsPresets, playing, setPlaying, selectedQuizzes: playQuizzes.selected, allQuestionsMap: playQuestions.map, allQuestions: allShuffledQuestions, filteredQuizzes: playQuizzes.filtered, setPlaySettings, playSettings, errorLogs, setErrorLogs, uploadedQuizzes, selectedQuizIds, setUploadedQuizzes, setSelectedQuizIds }}>
+      <SettingsContext.Provider value={{ settings, setSettingsPresetsConfigs, settingsPresets, setSettings }}>
+        <RootContext.Provider value={{ allQuizzesMap, playQuestions, setPlayQuestions, playQuizzes, setPlayQuizzes, uploadedPlayState, setUploadedPlayState, playSettingsPresets, setPlaySettingsPresets, playing, setPlaying, selectedQuizzes: playQuizzes.selected, allQuestionsMap: playQuestions.map, allQuestions: allShuffledQuestions, filteredQuizzes: playQuizzes.settingsApplied, setPlaySettings, playSettings, errorLogs, setErrorLogs, uploadedQuizzes, selectedQuizIds, setUploadedQuizzes, setSelectedQuizIds }}>
           {props.children}
         </RootContext.Provider>
       </SettingsContext.Provider>
