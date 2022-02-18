@@ -28,27 +28,27 @@ export function applyCheckboxShortcut(
     // Using a set to filter out duplicate items
     finalSelectedItems = Array.from(
       new Set(
-        allItems.slice(0, index).concat(currentSelectedItems)
+        allItems.slice(0, index + 1).concat(currentSelectedItems)
       )
     );
   } 
   // Select everything from first to selected, without keeping the current selected items
   else if (shiftKey && ctrlKey && !altKey) {
-    finalSelectedItems = allItems.slice(0, index);
+    finalSelectedItems = allItems.slice(0, index + 1);
   } 
   // Select everything from current to end, keeping current selected items
   else if (shiftKey && !ctrlKey && altKey) {
     finalSelectedItems = Array.from(
       new Set(
         allItems
-          .slice(index)
+          .slice(index + 1)
           .concat(currentSelectedItems)
       )
     );
   } 
   // Select everything from current to end, without current selected items
   else if (shiftKey && ctrlKey && altKey) {
-    finalSelectedItems = allItems.slice(index)
+    finalSelectedItems = allItems.slice(index + 1)
   } else if (!shiftKey && !ctrlKey && altKey) {
     // Only keep the current index if its checked
     if (checked) finalSelectedItems = [allItems[index]];
