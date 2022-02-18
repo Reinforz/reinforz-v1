@@ -1,7 +1,6 @@
 import { Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import { useThemeSettings } from "../../hooks";
-import sounds from "../../sounds";
+import useSounds from "../../hooks/useSounds";
 import { createAggregateItemsMap, createItemMap } from "../../utils";
 import "./style.scss";
 
@@ -16,13 +15,13 @@ export interface ListTableProps<T> {
 }
 
 export default function ListTable<T extends Record<string, any>>(props: ListTableProps<T>) {
-  const { settings } = useThemeSettings();
   const [itemsMap, setItemsMap] = useState<Record<string, any>[]>([]);
   const [sort, setSort] = useState<[string, boolean]>(['title', true]);
   useEffect(() => {
     setItemsMap(createItemMap<T>(props))
     // eslint-disable-next-line
   }, [props.items])
+  const { click } = useSounds();
 
   const aggregateItemsMap = createAggregateItemsMap(itemsMap, props.headers)
 
@@ -33,7 +32,7 @@ export default function ListTable<T extends Record<string, any>>(props: ListTabl
     <div className="ListTable-headers bg-dark p-5 mb-5">
       <div className="ListTable-headers-row">
         {headers.map((header) => <span className={`ListTable-headers-row-item ListTable-headers-row-item-${header} flex ai-c jc-c tt-c c-p us-n`} key={header} onClick={() => {
-          settings.sound && sounds.click.play()
+          click()
           if (sort[0] === header) setSort([header, !sort[1]])
           else setSort([header, false])
         }}>

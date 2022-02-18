@@ -10,7 +10,7 @@ export default function useSounds() {
   soundNames.forEach(soundName => {
     soundRecord[soundName] = () => {
       // If the user has sounds enabled only then play it
-      settings.sound && sounds[soundName].play();
+      settings.sound &&  sounds[soundName].play();
     }
   })
 

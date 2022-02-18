@@ -1,7 +1,7 @@
 import { Button } from '@mui/material';
 import { Markdown } from '../../../components';
-import { useDisabled, useThemeSettings } from '../../../hooks';
-import sounds from '../../../sounds';
+import { useDisabled } from '../../../hooks';
+import useSounds from '../../../hooks/useSounds';
 import "./QuestionHints.scss";
 
 interface Props {
@@ -13,9 +13,9 @@ interface Props {
 export default function QuestionHints(props: Props) {
   const { hints, usedHints, setUsedHints } = props;
   const { is_disabled, disable } = useDisabled(2500);
-  const { settings } = useThemeSettings();
   const totalUsedHints = usedHints.length;
   const hintsExhausted = totalUsedHints === hints.length;
+  const { click } = useSounds();
 
   const onButtonClick = () => {
     if (!hintsExhausted && !is_disabled) {
@@ -27,7 +27,7 @@ export default function QuestionHints(props: Props) {
   return <div className="QuestionHints mb-5">
     <div className="flex jc-c ai-c mb-5" style={{ height: 50 }}>
       <Button disabled={is_disabled || hintsExhausted} color="primary" variant="contained" className="QuestionHints-button flex-1" onClick={() => {
-        settings.sound && sounds.click.play()
+        click()
         onButtonClick()
       }}>{hints.length > 0 ? `Show ${"hints"} ${totalUsedHints}/${hints.length}` : `No hints available`}</Button>
     </div>

@@ -4,15 +4,16 @@ import { IoMdDocument } from 'react-icons/io';
 import { IconType } from 'react-icons/lib';
 import { useNavigate } from 'react-router-dom';
 import { REINFORZ_DOCS_URL, REINFORZ_REPO_URL } from '../constants';
-import sounds from '../sounds';
+import useSounds from './useSounds';
 import useThemeSettings from './useThemeSettings';
 
 export default function useNavigationIcons(iconInfos: { path: string, component: IconType, size?: number, fill?: string, page?: string, onClick?: (e: React.MouseEventHandler<SVGElement>) => void, popoverText?: string }[]) {
   const { theme, settings } = useThemeSettings();
   const navigate = useNavigate();
+  const { swoosh } = useSounds();
 
   const goto = (path: string, forShortcuts: boolean) => {
-    settings.sound && sounds.swoosh.play();
+    swoosh();
     if (forShortcuts) {
       settings.shortcuts && navigate(path);
     } else {
@@ -21,7 +22,7 @@ export default function useNavigationIcons(iconInfos: { path: string, component:
   };
 
   const goToDocumentation = () => {
-    settings.sound && sounds.swoosh.play()
+    swoosh()
     const win = window.open(
       REINFORZ_DOCS_URL,
       '_blank'
@@ -30,7 +31,7 @@ export default function useNavigationIcons(iconInfos: { path: string, component:
   }
 
   const goToRepo = () => {
-    settings.sound && sounds.swoosh.play()
+    swoosh()
     const win = window.open(
       REINFORZ_REPO_URL,
       '_blank'

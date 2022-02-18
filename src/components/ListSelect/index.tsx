@@ -1,7 +1,5 @@
 import { FormGroup, InputLabel, MenuItem, Select as MuiSelect } from "@mui/material";
-import { useContext } from "react";
-import { SettingsContext } from "../../context/SettingsContext";
-import sounds from "../../sounds";
+import useSounds from "../../hooks/useSounds";
 import { transformTextBySeparator } from "../../utils";
 
 export interface ListSelectProps {
@@ -13,14 +11,14 @@ export interface ListSelectProps {
 }
 
 export default function ListSelect(props: ListSelectProps) {
-  const { settings } = useContext(SettingsContext);
   const { items, onChange, item, label, menuItemLabel } = props;
+  const { click } = useSounds();
   return <FormGroup className="ListSelect pb-0">
     {label && <InputLabel>{label}</InputLabel>}
     <div className="Select-content bg-light flex fd-c p-5">
       <MuiSelect disableUnderline value={item}
         onChange={(e) => {
-          settings.sound && sounds.click.play();
+          click();
           onChange(e.target.value as string)
         }}>
         {items.map(item =>

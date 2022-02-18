@@ -3,17 +3,16 @@ import { safeDump } from 'js-yaml';
 import { useCallback, useContext } from 'react';
 import { Header, Hovertips, Select } from '../../../components';
 import { ReportContext } from '../../../context/ReportContext';
-import { useThemeSettings } from '../../../hooks';
-import sounds from '../../../sounds';
+import useSounds from '../../../hooks/useSounds';
 import { download, generateReportQuizzesFromQuizzesMap, transformFullQuestions } from "../../../utils";
 import "./ReportExport.scss";
 
 export default function ReportExport() {
   const { sortedResults, filteredQuizzesMap, report: { settings: playSettings }, reportSettings, setReportSettings } = useContext(ReportContext);
-  const { settings } = useThemeSettings();
   const generatedReportQuizzes = generateReportQuizzesFromQuizzesMap(filteredQuizzesMap);
   const { export: exportState } = reportSettings;
   const { export_type, export_as } = exportState;
+  const { swoosh } = useSounds();
 
   const clonedDownload = useCallback((type) => {
     for (const [, quiz] of filteredQuizzesMap) {
@@ -69,7 +68,7 @@ export default function ReportExport() {
 
         <Hovertips popoverText={`Export ${export_type} as ${export_as}`} className="Report-Export-button jc-c flex p-5">
           <Button variant="contained" color="primary" onClick={() => {
-            settings.sound && sounds.swoosh.play();
+            swoosh();
             downloadFiles()
           }}>Download</Button>
         </Hovertips>

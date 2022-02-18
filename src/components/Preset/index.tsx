@@ -6,9 +6,8 @@ import { MdDelete, MdUpdate } from "react-icons/md";
 import shortid from "shortid";
 import { Hovertips, ListSelect, ModalPresetInput } from "..";
 import { ModalContext } from "../../context/ModalContext";
-import { SettingsContext } from "../../context/SettingsContext";
 import { useThemeSettings } from "../../hooks";
-import sounds from "../../sounds";
+import useSounds from "../../hooks/useSounds";
 import { IPresetConfig } from "../../types";
 import "./style.scss";
 
@@ -32,7 +31,7 @@ const centerBottomErrorNotistack = {
 export default function Preset(props: PresetProps) {
   const { setModalState } = useContext(ModalContext);
   const { theme } = useThemeSettings();
-  const { settings } = useContext(SettingsContext)
+  const { remove, click } = useSounds();
   const { lsKey, modalLabel = 'Save preset', popoverText = 'Save preset', setPresetState, currentPreset, itemPresets } = props;
   const { enqueueSnackbar } = useSnackbar();
 
@@ -61,11 +60,11 @@ export default function Preset(props: PresetProps) {
 
     <Hovertips popoverText={popoverText}>
       <FaSave fill={theme.palette.color.opposite_light} size={20} onClick={() => {
-        settings.sound && sounds.click.play()
+        click()
         setModalState([true, <ModalPresetInput closeModal={() => setModalState([false, null])} label={modalLabel} onSave={(input) => {
           const isValid = checkPresetInput(input);
           if (isValid) {
-            settings.sound && sounds.click.play();
+            click();
             const currentActivePresetId = shortid();
             const newSettingsPresets: IPresetConfig<any> = {
               current: currentActivePresetId,
@@ -85,7 +84,7 @@ export default function Preset(props: PresetProps) {
     <Hovertips popoverText={itemPresets.current !== 'default' ? "Update preset" : "Can't update default preset"}>
       <MdUpdate size={20} fill={itemPresets.current !== 'default' ? theme.palette.color.opposite_light : grey[500]} onClick={() => {
         if (itemPresets.current !== 'default') {
-          settings.sound && sounds.click.play();
+          click();
           const currentPresetIndex = itemPresets.presets.findIndex(preset => preset.id === itemPresets.current);
           itemPresets.presets[currentPresetIndex].data = currentPreset;
           setPresetState(JSON.parse(JSON.stringify(itemPresets)))
@@ -103,7 +102,7 @@ export default function Preset(props: PresetProps) {
     <Hovertips popoverText={itemPresets.current !== 'default' ? "Delete preset" : "Can't delete default preset"}>
       <MdDelete size={20} fill={itemPresets.current !== 'default' ? red[500] : grey[500]} onClick={() => {
         if (itemPresets.current !== 'default') {
-          settings.sound && sounds.remove.play();
+          remove();
           setPresetState({
             current: 'default',
             presets: itemPresets.presets.filter(preset => preset.id !== itemPresets.current)

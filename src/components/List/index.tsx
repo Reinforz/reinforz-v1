@@ -3,7 +3,7 @@ import { red } from "@mui/material/colors";
 import { MdDelete } from 'react-icons/md';
 import { Container, Content, Flex, Header, Hovertips } from "../";
 import { useThemeSettings } from "../../hooks";
-import sounds from "../../sounds";
+import useSounds from "../../hooks/useSounds";
 import { applyCheckboxShortcut } from "../../utils";
 import "./style.scss";
 
@@ -22,6 +22,7 @@ export interface ListProps<T extends { _id: string } & Record<string, any>> {
 export default function List<T extends { _id: string }>(props: ListProps<T>) {
   const { items, selectedItems, setItems, setSelectedItems, header, fields, emptyListMessage = 'No items', className = '' } = props;
   const { theme, settings } = useThemeSettings();
+  const { remove, pop_off, pop_on } = useSounds();
   const isAllSelected = items.length !== 0 && selectedItems.length === items.length;
   return <Container className={`List flex fd-c ${className}`}>
     <Header header={header} sideElements={[
@@ -29,11 +30,11 @@ export default function List<T extends { _id: string }>(props: ListProps<T>) {
         <Hovertips popoverText={`${isAllSelected ? "Deselect" : "Select"} all items`}>
           <Checkbox color="primary" key={"checkbox"} onClick={(e) => {
             if ((e.target as any).checked) {
-              settings.sound && sounds.pop_off.play();
+              pop_off();
               setSelectedItems(items.map(item => item._id))
             }
             else {
-              settings.sound && sounds.pop_on.play();
+              pop_on();
               setSelectedItems([])
             }
           }} checked={isAllSelected} />
@@ -45,7 +46,7 @@ export default function List<T extends { _id: string }>(props: ListProps<T>) {
       <Flex>
         <Hovertips popoverText={`Remove ${selectedItems.length} selected items`} key={"delete icon"} >
           <MdDelete size={20} className={"List-header-icons-cancel"} fill={red[500]} onClick={() => {
-            settings.sound && sounds.remove.play();
+            remove();
             const remainingItems = items.filter(item => !selectedItems.includes(item._id))
             setItems(remainingItems)
             props.onDelete && props.onDelete(remainingItems, selectedItems)
@@ -64,13 +65,13 @@ export default function List<T extends { _id: string }>(props: ListProps<T>) {
               <Checkbox color="primary" className="List-content-item-icons-checkbox" key={_id + "checkbox" + index} onClick={(e: any) => {
                 e.persist();
                 if (settings.sound) {
-                  e.target.checked ? sounds.pop_off.play() : sounds.pop_on.play();
+                  e.target.checked ? pop_off() : pop_on();
                 }
                 setSelectedItems(applyCheckboxShortcut(e, items.map(item => item._id), selectedItems, index));
               }} checked={selectedItems.includes(_id)} value={_id} />
               <Hovertips key={_id + "icon" + index} popoverText="Delete this item">
                 <MdDelete size={20} className="List-content-item-icons-cancel" fill={red[500]} onClick={() => {
-                  settings.sound && sounds.remove.play();
+                  remove();
                   const remainingItems = items.filter(_item => _item._id !== _id);
                   props.onDelete && props.onDelete(remainingItems, [item._id])
                   setItems(remainingItems)

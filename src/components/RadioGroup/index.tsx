@@ -1,7 +1,6 @@
 import { FormControlLabel, InputLabel, Radio, RadioGroup as MuiRadioGroup } from "@mui/material";
 import React, { Dispatch, SetStateAction } from "react";
-import { useThemeSettings } from "../../hooks";
-import sounds from "../../sounds";
+import useSounds from "../../hooks/useSounds";
 import { transformTextBySeparator } from "../../utils";
 
 export interface RadioGroupProps<I> {
@@ -24,7 +23,7 @@ export interface RadioGroupProps<I> {
 }
 
 export default function RadioGroup<I>(props: RadioGroupProps<I>) {
-  const { settings } = useThemeSettings();
+  const { click } = useSounds();
   const { classNames = {} } = props;
 
   const itemDirection = props.itemDirection ?? 'column';
@@ -34,7 +33,7 @@ export default function RadioGroup<I>(props: RadioGroupProps<I>) {
     <InputLabel className={`${classNames.inputLabel ?? ''}`}>{props.label}</InputLabel>
     <div style={{ flexDirection: itemDirection }} className={`RadioGroup-content bg-dark p-5 ${contentPaddingStyle} flex ${classNames.content ?? ''}`}>
       {props.items.map((item, index) => <FormControlLabel className={`${itemPaddingStyle} flex-1 ${classNames.formControlLabel ?? ''}`} onClick={(e: any) => {
-        settings.sound && sounds.click.play()
+        click()
         props.setState({ ...props.state, [props.stateKey]: e.target.value })
         props.onClick && props.onClick(e);
         if (props.lsKey) {

@@ -6,7 +6,7 @@ import { Hovertips } from "../../components";
 import { QuestionDisplay } from "../../components/QuestionDisplay";
 import { RootContext } from "../../context/RootContext";
 import { SettingsContext } from "../../context/SettingsContext";
-import sounds from "../../sounds";
+import useSounds from "../../hooks/useSounds";
 import { TQuestion, TSelectQuestion } from "../../types";
 import { applyOptionsShortcut, displayTime } from "../../utils";
 import "./Question.scss";
@@ -30,6 +30,7 @@ export default function Question(props: Props) {
   const [timer, setTimer] = useState<null | NodeJS.Timeout>(null);
   const [timeBreak, setTimeBreak] = useState(false);
   const ref = useRef<HTMLDivElement | null>(null);
+  const { swoosh } = useSounds();
 
   const { disable_timer } = playSettings.options
   const options = (props.question as TSelectQuestion).options;
@@ -47,7 +48,7 @@ export default function Question(props: Props) {
   }, [props.question])
 
   const onNextButtonPress = () => {
-    settings.sound && sounds.swoosh.play()
+    swoosh()
     setUserAnswers([])
     setUsedHints([])
     if (!disable_timer) {

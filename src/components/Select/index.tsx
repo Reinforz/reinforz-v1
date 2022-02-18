@@ -1,7 +1,6 @@
 import { FormGroup, InputLabel, MenuItem, Select as MuiSelect, SelectChangeEvent } from "@mui/material";
-import { ReactNode, useContext } from "react";
-import { SettingsContext } from "../../context/SettingsContext";
-import sounds from "../../sounds";
+import { ReactNode } from "react";
+import useSounds from "../../hooks/useSounds";
 import { transformTextBySeparator } from "../../utils";
 
 export interface ISelectClassNames {
@@ -27,7 +26,7 @@ export interface SelectProps<T extends Record<string, any>> {
 }
 
 export default function Select<T extends Record<string, any>>(props: SelectProps<T>) {
-  const { settings } = useContext(SettingsContext);
+  const { click } = useSounds();
   const { items, multiple = false, renderValue, className = '', menuItemLabel, state, stateKey, setState, classNames = {} } = props;
   return <FormGroup className={`Select ${className ?? ''} ${classNames.formGroup ?? ''}`}>
     <InputLabel className={`${classNames.inputLabel ?? ''}`}>{props.label}</InputLabel>
@@ -36,7 +35,7 @@ export default function Select<T extends Record<string, any>>(props: SelectProps
         multiple={multiple}
         renderValue={(items) => renderValue ? renderValue(items) : multiple ? (items as string[]).map((item) => transformTextBySeparator(item)).join(", ") : transformTextBySeparator(items.join("") as string) as ReactNode}
         onChange={(e) => {
-          settings.sound && sounds.click.play();
+          click();
           setState({ ...state, [stateKey]: e.target.value as string[] })
           props.onChange && props.onChange(e)
           if (props.lsKey) {

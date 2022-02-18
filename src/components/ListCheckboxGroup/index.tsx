@@ -1,7 +1,6 @@
 import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 import { ReactElement } from "react";
-import { useThemeSettings } from "../../hooks";
-import sounds from "../../sounds";
+import useSounds from "../../hooks/useSounds";
 
 export interface ListCheckboxGroupProps {
   setState: (items: string[]) => any
@@ -11,14 +10,14 @@ export interface ListCheckboxGroupProps {
 
 export default function ListCheckboxGroup(props: ListCheckboxGroupProps) {
   const { items, setState, value } = props;
-  const { settings } = useThemeSettings();
+  const { pop_off, pop_on } = useSounds();
   return <FormGroup className="ListCheckboxGroup bg-base pb-0" onChange={(e: any) => {
     if (e.target.checked) {
-      settings.sound && sounds.pop_off.play();
+      pop_off();
       setState(value.concat(e.target.value))
     }
     else {
-      settings.sound && sounds.pop_on.play();
+      pop_on();
       setState(value.filter(value => value !== e.target.value));
     }
   }}>

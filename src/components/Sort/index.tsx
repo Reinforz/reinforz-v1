@@ -4,7 +4,7 @@ import { AiFillPlusCircle } from "react-icons/ai";
 import { FaArrowAltCircleDown, FaArrowAltCircleUp } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { useThemeSettings } from "../../hooks";
-import sounds from "../../sounds";
+import useSounds from "../../hooks/useSounds";
 import { IReportSort } from "../../types";
 import { transformTextBySeparator } from "../../utils";
 import Hovertips from "../Hovertips";
@@ -19,12 +19,13 @@ export interface SortProps {
 }
 
 function SortSelect(props: { items: string[], menuItemLabel: SortProps["menuItemLabel"], sort: [string, "ASC" | "DESC"], index: number, sorts: SortProps["sorts"], setSorts: SortProps["setSorts"] }) {
-  const { settings } = useThemeSettings();
+  const { click } = useSounds();
+
   const { items, sort, menuItemLabel, index, sorts, setSorts } = props;
   const item = sort[index];
   return <MuiSelect disableUnderline className="Sort-content-item-category bg-light flex-1 mr-5" value={item}
     onChange={(e) => {
-      settings.sound && sounds.click.play()
+      click()
       sort[index] = e.target.value as any;
       setSorts(JSON.parse(JSON.stringify(sorts)))
     }}>
@@ -35,9 +36,11 @@ function SortSelect(props: { items: string[], menuItemLabel: SortProps["menuItem
 }
 
 export default function Sort(props: SortProps) {
-  const { theme, settings } = useThemeSettings();
+  const { theme } = useThemeSettings();
   const { max = 3, items, header, sorts, setSorts, menuItemLabel } = props;
   const canAddSort = sorts.length !== max;
+
+  const { remove, click } = useSounds();
 
   return <FormGroup className="Sort">
     <InputLabel className="Sort-header">{header}</InputLabel>
@@ -83,7 +86,7 @@ export default function Sort(props: SortProps) {
             <div className="Sort-content-item-icons-delete">
               <Hovertips popoverText={`Delete ${item} by ${order} sort`}>
                 <MdDelete size={20} fill={red[500]} onClick={() => {
-                  settings.sound && sounds.remove.play()
+                  remove()
                   sorts[index] = null as any;
                   setSorts(sorts.filter(sort => sort))
                 }} />
@@ -97,7 +100,7 @@ export default function Sort(props: SortProps) {
       <Hovertips popoverText={`${canAddSort ? "Add Sort" : "Max sort limit reached"}`}>
         <AiFillPlusCircle size={25} fill={canAddSort ? green[500] : grey[500]} onClick={() => {
           if (canAddSort) {
-            settings.sound && sounds.click.play()
+            click()
             setSorts([...sorts, [items[0], 'ASC']])
           }
         }} />

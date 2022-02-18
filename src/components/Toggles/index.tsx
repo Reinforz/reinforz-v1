@@ -1,8 +1,7 @@
 import { FormGroup, InputLabel, Switch, withStyles } from '@material-ui/core';
 import { green, red } from '@material-ui/core/colors';
-import React, { useContext } from 'react';
-import { SettingsContext } from '../../context/SettingsContext';
-import sounds from '../../sounds';
+import React from 'react';
+import useSounds from '../../hooks/useSounds';
 import { transformTextBySeparator } from '../../utils';
 
 const OnOffSwitch = withStyles({
@@ -35,21 +34,23 @@ export interface TogglesProps<I extends Record<string, any>> {
 }
 
 export default function Toggles<I extends Record<string, any>>(props: TogglesProps<I>) {
-  const { settings } = useContext(SettingsContext);
   const { state, setState, classNames = {} } = props;
   const items = props.items as string[];
+
+  const { switch_off, switch_on} = useSounds();
+
   return <div className={`Toggles bg-dark w-100p ${classNames.container ?? ''}`}> {items.map((item, index) =>
     <FormGroup key={item} row className={`Toggles-item bg-base p-5${items.length - 1 !== index ? " mb-5" : ""} ${classNames.formGroup ?? ''}`}>
       <InputLabel className={`Toggles-item-label mb-0 ${classNames.inputLabel ?? ''}`}>{transformTextBySeparator(item)}</InputLabel>
       <OnOffSwitch
         className={`${classNames.switch ?? ''}`}
         checked={Boolean(state[item])}
-        onChange={(e) => {
+        onChange={() => {
           const checked = state[item];
-          if (checked && settings.sound) {
-            sounds.switch_off.play()
-          } else if (!checked && settings.sound) {
-            sounds.switch_on.play()
+          if (checked) {
+            switch_off()
+          } else if (!checked) {
+            switch_on()
           }
           setState({ ...state, [item]: !checked })
         }}

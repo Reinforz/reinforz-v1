@@ -9,7 +9,7 @@ import { QuestionDisplay } from "../../../components/QuestionDisplay";
 import { ModalContext } from "../../../context/ModalContext";
 import { ReportContext } from "../../../context/ReportContext";
 import { useThemeSettings } from "../../../hooks";
-import sounds from "../../../sounds";
+import useSounds from "../../../hooks/useSounds";
 import { IQuestionResult, TInputQuestionResult } from "../../../types";
 import { ReportAnswers } from "../ReportAnswers/ReportAnswers";
 import { ReportOptions } from "../ReportOptions/ReportOptions";
@@ -70,8 +70,10 @@ function ReportTableRow(props: ReportTableRowProps) {
 
 export function ReportTable() {
   const { setReport, sortedResults, excludedColumns, report } = useContext(ReportContext);
-  const { settings, theme } = useThemeSettings();
+  const { theme } = useThemeSettings();
   const { setModalState } = useContext(ModalContext);
+  const { remove } = useSounds();
+
   const memoizedReportQuestions = useMemo(() => sortedResults.map(sortedResult => <QuestionDisplay contexts={report.quizzes[sortedResult.question.quiz].contexts} question={sortedResult.question} userAnswers={sortedResult.user_answers} showContexts={!excludedColumns['contexts']} showImage={Boolean(!excludedColumns["image"])} showQuestion={!excludedColumns["question"]} />), [report, sortedResults, excludedColumns]);
   return <div className="ReportTable flex-1 p-5 bg-base overflowY-auto">
     {sortedResults.map((sortedResult, index) => {
@@ -88,7 +90,7 @@ export function ReportTable() {
         }} reportQuestions={memoizedReportQuestions} index={index} results={sortedResults} excludedColumns={excludedColumns} header={null} />])
       }} /></Hovertips>
         <Hovertips popoverText="Delete"><MdDelete size={20} fill={red[500]} onClick={() => {
-          settings.sound && sounds.remove.play();
+          remove();
           setReport({
             ...report,
             results: report.results.filter(result => result._id !== sortedResult._id)

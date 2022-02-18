@@ -1,10 +1,9 @@
 import { PopoverOrigin } from "@mui/material";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { FaArrowAltCircleRight } from "react-icons/fa";
 import { RiArrowLeftRightLine } from "react-icons/ri";
-import { SettingsContext } from "../../context/SettingsContext";
 import { useThemeSettings } from "../../hooks";
-import sounds from "../../sounds";
+import useSounds from "../../hooks/useSounds";
 import { generateMenuStyles } from "../../utils";
 import IconGroup from "../IconGroup";
 import "./style.scss";
@@ -19,7 +18,7 @@ export interface SideToggleMenuProps {
 
 export default function SideToggleMenu(props: SideToggleMenuProps) {
   const { theme } = useThemeSettings();
-  const { settings } = useContext(SettingsContext);
+  const { switch_off, switch_on, swoosh } = useSounds();
   const { icons = [], width = 300, initialPosition, lsKey, initialOpen, contents } = props;
   let menuLsState = {
     position: initialPosition ?? "right",
@@ -72,10 +71,10 @@ export default function SideToggleMenu(props: SideToggleMenuProps) {
     <div className="SideToggleMenu-sidebar p-5" style={{ left, width }}>
       <IconGroup className="SideToggleMenu-sidebar-icons" direction="column" style={iconsContainerStyle} icons={[
         [`${isOpen ? "Close" : "Open"} Menu`, <FaArrowAltCircleRight fill={theme.palette.color.opposite_light} onClick={() => {
-          if (settings.sound && isOpen === false) {
-            sounds.switch_on.play();
-          } else if (settings.sound && isOpen === true) {
-            sounds.switch_off.play();
+          if (isOpen === false) {
+            switch_on();
+          } else if (isOpen === true) {
+            switch_off();
           }
           const newValue = !isOpen
           setIsOpen(newValue)
@@ -85,7 +84,7 @@ export default function SideToggleMenu(props: SideToggleMenuProps) {
           }))
         }} style={iconStyle} />, popoverOrigin],
         [`Switch to ${position === "left" ? "right" : "left"}`, <RiArrowLeftRightLine fill={theme.palette.color.opposite_light} onClick={() => {
-          settings.sound && sounds.swoosh.play();
+          swoosh();
           const newValue = position === "left" ? "right" : "left"
           setPosition(newValue)
           lsKey && localStorage.setItem(lsKey, JSON.stringify({

@@ -1,9 +1,7 @@
 import { Typography } from "@mui/material";
 import { OptionsObject, SnackbarKey, SnackbarMessage, useSnackbar } from "notistack";
-import { useContext } from "react";
 import { DropzoneOptions, useDropzone } from "react-dropzone";
-import { SettingsContext } from "../../context/SettingsContext";
-import sounds from "../../sounds";
+import useSounds from "../../hooks/useSounds";
 import "./style.scss";
 
 export interface UploadProps {
@@ -24,9 +22,9 @@ const notistackOptionsObject = {
 } as OptionsObject
 
 export default function Upload(props: UploadProps) {
-  const { settings } = useContext(SettingsContext);
   const { enqueueSnackbar } = useSnackbar();
   const { uploadMessage, className, onLoad, postRead, maxFiles } = props;
+  const { swoosh } = useSounds();
 
   const onDrop = (acceptedFiles: any) => {
     const filePromises: Promise<any>[] = [];
@@ -74,7 +72,7 @@ export default function Upload(props: UploadProps) {
 
   const onClick = rootProps.onClick
   rootProps.onClick = (e) => {
-    settings.sound && sounds.swoosh.play();
+    swoosh();
     onClick && onClick(e)
   }
 

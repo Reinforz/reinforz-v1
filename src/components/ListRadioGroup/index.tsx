@@ -1,7 +1,6 @@
 import { FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import { ReactElement } from "react";
-import { useThemeSettings } from "../../hooks";
-import sounds from "../../sounds";
+import useSounds from "../../hooks/useSounds";
 
 export interface ListRadioGroupProps {
   setState: (items: string[]) => any
@@ -11,9 +10,9 @@ export interface ListRadioGroupProps {
 
 export default function ListRadioGroup(props: ListRadioGroupProps) {
   const { items, setState, value } = props;
-  const { settings } = useThemeSettings();
+  const { option_click } = useSounds();
   return <RadioGroup className="ListRadioGroup bg-base pb-0" value={value.length === 0 ? [''] : value[0]} onChange={e => {
-    settings.sound && sounds.option_click.play();
+    option_click();
     setState([e.target.value])
   }}>
     {items.map((label, i) => {

@@ -3,9 +3,8 @@ import React, { useContext } from "react";
 import { CheckboxGroup, Header, InputRange, Preset } from '../../../components';
 import { REINFORZ_PLAY_SETTINGS_LS_KEY } from "../../../constants";
 import { RootContext } from "../../../context/RootContext";
-import { SettingsContext } from "../../../context/SettingsContext";
 import { useThemeSettings } from "../../../hooks";
-import sounds from "../../../sounds";
+import useSounds from "../../../hooks/useSounds";
 import { IPlaySettingsFilters, IPlaySettingsOptions } from "../../../types";
 import { generateDefaultPlaySettingsState, transformTextBySeparator } from "../../../utils";
 import "./PlaySettings.scss";
@@ -13,7 +12,7 @@ import "./PlaySettings.scss";
 export default function PlaySettings() {
   const { playSettingsPresets, setPlaySettingsPresets, selectedQuizIds, playSettings, setPlaySettings, filteredQuizzes } = useContext(RootContext);
   const { theme } = useThemeSettings();
-  const { settings } = useContext(SettingsContext);
+  const { reset, pop_off, pop_on } = useSounds();
 
   const filteredQuestions = filteredQuizzes.reduce((acc, filteredQuiz) => acc += filteredQuiz.questions.length, 0);
 
@@ -39,9 +38,9 @@ export default function PlaySettings() {
                 checked={playSettings.options[key as keyof IPlaySettingsOptions]}
                 onChange={(event, checked) => {
                   if (checked) {
-                    settings.sound && sounds.pop_on.play();
+                    pop_on();
                   } else {
-                    settings.sound && sounds.pop_off.play();
+                    pop_off();
                   }
                   setPlaySettings(key === "flatten_mix" ? { ...playSettings, options: { ...playSettings.options, [event.target.name]: checked, shuffle_questions: checked, shuffle_quizzes: checked } } : { ...playSettings, options: { ...playSettings.options, [event.target.name]: checked } })
                 }}
@@ -67,7 +66,7 @@ export default function PlaySettings() {
       </div>
     </div>
     <Button className="PlaySettings-group-button mb-5" variant="contained" color="primary" onClick={() => {
-      settings.sound && sounds.reset.play()
+      reset()
       setPlaySettings(generateDefaultPlaySettingsState())
     }}>Reset</Button>
     <Typography className="PlaySettings-total bg-dark flex jc-c ai-c bold fs-16 p-5 mb-5" style={{ color: filteredQuestions === 0 ? theme.palette.error.main : theme.palette.success.main }}>{filteredQuestions} Questions</Typography>
