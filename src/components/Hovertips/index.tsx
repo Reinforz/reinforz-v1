@@ -1,18 +1,7 @@
-import { Popover, PopoverOrigin, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import { Theme } from '@mui/material';
+import { useTheme } from '@emotion/react';
+import { Popover, PopoverOrigin, Typography } from '@mui/material';
 import React, { Fragment, useContext, useEffect } from 'react';
 import { SettingsContext } from '../../context/SettingsContext';
-
-const useStyles = makeStyles((theme: Theme) => ({
-  popover: {
-    pointerEvents: 'none',
-  },
-  paper: {
-    backgroundColor: theme.palette.color.dark,
-    padding: theme.spacing(1),
-  },
-}));
 
 export interface HovertipsProps {
   className?: string,
@@ -25,10 +14,9 @@ export interface HovertipsProps {
 }
 
 export default function Hovertips(props: HovertipsProps) {
-  const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const { settings } = useContext(SettingsContext);
-
+  const theme = useTheme();
   const open = Boolean(anchorEl);
 
   const {
@@ -57,10 +45,13 @@ export default function Hovertips(props: HovertipsProps) {
 
   return <Fragment>
     <span {...generatedProps} className={`${className ?? ''} flex icon`} style={{ cursor: 'pointer', height: 'fit-content', ...props.style ?? {}, }} onMouseEnter={(e: any) => setAnchorEl(e.currentTarget)} onMouseLeave={() => setAnchorEl(null)}>{children}</span>
-    {settings.hovertips && <Popover className={classes.popover}
-      classes={{
-        paper: classes.paper,
-      }} open={open} anchorEl={anchorEl} anchorOrigin={popoverAnchorOrigin}
+    {settings.hovertips && <Popover sx={{
+      pointerEvents: 'none',
+      "& 	.MuiPopover-paper": {
+        backgroundColor: theme.palette.color.dark,
+        padding: theme.spacing(1),
+      }
+    }} open={open} anchorEl={anchorEl} anchorOrigin={popoverAnchorOrigin}
       transformOrigin={popoverTransformOrigin}
       onClose={() => setAnchorEl(null)} disableRestoreFocus ><Typography>{popoverText}</Typography></Popover>}
   </Fragment>

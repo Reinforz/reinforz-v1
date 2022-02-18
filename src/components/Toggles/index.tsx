@@ -1,25 +1,27 @@
-import { Box, FormGroup, InputLabel, Switch, withStyles } from '@material-ui/core';
-import { green, red } from '@material-ui/core/colors';
+import styled from '@emotion/styled';
+import { Box, FormGroup, InputLabel, Switch } from '@mui/material';
+import { green, red } from '@mui/material/colors';
 import React from 'react';
 import useSounds from '../../hooks/useSounds';
 import { transformTextBySeparator } from '../../utils';
 
-const OnOffSwitch = withStyles({
-  switchBase: {
-    color: red[500],
+const OnOffSwitch = styled(Switch)`
+  &	.MuiSwitch-switchBase {
+    color: ${red[500]};
+  }
 
-    '&$checked': {
-      color: green[500],
-    },
-    '&$checked + $track': {
-      backgroundColor: green[500],
-    },
-  },
-  'track': {
-    backgroundColor: red[500],
-  },
-  checked: {},
-})(Switch);
+  &.Mui-checked {
+    color: ${green[500]};
+  }
+
+  &.Mui-checked + .MuiSwitch-track {
+    background-color: ${green[500]};
+  }
+
+  & .MuiSwitch-track {
+    background-color: ${red[500]};
+  }
+`;
 
 export interface TogglesProps<I extends Record<string, any>> {
   items: (keyof I)[]

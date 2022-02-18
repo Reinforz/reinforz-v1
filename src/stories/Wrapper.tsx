@@ -1,6 +1,5 @@
 import { Theme } from "@emotion/react";
-import { ThemeProvider } from "@material-ui/styles";
-import { Box } from "@mui/material";
+import { Box, ThemeProvider } from "@mui/material";
 import { SnackbarProvider } from "notistack";
 import { ReactNode } from "react";
 import { SettingsContext } from "../context/SettingsContext";
@@ -29,7 +28,7 @@ export default function Wrapper(props: Props) {
 
   return <ThemeProvider theme={generatedTheme}>
     <SnackbarProvider maxSnack={4}>
-      <SettingsContext.Provider value={{ setSettings: () => { }, setSettingsPresets: () => { }, settings: defaultSettings, settingsPresets: defaultSettingsPresets }}>
+      <SettingsContext.Provider value={{ setSettings: () => { }, setSettingsPresets: () => { }, settings: defaultSettings, settingsPresets: defaultSettingsPresets } as any}>
         <Root theme={generatedTheme} settings={defaultSettings}>
           {props.children}
         </Root>

@@ -1,4 +1,4 @@
-import { ThemeProvider } from "@material-ui/styles";
+import { ThemeProvider } from "@mui/material";
 import { SnackbarProvider } from "notistack";
 import "prismjs/components/prism-bash";
 import "prismjs/components/prism-c";
