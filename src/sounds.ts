@@ -1,4 +1,4 @@
-const soundNames = [
+export const soundNames = [
   'pop_on',
   'pop_off',
   'remove',
@@ -34,15 +34,17 @@ const sounds: Record<
 > = {} as any;
 
 soundNames.forEach((sound_url) => {
-  if (
-    window.location.host === 'localhost:3000' ||
-    window.location.host === 'reinforz.vercel.app'
-  ) {
-    const audio = new Audio(
-      process.env.PUBLIC_URL + `/sounds/${sound_url}.mp3`
-    );
-    audio.volume = 0.25;
-    sounds[sound_url] = audio;
+  if (typeof window !== "undefined") {
+    if (
+      window.location.host.startsWith("localhost") ||
+      window.location.host === 'reinforz.xyz'
+    ) {
+      const audio = new Audio(
+        process.env.PUBLIC_URL + `/sounds/${sound_url}.mp3`
+      );
+      audio.volume = 0.25;
+      sounds[sound_url] = audio;
+    }
   }
 });
 
