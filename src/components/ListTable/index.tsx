@@ -1,4 +1,4 @@
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import useSounds from "../../hooks/useSounds";
 import { createAggregateItemsMap, createItemMap } from "../../utils";
@@ -28,9 +28,9 @@ export default function ListTable<T extends Record<string, any>>(props: ListTabl
   const headers = ["Sl", "title", ...props.headers];
   const sortedItems: Record<string, any>[] = sort ? itemsMap.sort((sortedItemA, sortedItemB) => sortedItemA[sort[0]] > sortedItemB[sort[0]] ? sort[1] ? 1 : -1 : sort[1] ? -1 : 1) : itemsMap;
 
-  return <div className={`ListTable bg-base p-5 flex fd-c ta-c ${props.className ?? ''}`}>
-    <div className="ListTable-headers bg-dark p-5 mb-5">
-      <div className="ListTable-headers-row">
+  return <Box className={`ListTable bg-base p-5 flex fd-c ta-c ${props.className ?? ''}`}>
+    <Box className="ListTable-headers bg-dark p-5 mb-5">
+      <Box className="ListTable-headers-row">
         {headers.map((header) => <span className={`ListTable-headers-row-item ListTable-headers-row-item-${header} flex ai-c jc-c tt-c c-p us-n`} key={header} onClick={() => {
           click()
           if (sort[0] === header) setSort([header, !sort[1]])
@@ -41,19 +41,19 @@ export default function ListTable<T extends Record<string, any>>(props: ListTabl
           </Typography> : null}
           <Typography className={`bold ListTable-headers-row-item-text`}>{header}</Typography>
         </span>)}
-      </div>
-    </div>
-    <div className="ListTable-body bg-dark p-5 mb-5 pb-0">
-      {sortedItems.map((itemMap, index) => <div key={itemMap._id} className="ListTable-body-row mb-5 bg-light bold">
+      </Box>
+    </Box>
+    <Box className="ListTable-body bg-dark p-5 mb-5 pb-0">
+      {sortedItems.map((itemMap, index) => <Box key={itemMap._id} className="ListTable-body-row mb-5 bg-light bold">
         <Typography className={`bold ListTable-body-row-item flex jc-c ai-c ListTable-body-row-item-index`}>{index + 1}</Typography>
         {["title", ...props.headers].map(header => <Typography className={`bold ListTable-body-row-item ListTable-body-row-item-${header}`} key={header}>{itemMap[header]}</Typography>)}
-      </div>)}
-    </div>
-    <div className="ListTable-footer">
-      <div className="ListTable-headers-row bg-dark bold">
+      </Box>)}
+    </Box>
+    <Box className="ListTable-footer">
+      <Box className="ListTable-headers-row bg-dark bold">
         <span className={`ListTable-headers-row-item ListTable-headers-row-item-blank`}></span>
         {["total", ...props.headers].map(header => <Typography className={`bold ListTable-headers-row-item ListTable-headers-row-item-${header}`} key={header}>{aggregateItemsMap[header]}</Typography>)}
-      </div>
-    </div>
-  </div>
+      </Box>
+    </Box>
+  </Box>
 }

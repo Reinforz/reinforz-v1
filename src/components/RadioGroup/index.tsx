@@ -1,4 +1,4 @@
-import { FormControlLabel, InputLabel, Radio, RadioGroup as MuiRadioGroup } from "@mui/material";
+import { Box, FormControlLabel, InputLabel, Radio, RadioGroup as MuiRadioGroup } from "@mui/material";
 import React, { Dispatch, SetStateAction } from "react";
 import useSounds from "../../hooks/useSounds";
 import { transformTextBySeparator } from "../../utils";
@@ -31,7 +31,7 @@ export default function RadioGroup<I>(props: RadioGroupProps<I>) {
   const itemPaddingStyle = itemDirection === 'column' ? 'mb-5' : 'mr-5';
   return <MuiRadioGroup className={`${classNames.radioGroup ?? ''}`} name={props.stateKey.toString()} value={props.state[props.stateKey]} >
     <InputLabel className={`${classNames.inputLabel ?? ''}`}>{props.label}</InputLabel>
-    <div style={{ flexDirection: itemDirection }} className={`RadioGroup-content bg-dark p-5 ${contentPaddingStyle} flex ${classNames.content ?? ''}`}>
+    <Box style={{ flexDirection: itemDirection }} className={`RadioGroup-content bg-dark p-5 ${contentPaddingStyle} flex ${classNames.content ?? ''}`}>
       {props.items.map((item, index) => <FormControlLabel className={`${itemPaddingStyle} flex-1 ${classNames.formControlLabel ?? ''}`} onClick={(e: any) => {
         click()
         props.setState({ ...props.state, [props.stateKey]: e.target.value })
@@ -43,6 +43,6 @@ export default function RadioGroup<I>(props: RadioGroupProps<I>) {
           }))
         }
       }} key={item + index} value={item} control={<Radio className={`${classNames.radio ?? ''}`} size="small" color="primary" />} label={props.itemLabel ? props.itemLabel(item) : transformTextBySeparator(item)} />)}
-    </div>
+    </Box>
   </MuiRadioGroup>
 }

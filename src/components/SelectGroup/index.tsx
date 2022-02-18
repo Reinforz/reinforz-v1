@@ -1,4 +1,4 @@
-import { FormGroup, InputLabel } from "@mui/material";
+import { Box, FormGroup, InputLabel } from "@mui/material";
 import { ReactNode } from "react";
 import { Select } from "..";
 import { transformTextBySeparator } from "../../utils";
@@ -28,7 +28,7 @@ export default function SelectGroup(props: SelectGroupProps) {
     <InputLabel className={`Select-Group-header ${classNames.inputLabel}`}>
       {label}
     </InputLabel>
-    <div className={`Select-Group-content flex jc-c ai-c ${classNames.content}`}>
+    <Box className={`Select-Group-content flex jc-c ai-c ${classNames.content}`}>
       {groupItems.map(([items, label, itemStateKey], index) => <Select key={index} renderValue={renderValue} classNames={classNames.select ?? {}} className={`Select-Group-content-item flex-1 p-0 ${index !== groupItems.length - 1 ? ' mr-5' : ''}`} items={items} label={label} setState={(newState) => {
         setState({
           ...state,
@@ -38,6 +38,6 @@ export default function SelectGroup(props: SelectGroupProps) {
           }
         })
       }} state={state[stateKey]} stateKey={itemStateKey} menuItemLabel={menuItemLabel ? menuItemLabel : (item) => transformTextBySeparator(item)} />)}
-    </div>
+    </Box>
   </FormGroup>
 }

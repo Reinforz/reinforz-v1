@@ -1,4 +1,4 @@
-import { Checkbox, Typography } from "@mui/material";
+import { Box, Checkbox, Typography } from "@mui/material";
 import { red } from "@mui/material/colors";
 import { MdDelete } from 'react-icons/md';
 import { Container, Content, Flex, Header, Hovertips } from "../";
@@ -60,8 +60,8 @@ export default function List<T extends { _id: string }>(props: ListProps<T>) {
       {items.length > 0 ?
         items.map((item, index) => {
           const { _id } = item
-          return <div className="List-content-item flex ai-c bg-light p-5 mb-5 pr-0" key={_id}>
-            <div className="List-content-item-icons p-5 mr-5 flex ai-c">
+          return <Box className="List-content-item flex ai-c bg-light p-5 mb-5 pr-0" key={_id}>
+            <Box className="List-content-item-icons p-5 mr-5 flex ai-c">
               <Checkbox color="primary" className="List-content-item-icons-checkbox" key={_id + "checkbox" + index} onClick={(e: any) => {
                 e.persist();
                 if (settings.sound) {
@@ -78,20 +78,20 @@ export default function List<T extends { _id: string }>(props: ListProps<T>) {
                   setSelectedItems(selectedItems.filter(selectedItem => selectedItem !== _id))
                 }} style={{ fill: theme.palette.error.dark }} />
               </Hovertips>
-            </div>
-            <div className="flex flex-1 jc-sb p-5 mr-5">
-              {fields.map((field, index) => <div className="List-content-item-field" key={_id + field + index}>
+            </Box>
+            <Box className="flex flex-1 jc-sb p-5 mr-5">
+              {fields.map((field, index) => <Box className="List-content-item-field" key={_id + field + index}>
                 <Typography variant="body1" component="div" className="fs-18">
                   {typeof field === "function" ? field(item) : item[field]}
                 </Typography>
-              </div>)}
-            </div>
-          </div>
-        }) : <div className="center ta-c flex ai-c jc-c bold p-5">
+              </Box>)}
+            </Box>
+          </Box>
+        }) : <Box className="center ta-c flex ai-c jc-c bold p-5">
           <Typography variant="h5">
             {emptyListMessage}
           </Typography>
-        </div>}
+        </Box>}
     </Content>
   </Container>
 }

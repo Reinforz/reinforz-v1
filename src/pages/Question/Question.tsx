@@ -1,4 +1,4 @@
-import { Button, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { green, red } from "@mui/material/colors";
 import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import { FaClock } from "react-icons/fa";
@@ -85,7 +85,7 @@ export default function Question(props: Props) {
     // eslint-disable-next-line
   }, [allQuizzesMap, props.question])
 
-  return <div className="Question bg-dark p-5" ref={ref} onKeyUp={(e) => {
+  return <Box className="Question bg-dark p-5" ref={ref} onKeyUp={(e) => {
     if (settings.shortcuts) {
       if (e.nativeEvent.altKey && e.nativeEvent.key === "a")
         onNextButtonPress();
@@ -94,15 +94,15 @@ export default function Question(props: Props) {
     }
   }} tabIndex={0}>
     {props.question.type === "FIB" ? memoizedFIBQuestionComponent : memoizedSelectionQuestionComponent}
-    <div className="flex" style={{ height: "calc(100% - 255px)" }}>
-      <div className="overflowY-auto flex-1 mr-5">
+    <Box className="flex" style={{ height: "calc(100% - 255px)" }}>
+      <Box className="overflowY-auto flex-1 mr-5">
         {props.question.type === "MCQ" || props.question.type === "MS"
           ? <QuestionOptions setUserAnswers={setUserAnswers} userAnswers={userAnswers} question={props.question} />
           : <QuestionInputs setUserAnswers={setUserAnswers} userAnswers={userAnswers} question={props.question} />}
-      </div>
-      <div className="flex fd-c bg-base p-5 pb-0" style={{ width: 300 }}>
+      </Box>
+      <Box className="flex fd-c bg-base p-5 pb-0" style={{ width: 300 }}>
         <QuestionHints usedHints={usedHints} setUsedHints={setUsedHints} hints={hints} />
-        {<div className="flex ai-c mb-5" style={{ height: '65px' }}>
+        {<Box className="flex ai-c mb-5" style={{ height: '65px' }}>
           {<Hovertips popoverAnchorOrigin={{
             vertical: 'top',
             horizontal: 'center',
@@ -134,9 +134,9 @@ export default function Question(props: Props) {
             }
           }}>{!isLast ? "Next" : "Report"}</Button>
           {timeout && !playSettings.options.disable_timer && <Typography className="QuestionTimer bg-light p-5 flex jc-c ai-c flex-1 bold fs-20 ml-5 h-calc_100p_m_10px">{displayTime(timeout)}</Typography>}
-        </div>}
-      </div>
-    </div>
+        </Box>}
+      </Box>
+    </Box>
 
-  </div>
+  </Box>
 }

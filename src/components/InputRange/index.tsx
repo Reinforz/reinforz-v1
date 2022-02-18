@@ -1,4 +1,4 @@
-import { FormGroup, InputLabel, MenuItem, Select, TextField } from "@mui/material";
+import { Box, FormGroup, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 import useSounds from "../../hooks/useSounds";
 import { TNumberOperator } from "../../types";
 import { transformTextBySeparator } from "../../utils";
@@ -28,8 +28,8 @@ export default function InputRange<T extends Record<string, any>>(props: InputRa
   const [operator, range]: [TNumberOperator, [string, string]] = state[stateKey]
   return <FormGroup className={`InputRange p-5 ${classNames.formGroup ?? ''}`}>
     <InputLabel className={`${classNames.inputLabel ?? ''}`}>{label}</InputLabel>
-    <div style={{ flexDirection: direction }} className={`InputRange-content bg-dark p-5 ${containerPaddingClass} flex ${classNames.content ?? ''}`}>
-      <div className={`bg-light flex p-5 fd-c ${itemMarginClass}`}>
+    <Box style={{ flexDirection: direction }} className={`InputRange-content bg-dark p-5 ${containerPaddingClass} flex ${classNames.content ?? ''}`}>
+      <Box className={`bg-light flex p-5 fd-c ${itemMarginClass}`}>
         <Select disableUnderline className={`${classNames.operatorSelect ?? ''}`} value={operator}
           onChange={(e) => {
             setState({ ...state, [stateKey]: [e.target.value, range] })
@@ -39,7 +39,7 @@ export default function InputRange<T extends Record<string, any>>(props: InputRa
             <MenuItem key={item} value={item}>{transformTextBySeparator(item)}</MenuItem>
           )}
         </Select>
-      </div>
+      </Box>
       <TextField InputProps={{ disableUnderline: true }} className={`flex-1 ${itemMarginClass} ${classNames.numberField ?? ''}`} type="number" inputProps={{ step, min, max: parseInt(range[1]) }} value={parseInt(range[0])} onChange={(e) => {
         setState({ ...state, [stateKey]: [operator, [e.target.value, parseInt(range[1])]] })
         click()
@@ -48,6 +48,6 @@ export default function InputRange<T extends Record<string, any>>(props: InputRa
         click()
         setState({ ...state, [stateKey]: [operator, [parseInt(range[0]), e.target.value]] })
       }} />}
-    </div>
+    </Box>
   </FormGroup>
 }

@@ -1,4 +1,4 @@
-import { Button, Checkbox, FormControlLabel, Typography } from "@mui/material";
+import { Box, Button, Checkbox, FormControlLabel, Typography } from "@mui/material";
 import React, { useContext } from "react";
 import { CheckboxGroup, Header, InputRange, Preset } from '../../../components';
 import { REINFORZ_PLAY_SETTINGS_LS_KEY } from "../../../constants";
@@ -20,13 +20,13 @@ export default function PlaySettings() {
     setPlaySettings({ ...playSettings, filters: { ...playSettings.filters, ...newFilterState } })
   }
 
-  return <div className="PlaySettings p-5 bg-base">
-    <div className="bg-dark p-5 mb-5">
+  return <Box className="PlaySettings p-5 bg-base">
+    <Box className="bg-dark p-5 mb-5">
       <Preset lsKey={REINFORZ_PLAY_SETTINGS_LS_KEY} modalLabel="Save Play Settings" popoverText="Save current play settings as preset" currentPreset={playSettings} itemPresets={playSettingsPresets} setPresetState={setPlaySettingsPresets} />
-    </div>
-    <div className="PlaySettings-group mb-5 flex fd-c PlaySettings-group-options">
+    </Box>
+    <Box className="PlaySettings-group mb-5 flex fd-c PlaySettings-group-options">
       <Header className="PlaySettings-group-header bg-dark tt-u fs-16 p-0" header={"Options"} />
-      <div className="PlaySettings-group-content bg-dark flex fd-c p-5 pb-0">
+      <Box className="PlaySettings-group-content bg-dark flex fd-c p-5 pb-0">
         {Object.keys(playSettings.options).map((key, index) => {
           let isDisabled = false;
           if (Boolean(key.match(/(shuffle_questions|shuffle_quizzes)/) && playSettings.options.flatten_mix)) isDisabled = true;
@@ -51,11 +51,11 @@ export default function PlaySettings() {
             label={transformTextBySeparator(key)}
           />
         })}
-      </div>
-    </div>
-    <div className="PlaySettings-group mb-5 PlaySettings-group-filters">
+      </Box>
+    </Box>
+    <Box className="PlaySettings-group mb-5 PlaySettings-group-filters">
       <Header className="PlaySettings-group-header tt-u fs-16 p-0" header={"Filters"} />
-      <div className="PlaySettings-group-content bg-dark p-5">
+      <Box className="PlaySettings-group-content bg-dark p-5">
         <InputRange classNames={{
           formGroup: 'mb-5'
         }} step={1} label={"Time Allocated range"} min={0} max={120} setState={setPlaySettingsFilters} state={playSettings.filters} stateKey={"time_allocated"} />
@@ -63,12 +63,12 @@ export default function PlaySettings() {
           formGroup: 'mb-5'
         }} label={'Excluded Difficulty'} items={['Beginner', 'Intermediate', 'Advanced']} setState={setPlaySettingsFilters} stateKey={'excluded_difficulty'} state={playSettings.filters} />
         <CheckboxGroup label={'Excluded Type'} items={['FIB', 'MS', 'MCQ', "Snippet"]} setState={setPlaySettingsFilters} stateKey={'excluded_types'} state={playSettings.filters} />
-      </div>
-    </div>
+      </Box>
+    </Box>
     <Button className="PlaySettings-group-button mb-5" variant="contained" color="primary" onClick={() => {
       reset()
       setPlaySettings(generateDefaultPlaySettingsState())
     }}>Reset</Button>
     <Typography className="PlaySettings-total bg-dark flex jc-c ai-c bold fs-16 p-5 mb-5" style={{ color: filteredQuestions === 0 ? theme.palette.error.main : theme.palette.success.main }}>{filteredQuestions} Questions</Typography>
-  </div>
+  </Box>
 }

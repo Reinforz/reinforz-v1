@@ -1,5 +1,6 @@
 import { Theme } from "@emotion/react";
 import { ThemeProvider } from "@material-ui/styles";
+import { Box } from "@mui/material";
 import { SnackbarProvider } from "notistack";
 import { ReactNode } from "react";
 import { SettingsContext } from "../context/SettingsContext";
@@ -15,9 +16,9 @@ interface Props {
 function Root(props: Props & { settings: IGlobalSettings, theme: Theme }) {
   const { settings, theme } = props;
   const classes = generateDynamicStyleClasses();
-  return <div className={`App ${classes.root}`} style={{ backgroundColor: theme.palette.color.dark, height: 'fit-content', padding: 5, overflow: 'hidden' }}>
+  return <Box className={`App ${classes.root}`} style={{ backgroundColor: theme.palette.color.dark, height: 'fit-content', padding: 5, overflow: 'hidden' }}>
     {typeof props.children === "function" ? props.children(settings, theme) : props.children}
-  </div>
+  </Box>
 }
 
 export default function Wrapper(props: Props) {

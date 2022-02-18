@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 import "./style.scss";
 
 export interface ContentProps {
@@ -8,9 +9,9 @@ export interface ContentProps {
 
 export function Content(props: ContentProps) {
   const styles: React.CSSProperties = { ...props.style ?? {} };
-  return <div className={`Content bg-dark p-5 ${props.className ?? ''}`} style={styles}>
+  return <Box className={`Content bg-dark p-5 ${props.className ?? ''}`} style={styles}>
     {props.children}
-  </div>
+  </Box>
 }
 
 export interface FlexContentProps extends ContentProps {

@@ -1,4 +1,4 @@
-import { PopoverOrigin } from "@mui/material";
+import { Box, PopoverOrigin } from "@mui/material";
 import React, { useState } from "react";
 import { FaArrowAltCircleRight } from "react-icons/fa";
 import { RiArrowLeftRightLine } from "react-icons/ri";
@@ -64,11 +64,11 @@ export default function SideToggleMenu(props: SideToggleMenuProps) {
     else contentStyle.marginRight = 5;
   }
 
-  return <div style={containerStyle} className="SideToggleMenu">
-    <div style={contentStyle} className="SideToggleMenu-content">
+  return <Box style={containerStyle} className="SideToggleMenu">
+    <Box style={contentStyle} className="SideToggleMenu-content">
       {contents[1]}
-    </div>
-    <div className="SideToggleMenu-sidebar p-5" style={{ left, width }}>
+    </Box>
+    <Box className="SideToggleMenu-sidebar p-5" style={{ left, width }}>
       <IconGroup className="SideToggleMenu-sidebar-icons" direction="column" style={iconsContainerStyle} icons={[
         [`${isOpen ? "Close" : "Open"} Menu`, <FaArrowAltCircleRight fill={theme.palette.color.opposite_light} onClick={() => {
           if (isOpen === false) {
@@ -96,6 +96,6 @@ export default function SideToggleMenu(props: SideToggleMenuProps) {
         ...icons,
       ]} />
       {contents[0]}
-    </div>
-  </div>
+    </Box>
+  </Box>
 }

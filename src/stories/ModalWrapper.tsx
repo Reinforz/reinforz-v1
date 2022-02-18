@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { Box } from "@mui/material";
+import { useState } from "react";
 import { SimpleModal } from "../components";
 import { ModalContext } from "../context/ModalContext";
 
@@ -10,9 +11,9 @@ export default function ModalWrapper(props: Props) {
   const [modalState, setModalState] = useState<[boolean, JSX.Element | null]>([false, null]);
   return <ModalContext.Provider value={{ modalState, setModalState }}>
     <SimpleModal open={modalState[0]} setOpen={() => setModalState([false, null])}>
-      <div className="Modal-content">
+      <Box className="Modal-content">
         {modalState[1]}
-      </div>
+      </Box>
     </SimpleModal>
     {props.children}
   </ModalContext.Provider>

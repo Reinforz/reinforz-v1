@@ -1,3 +1,4 @@
+import { Box } from '@mui/material';
 import Modal from '@mui/material/Modal';
 
 interface Props {
@@ -14,13 +15,13 @@ export default function SimpleModal(props: Props) {
   };
 
   return (
-    <div className="Modal">
+    <Box className="Modal">
       <Modal
         open={open}
         onClose={handleClose}
       >
         {children}
       </Modal>
-    </div>
+    </Box>
   );
 }

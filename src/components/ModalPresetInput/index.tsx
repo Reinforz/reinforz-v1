@@ -1,4 +1,4 @@
-import { Button, FormGroup, InputLabel, TextField } from "@mui/material";
+import { Box, Button, FormGroup, InputLabel, TextField } from "@mui/material";
 import { useState } from "react";
 import { useThemeSettings } from "../../hooks";
 import "./style.scss";
@@ -14,14 +14,14 @@ export default function ModalPresetInput(props: ModalPresetInputProps) {
   const { label, onSave, closeModal } = props;
   const { theme } = useThemeSettings();
 
-  return <div className="ModalPresetInput bg-base center" style={{ backgroundColor: theme.palette.color.base }}>
+  return <Box className="ModalPresetInput bg-base center" style={{ backgroundColor: theme.palette.color.base }}>
     <FormGroup className="pb-0">
       <InputLabel className="ModalPresetInput-header">{label}</InputLabel>
-      <div className="ModalPresetInput-content">
+      <Box className="ModalPresetInput-content">
         <TextField value={input} onChange={(e) => setInput(e.target.value)} />
-      </div>
+      </Box>
     </FormGroup>
-    <div className="ModalPresetInput-buttons flex jc-sb p-5">
+    <Box className="ModalPresetInput-buttons flex jc-sb p-5">
       <Button variant="contained" color="primary" onClick={() => closeModal()}>
         Close
       </Button>
@@ -32,6 +32,6 @@ export default function ModalPresetInput(props: ModalPresetInputProps) {
       }}>
         Save
       </Button>
-    </div>
-  </div>
+    </Box>
+  </Box>
 }

@@ -1,4 +1,4 @@
-import { Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { blue, green, indigo, orange, red, yellow } from '@mui/material/colors';
 import { useContext, useEffect, useRef } from 'react';
 import { AiFillHome } from 'react-icons/ai';
@@ -51,16 +51,16 @@ function Settings() {
 
   const generatedNavigationStyles = generateNavigationStyles(settings.navigation);
   return (
-    <div onKeyUp={(e) => {
+    <Box onKeyUp={(e) => {
       settings.shortcuts && navigateBetweenPresets(e, settingsPresets, setSettingsPresetsConfigs, REINFORZ_GLOBAL_SETTINGS_LS_KEY)
     }} style={{ width: '100vw', height: '100vh' }} tabIndex={0} ref={ref} onKeyPress={onKeyPress}>
       <IconGroup className="Settings-icons" direction={settings.navigation.direction} style={generatedNavigationStyles} icons={navigationIcons} />
-      <div className="Settings p-5 center bg-base">
-        <div className="Settings-header flex mb-5 p-5 bg-dark">
+      <Box className="Settings p-5 center bg-base">
+        <Box className="Settings-header flex mb-5 p-5 bg-dark">
           <Typography variant="h6" className="Settings-header-text bold flex-1 ta-c flex ai-c jc-c tt-u">Settings</Typography>
           <Preset lsKey={REINFORZ_GLOBAL_SETTINGS_LS_KEY} modalLabel="Save Settings" popoverText="Save current settings as preset" currentPreset={settings} itemPresets={settingsPresets} setPresetState={setSettingsPresetsConfigs} />
-        </div>
-        <div className="Settings-content bg-dark flex fd-c ai-c p-5">
+        </Box>
+        <Box className="Settings-content bg-dark flex fd-c ai-c p-5">
           <Select classNames={{
             formGroup: "mb-5 p-5 w-c_10 fd-r",
             inputLabel: 'w-100 mr-10 mb-0 fs-16',
@@ -88,9 +88,9 @@ function Settings() {
             }
           }} renderValue={(item) => colorMap[item as string]} menuItemLabel={(item) => colorMap[item]} />
           <Toggles classNames={{ inputLabel: 'w-100 fs-16' }} items={["animation", "hovertips", "shortcuts", "sound"]} setState={setSettings} state={settings} />
-        </div>
-      </div>
-    </div>
+        </Box>
+      </Box>
+    </Box>
   );
 }
 

@@ -1,4 +1,4 @@
-import { FormGroup, InputLabel, Switch, withStyles } from '@material-ui/core';
+import { Box, FormGroup, InputLabel, Switch, withStyles } from '@material-ui/core';
 import { green, red } from '@material-ui/core/colors';
 import React from 'react';
 import useSounds from '../../hooks/useSounds';
@@ -39,7 +39,7 @@ export default function Toggles<I extends Record<string, any>>(props: TogglesPro
 
   const { switch_off, switch_on} = useSounds();
 
-  return <div className={`Toggles bg-dark w-100p ${classNames.container ?? ''}`}> {items.map((item, index) =>
+  return <Box className={`Toggles bg-dark w-100p ${classNames.container ?? ''}`}> {items.map((item, index) =>
     <FormGroup key={item} row className={`Toggles-item bg-base p-5${items.length - 1 !== index ? " mb-5" : ""} ${classNames.formGroup ?? ''}`}>
       <InputLabel className={`Toggles-item-label mb-0 ${classNames.inputLabel ?? ''}`}>{transformTextBySeparator(item)}</InputLabel>
       <OnOffSwitch
@@ -57,5 +57,5 @@ export default function Toggles<I extends Record<string, any>>(props: TogglesPro
       />
     </FormGroup>
   )}
-  </div>
+  </Box>
 }

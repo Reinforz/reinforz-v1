@@ -1,14 +1,14 @@
-import { DetailedHTMLProps, HTMLAttributes } from "react";
+import { Box, BoxProps } from "@mui/material";
 import "./style.scss";
 
-interface Props extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
+interface Props extends BoxProps {
   children: (JSX.Element | null | string)[] | (JSX.Element | null | string)
 }
 
 export function Container({ className = '', style = {}, ...props }: Props) {
-  return <div {...props} className={`Container p-5 bg-base ${className ?? ''} `}>
+  return <Box {...props} className={`Container p-5 bg-base ${className ?? ''} `}>
     {props.children}
-  </div>
+  </Box>
 }
 
 export function FlexContainer({ className = '', style = {}, ...props }: Props) {

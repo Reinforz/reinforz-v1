@@ -1,4 +1,4 @@
-import { FormGroup, InputLabel, MenuItem, Select as MuiSelect } from "@mui/material";
+import { Box, FormGroup, InputLabel, MenuItem, Select as MuiSelect } from "@mui/material";
 import { green, grey, red } from "@mui/material/colors";
 import { AiFillPlusCircle } from "react-icons/ai";
 import { FaArrowAltCircleDown, FaArrowAltCircleUp } from "react-icons/fa";
@@ -44,7 +44,7 @@ export default function Sort(props: SortProps) {
 
   return <FormGroup className="Sort">
     <InputLabel className="Sort-header">{header}</InputLabel>
-    {sorts.length !== 0 && <div className="Sort-content bg-dark flex p-5 fd-c">
+    {sorts.length !== 0 && <Box className="Sort-content bg-dark flex p-5 fd-c">
       {sorts.map((sort, index) => {
         const [item, order] = sort,
           canMoveDownwards = index !== sorts.length - 1 && sorts.length !== 1,
@@ -55,11 +55,11 @@ export default function Sort(props: SortProps) {
           sort,
           sorts
         };
-        return <div key={`${item}.${order}.${index}`} className={`Sort-content-item bg-base flex p-5 ${index !== sorts.length - 1 ? "pb-0" : ''}`}>
+        return <Box key={`${item}.${order}.${index}`} className={`Sort-content-item bg-base flex p-5 ${index !== sorts.length - 1 ? "pb-0" : ''}`}>
           <SortSelect index={0} items={items} {...props} />
           <SortSelect index={1} items={["ASC", "DESC"]} {...props} />
-          <div className="Sort-content-item-icons bg-light p-5 flex jc-c ai-c">
-            <div className="Sort-content-item-icons-down mr-5">
+          <Box className="Sort-content-item-icons bg-light p-5 flex jc-c ai-c">
+            <Box className="Sort-content-item-icons-down mr-5">
               <Hovertips popoverText={"Move downwards"}>
                 <FaArrowAltCircleDown fill={canMoveDownwards ? theme.palette.color.opposite_light : grey[500]} size={15} onClick={() => {
                   if (canMoveDownwards) {
@@ -70,8 +70,8 @@ export default function Sort(props: SortProps) {
                   }
                 }} />
               </Hovertips>
-            </div>
-            <div className="Sort-content-item-icons-up mr-5">
+            </Box>
+            <Box className="Sort-content-item-icons-up mr-5">
               <Hovertips popoverText={"Move upwards"}>
                 <FaArrowAltCircleUp fill={canMoveUpwards ? theme.palette.color.opposite_light : grey[500]} size={15} onClick={() => {
                   if (canMoveUpwards) {
@@ -82,8 +82,8 @@ export default function Sort(props: SortProps) {
                   }
                 }} />
               </Hovertips>
-            </div>
-            <div className="Sort-content-item-icons-delete">
+            </Box>
+            <Box className="Sort-content-item-icons-delete">
               <Hovertips popoverText={`Delete ${item} by ${order} sort`}>
                 <MdDelete size={20} fill={red[500]} onClick={() => {
                   remove()
@@ -91,12 +91,12 @@ export default function Sort(props: SortProps) {
                   setSorts(sorts.filter(sort => sort))
                 }} />
               </Hovertips>
-            </div>
-          </div>
-        </div>
+            </Box>
+          </Box>
+        </Box>
       })}
-    </div>}
-    <div className="Sort-add flex jc-c ai-c">
+    </Box>}
+    <Box className="Sort-add flex jc-c ai-c">
       <Hovertips popoverText={`${canAddSort ? "Add Sort" : "Max sort limit reached"}`}>
         <AiFillPlusCircle size={25} fill={canAddSort ? green[500] : grey[500]} onClick={() => {
           if (canAddSort) {
@@ -105,6 +105,6 @@ export default function Sort(props: SortProps) {
           }
         }} />
       </Hovertips>
-    </div>
+    </Box>
   </FormGroup>
 }

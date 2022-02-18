@@ -1,4 +1,4 @@
-import { Button, TextField } from "@mui/material";
+import { Box, Button, TextField } from "@mui/material";
 import { useState } from "react";
 import shortid from "shortid";
 import { List } from "../../components";
@@ -9,7 +9,7 @@ export function Create() {
   const [questions, setQuestions] = useState<TQuestion[]>([]);
   const [question, setQuestion] = useState<TQuestion | null>(null);
   const [selectedQuestions, setSelectedQuestions] = useState<string[]>([]);
-  return <div className="Create">
+  return <Box className="Create">
     <Button color="primary" variant="contained" onClick={() => {
       if (question !== null) {
         setQuestions([...questions, {
@@ -21,5 +21,5 @@ export function Create() {
     }}>Create</Button>
     <TextField value={question?.question ?? ''} label={"Question"} onChange={(e) => setQuestion({ ...question ?? {} as TQuestion, question: e.target.value } as any)} />
     <List selectedItems={selectedQuestions} setSelectedItems={setSelectedQuestions} header="Questions" items={questions} setItems={setQuestions} fields={["question"]} />
-  </div>
+  </Box>
 }

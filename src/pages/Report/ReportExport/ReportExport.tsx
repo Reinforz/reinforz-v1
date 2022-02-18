@@ -1,4 +1,4 @@
-import { Button } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import { safeDump } from 'js-yaml';
 import { useCallback, useContext } from 'react';
 import { Header, Hovertips, Select } from '../../../components';
@@ -44,9 +44,9 @@ export default function ReportExport() {
   }
 
   return (
-    <div className="Report-Export bg-base p-5 mb-5">
+    <Box className="Report-Export bg-base p-5 mb-5">
       <Header header={"Report Export"} />
-      <div className="Report-Export-content bg-dark p-5">
+      <Box className="Report-Export-content bg-dark p-5">
         <Select classNames={{ formGroup: 'mb-5' }} lsKey={"REPORT_EXPORT"} items={['Quizzes', 'Report']} label={"Export Type"} menuItemLabel={(item) => item} setState={(exportState) => {
           setReportSettings({
             ...reportSettings,
@@ -72,8 +72,8 @@ export default function ReportExport() {
             downloadFiles()
           }}>Download</Button>
         </Hovertips>
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 }
 

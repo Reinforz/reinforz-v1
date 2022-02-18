@@ -1,4 +1,4 @@
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { green, red } from "@mui/material/colors";
 import { OptionsObject, useSnackbar } from "notistack";
 import { useContext, useEffect, useRef, useState } from "react";
@@ -76,7 +76,7 @@ function Play() {
     ref.current && ref.current.focus();
   }, [])
 
-  return <SideToggleMenu lsKey="PLAY_MENU" width={290} contents={[<PlaySettings />, <div className="Play" ref={ref} tabIndex={0} onKeyPress={(e) => {
+  return <SideToggleMenu lsKey="PLAY_MENU" width={290} contents={[<PlaySettings />, <Box className="Play" ref={ref} tabIndex={0} onKeyPress={(e) => {
     settings.shortcuts && navigateBetweenPresets(e, playSettingsPresets, setPlaySettingsPresets, REINFORZ_PLAY_SETTINGS_LS_KEY)
     onKeyPress(e)
   }}>
@@ -89,10 +89,10 @@ function Play() {
         setErrorLogs(filteredErrorLogs)
         setSelectedErrorLogIds(selectedErrorLogIds.filter(selectedErrorLogId => filteredErrorLogIds.includes(selectedErrorLogId)))
       }} selectedItems={selectedQuizIds} setSelectedItems={setSelectedQuizIds} header="Uploaded Quizzes" items={uploadedQuizzes} setItems={setUploadedQuizzes} fields={[(item) => `${item.subject} - ${item.topic}`, (item) => <Typography className="bold" variant="body2">{item.questions.length + " Qs"}</Typography>]} />,
-      <List className="Play-ErrorLogs" emptyListMessage="No Errors or Warnings!" selectedItems={selectedErrorLogIds} setSelectedItems={setSelectedErrorLogIds} header="Error & Warnings" items={errorLogs} setItems={setErrorLogs} fields={[(errorLog) => <div className="Play-ErrorLogs-item" style={{ backgroundColor: errorLog.level === "ERROR" ? theme.palette.error.main : theme.palette.warning.main }}>{errorLog.quiz}: {errorLog.target}, {errorLog.message}</div>]} />]}
+      <List className="Play-ErrorLogs" emptyListMessage="No Errors or Warnings!" selectedItems={selectedErrorLogIds} setSelectedItems={setSelectedErrorLogIds} header="Error & Warnings" items={errorLogs} setItems={setErrorLogs} fields={[(errorLog) => <Box className="Play-ErrorLogs-item" style={{ backgroundColor: errorLog.level === "ERROR" ? theme.palette.error.main : theme.palette.warning.main }}>{errorLog.quiz}: {errorLog.target}, {errorLog.message}</Box>]} />]}
     />
     <PlayListTable />
-  </div>]} />
+  </Box>]} />
 }
 
 export default Play;

@@ -1,4 +1,4 @@
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { green, red } from "@mui/material/colors";
 import { ReactNode, useContext, useMemo, useState } from "react";
 import { BsFillCaretLeftFill, BsFillCaretRightFill, BsFilm } from "react-icons/bs";
@@ -41,31 +41,31 @@ function ReportTableRow(props: ReportTableRowProps) {
   const { reportQuestions, index, results, header, excludedColumns, style = {}, quiz } = props;
   const result = results[index];
   const showHints = result.question.hints.length !== 0 && !excludedColumns['hints'];
-  return <div key={result.question._id} className="ReportTableRow pb-0 p-5 bg-dark" style={style.container}>
-    <div className="ReportTableRow-header flex ai-c jc-c bg-dark mb-5" style={style.header}>
+  return <Box key={result.question._id} className="ReportTableRow pb-0 p-5 bg-dark" style={style.container}>
+    <Box className="ReportTableRow-header flex ai-c jc-c bg-dark mb-5" style={style.header}>
       {!excludedColumns['quiz_info'] ? <Typography className="p-10 bg-light fs-16 bold">{quiz}</Typography> : null}
       <Typography variant="h6" className="ReportTableRow-index bold flex-1 ta-c">{index + 1}</Typography>
       {header}
-    </div>
-    <div className="ReportTableRow-content" style={style.content}>
+    </Box>
+    <Box className="ReportTableRow-content" style={style.content}>
       {reportQuestions[index]}
-      <div className="ReportTableRow-content-stats mb-5 overflowX-auto">
+      <Box className="ReportTableRow-content-stats mb-5 overflowX-auto">
         {!excludedColumns['question_stats'] ? <StackList header="Question Stats" items={[['Type', result.question.type], ['Difficulty', result.question.difficulty], ['Time Allocated', result.question.time_allocated], ['Weight', result.question.weight]]} classNames={{ container: 'mr-5' }} /> : null}
         {!excludedColumns['user_stats'] ? <StackList classNames={{ container: 'mr-5' }} header="User Stats" items={[['Time Taken', result.time_taken], ['Hints Used', result.hints_used], ['Verdict', <Typography className="bold" style={{
           color: result.verdict === false ? red[500] : green[500]
         }}>{result.verdict === false ? "Incorrect" : "Correct"}</Typography>]]} /> : null}
         {!excludedColumns['score_breakdown'] ? <StackList header="Score Breakdown" items={[['Amount', result.score.amount], ['Answers', result.score.answers], ['Time', result.score.time], ['Hints', result.score.hints], ['Weighted', result.question.weight * result.score.amount]]} /> : null}
-      </div>
-      <div className="flex">
+      </Box>
+      <Box className="flex">
         {(result.question.type === "MCQ" || result.question.type === "MS") ? !excludedColumns['options'] ? <ReportOptions question={result.question} userAnswers={result.user_answers} className={`${showHints ? 'mr-5' : ''}`} /> : null : !excludedColumns['answers'] ? <ReportAnswers question={result.question as TInputQuestionResult} userAnswers={result.user_answers} className={`${showHints ? 'mr-5' : ''}`} /> : null}
-        {showHints ? <div className="ReportTableRow-content-hints bg-base p-5 mb-5" style={{ width: '25%' }}>
-          {result.question.hints.map(hint => <div className="ReportTableRow-content-hints overflowX-auto bg-light p-5 mb-5" key={hint}>
+        {showHints ? <Box className="ReportTableRow-content-hints bg-base p-5 mb-5" style={{ width: '25%' }}>
+          {result.question.hints.map(hint => <Box className="ReportTableRow-content-hints overflowX-auto bg-light p-5 mb-5" key={hint}>
             <Markdown content={hint} />
-          </div>)}
-        </div> : null}
-      </div>
-    </div>
-  </div>
+          </Box>)}
+        </Box> : null}
+      </Box>
+    </Box>
+  </Box>
 }
 
 export function ReportTable() {
@@ -75,10 +75,10 @@ export function ReportTable() {
   const { remove } = useSounds();
 
   const memoizedReportQuestions = useMemo(() => sortedResults.map(sortedResult => <QuestionDisplay contexts={report.quizzes[sortedResult.question.quiz].contexts} question={sortedResult.question} userAnswers={sortedResult.user_answers} showContexts={!excludedColumns['contexts']} showImage={Boolean(!excludedColumns["image"])} showQuestion={!excludedColumns["question"]} />), [report, sortedResults, excludedColumns]);
-  return <div className="ReportTable flex-1 p-5 bg-base overflowY-auto">
+  return <Box className="ReportTable flex-1 p-5 bg-base overflowY-auto">
     {sortedResults.map((sortedResult, index) => {
       const quiz = report.quizzes[sortedResult.question.quiz];
-      return <ReportTableRow quiz={`${quiz.subject} - ${quiz.topic}`} key={sortedResult._id} reportQuestions={memoizedReportQuestions} index={index} results={sortedResults} excludedColumns={excludedColumns} header={<div className="ReportTable-item-icons flex jc-sb c-p ai-c" style={{ width: 40 }}><Hovertips popoverText="View separate"><BsFilm fill={theme.palette.color.opposite_dark} size={15} onClick={() => {
+      return <ReportTableRow quiz={`${quiz.subject} - ${quiz.topic}`} key={sortedResult._id} reportQuestions={memoizedReportQuestions} index={index} results={sortedResults} excludedColumns={excludedColumns} header={<Box className="ReportTable-item-icons flex jc-sb c-p ai-c" style={{ width: 40 }}><Hovertips popoverText="View separate"><BsFilm fill={theme.palette.color.opposite_dark} size={15} onClick={() => {
         setModalState([true, <ReportTableModal quiz={`${quiz.subject} - ${quiz.topic}`} style={{
           content: {
             height: "calc(100% - 60px)",
@@ -95,7 +95,7 @@ export function ReportTable() {
             ...report,
             results: report.results.filter(result => result._id !== sortedResult._id)
           })
-        }} /></Hovertips></div>} />
+        }} /></Hovertips></Box>} />
     })}
-  </div>
+  </Box>
 }

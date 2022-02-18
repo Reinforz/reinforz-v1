@@ -1,4 +1,4 @@
-import { Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { grey } from '@mui/material/colors';
 import { useEffect, useRef } from 'react';
 import { AiFillHome } from 'react-icons/ai';
@@ -10,12 +10,12 @@ import { generateNavigationStyles } from '../../utils';
 import './Shortcuts.scss';
 
 function StackListItem(props: { contents: [string, string] }) {
-  return <div className="flex fd-c">
+  return <Box className="flex fd-c">
     <Typography>{props.contents[0]}</Typography>
     <Typography className="mt-5 fs-14" style={{ color: grey[300] }}>
       ({props.contents[1]})
     </Typography>
-  </div>
+  </Box>
 }
 
 export default function Shortcuts() {
@@ -49,7 +49,7 @@ export default function Shortcuts() {
   );
 
   return (
-    <div ref={ref} className="Shortcuts page" tabIndex={0} onKeyPress={onKeyPress}>
+    <Box ref={ref} className="Shortcuts page" tabIndex={0} onKeyPress={onKeyPress}>
       <IconGroup
         style={generatedNavigationStyles}
         direction={settings.navigation.direction}
@@ -90,6 +90,6 @@ export default function Shortcuts() {
           ]
         ]}
       />
-    </div>
+    </Box>
   );
 }

@@ -1,3 +1,4 @@
+import { Box } from '@mui/material';
 import yaml, { safeDump } from 'js-yaml';
 import { ReactNode, useContext, useEffect, useRef, useState } from "react";
 import { AiFillHome } from "react-icons/ai";
@@ -58,8 +59,8 @@ export default function Quiz() {
       stackListItems.push(["Current", currentIndex + 1], ["Total", totalQuestions], ["Type", currentQuestion.type], ["Weight", currentQuestion.weight], ["Difficulty", currentQuestion.difficulty])
       if (!playSettings.options.disable_timer)
         stackListItems.push(["Time Allocated", currentQuestion.time_allocated])
-      return <div className="Quiz bg-base flex fd-c p-5">
-        <div className="flex ai-c mb-5" style={{ height: 60 }}>
+      return <Box className="Quiz bg-base flex fd-c p-5">
+        <Box className="flex ai-c mb-5" style={{ height: 60 }}>
           <StackList direction="row" items={stackListItems} classNames={{
             container: 'p-0 flex-1',
             content: 'jc-sb'
@@ -74,7 +75,7 @@ export default function Quiz() {
               }))
             }} />
           </Hovertips>
-        </div>
+        </Box>
         <Question isLast={isLastItem} question={currentQuestion} changeCounter={(user_answers, time_taken, hints_used) => {
           const [transformedQuestion, answerResult] = getAnswerResult(currentQuestion, user_answers, time_taken, hints_used, playSettings.options.partial_score, playSettings.options.disable_timer);
           const newResultState = [...results, { question: transformedQuestion, ...answerResult, time_taken, hints_used, user_answers }];
@@ -92,9 +93,9 @@ export default function Quiz() {
             getNextIndex();
           }
         }} />
-      </div>
+      </Box>
     } else {
-      return <div ref={ref} className="Quiz flex fd-c" onKeyPress={onKeyPress} tabIndex={0}>
+      return <Box ref={ref} className="Quiz flex fd-c" onKeyPress={onKeyPress} tabIndex={0}>
         <IconGroup className="Report-icons" icons={navigationIcons} direction={settings.navigation.direction} style={generatedNavigationStyles} />
         <Upload className="center" accept={[".yaml", ".yml"]} maxFiles={1} uploadMessage="Drag 'n' drop, or click to upload some play files (.json or .yaml)" onLoad={(result) => {
           const uploadedPlayState = yaml.safeLoad(result as string) as any;
@@ -120,7 +121,7 @@ export default function Quiz() {
           setPlaySettings(playState.playSettings)
           setPlaying(true)
         }} />
-      </div>;
+      </Box>;
     }
   }
 

@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 import React from "react";
 import "./style.scss";
 
@@ -12,7 +13,7 @@ export default class ErrorBoundary extends React.Component {
 
   render() {
     if (this.state.hasError) {
-      return <div className="Error-Boundary">
+      return <Box className="Error-Boundary">
         <h1>
           Something went wrong. But don't panic.
         </h1>
@@ -28,7 +29,7 @@ export default class ErrorBoundary extends React.Component {
             Remove all the data from the local storage and reload
           </li>
         </ul>
-      </div>;
+      </Box>;
     }
 
     return this.props.children;

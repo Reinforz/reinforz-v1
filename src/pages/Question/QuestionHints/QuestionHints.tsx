@@ -1,4 +1,4 @@
-import { Button } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import { Markdown } from '../../../components';
 import { useDisabled } from '../../../hooks';
 import useSounds from '../../../hooks/useSounds';
@@ -24,18 +24,18 @@ export default function QuestionHints(props: Props) {
     }
   }
 
-  return <div className="QuestionHints mb-5">
-    <div className="flex jc-c ai-c mb-5" style={{ height: 50 }}>
+  return <Box className="QuestionHints mb-5">
+    <Box className="flex jc-c ai-c mb-5" style={{ height: 50 }}>
       <Button disabled={is_disabled || hintsExhausted} color="primary" variant="contained" className="QuestionHints-button flex-1" onClick={() => {
         click()
         onButtonClick()
       }}>{hints.length > 0 ? `Show ${"hints"} ${totalUsedHints}/${hints.length}` : `No hints available`}</Button>
-    </div>
-    <div className="QuestionHints-list bg-dark p-5 pb-0">
+    </Box>
+    <Box className="QuestionHints-list bg-dark p-5 pb-0">
       {usedHints.map((hint, i) =>
-        <div key={`hint${i}`} className="QuestionHints-list-item p-10 bg-light mb-5">
+        <Box key={`hint${i}`} className="QuestionHints-list-item p-10 bg-light mb-5">
           <Markdown content={hint} />
-        </div>)}
-    </div>
-  </div>
+        </Box>)}
+    </Box>
+  </Box>
 }

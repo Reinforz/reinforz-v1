@@ -1,4 +1,4 @@
-import { FormGroup, InputLabel, MenuItem, Select as MuiSelect, SelectChangeEvent } from "@mui/material";
+import { Box, FormGroup, InputLabel, MenuItem, Select as MuiSelect, SelectChangeEvent } from "@mui/material";
 import { ReactNode } from "react";
 import useSounds from "../../hooks/useSounds";
 import { transformTextBySeparator } from "../../utils";
@@ -30,7 +30,7 @@ export default function Select<T extends Record<string, any>>(props: SelectProps
   const { items, multiple = false, renderValue, className = '', menuItemLabel, state, stateKey, setState, classNames = {} } = props;
   return <FormGroup className={`Select ${className ?? ''} ${classNames.formGroup ?? ''}`}>
     <InputLabel className={`${classNames.inputLabel ?? ''}`}>{props.label}</InputLabel>
-    <div className={`Select-content flex fd-c bg-light p-2_5 ${classNames.content ?? ''}`}>
+    <Box className={`Select-content flex fd-c bg-light p-2_5 ${classNames.content ?? ''}`}>
       <MuiSelect disableUnderline className={`${classNames.select ?? ''}`} value={state[stateKey] as string[]}
         multiple={multiple}
         renderValue={(items) => renderValue ? renderValue(items) : multiple ? (items as string[]).map((item) => transformTextBySeparator(item)).join(", ") : transformTextBySeparator(items.join("") as string) as ReactNode}
@@ -49,6 +49,6 @@ export default function Select<T extends Record<string, any>>(props: SelectProps
           <MenuItem key={item} value={item}>{menuItemLabel ? menuItemLabel(item) : transformTextBySeparator(item)}</MenuItem>
         )}
       </MuiSelect>
-    </div>
+    </Box>
   </FormGroup>
 }

@@ -1,3 +1,4 @@
+import { Box } from '@mui/material';
 import { green, red } from '@mui/material/colors';
 import React, { useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { AiFillHome } from 'react-icons/ai';
@@ -148,7 +149,7 @@ export default function Report() {
           lsKey="REPORT_MENU"
           contents={[
             <ReportFilter />,
-            <div
+            <Box
               className="Report"
               {...navigationShortcutProps}
               onKeyUp={(e) => {
@@ -159,7 +160,7 @@ export default function Report() {
               {navigationIconGroup}
               <ReportTable />
               {!excludedColumns['report_info'] ? (
-                <div className="overflow-auto flex fd-c p-5"
+                <Box className="overflow-auto flex fd-c p-5"
                   style={{
                     width: 300,
                   }}
@@ -188,7 +189,7 @@ export default function Report() {
                       ]}
                     />
                   ) : null}
-                  <div className="Report-Settings">
+                  <Box className="Report-Settings">
                     {!excludedColumns['play_options'] ? (
                       <StackList
                         classNames={{
@@ -225,29 +226,29 @@ export default function Report() {
                         ])}
                       />
                     ) : null}
-                  </div>
+                  </Box>
                   {!excludedColumns['report_export'] ? (
                     <ReportExport />
                   ) : null}
                   {!excludedColumns['report_aggregator'] ? (
                     <ReportAggregator />
                   ) : null}
-                </div>
+                </Box>
               ) : null}
-            </div>
+            </Box>
           ]}
         />
       );
     } else {
       return (
-        <div
-          ref={ref}
+        <Box
+          ref={ref as any}
           className="Report"
           {...navigationShortcutProps}
         >
           {navigationIconGroup}
           <ReportUpload />
-        </div>
+        </Box>
       );
     }
   };

@@ -1,4 +1,5 @@
 import { useTheme } from "@emotion/react";
+import { Box } from "@mui/material";
 import { ReactNode, useContext, useState } from "react";
 import { SimpleModal } from "./components";
 import { ModalContext } from './context/ModalContext';
@@ -16,13 +17,13 @@ export default function App(props: Props) {
   const { settings } = useContext(SettingsContext);
 
   return <ModalContext.Provider value={{ modalState, setModalState }}>
-    <div className={`App line-numbers ${theme.palette.theme} ${classes.root}`} style={{ fontFamily: settings.font === 'sans-serif' ? 'Lato' : settings.font === 'serif' ? 'Noto Serif' : 'Ubuntu Mono', backgroundColor: theme.palette.color.dark }}>
+    <Box className={`App line-numbers ${theme.palette.theme} ${classes.root}`} style={{ fontFamily: settings.font === 'sans-serif' ? 'Lato' : settings.font === 'serif' ? 'Noto Serif' : 'Ubuntu Mono', backgroundColor: theme.palette.color.dark }}>
       <SimpleModal open={modalState[0]} setOpen={() => setModalState([false, null])}>
-        <div className={`Modal-content line-numbers ${theme.palette.theme} ${classes.root}`} style={{ fontFamily: settings.font === 'sans-serif' ? 'Lato' : settings.font === 'serif' ? 'Noto Serif' : 'Ubuntu Mono', backgroundColor: theme.palette.color.dark }}>
+        <Box className={`Modal-content line-numbers ${theme.palette.theme} ${classes.root}`} style={{ fontFamily: settings.font === 'sans-serif' ? 'Lato' : settings.font === 'serif' ? 'Noto Serif' : 'Ubuntu Mono', backgroundColor: theme.palette.color.dark }}>
           {modalState[1]}
-        </div>
+        </Box>
       </SimpleModal>
       {props.children}
-    </div>
+    </Box>
   </ModalContext.Provider>
 }

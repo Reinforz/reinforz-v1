@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 import { grey, red } from "@mui/material/colors";
 import { OptionsObject, useSnackbar } from "notistack";
 import { useContext } from "react";
@@ -46,7 +47,7 @@ export default function Preset(props: PresetProps) {
     return false
   }
 
-  return <div className="Preset">
+  return <Box className="Preset">
     <ListSelect items={itemPresets.presets.map(preset => preset.id)} menuItemLabel={(id) => itemPresets.presets.find(preset => preset.id === id)!.name} onChange={(id) => {
       setPresetState({
         current: id,
@@ -110,5 +111,5 @@ export default function Preset(props: PresetProps) {
         }
       }} />
     </Hovertips>
-  </div>
+  </Box>
 }
