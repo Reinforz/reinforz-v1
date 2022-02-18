@@ -1,3 +1,10 @@
+/**
+ * Generate menu css styles based on the given parameters
+ * @param position Which edge the menu is currently positioned 
+ * @param isOpen Whether the menu is open or not
+ * @param width width of the menu
+ * @returns menu css styles
+ */
 export function generateMenuStyles(
   position: 'right' | 'left',
   isOpen: boolean,

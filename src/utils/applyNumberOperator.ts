@@ -1,10 +1,16 @@
 import { TNumberFilter } from '../types';
 
+/**
+ * Applies number operator to a number data 
+ * @param filter Number filter to apply
+ * @param data number data to filter on
+ * @returns If the number is filtered or not
+ */
 export function applyNumberOperator(
-  param: TNumberFilter,
+  filter: TNumberFilter,
   data: number
 ) {
-  const [operator, range] = param;
+  const [operator, range] = filter;
   switch (operator) {
     case '!': {
       return range[0] !== data;

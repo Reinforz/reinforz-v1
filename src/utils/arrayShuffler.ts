@@ -1,3 +1,8 @@
+/**
+ * Shuffles an array
+ * @param array Array to shuffle
+ * @returns Shuffled array
+ */
 export function arrayShuffler(array: any[]) {
   let currentIndex = array.length,
     temporaryValue,

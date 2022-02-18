@@ -1,3 +1,8 @@
+/**
+ * Convert time allocated to certain threshold values
+ * @param timeAllocated Time allocated number
+ * @returns Stringified time allocation number
+ */
 export function divideTimeAllocated(timeAllocated: number) {
   if (timeAllocated <= 15) return '15';
   else if (timeAllocated <= 30) return '30';

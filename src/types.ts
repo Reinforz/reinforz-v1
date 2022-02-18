@@ -84,7 +84,7 @@ export interface InputQuiz {
   subject: string;
   _id?: string;
   default?: Partial<IQuizDefaultSettings>;
-  questions: InputQuestion[];
+  questions: TInputQuestion[];
   contexts?: string[];
 }
 

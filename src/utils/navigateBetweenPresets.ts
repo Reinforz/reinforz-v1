@@ -1,45 +1,51 @@
 import { KeyboardEvent, SetStateAction } from 'react';
 import { IPresetConfig } from '../types';
 
+/**
+ * Navigate between preset by pressing appropriate keys
+ * @param event Event to extract current pressed key from
+ * @param presetConfig Preset config to search for current preset
+ * @param setSettings A state mutation function, called only if a new preset was selected
+ * @param lsKey Local storage key to update
+ */
 export function navigateBetweenPresets(
   event: KeyboardEvent<HTMLDivElement>,
-  settings: IPresetConfig<any>,
+  presetConfig: IPresetConfig<any>,
   setSettings: (value: SetStateAction<IPresetConfig<any>>) => void,
   lsKey: string
 ) {
   let newPresetId: string | null = null;
-  if (settings.presets.length !== 1) {
+  // If there are more that one preset in config, only then we can toggle
+  if (presetConfig.presets.length !== 1) {
+    // Find the current preset index
+    const presetIndex = presetConfig.presets.findIndex(
+      (preset) => preset.id === presetConfig.current
+    );
+
+    // Alt + S to move to the next preset
     if (event.nativeEvent.altKey && event.nativeEvent.code === 'KeyS') {
-      const presetIndex = settings.presets.findIndex(
-        (preset) => preset.id === settings.current
-      );
-      newPresetId =
-        presetIndex === settings.presets.length - 1
-          ? 'default'
-          : settings.presets[presetIndex + 1].id;
+      // Set the new preset id by moving forward
+      newPresetId = presetConfig.presets[presetIndex === presetConfig.presets.length - 1 ? 0 : presetIndex + 1].id;
     } else if (event.nativeEvent.altKey && event.nativeEvent.code === 'KeyA') {
-      const presetIndex = settings.presets.findIndex(
-        (settingsPreset) => settingsPreset.id === settings.current
-      );
-      newPresetId =
-        presetIndex === 0
-          ? settings.presets[settings.presets.length - 1].id
-          : settings.presets[presetIndex - 1].id;
+      newPresetId = presetConfig.presets[presetIndex === 0 ? presetConfig.presets.length - 1 : presetIndex - 1].id;
     }
   }
 
+  // If a new preset was set, it would be set if we hit the right shortcuts
   if (newPresetId !== null) {
+    if (typeof window !== "undefined") {
+      localStorage.setItem(
+        lsKey,
+        JSON.stringify({
+          current: newPresetId,
+          presets: presetConfig.presets
+        })
+      );
+    }
+
     setSettings({
       current: newPresetId,
-      presets: settings.presets
-    });
-
-    localStorage.setItem(
-      lsKey,
-      JSON.stringify({
-        current: newPresetId,
-        presets: settings.presets
-      })
-    );
+      presets: presetConfig.presets
+    })
   }
 }

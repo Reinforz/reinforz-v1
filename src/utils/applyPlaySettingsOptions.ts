@@ -27,6 +27,7 @@ export function applyPlaySettingsOptions(
     );
   }
 
+  // If we are shuffling options for each question
   if (playSettingsOptions.shuffle_options) {
     settingsAppliedQuizzes.forEach(
       (quiz) =>  {
