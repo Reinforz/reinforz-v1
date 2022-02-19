@@ -9,26 +9,12 @@ import Shortcuts from "./pages/Shortcuts/Shortcuts";
 
 export default function CustomRoutes() {
   return <Routes>
-    <Route path="/">
-      <Play />
-    </Route>
-    <Route path="/settings">
-      <Settings />
-    </Route>
-    <Route path="/create">
-      <Create />
-    </Route>
-    <Route path="/report">
-      <Report />
-    </Route>
-    <Route path="/play">
-      <Quiz />
-    </Route>
-    <Route path="/shortcuts">
-      <Shortcuts />
-    </Route>
-    <Route path="*">
-      <NotFoundPage />
-    </Route>
+    <Route path="/" element={<Play />}/>
+    <Route path="/settings" element={<Settings />}/>
+    <Route path="/create" element={<Create />}/>
+    <Route path="/report" element={<Report />}/>
+    <Route path="/play" element={<Quiz />}/>
+    <Route path="/shortcuts" element={<Shortcuts />}/>
+    <Route path="*" element={<NotFoundPage />}/>
   </Routes>
 }
