@@ -17,7 +17,7 @@ export default function ListRadioGroup(props: ListRadioGroupProps) {
   }}>
     {items.map((label, i) => {
       return <FormControlLabel
-        key={`option${i}`} className="ListRadioGroup-FormControlLabel bg-light mb-5"
+        key={`option${i}`} className="ListRadioGroup-FormControlLabel bg-light mb-1"
         control={<Radio color="primary" />}
         value={`${i}`}
         label={label}

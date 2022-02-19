@@ -13,26 +13,10 @@ div#root {
     height: 100%;
   }
 
-  & .p-2_5 {
-    padding: 2.5px;
-  }
-
-  & .m-2_5 {
-    margin: 2.5px;
-  }
-
-  & .p-5 {
-    padding: 5px;
-  }
-
   & .p-0 {
     padding: 0px;
   }
-
-  & .p-10 {
-    padding: 10px;
-  }
-
+  
   & .m-0 {
     margin: 0px;
   }
@@ -45,48 +29,12 @@ div#root {
     padding-right: 0px;
   }
 
-  & .pl-5 {
-    padding-left: 5px;
-  }
-
-  & .m-5 {
-    margin: 5px;
-  }
-
-  & .ml-0 {
-    margin-left: 0px;
-  }
-
-  & .ml-5 {
-    margin-left: 5px;
-  }
-
-  & .ml-10 {
-    margin-left: 10px;
-  }
-
-  & .mr-5 {
-    margin-right: 5px;
-  }
-
-  & .mr-10 {
-    margin-right: 10px;
-  }
-
-  .mt-0 {
+  & .mt-0 {
     margin-top: 0px;
   }
 
-  .mt-5 {
-    margin-top: 5px;
-  }
-
-  & .mb-5 {
-    margin-bottom: 5px;
-  }
-
-  & .mb-10 {
-    margin-bottom: 10px;
+  & .mb-0 {
+    margin-bottom: 0px;
   }
 
   & .fs-14 {
@@ -107,10 +55,6 @@ div#root {
 
   & .fs-22 {
     font-size: 22px;
-  }
-
-  & .mb-0 {
-    margin-bottom: 0px;
   }
 
   & .overflow-auto {

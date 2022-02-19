@@ -60,8 +60,8 @@ export default function List<T extends { _id: string }>(props: ListProps<T>) {
       {items.length > 0 ?
         items.map((item, index) => {
           const { _id } = item
-          return <Box className="List-content-item flex items-center bg-light p-5 mb-5 pr-0" key={_id}>
-            <Box className="List-content-item-icons p-5 mr-5 flex items-center">
+          return <Box className="List-content-item flex items-center bg-light p-1 mb-1 pr-0" key={_id}>
+            <Box className="List-content-item-icons p-1 mr-1 flex items-center">
               <Checkbox color="primary" className="List-content-item-icons-checkbox" key={_id + "checkbox" + index} onClick={(e: any) => {
                 e.persist();
                 if (settings.sound) {
@@ -79,7 +79,7 @@ export default function List<T extends { _id: string }>(props: ListProps<T>) {
                 }} style={{ fill: theme.palette.error.dark }} />
               </Hovertips>
             </Box>
-            <Box className="flex flex-1 justify-between p-5 mr-5">
+            <Box className="flex flex-1 justify-between p-1 mr-1">
               {fields.map((field, index) => <Box className="List-content-item-field" key={_id + field + index}>
                 <Typography variant="body1" component="div" className="fs-18">
                   {typeof field === "function" ? field(item) : item[field]}
@@ -87,7 +87,7 @@ export default function List<T extends { _id: string }>(props: ListProps<T>) {
               </Box>)}
             </Box>
           </Box>
-        }) : <Box className="center text-center flex items-center justify-center bold p-5">
+        }) : <Box className="center text-center flex items-center justify-center bold p-1">
           <Typography variant="h5">
             {emptyListMessage}
           </Typography>

@@ -21,7 +21,7 @@ export default function ModalPresetInput(props: ModalPresetInputProps) {
         <TextField value={input} onChange={(e) => setInput(e.target.value)} />
       </Box>
     </FormGroup>
-    <Box className="ModalPresetInput-buttons flex justify-between p-5">
+    <Box className="ModalPresetInput-buttons flex justify-between p-1">
       <Button variant="contained" color="primary" onClick={() => closeModal()}>
         Close
       </Button>

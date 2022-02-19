@@ -24,12 +24,12 @@ export interface InputRangeProps<T extends Record<string, any>> {
 export default function InputRange<T extends Record<string, any>>(props: InputRangeProps<T>) {
   const { direction = 'row', min, max, setState, state, stateKey, label, step = 5, classNames = {} } = props;
   const { click } = useSounds();
-  const containerPaddingClass = direction === 'row' ? 'pr-0' : 'pb-0', itemMarginClass = direction === 'row' ? 'mr-5' : 'mb-5'
+  const containerPaddingClass = direction === 'row' ? 'pr-0' : 'pb-0', itemMarginClass = direction === 'row' ? 'mr-1' : 'mb-1'
   const [operator, range]: [TNumberOperator, [string, string]] = state[stateKey]
-  return <FormGroup className={`InputRange p-5 ${classNames.formGroup ?? ''}`}>
+  return <FormGroup className={`InputRange p-1 ${classNames.formGroup ?? ''}`}>
     <InputLabel className={`${classNames.inputLabel ?? ''}`}>{label}</InputLabel>
-    <Box style={{ flexDirection: direction }} className={`InputRange-content bg-dark p-5 ${containerPaddingClass} flex ${classNames.content ?? ''}`}>
-      <Box className={`bg-light flex p-5 flex-col ${itemMarginClass}`}>
+    <Box style={{ flexDirection: direction }} className={`InputRange-content bg-dark p-1 ${containerPaddingClass} flex ${classNames.content ?? ''}`}>
+      <Box className={`bg-light flex p-1 flex-col ${itemMarginClass}`}>
         <Select disableUnderline className={`${classNames.operatorSelect ?? ''}`} value={operator}
           onChange={(e) => {
             setState({ ...state, [stateKey]: [e.target.value, range] })

@@ -15,14 +15,14 @@ export default function QuestionInputs(props: Props) {
   const { setUserAnswers, userAnswers, question: { _id, type } } = props;
 
   return (
-    <Box className={`QuestionInputs QuestionInputs-${type} bg-base p-5 pb-0 flex flex-col`}>
+    <Box className={`QuestionInputs QuestionInputs-${type} bg-base p-1 pb-0 flex flex-col`}>
       {props.question.answers.map((_, i) =>
-        <TextField InputProps={{ disableUnderline: true }} key={`${_id}.${i}`} className={`QuestionInputs-item mb-5 w-calc_100p_m_10px pl-5`} autoFocus={i === 0} fullWidth inputProps={{
+        <TextField InputProps={{ disableUnderline: true }} key={`${_id}.${i}`} className={`QuestionInputs-item mb-1 w-calc_100p_m_10px pl-1`} autoFocus={i === 0} fullWidth inputProps={{
           placeholder: `Answer ${i + 1}`,
           style: {
             fontSize: '1.25em',
           },
-          className: 'pl-5'
+          className: 'pl-1'
         }} value={userAnswers[i] ?? ''} onChange={e => {
           if (settings.sound) {
             const min = Math.ceil(1);

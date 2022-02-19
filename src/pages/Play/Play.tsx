@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import { green, red } from "@mui/material/colors";
 import { useSnackbar } from "notistack";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import { FaKeyboard, FaPlay } from "react-icons/fa";
 import { HiDocumentReport } from "react-icons/hi";
 import { IoLogoGameControllerB, IoMdCreate, IoMdSettings } from 'react-icons/io';
@@ -23,15 +23,16 @@ function Play() {
   const { setPlaying, filteredQuizzes, selectedQuizIds, setUploadedQuizzes, setSelectedQuizIds, uploadedQuizzes, errorLogs, setErrorLogs, playSettingsPresets, setPlaySettingsPresets } = useContext(RootContext);
   const { enqueueSnackbar } = useSnackbar();
   const ref = useRef<HTMLDivElement | null>(null);
-  const filteredQuestions = filteredQuizzes.reduce((acc, filteredQuiz) => acc += filteredQuiz.questions.length, 0);
-  const canStartPlay = (filteredQuestions !== 0 && selectedQuizIds.length !== 0);
-  const generatedNavigationStyles = generateNavigationStyles(settings.navigation);
+  const totalQuestions = filteredQuizzes.reduce((acc, filteredQuiz) => acc += filteredQuiz.questions.length, 0);
+  const canStartPlay = (totalQuestions !== 0 && selectedQuizIds.length !== 0);
+  const generatedNavigationStyles = useMemo(() => generateNavigationStyles(settings.navigation), [settings.navigation]);
+
   const startPlay = () => {
     if (uploadedQuizzes.length === 0) {
       enqueueSnackbar(`No quiz has been uploaded.`, NotistackOptions);
     } else if (selectedQuizIds.length === 0) {
       enqueueSnackbar(`No quiz has been selected.`, NotistackOptions);
-    } else if (filteredQuestions === 0) {
+    } else if (totalQuestions === 0) {
       enqueueSnackbar(`There are in total 0 questions to be played after applying the filters. Make the filters less strict.`, NotistackOptions);
     }
 

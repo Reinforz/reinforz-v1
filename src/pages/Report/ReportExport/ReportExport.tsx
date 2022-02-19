@@ -44,10 +44,10 @@ export default function ReportExport() {
   }
 
   return (
-    <Box className="Report-Export bg-base p-5 mb-5">
+    <Box className="Report-Export bg-base p-1 mb-1">
       <Header header={"Report Export"} />
-      <Box className="Report-Export-content bg-dark p-5">
-        <Select classNames={{ formGroup: 'mb-5' }} lsKey={"REPORT_EXPORT"} items={['Quizzes', 'Report']} label={"Export Type"} menuItemLabel={(item) => item} setState={(exportState) => {
+      <Box className="Report-Export-content bg-dark p-1">
+        <Select classNames={{ formGroup: 'mb-1' }} lsKey={"REPORT_EXPORT"} items={['Quizzes', 'Report']} label={"Export Type"} menuItemLabel={(item) => item} setState={(exportState) => {
           setReportSettings({
             ...reportSettings,
             export: {
@@ -56,7 +56,7 @@ export default function ReportExport() {
             }
           })
         }} state={exportState} stateKey={"export_type"} />
-        <Select classNames={{ formGroup: 'mb-5' }} lsKey={"REPORT_EXPORT"} items={['YAML', 'JSON']} label={"Export As"} menuItemLabel={(item) => item} setState={(exportState) => {
+        <Select classNames={{ formGroup: 'mb-1' }} lsKey={"REPORT_EXPORT"} items={['YAML', 'JSON']} label={"Export As"} menuItemLabel={(item) => item} setState={(exportState) => {
           setReportSettings({
             ...reportSettings,
             export: {
@@ -66,7 +66,7 @@ export default function ReportExport() {
           })
         }} state={exportState} stateKey={"export_as"} />
 
-        <Hovertips popoverText={`Export ${export_type} as ${export_as}`} className="Report-Export-button justify-center flex p-5">
+        <Hovertips popoverText={`Export ${export_type} as ${export_as}`} className="Report-Export-button justify-center flex p-1">
           <Button variant="contained" color="primary" onClick={() => {
             swoosh();
             downloadFiles()

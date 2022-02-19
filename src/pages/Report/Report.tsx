@@ -160,7 +160,7 @@ export default function Report() {
               {navigationIconGroup}
               <ReportTable />
               {!excludedColumns['report_info'] ? (
-                <Box className="overflow-auto flex flex-col p-5"
+                <Box className="overflow-auto flex flex-col p-1"
                   style={{
                     width: 300,
                   }}
@@ -169,7 +169,7 @@ export default function Report() {
                     <StackList
                       header={'Report Stats'}
                       classNames={{
-                        container: 'mb-5'
+                        container: 'mb-1'
                       }}
                       items={[
                         [
@@ -193,7 +193,7 @@ export default function Report() {
                     {!excludedColumns['play_options'] ? (
                       <StackList
                         classNames={{
-                          container: 'mb-5'
+                          container: 'mb-1'
                         }}
                         header={'Play Options'}
                         items={Object.entries(
@@ -213,7 +213,7 @@ export default function Report() {
                     {!excludedColumns['play_filters'] ? (
                       <StackList
                         classNames={{
-                          container: 'mb-5'
+                          container: 'mb-1'
                         }}
                         header={'Play Filters'}
                         items={Object.entries(

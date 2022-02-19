@@ -24,11 +24,11 @@ export interface AggregatorProps<T> {
 
 export default function Aggregator<T>(props: AggregatorProps<T>) {
   const { header, items, state, setState } = props;
-  return <Box className="Aggregator bg-base p-5">
+  return <Box className="Aggregator bg-base p-1">
     <Header header={header} />
     <Content className="Aggregator-content pb-0">
-      {items.map(item => <Box key={item.type + item.stateKey} className="Aggregator-content-item flex mb-5">
-        <Select className="mr-5 flex-1" menuItemLabel={(item) => item} label={item.label ?? transformTextBySeparator(item.stateKey as string)} items={item.type === "number" ? ["MAX", "MIN", "AVG", 'MEDIAN', 'MODE', 'STDDEV', 'VARIANCE'] : ["TRUE", "FALSE"]} setState={(aggregator) => {
+      {items.map(item => <Box key={item.type + item.stateKey} className="Aggregator-content-item flex mb-1">
+        <Select className="mr-1 flex-1" menuItemLabel={(item) => item} label={item.label ?? transformTextBySeparator(item.stateKey as string)} items={item.type === "number" ? ["MAX", "MIN", "AVG", 'MEDIAN', 'MODE', 'STDDEV', 'VARIANCE'] : ["TRUE", "FALSE"]} setState={(aggregator) => {
           setState({
             ...state,
             [item.stateKey]: (aggregator as T)[item.stateKey]

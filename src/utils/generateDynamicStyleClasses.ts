@@ -57,6 +57,33 @@ export function generateDynamicStyleClasses(theme: Theme): SxProps<Theme> {
     },
     '& tbody tr:nth-of-type(even)': {
       background: theme.palette.color.light
+    },
+    "& .m-1": {
+      margin: theme.spacing(1)
+    },
+    "& .ml-1": {
+      marginLeft: theme.spacing(1)
+    },
+    "& .mr-1": {
+      marginRight: theme.spacing(1)
+    },
+    "& .mb-1": {
+      marginBottom: theme.spacing(1)
+    },
+    "& .mr-2": {
+      marginRight: theme.spacing(2)
+    },
+    "& .p-1": {
+      padding: theme.spacing(1)
+    },
+    "& .pl-1": {
+      paddingLeft: theme.spacing(1)
+    },
+    "& .m-2": {
+      margin: theme.spacing(2)
+    },
+    "& .p-2": {
+      padding: theme.spacing(2)
     }
   }
 }

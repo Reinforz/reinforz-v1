@@ -28,10 +28,10 @@ export default function RadioGroup<I>(props: RadioGroupProps<I>) {
 
   const itemDirection = props.itemDirection ?? 'column';
   const contentPaddingStyle = itemDirection === 'column' ? 'pb-0' : 'pr-0';
-  const itemPaddingStyle = itemDirection === 'column' ? 'mb-5' : 'mr-5';
+  const itemPaddingStyle = itemDirection === 'column' ? 'mb-1' : 'mr-1';
   return <MuiRadioGroup className={`${classNames.radioGroup ?? ''}`} name={props.stateKey.toString()} value={props.state[props.stateKey]} >
     <InputLabel className={`${classNames.inputLabel ?? ''}`}>{props.label}</InputLabel>
-    <Box style={{ flexDirection: itemDirection }} className={`RadioGroup-content bg-dark p-5 ${contentPaddingStyle} flex ${classNames.content ?? ''}`}>
+    <Box style={{ flexDirection: itemDirection }} className={`RadioGroup-content bg-dark p-1 ${contentPaddingStyle} flex ${classNames.content ?? ''}`}>
       {props.items.map((item, index) => <FormControlLabel className={`${itemPaddingStyle} flex-1 ${classNames.formControlLabel ?? ''}`} onClick={(e: any) => {
         click()
         props.setState({ ...props.state, [props.stateKey]: e.target.value })

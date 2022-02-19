@@ -68,7 +68,7 @@ export default function SideToggleMenu(props: SideToggleMenuProps) {
     <Box style={contentStyle} className="SideToggleMenu-content">
       {contents[1]}
     </Box>
-    <Box className="SideToggleMenu-sidebar p-5" style={{ left, width }}>
+    <Box className="SideToggleMenu-sidebar p-1" style={{ left, width }}>
       <IconGroup className="SideToggleMenu-sidebar-icons" direction="column" style={iconsContainerStyle} icons={[
         [`${isOpen ? "Close" : "Open"} Menu`, <FaArrowAltCircleRight fill={theme.palette.color.opposite_light} onClick={() => {
           if (isOpen === false) {

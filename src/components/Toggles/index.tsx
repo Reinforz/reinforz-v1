@@ -42,7 +42,7 @@ export default function Toggles<I extends Record<string, any>>(props: TogglesPro
   const { switch_off, switch_on} = useSounds();
 
   return <Box className={`Toggles bg-dark w-full ${classNames.container ?? ''}`}> {items.map((item, index) =>
-    <FormGroup key={item} row className={`Toggles-item bg-base p-5${items.length - 1 !== index ? " mb-5" : ""} ${classNames.formGroup ?? ''}`}>
+    <FormGroup key={item} row className={`Toggles-item bg-base p-1${items.length - 1 !== index ? " mb-1" : ""} ${classNames.formGroup ?? ''}`}>
       <InputLabel className={`Toggles-item-label mb-0 ${classNames.inputLabel ?? ''}`}>{transformTextBySeparator(item)}</InputLabel>
       <OnOffSwitch
         className={`${classNames.switch ?? ''}`}

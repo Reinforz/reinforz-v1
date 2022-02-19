@@ -15,7 +15,7 @@ export default function ListSelect(props: ListSelectProps) {
   const { click } = useSounds();
   return <FormGroup className="ListSelect pb-0">
     {label && <InputLabel>{label}</InputLabel>}
-    <Box className="Select-content bg-light flex flex-col p-5">
+    <Box className="Select-content bg-light flex flex-col p-1">
       <MuiSelect disableUnderline value={item}
         onChange={(e) => {
           click();

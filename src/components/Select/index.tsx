@@ -30,7 +30,7 @@ export default function Select<T extends Record<string, any>>(props: SelectProps
   const { items, multiple = false, renderValue, className = '', menuItemLabel, state, stateKey, setState, classNames = {} } = props;
   return <FormGroup className={`Select ${className ?? ''} ${classNames.formGroup ?? ''}`}>
     <InputLabel className={`${classNames.inputLabel ?? ''}`}>{props.label}</InputLabel>
-    <Box className={`Select-content flex flex-col bg-light p-2_5 ${classNames.content ?? ''}`}>
+    <Box className={`Select-content flex flex-col bg-light p-1 ${classNames.content ?? ''}`}>
       <MuiSelect disableUnderline className={`${classNames.select ?? ''}`} value={state[stateKey] as string[]}
         multiple={multiple}
         renderValue={(items) => renderValue ? renderValue(items) : multiple ? (items as string[]).map((item) => transformTextBySeparator(item)).join(", ") : transformTextBySeparator(items.join("") as string) as ReactNode}

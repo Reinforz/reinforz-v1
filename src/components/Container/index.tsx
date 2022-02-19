@@ -6,7 +6,7 @@ interface Props extends BoxProps {
 }
 
 export function Container({ className = '', style = {}, ...props }: Props) {
-  return <Box {...props} className={`Container p-5 bg-base ${className ?? ''} `}>
+  return <Box {...props} className={`Container p-1 bg-base ${className ?? ''} `}>
     {props.children}
   </Box>
 }

@@ -125,7 +125,7 @@ export function generateTheme(settings: IGlobalSettings) {
         main: settings.color.primary
       },
     },
-    
+    spacing: (spacing: number) => `${spacing * 0.25}rem`,  
     typography: {
       fontFamily:
         font === 'sans-serif'

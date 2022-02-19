@@ -12,7 +12,7 @@ import './Shortcuts.scss';
 function StackListItem(props: { contents: [string, string] }) {
   return <Box className="flex flex-col">
     <Typography>{props.contents[0]}</Typography>
-    <Typography className="mt-5 fs-14" style={{ color: grey[300] }}>
+    <Typography className="fs-14" style={{ color: grey[300] }}>
       ({props.contents[1]})
     </Typography>
   </Box>
