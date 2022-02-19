@@ -24,9 +24,9 @@ export default function PlaySettings() {
     <Box className="bg-dark p-5 mb-5">
       <Preset lsKey={REINFORZ_PLAY_SETTINGS_LS_KEY} modalLabel="Save Play Settings" popoverText="Save current play settings as preset" currentPreset={playSettings} itemPresets={playSettingsPresets} setPresetState={setPlaySettingsPresets} />
     </Box>
-    <Box className="PlaySettings-group mb-5 flex fd-c PlaySettings-group-options">
-      <Header className="PlaySettings-group-header bg-dark tt-u fs-16 p-0" header={"Options"} />
-      <Box className="PlaySettings-group-content bg-dark flex fd-c p-5 pb-0">
+    <Box className="PlaySettings-group mb-5 flex flex-col PlaySettings-group-options">
+      <Header className="PlaySettings-group-header bg-dark uppercase fs-16 p-0" header={"Options"} />
+      <Box className="PlaySettings-group-content bg-dark flex flex-col p-5 pb-0">
         {Object.keys(playSettings.options).map((key, index) => {
           let isDisabled = false;
           if (Boolean(key.match(/(shuffle_questions|shuffle_quizzes)/) && playSettings.options.flatten_mix)) isDisabled = true;
@@ -54,7 +54,7 @@ export default function PlaySettings() {
       </Box>
     </Box>
     <Box className="PlaySettings-group mb-5 PlaySettings-group-filters">
-      <Header className="PlaySettings-group-header tt-u fs-16 p-0" header={"Filters"} />
+      <Header className="PlaySettings-group-header uppercase fs-16 p-0" header={"Filters"} />
       <Box className="PlaySettings-group-content bg-dark p-5">
         <InputRange classNames={{
           formGroup: 'mb-5'
@@ -69,6 +69,6 @@ export default function PlaySettings() {
       reset()
       setPlaySettings(generateDefaultPlaySettingsState())
     }}>Reset</Button>
-    <Typography className="PlaySettings-total bg-dark flex jc-c ai-c bold fs-16 p-5 mb-5" style={{ color: filteredQuestions === 0 ? theme.palette.error.main : theme.palette.success.main }}>{filteredQuestions} Questions</Typography>
+    <Typography className="PlaySettings-total bg-dark flex justify-center items-center bold fs-16 p-5 mb-5" style={{ color: filteredQuestions === 0 ? theme.palette.error.main : theme.palette.success.main }}>{filteredQuestions} Questions</Typography>
   </Box>
 }

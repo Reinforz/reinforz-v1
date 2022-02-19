@@ -34,7 +34,7 @@ export default function Aggregator<T>(props: AggregatorProps<T>) {
             [item.stateKey]: (aggregator as T)[item.stateKey]
           })
         }} stateKey={item.stateKey} state={state} />
-        <Box className="Aggregator-content-item-value bg-light flex ai-c jc-c br-2_5">
+        <Box className="Aggregator-content-item-value bg-light flex items-center justify-center br-2_5">
           <Typography variant="body1" className="bold">
             {item.type === "number" ? computeNumberDataAggregation(item.data, { aggregation: state[item.stateKey] as unknown as TNumberAggregation }) : computeBooleanDataAggregation(item.data, state[item.stateKey] as unknown as TBooleanAggregation)}
           </Typography>

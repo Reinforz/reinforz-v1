@@ -44,7 +44,7 @@ export default function Sort(props: SortProps) {
 
   return <FormGroup className="Sort">
     <InputLabel className="Sort-header">{header}</InputLabel>
-    {sorts.length !== 0 && <Box className="Sort-content bg-dark flex p-5 fd-c">
+    {sorts.length !== 0 && <Box className="Sort-content bg-dark flex p-5 flex-col">
       {sorts.map((sort, index) => {
         const [item, order] = sort,
           canMoveDownwards = index !== sorts.length - 1 && sorts.length !== 1,
@@ -58,7 +58,7 @@ export default function Sort(props: SortProps) {
         return <Box key={`${item}.${order}.${index}`} className={`Sort-content-item bg-base flex p-5 ${index !== sorts.length - 1 ? "pb-0" : ''}`}>
           <SortSelect index={0} items={items} {...props} />
           <SortSelect index={1} items={["ASC", "DESC"]} {...props} />
-          <Box className="Sort-content-item-icons bg-light p-5 flex jc-c ai-c">
+          <Box className="Sort-content-item-icons bg-light p-5 flex justify-center items-center">
             <Box className="Sort-content-item-icons-down mr-5">
               <Hovertips popoverText={"Move downwards"}>
                 <FaArrowAltCircleDown fill={canMoveDownwards ? theme.palette.color.opposite_light : grey[500]} size={15} onClick={() => {
@@ -96,7 +96,7 @@ export default function Sort(props: SortProps) {
         </Box>
       })}
     </Box>}
-    <Box className="Sort-add flex jc-c ai-c">
+    <Box className="Sort-add flex justify-center items-center">
       <Hovertips popoverText={`${canAddSort ? "Add Sort" : "Max sort limit reached"}`}>
         <AiFillPlusCircle size={25} fill={canAddSort ? green[500] : grey[500]} onClick={() => {
           if (canAddSort) {

@@ -95,21 +95,21 @@ export default function Question(props: Props) {
   }} tabIndex={0}>
     {props.question.type === "FIB" ? memoizedFIBQuestionComponent : memoizedSelectionQuestionComponent}
     <Box className="flex" style={{ height: "calc(100% - 255px)" }}>
-      <Box className="overflowY-auto flex-1 mr-5">
+      <Box className="overflow-y-auto flex-1 mr-5">
         {props.question.type === "MCQ" || props.question.type === "MS"
           ? <QuestionOptions setUserAnswers={setUserAnswers} userAnswers={userAnswers} question={props.question} />
           : <QuestionInputs setUserAnswers={setUserAnswers} userAnswers={userAnswers} question={props.question} />}
       </Box>
-      <Box className="flex fd-c bg-base p-5 pb-0" style={{ width: 300 }}>
+      <Box className="flex flex-col bg-base p-5 pb-0" style={{ width: 300 }}>
         <QuestionHints usedHints={usedHints} setUsedHints={setUsedHints} hints={hints} />
-        {<Box className="flex ai-c mb-5" style={{ height: '65px' }}>
+        {<Box className="flex items-center mb-5" style={{ height: '65px' }}>
           {<Hovertips popoverAnchorOrigin={{
             vertical: 'top',
             horizontal: 'center',
           }} popoverTransformOrigin={{
             vertical: 'bottom',
             horizontal: 'center',
-          }} style={{ height: 'calc(100% - 10px)' }} className="Question-timerBreak bg-light p-5 mr-5 jc-c ai-c flex br-5 c-p h-calc_100p_m_10px" popoverText={timeBreak ? "Stop time break" : "Start time break"} onClick={() => {
+          }} style={{ height: 'calc(100% - 10px)' }} className="Question-timerBreak bg-light p-5 mr-5 justify-center items-center flex br-5 cursor-pointer h-calc_100p_m_10px" popoverText={timeBreak ? "Stop time break" : "Start time break"} onClick={() => {
             setTimeBreak((timeBreak) => !timeBreak);
             if (timeBreak === false) {
               setTimer(null);
@@ -133,7 +133,7 @@ export default function Question(props: Props) {
               onNextButtonPress()
             }
           }}>{!isLast ? "Next" : "Report"}</Button>
-          {timeout && !playSettings.options.disable_timer && <Typography className="QuestionTimer bg-light p-5 flex jc-c ai-c flex-1 bold fs-20 ml-5 h-calc_100p_m_10px">{displayTime(timeout)}</Typography>}
+          {timeout && !playSettings.options.disable_timer && <Typography className="QuestionTimer bg-light p-5 flex justify-center items-center flex-1 bold fs-20 ml-5 h-calc_100p_m_10px">{displayTime(timeout)}</Typography>}
         </Box>}
       </Box>
     </Box>

@@ -12,15 +12,15 @@ import { RootContext } from '../../context/RootContext';
 import { useNavigationIcons, useThemeSettings } from '../../hooks';
 import { IQuestionResult, IQuiz, IReport, IReportSettingsPresetConfig } from '../../types';
 import {
-  applyReportFilters,
-  applyReportSorts,
-  generateNavigationStyles,
-  generateQuestionsMapFromReportResults,
-  generateQuizzesFromResults,
-  generateReportQuizzesFromQuizzesMap,
-  getReportSettingsPresets,
-  navigateBetweenPresets,
-  transformTextBySeparator
+    applyReportFilters,
+    applyReportSorts,
+    generateNavigationStyles,
+    generateQuestionsMapFromReportResults,
+    generateQuizzesFromResults,
+    generateReportQuizzesFromQuizzesMap,
+    getReportSettingsPresets,
+    navigateBetweenPresets,
+    transformTextBySeparator
 } from '../../utils';
 import './Report.scss';
 import { ReportAggregator } from './ReportAggregator/ReportAggregator';
@@ -160,7 +160,7 @@ export default function Report() {
               {navigationIconGroup}
               <ReportTable />
               {!excludedColumns['report_info'] ? (
-                <Box className="overflow-auto flex fd-c p-5"
+                <Box className="overflow-auto flex flex-col p-5"
                   style={{
                     width: 300,
                   }}

@@ -28,10 +28,10 @@ export default function ListTable<T extends Record<string, any>>(props: ListTabl
   const headers = ["Sl", "title", ...props.headers];
   const sortedItems: Record<string, any>[] = sort ? itemsMap.sort((sortedItemA, sortedItemB) => sortedItemA[sort[0]] > sortedItemB[sort[0]] ? sort[1] ? 1 : -1 : sort[1] ? -1 : 1) : itemsMap;
 
-  return <Box className={`ListTable bg-base p-5 flex fd-c ta-c ${props.className ?? ''}`}>
+  return <Box className={`ListTable bg-base p-5 flex flex-col text-center ${props.className ?? ''}`}>
     <Box className="ListTable-headers bg-dark p-5 mb-5">
       <Box className="ListTable-headers-row">
-        {headers.map((header) => <span className={`ListTable-headers-row-item ListTable-headers-row-item-${header} flex ai-c jc-c tt-c c-p us-n`} key={header} onClick={() => {
+        {headers.map((header) => <span className={`ListTable-headers-row-item ListTable-headers-row-item-${header} flex items-center justify-center capitalize cursor-pointer select-none`} key={header} onClick={() => {
           click()
           if (sort[0] === header) setSort([header, !sort[1]])
           else setSort([header, false])
@@ -45,7 +45,7 @@ export default function ListTable<T extends Record<string, any>>(props: ListTabl
     </Box>
     <Box className="ListTable-body bg-dark p-5 mb-5 pb-0">
       {sortedItems.map((itemMap, index) => <Box key={itemMap._id} className="ListTable-body-row mb-5 bg-light bold">
-        <Typography className={`bold ListTable-body-row-item flex jc-c ai-c ListTable-body-row-item-index`}>{index + 1}</Typography>
+        <Typography className={`bold ListTable-body-row-item flex justify-center items-center ListTable-body-row-item-index`}>{index + 1}</Typography>
         {["title", ...props.headers].map(header => <Typography className={`bold ListTable-body-row-item ListTable-body-row-item-${header}`} key={header}>{itemMap[header]}</Typography>)}
       </Box>)}
     </Box>

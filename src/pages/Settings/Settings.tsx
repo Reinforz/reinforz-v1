@@ -57,16 +57,16 @@ function Settings() {
       <IconGroup className="Settings-icons" direction={settings.navigation.direction} style={generatedNavigationStyles} icons={navigationIcons} />
       <Box className="Settings p-5 center bg-base">
         <Box className="Settings-header flex mb-5 p-5 bg-dark">
-          <Typography variant="h6" className="Settings-header-text bold flex-1 ta-c flex ai-c jc-c tt-u">Settings</Typography>
+          <Typography variant="h6" className="Settings-header-text bold flex-1 text-center flex items-center justify-center uppercase">Settings</Typography>
           <Preset lsKey={REINFORZ_GLOBAL_SETTINGS_LS_KEY} modalLabel="Save Settings" popoverText="Save current settings as preset" currentPreset={settings} itemPresets={settingsPresets} setPresetState={setSettingsPresetsConfigs} />
         </Box>
-        <Box className="Settings-content bg-dark flex fd-c ai-c p-5">
+        <Box className="Settings-content bg-dark flex flex-col items-center p-5">
           <Select classNames={{
-            formGroup: "mb-5 p-5 w-c_10 fd-r",
+            formGroup: "mb-5 p-5 w-c_10 flex-row",
             inputLabel: 'w-100 mr-10 mb-0 fs-16',
           }} items={["dark", "polar_night", "light", "snow_storm"]} label={"Theme"} setState={setSettings} state={settings} stateKey={"theme"} menuItemLabel={(item) => transformTextBySeparator(item)} />
           <Select classNames={{
-            formGroup: "mb-5 p-5 w-c_10 fd-r",
+            formGroup: "mb-5 p-5 w-c_10 flex-row",
             inputLabel: 'w-100 mr-10 mb-0 fs-16',
           }} items={["serif", "sans-serif", "monospace"]} label={"Font"} setState={setSettings} state={settings} stateKey={"font"} menuItemLabel={(item) => transformTextBySeparator(item, "-")} />
           <SelectGroup className="mb-5 w-c_10" groupItems={[

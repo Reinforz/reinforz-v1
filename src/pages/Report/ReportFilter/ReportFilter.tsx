@@ -23,11 +23,11 @@ export default function ReportFilter() {
   const allTopics = useMemo(() => Array.from(new Set(Array.from(allQuizzesMap.values()).map(quiz => quiz.topic.trim()))), [allQuizzesMap]);
   const allSubjects = useMemo(() => Array.from(new Set(Array.from(allQuizzesMap.values()).map(quiz => quiz.subject.trim()))), [allQuizzesMap])
 
-  return <Box className="ReportFilter flex fd-c">
+  return <Box className="ReportFilter flex flex-col">
     <Box className="bg-dark mb-5">
       <Preset lsKey={REINFORZ_REPORT_SETTINGS_LS_KEY} modalLabel="Save Report Settings" popoverText="Save current report settings as preset" currentPreset={reportSettings} itemPresets={reportSettingsPresets} setPresetState={setReportSettingsPresets} />
     </Box>
-    <Box className={'overflowY-auto overflowX-hidden'}>
+    <Box className={'overflow-y-auto overflow-x-hidden'}>
       <InputRange classNames={{ formGroup: 'mb-5' }} label={"Time taken range"} min={0} max={120} setState={setFilterState} state={filters} stateKey={"time_taken"} />
       <InputRange classNames={{ formGroup: 'mb-5' }} step={0.25} label={"Score"} min={0} max={1} setState={setFilterState} state={filters} stateKey={"score"} />
       <InputRange classNames={{ formGroup: 'mb-5' }} step={1} label={"Hints Used"} min={0} max={10} setState={setFilterState} state={filters} stateKey={"hints_used"} />

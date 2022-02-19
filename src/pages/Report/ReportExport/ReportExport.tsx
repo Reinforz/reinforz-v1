@@ -66,7 +66,7 @@ export default function ReportExport() {
           })
         }} state={exportState} stateKey={"export_as"} />
 
-        <Hovertips popoverText={`Export ${export_type} as ${export_as}`} className="Report-Export-button jc-c flex p-5">
+        <Hovertips popoverText={`Export ${export_type} as ${export_as}`} className="Report-Export-button justify-center flex p-5">
           <Button variant="contained" color="primary" onClick={() => {
             swoosh();
             downloadFiles()

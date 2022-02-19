@@ -25,7 +25,7 @@ export default function QuestionHints(props: Props) {
   }
 
   return <Box className="QuestionHints mb-5">
-    <Box className="flex jc-c ai-c mb-5" style={{ height: 50 }}>
+    <Box className="flex justify-center items-center mb-5" style={{ height: 50 }}>
       <Button disabled={is_disabled || hintsExhausted} color="primary" variant="contained" className="QuestionHints-button flex-1" onClick={() => {
         click()
         onButtonClick()

@@ -24,11 +24,11 @@ export interface SelectGroupProps {
 
 export default function SelectGroup(props: SelectGroupProps) {
   const { label, menuItemLabel, setState, state, stateKey, className = '', renderValue, groupItems, classNames = {} } = props;
-  return <FormGroup className={`Select-Group fd-c ${className} ${classNames.formGroup}`}>
+  return <FormGroup className={`Select-Group flex-col ${className} ${classNames.formGroup}`}>
     <InputLabel className={`Select-Group-header ${classNames.inputLabel}`}>
       {label}
     </InputLabel>
-    <Box className={`Select-Group-content flex jc-c ai-c ${classNames.content}`}>
+    <Box className={`Select-Group-content flex justify-center items-center ${classNames.content}`}>
       {groupItems.map(([items, label, itemStateKey], index) => <Select key={index} renderValue={renderValue} classNames={classNames.select ?? {}} className={`Select-Group-content-item flex-1 p-0 ${index !== groupItems.length - 1 ? ' mr-5' : ''}`} items={items} label={label} setState={(newState) => {
         setState({
           ...state,

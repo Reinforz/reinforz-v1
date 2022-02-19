@@ -32,7 +32,7 @@ interface ReportTableRowProps {
 function ReportTableModal(props: ReportTableRowProps) {
   const { setModalState } = useContext(ModalContext);
   const [currentIndex, setCurrentIndex] = useState(props.index)
-  return <ReportTableRow {...props} index={currentIndex} header={<Typography className="bold flex jc-sb ai-c mr-10" style={{ width: 100 }}><Hovertips popoverText="Move left">
+  return <ReportTableRow {...props} index={currentIndex} header={<Typography className="bold flex justify-between items-center mr-10" style={{ width: 100 }}><Hovertips popoverText="Move left">
     <BsFillCaretLeftFill onClick={() => setCurrentIndex((currentIndex) => (currentIndex === 0 ? props.results.length - 1 : currentIndex - 1))} /></Hovertips>{currentIndex + 1}/{props.results.length}<Hovertips popoverText="Move left">
       <BsFillCaretRightFill onClick={() => setCurrentIndex((currentIndex) => ((currentIndex + 1) % props.results.length))} /></Hovertips><Hovertips popoverText="Go back"><ImCross size={15} fill={red[500]} onClick={() => setModalState([false, null])} /></Hovertips></Typography>} />
 }
@@ -42,14 +42,14 @@ function ReportTableRow(props: ReportTableRowProps) {
   const result = results[index];
   const showHints = result.question.hints.length !== 0 && !excludedColumns['hints'];
   return <Box key={result.question._id} className="ReportTableRow pb-0 p-5 bg-dark" style={style.container}>
-    <Box className="ReportTableRow-header flex ai-c jc-c bg-dark mb-5" style={style.header}>
+    <Box className="ReportTableRow-header flex items-center justify-center bg-dark mb-5" style={style.header}>
       {!excludedColumns['quiz_info'] ? <Typography className="p-10 bg-light fs-16 bold">{quiz}</Typography> : null}
-      <Typography variant="h6" className="ReportTableRow-index bold flex-1 ta-c">{index + 1}</Typography>
+      <Typography variant="h6" className="ReportTableRow-index bold flex-1 text-center">{index + 1}</Typography>
       {header}
     </Box>
     <Box className="ReportTableRow-content" style={style.content}>
       {reportQuestions[index]}
-      <Box className="ReportTableRow-content-stats mb-5 overflowX-auto">
+      <Box className="ReportTableRow-content-stats mb-5 overflow-x-auto">
         {!excludedColumns['question_stats'] ? <StackList header="Question Stats" items={[['Type', result.question.type], ['Difficulty', result.question.difficulty], ['Time Allocated', result.question.time_allocated], ['Weight', result.question.weight]]} classNames={{ container: 'mr-5' }} /> : null}
         {!excludedColumns['user_stats'] ? <StackList classNames={{ container: 'mr-5' }} header="User Stats" items={[['Time Taken', result.time_taken], ['Hints Used', result.hints_used], ['Verdict', <Typography className="bold" style={{
           color: result.verdict === false ? red[500] : green[500]
@@ -59,7 +59,7 @@ function ReportTableRow(props: ReportTableRowProps) {
       <Box className="flex">
         {(result.question.type === "MCQ" || result.question.type === "MS") ? !excludedColumns['options'] ? <ReportOptions question={result.question} userAnswers={result.user_answers} className={`${showHints ? 'mr-5' : ''}`} /> : null : !excludedColumns['answers'] ? <ReportAnswers question={result.question as TInputQuestionResult} userAnswers={result.user_answers} className={`${showHints ? 'mr-5' : ''}`} /> : null}
         {showHints ? <Box className="ReportTableRow-content-hints bg-base p-5 mb-5" style={{ width: '25%' }}>
-          {result.question.hints.map(hint => <Box className="ReportTableRow-content-hints overflowX-auto bg-light p-5 mb-5" key={hint}>
+          {result.question.hints.map(hint => <Box className="ReportTableRow-content-hints overflow-x-auto bg-light p-5 mb-5" key={hint}>
             <Markdown content={hint} />
           </Box>)}
         </Box> : null}
@@ -75,10 +75,10 @@ export function ReportTable() {
   const { remove } = useSounds();
 
   const memoizedReportQuestions = useMemo(() => sortedResults.map(sortedResult => <QuestionDisplay contexts={report.quizzes[sortedResult.question.quiz].contexts} question={sortedResult.question} userAnswers={sortedResult.user_answers} showContexts={!excludedColumns['contexts']} showImage={Boolean(!excludedColumns["image"])} showQuestion={!excludedColumns["question"]} />), [report, sortedResults, excludedColumns]);
-  return <Box className="ReportTable flex-1 p-5 bg-base overflowY-auto">
+  return <Box className="ReportTable flex-1 p-5 bg-base overflow-y-auto">
     {sortedResults.map((sortedResult, index) => {
       const quiz = report.quizzes[sortedResult.question.quiz];
-      return <ReportTableRow quiz={`${quiz.subject} - ${quiz.topic}`} key={sortedResult._id} reportQuestions={memoizedReportQuestions} index={index} results={sortedResults} excludedColumns={excludedColumns} header={<Box className="ReportTable-item-icons flex jc-sb c-p ai-c" style={{ width: 40 }}><Hovertips popoverText="View separate"><BsFilm fill={theme.palette.color.opposite_dark} size={15} onClick={() => {
+      return <ReportTableRow quiz={`${quiz.subject} - ${quiz.topic}`} key={sortedResult._id} reportQuestions={memoizedReportQuestions} index={index} results={sortedResults} excludedColumns={excludedColumns} header={<Box className="ReportTable-item-icons flex justify-between cursor-pointer items-center" style={{ width: 40 }}><Hovertips popoverText="View separate"><BsFilm fill={theme.palette.color.opposite_dark} size={15} onClick={() => {
         setModalState([true, <ReportTableModal quiz={`${quiz.subject} - ${quiz.topic}`} style={{
           content: {
             height: "calc(100% - 60px)",

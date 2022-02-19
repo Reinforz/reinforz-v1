@@ -1,15 +1,15 @@
-@import "./anim";
+@import './anim';
 
 div#root {
   height: 100vh;
 }
 
-.App, .Modal-content {
+.App,
+.Modal-content {
   height: 100%;
   outline: none;
 
-  
-  & .h-100p{
+  & .h-full {
     height: 100%;
   }
 
@@ -18,7 +18,7 @@ div#root {
   }
 
   & .m-2_5 {
-    margin: 2.5px
+    margin: 2.5px;
   }
 
   & .p-5 {
@@ -49,8 +49,6 @@ div#root {
     padding-left: 5px;
   }
 
-  
-
   & .m-5 {
     margin: 5px;
   }
@@ -78,7 +76,7 @@ div#root {
   .mt-0 {
     margin-top: 0px;
   }
-  
+
   .mt-5 {
     margin-top: 5px;
   }
@@ -91,23 +89,23 @@ div#root {
     margin-bottom: 10px;
   }
 
-  & .fs-14{
+  & .fs-14 {
     font-size: 14px;
   }
 
-  & .fs-16{
+  & .fs-16 {
     font-size: 16px;
   }
 
-  & .fs-18{
+  & .fs-18 {
     font-size: 18px;
   }
 
-  & .fs-20{
+  & .fs-20 {
     font-size: 20px;
   }
 
-  & .fs-22{
+  & .fs-22 {
     font-size: 22px;
   }
 
@@ -115,80 +113,80 @@ div#root {
     margin-bottom: 0px;
   }
 
-  & .overflow-auto{
+  & .overflow-auto {
     overflow: auto;
   }
 
-  & .overflowY-auto{
+  & .overflow-y-auto {
     overflow-y: auto;
   }
 
-  & .overflowX-auto{
+  & .overflow-x-auto {
     overflow-x: auto;
   }
 
-  & .overflowX-hidden{
+  & .overflow-x-hidden {
     overflow-x: hidden;
   }
 
   & .flex {
-    display: flex
+    display: flex;
   }
 
   & .grid {
-    display: grid
+    display: grid;
   }
 
   & .flex-1 {
     flex: 1;
   }
 
-  & .ai-c {
-    align-items: center
+  & .items-center {
+    align-items: center;
   }
 
-  & .jc-c {
-    justify-content: center
+  & .justify-center {
+    justify-content: center;
   }
 
-  & .jc-sb {
-    justify-content: space-between
+  & .justify-between {
+    justify-content: space-between;
   }
 
   & .br-2_5 {
-    border-radius: 2.5px
+    border-radius: 2.5px;
   }
 
   & .br-5 {
-    border-radius: 5px
+    border-radius: 5px;
   }
 
   & .bold {
-    font-weight: bold
+    font-weight: bold;
   }
 
-  & .fd-c {
-    flex-direction: column
+  & .flex-col {
+    flex-direction: column;
   }
 
-  & .ta-c {
-    text-align: center
+  & .text-center {
+    text-align: center;
   }
 
-  & .us-n {
-    user-select: none
+  & .select-none {
+    user-select: none;
   }
 
-  & .tt-c {
-    text-transform: capitalize
+  & .capitalize {
+    text-transform: capitalize;
   }
 
-  & .tt-u {
-    text-transform: uppercase
+  & .uppercase {
+    text-transform: uppercase;
   }
 
-  & .c-p {
-    cursor: pointer
+  & .cursor-pointer {
+    cursor: pointer;
   }
 
   & .center {
@@ -198,7 +196,7 @@ div#root {
     transform: translate(-50%, -50%);
   }
 
-  & .absolute{
+  & .absolute {
     position: absolute;
   }
 
@@ -206,59 +204,59 @@ div#root {
     min-height: min-content;
   }
 
-  & .h-fc{
+  & .h-fit {
     height: fit-content;
   }
 
-  & .relative{
+  & .relative {
     position: relative;
   }
 
-  & .top-0px{
+  & .top-0px {
     top: 0px;
   }
 
-  & .w-c_10{
+  & .w-c_10 {
     width: calc(100% - 10px);
   }
 
-  & .w-calc_100p_m_10px{
+  & .w-calc_100p_m_10px {
     width: calc(100% - 10px);
   }
 
-  & .h-calc_100p_m_10px{
+  & .h-calc_100p_m_10px {
     height: calc(100% - 10px);
   }
 
-  & .h-calc_100p_m_20px{
+  & .h-calc_100p_m_20px {
     height: calc(100% - 20px);
   }
 
-  & .h-calc_100p_m_5px{
+  & .h-calc_100p_m_5px {
     height: calc(100% - 5px);
   }
 
-  & .w-calc_100p_m_5px{
+  & .w-calc_100p_m_5px {
     width: calc(100% - 5px);
   }
 
-  & .w-100{
+  & .w-100 {
     width: 100px;
   }
 
-  & .w-100p{
+  & .w-full {
     width: 100%;
   }
 
-  & .h-100p{
+  & .h-full {
     height: 100%;
   }
 
-  & .h-100px{
+  & .h-100px {
     height: 100px;
   }
 
-  & .fd-r{
+  & .flex-row {
     flex-direction: row;
   }
 }
@@ -270,7 +268,8 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
 }
 
 .page {
@@ -279,19 +278,20 @@ code {
   height: 100%;
 }
 
-.markdown{
+.markdown {
   table {
     margin: 0 auto;
     border: none;
     border-collapse: collapse;
 
-    th, td {
+    th,
+    td {
       text-align: center;
-      padding: .5em;
+      padding: 0.5em;
     }
   }
 
-  p{
+  p {
     margin: 5px;
   }
 }

@@ -29,7 +29,7 @@ export default function InputRange<T extends Record<string, any>>(props: InputRa
   return <FormGroup className={`InputRange p-5 ${classNames.formGroup ?? ''}`}>
     <InputLabel className={`${classNames.inputLabel ?? ''}`}>{label}</InputLabel>
     <Box style={{ flexDirection: direction }} className={`InputRange-content bg-dark p-5 ${containerPaddingClass} flex ${classNames.content ?? ''}`}>
-      <Box className={`bg-light flex p-5 fd-c ${itemMarginClass}`}>
+      <Box className={`bg-light flex p-5 flex-col ${itemMarginClass}`}>
         <Select disableUnderline className={`${classNames.operatorSelect ?? ''}`} value={operator}
           onChange={(e) => {
             setState({ ...state, [stateKey]: [e.target.value, range] })

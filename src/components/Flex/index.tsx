@@ -6,7 +6,7 @@ interface Props extends BoxProps {
 }
 
 export default function Flex({ className = '', style = {}, ...props }: Props) {
-  return <Box {...props} className={`flex jc-c ai-c ${className ?? ''}`} style={{ ...style, flexDirection: props.direction ?? 'row' }}>
+  return <Box {...props} className={`flex justify-center items-center ${className ?? ''}`} style={{ ...style, flexDirection: props.direction ?? 'row' }}>
     {props.children}
   </Box>
 }
