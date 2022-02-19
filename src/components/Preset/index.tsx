@@ -1,11 +1,12 @@
 import { Box } from "@mui/material";
 import { grey, red } from "@mui/material/colors";
-import { OptionsObject, useSnackbar } from "notistack";
+import { useSnackbar } from "notistack";
 import { useContext } from "react";
 import { FaSave } from "react-icons/fa";
 import { MdDelete, MdUpdate } from "react-icons/md";
 import shortid from "shortid";
 import { Hovertips, ListSelect, ModalPresetInput } from "..";
+import { NotistackOptions } from "../../constants";
 import { ModalContext } from "../../context/ModalContext";
 import { useThemeSettings } from "../../hooks";
 import useSounds from "../../hooks/useSounds";
@@ -21,14 +22,6 @@ export interface PresetProps {
   lsKey?: string
 }
 
-const centerBottomErrorNotistack = {
-  variant: 'error',
-  anchorOrigin: {
-    vertical: 'bottom',
-    horizontal: 'center',
-  },
-} as OptionsObject;
-
 export default function Preset(props: PresetProps) {
   const { setModalState } = useContext(ModalContext);
   const { theme } = useThemeSettings();
@@ -38,9 +31,9 @@ export default function Preset(props: PresetProps) {
 
   function checkPresetInput(input: string) {
     if (input === '') {
-      enqueueSnackbar("Can't save a preset with no name", centerBottomErrorNotistack)
+      enqueueSnackbar("Can't save a preset with no name", NotistackOptions)
     } else if (itemPresets.presets.map(preset => preset.name).includes(input)) {
-      enqueueSnackbar(`A preset with name: ${input} already exists`, centerBottomErrorNotistack)
+      enqueueSnackbar(`A preset with name: ${input} already exists`, NotistackOptions)
     } else {
       return true;
     }

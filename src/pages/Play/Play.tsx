@@ -1,13 +1,13 @@
 import { Box, Typography } from "@mui/material";
 import { green, red } from "@mui/material/colors";
-import { OptionsObject, useSnackbar } from "notistack";
+import { useSnackbar } from "notistack";
 import { useContext, useEffect, useRef, useState } from "react";
 import { FaKeyboard, FaPlay } from "react-icons/fa";
 import { HiDocumentReport } from "react-icons/hi";
 import { IoLogoGameControllerB, IoMdCreate, IoMdSettings } from 'react-icons/io';
 import { useNavigate } from "react-router-dom";
 import { IconGroup, List, SideToggleMenu, View } from '../../components';
-import { REINFORZ_PLAY_SETTINGS_LS_KEY } from "../../constants";
+import { NotistackOptions, REINFORZ_PLAY_SETTINGS_LS_KEY } from "../../constants";
 import { RootContext } from "../../context/RootContext";
 import { useNavigationIcons, useThemeSettings } from '../../hooks';
 import { generateNavigationStyles, navigateBetweenPresets } from "../../utils";
@@ -15,14 +15,6 @@ import "./Play.scss";
 import { PlayListTable } from "./PlayListTable/PlayListTable";
 import PlaySettings from "./PlaySettings/PlaySettings";
 import PlayUpload from "./PlayUpload/PlayUpload";
-
-const centerBottomErrorNotistack = {
-  variant: 'error',
-  anchorOrigin: {
-    vertical: 'bottom',
-    horizontal: 'center',
-  },
-} as OptionsObject;
 
 function Play() {
   const [selectedErrorLogIds, setSelectedErrorLogIds] = useState<string[]>([]);
@@ -36,11 +28,11 @@ function Play() {
   const generatedNavigationStyles = generateNavigationStyles(settings.navigation);
   const startPlay = () => {
     if (uploadedQuizzes.length === 0) {
-      enqueueSnackbar(`No quiz has been uploaded.`, centerBottomErrorNotistack);
+      enqueueSnackbar(`No quiz has been uploaded.`, NotistackOptions);
     } else if (selectedQuizIds.length === 0) {
-      enqueueSnackbar(`No quiz has been selected.`, centerBottomErrorNotistack);
+      enqueueSnackbar(`No quiz has been selected.`, NotistackOptions);
     } else if (filteredQuestions === 0) {
-      enqueueSnackbar(`There are in total 0 questions to be played after applying the filters. Make the filters less strict.`, centerBottomErrorNotistack);
+      enqueueSnackbar(`There are in total 0 questions to be played after applying the filters. Make the filters less strict.`, NotistackOptions);
     }
 
     if (canStartPlay) {
