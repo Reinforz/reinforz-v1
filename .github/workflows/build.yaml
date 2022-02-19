@@ -2,9 +2,9 @@ name: Lint, Build and Test
 
 on:
   push:
-    branches: [master]
+    branches: [prod, "dev"]
   pull_request:
-    branches: [master]
+    branches: [prod]
 
 jobs:
   build:
