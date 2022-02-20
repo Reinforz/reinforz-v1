@@ -43,7 +43,7 @@ function ReportTableRow(props: ReportTableRowProps) {
   const showHints = result.question.hints.length !== 0 && !excludedColumns['hints'];
   return <Box key={result.question._id} className="ReportTableRow pb-0 p-1 bg-dark" style={style.container}>
     <Box className="ReportTableRow-header flex items-center justify-center bg-dark mb-1" style={style.header}>
-      {!excludedColumns['quiz_info'] ? <Typography className="p-10 bg-light fs-16 bold">{quiz}</Typography> : null}
+      {!excludedColumns['quiz_info'] ? <Typography className="p-10 bg-light text-base bold">{quiz}</Typography> : null}
       <Typography variant="h6" className="ReportTableRow-index bold flex-1 text-center">{index + 1}</Typography>
       {header}
     </Box>

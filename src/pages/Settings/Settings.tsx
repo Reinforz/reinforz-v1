@@ -63,11 +63,11 @@ function Settings() {
         <Box className="Settings-content bg-dark flex flex-col items-center p-1">
           <Select classNames={{
             formGroup: "mb-1 p-1 w-c_10 flex-row",
-            inputLabel: 'w-100 mr-2 mb-0 fs-16',
+            inputLabel: 'w-100 mr-2 mb-0 text-base',
           }} items={["dark", "polar_night", "light", "snow_storm"]} label={"Theme"} setState={setSettings} state={settings} stateKey={"theme"} menuItemLabel={(item) => transformTextBySeparator(item)} />
           <Select classNames={{
             formGroup: "mb-1 p-1 w-c_10 flex-row",
-            inputLabel: 'w-100 mr-2 mb-0 fs-16',
+            inputLabel: 'w-100 mr-2 mb-0 text-base',
           }} items={["serif", "sans-serif", "monospace"]} label={"Font"} setState={setSettings} state={settings} stateKey={"font"} menuItemLabel={(item) => transformTextBySeparator(item, "-")} />
           <SelectGroup className="mb-1 w-c_10" groupItems={[
             [["center", "right", "left"], "X-Axis", "x"],
@@ -76,7 +76,7 @@ function Settings() {
           ]} label={"Navigation"} setState={setSettings} state={settings} stateKey={"navigation"} classNames={{
             inputLabel: 'fs-18 p-10',
             select: {
-              inputLabel: 'fs-16 p-10'
+              inputLabel: 'text-base p-10'
             }
           }} />
           <SelectGroup className="mb-1 w-c_10" groupItems={[
@@ -84,10 +84,10 @@ function Settings() {
           ]} label={"Color"} setState={setSettings} state={settings} stateKey={"color"} classNames={{
             inputLabel: 'fs-18 p-10',
             select: {
-              inputLabel: 'fs-16 p-10'
+              inputLabel: 'text-base p-10'
             }
           }} renderValue={(item) => colorMap[item as string]} menuItemLabel={(item) => colorMap[item]} />
-          <Toggles classNames={{ inputLabel: 'w-100 fs-16' }} items={["animation", "hovertips", "shortcuts", "sound"]} setState={setSettings} state={settings} />
+          <Toggles classNames={{ inputLabel: 'w-100 text-base' }} items={["animation", "hovertips", "shortcuts", "sound"]} setState={setSettings} state={settings} />
         </Box>
       </Box>
     </Box>

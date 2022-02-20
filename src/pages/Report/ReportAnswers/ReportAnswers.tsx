@@ -24,7 +24,7 @@ export function ReportAnswers(props: Props) {
           </Box>
           {answers.map((answer, alternateIndex) => <Box className="Report-Answers-container-item pb-0 mb-1 bg-base p-1" key={alternateIndex}>
             <Box className="mb-1 flex justify-between">
-              <Typography className="flex p-10 justify-center items-center bold fs-16 mr-1">{alternateIndex + 1}</Typography>
+              <Typography className="flex p-10 justify-center items-center bold text-base mr-1">{alternateIndex + 1}</Typography>
               <Typography className="Report-Answers-container-item-text bg-light p-10 flex-1 items-center flex">{answer.text}</Typography>
               {answer.regex ? <Typography className="Report-Answers-container-item-regex bg-light p-10 ml-1 bold">{answer.regex.regex ? "/" + answer.regex.regex + "/" : 'N/A'}{answer.regex.flags ? answer.regex.flags : ''}</Typography> : null}
               {answer.modifiers.length !== 0 ? <Typography className="Report-Answers-container-item-modifiers bg-light p-10 ml-1 bold">{answer.modifiers.join(",")}</Typography> : null}

@@ -20,7 +20,7 @@ div#root {
   & .p-0 {
     padding: 0px;
   }
-  
+
   & .m-0 {
     margin: 0px;
   }
@@ -41,12 +41,58 @@ div#root {
     margin-bottom: 0px;
   }
 
-  & .fs-14 {
-    font-size: 14px;
+  .text-xs {
+    font-size: 0.75rem;
+    line-height: 1rem;
   }
 
-  & .fs-16 {
-    font-size: 16px;
+  .text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+
+  .text-base {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+
+  .text-lg {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
+
+  .text-xl {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+
+  .text-2xl {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+
+  .text-3xl {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+  }
+
+  .text-4xl {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+  }
+
+  .text-5xl {
+    font-size: 3rem;
+    line-height: 1;
+  }
+
+  .text-6xl {
+    font-size: 3.75rem;
+    line-height: 1;
+  }
+
+  & .fs-14 {
+    font-size: 14px;
   }
 
   & .fs-18 {
