@@ -81,7 +81,7 @@ export default function List<T extends { _id: string }>(props: ListProps<T>) {
             </Box>
             <Box className="flex flex-1 justify-between p-1 mr-1">
               {fields.map((field, index) => <Box className="List-content-item-field" key={_id + field + index}>
-                <Typography variant="body1" component="div" className="fs-18">
+                <Typography variant="body1" component="div" className="text-lg">
                   {typeof field === "function" ? field(item) : item[field]}
                 </Typography>
               </Box>)}

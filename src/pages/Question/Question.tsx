@@ -133,7 +133,7 @@ export default function Question(props: Props) {
               onNextButtonPress()
             }
           }}>{!isLast ? "Next" : "Report"}</Button>
-          {timeout && !playSettings.options.disable_timer && <Typography className="QuestionTimer bg-light p-1 flex justify-center items-center flex-1 bold fs-20 ml-1 h-calc_100p_m_10px">{displayTime(timeout)}</Typography>}
+          {timeout && !playSettings.options.disable_timer && <Typography className="QuestionTimer bg-light p-1 flex justify-center items-center flex-1 bold text-xl ml-1 h-calc_100p_m_10px">{displayTime(timeout)}</Typography>}
         </Box>}
       </Box>
     </Box>

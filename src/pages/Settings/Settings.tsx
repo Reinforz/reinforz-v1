@@ -74,7 +74,7 @@ function Settings() {
             [["center", "top", "bottom"], "Y-Axis", "y"],
             [["column", "row"], "Direction", "direction"],
           ]} label={"Navigation"} setState={setSettings} state={settings} stateKey={"navigation"} classNames={{
-            inputLabel: 'fs-18 p-10',
+            inputLabel: 'text-lg p-10',
             select: {
               inputLabel: 'text-base p-10'
             }
@@ -82,7 +82,7 @@ function Settings() {
           <SelectGroup className="mb-1 w-c_10" groupItems={[
             [[...Object.keys(colorMap)], "Primary", "primary"],
           ]} label={"Color"} setState={setSettings} state={settings} stateKey={"color"} classNames={{
-            inputLabel: 'fs-18 p-10',
+            inputLabel: 'text-lg p-10',
             select: {
               inputLabel: 'text-base p-10'
             }

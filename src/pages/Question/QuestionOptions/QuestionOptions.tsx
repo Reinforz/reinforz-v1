@@ -12,7 +12,7 @@ export default function QuestionOptions(props: Props) {
   const { setUserAnswers, userAnswers, question: { options, _id } } = props;
 
   const memoizedQuestionOptions = useMemo(() => {
-    return options!.map(option => <Markdown content={option.text} classNames={{ typography: 'fs-20' }} />)
+    return options!.map(option => <Markdown content={option.text} classNames={{ typography: 'text-xl' }} />)
     // eslint-disable-next-line
   }, [_id])
 

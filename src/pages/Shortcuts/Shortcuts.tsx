@@ -12,7 +12,7 @@ import './Shortcuts.scss';
 function StackListItem(props: { contents: [string, string] }) {
   return <Box className="flex flex-col">
     <Typography>{props.contents[0]}</Typography>
-    <Typography className="fs-14" style={{ color: grey[300] }}>
+    <Typography className="text-sm" style={{ color: grey[300] }}>
       ({props.contents[1]})
     </Typography>
   </Box>
@@ -59,7 +59,7 @@ export default function Shortcuts() {
       <StackList
         classNames={{
           container: 'center',
-          header: 'fs-18 p-10 uppercase'
+          header: 'text-lg p-10 uppercase'
         }}
         header={'Shortcuts'}
         items={[

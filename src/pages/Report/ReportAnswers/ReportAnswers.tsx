@@ -19,8 +19,8 @@ export function ReportAnswers(props: Props) {
       question.answers.map((answers, answerIndex) => {
         return <Box className="Report-Answers-container mb-1 p-1 pb-0 flex flex-col bg-dark" key={answerIndex}>
           <Box className="flex mb-1">
-            <Typography className="flex p-10 justify-center items-center bold fs-18 mr-1">{answerIndex + 1}</Typography>
-            <Typography className="Report-Answers-container-userAnswer bg-light p-1 bold flex justify-center items-center text-center fs-18 flex-1">{userAnswers[answerIndex] ?? 'N/A'}</Typography>
+            <Typography className="flex p-10 justify-center items-center bold text-lg mr-1">{answerIndex + 1}</Typography>
+            <Typography className="Report-Answers-container-userAnswer bg-light p-1 bold flex justify-center items-center text-center text-lg flex-1">{userAnswers[answerIndex] ?? 'N/A'}</Typography>
           </Box>
           {answers.map((answer, alternateIndex) => <Box className="Report-Answers-container-item pb-0 mb-1 bg-base p-1" key={alternateIndex}>
             <Box className="mb-1 flex justify-between">
