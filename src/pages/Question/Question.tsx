@@ -109,7 +109,7 @@ export default function Question(props: Props) {
           }} popoverTransformOrigin={{
             vertical: 'bottom',
             horizontal: 'center',
-          }} style={{ height: 'calc(100% - 10px)' }} className="Question-timerBreak bg-light p-1 mr-1 justify-center items-center flex br-5 cursor-pointer h-calc_100p_m_10px" popoverText={timeBreak ? "Stop time break" : "Start time break"} onClick={() => {
+          }} style={{ height: 'calc(100% - 10px)' }} className="Question-timerBreak bg-light p-1 mr-1 justify-center items-center flex rounded cursor-pointer" popoverText={timeBreak ? "Stop time break" : "Start time break"} onClick={() => {
             setTimeBreak((timeBreak) => !timeBreak);
             if (timeBreak === false) {
               setTimer(null);
@@ -133,7 +133,7 @@ export default function Question(props: Props) {
               onNextButtonPress()
             }
           }}>{!isLast ? "Next" : "Report"}</Button>
-          {timeout && !playSettings.options.disable_timer && <Typography className="QuestionTimer bg-light p-1 flex justify-center items-center flex-1 bold text-xl ml-1 h-calc_100p_m_10px">{displayTime(timeout)}</Typography>}
+          {timeout && !playSettings.options.disable_timer && <Typography className="QuestionTimer bg-light p-1 flex justify-center items-center flex-1 bold text-xl ml-1">{displayTime(timeout)}</Typography>}
         </Box>}
       </Box>
     </Box>

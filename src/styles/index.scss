@@ -41,52 +41,52 @@ div#root {
     margin-bottom: 0px;
   }
 
-  .text-xs {
+  & .text-xs {
     font-size: 0.75rem;
     line-height: 1rem;
   }
 
-  .text-sm {
+  & .text-sm {
     font-size: 0.875rem;
     line-height: 1.25rem;
   }
 
-  .text-base {
+  & .text-base {
     font-size: 1rem;
     line-height: 1.5rem;
   }
 
-  .text-lg {
+  & .text-lg {
     font-size: 1.125rem;
     line-height: 1.75rem;
   }
 
-  .text-xl {
+  & .text-xl {
     font-size: 1.25rem;
     line-height: 1.75rem;
   }
 
-  .text-2xl {
+  & .text-2xl {
     font-size: 1.5rem;
     line-height: 2rem;
   }
 
-  .text-3xl {
+  & .text-3xl {
     font-size: 1.875rem;
     line-height: 2.25rem;
   }
 
-  .text-4xl {
+  & .text-4xl {
     font-size: 2.25rem;
     line-height: 2.5rem;
   }
 
-  .text-5xl {
+  & .text-5xl {
     font-size: 3rem;
     line-height: 1;
   }
 
-  .text-6xl {
+  & .text-6xl {
     font-size: 3.75rem;
     line-height: 1;
   }
@@ -131,12 +131,36 @@ div#root {
     justify-content: space-between;
   }
 
-  & .br-2_5 {
-    border-radius: 2.5px;
+  & .rounded-none {
+    border-radius: 0px;
   }
 
-  & .br-5 {
-    border-radius: 5px;
+  & .rounded-sm {
+    border-radius: 0.125rem;
+  }
+
+  & .rounded {
+    border-radius: 0.25rem
+  }
+
+  & .rounded-md {
+    border-radius: 0.375rem;
+  }
+
+  & .rounded-lg {
+    border-radius: 0.5rem;
+  }
+
+  & .rounded-xl {
+    border-radius: 0.75rem;
+  }
+
+  & .rounded-2xl {
+    border-radius: 1rem;
+  }
+
+  & .rounded-3xl {
+    border-radius: 1.5rem;
   }
 
   & .bold {
@@ -190,48 +214,12 @@ div#root {
     position: relative;
   }
 
-  & .top-0px {
-    top: 0px;
-  }
-
-  & .w-c_10 {
-    width: calc(100% - 10px);
-  }
-
-  & .w-calc_100p_m_10px {
-    width: calc(100% - 10px);
-  }
-
-  & .h-calc_100p_m_10px {
-    height: calc(100% - 10px);
-  }
-
-  & .h-calc_100p_m_20px {
-    height: calc(100% - 20px);
-  }
-
-  & .h-calc_100p_m_5px {
-    height: calc(100% - 5px);
-  }
-
-  & .w-calc_100p_m_5px {
-    width: calc(100% - 5px);
-  }
-
-  & .w-100 {
-    width: 100px;
-  }
-
   & .w-full {
     width: 100%;
   }
 
   & .h-full {
     height: 100%;
-  }
-
-  & .h-100px {
-    height: 100px;
   }
 
   & .flex-row {
