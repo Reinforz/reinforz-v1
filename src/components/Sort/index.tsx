@@ -23,7 +23,7 @@ function SortSelect(props: { items: string[], menuItemLabel: SortProps["menuItem
 
   const { items, sort, menuItemLabel, index, sorts, setSorts } = props;
   const item = sort[index];
-  return <MuiSelect disableUnderline className="Sort-content-item-category bg-light flex-1 mr-1" value={item}
+  return <MuiSelect disableUnderline className="Sort-content-item-category bg-light flex-1 " value={item}
     onChange={(e) => {
       click()
       sort[index] = e.target.value as any;
@@ -59,7 +59,7 @@ export default function Sort(props: SortProps) {
           <SortSelect index={0} items={items} {...props} />
           <SortSelect index={1} items={["ASC", "DESC"]} {...props} />
           <Box className="Sort-content-item-icons bg-light p-1 flex justify-center items-center">
-            <Box className="Sort-content-item-icons-down mr-1">
+            <Box className="Sort-content-item-icons-down ">
               <Hovertips popoverText={"Move downwards"}>
                 <FaArrowAltCircleDown fill={canMoveDownwards ? theme.palette.color.opposite_light : grey[500]} size={15} onClick={() => {
                   if (canMoveDownwards) {
@@ -71,7 +71,7 @@ export default function Sort(props: SortProps) {
                 }} />
               </Hovertips>
             </Box>
-            <Box className="Sort-content-item-icons-up mr-1">
+            <Box className="Sort-content-item-icons-up ">
               <Hovertips popoverText={"Move upwards"}>
                 <FaArrowAltCircleUp fill={canMoveUpwards ? theme.palette.color.opposite_light : grey[500]} size={15} onClick={() => {
                   if (canMoveUpwards) {

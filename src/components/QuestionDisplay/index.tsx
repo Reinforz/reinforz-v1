@@ -33,7 +33,7 @@ export function QuestionDisplay(props: QuestionDisplayProps) {
     questionString = question.question;
   }
   return <Box className={`QuestionDisplay p-1 flex justify-center mb-1 bg-base ${classNames.container ?? ''}`}>
-    {showContexts && question.contexts.length !== 0 && <Box className="QuestionDisplay-contexts overflow-y-auto bg-dark p-1 pb-0 mr-1">
+    {showContexts && question.contexts.length !== 0 && <Box className="QuestionDisplay-contexts overflow-y-auto bg-dark p-1 pb-0 ">
       {question.contexts.map(context => <Markdown content={contexts[context]} classNames={{
         typography: 'QuestionDisplay-contexts-item bg-light text-xl overflow-y-auto flex-1 p-10 mb-1',
       }} />)}
@@ -41,6 +41,6 @@ export function QuestionDisplay(props: QuestionDisplayProps) {
     {showQuestion && <Markdown content={questionString} classNames={{
       typography: 'QuestionDisplay-question bg-light text-xl overflow-y-auto flex-1 p-10',
     }} />}
-    {showImage && question.image ? <Box className={`QuestionDisplay-image bg-light flex justify-center items-center ml-1 ${classNames.imageContainer ?? ''}`} style={{ width: `25%`, minWidth: 350, maxWidth: 500 }}><img className={`${classNames.image ?? ''}`} src={question.image!} alt="Question" /></Box> : null}
+    {showImage && question.image ? <Box className={`QuestionDisplay-image bg-light flex justify-center items-center  ${classNames.imageContainer ?? ''}`} style={{ width: `25%`, minWidth: 350, maxWidth: 500 }}><img className={`${classNames.image ?? ''}`} src={question.image!} alt="Question" /></Box> : null}
   </Box>
 }

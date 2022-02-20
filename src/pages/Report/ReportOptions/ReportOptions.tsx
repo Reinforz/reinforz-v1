@@ -25,8 +25,8 @@ export function ReportOptions(props: Props) {
           <Markdown classNames={{
             typography: `Report-Options-container-item-text flex-1 bg-light flex items-center p-10`
           }} content={option.text} />
-          {option.isCorrect ? <Box className="bg-light flex items-center justify-center p-1 ml-1"><AiFillCheckSquare fill={green[500]} style={{ padding: 5 }} size={17.5} /></Box> : null}
-          {option.userSelected ? <Box className="bg-light flex items-center justify-center p-1 ml-1"><FaUser fill={theme.palette.text.primary} style={{ padding: 5 }} size={17.5} /> </Box> : null}
+          {option.isCorrect ? <Box className="bg-light flex items-center justify-center p-1 "><AiFillCheckSquare fill={green[500]} style={{ padding: 5 }} size={17.5} /></Box> : null}
+          {option.userSelected ? <Box className="bg-light flex items-center justify-center p-1 "><FaUser fill={theme.palette.text.primary} style={{ padding: 5 }} size={17.5} /> </Box> : null}
         </Box>
         {question.answers[answerIndex]?.explanation ? <Box className="Report-Options-container-item-explanation bg-light mb-1 p-10 text-lg">
           <Markdown content={question.answers[answerIndex].explanation!} />

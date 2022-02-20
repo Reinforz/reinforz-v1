@@ -24,7 +24,7 @@ export interface InputRangeProps<T extends Record<string, any>> {
 export default function InputRange<T extends Record<string, any>>(props: InputRangeProps<T>) {
   const { direction = 'row', min, max, setState, state, stateKey, label, step = 5, classNames = {} } = props;
   const { click } = useSounds();
-  const containerPaddingClass = direction === 'row' ? 'pr-0' : 'pb-0', itemMarginClass = direction === 'row' ? 'mr-1' : 'mb-1'
+  const containerPaddingClass = direction === 'row' ? 'pr-0' : 'pb-0', itemMarginClass = direction === 'row' ? '' : 'mb-1'
   const [operator, range]: [TNumberOperator, [string, string]] = state[stateKey]
   return <FormGroup className={`InputRange p-1 ${classNames.formGroup ?? ''}`}>
     <InputLabel className={`${classNames.inputLabel ?? ''}`}>{label}</InputLabel>

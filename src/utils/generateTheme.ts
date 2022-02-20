@@ -246,12 +246,12 @@ export function generateTheme(settings: IGlobalSettings) {
       MuiFormControlLabel: {
         styleOverrides: {
           root: {
-            marginLeft: 0,
-            marginRight: 0,
             margin: 0,
-            padding: 5,
-            backgroundColor: light
+            backgroundColor: light,
           }
+        },
+        defaultProps: {
+          className: "p-1.5 rounded-sm"
         }
       },
       MuiFormLabel: {

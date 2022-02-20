@@ -50,14 +50,14 @@ function ReportTableRow(props: ReportTableRowProps) {
     <Box className="ReportTableRow-content" style={style.content}>
       {reportQuestions[index]}
       <Box className="ReportTableRow-content-stats mb-1 overflow-x-auto">
-        {!excludedColumns['question_stats'] ? <StackList header="Question Stats" items={[['Type', result.question.type], ['Difficulty', result.question.difficulty], ['Time Allocated', result.question.time_allocated], ['Weight', result.question.weight]]} classNames={{ container: 'mr-1' }} /> : null}
-        {!excludedColumns['user_stats'] ? <StackList classNames={{ container: 'mr-1' }} header="User Stats" items={[['Time Taken', result.time_taken], ['Hints Used', result.hints_used], ['Verdict', <Typography className="bold" style={{
+        {!excludedColumns['question_stats'] ? <StackList header="Question Stats" items={[['Type', result.question.type], ['Difficulty', result.question.difficulty], ['Time Allocated', result.question.time_allocated], ['Weight', result.question.weight]]} classNames={{ container: '' }} /> : null}
+        {!excludedColumns['user_stats'] ? <StackList classNames={{ container: '' }} header="User Stats" items={[['Time Taken', result.time_taken], ['Hints Used', result.hints_used], ['Verdict', <Typography className="bold" style={{
           color: result.verdict === false ? red[500] : green[500]
         }}>{result.verdict === false ? "Incorrect" : "Correct"}</Typography>]]} /> : null}
         {!excludedColumns['score_breakdown'] ? <StackList header="Score Breakdown" items={[['Amount', result.score.amount], ['Answers', result.score.answers], ['Time', result.score.time], ['Hints', result.score.hints], ['Weighted', result.question.weight * result.score.amount]]} /> : null}
       </Box>
       <Box className="flex">
-        {(result.question.type === "MCQ" || result.question.type === "MS") ? !excludedColumns['options'] ? <ReportOptions question={result.question} userAnswers={result.user_answers} className={`${showHints ? 'mr-1' : ''}`} /> : null : !excludedColumns['answers'] ? <ReportAnswers question={result.question as TInputQuestionResult} userAnswers={result.user_answers} className={`${showHints ? 'mr-1' : ''}`} /> : null}
+        {(result.question.type === "MCQ" || result.question.type === "MS") ? !excludedColumns['options'] ? <ReportOptions question={result.question} userAnswers={result.user_answers} className={`${showHints ? '' : ''}`} /> : null : !excludedColumns['answers'] ? <ReportAnswers question={result.question as TInputQuestionResult} userAnswers={result.user_answers} className={`${showHints ? '' : ''}`} /> : null}
         {showHints ? <Box className="ReportTableRow-content-hints bg-base p-1 mb-1" style={{ width: '25%' }}>
           {result.question.hints.map(hint => <Box className="ReportTableRow-content-hints overflow-x-auto bg-light p-1 mb-1" key={hint}>
             <Markdown content={hint} />

@@ -28,7 +28,7 @@ export default function Aggregator<T>(props: AggregatorProps<T>) {
     <Header header={header} />
     <Content className="Aggregator-content pb-0">
       {items.map(item => <Box key={item.type + item.stateKey} className="Aggregator-content-item flex mb-1">
-        <Select className="mr-1 flex-1" menuItemLabel={(item) => item} label={item.label ?? transformTextBySeparator(item.stateKey as string)} items={item.type === "number" ? ["MAX", "MIN", "AVG", 'MEDIAN', 'MODE', 'STDDEV', 'VARIANCE'] : ["TRUE", "FALSE"]} setState={(aggregator) => {
+        <Select className=" flex-1" menuItemLabel={(item) => item} label={item.label ?? transformTextBySeparator(item.stateKey as string)} items={item.type === "number" ? ["MAX", "MIN", "AVG", 'MEDIAN', 'MODE', 'STDDEV', 'VARIANCE'] : ["TRUE", "FALSE"]} setState={(aggregator) => {
           setState({
             ...state,
             [item.stateKey]: (aggregator as T)[item.stateKey]
