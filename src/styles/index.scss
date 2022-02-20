@@ -4,6 +4,10 @@ div#root {
   height: 100vh;
 }
 
+:root {
+  font-size: 14px;
+}
+
 .App,
 .Modal-content {
   height: 100%;

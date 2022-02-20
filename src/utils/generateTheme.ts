@@ -133,14 +133,36 @@ export function generateTheme(settings: IGlobalSettings) {
           : font === 'serif'
           ? 'Noto Serif'
           : 'Ubuntu Mono',
-      fontSize: 14,
+      fontSize: 16,
+      h1:{
+        fontWeight: 700,
+        fontSize: "3.75rem",
+        lineHeight: 1
+      },
+      h2: {
+        fontWeight: 700,
+        fontSize: "3rem",
+        lineHeight: 1
+      },
+      h3: {
+        fontWeight: 700,
+        fontSize: '2.25rem',
+        lineHeight: "2.5rem"
+      },
+      h4: {
+        fontWeight: 700,
+        fontSize: '1.875rem',
+        lineHeight: "2.25rem"
+      },
       h5: {
-        fontWeight: 'bold',
-        fontSize: '1.25em'
+        fontWeight: 600,
+        fontSize: '1.5rem',
+        lineHeight: "2rem"
       },
       h6: {
-        fontWeight: 'bold',
-        fontSize: '1.15em'
+        fontWeight: 600,
+        fontSize: '1.25rem',
+        lineHeight: "1.75rem"
       }
     },
     components: {
