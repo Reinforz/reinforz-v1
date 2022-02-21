@@ -224,9 +224,6 @@ export function generateTheme(settings: IGlobalSettings) {
             paddingLeft: 5
           }
         },
-        defaultProps: {
-          disableUnderline: true
-        }
       },
       MuiRadio: {
         styleOverrides: {
@@ -276,20 +273,25 @@ export function generateTheme(settings: IGlobalSettings) {
           }
         }
       },
-      MuiTextField: {
-        defaultProps: {
-          InputProps: {
-            disableUnderline: true
+      MuiInput: {
+        styleOverrides: {
+          root: {
+            "&&&:before": {
+              borderBottom: "none"
+            },
+            "&&:after": {
+              borderBottom: "none"
+            },
           }
         }
       },
       MuiInputBase: {
         styleOverrides: {
           input: {
-            paddingBottom: 5
+            paddingBottom: "0.25rem"
           },
           root: {
-            padding: 5,
+            padding: "0.25rem",
             paddingLeft: 0
           }
         }

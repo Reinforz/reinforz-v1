@@ -13,10 +13,10 @@ export interface ListSelectProps {
 export default function ListSelect(props: ListSelectProps) {
   const { items, onChange, item, label, menuItemLabel } = props;
   const { click } = useSounds();
-  return <FormGroup className="ListSelect pb-0">
+  return <FormGroup className="ListSelect">
     {label && <InputLabel>{label}</InputLabel>}
     <Box className="Select-content bg-light flex flex-col p-1">
-      <MuiSelect disableUnderline value={item}
+      <MuiSelect variant="standard" value={item}
         onChange={(e) => {
           click();
           onChange(e.target.value as string)

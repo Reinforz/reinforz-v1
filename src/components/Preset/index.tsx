@@ -40,7 +40,7 @@ export default function Preset(props: PresetProps) {
     return false
   }
 
-  return <Box className="Preset">
+  return <Box className="Preset cursor-pointer flex items-center align-center gap-1 p-1">
     <ListSelect items={itemPresets.presets.map(preset => preset.id)} menuItemLabel={(id) => itemPresets.presets.find(preset => preset.id === id)!.name} onChange={(id) => {
       setPresetState({
         current: id,

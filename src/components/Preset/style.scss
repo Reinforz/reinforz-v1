@@ -1,9 +1,4 @@
 .Preset{
-  align-items: center; 
-  justify-content: center; 
-  cursor: pointer;
-  display: flex;
-  
   .icon{
     display: flex;
     justify-content: center;
@@ -12,10 +7,7 @@
     width: fit-content;
   }
 
-  .MuiFormGroup-root{
+  .MuiFormGroup-root {
     flex: 1;
-    padding: 0px;
-    margin: 0px;
-    margin-right: 5px;
   }
 }

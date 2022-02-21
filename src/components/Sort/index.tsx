@@ -23,7 +23,7 @@ function SortSelect(props: { items: string[], menuItemLabel: SortProps["menuItem
 
   const { items, sort, menuItemLabel, index, sorts, setSorts } = props;
   const item = sort[index];
-  return <MuiSelect disableUnderline className="Sort-content-item-category bg-light flex-1 " value={item}
+  return <MuiSelect className="Sort-content-item-category bg-light flex-1 " value={item}
     onChange={(e) => {
       click()
       sort[index] = e.target.value as any;
