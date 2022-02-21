@@ -7,7 +7,6 @@ import { useThemeSettings } from "../../../hooks";
 import useSounds from "../../../hooks/useSounds";
 import { IPlaySettingsFilters, IPlaySettingsOptions } from "../../../types";
 import { generateDefaultPlaySettingsState, transformTextBySeparator } from "../../../utils";
-import "./PlaySettings.scss";
 
 export default function PlaySettings() {
   const { playSettingsPresets, setPlaySettingsPresets, selectedQuizIds, playSettings, setPlaySettings, filteredQuizzes } = useContext(RootContext);
@@ -24,7 +23,7 @@ export default function PlaySettings() {
     <Box className="bg-dark">
       <Preset lsKey={REINFORZ_PLAY_SETTINGS_LS_KEY} modalLabel="Save Play Settings" popoverText="Save current play settings as preset" currentPreset={playSettings} itemPresets={playSettingsPresets} setPresetState={setPlaySettingsPresets} />
     </Box>
-    <Box className="PlaySettings-group flex-col-1 PlaySettings-group-options">
+    <Box className="PlaySettings-group PlaySettings-group-options flex-col-1">
       <Header className="PlaySettings-group-header uppercase text-base" header={"Options"} />
       <Box className="PlaySettings-group-content flex-col-1 p-1">
         {Object.keys(playSettings.options).map((key, index) => {
@@ -53,9 +52,9 @@ export default function PlaySettings() {
         })}
       </Box>
     </Box>
-    <Box className="PlaySettings-group PlaySettings-group-filters overflow-auto">
-      <Header className="PlaySettings-group-header uppercase text-base p-0" header={"Filters"} />
-      <Box className="PlaySettings-group-content bg-dark p-1">
+    <Box className="PlaySettings-group PlaySettings-group-filters overflow-auto flex-col-1 p-1">
+      <Header className="PlaySettings-group-header uppercase text-base" header={"Filters"} />
+      <Box className="PlaySettings-group-content flex-col-2">
         <InputRange step={1} label={"Time Allocated range"} min={0} max={120} setState={setPlaySettingsFilters} state={playSettings.filters} stateKey={"time_allocated"} />
         <CheckboxGroup label={'Excluded Difficulty'} items={['Beginner', 'Intermediate', 'Advanced']} setState={setPlaySettingsFilters} stateKey={'excluded_difficulty'} state={playSettings.filters} />
         <CheckboxGroup label={'Excluded Type'} items={['FIB', 'MS', 'MCQ', "Snippet"]} setState={setPlaySettingsFilters} stateKey={'excluded_types'} state={playSettings.filters} />
@@ -65,6 +64,6 @@ export default function PlaySettings() {
       reset()
       setPlaySettings(generateDefaultPlaySettingsState())
     }}>Reset</Button>
-    <Typography className="PlaySettings-total bg-dark flex justify-center items-center bold text-base p-1" style={{ color: filteredQuestions === 0 ? theme.palette.error.main : theme.palette.success.main }}>{filteredQuestions} Questions</Typography>
+    <Typography className="PlaySettings-total bg-dark flex justify-center items-center bold text-base p-1" style={{ color: filteredQuestions === 0 ? theme.palette.error.main : theme.palette.success.main, height: 30 }}>{filteredQuestions} Questions</Typography>
   </Box>
 }

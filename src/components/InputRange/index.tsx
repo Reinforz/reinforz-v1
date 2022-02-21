@@ -24,12 +24,11 @@ export interface InputRangeProps<T extends Record<string, any>> {
 export default function InputRange<T extends Record<string, any>>(props: InputRangeProps<T>) {
   const { direction = 'row', min, max, setState, state, stateKey, label, step = 5, classNames = {} } = props;
   const { click } = useSounds();
-  const containerPaddingClass = direction === 'row' ? 'pr-0' : 'pb-0', itemMarginClass = direction === 'row' ? '' : 'mb-1'
   const [operator, range]: [TNumberOperator, [string, string]] = state[stateKey]
-  return <FormGroup className={`InputRange p-1 ${classNames.formGroup ?? ''}`}>
+  return <FormGroup className={`InputRange flex-col-1 ${classNames.formGroup ?? ''}`}>
     <InputLabel className={`${classNames.inputLabel ?? ''}`}>{label}</InputLabel>
-    <Box style={{ flexDirection: direction }} className={`InputRange-content bg-dark p-1 ${containerPaddingClass} flex ${classNames.content ?? ''}`}>
-      <Box className={`bg-light flex p-1 flex-col ${itemMarginClass}`}>
+    <Box style={{ flexDirection: direction }} className={`InputRange-content p-1 gap-1 flex ${classNames.content ?? ''}`}>
+      <Box className={`bg-light flex p-1 flex-col`}>
         <Select disableUnderline className={`${classNames.operatorSelect ?? ''}`} value={operator}
           onChange={(e) => {
             setState({ ...state, [stateKey]: [e.target.value, range] })
@@ -40,11 +39,11 @@ export default function InputRange<T extends Record<string, any>>(props: InputRa
           )}
         </Select>
       </Box>
-      <TextField InputProps={{ disableUnderline: true }} className={`flex-1 ${itemMarginClass} ${classNames.numberField ?? ''}`} type="number" inputProps={{ step, min, max: parseInt(range[1]) }} value={parseInt(range[0])} onChange={(e) => {
+      <TextField InputProps={{ disableUnderline: true }} className={`flex-1 ${classNames.numberField ?? ''}`} type="number" inputProps={{ step, min, max: parseInt(range[1]) }} value={parseInt(range[0])} onChange={(e) => {
         setState({ ...state, [stateKey]: [operator, [e.target.value, parseInt(range[1])]] })
         click()
       }} />
-      {["<>", "><"].includes(operator) && <TextField InputProps={{ disableUnderline: true }} className={`flex-1 ${itemMarginClass} ${classNames.numberField ?? ''}`} type="number" inputProps={{ step, min: parseInt(range[0]), max }} value={parseInt(range[1])} onChange={(e) => {
+      {["<>", "><"].includes(operator) && <TextField InputProps={{ disableUnderline: true }} className={`flex-1 ${classNames.numberField ?? ''}`} type="number" inputProps={{ step, min: parseInt(range[0]), max }} value={parseInt(range[1])} onChange={(e) => {
         click()
         setState({ ...state, [stateKey]: [operator, [parseInt(range[0]), e.target.value]] })
       }} />}

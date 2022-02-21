@@ -248,11 +248,10 @@ export function generateTheme(settings: IGlobalSettings) {
           root: {
             margin: 0,
             backgroundColor: light,
+            padding: "0.375rem",
+            borderRadius: "0.125rem"
           }
         },
-        defaultProps: {
-          className: "p-1.5 rounded-sm"
-        }
       },
       MuiFormLabel: {
         styleOverrides: {
@@ -303,7 +302,6 @@ export function generateTheme(settings: IGlobalSettings) {
             backgroundColor: dark,
             padding: 5,
             margin: 0,
-            marginBottom: 5,
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center'
@@ -316,8 +314,6 @@ export function generateTheme(settings: IGlobalSettings) {
             flexWrap: 'nowrap',
             backgroundColor: base,
             margin: 0,
-            padding: 5,
-            boxShadow: `1px 1px 2px 2px ${dark}`
           }
         }
       }

@@ -9,7 +9,7 @@ export interface ContentProps {
 
 export function Content(props: ContentProps) {
   const styles: React.CSSProperties = { ...props.style ?? {} };
-  return <Box className={`Content bg-dark p-1 ${props.className ?? ''}`} style={styles}>
+  return <Box className={`Content p-1 ${props.className ?? ''}`} style={styles}>
     {props.children}
   </Box>
 }

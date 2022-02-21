@@ -252,12 +252,28 @@ div#root {
     gap: 0.25rem;
   }
 
+  & .flex-col-2 {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
   & .m-1 {
     margin: 0.25rem;
   }
 
   & .p-1 {
     padding: 0.25rem;
+  }
+
+  & .py-1 {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+  }
+
+  & .px-1 {
+    padding-right: 0.25rem;
+    padding-left: 0.25rem;
   }
 
   & .m-2 {
