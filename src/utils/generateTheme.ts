@@ -1,4 +1,4 @@
-import { createTheme, darken, lighten, Theme as MaterialUITheme, ThemeOptions } from "@mui/material";
+import { alpha, createTheme, darken, lighten, Theme as MaterialUITheme, ThemeOptions } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import { AllowedTheme, IGlobalSettings } from "../types";
 
@@ -206,8 +206,14 @@ export function generateTheme(settings: IGlobalSettings) {
         styleOverrides: {
           root: {
             padding: 0,
-            marginRight: 5
+            marginRight: "0.25rem",
+            "&.Mui-disabled": {
+              color: alpha(color.opposite_base, 0.25)
+            }
           }
+        },
+        defaultProps: {
+          disableRipple: true
         }
       },
       MuiIconButton: {
@@ -221,14 +227,14 @@ export function generateTheme(settings: IGlobalSettings) {
       MuiSelect: {
         styleOverrides: {
           select: {
-            paddingLeft: 5
+            paddingLeft: "0.25rem"
           }
         },
       },
       MuiRadio: {
         styleOverrides: {
           root: {
-            padding: 5
+            padding: "0.25rem"
           }
         }
       },
@@ -254,7 +260,7 @@ export function generateTheme(settings: IGlobalSettings) {
         styleOverrides: {
           root: {
             margin: 2.5,
-            padding: 5
+            padding: "0.25rem"
           }
         }
       },
@@ -262,7 +268,15 @@ export function generateTheme(settings: IGlobalSettings) {
         styleOverrides: {
           root: {
             backgroundColor: light,
-            padding: 5
+            padding: "0.25rem"
+          }
+        }
+      },
+      MuiTextField: {
+        styleOverrides: {
+          root: {
+            paddingLeft: "0.5rem",
+            borderRadius: "0.125rem"
           }
         }
       },
@@ -302,7 +316,7 @@ export function generateTheme(settings: IGlobalSettings) {
             fontWeight: 'bolder',
             fontSize: '1em',
             backgroundColor: dark,
-            padding: 5,
+            padding: "0.25rem",
             margin: 0,
             display: 'flex',
             justifyContent: 'center',

@@ -54,7 +54,7 @@ export default function PlaySettings() {
     </Box>
     <Box className="PlaySettings-group PlaySettings-group-filters overflow-auto flex-col-1 p-1">
       <Header className="PlaySettings-group-header uppercase text-base" header={"Filters"} />
-      <Box className="PlaySettings-group-content flex-col-2">
+      <Box className="PlaySettings-group-content flex-col-3/2">
         <InputRange step={1} label={"Time Allocated range"} min={0} max={120} setState={setPlaySettingsFilters} state={playSettings.filters} stateKey={"time_allocated"} />
         <CheckboxGroup label={'Excluded Difficulty'} items={['Beginner', 'Intermediate', 'Advanced']} setState={setPlaySettingsFilters} stateKey={'excluded_difficulty'} state={playSettings.filters} />
         <CheckboxGroup label={'Excluded Type'} items={['FIB', 'MS', 'MCQ', "Snippet"]} setState={setPlaySettingsFilters} stateKey={'excluded_types'} state={playSettings.filters} />
