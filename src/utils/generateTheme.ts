@@ -180,11 +180,44 @@ export function generateTheme(settings: IGlobalSettings) {
           }
         }
       },
+      MuiMenu: {
+        styleOverrides: {
+          list: {
+            paddingTop: 0,
+            paddingBottom: 0,
+            padding: "0.25rem"
+          }
+        }
+      },
+      MuiMenuItem: {
+        styleOverrides: {
+          root: {
+            display: "flex",
+            justifyContent: "center",
+            backgroundColor: color.base,
+            borderRadius: "0.125rem",
+            transition: "background-color 150ms ease-in-out",
+            "&.Mui-selected:hover": {
+              backgroundColor: color.dark,
+              transition: "background-color 150ms ease-in-out"
+            },
+            "&.Mui-selected": {
+              backgroundColor: color.dark,
+              transition: "background-color 150ms ease-in-out"
+            },
+            "&:hover": {
+              backgroundColor: color.light,
+              transition: "background-color 150ms ease-in-out"
+            }
+          }
+        }
+      },
       MuiButton: {
         styleOverrides: {
           contained: {
             fontSize: '1em',
-            fontWeight: 'bold'
+            fontWeight: 'bold',
+            borderRadius: "0.125rem"
           }
         }
       },

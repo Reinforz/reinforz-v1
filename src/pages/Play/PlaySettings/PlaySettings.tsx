@@ -64,6 +64,6 @@ export default function PlaySettings() {
       reset()
       setPlaySettings(generateDefaultPlaySettingsState())
     }}>Reset</Button>
-    <Typography className="PlaySettings-total bg-dark flex justify-center items-center bold text-base p-1" style={{ color: filteredQuestions === 0 ? theme.palette.error.main : theme.palette.success.main, height: 30 }}>{filteredQuestions} Questions</Typography>
+    <Typography className="PlaySettings-total bg-dark flex justify-center items-center bold text-base p-2 rounded-sm" style={{ color: filteredQuestions === 0 ? theme.palette.error.main : theme.palette.success.main, height: 30 }}>{filteredQuestions} Questions</Typography>
   </Box>
 }
