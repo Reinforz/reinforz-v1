@@ -98,7 +98,7 @@ export default function Quiz() {
       return <Box ref={ref} className="Quiz flex flex-col" onKeyPress={onKeyPress} tabIndex={0}>
         <IconGroup className="Report-icons" icons={navigationIcons} direction={settings.navigation.direction} style={generatedNavigationStyles} />
         <Upload className="center" accept={[".yaml", ".yml"]} maxFiles={1} uploadMessage="Drag 'n' drop, or click to upload some play files (.json or .yaml)" onLoad={(result) => {
-          const uploadedPlayState = yaml.safeLoad(result as string) as any;
+          const uploadedPlayState = yaml.load(result as string) as any;
           return uploadedPlayState;
         }} postRead={([playState]: IPlayDownloadedState[]) => {
           const allQuestionsMap: Map<string, TQuestion> = new Map();

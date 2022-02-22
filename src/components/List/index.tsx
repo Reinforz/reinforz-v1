@@ -24,7 +24,7 @@ export default function List<T extends { _id: string }>(props: ListProps<T>) {
   const { theme, settings } = useThemeSettings();
   const { remove, pop_off, pop_on } = useSounds();
   const isAllSelected = items.length !== 0 && selectedItems.length === items.length;
-  return <Container className={`List flex flex-col ${className}`}>
+  return <Container className={`List flex-col-1 ${className}`}>
     <Header header={header} sideElements={[
       <Flex>
         <Hovertips popoverText={`${isAllSelected ? "Deselect" : "Select"} all items`}>
@@ -56,11 +56,11 @@ export default function List<T extends { _id: string }>(props: ListProps<T>) {
       </Flex>
     ]} />
 
-    <Content className={`h-full ${items.length > 0 ? "pb-0" : ""}`}>
+    <Content className={`h-full bg-dark`}>
       {items.length > 0 ?
         items.map((item, index) => {
           const { _id } = item
-          return <Box className="List-content-item flex items-center bg-light p-1 mb-1 pr-0" key={_id}>
+          return <Box className="List-content-item flex items-center bg-light p-1 pr-0" key={_id}>
             <Box className="List-content-item-icons p-1  flex items-center">
               <Checkbox color="primary" className="List-content-item-icons-checkbox" key={_id + "checkbox" + index} onClick={(e: any) => {
                 e.persist();

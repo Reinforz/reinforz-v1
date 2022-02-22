@@ -55,8 +55,8 @@ export default function Upload(props: UploadProps) {
     });
   };
 
-  const useDropZoneOptions: DropzoneOptions = { onDrop, accept: props.accept ?? [".yml", ".yaml", "application/json"] };
-
+  const useDropZoneOptions: DropzoneOptions = { onDrop };
+  
   if (maxFiles) useDropZoneOptions.maxFiles = maxFiles
 
   const { getRootProps, getInputProps, isDragActive, isDragAccept, isDragReject } = useDropzone(useDropZoneOptions)
@@ -69,15 +69,24 @@ export default function Upload(props: UploadProps) {
     borderColor = '#2196f3';
 
   const rootProps = getRootProps()
+  const inputProps = getInputProps();
+  inputProps.accept = (props.accept ?? [".yaml", ".yml", ".json"]).join(", ");
+  inputProps.style = {
+    width: "100%",
+    height: "100%",
+    position: "absolute",
+    opacity: 0
+  }
+  
+  const onClick = rootProps.onClick;
 
-  const onClick = rootProps.onClick
   rootProps.onClick = (e) => {
     swoosh();
     onClick && onClick(e)
   }
 
-  return <Typography component="div" variant="h6" style={{ borderColor }} className={`Upload bold bg-light ${className ?? ''}`} {...rootProps as any}>
-    <input {...getInputProps()} />
+  return <Typography component="div" variant="h6" style={{ borderColor }} className={`Upload relative bold bg-light ${className ?? ''}`} {...rootProps as any}>
+    <input {...inputProps} />
     {
       isDragActive ?
         <p>Drop the files here ...</p> :
