@@ -189,6 +189,15 @@ export function generateTheme(settings: IGlobalSettings) {
           }
         }
       },
+      MuiSvgIcon: {
+        styleOverrides: {
+          root: {
+            "&.MuiSelect-icon": {
+              fill: color.opposite_base
+            }
+          }
+        }
+      },
       MuiMenuItem: {
         styleOverrides: {
           root: {
@@ -285,7 +294,11 @@ export function generateTheme(settings: IGlobalSettings) {
             margin: 0,
             backgroundColor: light,
             padding: "0.375rem",
-            borderRadius: "0.125rem"
+            borderRadius: "0.125rem",
+            "&.Mui-disabled .MuiTypography-root": {
+              color: alpha(color.opposite_base, 0.25)
+            },
+            userSelect: "none"
           }
         },
       },
@@ -301,7 +314,8 @@ export function generateTheme(settings: IGlobalSettings) {
         styleOverrides: {
           root: {
             backgroundColor: light,
-            padding: "0.25rem"
+            padding: "0.25rem",
+            userSelect: "none"
           }
         }
       },

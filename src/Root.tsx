@@ -110,7 +110,7 @@ export const Root = (props: RootProps) => {
     // eslint-disable-next-line
   }, [playSettingsPresets.current]);
 
-  const generatedTheme = generateTheme(settings);
+  const generatedTheme = useMemo(() => generateTheme(settings), [settings]);
 
   playQuizzes.settingsApplied.forEach(filteredQuiz => allQuizzesMap.set(filteredQuiz._id, filteredQuiz));
 
