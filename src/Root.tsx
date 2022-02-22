@@ -46,14 +46,14 @@ function findSettingsFromPresets(preset: IPresetConfig<any>) {
 }
 
 export const Root = (props: RootProps) => {
-  const [settingsPresets, setSettingsPresetsConfigs] = useState(getSettingsPresets());
+  const [settingsPresets, setSettingsPresetsConfigs] = useState(props.settingsPresets ?? getSettingsPresets());
   const [settings, setSettings] = useState<IGlobalSettings>(findSettingsFromPresets(settingsPresets));
-  const [playSettingsPresets, setPlaySettingsPresets] = useState(getPlaySettingsPresets());
+  const [playSettingsPresets, setPlaySettingsPresets] = useState(props.playSettingsPresets ??getPlaySettingsPresets());
   const [playSettings, setPlaySettings] = useState<IPlaySettings>(findSettingsFromPresets(playSettingsPresets));
 
-  const [uploadedQuizzes, setUploadedQuizzes] = useState<IQuiz[]>([]);
-  const [selectedQuizIds, setSelectedQuizIds] = useState<string[]>([]);
-  const [errorLogs, setErrorLogs] = useState<IErrorLog[]>([]);
+  const [uploadedQuizzes, setUploadedQuizzes] = useState<IQuiz[]>(props.uploadedQuizzes ?? []);
+  const [selectedQuizIds, setSelectedQuizIds] = useState<string[]>(props.selectedQuizIds ?? []);
+  const [errorLogs, setErrorLogs] = useState<IErrorLog[]>(props.errorLogs ?? []);
   const [playing, setPlaying] = useState(false);
   const [uploadedPlayState, setUploadedPlayState] = useState(false);
   const [playQuizzes, setPlayQuizzes] = useState<{ selected: IQuiz[], settingsApplied: IQuiz[] }>({
