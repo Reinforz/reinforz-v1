@@ -56,7 +56,7 @@ export default function List<T extends { _id: string }>(props: ListProps<T>) {
       </Flex>
     ]} />
 
-    <Content className={`h-full bg-dark flex-col-1`}>
+    <Content className={`h-full flex-col-1`}>
       {items.length > 0 ?
         items.map((item, index) => {
           const { _id } = item

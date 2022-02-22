@@ -1,5 +1,5 @@
 import { alpha, createTheme, darken, lighten, Theme as MaterialUITheme, ThemeOptions } from "@mui/material";
-import { grey } from "@mui/material/colors";
+import { grey, red } from "@mui/material/colors";
 import { AllowedTheme, IGlobalSettings } from "../types";
 
 declare module '@emotion/react' {
@@ -124,6 +124,9 @@ export function generateTheme(settings: IGlobalSettings) {
       primary: {
         main: settings.color.primary
       },
+      error: {
+        main: red[600],
+      }
     },
     spacing: (spacing: number) => `${spacing * 0.25}rem`,  
     typography: {

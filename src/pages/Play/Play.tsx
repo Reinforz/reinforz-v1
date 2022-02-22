@@ -82,7 +82,7 @@ function Play() {
         setErrorLogs(filteredErrorLogs)
         setSelectedErrorLogIds(selectedErrorLogIds.filter(selectedErrorLogId => filteredErrorLogIds.includes(selectedErrorLogId)))
       }} selectedItems={selectedQuizIds} setSelectedItems={setSelectedQuizIds} header="Uploaded Quizzes" items={uploadedQuizzes} setItems={setUploadedQuizzes} fields={[(item) => `${item.subject} - ${item.topic}`, (item) => <Typography className="bold" variant="body2">{item.questions.length + " Qs"}</Typography>]} />,
-      <List className="Play-ErrorLogs" emptyListMessage="No Errors or Warnings!" selectedItems={selectedErrorLogIds} setSelectedItems={setSelectedErrorLogIds} header="Error & Warnings" items={errorLogs} setItems={setErrorLogs} fields={[(errorLog) => <Box className="Play-ErrorLogs-item px-2 py-1 bold rounded-sm text-base" style={{ backgroundColor: errorLog.level === "ERROR" ? theme.palette.error.main : theme.palette.warning.main }}>{errorLog.quiz}: {errorLog.target}, {errorLog.message}</Box>]} />]}
+      <List className="Play-ErrorLogs" emptyListMessage="No Errors or Warnings!" selectedItems={selectedErrorLogIds} setSelectedItems={setSelectedErrorLogIds} header="Error & Warnings" items={errorLogs} setItems={setErrorLogs} fields={[(errorLog) => <Box className="Play-ErrorLogs-item px-2 py-1 bold rounded-sm text-base" style={{ color: errorLog.level === "ERROR" ? theme.palette.error.main : theme.palette.warning.main }}>{errorLog.quiz}: {errorLog.target}, {errorLog.message}</Box>]} />]}
     />
     <PlayListTable />
   </Box>]} />

@@ -75,7 +75,7 @@ export default function ListTable<T extends Record<string, any>>(
           ))}
         </Box>
       </Box>
-      <Box className="ListTable-body bg-dark p-1 flex-col-1">
+      <Box className="ListTable-body p-1 flex-col-1">
         {sortedItems.map((itemMap, index) => (
           <Box key={itemMap._id} className={`ListTable-body-row rounded-sm bold ${index%2 === 0 ? "bg-light" : "bg-base"}`}>
             <Typography
