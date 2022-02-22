@@ -75,7 +75,8 @@ export default function Upload(props: UploadProps) {
     width: "100%",
     height: "100%",
     position: "absolute",
-    opacity: 0
+    opacity: 0,
+    cursor: "pointer"
   }
   
   const onClick = rootProps.onClick;
@@ -85,7 +86,7 @@ export default function Upload(props: UploadProps) {
     onClick && onClick(e)
   }
 
-  return <Typography component="div" variant="h6" style={{ borderColor }} className={`Upload relative bold bg-light ${className ?? ''}`} {...rootProps as any}>
+  return <Typography component="div" variant="h6" style={{ borderColor }} className={`Upload font-bold select-none cursor-pointer flex items-center rounded justify-center text-center relative bold bg-light ${className ?? ''}`} {...rootProps as any}>
     <input {...inputProps} />
     {
       isDragActive ?

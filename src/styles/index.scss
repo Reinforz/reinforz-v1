@@ -282,6 +282,16 @@ div#root {
     padding-left: 0.25rem;
   }
 
+  & .py-2 {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  & .px-2 {
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+  }
+
   & .m-2 {
     margin: 0.5rem;
   }

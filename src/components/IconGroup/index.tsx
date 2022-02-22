@@ -14,7 +14,7 @@ export interface IconGroupProps {
 
 export default function IconGroup(props: IconGroupProps) {
   const direction = props.direction ?? 'row';
-  return <Box className={`IconGroup flex p-1 ${direction === 'row' ? "pr-0" : "pb-0"} bg-base ${props.className ?? ''}`} style={{ flexDirection: direction, ...props.style ?? {} }}>
+  return <Box className={`IconGroup flex p-1 gap-1 bg-base ${props.className ?? ''}`} style={{ flexDirection: direction, ...props.style ?? {} }}>
     {props.icons.map(([popoverText, icon, popoverOrigin], index) => <Hovertips key={popoverText + index} {...popoverOrigin ?? {}} popoverText={popoverText} className={`IconGroup-item bg-light flex justify-center items-center p-1 ${direction === "row" ? "" : "mb-1"}`} >
       {icon}
     </Hovertips>)}

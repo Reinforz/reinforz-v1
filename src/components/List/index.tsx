@@ -24,7 +24,7 @@ export default function List<T extends { _id: string }>(props: ListProps<T>) {
   const { theme, settings } = useThemeSettings();
   const { remove, pop_off, pop_on } = useSounds();
   const isAllSelected = items.length !== 0 && selectedItems.length === items.length;
-  return <Container className={`List flex-col-1 ${className}`}>
+  return <Container className={`List select-none flex-col-1 ${className}`}>
     <Header header={header} sideElements={[
       <Flex>
         <Hovertips popoverText={`${isAllSelected ? "Deselect" : "Select"} all items`}>
@@ -56,12 +56,12 @@ export default function List<T extends { _id: string }>(props: ListProps<T>) {
       </Flex>
     ]} />
 
-    <Content className={`h-full bg-dark`}>
+    <Content className={`h-full bg-dark flex-col-1`}>
       {items.length > 0 ?
         items.map((item, index) => {
           const { _id } = item
-          return <Box className="List-content-item flex items-center bg-light p-1 pr-0" key={_id}>
-            <Box className="List-content-item-icons p-1  flex items-center">
+          return <Box className={`List-content-item flex items-center p-1.5 rounded-sm ${index%2 === 0 ? "bg-light" : "bg-base"}`} key={_id}>
+            <Box className="List-content-item-icons p-1 flex items-center">
               <Checkbox color="primary" className="List-content-item-icons-checkbox" key={_id + "checkbox" + index} onClick={(e: any) => {
                 e.persist();
                 if (settings.sound) {
@@ -80,7 +80,7 @@ export default function List<T extends { _id: string }>(props: ListProps<T>) {
               </Hovertips>
             </Box>
             <Box className="flex flex-1 justify-between p-1 ">
-              {fields.map((field, index) => <Box className="List-content-item-field" key={_id + field + index}>
+              {fields.map((field, index) => <Box className="List-content-item-field flex items-center" key={_id + field + index}>
                 <Typography variant="body1" component="div" className="text-lg">
                   {typeof field === "function" ? field(item) : item[field]}
                 </Typography>

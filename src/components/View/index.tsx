@@ -19,11 +19,11 @@ export default function View(props: ViewProps) {
   const { swoosh } = useSounds();
 
   return <Box className="View">
-    <Box className="View-content" style={{ flexDirection: layout + (order === "0" ? '' : '-reverse') as any }}>
-      <Box className="View-content-item" style={{ marginBottom: order === "0" && layout === 'column' ? 5 : 0, marginRight: order === "0" && layout === 'row' ? 5 : 0, width: layout === 'column' ? '100%' : '50%', height: layout === 'column' ? '50%' : '100%' }}>
+    <Box className="View-content gap-1" style={{ flexDirection: layout + (order === "0" ? '' : '-reverse') as any }}>
+      <Box className="View-content-item" style={{ width: layout === 'column' ? '100%' : '50%', height: layout === 'column' ? '50%' : '100%' }}>
         {props.items[0]}
       </Box>
-      <Box className="View-content-item" style={{ marginBottom: order === "1" && layout === 'column' ? 5 : 0, marginRight: order === "1" && layout === 'row' ? 5 : 0, width: layout === 'column' ? '100%' : '50%', height: layout === 'column' ? '50%' : '100%' }}>
+      <Box className="View-content-item" style={{ width: layout === 'column' ? '100%' : '50%', height: layout === 'column' ? '50%' : '100%' }}>
         {props.items[1]}
       </Box>
     </Box>

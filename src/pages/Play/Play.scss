@@ -16,18 +16,9 @@
 
   &-ErrorLogs{
     height: calc(100% - 15px);
-    &-item {
-      padding: 10px;
-      border-radius: 4px;
-      margin: 2.5px;
-      font-weight: bold;
-      font-size: 1rem;
-    }
   }
 
   .View{
     grid-area: 2/1/5/2;
   }
-
-
 }

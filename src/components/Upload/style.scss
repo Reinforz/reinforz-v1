@@ -1,17 +1,6 @@
 .Upload{
-  grid-area: 1/1/2/2;
-  font-weight: bold;
-  user-select: none;
-  cursor: pointer;
   outline: none;
   transition: border 0.24s ease-in-out;
   font-size: 1.25em;
-  flex: 1;
-  display: flex;
-  align-items: center;
-  margin: 2.5px;
   padding: 10px 20px;
-  border-radius: 5px;
-  justify-content: center;
-  text-align: center;
 }
