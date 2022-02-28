@@ -8,7 +8,7 @@
       "skipFiles": [
         "<node_internals>/**"
       ],
-      "program": "${workspaceFolder}\\experiment\\AnswerASTNode.js",
+      "program": "${workspaceFolder}\\scripts\\updateName.js",
     }
   ]
 }
