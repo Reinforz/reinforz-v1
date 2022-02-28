@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import "./Content.scss";
+
 export interface ContentProps {
     children: JSX.Element | JSX.Element[] | string;
     className?: string;
@@ -7,7 +7,7 @@ export interface ContentProps {
 }
 export function Content(props: ContentProps) {
     const styles: React.CSSProperties = { ...props.style ?? {} };
-    return <Box className={`Content p-1 ${props.className ?? ""}`} style={styles}>
+    return <Box className={`Content relative overflow-auto p-1 ${props.className ?? ""}`} style={styles}>
     {props.children}
   </Box>;
 }

@@ -2,7 +2,7 @@ import { Typography } from "@mui/material";
 import { OptionsObject, SnackbarKey, SnackbarMessage, useSnackbar } from "notistack";
 import { DropzoneOptions, useDropzone } from "react-dropzone";
 import useSounds from "../hooks/useSounds";
-import "./Upload.scss";
+
 export interface UploadProps {
     onLoad: (result: string, file: File, notistack: {
         enqueueSnackbar: ((message: SnackbarMessage, options?: OptionsObject | undefined) => SnackbarKey);
@@ -80,7 +80,7 @@ export default function Upload(props: UploadProps) {
         swoosh();
         onClick && onClick(e);
     };
-    return <Typography component="div" variant="h6" style={{ borderColor }} className={`Upload font-bold select-none cursor-pointer flex items-center rounded justify-center text-center relative bold bg-light ${className ?? ""}`} {...rootProps as any}>
+    return <Typography component="div" variant="h6" style={{ borderColor }} className={`Upload text-lg font-bold select-none cursor-pointer flex items-center rounded justify-center text-center relative bold bg-light ${className ?? ""}`} {...rootProps as any}>
     <input {...inputProps}/>
     {isDragActive ?
             <p>Drop the files here ...</p> :

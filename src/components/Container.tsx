@@ -1,5 +1,4 @@
 import { Box, BoxProps } from "@mui/material";
-import "./Container.scss";
 interface Props extends BoxProps {
     children: (JSX.Element | null | string)[] | (JSX.Element | null | string);
 }
