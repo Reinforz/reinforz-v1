@@ -12,12 +12,6 @@ for (let index = 0; index < directories.length; index++) {
   const directoryPath = path.join(componentsDirPath, directory);
   
   if (fs.lstatSync(directoryPath).isDirectory()) {
-    const files = fs.readdirSync(directoryPath);
-    for (let index = 0; index < files.length; index++) {
-      const file = files[index];
-      const extension = path.extname(file);
-      fs.renameSync(path.join(directoryPath, file), path.join(componentsDirPath, `${directory}${extension}`));
-    }
     const tsxFile = path.join(directoryPath, "index.tsx");
     const program = ts.createProgram([tsxFile], {});
     const sourceFile = program.getSourceFile(tsxFile);
@@ -33,7 +27,14 @@ for (let index = 0; index < directories.length; index++) {
         }
       }
     })
-    fs.writeFileSync(path.join(componentsDirPath, `${directory}.tsx`), printer.printFile(sourceFile), "utf-8")
+    fs.writeFileSync(path.join(directoryPath, `index.tsx`), printer.printFile(sourceFile), "utf-8");
+
+    const files = fs.readdirSync(directoryPath);
+    for (let index = 0; index < files.length; index++) {
+      const file = files[index];
+      const extension = path.extname(file);
+      fs.renameSync(path.join(directoryPath, file), path.join(componentsDirPath, `${directory}${extension}`));
+    }
     fs.rmdirSync(directoryPath)
   }
 }
