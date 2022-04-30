@@ -5,6 +5,7 @@ import {
   IMcqQuestion,
   IMsQuestion, InputFibQuestion, InputSnippetQuestion, IQuizDefaultSettings, TInputQuestion, TInputSelectQuestion, TQuestion, TSelectQuestion
 } from '../types';
+import { extractBlankCountForFIBQuestion } from './extractBlankCountForFIBQuestion';
 import { generateSelectionQuestionAnswers } from './generateSelectionQuestionAnswers';
 import { generateTypeQuestionAnswers } from './generateTypeQuestionAnswers';
 import { isPrimitive } from './isPrimitive';
@@ -175,8 +176,8 @@ export function generateCompleteQuestion(
         logs.warns.push(...generatedLogs.warns);
         // The number of gaps must be 1 less than the number of answers
         if (
-          completeQuestion.answers.length + 1 !==
-          completeQuestion.question.length
+          completeQuestion.answers.length !==
+          completeQuestion.question.reduce((totalBlanks, question) => totalBlanks + extractBlankCountForFIBQuestion(question.text), 0)
         ) {
           logs.errors.push(
             `Unmatched blanks in question, given ${

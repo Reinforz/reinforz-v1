@@ -17,36 +17,8 @@
             "IS"
           ]
         }
-      ]
-    },
-    {
-      "question": "For many applications, using React will lead to a fast user interface without doing much work to specifically optimize for performance",
-      "options": [
-        true,
-        false
       ],
-      "answers": [
-        0
-      ]
-    },
-    {
-      "question": "Which react build is more performant ?",
-      "answers": [
-        "production"
-      ]
-    },
-    {
-      "question": "Which criterias are important for a performant build ?",
-      "options": [
-        "minified",
-        "production",
-        "development",
-        "unminified"
-      ],
-      "answers": [
-        0,
-        1
-      ]
+      "time_allocated": 10
     }
   ]
 }

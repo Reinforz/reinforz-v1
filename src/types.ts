@@ -141,8 +141,21 @@ export interface InputSnippetQuestion extends InputQuestion {
   answers: InputTypeQuestionAnswer;
 }
 
+export interface IFibTextQuestion {
+  type: 'text'
+  text: string
+}
+
+export interface IFibCodeQuestion {
+  type: 'code'
+  text: string
+  lang: string
+}
+
+export type TFibQuestion = IFibTextQuestion | IFibCodeQuestion
+
 export interface InputFibQuestion extends InputQuestion {
-  question: string[];
+  question: TFibQuestion[];
   type?: 'FIB';
   answers: InputTypeQuestionAnswer;
 }
@@ -208,7 +221,7 @@ export interface ISnippetQuestion extends IQuestion {
 }
 
 export interface IFibQuestion extends IQuestion {
-  question: string[];
+  question: TFibQuestion[];
   type: 'FIB';
   answers: TypeQuestionAnswerDetailed[][];
 }
